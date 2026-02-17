@@ -1,281 +1,849 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tosttoo | Menü</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-            color: white;
-        }
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover;
-        }
-        .hero h1 {
-            font-size: 4rem;
-            color: #ff6b00;
-            margin-bottom: 1rem;
-            cursor: pointer;
-        }
-        .work-time {
-            font-size: 1.5rem;
-            color: #ff6b00;
-            margin-bottom: 2rem;
-        }
-        .btn {
-            padding: 1rem 2rem;
-            background: #ff6b00;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #ff6b00;
-            margin-bottom: 3rem;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-        }
-        .card h3 {
-            color: #ff6b00;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            border-bottom: 2px solid #ff6b00;
-            padding-bottom: 0.5rem;
-        }
-        .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed rgba(255,107,0,0.3);
-        }
-        .name { color: #ff6b00; font-weight: 500; }
-        .price { font-weight: bold; }
-        .contact {
-            background: #000;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        .contact h2 { color: #ff6b00; margin-bottom: 2rem; }
-        .contact a { color: #ff6b00; text-decoration: none; }
-        iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-        .dev-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 400px;
-            background: #1a1a1a;
-            border: 2px solid #ff6b00;
-            border-radius: 15px;
-            padding: 2rem;
-            display: none;
-            z-index: 2000;
-        }
-        .dev-panel h3 {
-            color: #ff6b00;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-        .dev-panel input, .dev-panel select {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ff6b00;
-            border-radius: 5px;
-            background: #333;
-            color: white;
-        }
-        .dev-panel button {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: none;
-            border-radius: 5px;
-            background: #ff6b00;
-            color: white;
-            cursor: pointer;
-        }
-        .dev-panel .close-btn { background: #666; }
-        .status-message {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem;
-            background: #333;
-            color: white;
-            border-left: 4px solid #ff6b00;
-            display: none;
-            z-index: 1500;
-        }
-        .double-tap-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,107,0,0.3);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 12px;
-        }
-        #modeToggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            background: #ff6b00;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        .light-mode {
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            color: #333;
-        }
-        .light-mode .card { background: white; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tosttoo | Cloud Sync Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== جميع الأنماط كما هي ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    transition: all 0.5s ease;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #fff;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: 60px;
+    color: #ff8c00;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    animation: floatTitle 3s ease-in-out infinite;
+    text-shadow: 0 0 20px currentColor;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.work-time {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ff8c00;
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: #ff8c00;
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.container {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+    scroll-margin-top: 20px;
+}
+
+.container h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(255,140,0,0.3);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.item:hover {
+    transform: scale(1.02) translateX(5px);
+}
+
+.name {
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.price {
+    color: #fff;
+    font-weight: bold;
+}
+
+.contact {
+    text-align: center;
+    padding: 50px 20px;
+    background: #000;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: #ff8c00;
+}
+
+iframe {
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    right: 90px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.control-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: #ff8c00;
+    color: white;
+}
+
+.control-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+#modeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #ff8c00;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255,140,0,0.3);
+}
+
+#modeToggle:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.live-badge {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 0, 0, 0.9);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    pointer-events: none;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.dev-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 140, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    cursor: move;
+    user-select: none;
+}
+
+.dev-window h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    cursor: move;
+}
+
+.dev-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.dev-window input,
+.dev-window select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: white;
+}
+
+.dev-window button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: #ff8c00;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dev-window button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+}
+
+.dev-window .save-btn {
+    background: #28a745;
+}
+
+.dev-window .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+.color-picker-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    z-index: 1001;
+    display: none;
+    width: 90%;
+    max-width: 350px;
+    color: white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.color-picker-modal h3 {
+    color: #ff8c00;
+    text-align: center;
+}
+
+.color-picker-modal input[type=color] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.color-picker-modal label {
+    display: block;
+    margin-top: 15px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 2000;
+    animation: slideIn 0.3s ease;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0%); opacity: 1; }
+}
+
+.status-success { border-color: #28a745; }
+.status-error { border-color: #dc3545; }
+.status-loading { border-color: #ff8c00; }
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+}
+
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+.light-mode {
+    background: #f6f1e8 !important;
+    color: #2b2b2b !important;
+    animation: none !important;
+}
+
+.light-mode .card {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3 {
+    color: #d97706 !important;
+}
+
+.light-mode .hero {
+    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+}
+
+.light-mode .name {
+    color: #8b6b4f !important;
+}
+
+.light-mode .price {
+    color: #d97706 !important;
+}
+
+.light-mode .contact {
+    background: #e6d8c3 !important;
+}
+
+.light-mode .dev-window {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-window input {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    color: #2b2b2b !important;
+}
+
+.cloud-panel {
+    margin-top: 15px;
+    background: rgba(0, 150, 255, 0.1);
+    border: 1px solid #0099ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cloud-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.cloud-badge {
+    background: #0066cc;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.version-tag {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.double-tap-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,107,0,0.3);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid #ff8c00;
+    animation: fadeInOut 3s ease-in-out infinite;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 40px; }
+    .double-tap-hint { font-size: 10px; bottom: 10px; }
+}
+</style>
 </head>
-<body class="dark-mode" id="body">
 
-<!-- شارة البث -->
-<div class="live-badge" style="position:fixed; top:20px; left:20px; background:#ff0000; color:white; padding:5px 15px; border-radius:50px;">🔴 CANLI</div>
+<body class="" id="body" data-language="tr">
 
-<!-- زر الوضع -->
-<button id="modeToggle">🌙</button>
-
-<!-- القسم الرئيسي -->
-<section class="hero">
-    <h1 id="mainTitle">Tosttoo</h1>
-    <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
-    <div class="work-time">🕒 08:00 - 02:30</div>
-    <button class="btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Menüyü Gör</button>
-</section>
-
-<!-- المنيو -->
-<section class="container" id="menu">
-    <h2>Menü</h2>
-    <div class="menu-grid" id="menuGrid">
-        <div class="card">
-            <h3>Tostlar</h3>
-            <div class="item"><span class="name">Kaşarlı Tost</span><span class="price">60₺</span></div>
-            <div class="item"><span class="name">Sucuklu Tost</span><span class="price">75₺</span></div>
-        </div>
-        <div class="card">
-            <h3>İçecekler</h3>
-            <div class="item"><span class="name">Çay</span><span class="price">10₺</span></div>
-            <div class="item"><span class="name">Kahve</span><span class="price">15₺</span></div>
-        </div>
-    </div>
-</section>
-
-<!-- الاتصال -->
-<section class="contact">
-    <h2>İletişim</h2>
-    <p>📞 <a href="tel:05321580207">0532 158 02 07</a></p>
-    <p>📷 <a href="https://www.instagram.com/tosttooyevski">@tosttooyevski</a></p>
-    <iframe src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
-</section>
-
-<!-- لوحة المطور البسيطة -->
-<div class="dev-panel" id="devPanel">
-    <h3>⚙️ GELİŞTİRİCİ</h3>
-    
-    <h4>➕ Ürün Ekle</h4>
-    <input type="text" id="productName" placeholder="Ürün Adı">
-    <input type="text" id="productPrice" placeholder="Fiyat">
-    <select id="categorySelect"></select>
-    <button onclick="addProduct()">Ekle</button>
-    
-    <h4>📁 Kategori Ekle</h4>
-    <input type="text" id="categoryName" placeholder="Kategori Adı">
-    <button onclick="addCategory()">Ekle</button>
-    
-    <button class="close-btn" onclick="closeDevPanel()">Kapat</button>
+<div class="live-badge">
+    <span class="live-indicator"></span>
+    🔴 CLOUD LIVE
 </div>
 
-<!-- رسالة الحالة -->
-<div class="status-message" id="statusMessage"></div>
+<div class="control-buttons">
+    <button class="control-btn" id="langBtn">🌍 EN / TR</button>
+</div>
+
+<button id="modeToggle">🌙</button>
+
+<section class="hero">
+    <h1 id="secretTrigger">Tosttoo</h1>
+    <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
+    <div class="work-time">🕒 08:00 - 02:30</div>
+    <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
+        Menüyü Gör
+    </button>
+</section>
+
+<section class="container" id="menu">
+    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
+    <div class="grid" id="menuGrid"></div>
+</section>
+
+<section class="contact">
+    <h2 id="contactTitle">İletişim</h2>
+    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
+    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
+    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
+</section>
+
+<div class="dev-window" id="devPanel">
+    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ</h3>
+
+    <div class="dev-section">
+        <h4>➕ Ürün Ekle</h4>
+        <select id="categorySelect"></select>
+        <input type="text" id="newName" placeholder="Ürün Adı">
+        <input type="text" id="productPrice" placeholder="Fiyat">
+        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" placeholder="Yeni Kategori">
+        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>🗑️ Silme Modu</h4>
+        <button onclick="toggleDeleteMode()" id="deleteModeBtn">🔴 Silme Modunu Aç</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>📱 Sosyal Medya</h4>
+        <input type="text" id="newInstagram" placeholder="Instagram Link">
+        <button onclick="changeInstagram()">📷 Güncelle</button>
+        <input type="text" id="newLocation" placeholder="Konum (örn: 36.484479,32.101147)">
+        <button onclick="changeLocation()">📍 Güncelle</button>
+    </div>
+
+    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
+        <h4>☁️ CLOUD SYNC <span class="cloud-badge">AKTİF</span></h4>
+        <div class="cloud-panel">
+            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;" id="cloudSaveBtn">
+                ☁️ BULUTA KAYDET (HERKESE GÖNDER)
+            </button>
+            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
+                📥 BULUTTAN YÜKLE
+            </button>
+            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
+                🔌 BAĞLANTI TESTİ
+            </button>
+        </div>
+    </div>
+
+    <button onclick="closeDev()" class="close-btn">❌ Çıkış</button>
+</div>
+
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Değiştir</h3>
+    <label>Kategori Başlığı (h3)</label>
+    <input type="color" id="colorCategory" value="#ff8c00">
+    <label>Ürün Adı (.name)</label>
+    <input type="color" id="colorName" value="#ff8c00">
+    <label>Fiyat (.price)</label>
+    <input type="color" id="colorPrice" value="#ffffff">
+    <button onclick="applyColors()">Renkleri Uygula</button>
+    <button onclick="closeColorPicker()">Kapat</button>
+</div>
 
 <script>
-// ===== متغيرات =====
-let isDeveloper = false;
+// ===== الرابط الخاص بك =====
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 
-// ===== فتح لوحة المطور =====
-function openDev() {
-    let pass = prompt("Şifre:");
-    if (pass === "momotunc0702") {
-        isDeveloper = true;
-        document.getElementById('devPanel').style.display = 'block';
-        updateCategorySelect();
-        showStatus('✅ Hoş geldiniz!');
-    } else {
-        showStatus('❌ Yanlış şifre!');
+// ===== متغيرات عامة =====
+let isDeveloper = false;
+let deleteMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let lastCloudData = null;
+
+// ===== تحميل المنيو عند فتح الصفحة =====
+window.addEventListener('load', function() {
+    loadSavedData();
+    loadMenuFromCloud();
+    startRealTimeSync();
+});
+
+// ===== المزامنة الفورية بين جميع الأجهزة =====
+function startRealTimeSync() {
+    setInterval(async () => {
+        try {
+            const response = await fetch(CLOUD_API_URL);
+            const data = await response.json();
+            
+            if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                lastCloudData = data;
+                if (data.menu && data.menu.length > 0) {
+                    displayMenuFromCloud(data.menu);
+                    showStatus('🔄 Menü güncellendi!', 'success');
+                }
+            }
+        } catch(e) {}
+    }, 3000); // كل 3 ثواني
+}
+
+// ===== تحميل المنيو من السحاب =====
+async function loadMenuFromCloud() {
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        lastCloudData = data;
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenuFromCloud(data.menu);
+            showStatus('✅ Menü yüklendi!', 'success');
+        } else {
+            loadDefaultMenu();
+        }
+    } catch(error) {
+        loadDefaultMenu();
     }
 }
 
-// ===== نقر مزدوج على العنوان =====
-document.getElementById('mainTitle').ondblclick = openDev;
+// ===== عرض المنيو =====
+function displayMenuFromCloud(menuData) {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    menuData.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${category.category}</h3>`;
+        
+        category.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
+            card.appendChild(itemDiv);
+        });
+        
+        menuGrid.appendChild(card);
+    });
+    
+    updateCategorySelect();
+}
+
+// ===== المنيو الافتراضي =====
+function loadDefaultMenu() {
+    const defaultMenu = [
+        { category: 'Tostlar', items: [
+            { name: 'Kaşarlı Tost', price: '60₺' },
+            { name: 'Sucuklu Tost', price: '75₺' },
+            { name: 'Karışık Tost', price: '85₺' }
+        ]},
+        { category: 'İçecekler', items: [
+            { name: 'Çay', price: '10₺' },
+            { name: 'Kahve', price: '15₺' },
+            { name: 'Ayran', price: '12₺' }
+        ]}
+    ];
+    displayMenuFromCloud(defaultMenu);
+}
+
+// ===== حفظ في السحاب =====
+async function saveToCloud() {
+    showStatus("☁️ Kaydediliyor...", "loading");
+    
+    try {
+        const menuData = [];
+        document.querySelectorAll('.card').forEach(card => {
+            const category = card.querySelector('h3').innerText;
+            const items = [];
+            card.querySelectorAll('.item').forEach(item => {
+                items.push({
+                    name: item.querySelector('.name').innerText,
+                    price: item.querySelector('.price').innerText
+                });
+            });
+            menuData.push({ category, items });
+        });
+        
+        const saveData = { menu: menuData };
+        
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+        });
+        
+        if (response.ok) {
+            showStatus("✅ Kaydedildi! Herkes görecek!", "success");
+            currentVersion = (parseFloat(currentVersion) + 0.1).toFixed(1);
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+        }
+    } catch(error) {
+        showStatus("❌ Kayıt başarısız!", "error");
+    }
+}
+
+// ===== تحميل من السحاب =====
+async function loadFromCloud() {
+    await loadMenuFromCloud();
+    showStatus("✅ Buluttan yüklendi!", "success");
+}
+
+// ===== اختبار الاتصال =====
+async function testCloudConnection() {
+    try {
+        await fetch(CLOUD_API_URL);
+        showStatus("✅ Bağlantı başarılı!", "success");
+    } catch {
+        showStatus("❌ Bağlantı başarısız!", "error");
+    }
+}
+
+// ===== النقر المزدوج =====
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById('secretTrigger').addEventListener('click', function() {
+    clickCount++;
+    
+    if (clickCount === 1) {
+        clickTimer = setTimeout(() => clickCount = 0, 300);
+    } else if (clickCount === 2) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        let pass = prompt("🔐 Şifre:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz!", "success");
+        }
+    }
+});
 
 // ===== F5 =====
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
-        openDev();
+        let pass = prompt("🔐 Şifre:");
+        if (pass === "momotunc0702") openDev();
     }
 });
 
-// ===== إغلاق اللوحة =====
-function closeDevPanel() {
-    document.getElementById('devPanel').style.display = 'none';
+// ===== فتح/إغلاق اللوحة =====
+function openDev() {
+    document.getElementById("devPanel").style.display = "block";
+    isDeveloper = true;
+    updateCategorySelect();
+}
+
+function closeDev() {
+    document.getElementById("devPanel").style.display = "none";
     isDeveloper = false;
+    deleteMode = false;
+    document.getElementById('deleteModeBtn').textContent = '🔴 Silme Modunu Aç';
 }
 
 // ===== تحديث قائمة التصنيفات =====
 function updateCategorySelect() {
-    let select = document.getElementById('categorySelect');
-    select.innerHTML = '';
-    document.querySelectorAll('.card h3').forEach((h3, i) => {
-        select.innerHTML += `<option value="${i}">${h3.textContent}</option>`;
+    let select = document.getElementById("categorySelect");
+    select.innerHTML = "";
+    document.querySelectorAll(".card h3").forEach((h, i) => {
+        select.innerHTML += `<option value="${i}">${h.innerText}</option>`;
     });
 }
 
@@ -283,25 +851,25 @@ function updateCategorySelect() {
 function addProduct() {
     if (!isDeveloper) return;
     
-    let name = document.getElementById('productName').value.trim();
-    let price = document.getElementById('productPrice').value.trim();
-    let catIndex = document.getElementById('categorySelect').value;
+    let name = document.getElementById("newName").value.trim();
+    let price = document.getElementById("productPrice").value.trim();
+    let index = document.getElementById("categorySelect").value;
     
     if (!name || !price) {
-        showStatus('❌ Ad ve fiyat girin!');
+        showStatus("Ad ve fiyat girin!", "error");
         return;
     }
-    
-    let cards = document.querySelectorAll('.card');
-    if (cards[catIndex]) {
-        let item = document.createElement('div');
-        item.className = 'item';
-        item.innerHTML = `<span class="name">${name}</span><span class="price">${price}</span>`;
-        cards[catIndex].appendChild(item);
+
+    let cards = document.querySelectorAll(".card");
+    if (cards[index]) {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<span class="name">${name}</span><span class="price">${price}</span>`;
+        cards[index].appendChild(div);
         
-        document.getElementById('productName').value = '';
-        document.getElementById('productPrice').value = '';
-        showStatus('✅ Ürün eklendi!');
+        document.getElementById("newName").value = "";
+        document.getElementById("productPrice").value = "";
+        showStatus("✅ Ürün eklendi!", "success");
     }
 }
 
@@ -309,39 +877,119 @@ function addProduct() {
 function addCategory() {
     if (!isDeveloper) return;
     
-    let name = document.getElementById('categoryName').value.trim();
+    let name = document.getElementById("newCategory").value.trim();
     if (!name) {
-        showStatus('❌ Kategori adı girin!');
+        showStatus("Kategori adı girin!", "error");
         return;
     }
     
-    let card = document.createElement('div');
-    card.className = 'card';
+    let card = document.createElement("div");
+    card.className = "card";
     card.innerHTML = `<h3>${name}</h3>`;
-    document.getElementById('menuGrid').appendChild(card);
+    document.getElementById("menuGrid").appendChild(card);
     
-    document.getElementById('categoryName').value = '';
+    document.getElementById("newCategory").value = "";
     updateCategorySelect();
-    showStatus('✅ Kategori eklendi!');
+    showStatus("✅ Kategori eklendi!", "success");
+}
+
+// ===== وضع الحذف =====
+function toggleDeleteMode() {
+    deleteMode = !deleteMode;
+    const btn = document.getElementById('deleteModeBtn');
+    
+    if (deleteMode) {
+        btn.textContent = '🟢 Silme Modu Aktif';
+        btn.style.background = '#dc3545';
+    } else {
+        btn.textContent = '🔴 Silme Modunu Aç';
+        btn.style.background = '#ff8c00';
+    }
+}
+
+document.getElementById('menuGrid').addEventListener('click', function(e) {
+    if (!deleteMode || !isDeveloper) return;
+    
+    const item = e.target.closest('.item');
+    if (item && confirm('Silmek istiyor musun?')) {
+        item.remove();
+        showStatus("✅ Silindi!", "success");
+    }
+});
+
+// ===== تحديث Instagram =====
+function changeInstagram() {
+    let val = document.getElementById("newInstagram").value;
+    if(val) {
+        document.getElementById("instaLink").href = val;
+        localStorage.setItem("insta", val);
+        showStatus("Instagram güncellendi", "success");
+    }
+}
+
+// ===== تحديث الموقع =====
+function changeLocation() {
+    let val = document.getElementById("newLocation").value;
+    if(val) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
+        localStorage.setItem("map", val);
+        showStatus("Konum güncellendi", "success");
+    }
+}
+
+// ===== تحميل البيانات المحفوظة =====
+function loadSavedData() {
+    if (localStorage.getItem("insta")) {
+        document.getElementById("instaLink").href = localStorage.getItem("insta");
+    }
+    if (localStorage.getItem("map")) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    }
+    if (localStorage.getItem('menuVersion')) {
+        currentVersion = localStorage.getItem('menuVersion');
+        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    }
 }
 
 // ===== عرض رسالة =====
-function showStatus(msg) {
-    let status = document.getElementById('statusMessage');
-    status.textContent = msg;
-    status.style.display = 'block';
-    setTimeout(() => status.style.display = 'none', 2000);
+function showStatus(message, type) {
+    let oldStatus = document.querySelector(".status-message");
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement("div");
+    status.className = `status-message status-${type}`;
+    status.innerText = message;
+    document.body.appendChild(status);
+
+    setTimeout(() => status.remove(), 2000);
 }
 
-// ===== الوضع الليلي/النهاري =====
-let modeToggle = document.getElementById('modeToggle');
-modeToggle.onclick = function() {
-    document.body.classList.toggle('light-mode');
-    modeToggle.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+// ===== اللغة =====
+let currentLang = localStorage.getItem("lang") || "tr";
+
+function applyLanguage() {
+    document.getElementById("menuTitle").innerText = currentLang === "tr" ? "Menü" : "Menu";
+    document.getElementById("contactTitle").innerText = currentLang === "tr" ? "İletişim" : "Contact";
+    document.querySelector('.btn').innerText = currentLang === "tr" ? "Menüyü Gör" : "View Menu";
+    document.getElementById("langBtn").innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
+}
+
+document.getElementById("langBtn").onclick = function() {
+    currentLang = currentLang === "tr" ? "en" : "tr";
+    localStorage.setItem("lang", currentLang);
+    applyLanguage();
 };
 
-// تحديث القائمة أول مرة
-updateCategorySelect();
+// ===== الوضع =====
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+    document.body.classList.toggle("light-mode");
+    modeToggle.innerHTML = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+});
+
+// ===== بدء التشغيل =====
+applyLanguage();
 </script>
 
 </body>
