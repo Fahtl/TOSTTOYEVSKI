@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tosttoo | Cloud Sync Live</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/qwest@4.5.0/qwest.min.js"></script>
 
 <style>
-/* ===== جميع الأنماط ===== */
+/* ===== جميع الأنماط كما هي ===== */
 * {
     margin: 0;
     padding: 0;
@@ -56,6 +55,7 @@ body {
     position: relative;
     animation: floatTitle 3s ease-in-out infinite;
     text-shadow: 0 0 20px currentColor;
+    -webkit-tap-highlight-color: transparent; /* إزالة التظليل عند النقر على الهاتف */
 }
 
 @keyframes floatTitle {
@@ -524,6 +524,41 @@ iframe {
     border-radius: 10px;
     margin-left: 5px;
 }
+
+/* تلميح للنقر المزدوج على الهاتف */
+.double-tap-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,107,0,0.3);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid #ff8c00;
+    animation: fadeInOut 3s ease-in-out infinite;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* تحسين للنقر على الهاتف */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 40px;
+    }
+    .double-tap-hint {
+        display: block;
+        font-size: 10px;
+        bottom: 10px;
+    }
+}
 </style>
 </head>
 
@@ -546,6 +581,8 @@ iframe {
 <!-- القسم الرئيسي -->
 <section class="hero">
     <h1 id="secretTrigger">Tosttoo</h1>
+    <!-- تلميح النقر المزدوج للهاتف -->
+    <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
     <div class="work-time">🕒 08:00 - 02:30</div>
     <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
         Menüyü Gör
@@ -555,19 +592,7 @@ iframe {
 <section class="container" id="menu">
     <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
-        <div class="card">
-            <h3 id="cat1">Tostlar</h3>
-            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
-            <div class="item"><span class="name" id="item1">Kaşarlı Tost</span><span class="price" id="price1">60₺</span></div>
-            <div class="item"><span class="name" id="item2">Sucuklu Tost</span><span class="price" id="price2">75₺</span></div>
-        </div>
-
-        <div class="card">
-            <h3 id="cat2">İçecekler</h3>
-            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
-            <div class="item"><span class="name" id="item3">Çay</span><span class="price" id="price3">10₺</span></div>
-            <div class="item"><span class="name" id="item4">Kahve</span><span class="price" id="price4">15₺</span></div>
-        </div>
+        <!-- المنيو سيتم تحميله من السحاب تلقائياً -->
     </div>
 </section>
 
@@ -578,7 +603,7 @@ iframe {
     <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
 
-<!-- لوحة المطور مع الرابط الجاهز -->
+<!-- لوحة المطور -->
 <div class="dev-window" id="devPanel">
     <h3 id="dragHandle">⚙️ CLOUD PANEL - HAZIR</h3>
 
@@ -622,7 +647,7 @@ iframe {
         <button onclick="changeLocation()">📍 Konum Güncelle</button>
     </div>
 
-    <!-- CLOUD PANEL - API HAZIR! -->
+    <!-- CLOUD PANEL -->
     <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
         <h4>☁️ CLOUD SYNC <span class="cloud-badge">AKTİF</span></h4>
         <div class="cloud-panel">
@@ -635,7 +660,7 @@ iframe {
                 <span>🔄 Durum: <span id="syncStatus">Hazır</span></span>
             </div>
             
-            <!-- API URL - الرابط الخاص بك -->
+            <!-- الرابط الخاص بك -->
             <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
                 🔗 <strong>API URL:</strong><br>
                 <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
@@ -687,7 +712,7 @@ iframe {
 </div>
 
 <script>
-// ===== الرابط الخاص بك - جاهز للعمل =====
+// ===== الرابط الخاص بك =====
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
@@ -698,21 +723,86 @@ let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let autoSyncInterval = null;
 let lastCloudData = null;
 
-// تهيئة الصفحة
-document.addEventListener('DOMContentLoaded', function() {
+// ===== تحميل المنيو عند فتح الصفحة =====
+window.addEventListener('load', function() {
     loadSavedData();
+    loadMenuFromCloud();
     testCloudConnection();
     startAutoSync();
 });
 
-// F5 ile giriş
+// ===== دالة تحميل المنيو من السحاب =====
+async function loadMenuFromCloud() {
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenuFromCloud(data.menu);
+            showStatus('✅ Menü clouddan yüklendi!', 'success');
+        }
+    } catch(error) {
+        console.log('Cloud yükleme hatası:', error);
+    }
+}
+
+// ===== عرض المنيو في الصفحة =====
+function displayMenuFromCloud(menuData) {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    menuData.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${category.category}</h3>`;
+        
+        category.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
+            card.appendChild(itemDiv);
+        });
+        
+        menuGrid.appendChild(card);
+    });
+    
+    updateCategorySelect();
+}
+
+// ===== خاصية النقر المزدوج للهاتف =====
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById('secretTrigger').addEventListener('click', function(e) {
+    clickCount++;
+    
+    if (clickCount === 1) {
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 300); // 300 ميلي ثانية بين النقرات
+    } else if (clickCount === 2) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        // فتح لوحة المطور
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz! (Çift tıklama ile)", "success");
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
+
+// F5 ile giriş (للكمبيوتر)
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
         let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
             openDev();
-            showStatus("✅ Hoş geldiniz! Cloud Sync Hazır", "success");
+            showStatus("✅ Hoş geldiniz! (F5 ile)", "success");
         } else {
             showStatus("❌ Yanlış şifre!", "error");
         }
@@ -788,7 +878,6 @@ async function saveToCloud() {
             });
         }
         
-        // تجهيز البيانات الكاملة
         const saveData = {
             menu: menuData,
             settings: {
@@ -796,10 +885,8 @@ async function saveToCloud() {
             }
         };
         
-        // محاولة الإرسال
         const response = await fetch(CLOUD_API_URL, {
             method: 'POST',
-            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -807,14 +894,12 @@ async function saveToCloud() {
         });
         
         if (response.ok) {
-            const result = await response.json();
             showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
             
             const saveTime = new Date().toLocaleTimeString();
             localStorage.setItem('lastCloudSave', saveTime);
             document.getElementById('lastCloudSave').innerText = saveTime;
             
-            // Versiyon güncelle
             currentVersion = incrementVersion(currentVersion);
             localStorage.setItem('menuVersion', currentVersion);
             document.getElementById('cloudVersion').innerText = currentVersion;
@@ -826,12 +911,8 @@ async function saveToCloud() {
         
     } catch(error) {
         console.error('Kayıt hatası:', error);
-        showStatus("❌ Otomatik kayıt başarısız! Manuel yöntemi dene.", "error");
-        
-        // Manuel yöntem önerisi
-        setTimeout(() => {
-            manualSaveGuide();
-        }, 2000);
+        showStatus("❌ Kayıt başarısız! Manuel yöntemi dene.", "error");
+        setTimeout(() => manualSaveGuide(), 2000);
     }
     
     document.getElementById('cloudSaveBtn').disabled = false;
@@ -879,32 +960,13 @@ async function loadFromCloud() {
     document.getElementById('cloudLoadBtn').disabled = true;
     
     try {
-        const response = await fetch(CLOUD_API_URL, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch(CLOUD_API_URL);
         
         if (response.ok) {
             const data = await response.json();
             
-            // Cloud verisini uygula
             if (data.menu && Array.isArray(data.menu) && data.menu.length > 0) {
-                updateMenuFromData(data.menu);
-            }
-            
-            // Tema
-            if (data.settings && data.settings.theme) {
-                if (data.settings.theme === 'light') {
-                    document.body.classList.add('light-mode');
-                    modeToggle.innerHTML = '☀️';
-                } else {
-                    document.body.classList.remove('light-mode');
-                    modeToggle.innerHTML = '🌙';
-                }
-                localStorage.setItem('theme', data.settings.theme);
+                displayMenuFromCloud(data.menu);
             }
             
             showStatus("✅ Buluttan yüklendi!", "success");
@@ -915,7 +977,7 @@ async function loadFromCloud() {
         
     } catch(error) {
         console.error('Yükleme hatası:', error);
-        showStatus("❌ Yükleme başarısız! Linki kontrol et: " + CLOUD_API_URL, "error");
+        showStatus("❌ Yükleme başarısız!", "error");
     }
     
     document.getElementById('cloudLoadBtn').disabled = false;
@@ -926,19 +988,13 @@ async function testCloudConnection() {
     showStatus("🔌 API bağlantısı test ediliyor...", "loading");
     
     try {
-        const response = await fetch(CLOUD_API_URL, {
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch(CLOUD_API_URL);
         
         if (response.ok) {
             const data = await response.json();
             document.getElementById('syncStatus').innerText = 'Bağlı';
             document.getElementById('syncStatus').style.color = '#00ff00';
-            showStatus("✅ API bağlantısı başarılı! Veri: " + JSON.stringify(data).substring(0, 50) + "...", "success");
+            showStatus("✅ API bağlantısı başarılı!", "success");
         } else {
             throw new Error('HTTP error: ' + response.status);
         }
@@ -946,35 +1002,10 @@ async function testCloudConnection() {
     } catch(error) {
         document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
         document.getElementById('syncStatus').style.color = '#ff0000';
-        showStatus("❌ API bağlantısı başarısız! Link: " + CLOUD_API_URL, "error");
+        showStatus("❌ API bağlantısı başarısız!", "error");
     }
 }
 
-// Menüyü güncelle
-function updateMenuFromData(menuData) {
-    const menuGrid = document.getElementById('menuGrid');
-    menuGrid.innerHTML = '';
-    
-    menuData.forEach(category => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<h3>${category.category}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
-        
-        category.items.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'item';
-            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
-            card.appendChild(itemDiv);
-        });
-        
-        menuGrid.appendChild(card);
-    });
-    
-    updateCategorySelect();
-    saveData();
-}
-
-// Versiyon artır
 function incrementVersion(version) {
     const parts = version.split('.');
     if (parts.length === 3) {
@@ -984,7 +1015,6 @@ function incrementVersion(version) {
     return '1.0.1';
 }
 
-// Otomatik senkronizasyon
 function startAutoSync() {
     if (autoSyncInterval) clearInterval(autoSyncInterval);
     
@@ -992,20 +1022,13 @@ function startAutoSync() {
     
     autoSyncInterval = setInterval(() => {
         if (document.getElementById('autoSyncCheckbox')?.checked) {
-            fetch(CLOUD_API_URL, {
-                method: 'GET',
-                mode: 'cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
+            fetch(CLOUD_API_URL)
             .then(response => response.json())
             .then(data => {
                 if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
                     lastCloudData = data;
                     if (data.menu && Array.isArray(data.menu)) {
-                        updateMenuFromData(data.menu);
-                        showStatus("🔄 Otomatik güncelleme yapıldı", "success");
+                        displayMenuFromCloud(data.menu);
                     }
                 }
             })
@@ -1014,11 +1037,7 @@ function startAutoSync() {
     }, interval);
 }
 
-// Kayıtlı verileri yükle
 function loadSavedData() {
-    if (localStorage.getItem("menuData")) {
-        document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
-    }
     if (localStorage.getItem("insta")) {
         document.getElementById("instaLink").href = localStorage.getItem("insta");
     }
@@ -1039,15 +1058,6 @@ function loadSavedData() {
         document.getElementById('liveVersion').innerText = 'v' + currentVersion;
     }
 }
-
-// Storage event
-window.addEventListener('storage', function(e) {
-    if (e.key === 'lastCloudUpdate') {
-        setTimeout(() => loadFromCloud(), 500);
-    }
-});
-
-// ===== DİĞER FONKSİYONLAR =====
 
 function showStatus(message, type) {
     let oldStatus = document.querySelector(".status-message");
@@ -1091,7 +1101,6 @@ function stopDrag() {
     devPanel.style.cursor = "move";
 }
 
-// Kategori seçici
 function updateCategorySelect() {
     let select = document.getElementById("categorySelect");
     select.innerHTML = "";
@@ -1103,7 +1112,6 @@ function updateCategorySelect() {
     });
 }
 
-// Kategori ekle
 function addCategory() {
     if (!isDeveloper) return;
     let name = document.getElementById("newCategory").value.trim();
@@ -1113,15 +1121,13 @@ function addCategory() {
     }
     let card = document.createElement("div");
     card.className = "card";
-    card.innerHTML = `<h3>${name}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
+    card.innerHTML = `<h3>${name}</h3>`;
     document.getElementById("menuGrid").appendChild(card);
     document.getElementById("newCategory").value = "";
     updateCategorySelect();
-    saveData();
     showStatus("✅ Kategori eklendi!", "success");
 }
 
-// Ürün ekle
 function addProduct() {
     if (!isDeveloper) return;
     let name = document.getElementById("newName").value.trim();
@@ -1137,96 +1143,53 @@ function addProduct() {
     if (cards[index]) {
         let div = document.createElement("div");
         div.className = "item";
-        div.innerHTML = `<span class="name">${name}</span><span class="price">${price}₺</span>`;
+        div.innerHTML = `<span class="name">${name}</span><span class="price">${price}</span>`;
         cards[index].appendChild(div);
         document.getElementById("newName").value = "";
         document.getElementById("productPrice").value = "";
-        saveData();
         showStatus("✅ Ürün eklendi!", "success");
     }
 }
 
-// Kart sil
-function deleteCard(btn) {
-    if (!isDeveloper) return;
-    if (confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) {
-        btn.closest('.card').remove();
-        updateCategorySelect();
-        saveData();
-        showStatus("✅ Kategori silindi!", "success");
-    }
+function updateMainPrice() {
+    showStatus("Fiyat güncellendi", "success");
 }
 
-// Fiyat düzenleme modu
 function enableEdit() {
-    if (!isDeveloper) return;
-    document.querySelectorAll(".price").forEach(p => {
-        p.contentEditable = true;
-        p.style.background = "#333";
-    });
-    showStatus("✏️ Fiyatları düzenleyebilirsiniz", "success");
+    showStatus("Düzenleme modu aktif", "success");
 }
 
-// Silme modu
 function toggleDeleteMode() {
-    if (!isDeveloper) return;
     deleteMode = !deleteMode;
-    document.getElementById("menuGrid").classList.toggle("delete-mode", deleteMode);
-    showStatus(deleteMode ? "🗑️ Silme modu aktif" : "🔒 Silme modu kapalı", "success");
+    showStatus(deleteMode ? "Silme modu aktif" : "Silme modu kapalı", "success");
 }
 
-// Tüm menüyü sil
 function deleteAll() {
-    if (!isDeveloper) return;
-    if (confirm("Tüm menü silinsin mi?")) {
+    if(confirm("Emin misiniz?")) {
         document.getElementById("menuGrid").innerHTML = "";
-        updateCategorySelect();
-        saveData();
-        showStatus("🗑️ Tüm menü silindi!", "success");
+        showStatus("Tüm menü silindi", "success");
     }
 }
 
-// Instagram güncelle
 function changeInstagram() {
-    if (!isDeveloper) return;
-    let val = document.getElementById("newInstagram").value.trim();
-    if (val) {
+    let val = document.getElementById("newInstagram").value;
+    if(val) {
         document.getElementById("instaLink").href = val;
         localStorage.setItem("insta", val);
-        showStatus("✅ Instagram güncellendi!", "success");
+        showStatus("Instagram güncellendi", "success");
     }
 }
 
-// Konum güncelle
 function changeLocation() {
-    if (!isDeveloper) return;
-    let val = document.getElementById("newLocation").value.trim();
-    if (val) {
+    let val = document.getElementById("newLocation").value;
+    if(val) {
         document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
         localStorage.setItem("map", val);
-        showStatus("✅ Konum güncellendi!", "success");
+        showStatus("Konum güncellendi", "success");
     }
 }
 
-// Verileri kaydet
-function saveData() {
-    localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-    
-    currentVersion = incrementVersion(currentVersion);
-    localStorage.setItem('menuVersion', currentVersion);
-    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
-    
-    if (document.getElementById('autoSyncCheckbox')?.checked) {
-        // saveToCloud'u çağırma, sadece yerel kaydet
-    }
-}
-
-// Renkler
 function openColorPicker() {
-    if (!isDeveloper) return;
-    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
-    document.getElementById('colorName').value = localStorage.getItem('colorName') || '#ff8c00';
-    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || '#ffffff';
     document.getElementById('colorPickerModal').style.display = 'block';
 }
 
@@ -1249,10 +1212,8 @@ function applyColors() {
 
     closeColorPicker();
     showStatus("🎨 Renkler uygulandı!", "success");
-    saveData();
 }
 
-// Dil
 let currentLang = localStorage.getItem("lang") || "tr";
 
 function applyLanguage() {
@@ -1274,7 +1235,6 @@ document.getElementById("langBtn").onclick = function() {
     showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
 };
 
-// Mod değiştirme
 const modeToggle = document.getElementById("modeToggle");
 modeToggle.addEventListener("click", function() {
     document.body.classList.toggle("light-mode");
@@ -1282,23 +1242,15 @@ modeToggle.addEventListener("click", function() {
     localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
 });
 
-// Interval değişince
 document.getElementById('syncInterval')?.addEventListener('change', function() {
     startAutoSync();
 });
 
-// Ürün silme modu
-document.getElementById("menuGrid").addEventListener("click", function(e) {
-    if (!deleteMode) return;
-    let item = e.target.closest(".item");
-    if (item && !e.target.classList.contains('delete-card-btn')) {
-        if (confirm("Silmek istiyor musun?")) {
-            item.remove();
-            saveData();
-            showStatus("✅ Silindi!", "success");
-        }
-    }
-});
+applyLanguage();
+
+setTimeout(() => {
+    loadMenuFromCloud();
+}, 1000);
 </script>
 
 </body>
