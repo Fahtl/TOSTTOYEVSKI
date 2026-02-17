@@ -928,6 +928,1256 @@ async function saveAndBroadcast() {
         console.error(err);
         showStatus('❌ Hata!', 'error');
     }
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<title>Tosttoo | Canlı Menü</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    transition: all 0.5s ease;
+}
+
+/* ===== الوضع الليلي (افتراضي) ===== */
+body.night-mode {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #fff;
+}
+
+body.night-mode .hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+}
+
+body.night-mode .hero h1 {
+    color: #ff8c00;
+    text-shadow: 0 0 20px rgba(255,140,0,0.5);
+}
+
+body.night-mode .work-time {
+    background: rgba(0,0,0,0.6);
+    border: 1px solid #ff8c00;
+    color: #ff8c00;
+}
+
+body.night-mode .btn {
+    background: #ff8c00;
+    color: #fff;
+}
+
+body.night-mode .card {
+    background: rgba(30, 30, 30, 0.9);
+    border: 1px solid rgba(255,140,0,0.3);
+}
+
+body.night-mode .card h3 {
+    color: #ff8c00;
+    border-bottom: 2px solid #ff8c00;
+}
+
+body.night-mode .name {
+    color: #ff8c00;
+}
+
+body.night-mode .item-price {
+    color: #fff;
+}
+
+body.night-mode .contact {
+    background: linear-gradient(to top, #000, #1a1a1a);
+}
+
+/* ===== الوضع النهاري ===== */
+body.day-mode {
+    background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+    color: #000;
+}
+
+body.day-mode .hero {
+    background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+body.day-mode .hero h1 {
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+body.day-mode .work-time {
+    background: rgba(255,255,255,0.8);
+    border: 1px solid #333;
+    color: #333;
+}
+
+body.day-mode .btn {
+    background: #333;
+    color: #fff;
+}
+
+body.day-mode .btn:hover {
+    background: #555;
+}
+
+body.day-mode .card {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #333;
+}
+
+body.day-mode .card h3 {
+    color: #333;
+    border-bottom: 2px solid #333;
+}
+
+body.day-mode .name {
+    color: #333;
+}
+
+body.day-mode .item-price {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+body.day-mode .contact {
+    background: linear-gradient(to top, #ddd, #f5f5f5);
+}
+
+body.day-mode .contact a {
+    color: #333;
+}
+
+/* ===== الهيرو ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 15vw, 80px);
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.work-time {
+    font-size: clamp(16px, 4vw, 20px);
+    margin: 15px 0;
+    padding: 8px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+}
+
+.btn {
+    border: none;
+    padding: 12px 30px;
+    font-size: clamp(16px, 4vw, 18px);
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* ===== المنيو ===== */
+.container {
+    padding: 40px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    scroll-margin-top: 20px;
+}
+
+.container h2 {
+    font-size: clamp(30px, 8vw, 40px);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.card {
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px 0;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.card h3 {
+    font-size: clamp(22px, 6vw, 28px);
+    margin-bottom: 15px;
+    text-align: center;
+    padding-bottom: 10px;
+    padding-right: 40px;
+}
+
+/* ===== زر حذف القائمة ===== */
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    box-shadow: 0 2px 10px rgba(220,53,69,0.3);
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .delete-card-btn {
+        display: none;
+    }
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px 15px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.name {
+    font-weight: 600;
+    font-size: clamp(14px, 4vw, 16px);
+}
+
+.item-price {
+    font-weight: bold;
+    font-size: clamp(14px, 4vw, 16px);
+}
+
+/* ===== الاتصال ===== */
+.contact {
+    text-align: center;
+    padding: 40px 15px;
+    margin-top: 30px;
+}
+
+.contact h2 {
+    font-size: clamp(30px, 8vw, 40px);
+    margin-bottom: 20px;
+}
+
+.contact a {
+    text-decoration: none;
+    word-break: break-word;
+}
+
+iframe {
+    border-radius: 15px;
+    margin-top: 20px;
+    max-width: 100%;
+    height: 250px;
+}
+
+/* ===== أزرار التحكم ===== */
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.control-btn {
+    background: rgba(255, 140, 0, 0.2);
+    border: 1px solid #ff8c00;
+    color: #ff8c00;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 140, 0, 0.4);
+}
+
+body.day-mode .control-btn {
+    background: rgba(51, 51, 51, 0.2);
+    border: 1px solid #333;
+    color: #333;
+}
+
+/* ===== لوحة المطور ===== */
+@media (max-width: 768px) {
+    .dev-panel {
+        display: none !important;
+    }
+}
+
+.dev-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
+    padding: 20px;
+    border: 2px solid #ff8c00;
+    border-radius: 20px;
+    z-index: 2000;
+    display: none;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    cursor: move;
+    user-select: none;
+    color: #fff;
+}
+
+.dev-panel.open {
+    display: block;
+}
+
+.dev-panel-header {
+    padding: 5px 10px 15px 10px;
+    cursor: move;
+    border-bottom: 1px solid rgba(255, 140, 0, 0.3);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dev-panel-header h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin: 0;
+}
+
+.drag-indicator {
+    color: rgba(255, 140, 0, 0.7);
+    font-size: 20px;
+}
+
+.dev-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dev-panel input,
+.dev-panel select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgba(255, 140, 0, 0.3);
+    color: #fff;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+.dev-panel button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #ff8c00;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.dev-panel button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+}
+
+.dev-panel .save-btn {
+    background: #28a745;
+}
+
+.dev-panel .delete-btn {
+    background: #dc3545;
+}
+
+.dev-panel .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+/* ===== قسم تعديل الألوان ===== */
+.color-section {
+    background: rgba(255, 140, 0, 0.15);
+    border: 2px solid #ff8c00;
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.color-row label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.color-row input[type="color"] {
+    width: 60px;
+    height: 40px;
+    padding: 2px;
+    border: 2px solid #ff8c00;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===== البث المباشر ===== */
+.live-badge {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+    z-index: 100;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+/* ===== مؤشرات الحالة ===== */
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 3000;
+    animation: slideIn 0.3s ease;
+    font-size: 14px;
+    max-width: 90%;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.status-success { border-color: #28a745; }
+.status-error { border-color: #dc3545; }
+.status-loading { border-color: #ff8c00; }
+
+/* ===== أوضاع التعديل ===== */
+.delete-mode .item {
+    cursor: pointer;
+    position: relative;
+}
+
+.delete-mode .item:hover {
+    background: rgba(255,0,0,0.2);
+    border: 1px solid red;
+}
+
+.edit-mode .item-price {
+    background: rgba(255,140,0,0.2);
+    padding: 2px 8px;
+    border-radius: 5px;
+    cursor: text;
+}
+
+/* ===== تلميح ===== */
+.f5-hint {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,140,0,0.2);
+    border: 1px solid #ff8c00;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: #ff8c00;
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    pointer-events: none;
+}
+
+body.day-mode .f5-hint {
+    background: rgba(51, 51, 51, 0.2);
+    border: 1px solid #333;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .f5-hint, .live-badge, .control-buttons {
+        display: none;
+    }
+}
+</style>
+</head>
+
+<body class="night-mode" id="body" data-language="tr">
+
+<!-- شارة البث المباشر -->
+<div class="live-badge">🔴 CANLI</div>
+
+<!-- أزرار التحكم -->
+<div class="control-buttons">
+    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">TR</button>
+    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">🌓</button>
+</div>
+
+<!-- تلميح -->
+<div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli</div>
+
+<!-- لوحة المطور -->
+<div class="dev-panel" id="devPanel">
+    <div class="dev-panel-header" id="panelHeader">
+        <h3 class="panel-title">⚙️ Geliştirici Paneli</h3>
+        <div class="drag-indicator">⋮⋮</div>
+    </div>
+    
+    <!-- Ürün Ekle -->
+    <div class="dev-section">
+        <h4 class="section-title-add">➕ Ürün Ekle</h4>
+        <select id="categorySelect"></select>
+        <input type="text" id="productName" class="product-name-input" placeholder="Ürün adı">
+        <input type="text" id="productPrice" class="product-price-input" placeholder="Fiyat">
+        <button onclick="addProduct()" class="save-btn add-product-btn">✅ Ürün Ekle</button>
+    </div>
+    
+    <!-- Kategori Ekle -->
+    <div class="dev-section">
+        <h4 class="section-title-cat">📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" class="new-category-input" placeholder="Yeni kategori adı">
+        <button onclick="addCategory()" class="save-btn add-category-btn">📁 Kategori Ekle</button>
+    </div>
+    
+    <!-- Renk Düzenle -->
+    <div class="dev-section color-section">
+        <h4 class="section-title-color">🎨 Renkleri Düzenle</h4>
+        
+        <div class="color-row">
+            <label class="color-label-cat">Kategori Başlığı</label>
+            <input type="color" id="colorCategory" value="#ff8c00">
+        </div>
+        
+        <div class="color-row">
+            <label class="color-label-name">Ürün Adı</label>
+            <input type="color" id="colorName" value="#ff8c00">
+        </div>
+        
+        <div class="color-row">
+            <label class="color-label-price">Fiyat</label>
+            <input type="color" id="colorPrice" value="#ffffff">
+        </div>
+        
+        <div class="color-row">
+            <label class="color-label-btn">Buton Rengi</label>
+            <input type="color" id="colorButton" value="#ff8c00">
+        </div>
+        
+        <button onclick="applyColors()" class="save-btn apply-colors-btn">🎨 Renkleri Uygula</button>
+        <button onclick="resetColors()" class="reset-colors-btn">🔄 Sıfırla</button>
+    </div>
+    
+    <!-- Araçlar -->
+    <div class="dev-section">
+        <h4 class="section-title-tools">🔧 Araçlar</h4>
+        <button onclick="toggleDeleteMode()" class="delete-mode-btn">🗑️ Ürün Silme Modu</button>
+        <button onclick="toggleEditMode()" class="edit-mode-btn">✏️ Fiyat Düzenleme Modu</button>
+        <button onclick="updateInstagram()" class="instagram-btn">📷 Instagram Güncelle</button>
+        <button onclick="updateLocation()" class="location-btn">📍 Konum Güncelle</button>
+    </div>
+    
+    <!-- Supabase + Canlı Yayın -->
+    <div class="dev-section">
+        <h4 class="section-title-broadcast">📡 Canlı Yayın</h4>
+        <button onclick="saveAndBroadcast()" class="save-btn broadcast-btn" style="background: #0066cc;">
+            🌐 Herkese Gönder
+        </button>
+        <div class="broadcast-text" style="font-size:12px; color:#aaa; text-align:center;">
+            Tüm değişiklikler anında herkese ulaşır
+        </div>
+    </div>
+    
+    <button onclick="closeDevPanel()" class="close-btn">❌ Kapat</button>
+</div>
+
+<!-- Ana İçerik -->
+<div class="main-content">
+    <section class="hero">
+        <h1 id="logo">Tosttoo</h1>
+        <div class="work-time" id="workTime">🕒 08:00 - 02:30</div>
+        <button class="btn" id="menuBtn" onclick="scrollToMenu()">Menüyü Gör</button>
+    </section>
+
+    <div class="container" id="menu">
+        <h2 id="menuTitle">🍽️ Menü</h2>
+        
+        <div class="card">
+            <h3 id="cat1">🥪 Tostlar</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
+            <div class="item"><span class="name" id="item1">Kaşarlı Tost</span><span class="item-price">60₺</span></div>
+            <div class="item"><span class="name" id="item2">Sucuklu Tost</span><span class="item-price">75₺</span></div>
+            <div class="item"><span class="name" id="item3">Karışık Tost</span><span class="item-price">85₺</span></div>
+        </div>
+        
+        <div class="card">
+            <h3 id="cat2">🥤 İçecekler</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
+            <div class="item"><span class="name" id="item4">Çay</span><span class="item-price">10₺</span></div>
+            <div class="item"><span class="name" id="item5">Kahve</span><span class="item-price">15₺</span></div>
+            <div class="item"><span class="name" id="item6">Meyve Suyu</span><span class="item-price">20₺</span></div>
+        </div>
+        
+        <div class="card">
+            <h3 id="cat3">🍰 Tatlılar</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
+            <div class="item"><span class="name" id="item7">Künefe</span><span class="item-price">50₺</span></div>
+            <div class="item"><span class="name" id="item8">Baklava</span><span class="item-price">45₺</span></div>
+            <div class="item"><span class="name" id="item9">Sütlaç</span><span class="item-price">30₺</span></div>
+        </div>
+    </div>
+
+    <section class="contact">
+        <h2 id="contactTitle">📞 İletişim</h2>
+        <p>📞 <a href="tel:05321580207">0532 158 0207</a></p>
+        <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski/" target="_blank">Instagram</a></p>
+        <div class="map-container">
+            <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+</div>
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+// ===== SUPABASE =====
+const supabaseUrl = "https://cufbyiefzbgygtyibupl.supabase.co";
+const supabaseKey = "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr";
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// ===== CANLI YAYIN KANALI =====
+const broadcastChannel = supabase.channel('menu-updates', {
+    config: { broadcast: { self: true } }
+});
+
+// Canlı yayını dinle
+broadcastChannel
+    .on('broadcast', { event: 'menu-changed' }, (payload) => {
+        console.log('🔄 Canlı güncelleme:', payload);
+        
+        if (payload.payload.type === 'menu') {
+            document.getElementById('menu').innerHTML = payload.payload.data;
+            updateCategorySelect();
+            showStatus('📋 Menü güncellendi!', 'success');
+        }
+        
+        if (payload.payload.type === 'instagram') {
+            document.getElementById('instaLink').href = payload.payload.data;
+        }
+        
+        if (payload.payload.type === 'location') {
+            document.getElementById('mapFrame').src = payload.payload.data;
+        }
+        
+        if (payload.payload.type === 'colors') {
+            applyColorsFromData(payload.payload.data);
+        }
+    })
+    .subscribe();
+
+// ===== DEĞİŞKENLER =====
+let deleteMode = false;
+let editMode = false;
+let clickCount = 0;
+let ctrlPressed = false;
+
+// Varsayılan renkler
+const defaultColors = {
+    category: '#ff8c00',
+    name: '#ff8c00',
+    price: '#ffffff',
+    button: '#ff8c00'
+};
+
+// Çeviriler
+const translations = {
+    tr: {
+        workTime: "🕒 08:00 - 02:30",
+        menuBtn: "Menüyü Gör",
+        menuTitle: "🍽️ Menü",
+        cat1: "🥪 Tostlar",
+        cat2: "🥤 İçecekler",
+        cat3: "🍰 Tatlılar",
+        item1: "Kaşarlı Tost",
+        item2: "Sucuklu Tost",
+        item3: "Karışık Tost",
+        item4: "Çay",
+        item5: "Kahve",
+        item6: "Meyve Suyu",
+        item7: "Künefe",
+        item8: "Baklava",
+        item9: "Sütlaç",
+        contactTitle: "📞 İletişim",
+        panelTitle: "⚙️ Geliştirici Paneli",
+        sectionAdd: "➕ Ürün Ekle",
+        productNamePlaceholder: "Ürün adı",
+        productPricePlaceholder: "Fiyat",
+        addProductBtn: "✅ Ürün Ekle",
+        sectionCat: "📁 Kategori Ekle",
+        newCategoryPlaceholder: "Yeni kategori adı",
+        addCategoryBtn: "📁 Kategori Ekle",
+        sectionColor: "🎨 Renkleri Düzenle",
+        colorLabelCat: "Kategori Başlığı",
+        colorLabelName: "Ürün Adı",
+        colorLabelPrice: "Fiyat",
+        colorLabelBtn: "Buton Rengi",
+        applyColorsBtn: "🎨 Renkleri Uygula",
+        resetColorsBtn: "🔄 Sıfırla",
+        sectionTools: "🔧 Araçlar",
+        deleteModeBtn: "🗑️ Ürün Silme Modu",
+        editModeBtn: "✏️ Fiyat Düzenleme Modu",
+        instagramBtn: "📷 Instagram Güncelle",
+        locationBtn: "📍 Konum Güncelle",
+        sectionBroadcast: "📡 Canlı Yayın",
+        broadcastBtn: "🌐 Herkese Gönder",
+        broadcastText: "Tüm değişiklikler anında herkese ulaşır",
+        closeBtn: "❌ Kapat"
+    },
+    en: {
+        workTime: "🕒 08:00 - 02:30",
+        menuBtn: "View Menu",
+        menuTitle: "🍽️ Menu",
+        cat1: "🥪 Toasts",
+        cat2: "🥤 Drinks",
+        cat3: "🍰 Desserts",
+        item1: "Cheese Toast",
+        item2: "Sausage Toast",
+        item3: "Mixed Toast",
+        item4: "Tea",
+        item5: "Coffee",
+        item6: "Juice",
+        item7: "Kunefe",
+        item8: "Baklava",
+        item9: "Rice Pudding",
+        contactTitle: "📞 Contact",
+        panelTitle: "⚙️ Developer Panel",
+        sectionAdd: "➕ Add Product",
+        productNamePlaceholder: "Product name",
+        productPricePlaceholder: "Price",
+        addProductBtn: "✅ Add Product",
+        sectionCat: "📁 Add Category",
+        newCategoryPlaceholder: "New category name",
+        addCategoryBtn: "📁 Add Category",
+        sectionColor: "🎨 Edit Colors",
+        colorLabelCat: "Category Title",
+        colorLabelName: "Product Name",
+        colorLabelPrice: "Price",
+        colorLabelBtn: "Button Color",
+        applyColorsBtn: "🎨 Apply Colors",
+        resetColorsBtn: "🔄 Reset",
+        sectionTools: "🔧 Tools",
+        deleteModeBtn: "🗑️ Delete Mode",
+        editModeBtn: "✏️ Edit Mode",
+        instagramBtn: "📷 Update Instagram",
+        locationBtn: "📍 Update Location",
+        sectionBroadcast: "📡 Live Broadcast",
+        broadcastBtn: "🌐 Send to All",
+        broadcastText: "All changes instantly reach everyone",
+        closeBtn: "❌ Close"
+    }
+};
+
+// ===== CİHAZ KONTROLÜ =====
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
+// ===== TEMEL =====
+function scrollToMenu() {
+    document.getElementById("menu").scrollIntoView({behavior: "smooth"});
+}
+
+// ===== DİL DEĞİŞTİRME =====
+function toggleLanguage() {
+    const body = document.getElementById('body');
+    const langToggle = document.getElementById('langToggle');
+    const currentLang = body.getAttribute('data-language');
+    
+    if(currentLang === 'tr') {
+        body.setAttribute('data-language', 'en');
+        langToggle.innerHTML = 'EN';
+        applyLanguage('en');
+        localStorage.setItem('language', 'en');
+        showStatus('🇬🇧 English mode active', 'success');
+    } else {
+        body.setAttribute('data-language', 'tr');
+        langToggle.innerHTML = 'TR';
+        applyLanguage('tr');
+        localStorage.setItem('language', 'tr');
+        showStatus('🇹🇷 Türkçe mod aktif', 'success');
+    }
+}
+
+function applyLanguage(lang) {
+    const t = translations[lang];
+    
+    // Ana sayfa
+    document.getElementById('workTime').innerText = t.workTime;
+    document.getElementById('menuBtn').innerText = t.menuBtn;
+    document.getElementById('menuTitle').innerText = t.menuTitle;
+    document.getElementById('cat1').innerText = t.cat1;
+    document.getElementById('cat2').innerText = t.cat2;
+    document.getElementById('cat3').innerText = t.cat3;
+    document.getElementById('item1').innerText = t.item1;
+    document.getElementById('item2').innerText = t.item2;
+    document.getElementById('item3').innerText = t.item3;
+    document.getElementById('item4').innerText = t.item4;
+    document.getElementById('item5').innerText = t.item5;
+    document.getElementById('item6').innerText = t.item6;
+    document.getElementById('item7').innerText = t.item7;
+    document.getElementById('item8').innerText = t.item8;
+    document.getElementById('item9').innerText = t.item9;
+    document.getElementById('contactTitle').innerText = t.contactTitle;
+    
+    // Developer panel
+    document.querySelector('.panel-title').innerText = t.panelTitle;
+    document.querySelector('.section-title-add').innerText = t.sectionAdd;
+    document.querySelector('.product-name-input').placeholder = t.productNamePlaceholder;
+    document.querySelector('.product-price-input').placeholder = t.productPricePlaceholder;
+    document.querySelector('.add-product-btn').innerText = t.addProductBtn;
+    
+    document.querySelector('.section-title-cat').innerText = t.sectionCat;
+    document.querySelector('.new-category-input').placeholder = t.newCategoryPlaceholder;
+    document.querySelector('.add-category-btn').innerText = t.addCategoryBtn;
+    
+    document.querySelector('.section-title-color').innerText = t.sectionColor;
+    document.querySelector('.color-label-cat').innerText = t.colorLabelCat;
+    document.querySelector('.color-label-name').innerText = t.colorLabelName;
+    document.querySelector('.color-label-price').innerText = t.colorLabelPrice;
+    document.querySelector('.color-label-btn').innerText = t.colorLabelBtn;
+    document.querySelector('.apply-colors-btn').innerText = t.applyColorsBtn;
+    document.querySelector('.reset-colors-btn').innerText = t.resetColorsBtn;
+    
+    document.querySelector('.section-title-tools').innerText = t.sectionTools;
+    document.querySelector('.delete-mode-btn').innerText = t.deleteModeBtn;
+    document.querySelector('.edit-mode-btn').innerText = t.editModeBtn;
+    document.querySelector('.instagram-btn').innerText = t.instagramBtn;
+    document.querySelector('.location-btn').innerText = t.locationBtn;
+    
+    document.querySelector('.section-title-broadcast').innerText = t.sectionBroadcast;
+    document.querySelector('.broadcast-btn').innerText = t.broadcastBtn;
+    document.querySelector('.broadcast-text').innerText = t.broadcastText;
+    
+    document.querySelector('.close-btn').innerText = t.closeBtn;
+}
+
+// ===== TEMA DEĞİŞTİRME =====
+function toggleTheme() {
+    const body = document.getElementById('body');
+    const themeToggle = document.getElementById('themeToggle');
+    
+    if(body.classList.contains('night-mode')) {
+        body.classList.remove('night-mode');
+        body.classList.add('day-mode');
+        themeToggle.innerHTML = '🌞';
+        localStorage.setItem('theme', 'day');
+        showStatus('🌞 Gündüz modu aktif', 'success');
+    } else {
+        body.classList.remove('day-mode');
+        body.classList.add('night-mode');
+        themeToggle.innerHTML = '🌓';
+        localStorage.setItem('theme', 'night');
+        showStatus('🌙 Gece modu aktif', 'success');
+    }
+}
+
+// ===== CTRL TAKİBİ =====
+document.addEventListener('keydown', e => { if(e.key === 'Control') ctrlPressed = true; });
+document.addEventListener('keyup', e => { if(e.key === 'Control') ctrlPressed = false; });
+
+// ===== GİRİŞ =====
+document.getElementById("logo").addEventListener("click", function() {
+    if(isMobile()) return;
+    
+    clickCount++;
+    setTimeout(() => clickCount = 0, 3000);
+    
+    if(clickCount === 5) {
+        let pass = prompt("🔐 Şifre:");
+        if(pass === "momotunc0702") {
+            openDevPanel();
+            showStatus("✅ Hoş geldiniz!", "success");
+        }
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if(isMobile()) return;
+    if(e.key === 'F5' && ctrlPressed) {
+        e.preventDefault();
+        let pass = prompt("🔐 Şifre (Ctrl+F5):");
+        if(pass === "momotunc0702") {
+            openDevPanel();
+            showStatus("✅ Hoş geldiniz!", "success");
+        }
+    }
+});
+
+// ===== SÜRÜKLEME =====
+let isDragging = false, xOffset = 0, yOffset = 0;
+const panel = document.getElementById('devPanel');
+const header = document.getElementById('panelHeader');
+
+header.addEventListener('mousedown', e => {
+    if(isMobile()) return;
+    isDragging = true;
+    xOffset = e.clientX - panel.offsetLeft;
+    yOffset = e.clientY - panel.offsetTop;
+    panel.style.transition = 'none';
+});
+
+document.addEventListener('mousemove', e => {
+    if(!isDragging || isMobile()) return;
+    panel.style.left = (e.clientX - xOffset) + 'px';
+    panel.style.top = (e.clientY - yOffset) + 'px';
+    panel.style.transform = 'none';
+});
+
+document.addEventListener('mouseup', () => {
+    isDragging = false;
+    panel.style.transition = 'box-shadow 0.3s ease';
+});
+
+// ===== PANEL =====
+function openDevPanel() {
+    if(isMobile()) return;
+    panel.classList.add('open');
+    updateCategorySelect();
+    loadColors();
+}
+
+function closeDevPanel() {
+    panel.classList.remove('open');
+    document.body.classList.remove('delete-mode', 'edit-mode');
+    
+    // Düzenleme modunu kapat
+    document.querySelectorAll('.item-price').forEach(el => {
+        el.contentEditable = false;
+    });
+}
+
+// ===== KATEGORİ =====
+function updateCategorySelect() {
+    let select = document.getElementById('categorySelect');
+    select.innerHTML = '';
+    document.querySelectorAll('.card').forEach((card, i) => {
+        let opt = document.createElement('option');
+        opt.value = i;
+        opt.textContent = card.querySelector('h3').innerText;
+        select.appendChild(opt);
+    });
+}
+
+function addCategory() {
+    if(isMobile()) return;
+    let name = document.getElementById('newCategory').value.trim();
+    if(!name) return;
+    
+    let card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<h3>${name}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
+    document.getElementById('menu').appendChild(card);
+    
+    document.getElementById('newCategory').value = '';
+    updateCategorySelect();
+    saveAndBroadcast();
+}
+
+function addProduct() {
+    if(isMobile()) return;
+    
+    let cat = document.getElementById('categorySelect').value;
+    let name = document.getElementById('productName').value.trim();
+    let price = document.getElementById('productPrice').value.trim();
+    
+    if(!name || !price) return;
+    
+    let item = document.createElement('div');
+    item.className = 'item';
+    item.innerHTML = `<span class="name">${name}</span><span class="item-price">${price}₺</span>`;
+    
+    document.querySelectorAll('.card')[cat].appendChild(item);
+    
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    saveAndBroadcast();
+}
+
+function deleteCard(btn) {
+    if(isMobile()) return;
+    if(confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
+        btn.closest('.card').remove();
+        updateCategorySelect();
+        saveAndBroadcast();
+    }
+}
+
+// ===== RENKLER =====
+function loadColors() {
+    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || defaultColors.category;
+    document.getElementById('colorName').value = localStorage.getItem('colorName') || defaultColors.name;
+    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || defaultColors.price;
+    document.getElementById('colorButton').value = localStorage.getItem('colorButton') || defaultColors.button;
+    applyColors();
+}
+
+function applyColors() {
+    let colors = {
+        category: document.getElementById('colorCategory').value,
+        name: document.getElementById('colorName').value,
+        price: document.getElementById('colorPrice').value,
+        button: document.getElementById('colorButton').value
+    };
+    
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colors.category);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colors.name);
+    document.querySelectorAll('.item-price').forEach(el => el.style.color = colors.price);
+    document.querySelectorAll('.btn, .dev-panel button:not(.save-btn):not(.delete-btn):not(.close-btn)').forEach(el => {
+        el.style.background = colors.button;
+    });
+    
+    Object.keys(colors).forEach(key => localStorage.setItem('color' + key, colors[key]));
+}
+
+function applyColorsFromData(colors) {
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colors.category);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colors.name);
+    document.querySelectorAll('.item-price').forEach(el => el.style.color = colors.price);
+    document.querySelectorAll('.btn, .dev-panel button:not(.save-btn):not(.delete-btn):not(.close-btn)').forEach(el => {
+        el.style.background = colors.button;
+    });
+}
+
+function resetColors() {
+    document.getElementById('colorCategory').value = defaultColors.category;
+    document.getElementById('colorName').value = defaultColors.name;
+    document.getElementById('colorPrice').value = defaultColors.price;
+    document.getElementById('colorButton').value = defaultColors.button;
+    applyColors();
+    saveAndBroadcast();
+}
+
+// ===== MODLAR =====
+function toggleDeleteMode() {
+    if(isMobile()) return;
+    deleteMode = !deleteMode;
+    document.body.classList.toggle('delete-mode', deleteMode);
+    
+    if(deleteMode) {
+        document.body.classList.remove('edit-mode');
+        editMode = false;
+        showStatus('🗑️ Silme modu aktif - Ürünlere tıklayın', 'success');
+    } else {
+        showStatus('🔒 Silme modu kapalı', 'success');
+    }
+}
+
+function toggleEditMode() {
+    if(isMobile()) return;
+    editMode = !editMode;
+    document.body.classList.toggle('edit-mode', editMode);
+    
+    if(editMode) {
+        document.body.classList.remove('delete-mode');
+        deleteMode = false;
+        
+        document.querySelectorAll('.item-price').forEach(el => {
+            el.contentEditable = true;
+        });
+        showStatus('✏️ Düzenleme modu aktif - Fiyatları değiştirin', 'success');
+    } else {
+        document.querySelectorAll('.item-price').forEach(el => {
+            el.contentEditable = false;
+        });
+        showStatus('🔒 Düzenleme modu kapalı', 'success');
+    }
+}
+
+// Ürün silme (delete mode)
+document.addEventListener('click', function(e) {
+    if(isMobile() || !deleteMode) return;
+    
+    let item = e.target.closest('.item');
+    if(item && !e.target.classList.contains('delete-card-btn')) {
+        if(confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
+            item.remove();
+            saveAndBroadcast();
+            showStatus('✅ Ürün silindi!', 'success');
+        }
+    }
+});
+
+// Fiyat düzenleme (edit mode) - otomatik kaydet
+document.addEventListener('blur', function(e) {
+    if(isMobile() || !editMode) return;
+    
+    if(e.target.classList.contains('item-price')) {
+        saveAndBroadcast();
+        showStatus('✅ Fiyat güncellendi!', 'success');
+    }
+}, true);
+
+// ===== INSTAGRAM & KONUM =====
+function updateInstagram() {
+    if(isMobile()) return;
+    let link = prompt('Yeni Instagram linki:', 'https://www.instagram.com/tosttooyevski/');
+    if(link) {
+        document.getElementById('instaLink').href = link;
+        saveAndBroadcast();
+    }
+}
+
+function updateLocation() {
+    if(isMobile()) return;
+    let loc = prompt('Yeni konum (örn: 36.484479,32.101147):');
+    if(loc) {
+        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${loc}&output=embed`;
+        saveAndBroadcast();
+    }
+}
+
+// ===== SUPABASE KAYIT + CANLI YAYIN =====
+async function saveAndBroadcast() {
+    showStatus('🔄 Kaydediliyor...', 'loading');
+    
+    try {
+        const data = {
+            menu: document.getElementById('menu').innerHTML,
+            instagram: document.getElementById('instaLink').href,
+            location: document.getElementById('mapFrame').src,
+            colors: {
+                category: document.getElementById('colorCategory')?.value || defaultColors.category,
+                name: document.getElementById('colorName')?.value || defaultColors.name,
+                price: document.getElementById('colorPrice')?.value || defaultColors.price,
+                button: document.getElementById('colorButton')?.value || defaultColors.button
+            }
+        };
+        
+        // Supabase'e kaydet
+        await supabase.from('settings').update({
+            menu_data: data.menu,
+            instagram: data.instagram,
+            location: data.location,
+            colors: JSON.stringify(data.colors)
+        }).eq('id', 1);
+        
+        // Canlı yayınla
+        await broadcastChannel.send({
+            type: 'broadcast',
+            event: 'menu-changed',
+            payload: { type: 'menu', data: data.menu }
+        });
+        
+        await broadcastChannel.send({
+            type: 'broadcast',
+            event: 'menu-changed',
+            payload: { type: 'instagram', data: data.instagram }
+        });
+        
+        await broadcastChannel.send({
+            type: 'broadcast',
+            event: 'menu-changed',
+            payload: { type: 'location', data: data.location }
+        });
+        
+        await broadcastChannel.send({
+            type: 'broadcast',
+            event: 'menu-changed',
+            payload: { type: 'colors', data: data.colors }
+        });
+        
+        showStatus('✅ Herkese gönderildi!', 'success');
+    } catch(err) {
+        console.error(err);
+        showStatus('❌ Hata!', 'error');
+    }
 }
 
 // ===== DURUM MESAJI =====
@@ -944,6 +2194,20 @@ function showStatus(msg, type) {
 
 // ===== BAŞLANGIÇ =====
 window.onload = async function() {
+    // Dil yükle
+    const savedLang = localStorage.getItem('language') || 'tr';
+    document.getElementById('body').setAttribute('data-language', savedLang);
+    document.getElementById('langToggle').innerHTML = savedLang === 'tr' ? 'TR' : 'EN';
+    applyLanguage(savedLang);
+    
+    // Tema yükle
+    const savedTheme = localStorage.getItem('theme');
+    if(savedTheme === 'day') {
+        document.getElementById('body').classList.remove('night-mode');
+        document.getElementById('body').classList.add('day-mode');
+        document.getElementById('themeToggle').innerHTML = '🌞';
+    }
+    
     // Supabase'den yükle
     const { data } = await supabase.from('settings').select('*').eq('id', 1).single();
     
