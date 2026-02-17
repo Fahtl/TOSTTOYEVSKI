@@ -1,38 +1,4 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>موقعي</title>
-  <h2 id="price">0</h2>
-</head>
-<body>
-
-<h2 id="price">...</h2>
-
-<!-- هنا تلصق كود Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const supabase = window.supabase.createClient(
-  "https://cufbyiefzbgygtyibupl.supabase.co",
-  "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr"
-);
-
-async function loadData() {
-  const { data, error } = await supabase
-    .from("settings")
-    .select("price")
-    .limit(1);
-
-  if (data && data.length > 0) {
-    document.getElementById("price").innerText = data[0].price;
-  }
-}
-
-loadData();
-</script>
-
-</body>
-</html> 
-<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -71,6 +37,25 @@ margin-top:15px;
 font-size:20px;
 color:#ff8c00;
 font-weight:600;
+}
+
+.price-container {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+#price {
+    color: #ff8c00;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: rgba(255,140,0,0.1);
+    cursor: pointer;
+}
+
+#price[contenteditable="true"] {
+    background: rgba(255,140,0,0.3);
+    outline: 2px solid #ff8c00;
 }
 
 .btn{
@@ -229,6 +214,9 @@ cursor:pointer
 <section class="hero">
 <h1 id="secretTrigger">Tosttoo</h1>
 <div class="work-time">🕒 08:00 - 02:30</div>
+<div class="price-container">
+    💰 Fiyat: <span id="price" contenteditable="false">0</span> ₺
+</div>
 <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
 </section>
 
@@ -302,7 +290,14 @@ width="100%" height="300"></iframe>
     <button onclick="closeColorPicker()">Kapat</button>
 </div>
 
+<!-- هنا تلصق كود Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const supabase = window.supabase.createClient(
+  "https://cufbyiefzbgygtyibupl.supabase.co",
+  "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr"
+);
+
 let isDeveloper=false,deleteMode=false;
 
 /* Scroll */
@@ -329,9 +324,10 @@ document.getElementById("devPanel").style.display="block";
 document.getElementById("overlay").style.display="block";
 isDeveloper=true;
 updateCategorySelect();
+// السماح بتعديل السعر عند فتح لوحة المطور
+document.getElementById("price").contentEditable = true;
 }
 
-/* بقية النظام بدون تغيير */
 function updateCategorySelect(){
 let select=document.getElementById("categorySelect");
 select.innerHTML="";
@@ -440,6 +436,8 @@ document.querySelectorAll(".price").forEach(p=>{
 p.contentEditable=false;
 p.style.background="transparent";
 });
+// تعطيل تعديل السعر عند إغلاق لوحة المطور
+document.getElementById("price").contentEditable = false;
 closeColorPicker(); // إغلاق نافذة الألوان إذا كانت مفتوحة
 }
 
@@ -475,7 +473,46 @@ function applyColors() {
     closeColorPicker();
 }
 
+// دالة تحميل البيانات من Supabase
+async function loadData() {
+  const { data, error } = await supabase
+    .from("settings")
+    .select("price")
+    .limit(1);
+
+  if (data && data.length > 0) {
+    document.getElementById("price").innerText = data[0].price;
+  }
+}
+
+// دالة تحديث السعر في Supabase
+async function updatePrice(newPrice) {
+  const { data, error } = await supabase
+    .from("settings")
+    .update({ price: newPrice })
+    .eq("id", 1);
+    
+  if (error) {
+    console.error("Error updating price:", error);
+  } else {
+    console.log("Price updated successfully");
+  }
+}
+
+// إضافة حدث فقدان التركيز لعنصر السعر
+document.getElementById("price").addEventListener("blur", async function () {
+  if (isDeveloper) {  // فقط إذا كان المطور مسجل الدخول
+    let newPrice = this.innerText.trim();
+    if (newPrice) {
+      await updatePrice(newPrice);
+    }
+  }
+});
+
 window.onload=function(){
+// تحميل البيانات من Supabase
+loadData();
+
 if(localStorage.getItem("menuData"))
 document.getElementById("menuGrid").innerHTML=
 localStorage.getItem("menuData");
