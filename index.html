@@ -3,1151 +3,223 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo | Ultimate Pro</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Tosttoo Ultimate 3.0</title>
 
 <style>
-/* ===== الوضع الافتراضي (ليل) ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    transition: all 0.5s ease;
-    overflow-x: hidden;
-    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: #fff;
-}
-
-/* أنيميشن الخلفية */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-@keyframes slideInDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pricePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); color: #ff8c00; }
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes livePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
-    animation: rotate 20s linear infinite;
-}
-
-.hero h1 {
-    font-size: 60px;
-    color: #ff8c00;
-    margin: 0;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    animation: floatTitle 3s ease-in-out infinite;
-    text-shadow: 0 0 20px currentColor;
-}
-
-.hero h1:hover {
-    animation: shake 0.5s ease-in-out;
-}
-
-.work-time {
-    margin-top: 15px;
-    font-size: 20px;
-    color: #ff8c00;
-    font-weight: 600;
-    animation: pulse 2s ease-in-out infinite;
-}
-
-.btn {
-    padding: 12px 25px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    background: #ff8c00;
-    color: #fff;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btn:hover {
-    transform: translateY(-3px) scale(1.05);
-}
-
-.container {
-    padding: 60px 20px;
-    max-width: 1100px;
-    margin: auto;
-    scroll-margin-top: 20px;
-}
-
-.container h2 {
-    font-size: 40px;
-    color: #ff8c00;
-    text-align: center;
-    margin-bottom: 40px;
-    animation: slideInDown 1s ease;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-#menuGrid {
-    scroll-margin-top: 20px;
-}
-
-.card {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    animation: fadeInUp 0.8s ease;
-    animation-fill-mode: both;
-    position: relative;
-    border: 1px solid rgba(255,140,0,0.3);
-}
-
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.4s; }
-
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
-}
-
-.card h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 15px;
-    text-align: center;
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 10px;
-    position: relative;
-}
-
-.card h3::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: currentColor;
-    transition: width 0.3s ease;
-}
-
-.card:hover h3::after {
-    width: 100px;
-}
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.item:hover::before {
-    left: 100%;
-}
-
-.item:hover {
-    transform: scale(1.02) translateX(5px);
-}
-
-.name {
-    color: #ff8c00;
-    font-weight: 600;
-}
-
-.price {
-    color: #fff;
-    font-weight: bold;
-    animation: pricePulse 2s ease-in-out infinite;
-}
-
-.contact {
-    text-align: center;
-    padding: 50px 20px;
-    background: #000;
-}
-
-.contact h2 {
-    font-size: 40px;
-    color: #ff8c00;
-    margin-bottom: 30px;
-}
-
-.contact a {
-    text-decoration: none;
-    color: #ff8c00;
-}
-
-iframe {
-    border-radius: 10px;
-    margin-top: 20px;
-    width: 100%;
-    height: 300px;
-    border: none;
-}
-
-/* أزرار التحكم الأخرى */
-.control-buttons {
-    position: fixed;
-    top: 20px;
-    right: 90px;
-    display: flex;
-    gap: 8px;
-    z-index: 1000;
-}
-
-.control-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    animation: bounceIn 0.5s ease;
-    background: #ff8c00;
-    color: white;
-}
-
-.control-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-
-/* شعار البث المباشر */
-.live-badge {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: rgba(255, 0, 0, 0.9);
-    color: #fff;
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    z-index: 100;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.3);
-    pointer-events: none;
-    animation: livePulse 1.5s ease-in-out infinite;
-}
-
-@keyframes livePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* لوحة المطور */
-.dev-window {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 420px;
-    max-height: 90vh;
-    overflow: auto;
-    padding: 20px;
-    border-radius: 15px;
-    display: none;
-    z-index: 1000;
-    background: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 140, 0, 0.5);
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
-    cursor: move;
-    user-select: none;
-}
-
-.dev-window:active {
-    cursor: grabbing;
-}
-
-.dev-window h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 10px;
-    cursor: move;
-}
-
-.dev-section {
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 140, 0, 0.3);
-}
-
-.dev-section h4 {
-    color: #ff8c00;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.dev-window input,
-.dev-window select {
-    width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: white;
-}
-
-.dev-window button {
-    width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    background: #ff8c00;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dev-window button:hover {
-    background: #ffa233;
-    transform: translateY(-2px);
-}
-
-.dev-window .save-btn {
-    background: #28a745;
-}
-
-.dev-window .delete-btn {
-    background: #dc3545;
-}
-
-.dev-window .close-btn {
-    background: #6c757d;
-    margin-top: 15px;
-}
-
-/* نافذة تعديل الألوان */
-.color-picker-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid #ff8c00;
-    z-index: 1001;
-    display: none;
-    width: 90%;
-    max-width: 350px;
-    color: white;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.color-picker-modal h3 {
-    color: #ff8c00;
-    margin-top: 0;
-    text-align: center;
-}
-
-.color-picker-modal input[type=color] {
-    width: 100%;
-    height: 50px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.color-picker-modal label {
-    display: block;
-    margin-top: 15px;
-    color: #ff8c00;
-    font-weight: 600;
-}
-
-.color-picker-modal button {
-    margin-top: 20px;
-    background: #ff8c00;
-}
-
-/* مؤشرات الحالة */
-.status-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    background: rgba(0,0,0,0.9);
-    border: 2px solid;
-    color: #fff;
-    font-weight: 600;
-    z-index: 2000;
-    animation: slideIn 0.3s ease;
-    font-size: 14px;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-.status-success { border-color: #28a745; }
-.status-error { border-color: #dc3545; }
-.status-loading { border-color: #ff8c00; }
-
-/* أوضاع التعديل */
-.delete-mode .item:hover {
-    outline: 2px solid red;
-    cursor: pointer;
-}
-
-/* زر حذف القائمة */
-.delete-card-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0;
-    z-index: 10;
-}
-
-.card:hover .delete-card-btn {
-    opacity: 1;
-}
-
-/* تلميح F5 - مخفي */
-.f5-hint {
-    display: none;
-}
-
-/* ===== وضع النهار الكريمي - محدث حسب طلبك ===== */
-.light-mode {
-    background: #f6f1e8 !important;
-    color: #2b2b2b !important;
-    animation: none !important;
-}
-
-/* اطار القوائم بوضع النهار */
-.light-mode .card {
-    background: #fffaf3 !important;
-    border: 2px solid #f59e0b !important;
-    border-radius: 18px !important;
-    padding: 20px !important;
-    box-shadow: 0 6px 20px rgba(217,119,6,0.15) !important;
-}
-
-/* عنوان داخل الكارت */
-.light-mode .card h3 {
-    color: #d97706 !important;
-    border-bottom: 2px solid #f59e0b !important;
-}
-
-.light-mode .card h3::after {
-    background: #f59e0b !important;
-}
-
-/* السعر */
-.light-mode .price {
-    color: #b45309 !important;
-    font-weight: bold;
-    animation: pricePulseDay 2s ease-in-out infinite;
-}
-
-@keyframes pricePulseDay {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); color: #d97706; }
-}
-
-.light-mode .hero {
-    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
-}
-
-.light-mode .hero h1 {
-    color: #d97706 !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-.light-mode .work-time {
-    color: #d97706 !important;
-}
-
-.light-mode .name {
-    color: #b45309 !important;
-}
-
-.light-mode .contact {
-    background: #e6d8c3 !important;
-}
-
-.light-mode .contact h2 {
-    color: #d97706 !important;
-}
-
-.light-mode .contact a {
-    color: #d97706 !important;
-}
-
-.light-mode .control-btn {
-    background: #f59e0b !important;
-}
-
-.light-mode .dev-window {
-    background: rgba(246, 241, 232, 0.95) !important;
-    border: 2px solid #f59e0b !important;
-}
-
-.light-mode .dev-window h3 {
-    color: #d97706 !important;
-    border-bottom: 2px solid #f59e0b !important;
-}
-
-.light-mode .dev-section {
-    background: rgba(255, 250, 243, 0.8) !important;
-    border: 1px solid #f59e0b !important;
-}
-
-.light-mode .dev-section h4 {
-    color: #d97706 !important;
-}
-
-.light-mode .dev-window input,
-.light-mode .dev-window select {
-    background: #fffaf3 !important;
-    border: 1px solid #f59e0b !important;
-    color: #2b2b2b !important;
-}
-
-.light-mode .color-picker-modal {
-    background: rgba(246, 241, 232, 0.98) !important;
-    border: 2px solid #f59e0b !important;
-    color: #2b2b2b !important;
-}
-
-.light-mode .color-picker-modal h3 {
-    color: #d97706 !important;
-}
-
-.light-mode .color-picker-modal label {
-    color: #b45309 !important;
-}
-
-.light-mode .color-picker-modal button {
-    background: #f59e0b !important;
+body{
+    margin:0;
+    font-family:Arial;
+    background:#111;
+    color:#fff;
+    transition:.3s;
+}
+header{
+    background:#ff8c00;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+.container{
+    padding:20px;
+}
+.card{
+    background:#1e1e1e;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+}
+.item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    cursor:pointer;
+}
+button{
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+#cartBtn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:#28a745;
+    color:white;
+}
+#modeBtn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    background:#444;
+    color:white;
+}
+#cartModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.8);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+#cartBox{
+    background:#222;
+    padding:20px;
+    width:320px;
+    border-radius:12px;
+}
+.light{
+    background:#f6f1e8;
+    color:#000;
+}
+.light .card{
+    background:#fff;
 }
 </style>
 </head>
 
-<body class="" id="body" data-language="tr">
+<body>
 
-<!-- شعار البث المباشر -->
-<div class="live-badge">🔴 CANLI</div>
+<header>Tosttoo Ultimate</header>
 
-<!-- أزرار التحكم - نترك زر اللغة فقط -->
-<div class="control-buttons">
-    <button class="control-btn" id="langBtn">🌍 EN / TR</button>
+<button id="cartBtn">🛒 (<span id="cartCount">0</span>)</button>
+<button id="modeBtn">🌙</button>
+
+<div class="container">
+
+<div class="card">
+<h3>Tostlar</h3>
+
+<div class="item" data-stock="5" onclick="addToCart(this)">
+<span>Kaşarlı Tost</span>
+<span class="price">60</span>₺
 </div>
 
-<!-- زر تغيير الوضع الجديد -->
-<button id="modeToggle">🌙</button>
-
-<!-- القسم الرئيسي -->
-<section class="hero">
-    <h1 id="secretTrigger">Tosttoo</h1>
-    <div class="work-time">🕒 08:00 - 02:30</div>
-    <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
-        Menüyü Gör
-    </button>
-</section>
-
-<section class="container" id="menu">
-    <h2 id="menuTitle">Menü</h2>
-    <div class="grid" id="menuGrid">
-        <div class="card">
-            <h3 id="cat1">Tostlar</h3>
-            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
-            <div class="item"><span class="name" id="item1">Kaşarlı Tost</span><span class="price" id="price1">60₺</span></div>
-            <div class="item"><span class="name" id="item2">Sucuklu Tost</span><span class="price" id="price2">75₺</span></div>
-        </div>
-
-        <div class="card">
-            <h3 id="cat2">İçecekler</h3>
-            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
-            <div class="item"><span class="name" id="item3">Çay</span><span class="price" id="price3">10₺</span></div>
-            <div class="item"><span class="name" id="item4">Kahve</span><span class="price" id="price4">15₺</span></div>
-        </div>
-    </div>
-</section>
-
-<section class="contact">
-    <h2 id="contactTitle">İletişim</h2>
-    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
-    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
-    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
-</section>
-
-<!-- لوحة المطور -->
-<div class="dev-window" id="devPanel">
-    <h3 id="dragHandle">⚙️ PRO Developer Panel</h3>
-
-    <div class="dev-section">
-        <h4>💰 Fiyat Düzenle</h4>
-        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
-        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>➕ Ürün Ekle</h4>
-        <select id="categorySelect"></select>
-        <input type="text" id="newName" placeholder="Ürün Adı">
-        <input type="text" id="productPrice" placeholder="Fiyat">
-        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>📁 Kategori Ekle</h4>
-        <input type="text" id="newCategory" placeholder="Yeni Kategori">
-        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>🎨 Renk Düzenle</h4>
-        <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>🔧 Araçlar</h4>
-        <button onclick="enableEdit()">✏️ Fiyat Düzenleme</button>
-        <button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
-        <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>📱 Sosyal Medya</h4>
-        <input type="text" id="newInstagram" placeholder="Instagram Link">
-        <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
-        <input type="text" id="newLocation" placeholder="Konum lat,long">
-        <button onclick="changeLocation()">📍 Konum Güncelle</button>
-    </div>
-
-    <div class="dev-section">
-        <h4>📡 Canlı Yayın</h4>
-        <button onclick="broadcastChanges()" class="save-btn" style="background:#0066cc;">🌐 Herkese Gönder</button>
-    </div>
-
-    <button onclick="closeDev()" class="close-btn">❌ Çıkış</button>
+<div class="item" data-stock="3" onclick="addToCart(this)">
+<span>Sucuklu Tost</span>
+<span class="price">75</span>₺
 </div>
 
-<!-- نافذة تعديل الألوان المنبثقة -->
-<div class="color-picker-modal" id="colorPickerModal">
-    <h3>🎨 Renkleri Değiştir</h3>
-    
-    <label>Kategori Başlığı (h3)</label>
-    <input type="color" id="colorCategory" value="#ff8c00">
-    <label>Ürün Adı (.name)</label>
-    <input type="color" id="colorName" value="#ff8c00">
-    <label>Fiyat (.price)</label>
-    <input type="color" id="colorPrice" value="#ffffff">
+</div>
 
-    <button onclick="applyColors()">Renkleri Uygula</button>
-    <button onclick="closeColorPicker()">Kapat</button>
+<div class="card">
+<h3>İçecekler</h3>
+
+<div class="item" data-stock="10" onclick="addToCart(this)">
+<span>Çay</span>
+<span class="price">10</span>₺
+</div>
+
+<div class="item" data-stock="8" onclick="addToCart(this)">
+<span>Kahve</span>
+<span class="price">15</span>₺
+</div>
+
+</div>
+
+<h3>📷 QR Menü</h3>
+<img id="qr" width="150">
+
+</div>
+
+<!-- CART -->
+<div id="cartModal">
+<div id="cartBox">
+<h3>Sepet</h3>
+<div id="cartItems"></div>
+<h4 id="total">Toplam: 0₺</h4>
+<button onclick="checkout()" style="background:#25D366;color:white;width:100%;margin-top:10px;">Siparişi WhatsApp Gönder</button>
+<button onclick="closeCart()" style="background:#666;color:white;width:100%;margin-top:5px;">Kapat</button>
+</div>
 </div>
 
 <script>
-// ===== الكود الجديد لحذف أزرار الإغلاق =====
-document.addEventListener("DOMContentLoaded", function() {
-  const closeBtn = document.querySelector('button[onclick*="close"], .close, .modal-close');
-  if (closeBtn) {
-    closeBtn.remove();
-    console.log("✅ زر الإغلاق تم حذفه");
-  }
-});
 
-// ===== زر تغيير الوضع الجديد =====
-const modeToggle = document.getElementById("modeToggle");
-modeToggle.addEventListener("click", function() {
-  document.body.classList.toggle("light-mode");
+let cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-  if (document.body.classList.contains("light-mode")) {
-    modeToggle.innerHTML = "☀️";
-  } else {
-    modeToggle.innerHTML = "🌙";
-  }
-});
+function updateCart(){
+    let container = document.getElementById("cartItems");
+    container.innerHTML="";
+    let total=0;
 
-// ===== باقي الكود =====
-let isDeveloper = false;
-let deleteMode = false;
-let ctrlPressed = false;
-
-// F5 İLE GİRİŞ
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'F5') {
-        e.preventDefault();
-        let pass = prompt("🔐 Geliştirici şifresi:");
-        if (pass === "momotunc0702") {
-            openDev();
-            showStatus("✅ Hoş geldiniz!", "success");
-        } else {
-            showStatus("❌ Yanlış şifre!", "error");
-        }
-    }
-});
-
-// PANEL KONTROLLERİ
-function openDev() {
-    document.getElementById("devPanel").style.display = "block";
-    isDeveloper = true;
-    updateCategorySelect();
-    centerPanel();
-}
-
-function closeDev() {
-    isDeveloper = false;
-    deleteMode = false;
-    document.getElementById("devPanel").style.display = "none";
-    document.querySelectorAll(".price").forEach(p => {
-        p.contentEditable = false;
-        p.style.background = "transparent";
+    cart.forEach((item,i)=>{
+        total+=item.price;
+        container.innerHTML+=`
+        <div style="display:flex;justify-content:space-between;margin:5px 0;">
+            <span>${item.name}</span>
+            <span>${item.price}₺</span>
+        </div>`;
     });
-    document.getElementById("menuGrid").classList.remove("delete-mode");
-    closeColorPicker();
+
+    document.getElementById("total").innerText="Toplam: "+total+"₺";
+    document.getElementById("cartCount").innerText=cart.length;
+
+    localStorage.setItem("cart",JSON.stringify(cart));
 }
 
-function centerPanel() {
-    let panel = document.getElementById("devPanel");
-    panel.style.left = "50%";
-    panel.style.top = "50%";
-    panel.style.transform = "translate(-50%, -50%)";
-}
+function addToCart(el){
+    let stock=parseInt(el.dataset.stock);
 
-// DURUM MESAJI
-function showStatus(message, type) {
-    let oldStatus = document.querySelector(".status-message");
-    if (oldStatus) oldStatus.remove();
-
-    let status = document.createElement("div");
-    status.className = `status-message status-${type}`;
-    status.innerText = message;
-    document.body.appendChild(status);
-
-    setTimeout(() => status.remove(), 3000);
-}
-
-// SÜRÜKLEME
-let devPanel = document.getElementById("devPanel");
-let isDragging = false;
-let offsetX, offsetY;
-let dragHandle = document.getElementById("dragHandle");
-
-dragHandle.addEventListener("mousedown", startDrag);
-document.addEventListener("mousemove", drag);
-document.addEventListener("mouseup", stopDrag);
-
-function startDrag(e) {
-    isDragging = true;
-    offsetX = e.clientX - devPanel.offsetLeft;
-    offsetY = e.clientY - devPanel.offsetTop;
-    devPanel.style.transform = "none";
-    devPanel.style.cursor = "grabbing";
-}
-
-function drag(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    devPanel.style.left = (e.clientX - offsetX) + "px";
-    devPanel.style.top = (e.clientY - offsetY) + "px";
-}
-
-function stopDrag() {
-    isDragging = false;
-    devPanel.style.cursor = "move";
-}
-
-// KATEGORİ İŞLEMLERİ
-function updateCategorySelect() {
-    let select = document.getElementById("categorySelect");
-    select.innerHTML = "";
-    document.querySelectorAll(".card h3").forEach((h, i) => {
-        let o = document.createElement("option");
-        o.textContent = h.innerText;
-        o.value = i;
-        select.appendChild(o);
-    });
-}
-
-function addCategory() {
-    if (!isDeveloper) return;
-    let name = document.getElementById("newCategory").value.trim();
-    if (!name) {
-        showStatus("Kategori adı girin!", "error");
-        return;
-    }
-    let card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `<h3>${name}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
-    document.getElementById("menuGrid").appendChild(card);
-    document.getElementById("newCategory").value = "";
-    updateCategorySelect();
-    saveData();
-    showStatus("✅ Kategori eklendi!", "success");
-}
-
-function addProduct() {
-    if (!isDeveloper) return;
-    let name = document.getElementById("newName").value.trim();
-    let price = document.getElementById("productPrice").value.trim();
-    if (!name || !price) {
-        showStatus("Ürün adı ve fiyat girin!", "error");
+    if(stock<=0){
+        alert("Stok tükendi!");
         return;
     }
 
-    let cards = document.querySelectorAll(".card");
-    let index = document.getElementById("categorySelect").value;
+    el.dataset.stock=stock-1;
 
-    if (cards[index]) {
-        let div = document.createElement("div");
-        div.className = "item";
-        div.innerHTML = `<span class="name">${name}</span><span class="price">${price}₺</span>`;
-        cards[index].appendChild(div);
-        document.getElementById("newName").value = "";
-        document.getElementById("productPrice").value = "";
-        saveData();
-        showStatus("✅ Ürün eklendi!", "success");
-    }
+    let name=el.children[0].innerText;
+    let price=parseInt(el.querySelector(".price").innerText);
+
+    cart.push({name,price});
+    updateCart();
+    playSound();
 }
 
-function deleteCard(btn) {
-    if (!isDeveloper) return;
-    if (confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) {
-        btn.closest('.card').remove();
-        updateCategorySelect();
-        saveData();
-        showStatus("✅ Kategori silindi!", "success");
+function checkout(){
+    if(cart.length==0){
+        alert("Sepet boş!");
+        return;
     }
-}
 
-function updateMainPrice() {
-    if (!isDeveloper) return;
-    let newPrice = document.getElementById("newPrice").value;
-    if (newPrice && !isNaN(newPrice)) {
-        showStatus("✅ Fiyat güncellendi!", "success");
-        document.getElementById("newPrice").value = "";
-    } else {
-        showStatus("Geçerli bir fiyat girin!", "error");
-    }
-}
+    let msg="Tosttoo Sipariş:\n\n";
+    let total=0;
 
-function enableEdit() {
-    if (!isDeveloper) return;
-    document.querySelectorAll(".price").forEach(p => {
-        p.contentEditable = true;
-        p.style.background = "#333";
+    cart.forEach(item=>{
+        msg+= "- "+item.name+" ("+item.price+"₺)\n";
+        total+=item.price;
     });
-    showStatus("✏️ Fiyatları düzenleyebilirsiniz", "success");
+
+    msg+="\nToplam: "+total+"₺";
+
+    window.open("https://wa.me/905321580207?text="+encodeURIComponent(msg));
 }
 
-function toggleDeleteMode() {
-    if (!isDeveloper) return;
-    deleteMode = !deleteMode;
-    document.getElementById("menuGrid").classList.toggle("delete-mode", deleteMode);
-    showStatus(deleteMode ? "🗑️ Silme modu aktif" : "🔒 Silme modu kapalı", "success");
+function closeCart(){
+    document.getElementById("cartModal").style.display="none";
 }
 
-document.getElementById("menuGrid").addEventListener("click", function(e) {
-    if (!deleteMode) return;
-    let item = e.target.closest(".item");
-    if (item && !e.target.classList.contains('delete-card-btn')) {
-        if (confirm("Silmek istiyor musun?")) {
-            item.remove();
-            saveData();
-            showStatus("✅ Silindi!", "success");
-        }
-    }
-});
-
-function deleteAll() {
-    if (!isDeveloper) return;
-    if (confirm("Tüm menü silinsin mi?")) {
-        document.getElementById("menuGrid").innerHTML = "";
-        updateCategorySelect();
-        saveData();
-        showStatus("🗑️ Tüm menü silindi!", "success");
-    }
+document.getElementById("cartBtn").onclick=function(){
+    document.getElementById("cartModal").style.display="flex";
 }
 
-function changeInstagram() {
-    if (!isDeveloper) return;
-    let val = document.getElementById("newInstagram").value.trim();
-    if (val) {
-        document.getElementById("instaLink").href = val;
-        localStorage.setItem("insta", val);
-        showStatus("✅ Instagram güncellendi!", "success");
-    }
+function playSound(){
+    let audio=new Audio("https://www.soundjay.com/buttons/sounds/button-3.mp3");
+    audio.play();
 }
 
-function changeLocation() {
-    if (!isDeveloper) return;
-    let val = document.getElementById("newLocation").value.trim();
-    if (val) {
-        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
-        localStorage.setItem("map", val);
-        showStatus("✅ Konum güncellendi!", "success");
-    }
+updateCart();
+
+/* QR */
+document.getElementById("qr").src=
+"https://api.qrserver.com/v1/create-qr-code/?size=150x150&data="+window.location.href;
+
+/* Dark Light */
+document.getElementById("modeBtn").onclick=function(){
+    document.body.classList.toggle("light");
+    this.innerText=document.body.classList.contains("light")?"☀️":"🌙";
 }
 
-function saveData() {
-    localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-    broadcastChanges();
-}
-
-function broadcastChanges() {
-    localStorage.setItem('lastUpdate', Date.now().toString());
-    showStatus("📡 Değişiklikler yayınlandı!", "success");
-}
-
-window.addEventListener('storage', function(e) {
-    if (e.key === 'lastUpdate' || e.key === 'menuData' || e.key === 'insta' || e.key === 'map') {
-        let savedMenu = localStorage.getItem("menuData");
-        if (savedMenu) document.getElementById("menuGrid").innerHTML = savedMenu;
-        
-        let savedInsta = localStorage.getItem("insta");
-        if (savedInsta) document.getElementById("instaLink").href = savedInsta;
-        
-        let savedMap = localStorage.getItem("map");
-        if (savedMap) document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + savedMap + "&output=embed";
-        
-        updateCategorySelect();
-        
-        let colorCategory = localStorage.getItem('colorCategory');
-        let colorName = localStorage.getItem('colorName');
-        let colorPrice = localStorage.getItem('colorPrice');
-
-        if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-        if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-        if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-        
-        showStatus("🔄 Menü güncellendi!", "success");
-    }
-});
-
-function openColorPicker() {
-    if (!isDeveloper) return;
-    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
-    document.getElementById('colorName').value = localStorage.getItem('colorName') || '#ff8c00';
-    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || '#ffffff';
-    document.getElementById('colorPickerModal').style.display = 'block';
-}
-
-function closeColorPicker() {
-    document.getElementById('colorPickerModal').style.display = 'none';
-}
-
-function applyColors() {
-    let colorCategory = document.getElementById('colorCategory').value;
-    let colorName = document.getElementById('colorName').value;
-    let colorPrice = document.getElementById('colorPrice').value;
-
-    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-
-    localStorage.setItem('colorCategory', colorCategory);
-    localStorage.setItem('colorName', colorName);
-    localStorage.setItem('colorPrice', colorPrice);
-
-    closeColorPicker();
-    showStatus("🎨 Renkler uygulandı!", "success");
-    broadcastChanges();
-}
-
-// ===== أزرار اللغة =====
-let currentLang = localStorage.getItem("lang") || "tr";
-
-function applyLanguage() {
-    const menuTitle = document.getElementById("menuTitle");
-    const contactTitle = document.getElementById("contactTitle");
-    const langBtn = document.getElementById("langBtn");
-    const menuBtn = document.querySelector('.btn');
-
-    if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
-    if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
-    if (menuBtn) menuBtn.innerText = currentLang === "tr" ? "Menüyü Gör" : "View Menu";
-    if (langBtn) langBtn.innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
-}
-
-document.getElementById("langBtn").onclick = function() {
-    currentLang = currentLang === "tr" ? "en" : "tr";
-    localStorage.setItem("lang", currentLang);
-    applyLanguage();
-    showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
-};
-
-// ===== SAYFA YÜKLENİNCE =====
-window.onload = function() {
-    if (localStorage.getItem("menuData"))
-        document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
-    if (localStorage.getItem("insta"))
-        document.getElementById("instaLink").href = localStorage.getItem("insta");
-    if (localStorage.getItem("map"))
-        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
-
-    let colorCategory = localStorage.getItem('colorCategory');
-    let colorName = localStorage.getItem('colorName');
-    let colorPrice = localStorage.getItem('colorPrice');
-
-    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-
-    updateCategorySelect();
-    applyLanguage();
-    
-    // التحقق من الوضع المحفوظ
-    if (localStorage.getItem("theme") === "light") {
-        document.body.classList.add("light-mode");
-        modeToggle.innerHTML = "☀️";
-    } else {
-        modeToggle.innerHTML = "🌙";
-    }
-};
-
-// حفظ الوضع عند التغيير
-modeToggle.addEventListener("click", function() {
-    if (document.body.classList.contains("light-mode")) {
-        localStorage.setItem("theme", "light");
-    } else {
-        localStorage.setItem("theme", "dark");
-    }
-});
 </script>
 
 </body>
