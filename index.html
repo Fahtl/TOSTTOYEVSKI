@@ -458,13 +458,6 @@ iframe {
         <div class="drag-indicator">⋮⋮</div>
     </div>
     
-    <!-- Fiyat -->
-    <div class="dev-section">
-        <h4>💰 Fiyat Düzenle</h4>
-        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
-        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
-    </div>
-    
     <!-- Ürün Ekle -->
     <div class="dev-section">
         <h4>➕ Ürün Ekle</h4>
@@ -600,11 +593,6 @@ broadcastChannel
     .on('broadcast', { event: 'menu-changed' }, (payload) => {
         console.log('🔄 Canlı güncelleme:', payload);
         
-        if (payload.payload.type === 'price') {
-            document.getElementById('price').innerText = payload.payload.data + '₺';
-            showStatus('💰 Fiyat güncellendi!', 'success');
-        }
-        
         if (payload.payload.type === 'menu') {
             document.getElementById('menu').innerHTML = payload.payload.data;
             updateCategorySelect();
@@ -711,7 +699,6 @@ function openDevPanel() {
     if(isMobile()) return;
     panel.classList.add('open');
     updateCategorySelect();
-    document.getElementById('newPrice').value = document.getElementById('price').innerText.replace('₺', '');
     loadColors();
 }
 
@@ -772,16 +759,6 @@ function deleteCard(btn) {
     if(confirm('Sil?')) {
         btn.closest('.card').remove();
         updateCategorySelect();
-        saveAndBroadcast();
-    }
-}
-
-// ===== FİYAT =====
-function updateMainPrice() {
-    if(isMobile()) return;
-    let price = document.getElementById('newPrice').value;
-    if(price && !isNaN(price)) {
-        document.getElementById('price').innerText = price + '₺';
         saveAndBroadcast();
     }
 }
@@ -887,7 +864,6 @@ async function saveAndBroadcast() {
     
     try {
         const data = {
-            price: document.getElementById('price').innerText.replace('₺', ''),
             menu: document.getElementById('menu').innerHTML,
             instagram: document.getElementById('instaLink').href,
             location: document.getElementById('mapFrame').src,
@@ -901,7 +877,6 @@ async function saveAndBroadcast() {
         
         // Supabase'e kaydet
         await supabase.from('settings').update({
-            price: data.price,
             menu_data: data.menu,
             instagram: data.instagram,
             location: data.location,
@@ -909,12 +884,6 @@ async function saveAndBroadcast() {
         }).eq('id', 1);
         
         // Canlı yayınla
-        await broadcastChannel.send({
-            type: 'broadcast',
-            event: 'menu-changed',
-            payload: { type: 'price', data: data.price }
-        });
-        
         await broadcastChannel.send({
             type: 'broadcast',
             event: 'menu-changed',
@@ -964,7 +933,6 @@ window.onload = async function() {
     const { data } = await supabase.from('settings').select('*').eq('id', 1).single();
     
     if(data) {
-        if(data.price) document.getElementById('price').innerText = data.price + '₺';
         if(data.menu_data) document.getElementById('menu').innerHTML = data.menu_data;
         if(data.instagram) document.getElementById('instaLink').href = data.instagram;
         if(data.location) document.getElementById('mapFrame').src = data.location;
