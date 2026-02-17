@@ -360,6 +360,33 @@ iframe {
     margin-top: 15px;
 }
 
+/* ===== قسم تعديل الألوان الجديد ===== */
+.color-section {
+    background: rgba(255, 140, 0, 0.15);
+    border: 2px solid #ff8c00;
+}
+
+.color-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.color-row label {
+    flex: 1;
+    font-size: 14px;
+}
+
+.color-row input[type="color"] {
+    width: 60px;
+    height: 40px;
+    padding: 2px;
+    border: 2px solid #ff8c00;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 /* ===== مؤشرات الحالة ===== */
 .status-message {
     position: fixed;
@@ -468,7 +495,7 @@ iframe {
     <!-- Fiyat Bölümü -->
     <div class="dev-section">
         <h4>💰 Fiyat Düzenle</h4>
-        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin (₺)">
         <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
     </div>
     
@@ -477,7 +504,7 @@ iframe {
         <h4>➕ Ürün Ekle</h4>
         <select id="categorySelect"></select>
         <input type="text" id="productName" placeholder="Ürün adı">
-        <input type="text" id="productPrice" placeholder="Fiyat (örnek: 50₺)">
+        <input type="text" id="productPrice" placeholder="Fiyat (örnek: 50)">
         <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
     </div>
     
@@ -486,6 +513,34 @@ iframe {
         <h4>📁 Kategori Ekle</h4>
         <input type="text" id="newCategory" placeholder="Yeni kategori adı">
         <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+    </div>
+    
+    <!-- ===== قسم تعديل الألوان الجديد ===== -->
+    <div class="dev-section color-section">
+        <h4>🎨 Renkleri Düzenle</h4>
+        
+        <div class="color-row">
+            <label>Kategori Başlığı</label>
+            <input type="color" id="colorCategory" value="#ff8c00">
+        </div>
+        
+        <div class="color-row">
+            <label>Ürün Adı</label>
+            <input type="color" id="colorName" value="#ff8c00">
+        </div>
+        
+        <div class="color-row">
+            <label>Fiyat</label>
+            <input type="color" id="colorPrice" value="#ffffff">
+        </div>
+        
+        <div class="color-row">
+            <label>Buton Rengi</label>
+            <input type="color" id="colorButton" value="#ff8c00">
+        </div>
+        
+        <button onclick="applyColors()" class="save-btn">🎨 Renkleri Uygula</button>
+        <button onclick="resetColors()">🔄 Varsayılana Dön</button>
     </div>
     
     <!-- Araçlar -->
@@ -554,7 +609,7 @@ iframe {
     <section class="contact">
         <h2>📞 İletişim</h2>
         <p>📞 <a href="tel:05321580207">0532 158 0207</a></p>
-        <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank">Instagram</a></p>
+        <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski/" target="_blank">Instagram</a></p>
         <div class="map-container">
             <iframe 
                 id="mapFrame"
@@ -576,6 +631,14 @@ let editMode = false;
 let clickCount = 0;
 let clickTimer = null;
 let ctrlPressed = false;
+
+// الألوان الافتراضية
+const defaultColors = {
+    category: '#ff8c00',
+    name: '#ff8c00',
+    price: '#ffffff',
+    button: '#ff8c00'
+};
 
 // ===== CİHAZ KONTROLÜ =====
 function isMobile() {
@@ -718,6 +781,9 @@ function openDevPanel() {
     
     updateCategorySelect();
     document.getElementById("newPrice").value = document.getElementById("price").innerText.replace('₺', '');
+    
+    // Renk seçicileri güncelle
+    loadColors();
 }
 
 function closeDevPanel() {
@@ -786,6 +852,11 @@ function addProduct() {
         return;
     }
     
+    // Fiyata ₺ ekle
+    if(!price.includes('₺')) {
+        price = price + '₺';
+    }
+    
     let cards = document.querySelectorAll(".card");
     if(cards[categoryIndex]) {
         let item = document.createElement("div");
@@ -811,7 +882,7 @@ function deleteCard(btn) {
     }
 }
 
-// ===== FİYAT İŞLEMLERİ =====
+// ===== FİYAT İŞLEMLERİ (TÜRK LİRASI) =====
 function updateMainPrice() {
     if(isMobile()) return;
     
@@ -823,6 +894,51 @@ function updateMainPrice() {
     } else {
         showStatus("⚠️ Geçerli bir fiyat girin!", "error");
     }
+}
+
+// ===== RENK İŞLEMLERİ =====
+function loadColors() {
+    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || defaultColors.category;
+    document.getElementById('colorName').value = localStorage.getItem('colorName') || defaultColors.name;
+    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || defaultColors.price;
+    document.getElementById('colorButton').value = localStorage.getItem('colorButton') || defaultColors.button;
+}
+
+function applyColors() {
+    if(isMobile()) return;
+    
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+    let colorButton = document.getElementById('colorButton').value;
+
+    // Uygula
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.item-price').forEach(el => el.style.color = colorPrice);
+    document.querySelectorAll('.btn, .dev-panel button:not(.save-btn):not(.delete-btn):not(.close-btn)').forEach(el => {
+        el.style.background = colorButton;
+    });
+
+    // Kaydet
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+    localStorage.setItem('colorButton', colorButton);
+
+    showStatus("🎨 Renkler uygulandı!", "success");
+}
+
+function resetColors() {
+    if(isMobile()) return;
+    
+    document.getElementById('colorCategory').value = defaultColors.category;
+    document.getElementById('colorName').value = defaultColors.name;
+    document.getElementById('colorPrice').value = defaultColors.price;
+    document.getElementById('colorButton').value = defaultColors.button;
+    
+    applyColors();
+    showStatus("🔄 Varsayılan renklere dönüldü!", "success");
 }
 
 // ===== MODLAR (SADECE PC) =====
@@ -876,11 +992,11 @@ document.addEventListener("click", function(e) {
     }
 });
 
-// ===== İNSTAGRAM VE KONUM =====
+// ===== İNSTAGRAM VE KONUM (GÜNCELLENMİŞ) =====
 function updateInstagram() {
     if(isMobile()) return;
     
-    let newLink = prompt("Yeni Instagram linkini girin:");
+    let newLink = prompt("Yeni Instagram linkini girin:", "https://www.instagram.com/tosttooyevski/");
     if(newLink) {
         document.getElementById("instaLink").href = newLink;
         showStatus("✅ Instagram güncellendi!", "success");
@@ -951,6 +1067,10 @@ window.onload = function() {
     
     // Kategorileri güncelle
     updateCategorySelect();
+    
+    // Renkleri yükle
+    loadColors();
+    applyColors();
     
     // Fiyat için blur event
     let price = document.getElementById("price");
