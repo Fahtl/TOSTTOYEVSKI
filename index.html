@@ -33,16 +33,17 @@ body {
                 url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: scroll; /* أفضل للهواتف */
 }
 
 .hero h1 {
-    font-size: clamp(40px, 15vw, 80px); /* متجاوب مع الشاشات */
+    font-size: clamp(40px, 15vw, 80px);
     color: #ff8c00;
     margin: 0;
     cursor: pointer;
     text-shadow: 0 0 20px rgba(255,140,0,0.5);
     padding: 0 15px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .work-time {
@@ -110,6 +111,13 @@ body {
     border-radius: 20px;
     margin: 20px 0;
     border: 1px solid rgba(255,140,0,0.3);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: #ff8c00;
+    transform: translateY(-3px);
 }
 
 .card h3 {
@@ -119,6 +127,45 @@ body {
     text-align: center;
     border-bottom: 2px solid #ff8c00;
     padding-bottom: 10px;
+    padding-right: 40px;
+}
+
+/* ===== زر حذف القائمة (الكارد) ===== */
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    box-shadow: 0 2px 10px rgba(220,53,69,0.3);
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+.delete-card-btn:hover {
+    background: #ff4757;
+    transform: scale(1.1);
+}
+
+/* للهواتف - يظهر زر الحذف دائماً */
+@media (max-width: 768px) {
+    .delete-card-btn {
+        opacity: 0.8;
+    }
 }
 
 .item {
@@ -129,6 +176,7 @@ body {
     background: rgba(0,0,0,0.4);
     border-radius: 10px;
     transition: all 0.3s ease;
+    position: relative;
 }
 
 .name {
@@ -176,76 +224,56 @@ iframe {
     height: 250px;
 }
 
-/* ===== زر القائمة للهواتف ===== */
-.menu-toggle {
+/* ===== لوحة المطور - نفس التصميم للجميع ===== */
+.dev-overlay {
     position: fixed;
-    top: 15px;
-    left: 15px;
-    background: #ff8c00;
-    color: #fff;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 1002;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1999;
     display: none;
-    box-shadow: 0 4px 15px rgba(255,140,0,0.3);
 }
 
-/* ===== لوحة المطور المتحركة ===== */
 .dev-panel {
     position: fixed;
-    left: -100%;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    max-width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
     background: rgba(10, 10, 10, 0.98);
     backdrop-filter: blur(20px);
-    padding: 20px;
-    border-right: 3px solid #ff8c00;
-    z-index: 1001;
-    overflow-y: auto;
-    transition: left 0.3s ease;
-    box-shadow: 10px 0 30px rgba(255,140,0,0.2);
+    padding: 25px;
+    border: 3px solid #ff8c00;
+    border-radius: 20px;
+    z-index: 2000;
+    display: none;
+    box-shadow: 0 20px 50px rgba(255,140,0,0.3);
+    animation: panelPop 0.3s ease;
+}
+
+@keyframes panelPop {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .dev-panel.open {
-    left: 0;
+    display: block;
 }
 
-/* للشاشات الكبيرة */
-@media (min-width: 1024px) {
-    .dev-panel {
-        left: 0;
-    }
-    
-    .menu-toggle {
-        display: none;
-    }
-    
-    .main-content {
-        margin-left: 400px;
-    }
-}
-
-/* للهواتف */
-@media (max-width: 1023px) {
-    .menu-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .main-content {
-        margin-left: 0;
-    }
-    
-    .dev-panel {
-        width: 85%;
-    }
+.dev-overlay.open {
+    display: block;
 }
 
 .dev-panel::-webkit-scrollbar {
@@ -263,7 +291,7 @@ iframe {
 
 .dev-panel h3 {
     color: #ff8c00;
-    font-size: 24px;
+    font-size: 28px;
     text-align: center;
     margin-bottom: 20px;
     border-bottom: 2px solid #ff8c00;
@@ -290,8 +318,8 @@ iframe {
 .dev-panel input,
 .dev-panel select {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+    padding: 12px;
+    margin: 8px 0;
     background: rgba(0,0,0,0.7);
     border: 2px solid #333;
     color: #fff;
@@ -308,8 +336,8 @@ iframe {
 
 .dev-panel button {
     width: 100%;
-    padding: 10px;
-    margin: 5px 0;
+    padding: 12px;
+    margin: 8px 0;
     background: #ff8c00;
     border: none;
     color: #fff;
@@ -342,29 +370,9 @@ iframe {
     background: #ff4757;
 }
 
-/* ===== زر إغلاق اللوحة للهواتف ===== */
-.close-panel {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: #ff8c00;
-    color: #fff;
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    font-size: 20px;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1002;
-}
-
-@media (max-width: 1023px) {
-    .close-panel {
-        display: flex;
-    }
+.dev-panel .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
 }
 
 /* ===== مؤشرات الحالة ===== */
@@ -378,7 +386,7 @@ iframe {
     border: 2px solid;
     color: #fff;
     font-weight: 600;
-    z-index: 2000;
+    z-index: 3000;
     animation: slideIn 0.3s ease;
     font-size: 14px;
     max-width: 90%;
@@ -416,7 +424,29 @@ iframe {
     background: #333;
 }
 
-/* ===== تجاوب الخريطة ===== */
+/* ===== تلميح Ctrl+F5 للكمبيوتر ===== */
+.f5-hint {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,140,0,0.2);
+    border: 1px solid #ff8c00;
+    padding: 8px 15px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: #ff8c00;
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .f5-hint {
+        display: none;
+    }
+}
+
+/* ===== الخريطة ===== */
 .map-container {
     width: 100%;
     padding: 0 15px;
@@ -432,14 +462,14 @@ iframe {
 
 <body>
 
-<!-- زر فتح القائمة للهواتف -->
-<button class="menu-toggle" id="menuToggle" onclick="toggleMobilePanel()">☰</button>
+<!-- تلميح Ctrl+F5 للكمبيوتر -->
+<div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli</div>
 
-<!-- لوحة المطور -->
+<!-- طبقة الخلفية -->
+<div class="dev-overlay" id="devOverlay" onclick="closeDevPanel()"></div>
+
+<!-- لوحة المطور - نفس التصميم للجميع -->
 <div class="dev-panel" id="devPanel">
-    <!-- زر إغلاق للهواتف -->
-    <button class="close-panel" onclick="closeMobilePanel()">✕</button>
-    
     <h3>⚙️ Geliştirici Paneli</h3>
     
     <!-- Fiyat Bölümü -->
@@ -468,7 +498,7 @@ iframe {
     <!-- Araçlar -->
     <div class="dev-section">
         <h4>🔧 Araçlar</h4>
-        <button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
+        <button onclick="toggleDeleteMode()">🗑️ Silme Modu (Ürünler)</button>
         <button onclick="toggleEditMode()">✏️ Düzenleme Modu</button>
         <button onclick="updateInstagram()">📷 Instagram Güncelle</button>
         <button onclick="updateLocation()">📍 Konum Güncelle</button>
@@ -478,16 +508,19 @@ iframe {
     <div class="dev-section">
         <h4>📋 Menü Yönetimi</h4>
         <button onclick="saveToLocal()">💾 Tarayıcıya Kaydet</button>
+        <button onclick="loadFromLocal()">🔄 Tarayıcıdan Yükle</button>
         <button onclick="resetToDefault()" class="delete-btn">🔄 Varsayılana Dön</button>
-        <button onclick="clearAllMenu()" class="delete-btn">🗑️ Tüm Menüyü Sil</button>
     </div>
+    
+    <!-- Kapatma Butonu -->
+    <button onclick="closeDevPanel()" class="close-btn">❌ Kapat</button>
 </div>
 
 <!-- القسم الرئيسي -->
-<div class="main-content" id="mainContent">
+<div class="main-content">
     <!-- الهيرو -->
     <section class="hero">
-        <h1 id="logo" onclick="handleLogoClick()">Tosttoo</h1>
+        <h1 id="logo">Tosttoo</h1>
         <div class="work-time">🕒 08:00 - 02:30</div>
         <div class="price-container">
             💰 Fiyat: <span id="price" contenteditable="false">60₺</span>
@@ -499,22 +532,25 @@ iframe {
     <div class="container" id="menu">
         <h2>🍽️ Menü</h2>
         
-        <div class="card">
+        <div class="card" data-category="tostlar">
             <h3>🥪 Tostlar</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
             <div class="item"><span class="name">Kaşarlı Tost</span><span class="item-price">60₺</span></div>
             <div class="item"><span class="name">Sucuklu Tost</span><span class="item-price">75₺</span></div>
             <div class="item"><span class="name">Karışık Tost</span><span class="item-price">85₺</span></div>
         </div>
         
-        <div class="card">
+        <div class="card" data-category="icecekler">
             <h3>🥤 İçecekler</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
             <div class="item"><span class="name">Çay</span><span class="item-price">10₺</span></div>
             <div class="item"><span class="name">Kahve</span><span class="item-price">15₺</span></div>
             <div class="item"><span class="name">Meyve Suyu</span><span class="item-price">20₺</span></div>
         </div>
         
-        <div class="card">
+        <div class="card" data-category="tatlilar">
             <h3>🍰 Tatlılar</h3>
+            <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>
             <div class="item"><span class="name">Künefe</span><span class="item-price">50₺</span></div>
             <div class="item"><span class="name">Baklava</span><span class="item-price">45₺</span></div>
             <div class="item"><span class="name">Sütlaç</span><span class="item-price">30₺</span></div>
@@ -544,27 +580,36 @@ iframe {
 // ===== DEĞİŞKENLER =====
 let deleteMode = false;
 let editMode = false;
+let clickCount = 0;
+let clickTimer = null;
+let ctrlPressed = false;
 
 // ===== TEMEL FONKSİYONLAR =====
 function scrollToMenu() {
     document.getElementById("menu").scrollIntoView({behavior: "smooth"});
 }
 
-// ===== PANEL KONTROLLERİ =====
-function toggleMobilePanel() {
-    document.getElementById("devPanel").classList.toggle("open");
-}
+// ===== CTRL TUŞU TAKİBİ =====
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'Control') {
+        ctrlPressed = true;
+    }
+});
 
-function closeMobilePanel() {
-    document.getElementById("devPanel").classList.remove("open");
-}
+document.addEventListener('keyup', function(e) {
+    if(e.key === 'Control') {
+        ctrlPressed = false;
+    }
+});
 
-// Logo tıklama ile panel açma (gizli giriş)
-let clickCount = 0;
-function handleLogoClick() {
+// ===== GİRİŞ SİSTEMLERİ =====
+// 1. Telefon için: Logo'ya 5 tıklama
+document.getElementById("logo").addEventListener("click", function() {
     clickCount++;
     
-    setTimeout(() => {
+    if(clickTimer) clearTimeout(clickTimer);
+    
+    clickTimer = setTimeout(() => {
         clickCount = 0;
     }, 3000);
     
@@ -572,14 +617,54 @@ function handleLogoClick() {
         clickCount = 0;
         let password = prompt("🔐 Şifre girin:");
         if(password === "momotunc0702") {
-            if(window.innerWidth < 1024) {
-                document.getElementById("devPanel").classList.add("open");
-            }
+            openDevPanel();
             showStatus("✅ Geliştirici paneline hoş geldiniz!", "success");
         } else {
             showStatus("❌ Yanlış şifre!", "error");
         }
     }
+});
+
+// 2. Bilgisayar için: Ctrl + F5 tuşu
+document.addEventListener('keydown', function(e) {
+    // Ctrl + F5 kontrolü
+    if(e.key === 'F5' && ctrlPressed) {
+        e.preventDefault(); // Sayfanın yenilenmesini engelle
+        
+        // Sadece bilgisayarda çalışsın
+        if(window.innerWidth > 768) {
+            let password = prompt("🔐 Geliştirici şifresi (Ctrl+F5):");
+            if(password === "momotunc0702") {
+                openDevPanel();
+                showStatus("✅ Geliştirici paneline hoş geldiniz!", "success");
+            } else {
+                showStatus("❌ Yanlış şifre!", "error");
+            }
+        }
+    }
+});
+
+// ===== PANEL KONTROLLERİ =====
+function openDevPanel() {
+    document.getElementById("devPanel").classList.add("open");
+    document.getElementById("devOverlay").classList.add("open");
+    updateCategorySelect();
+    document.getElementById("newPrice").value = document.getElementById("price").innerText.replace('₺', '');
+}
+
+function closeDevPanel() {
+    document.getElementById("devPanel").classList.remove("open");
+    document.getElementById("devOverlay").classList.remove("open");
+    
+    // Modları kapat
+    deleteMode = false;
+    editMode = false;
+    document.body.classList.remove("delete-mode", "edit-mode");
+    
+    // Düzenleme modunu kapat
+    document.querySelectorAll(".item-price").forEach(el => {
+        el.contentEditable = false;
+    });
 }
 
 // ===== KATEGORİ İŞLEMLERİ =====
@@ -609,7 +694,8 @@ function addCategory() {
     let menu = document.getElementById("menu");
     let newCard = document.createElement("div");
     newCard.className = "card";
-    newCard.innerHTML = `<h3>${name}</h3>`;
+    newCard.innerHTML = `<h3>${name}</h3>
+        <button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
     menu.appendChild(newCard);
     
     document.getElementById("newCategory").value = "";
@@ -640,6 +726,16 @@ function addProduct() {
     }
 }
 
+// ===== KART SİLME FONKSİYONU =====
+function deleteCard(btn) {
+    if(confirm("🗑️ Bu kategoriyi silmek istediğinize emin misiniz?")) {
+        let card = btn.closest(".card");
+        card.remove();
+        updateCategorySelect();
+        showStatus("✅ Kategori silindi!", "success");
+    }
+}
+
 // ===== FİYAT İŞLEMLERİ =====
 function updateMainPrice() {
     let newPrice = document.getElementById("newPrice").value;
@@ -659,7 +755,7 @@ function toggleDeleteMode() {
         document.body.classList.add("delete-mode");
         document.body.classList.remove("edit-mode");
         editMode = false;
-        showStatus("🗑️ Silme modu aktif", "success");
+        showStatus("🗑️ Silme modu aktif (Ürünlere tıklayın)", "success");
     } else {
         document.body.classList.remove("delete-mode");
         showStatus("🔒 Silme modu kapalı", "success");
@@ -686,13 +782,15 @@ function toggleEditMode() {
     }
 }
 
-// ===== SİLME İŞLEMİ =====
+// ===== ÜRÜN SİLME (Delete Mode) =====
 document.addEventListener("click", function(e) {
     if(deleteMode) {
         let item = e.target.closest(".item");
-        if(item && confirm("🗑️ Silmek istediğinize emin misiniz?")) {
-            item.remove();
-            showStatus("✅ Silindi!", "success");
+        if(item && !e.target.classList.contains("delete-card-btn")) {
+            if(confirm("🗑️ Bu ürünü silmek istediğinize emin misiniz?")) {
+                item.remove();
+                showStatus("✅ Ürün silindi!", "success");
+            }
         }
     }
 });
@@ -721,18 +819,21 @@ function saveToLocal() {
     showStatus("💾 Tarayıcıya kaydedildi!", "success");
 }
 
+function loadFromLocal() {
+    let savedMenu = localStorage.getItem("menuHTML");
+    if(savedMenu) {
+        document.getElementById("menu").innerHTML = savedMenu;
+        updateCategorySelect();
+        showStatus("🔄 Tarayıcıdan yüklendi!", "success");
+    } else {
+        showStatus("⚠️ Kayıtlı menü bulunamadı!", "error");
+    }
+}
+
 function resetToDefault() {
     if(confirm("⚠️ Varsayılana dönülsün mü? Tüm değişiklikler silinecek!")) {
         localStorage.clear();
         location.reload();
-    }
-}
-
-function clearAllMenu() {
-    if(confirm("🗑️ Tüm menü silinsin mi?")) {
-        document.getElementById("menu").innerHTML = "<h2>🍽️ Menü</h2>";
-        updateCategorySelect();
-        showStatus("🗑️ Tüm menü silindi!", "success");
     }
 }
 
@@ -760,21 +861,20 @@ window.onload = function() {
     // Kategorileri güncelle
     updateCategorySelect();
     
-    // Fiyatı düzenlenebilir yap
+    // Fiyat için blur event
     let price = document.getElementById("price");
     price.addEventListener("blur", function() {
-        if(this.innerText && !isNaN(this.innerText.replace('₺',''))) {
+        let value = this.innerText.replace('₺', '').trim();
+        if(value && !isNaN(value)) {
             showStatus("✅ Fiyat güncellendi!", "success");
         }
     });
 };
 
-// ===== PENCERE BOYUTU DEĞİŞİNCE =====
-window.addEventListener("resize", function() {
-    if(window.innerWidth >= 1024) {
-        document.getElementById("devPanel").classList.remove("open");
-    }
-});
+// ===== DOKUNMATİK EKRAN DESTEĞİ =====
+document.addEventListener('touchstart', function() {
+    // Mobilde touch desteği
+}, {passive: true});
 </script>
 
 </body>
