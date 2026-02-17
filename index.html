@@ -54,22 +54,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-.price-container {
-    margin: 15px 0;
-    font-size: clamp(20px, 5vw, 28px);
-    background: rgba(0,0,0,0.7);
-    padding: 12px 25px;
-    border-radius: 50px;
-    border: 1px solid #ff8c00;
-    backdrop-filter: blur(5px);
-}
-
-#price {
-    color: #ff8c00;
-    font-weight: bold;
-    font-size: clamp(24px, 6vw, 32px);
-}
-
 .btn {
     background: #ff8c00;
     border: none;
@@ -505,8 +489,8 @@ iframe {
     <!-- Araçlar -->
     <div class="dev-section">
         <h4>🔧 Araçlar</h4>
-        <button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
-        <button onclick="toggleEditMode()">✏️ Düzenleme Modu</button>
+        <button onclick="toggleDeleteMode()">🗑️ Ürün Silme Modu</button>
+        <button onclick="toggleEditMode()">✏️ Fiyat Düzenleme Modu</button>
         <button onclick="updateInstagram()">📷 Instagram Güncelle</button>
         <button onclick="updateLocation()">📍 Konum Güncelle</button>
     </div>
@@ -530,9 +514,6 @@ iframe {
     <section class="hero">
         <h1 id="logo">Tosttoo</h1>
         <div class="work-time">🕒 08:00 - 02:30</div>
-        <div class="price-container">
-            💰 Fiyat: <span id="price">60₺</span>
-        </div>
         <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
     </section>
 
@@ -705,6 +686,11 @@ function openDevPanel() {
 function closeDevPanel() {
     panel.classList.remove('open');
     document.body.classList.remove('delete-mode', 'edit-mode');
+    
+    // Düzenleme modunu kapat
+    document.querySelectorAll('.item-price').forEach(el => {
+        el.contentEditable = false;
+    });
 }
 
 // ===== KATEGORİ =====
@@ -756,7 +742,7 @@ function addProduct() {
 
 function deleteCard(btn) {
     if(isMobile()) return;
-    if(confirm('Sil?')) {
+    if(confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
         btn.closest('.card').remove();
         updateCategorySelect();
         saveAndBroadcast();
@@ -813,31 +799,60 @@ function toggleDeleteMode() {
     if(isMobile()) return;
     deleteMode = !deleteMode;
     document.body.classList.toggle('delete-mode', deleteMode);
-    document.body.classList.remove('edit-mode');
-    editMode = false;
+    
+    if(deleteMode) {
+        document.body.classList.remove('edit-mode');
+        editMode = false;
+        showStatus('🗑️ Silme modu aktif - Ürünlere tıklayın', 'success');
+    } else {
+        showStatus('🔒 Silme modu kapalı', 'success');
+    }
 }
 
 function toggleEditMode() {
     if(isMobile()) return;
     editMode = !editMode;
     document.body.classList.toggle('edit-mode', editMode);
-    document.body.classList.remove('delete-mode');
-    deleteMode = false;
     
-    document.querySelectorAll('.item-price').forEach(el => {
-        el.contentEditable = editMode;
-    });
+    if(editMode) {
+        document.body.classList.remove('delete-mode');
+        deleteMode = false;
+        
+        document.querySelectorAll('.item-price').forEach(el => {
+            el.contentEditable = true;
+        });
+        showStatus('✏️ Düzenleme modu aktif - Fiyatları değiştirin', 'success');
+    } else {
+        document.querySelectorAll('.item-price').forEach(el => {
+            el.contentEditable = false;
+        });
+        showStatus('🔒 Düzenleme modu kapalı', 'success');
+    }
 }
 
-// Ürün silme
+// Ürün silme (delete mode)
 document.addEventListener('click', function(e) {
     if(isMobile() || !deleteMode) return;
+    
     let item = e.target.closest('.item');
-    if(item && confirm('Sil?')) {
-        item.remove();
-        saveAndBroadcast();
+    if(item && !e.target.classList.contains('delete-card-btn')) {
+        if(confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
+            item.remove();
+            saveAndBroadcast();
+            showStatus('✅ Ürün silindi!', 'success');
+        }
     }
 });
+
+// Fiyat düzenleme (edit mode) - otomatik kaydet
+document.addEventListener('blur', function(e) {
+    if(isMobile() || !editMode) return;
+    
+    if(e.target.classList.contains('item-price')) {
+        saveAndBroadcast();
+        showStatus('✅ Fiyat güncellendi!', 'success');
+    }
+}, true);
 
 // ===== INSTAGRAM & KONUM =====
 function updateInstagram() {
