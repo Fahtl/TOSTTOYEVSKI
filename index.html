@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo | Canlı Menü</title>
+<title>Tosttoo | Ultimate Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* جميع الأنماط كما هي - فقط تم إزالة تلميح F5 */
+
+/* ===== باقي الأنماط تبقى كما هي ===== */
 * {
     margin: 0;
     padding: 0;
@@ -20,7 +23,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ===== أنيميشن الخلفية المتحركة ===== */
+/* أنيميشن الخلفية */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -66,7 +69,7 @@ body.day-mode .contact {
     background: #eaeaea;
 }
 
-/* ===== الهيرو مع أنيميشن ===== */
+/* ===== الهيرو ===== */
 .hero {
     height: 100vh;
     display: flex;
@@ -78,7 +81,6 @@ body.day-mode .contact {
     overflow: hidden;
 }
 
-/* أنيميشن الجسيمات */
 .hero::before {
     content: '';
     position: absolute;
@@ -93,7 +95,6 @@ body.day-mode .contact {
     to { transform: rotate(360deg); }
 }
 
-/* أنيمينين عنوان Tosttoo */
 .hero h1 {
     font-size: 60px;
     color: #ff8c00;
@@ -120,7 +121,6 @@ body.day-mode .contact {
     75% { transform: translateX(10px); }
 }
 
-/* أنيميشن وقت العمل */
 .work-time {
     margin-top: 15px;
     font-size: 20px;
@@ -134,7 +134,7 @@ body.day-mode .contact {
     50% { transform: scale(1.05); opacity: 0.9; }
 }
 
-/* ===== زر Menüyü Gör مع أنيميشن ===== */
+/* ===== زر Menüyü Gör ===== */
 .btn {
     background: #ff8c00;
     padding: 12px 25px;
@@ -204,7 +204,6 @@ body.day-mode .contact {
     gap: 20px;
 }
 
-/* أنيميشن البطاقات */
 .card {
     background: #1e1e1e;
     padding: 20px;
@@ -212,6 +211,7 @@ body.day-mode .contact {
     transition: all 0.3s ease;
     animation: fadeInUp 0.8s ease;
     animation-fill-mode: both;
+    position: relative;
 }
 
 .card:nth-child(2) { animation-delay: 0.2s; }
@@ -260,7 +260,6 @@ body.day-mode .contact {
     width: 100px;
 }
 
-/* أنيميشن عناصر القائمة */
 .item {
     display: flex;
     justify-content: space-between;
@@ -340,9 +339,6 @@ body.day-mode .contact {
     animation: bounceIn 0.5s ease;
 }
 
-.control-btn:nth-child(1) { animation-delay: 0.1s; }
-.control-btn:nth-child(2) { animation-delay: 0.2s; }
-
 @keyframes bounceIn {
     0% { transform: scale(0); opacity: 0; }
     50% { transform: scale(1.2); }
@@ -351,10 +347,6 @@ body.day-mode .contact {
 
 .control-btn:hover {
     transform: scale(1.1) rotate(5deg);
-}
-
-body.day-mode .control-btn {
-    background: #444;
 }
 
 /* ===== شعار البث المباشر ===== */
@@ -381,45 +373,7 @@ body.day-mode .control-btn {
     50% { transform: scale(1.1); }
 }
 
-/* ===== زر حذف القائمة ===== */
-.delete-card-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0;
-    z-index: 10;
-}
-
-.card {
-    position: relative;
-}
-
-.card:hover .delete-card-btn {
-    opacity: 1;
-}
-
-/* ===== لوحة المطور ===== */
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(5px);
-    display: none;
-    z-index: 999;
-}
-
+/* ===== لوحة المطور - شفافة وقابلة للتحريك ===== */
 .dev-window {
     position: fixed;
     top: 50%;
@@ -433,11 +387,17 @@ body.day-mode .control-btn {
     border-radius: 15px;
     display: none;
     z-index: 1000;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 0 40px rgba(0,0,0,.6);
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 140, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
     cursor: move;
+    user-select: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.dev-window:active {
+    cursor: grabbing;
 }
 
 .dev-window h3 {
@@ -445,16 +405,17 @@ body.day-mode .control-btn {
     font-size: 24px;
     text-align: center;
     margin-bottom: 15px;
-    border-bottom: 1px solid #ff8c00;
+    border-bottom: 2px solid #ff8c00;
     padding-bottom: 10px;
+    cursor: move;
 }
 
 .dev-section {
     margin: 15px 0;
     padding: 15px;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    border: 1px solid rgba(255,140,0,0.3);
+    border: 1px solid rgba(255, 140, 0, 0.3);
 }
 
 .dev-section h4 {
@@ -468,10 +429,16 @@ body.day-mode .control-btn {
     width: 100%;
     padding: 8px;
     margin: 6px 0;
-    background: rgba(0,0,0,.6);
+    background: rgba(0, 0, 0, 0.7);
     border: 1px solid #333;
     color: white;
     border-radius: 6px;
+}
+
+.dev-window input:focus,
+.dev-window select:focus {
+    border-color: #ff8c00;
+    outline: none;
 }
 
 .dev-window button {
@@ -575,28 +542,6 @@ body.day-mode .control-btn {
 .status-error { border-color: #dc3545; }
 .status-loading { border-color: #ff8c00; }
 
-/* ===== تلميح F5 ===== */
-.f5-hint {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(255,140,0,0.2);
-    border: 1px solid #ff8c00;
-    padding: 8px 15px;
-    border-radius: 30px;
-    font-size: 12px;
-    color: #ff8c00;
-    backdrop-filter: blur(5px);
-    z-index: 100;
-    pointer-events: none;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-}
-
 /* ===== أوضاع التعديل ===== */
 .delete-mode .item:hover {
     outline: 2px solid red;
@@ -606,6 +551,11 @@ body.day-mode .control-btn {
 .delete-mode .card:hover {
     outline: 2px solid red;
     cursor: pointer;
+}
+
+/* ===== تلميح F5 - مخفي تماماً ===== */
+.f5-hint {
+    display: none; /* تم إخفاء التلميح */
 }
 </style>
 </head>
@@ -621,15 +571,9 @@ body.day-mode .control-btn {
     <button class="control-btn" id="themeBtn">🌙 / ☀️</button>
 </div>
 
-<!-- تلميح F5 -->
-<div class="f5-hint">💻 F5 - Geliştirici Paneli</div>
-
-<!-- طبقة الخلفية -->
-<div class="overlay" id="overlay"></div>
-
-<!-- نافذة المطور -->
+<!-- لوحة المطور - شفافة وقابلة للتحريك (بدون طبقة خلفية) -->
 <div class="dev-window" id="devPanel">
-    <h3>⚙️ PRO Developer Panel</h3>
+    <h3 id="dragHandle">⚙️ PRO Developer Panel</h3>
 
     <!-- Fiyat Bölümü -->
     <div class="dev-section">
@@ -751,7 +695,7 @@ function scrollToMenu() {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
-        let pass = prompt("🔐 Geliştirici şifresi (F5):");
+        let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
             openDev();
             showStatus("✅ Hoş geldiniz!", "success");
@@ -764,22 +708,29 @@ document.addEventListener('keydown', function(e) {
 // ===== PANEL KONTROLLERİ =====
 function openDev() {
     document.getElementById("devPanel").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
     isDeveloper = true;
     updateCategorySelect();
+    centerPanel();
 }
 
 function closeDev() {
     isDeveloper = false;
     deleteMode = false;
     document.getElementById("devPanel").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
     document.querySelectorAll(".price").forEach(p => {
         p.contentEditable = false;
         p.style.background = "transparent";
     });
     document.getElementById("menuGrid").classList.remove("delete-mode");
     closeColorPicker();
+}
+
+// توسيط اللوحة
+function centerPanel() {
+    let panel = document.getElementById("devPanel");
+    panel.style.left = "50%";
+    panel.style.top = "50%";
+    panel.style.transform = "translate(-50%, -50%)";
 }
 
 // ===== DURUM MESAJI =====
@@ -795,7 +746,37 @@ function showStatus(message, type) {
     setTimeout(() => status.remove(), 3000);
 }
 
-// ===== KATEGORİ İŞLEMLERİ =====
+// ===== سحب لوحة المطور =====
+let devPanel = document.getElementById("devPanel");
+let isDragging = false;
+let offsetX, offsetY;
+let dragHandle = document.getElementById("dragHandle");
+
+dragHandle.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", stopDrag);
+
+function startDrag(e) {
+    isDragging = true;
+    offsetX = e.clientX - devPanel.offsetLeft;
+    offsetY = e.clientY - devPanel.offsetTop;
+    devPanel.style.transform = "none";
+    devPanel.style.cursor = "grabbing";
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    devPanel.style.left = (e.clientX - offsetX) + "px";
+    devPanel.style.top = (e.clientY - offsetY) + "px";
+}
+
+function stopDrag() {
+    isDragging = false;
+    devPanel.style.cursor = "move";
+}
+
+// ===== باقي الدوال (نفس الكود السابق) =====
 function updateCategorySelect() {
     let select = document.getElementById("categorySelect");
     select.innerHTML = "";
@@ -858,7 +839,6 @@ function deleteCard(btn) {
     }
 }
 
-// ===== FİYAT İŞLEMLERİ =====
 function updateMainPrice() {
     if (!isDeveloper) return;
     let newPrice = document.getElementById("newPrice").value;
@@ -879,7 +859,6 @@ function enableEdit() {
     showStatus("✏️ Fiyatları düzenleyebilirsiniz", "success");
 }
 
-// ===== SİLME MODU =====
 function toggleDeleteMode() {
     if (!isDeveloper) return;
     deleteMode = !deleteMode;
@@ -890,8 +869,6 @@ function toggleDeleteMode() {
 document.getElementById("menuGrid").addEventListener("click", function(e) {
     if (!deleteMode) return;
     let item = e.target.closest(".item");
-    let card = e.target.closest(".card");
-
     if (item && !e.target.classList.contains('delete-card-btn')) {
         if (confirm("Silmek istiyor musun?")) {
             item.remove();
@@ -911,7 +888,6 @@ function deleteAll() {
     }
 }
 
-// ===== SOSYAL MEDYA =====
 function changeInstagram() {
     if (!isDeveloper) return;
     let val = document.getElementById("newInstagram").value.trim();
@@ -932,45 +908,29 @@ function changeLocation() {
     }
 }
 
-// ===== VERİ KAYIT =====
 function saveData() {
     localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-    broadcastChanges(); // Her kayıtta otomatik yayınla
+    broadcastChanges();
 }
 
-// ===== CANLI YAYIN FONKSİYONU =====
 function broadcastChanges() {
-    // Bu fonksiyon tüm açık sekmelere değişiklikleri bildirir
-    // localStorage olayını tetikler
     localStorage.setItem('lastUpdate', Date.now().toString());
     showStatus("📡 Değişiklikler yayınlandı!", "success");
 }
 
-// Tüm sekmelerde değişiklikleri dinle
 window.addEventListener('storage', function(e) {
     if (e.key === 'lastUpdate' || e.key === 'menuData' || e.key === 'insta' || e.key === 'map') {
-        // Menü verilerini güncelle
         let savedMenu = localStorage.getItem("menuData");
-        if (savedMenu) {
-            document.getElementById("menuGrid").innerHTML = savedMenu;
-        }
+        if (savedMenu) document.getElementById("menuGrid").innerHTML = savedMenu;
         
-        // Instagram linkini güncelle
         let savedInsta = localStorage.getItem("insta");
-        if (savedInsta) {
-            document.getElementById("instaLink").href = savedInsta;
-        }
+        if (savedInsta) document.getElementById("instaLink").href = savedInsta;
         
-        // Haritayı güncelle
         let savedMap = localStorage.getItem("map");
-        if (savedMap) {
-            document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + savedMap + "&output=embed";
-        }
+        if (savedMap) document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + savedMap + "&output=embed";
         
-        // Kategorileri güncelle
         updateCategorySelect();
         
-        // Renkleri güncelle
         let colorCategory = localStorage.getItem('colorCategory');
         let colorName = localStorage.getItem('colorName');
         let colorPrice = localStorage.getItem('colorPrice');
@@ -983,7 +943,6 @@ window.addEventListener('storage', function(e) {
     }
 });
 
-// ===== RENK İŞLEMLERİ =====
 function openColorPicker() {
     if (!isDeveloper) return;
     document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
@@ -1011,33 +970,9 @@ function applyColors() {
 
     closeColorPicker();
     showStatus("🎨 Renkler uygulandı!", "success");
-    broadcastChanges(); // Renk değişikliklerini de yayınla
+    broadcastChanges();
 }
 
-// ===== SÜRÜKLEME =====
-let devPanel = document.getElementById("devPanel");
-let isDragging = false, offsetX, offsetY;
-
-devPanel.addEventListener("mousedown", function(e) {
-    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-    isDragging = true;
-    offsetX = e.clientX - devPanel.offsetLeft;
-    offsetY = e.clientY - devPanel.offsetTop;
-    devPanel.style.transform = "none";
-});
-
-document.addEventListener("mousemove", function(e) {
-    if (isDragging) {
-        devPanel.style.left = (e.clientX - offsetX) + "px";
-        devPanel.style.top = (e.clientY - offsetY) + "px";
-    }
-});
-
-document.addEventListener("mouseup", function() {
-    isDragging = false;
-});
-
-// ===== أزرار اللغة والوضع =====
 let currentLang = localStorage.getItem("lang") || "tr";
 let currentTheme = localStorage.getItem("theme") || "dark";
 
@@ -1082,7 +1017,6 @@ document.getElementById("themeBtn").onclick = function() {
     showStatus(currentTheme === "dark" ? "🌙 Gece Modu" : "☀️ Gündüz Modu", "success");
 };
 
-// ===== SAYFA YÜKLENİNCE =====
 window.onload = function() {
     if (localStorage.getItem("menuData"))
         document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
