@@ -304,7 +304,7 @@ iframe {
 .control-buttons {
     position: fixed;
     top: 20px;
-    right: 90px; /* تعديل المسافة لترك مكان للزر الجديد */
+    right: 90px;
     display: flex;
     gap: 8px;
     z-index: 1000;
@@ -548,31 +548,42 @@ iframe {
     display: none;
 }
 
-/* ===== مود النهار الكريمي - الجديد ===== */
+/* ===== وضع النهار الكريمي - محدث حسب طلبك ===== */
 .light-mode {
     background: #f6f1e8 !important;
     color: #2b2b2b !important;
     animation: none !important;
 }
 
-.light-mode .card,
-.light-mode .menu-box,
-.light-mode .modal-content,
-.light-mode .box {
+/* اطار القوائم بوضع النهار */
+.light-mode .card {
     background: #fffaf3 !important;
-    border: 1px solid #e6d8c3 !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+    border: 2px solid #f59e0b !important;
+    border-radius: 18px !important;
+    padding: 20px !important;
+    box-shadow: 0 6px 20px rgba(217,119,6,0.15) !important;
 }
 
-.light-mode h1,
-.light-mode h2,
-.light-mode h3 {
+/* عنوان داخل الكارت */
+.light-mode .card h3 {
     color: #d97706 !important;
+    border-bottom: 2px solid #f59e0b !important;
 }
 
-.light-mode button:not(.control-btn) {
+.light-mode .card h3::after {
     background: #f59e0b !important;
-    color: white !important;
+}
+
+/* السعر */
+.light-mode .price {
+    color: #b45309 !important;
+    font-weight: bold;
+    animation: pricePulseDay 2s ease-in-out infinite;
+}
+
+@keyframes pricePulseDay {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); color: #d97706; }
 }
 
 .light-mode .hero {
@@ -590,11 +601,7 @@ iframe {
 }
 
 .light-mode .name {
-    color: #8b6b4f !important;
-}
-
-.light-mode .price {
-    color: #d97706 !important;
+    color: #b45309 !important;
 }
 
 .light-mode .contact {
@@ -609,19 +616,23 @@ iframe {
     color: #d97706 !important;
 }
 
+.light-mode .control-btn {
+    background: #f59e0b !important;
+}
+
 .light-mode .dev-window {
     background: rgba(246, 241, 232, 0.95) !important;
-    border: 2px solid #d97706 !important;
+    border: 2px solid #f59e0b !important;
 }
 
 .light-mode .dev-window h3 {
     color: #d97706 !important;
-    border-bottom: 2px solid #d97706 !important;
+    border-bottom: 2px solid #f59e0b !important;
 }
 
 .light-mode .dev-section {
     background: rgba(255, 250, 243, 0.8) !important;
-    border: 1px solid #e6d8c3 !important;
+    border: 1px solid #f59e0b !important;
 }
 
 .light-mode .dev-section h4 {
@@ -631,13 +642,13 @@ iframe {
 .light-mode .dev-window input,
 .light-mode .dev-window select {
     background: #fffaf3 !important;
-    border: 1px solid #e6d8c3 !important;
+    border: 1px solid #f59e0b !important;
     color: #2b2b2b !important;
 }
 
 .light-mode .color-picker-modal {
     background: rgba(246, 241, 232, 0.98) !important;
-    border: 2px solid #d97706 !important;
+    border: 2px solid #f59e0b !important;
     color: #2b2b2b !important;
 }
 
@@ -646,7 +657,11 @@ iframe {
 }
 
 .light-mode .color-picker-modal label {
-    color: #8b6b4f !important;
+    color: #b45309 !important;
+}
+
+.light-mode .color-picker-modal button {
+    background: #f59e0b !important;
 }
 </style>
 </head>
