@@ -309,11 +309,16 @@ iframe {
     backdrop-filter: blur(5px);
     transition: all 0.3s ease;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    -webkit-tap-highlight-color: transparent; /* إزالة التظليل عند الضغط على الجوال */
 }
 
 .control-btn:hover {
     transform: scale(1.1);
     background: rgba(255, 140, 0, 0.4);
+}
+
+.control-btn:active {
+    transform: scale(0.95); /* تأثير الضغط */
 }
 
 body.day-mode .control-btn {
@@ -331,16 +336,54 @@ body.day-mode .control-btn {
     }
     
     .control-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+        width: 45px; /* تكبير للأزرار */
+        height: 45px;
+        font-size: 18px;
         background: rgba(255, 140, 0, 0.3);
         border: 2px solid #ff8c00;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     
     body.day-mode .control-btn {
         background: rgba(51, 51, 51, 0.3);
         border: 2px solid #333;
+    }
+}
+
+/* ===== شعار CANLI - يعمل على جميع الأجهزة ===== */
+.live-badge {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 0, 0, 0.9);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    animation: pulse 1.5s infinite;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    pointer-events: none; /* لا يؤثر على الضغط */
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+    100% { opacity: 0.7; transform: scale(1); }
+}
+
+/* تحسين للجوال */
+@media (max-width: 768px) {
+    .live-badge {
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 5px 12px;
+        background: rgba(255, 0, 0, 0.95);
+        border: 1px solid #fff;
     }
 }
 
@@ -488,37 +531,6 @@ body.day-mode .control-btn {
     cursor: pointer;
 }
 
-/* ===== البث المباشر ===== */
-.live-badge {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: rgba(255, 0, 0, 0.8);
-    color: #fff;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: bold;
-    animation: pulse 1.5s infinite;
-    z-index: 100;
-    backdrop-filter: blur(5px);
-}
-
-@media (max-width: 768px) {
-    .live-badge {
-        top: 10px;
-        left: 10px;
-        font-size: 10px;
-        padding: 4px 10px;
-    }
-}
-
-@keyframes pulse {
-    0% { opacity: 0.5; }
-    50% { opacity: 1; }
-    100% { opacity: 0.5; }
-}
-
 /* ===== مؤشرات الحالة ===== */
 .status-message {
     position: fixed;
@@ -547,7 +559,7 @@ body.day-mode .control-btn {
 
 @media (max-width: 768px) {
     .status-message {
-        top: 60px;
+        top: 70px;
         right: 10px;
         left: 10px;
         max-width: none;
@@ -614,13 +626,13 @@ body.day-mode .f5-hint {
 
 <body class="night-mode" id="body" data-language="tr">
 
-<!-- شارة البث المباشر -->
+<!-- شارة البث المباشر - تعمل على جميع الأجهزة -->
 <div class="live-badge">🔴 CANLI</div>
 
 <!-- أزرار التحكم - تعمل على جميع الأجهزة -->
 <div class="control-buttons">
-    <button class="control-btn" id="langToggle" onclick="toggleLanguage()">TR</button>
-    <button class="control-btn" id="themeToggle" onclick="toggleTheme()">🌓</button>
+    <button class="control-btn" id="langToggle" onclick="toggleLanguage()" aria-label="Dil değiştir">TR</button>
+    <button class="control-btn" id="themeToggle" onclick="toggleTheme()" aria-label="Tema değiştir">🌓</button>
 </div>
 
 <!-- تلميح - يظهر فقط على الكمبيوتر -->
@@ -897,8 +909,9 @@ function scrollToMenu() {
     document.getElementById("menu").scrollIntoView({behavior: "smooth"});
 }
 
-// ===== DİL DEĞİŞTİRME =====
+// ===== DİL DEĞİŞTİRME - تعمل على جميع الأجهزة =====
 function toggleLanguage() {
+    console.log("Dil değiştiriliyor..."); // للتأكد من عمل الدالة
     const body = document.getElementById('body');
     const langToggle = document.getElementById('langToggle');
     const currentLang = body.getAttribute('data-language');
@@ -939,8 +952,8 @@ function applyLanguage(lang) {
     document.getElementById('item9').innerText = t.item9;
     document.getElementById('contactTitle').innerText = t.contactTitle;
     
-    // Developer panel (sadece PC'de var)
-    if(!isMobile()) {
+    // Developer panel (sadece PC'de varsa)
+    if(!isMobile() && document.querySelector('.panel-title')) {
         document.querySelector('.panel-title').innerText = t.panelTitle;
         document.querySelector('.section-title-add').innerText = t.sectionAdd;
         document.querySelector('.product-name-input').placeholder = t.productNamePlaceholder;
@@ -973,8 +986,9 @@ function applyLanguage(lang) {
     }
 }
 
-// ===== TEMA DEĞİŞTİRME =====
+// ===== TEMA DEĞİŞTİRME - تعمل على جميع الأجهزة =====
 function toggleTheme() {
+    console.log("Tema değiştiriliyor..."); // للتأكد من عمل الدالة
     const body = document.getElementById('body');
     const themeToggle = document.getElementById('themeToggle');
     
@@ -1326,6 +1340,8 @@ function showStatus(msg, type) {
 
 // ===== BAŞLANGIÇ =====
 window.onload = async function() {
+    console.log("Sayfa yüklendi"); // للتأكد
+    
     // Dil yükle
     const savedLang = localStorage.getItem('language') || 'tr';
     document.getElementById('body').setAttribute('data-language', savedLang);
@@ -1338,28 +1354,42 @@ window.onload = async function() {
         document.getElementById('body').classList.remove('night-mode');
         document.getElementById('body').classList.add('day-mode');
         document.getElementById('themeToggle').innerHTML = '🌞';
+    } else {
+        document.getElementById('themeToggle').innerHTML = '🌓';
     }
     
-    // Supabase'den yükle (sadece PC'de yükleme yap, mobilde görüntüleme için)
-    const { data } = await supabase.from('settings').select('*').eq('id', 1).single();
-    
-    if(data) {
-        if(data.menu_data) document.getElementById('menu').innerHTML = data.menu_data;
-        if(data.instagram) document.getElementById('instaLink').href = data.instagram;
-        if(data.location) document.getElementById('mapFrame').src = data.location;
-        if(data.colors) {
-            let colors = JSON.parse(data.colors);
-            applyColorsFromData(colors);
-            localStorage.setItem('colorCategory', colors.category);
-            localStorage.setItem('colorName', colors.name);
-            localStorage.setItem('colorPrice', colors.price);
-            localStorage.setItem('colorButton', colors.button);
+    // Supabase'den yükle (sadece verileri al, kaydetme)
+    try {
+        const { data } = await supabase.from('settings').select('*').eq('id', 1).single();
+        
+        if(data) {
+            if(data.menu_data) document.getElementById('menu').innerHTML = data.menu_data;
+            if(data.instagram) document.getElementById('instaLink').href = data.instagram;
+            if(data.location) document.getElementById('mapFrame').src = data.location;
+            if(data.colors) {
+                let colors = JSON.parse(data.colors);
+                applyColorsFromData(colors);
+                localStorage.setItem('colorCategory', colors.category);
+                localStorage.setItem('colorName', colors.name);
+                localStorage.setItem('colorPrice', colors.price);
+                localStorage.setItem('colorButton', colors.button);
+            }
         }
+    } catch(err) {
+        console.log("Supabase yükleme hatası (önemsiz):", err);
     }
     
-    updateCategorySelect();
-    loadColors();
+    // Sadece PC'de kategori seçimini güncelle
+    if(!isMobile()) {
+        updateCategorySelect();
+        loadColors();
+    }
 };
+
+// Dokunmatik olaylar için ek güvence
+document.addEventListener('touchstart', function() {
+    // Dokunmatik ekran için hiçbir şey yapma
+}, { passive: true });
 </script>
 
 </body>
