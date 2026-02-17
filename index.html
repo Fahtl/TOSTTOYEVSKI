@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* جميع الأنماط كما هي - لن أكررها للاختصار */
 * {
     margin: 0;
     padding: 0;
@@ -27,7 +28,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* ===== الوضع الليلي (افتراضي) ===== */
+/* الوضع الليلي */
 body.night-mode {
     background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
     background-size: 400% 400%;
@@ -51,7 +52,7 @@ body.night-mode .name { color: #ff8c00; }
 body.night-mode .price { color: #fff; }
 body.night-mode .contact { background: #000; }
 
-/* ===== الوضع النهاري - ألوان كريمية ===== */
+/* الوضع النهاري */
 body.day-mode {
     background: #f8f4e8 !important;
     color: #3a342c !important;
@@ -63,73 +64,19 @@ body.day-mode .hero {
                 url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
 }
 
-body.day-mode .hero h1 {
-    color: #c17b4c !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
+body.day-mode .hero h1 { color: #c17b4c !important; }
+body.day-mode .work-time { color: #b56f3c !important; }
+body.day-mode .btn { background: #c17b4c !important; color: #fff !important; }
+body.day-mode .card { background: #fffaf0 !important; color: #3a342c !important; }
+body.day-mode .card h3 { color: #b56f3c !important; border-bottom: 2px solid #e8dccc; }
+body.day-mode .name { color: #8b6b4f !important; }
+body.day-mode .price { color: #b56f3c !important; }
+body.day-mode .contact { background: #f1eadb !important; }
+body.day-mode .contact h2 { color: #b56f3c !important; }
+body.day-mode .contact a { color: #c17b4c !important; }
+body.day-mode .control-btn { background: #c17b4c !important; }
 
-body.day-mode .work-time {
-    color: #b56f3c !important;
-}
-
-body.day-mode .btn {
-    background: #c17b4c !important;
-    color: #fff !important;
-}
-
-body.day-mode .btn:hover {
-    background: #a5673a !important;
-}
-
-body.day-mode .card {
-    background: #fffaf0 !important;
-    color: #3a342c !important;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.06) !important;
-}
-
-body.day-mode .card h3 {
-    color: #b56f3c !important;
-    border-bottom: 2px solid #e8dccc;
-}
-
-body.day-mode .name {
-    color: #8b6b4f !important;
-}
-
-body.day-mode .price {
-    color: #b56f3c !important;
-}
-
-body.day-mode .contact {
-    background: #f1eadb !important;
-}
-
-body.day-mode .contact h2 {
-    color: #b56f3c !important;
-}
-
-body.day-mode .contact a {
-    color: #c17b4c !important;
-}
-
-body.day-mode .control-btn {
-    background: #c17b4c !important;
-}
-
-body.day-mode .dev-window {
-    background: rgba(248, 244, 232, 0.95) !important;
-    border: 2px solid #c17b4c !important;
-}
-
-body.day-mode .dev-window h3 {
-    color: #b56f3c !important;
-}
-
-body.day-mode .dev-section h4 {
-    color: #b56f3c !important;
-}
-
-/* ===== الهيرو ===== */
+/* الهيرو */
 .hero {
     height: 100vh;
     display: flex;
@@ -141,7 +88,6 @@ body.day-mode .dev-section h4 {
     overflow: hidden;
 }
 
-/* أنيميشن الجسيمات */
 .hero::before {
     content: '';
     position: absolute;
@@ -193,7 +139,7 @@ body.day-mode .dev-section h4 {
     50% { transform: scale(1.05); opacity: 0.9; }
 }
 
-/* ===== زر Menüyü Gör - تم التعديل هنا ===== */
+/* الزر */
 .btn {
     padding: 12px 25px;
     border: none;
@@ -227,7 +173,7 @@ body.day-mode .dev-section h4 {
     transform: translateY(-3px) scale(1.05);
 }
 
-/* ===== المنيو ===== */
+/* المنيو */
 .container {
     padding: 60px 20px;
     max-width: 1100px;
@@ -274,7 +220,6 @@ body.day-mode .dev-section h4 {
 
 .card:nth-child(2) { animation-delay: 0.2s; }
 .card:nth-child(3) { animation-delay: 0.4s; }
-.card:nth-child(4) { animation-delay: 0.6s; }
 
 @keyframes fadeInUp {
     from {
@@ -359,7 +304,7 @@ body.day-mode .dev-section h4 {
     50% { transform: scale(1.1); }
 }
 
-/* ===== الاتصال ===== */
+/* الاتصال */
 .contact {
     text-align: center;
     padding: 50px 20px;
@@ -382,7 +327,7 @@ iframe {
     border: none;
 }
 
-/* ===== أزرار التحكم ===== */
+/* أزرار التحكم */
 .control-buttons {
     position: fixed;
     top: 15px;
@@ -400,6 +345,8 @@ iframe {
     font-weight: bold;
     transition: all 0.3s ease;
     animation: bounceIn 0.5s ease;
+    background: #ff8c00;
+    color: white;
 }
 
 @keyframes bounceIn {
@@ -412,7 +359,7 @@ iframe {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* ===== شعار البث المباشر ===== */
+/* شعار البث المباشر */
 .live-badge {
     position: fixed;
     top: 20px;
@@ -436,7 +383,7 @@ iframe {
     50% { transform: scale(1.1); }
 }
 
-/* ===== لوحة المطور ===== */
+/* لوحة المطور */
 .dev-window {
     position: fixed;
     top: 50%;
@@ -463,10 +410,11 @@ iframe {
 }
 
 .dev-window h3 {
+    color: #ff8c00;
     font-size: 24px;
     text-align: center;
     margin-bottom: 15px;
-    border-bottom: 2px solid;
+    border-bottom: 2px solid #ff8c00;
     padding-bottom: 10px;
     cursor: move;
 }
@@ -480,6 +428,7 @@ iframe {
 }
 
 .dev-section h4 {
+    color: #ff8c00;
     margin-bottom: 10px;
     font-size: 16px;
 }
@@ -525,7 +474,7 @@ iframe {
     margin-top: 15px;
 }
 
-/* ===== نافذة تعديل الألوان ===== */
+/* نافذة تعديل الألوان */
 .color-picker-modal {
     position: fixed;
     top: 50%;
@@ -571,7 +520,7 @@ iframe {
     background: #ff8c00;
 }
 
-/* ===== مؤشرات الحالة ===== */
+/* مؤشرات الحالة */
 .status-message {
     position: fixed;
     top: 20px;
@@ -596,18 +545,13 @@ iframe {
 .status-error { border-color: #dc3545; }
 .status-loading { border-color: #ff8c00; }
 
-/* ===== أوضاع التعديل ===== */
+/* أوضاع التعديل */
 .delete-mode .item:hover {
     outline: 2px solid red;
     cursor: pointer;
 }
 
-.delete-mode .card:hover {
-    outline: 2px solid red;
-    cursor: pointer;
-}
-
-/* ===== زر حذف القائمة ===== */
+/* زر حذف القائمة */
 .delete-card-btn {
     position: absolute;
     top: 15px;
@@ -654,8 +598,6 @@ iframe {
 <section class="hero">
     <h1 id="secretTrigger">Tosttoo</h1>
     <div class="work-time">🕒 08:00 - 02:30</div>
-    
-    <!-- ===== زر Menüyü Gör - تم التعديل هنا مباشرة ===== -->
     <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
         Menüyü Gör
     </button>
@@ -683,7 +625,7 @@ iframe {
 <section class="contact">
     <h2 id="contactTitle">İletişim</h2>
     <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
-    <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank" style="color:#ff8c00">Instagram</a></p>
+    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
     <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
 
@@ -755,12 +697,21 @@ iframe {
 </div>
 
 <script>
-// ===== DEĞİŞKENLER =====
+// ===== الكود الجديد لحذف أزرار الإغلاق =====
+document.addEventListener("DOMContentLoaded", function() {
+  const closeBtn = document.querySelector('button[onclick*="close"], .close, .modal-close');
+  if (closeBtn) {
+    closeBtn.remove();
+    console.log("✅ زر الإغلاق تم حذفه");
+  }
+});
+
+// ===== باقي الكود =====
 let isDeveloper = false;
 let deleteMode = false;
 let ctrlPressed = false;
 
-// ===== F5 İLE GİRİŞ =====
+// F5 İLE GİRİŞ
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
@@ -774,7 +725,7 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// ===== PANEL KONTROLLERİ =====
+// PANEL KONTROLLERİ
 function openDev() {
     document.getElementById("devPanel").style.display = "block";
     isDeveloper = true;
@@ -801,7 +752,7 @@ function centerPanel() {
     panel.style.transform = "translate(-50%, -50%)";
 }
 
-// ===== DURUM MESAJI =====
+// DURUM MESAJI
 function showStatus(message, type) {
     let oldStatus = document.querySelector(".status-message");
     if (oldStatus) oldStatus.remove();
@@ -814,7 +765,7 @@ function showStatus(message, type) {
     setTimeout(() => status.remove(), 3000);
 }
 
-// ===== سحب لوحة المطور =====
+// SÜRÜKLEME
 let devPanel = document.getElementById("devPanel");
 let isDragging = false;
 let offsetX, offsetY;
@@ -844,7 +795,7 @@ function stopDrag() {
     devPanel.style.cursor = "move";
 }
 
-// ===== KATEGORİ İŞLEMLERİ =====
+// KATEGORİ İŞLEMLERİ
 function updateCategorySelect() {
     let select = document.getElementById("categorySelect");
     select.innerHTML = "";
@@ -1049,7 +1000,7 @@ function applyLanguage() {
     const menuTitle = document.getElementById("menuTitle");
     const contactTitle = document.getElementById("contactTitle");
     const langBtn = document.getElementById("langBtn");
-    const menuBtn = document.querySelector('.btn'); // نختار الزر
+    const menuBtn = document.querySelector('.btn');
 
     if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
     if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
