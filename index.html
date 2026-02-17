@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* جميع الأنماط كما هي - لن أكررها للاختصار */
+/* ===== الوضع الافتراضي (ليل) ===== */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +19,10 @@ body {
     min-height: 100vh;
     transition: all 0.5s ease;
     overflow-x: hidden;
+    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #fff;
 }
 
 /* أنيميشن الخلفية */
@@ -28,55 +32,58 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* الوضع الليلي */
-body.night-mode {
-    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: #fff;
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
-body.night-mode .hero {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
-    background-size: cover;
-    background-position: center;
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-body.night-mode .hero h1 { color: #ff8c00; }
-body.night-mode .work-time { color: #ff8c00; }
-body.night-mode .btn { background: #ff8c00; color: #fff; }
-body.night-mode .card { background: #1e1e1e; border: 1px solid rgba(255,140,0,0.3); }
-body.night-mode .card h3 { color: #ff8c00; border-bottom: 2px solid #ff8c00; }
-body.night-mode .name { color: #ff8c00; }
-body.night-mode .price { color: #fff; }
-body.night-mode .contact { background: #000; }
-
-/* الوضع النهاري */
-body.day-mode {
-    background: #f8f4e8 !important;
-    color: #3a342c !important;
-    animation: none;
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
 }
 
-body.day-mode .hero {
-    background: linear-gradient(rgba(248,244,232,0.85), rgba(248,244,232,0.85)),
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
 }
 
-body.day-mode .hero h1 { color: #c17b4c !important; }
-body.day-mode .work-time { color: #b56f3c !important; }
-body.day-mode .btn { background: #c17b4c !important; color: #fff !important; }
-body.day-mode .card { background: #fffaf0 !important; color: #3a342c !important; }
-body.day-mode .card h3 { color: #b56f3c !important; border-bottom: 2px solid #e8dccc; }
-body.day-mode .name { color: #8b6b4f !important; }
-body.day-mode .price { color: #b56f3c !important; }
-body.day-mode .contact { background: #f1eadb !important; }
-body.day-mode .contact h2 { color: #b56f3c !important; }
-body.day-mode .contact a { color: #c17b4c !important; }
-body.day-mode .control-btn { background: #c17b4c !important; }
+@keyframes slideInDown {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
 
-/* الهيرو */
+@keyframes fadeInUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pricePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); color: #ff8c00; }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes livePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
 .hero {
     height: 100vh;
     display: flex;
@@ -86,6 +93,10 @@ body.day-mode .control-btn { background: #c17b4c !important; }
     text-align: center;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .hero::before {
@@ -97,13 +108,9 @@ body.day-mode .control-btn { background: #c17b4c !important; }
     animation: rotate 20s linear infinite;
 }
 
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .hero h1 {
     font-size: 60px;
+    color: #ff8c00;
     margin: 0;
     cursor: pointer;
     user-select: none;
@@ -112,34 +119,18 @@ body.day-mode .control-btn { background: #c17b4c !important; }
     text-shadow: 0 0 20px currentColor;
 }
 
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
 .hero h1:hover {
     animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
 }
 
 .work-time {
     margin-top: 15px;
     font-size: 20px;
+    color: #ff8c00;
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-/* الزر */
 .btn {
     padding: 12px 25px;
     border: none;
@@ -149,6 +140,8 @@ body.day-mode .control-btn { background: #c17b4c !important; }
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    background: #ff8c00;
+    color: #fff;
 }
 
 .btn::before {
@@ -173,7 +166,6 @@ body.day-mode .control-btn { background: #c17b4c !important; }
     transform: translateY(-3px) scale(1.05);
 }
 
-/* المنيو */
 .container {
     padding: 60px 20px;
     max-width: 1100px;
@@ -183,20 +175,10 @@ body.day-mode .control-btn { background: #c17b4c !important; }
 
 .container h2 {
     font-size: 40px;
+    color: #ff8c00;
     text-align: center;
     margin-bottom: 40px;
     animation: slideInDown 1s ease;
-}
-
-@keyframes slideInDown {
-    from {
-        transform: translateY(-50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
 }
 
 .grid {
@@ -210,38 +192,30 @@ body.day-mode .control-btn { background: #c17b4c !important; }
 }
 
 .card {
+    background: #1e1e1e;
     padding: 20px;
     border-radius: 10px;
     transition: all 0.3s ease;
     animation: fadeInUp 0.8s ease;
     animation-fill-mode: both;
     position: relative;
+    border: 1px solid rgba(255,140,0,0.3);
 }
 
 .card:nth-child(2) { animation-delay: 0.2s; }
 .card:nth-child(3) { animation-delay: 0.4s; }
 
-@keyframes fadeInUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 .card:hover {
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
 }
 
 .card h3 {
+    color: #ff8c00;
     font-size: 24px;
     margin-bottom: 15px;
     text-align: center;
-    border-bottom: 2px solid;
+    border-bottom: 2px solid #ff8c00;
     padding-bottom: 10px;
     position: relative;
 }
@@ -291,32 +265,31 @@ body.day-mode .control-btn { background: #c17b4c !important; }
 }
 
 .name {
+    color: #ff8c00;
     font-weight: 600;
 }
 
 .price {
+    color: #fff;
     font-weight: bold;
     animation: pricePulse 2s ease-in-out infinite;
 }
 
-@keyframes pricePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* الاتصال */
 .contact {
     text-align: center;
     padding: 50px 20px;
+    background: #000;
 }
 
 .contact h2 {
     font-size: 40px;
+    color: #ff8c00;
     margin-bottom: 30px;
 }
 
 .contact a {
     text-decoration: none;
+    color: #ff8c00;
 }
 
 iframe {
@@ -327,11 +300,11 @@ iframe {
     border: none;
 }
 
-/* أزرار التحكم */
+/* أزرار التحكم الأخرى */
 .control-buttons {
     position: fixed;
-    top: 15px;
-    right: 15px;
+    top: 20px;
+    right: 90px; /* تعديل المسافة لترك مكان للزر الجديد */
     display: flex;
     gap: 8px;
     z-index: 1000;
@@ -347,12 +320,6 @@ iframe {
     animation: bounceIn 0.5s ease;
     background: #ff8c00;
     color: white;
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
 }
 
 .control-btn:hover {
@@ -580,19 +547,122 @@ iframe {
 .f5-hint {
     display: none;
 }
+
+/* ===== مود النهار الكريمي - الجديد ===== */
+.light-mode {
+    background: #f6f1e8 !important;
+    color: #2b2b2b !important;
+    animation: none !important;
+}
+
+.light-mode .card,
+.light-mode .menu-box,
+.light-mode .modal-content,
+.light-mode .box {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3 {
+    color: #d97706 !important;
+}
+
+.light-mode button:not(.control-btn) {
+    background: #f59e0b !important;
+    color: white !important;
+}
+
+.light-mode .hero {
+    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+}
+
+.light-mode .hero h1 {
+    color: #d97706 !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.light-mode .work-time {
+    color: #d97706 !important;
+}
+
+.light-mode .name {
+    color: #8b6b4f !important;
+}
+
+.light-mode .price {
+    color: #d97706 !important;
+}
+
+.light-mode .contact {
+    background: #e6d8c3 !important;
+}
+
+.light-mode .contact h2 {
+    color: #d97706 !important;
+}
+
+.light-mode .contact a {
+    color: #d97706 !important;
+}
+
+.light-mode .dev-window {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-window h3 {
+    color: #d97706 !important;
+    border-bottom: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-section {
+    background: rgba(255, 250, 243, 0.8) !important;
+    border: 1px solid #e6d8c3 !important;
+}
+
+.light-mode .dev-section h4 {
+    color: #d97706 !important;
+}
+
+.light-mode .dev-window input,
+.light-mode .dev-window select {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    color: #2b2b2b !important;
+}
+
+.light-mode .color-picker-modal {
+    background: rgba(246, 241, 232, 0.98) !important;
+    border: 2px solid #d97706 !important;
+    color: #2b2b2b !important;
+}
+
+.light-mode .color-picker-modal h3 {
+    color: #d97706 !important;
+}
+
+.light-mode .color-picker-modal label {
+    color: #8b6b4f !important;
+}
 </style>
 </head>
 
-<body class="night-mode" id="body" data-language="tr">
+<body class="" id="body" data-language="tr">
 
 <!-- شعار البث المباشر -->
 <div class="live-badge">🔴 CANLI</div>
 
-<!-- أزرار التحكم -->
+<!-- أزرار التحكم - نترك زر اللغة فقط -->
 <div class="control-buttons">
     <button class="control-btn" id="langBtn">🌍 EN / TR</button>
-    <button class="control-btn" id="themeBtn">🌙 / ☀️</button>
 </div>
+
+<!-- زر تغيير الوضع الجديد -->
+<button id="modeToggle">🌙</button>
 
 <!-- القسم الرئيسي -->
 <section class="hero">
@@ -703,6 +773,18 @@ document.addEventListener("DOMContentLoaded", function() {
   if (closeBtn) {
     closeBtn.remove();
     console.log("✅ زر الإغلاق تم حذفه");
+  }
+});
+
+// ===== زر تغيير الوضع الجديد =====
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+  document.body.classList.toggle("light-mode");
+
+  if (document.body.classList.contains("light-mode")) {
+    modeToggle.innerHTML = "☀️";
+  } else {
+    modeToggle.innerHTML = "🌙";
   }
 });
 
@@ -992,9 +1074,8 @@ function applyColors() {
     broadcastChanges();
 }
 
-// ===== أزرار اللغة والوضع =====
+// ===== أزرار اللغة =====
 let currentLang = localStorage.getItem("lang") || "tr";
-let currentTheme = localStorage.getItem("theme") || "dark";
 
 function applyLanguage() {
     const menuTitle = document.getElementById("menuTitle");
@@ -1008,33 +1089,11 @@ function applyLanguage() {
     if (langBtn) langBtn.innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
 }
 
-function applyTheme() {
-    const body = document.getElementById('body');
-    const themeBtn = document.getElementById('themeBtn');
-
-    if (currentTheme === "light") {
-        body.classList.remove('night-mode');
-        body.classList.add('day-mode');
-        if (themeBtn) themeBtn.innerText = "☀️ / 🌙";
-    } else {
-        body.classList.remove('day-mode');
-        body.classList.add('night-mode');
-        if (themeBtn) themeBtn.innerText = "🌙 / ☀️";
-    }
-}
-
 document.getElementById("langBtn").onclick = function() {
     currentLang = currentLang === "tr" ? "en" : "tr";
     localStorage.setItem("lang", currentLang);
     applyLanguage();
     showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
-};
-
-document.getElementById("themeBtn").onclick = function() {
-    currentTheme = currentTheme === "dark" ? "light" : "dark";
-    localStorage.setItem("theme", currentTheme);
-    applyTheme();
-    showStatus(currentTheme === "dark" ? "🌙 Gece Modu" : "☀️ Gündüz Modu", "success");
 };
 
 // ===== SAYFA YÜKLENİNCE =====
@@ -1056,8 +1115,24 @@ window.onload = function() {
 
     updateCategorySelect();
     applyLanguage();
-    applyTheme();
+    
+    // التحقق من الوضع المحفوظ
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light-mode");
+        modeToggle.innerHTML = "☀️";
+    } else {
+        modeToggle.innerHTML = "🌙";
+    }
 };
+
+// حفظ الوضع عند التغيير
+modeToggle.addEventListener("click", function() {
+    if (document.body.classList.contains("light-mode")) {
+        localStorage.setItem("theme", "light");
+    } else {
+        localStorage.setItem("theme", "dark");
+    }
+});
 </script>
 
 </body>
