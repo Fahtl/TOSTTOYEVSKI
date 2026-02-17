@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -70,35 +69,13 @@ border-radius:10px;
 
 .card h3{color:#ff8c00;}
 
-.product-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    display: block;
-}
-
 .item{
 display:flex;
 justify-content:space-between;
 margin:10px 0;
-align-items: center;
 }
 
-.item-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.product-thumb {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    object-fit: cover;
-}
-
+/* تم تعديل هذه الخانات لتأخذ الألوان من المتغيرات المحلية أو الإفتراضية */
 .name{color:#ff8c00;}
 .price{color:white;font-weight:bold}
 
@@ -137,30 +114,8 @@ box-shadow:0 0 40px rgba(0,0,0,.6);
 cursor:move;
 }
 
-.dev-window2{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:95%;
-max-width:420px;
-max-height:90vh;
-overflow:auto;
-padding:20px;
-border-radius:15px;
-display:none;
-z-index:1000;
-background:rgba(255,0,0,0.15);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,0,0,0.3);
-box-shadow:0 0 40px rgba(0,0,0,.6);
-cursor:move;
-}
-
 .dev-window input,
-.dev-window select,
-.dev-window2 input,
-.dev-window2 select{
+.dev-window select{
 width:100%;
 padding:8px;
 margin:6px 0;
@@ -170,8 +125,7 @@ color:white;
 border-radius:6px
 }
 
-.dev-window button,
-.dev-window2 button{
+.dev-window button{
 width:100%;
 padding:8px;
 margin:6px 0;
@@ -182,16 +136,13 @@ border-radius:6px;
 cursor:pointer
 }
 
-.dev-window2 button {
-    background: #ff4444;
-}
-
 .delete-mode .item:hover,
 .delete-mode .card:hover{
 outline:2px solid red;
 cursor:pointer
 }
 
+/* ستايل نافذة تعديل الألوان */
 .color-picker-modal {
     position: fixed;
     top: 50%;
@@ -236,58 +187,6 @@ cursor:pointer
     margin-top: 20px;
     background: #ff8c00;
 }
-
-/* نافذة كلمة السر */
-.password-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.95);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 15px;
-    border: 2px solid #ff8c00;
-    z-index: 2000;
-    display: none;
-    width: 90%;
-    max-width: 300px;
-    text-align: center;
-}
-
-.password-modal h3 {
-    color: #ff8c00;
-    margin-top: 0;
-    margin-bottom: 20px;
-}
-
-.password-modal input {
-    width: 100%;
-    padding: 10px;
-    margin: 15px 0;
-    background: #333;
-    border: 1px solid #ff8c00;
-    color: white;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.password-modal button {
-    background: #ff8c00;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
-    width: 100px;
-}
-
-.password-modal button:last-child {
-    background: #666;
-}
 </style>
 </head>
 
@@ -305,20 +204,8 @@ cursor:pointer
 
 <div class="card">
 <h3>Tostlar</h3>
-<div class="item">
-    <div class="item-left">
-        <img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src='https://via.placeholder.com/40'">
-        <span class="name">Kaşarlı Tost</span>
-    </div>
-    <span class="price">60₺</span>
-</div>
-<div class="item">
-    <div class="item-left">
-        <img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src='https://via.placeholder.com/40'">
-        <span class="name">Sucuklu Tost</span>
-    </div>
-    <span class="price">75₺</span>
-</div>
+<div class="item"><span class="name">Kaşarlı Tost</span><span class="price">60₺</span></div>
+<div class="item"><span class="name">Sucuklu Tost</span><span class="price">75₺</span></div>
 </div>
 
 </div>
@@ -335,19 +222,8 @@ width="100%" height="300"></iframe>
 
 <div class="overlay" id="overlay"></div>
 
-<!-- نافذة كلمة السر -->
-<div class="password-modal" id="passwordModal">
-    <h3>🔐 ŞİFRE GİRİN</h3>
-    <input type="password" id="passwordInput" placeholder="Şifre: momotunc0702">
-    <div>
-        <button onclick="checkPassword()">GİRİŞ</button>
-        <button onclick="closePasswordModal()">İPTAL</button>
-    </div>
-</div>
-
-<!-- لوحة المطور الرئيسية (F1) -->
 <div class="dev-window" id="devPanel">
-<h3>🔧 PRO Developer Panel</h3>
+<h3>PRO Developer Panel</h3>
 
 <select id="categorySelect"></select>
 
@@ -369,27 +245,10 @@ width="100%" height="300"></iframe>
 <input type="text" id="newLocation" placeholder="Konum lat,long">
 <button onclick="changeLocation()">Konum Güncelle</button>
 
-<button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+<!-- زر جديد لتعديل الألوان -->
+<button onclick="openColorPicker()" style="background:#purple; background-color: #8a2be2;">🎨 Renkleri Düzenle</button>
 
-<button onclick="closeDev()">Çıkış (Kaydet)</button>
-</div>
-
-<!-- لوحة المطور الثانية للصور (F2) -->
-<div class="dev-window2" id="devPanel2">
-<h3>📸 RESİM EKLEME PANELİ</h3>
-
-<select id="categorySelectImage"></select>
-<select id="productSelectImage"></select>
-
-<input type="text" id="productImageUrl" placeholder="Resim URL'si">
-<button onclick="addImageToProduct()">Resim Ekle/Güncelle</button>
-
-<hr style="border-color:#ff4444">
-
-<input type="text" id="categoryImageUrl" placeholder="Kategori Resim URL'si">
-<button onclick="addImageToCategory()">Kategori Resmi Ekle</button>
-
-<button onclick="closeDev2()">Panel Kapat (Kaydet)</button>
+<button onclick="closeDev()">Çıkış</button>
 </div>
 
 <!-- نافذة تعديل الألوان المنبثقة -->
@@ -410,14 +269,7 @@ width="100%" height="300"></iframe>
 </div>
 
 <script>
-let isDeveloper=false, isDeveloper2=false, deleteMode=false;
-let pendingPanel = null;
-
-// متغيرات لتتبع التغييرات
-let menuChanged = false;
-let colorsChanged = false;
-let instagramChanged = false;
-let locationChanged = false;
+let isDeveloper=false,deleteMode=false;
 
 /* Scroll */
 function scrollToMenu(){
@@ -425,79 +277,27 @@ document.getElementById("menu")
 .scrollIntoView({behavior:"smooth"});
 }
 
-// فتح نافذة كلمة السر عند الضغط على F1 أو F2
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'F1' || e.keyCode === 112) {
-        e.preventDefault();
-        pendingPanel = 'devPanel';
-        openPasswordModal();
-    }
-    else if (e.key === 'F2' || e.keyCode === 113) {
-        e.preventDefault();
-        pendingPanel = 'devPanel2';
-        openPasswordModal();
-    }
-});
-
-// نافذة كلمة السر
-function openPasswordModal() {
-    document.getElementById('passwordModal').style.display = 'block';
-    document.getElementById('overlay').style.display = 'block';
-    document.getElementById('passwordInput').value = '';
-    document.getElementById('passwordInput').focus();
+/* 5 ضغطات */
+let tap=0,timer=null;
+document.getElementById("secretTrigger").onclick=function(){
+tap++;
+if(tap==1){timer=setTimeout(()=>tap=0,5000);}
+if(tap==5){
+clearTimeout(timer);
+tap=0;
+let pass=prompt("Şifre gir:");
+if(pass==="momotunc0702") openDev();
 }
-
-function closePasswordModal() {
-    document.getElementById('passwordModal').style.display = 'none';
-    document.getElementById('overlay').style.display = 'none';
-    pendingPanel = null;
-}
-
-function checkPassword() {
-    let pass = document.getElementById('passwordInput').value;
-    if (pass === "momotunc0702") {
-        closePasswordModal();
-        
-        if (pendingPanel === 'devPanel') {
-            openDev();
-        } 
-        else if (pendingPanel === 'devPanel2') {
-            openDev2();
-        }
-        
-        pendingPanel = null;
-    } else {
-        alert("❌ Yanlış şifre! Şifre: momotunc0702");
-        document.getElementById('passwordInput').value = '';
-    }
-}
+};
 
 function openDev(){
 document.getElementById("devPanel").style.display="block";
 document.getElementById("overlay").style.display="block";
 isDeveloper=true;
 updateCategorySelect();
-updateCategorySelectImage();
-
-// إعادة تعيين متغيرات التغيير
-menuChanged = false;
-colorsChanged = false;
-instagramChanged = false;
-locationChanged = false;
 }
 
-function openDev2(){
-document.getElementById("devPanel2").style.display="block";
-document.getElementById("overlay").style.display="block";
-isDeveloper2=true;
-updateCategorySelectImage();
-updateProductSelectImage();
-
-// إعادة تعيين متغيرات التغيير
-menuChanged = false;
-}
-
-/* تحديث قوائم الفئات */
+/* بقية النظام بدون تغيير */
 function updateCategorySelect(){
 let select=document.getElementById("categorySelect");
 select.innerHTML="";
@@ -506,110 +306,6 @@ let o=document.createElement("option");
 o.textContent=h.innerText;
 select.appendChild(o);
 });
-}
-
-function updateCategorySelectImage(){
-let select=document.getElementById("categorySelectImage");
-select.innerHTML="";
-document.querySelectorAll(".card h3").forEach(h=>{
-let o=document.createElement("option");
-o.textContent=h.innerText;
-select.appendChild(o);
-});
-}
-
-function updateProductSelectImage(){
-let select=document.getElementById("productSelectImage");
-select.innerHTML="";
-let categoryName = document.getElementById("categorySelectImage").value;
-document.querySelectorAll(".card").forEach(card=>{
-if(card.querySelector("h3").innerText === categoryName){
-card.querySelectorAll(".name").forEach(name=>{
-let o=document.createElement("option");
-o.textContent=name.innerText;
-select.appendChild(o);
-});
-}
-});
-}
-
-document.getElementById("categorySelectImage").addEventListener("change", function(){
-updateProductSelectImage();
-});
-
-/* إضافة منتج مع صورة */
-function addProduct(){
-if(!isDeveloper) return;
-let name=document.getElementById("newName").value.trim();
-let price=document.getElementById("newPrice").value.trim();
-if(!name||!price) return;
-document.querySelectorAll(".card").forEach(card=>{
-if(card.querySelector("h3").innerText===
-document.getElementById("categorySelect").value){
-let div=document.createElement("div");
-div.className="item";
-div.innerHTML='<div class="item-left"><img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src=\'https://via.placeholder.com/40\'"><span class="name">'+name+'</span></div><span class="price">'+price+'₺</span>';
-card.appendChild(div);
-}
-});
-menuChanged = true; // تم تغيير المنيو
-}
-
-/* إضافة صورة لمنتج معين */
-function addImageToProduct(){
-if(!isDeveloper2) return;
-let category = document.getElementById("categorySelectImage").value;
-let product = document.getElementById("productSelectImage").value;
-let imageUrl = document.getElementById("productImageUrl").value.trim();
-
-if(!category || !product || !imageUrl) return;
-
-document.querySelectorAll(".card").forEach(card=>{
-if(card.querySelector("h3").innerText === category){
-card.querySelectorAll(".item").forEach(item=>{
-let nameSpan = item.querySelector(".name");
-if(nameSpan && nameSpan.innerText === product){
-let leftDiv = item.querySelector(".item-left");
-if(leftDiv){
-let img = leftDiv.querySelector(".product-thumb");
-if(img){
-img.src = imageUrl;
-} else {
-let newImg = document.createElement("img");
-newImg.className = "product-thumb";
-newImg.src = imageUrl;
-newImg.onerror = function(){this.src='https://via.placeholder.com/40'};
-leftDiv.insertBefore(newImg, leftDiv.firstChild);
-}
-}
-}
-});
-}
-});
-menuChanged = true; // تم تغيير المنيو
-}
-
-/* إضافة صورة للفئة (تظهر في أعلى البطاقة) */
-function addImageToCategory(){
-if(!isDeveloper2) return;
-let category = document.getElementById("categorySelectImage").value;
-let imageUrl = document.getElementById("categoryImageUrl").value.trim();
-
-if(!category || !imageUrl) return;
-
-document.querySelectorAll(".card").forEach(card=>{
-if(card.querySelector("h3").innerText === category){
-let oldImg = card.querySelector(".category-image");
-if(oldImg) oldImg.remove();
-
-let img = document.createElement("img");
-img.className = "product-image category-image";
-img.src = imageUrl;
-img.onerror = function(){this.src='https://via.placeholder.com/300x150'};
-card.insertBefore(img, card.querySelector("h3"));
-}
-});
-menuChanged = true; // تم تغيير المنيو
 }
 
 function addCategory(){
@@ -621,8 +317,25 @@ card.className="card";
 card.innerHTML="<h3>"+name+"</h3>";
 document.getElementById("menuGrid").appendChild(card);
 updateCategorySelect();
-updateCategorySelectImage();
-menuChanged = true; // تم تغيير المنيو
+saveData();
+}
+
+function addProduct(){
+if(!isDeveloper) return;
+let name=document.getElementById("newName").value.trim();
+let price=document.getElementById("newPrice").value.trim();
+if(!name||!price) return;
+document.querySelectorAll(".card").forEach(card=>{
+if(card.querySelector("h3").innerText===
+document.getElementById("categorySelect").value){
+let div=document.createElement("div");
+div.className="item";
+div.innerHTML="<span class='name'>"+name+
+"</span><span class='price'>"+price+"₺</span>";
+card.appendChild(div);
+}
+});
+saveData();
 }
 
 function enableEdit(){
@@ -647,8 +360,7 @@ let t=e.target.closest(".item,.card");
 if(t && confirm("Silmek istiyor musun?")){
 t.remove();
 updateCategorySelect();
-updateCategorySelectImage();
-menuChanged = true; // تم تغيير المنيو
+saveData();
 }
 });
 
@@ -657,8 +369,7 @@ if(!isDeveloper) return;
 if(confirm("Tüm menü silinsin mi?")){
 document.getElementById("menuGrid").innerHTML="";
 updateCategorySelect();
-updateCategorySelectImage();
-menuChanged = true; // تم تغيير المنيو
+saveData();
 }
 }
 
@@ -667,7 +378,7 @@ if(!isDeveloper) return;
 let val=document.getElementById("newInstagram").value.trim();
 if(val){
 document.getElementById("instaLink").href=val;
-instagramChanged = true; // تم تغيير الانستغرام
+localStorage.setItem("insta",val);
 }
 }
 
@@ -677,49 +388,16 @@ let val=document.getElementById("newLocation").value.trim();
 if(val){
 document.getElementById("mapFrame").src=
 "https://www.google.com/maps?q="+val+"&output=embed";
-locationChanged = true; // تم تغيير الموقع
+localStorage.setItem("map",val);
 }
 }
 
-// دالة حفظ كل التغييرات
-function saveAllChanges() {
-    if (menuChanged) {
-        localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-        console.log("Menü kaydedildi");
-    }
-    
-    if (instagramChanged) {
-        let instaVal = document.getElementById("newInstagram").value.trim();
-        if (instaVal) {
-            localStorage.setItem("insta", instaVal);
-            console.log("Instagram kaydedildi");
-        }
-    }
-    
-    if (locationChanged) {
-        let locVal = document.getElementById("newLocation").value.trim();
-        if (locVal) {
-            localStorage.setItem("map", locVal);
-            console.log("Konum kaydedildi");
-        }
-    }
-    
-    if (colorsChanged) {
-        // الألوان تحفظ في applyColors
-        console.log("Renkler kaydedildi");
-    }
-    
-    // إعادة تعيين متغيرات التغيير
-    menuChanged = false;
-    colorsChanged = false;
-    instagramChanged = false;
-    locationChanged = false;
+function saveData(){
+localStorage.setItem("menuData",
+document.getElementById("menuGrid").innerHTML);
 }
 
 function closeDev(){
-// حفظ كل التغييرات قبل الخروج
-saveAllChanges();
-
 isDeveloper=false;
 deleteMode=false;
 document.getElementById("devPanel").style.display="none";
@@ -728,26 +406,13 @@ document.querySelectorAll(".price").forEach(p=>{
 p.contentEditable=false;
 p.style.background="transparent";
 });
-closeColorPicker();
+closeColorPicker(); // إغلاق نافذة الألوان إذا كانت مفتوحة
 }
 
-function closeDev2(){
-// حفظ التغييرات قبل الخروج
-if (menuChanged) {
-    localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-    console.log("Menü kaydedildi");
-}
-
-isDeveloper2=false;
-document.getElementById("devPanel2").style.display="none";
-if(!isDeveloper) {
-    document.getElementById("overlay").style.display="none";
-}
-}
-
-// دوال تعديل الألوان
+// دوال تعديل الألوان الجديدة
 function openColorPicker() {
     if(!isDeveloper) return;
+    // تحميل الألوان المحفوظة مسبقاً إن وجدت
     document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
     document.getElementById('colorName').value = localStorage.getItem('colorName') || '#ff8c00';
     document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || '#ffffff';
@@ -763,67 +428,44 @@ function applyColors() {
     let colorName = document.getElementById('colorName').value;
     let colorPrice = document.getElementById('colorPrice').value;
 
+    // تطبيق الألوان على العناصر
     document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
     document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
     document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
 
+    // حفظ الألوان في المتصفح
     localStorage.setItem('colorCategory', colorCategory);
     localStorage.setItem('colorName', colorName);
     localStorage.setItem('colorPrice', colorPrice);
 
-    colorsChanged = true; // تم تغيير الألوان
     closeColorPicker();
 }
 
-// تحميل كل البيانات عند فتح الصفحة
 window.onload=function(){
-// تحميل بيانات المنيو
-if(localStorage.getItem("menuData")) {
-    document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
-}
+if(localStorage.getItem("menuData"))
+document.getElementById("menuGrid").innerHTML=
+localStorage.getItem("menuData");
+if(localStorage.getItem("insta"))
+document.getElementById("instaLink").href=
+localStorage.getItem("insta");
+if(localStorage.getItem("map"))
+document.getElementById("mapFrame").src=
+"https://www.google.com/maps?q="+
+localStorage.getItem("map")+"&output=embed";
 
-// تحميل رابط الانستغرام
-if(localStorage.getItem("insta")) {
-    document.getElementById("instaLink").href = localStorage.getItem("insta");
-    document.getElementById("newInstagram").value = localStorage.getItem("insta");
-}
-
-// تحميل موقع الخريطة
-if(localStorage.getItem("map")) {
-    document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
-    document.getElementById("newLocation").value = localStorage.getItem("map");
-}
-
-// استرجاع الألوان المحفوظة وتطبيقها
+// استرجاع الألوان المحفوظة عند تحميل الصفحة
 let colorCategory = localStorage.getItem('colorCategory');
 let colorName = localStorage.getItem('colorName');
 let colorPrice = localStorage.getItem('colorPrice');
 
-if (colorCategory) {
-    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-}
-if (colorName) {
-    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-}
-if (colorPrice) {
-    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-}
+if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
 
-// تحديث القوائم المنسدلة
 updateCategorySelect();
-updateCategorySelectImage();
-
-// إخفاء جميع اللوحات
-document.getElementById('devPanel').style.display = 'none';
-document.getElementById('devPanel2').style.display = 'none';
-document.getElementById('colorPickerModal').style.display = 'none';
-document.getElementById('passwordModal').style.display = 'none';
-document.getElementById('overlay').style.display = 'none';
-
-console.log("Sayfa yüklendi, tüm veriler geri yüklendi!");
 };
 
-// سحب النوافذ
+/* سحب النافذة */
 let devPanel=document.getElementById("devPanel");
 let isDragging=false,offsetX,offsetY;
 devPanel.addEventListener("mousedown",function(e){
@@ -840,25 +482,6 @@ devPanel.style.top=(e.clientY-offsetY)+"px";
 });
 document.addEventListener("mouseup",function(){
 isDragging=false;
-});
-
-// سحب النافذة الثانية
-let devPanel2=document.getElementById("devPanel2");
-let isDragging2=false,offsetX2,offsetY2;
-devPanel2.addEventListener("mousedown",function(e){
-isDragging2=true;
-offsetX2=e.clientX-devPanel2.offsetLeft;
-offsetY2=e.clientY-devPanel2.offsetTop;
-devPanel2.style.transform="none";
-});
-document.addEventListener("mousemove",function(e){
-if(isDragging2){
-devPanel2.style.left=(e.clientX-offsetX2)+"px";
-devPanel2.style.top=(e.clientY-offsetY2)+"px";
-}
-});
-document.addEventListener("mouseup",function(){
-isDragging2=false;
 });
 </script>
 
