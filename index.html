@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط السابقة تبقى كما هي ===== */
 * {
     margin: 0;
     padding: 0;
@@ -78,7 +77,7 @@ body.day-mode .item-price { color: #ff8c00; }
 body.day-mode .contact { background: linear-gradient(to top, #ddd, #f5f5f5); }
 body.day-mode .contact a { color: #333; }
 
-/* الهيرو */
+/* ===== الهيرو ===== */
 .hero {
     height: 100vh;
     display: flex;
@@ -132,6 +131,7 @@ body.day-mode .contact a { color: #333; }
     50% { transform: scale(1.05); opacity: 0.9; }
 }
 
+/* ===== زر Menüyü Gör ===== */
 .btn {
     border: none;
     padding: 12px 30px;
@@ -165,14 +165,15 @@ body.day-mode .contact a { color: #333; }
 
 .btn:hover {
     transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* المنيو */
+/* ===== المنيو ===== */
 .container {
     padding: 40px 15px;
     max-width: 1200px;
     margin: 0 auto;
-    scroll-margin-top: 20px;
+    scroll-margin-top: 20px; /* مهم للتمرير السلس */
 }
 
 .container h2 {
@@ -200,7 +201,6 @@ body.day-mode .contact a { color: #333; }
 
 .card:nth-child(2) { animation-delay: 0.2s; }
 .card:nth-child(3) { animation-delay: 0.4s; }
-.card:nth-child(4) { animation-delay: 0.6s; }
 
 @keyframes fadeInUp {
     from { transform: translateY(50px); opacity: 0; }
@@ -209,6 +209,7 @@ body.day-mode .contact a { color: #333; }
 
 .card:hover {
     transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .card h3 {
@@ -284,7 +285,7 @@ body.day-mode .contact a { color: #333; }
     50% { transform: scale(1.1); color: #ff8c00; }
 }
 
-/* الاتصال */
+/* ===== الاتصال ===== */
 .contact {
     text-align: center;
     padding: 40px 15px;
@@ -303,9 +304,10 @@ iframe {
     margin-top: 20px;
     max-width: 100%;
     height: 250px;
+    border: 3px solid #ff8c00;
 }
 
-/* أزرار التحكم */
+/* ===== أزرار التحكم ===== */
 .control-buttons {
     position: fixed;
     top: 15px;
@@ -361,7 +363,7 @@ body.day-mode .control-btn {
     }
 }
 
-/* شعار CANLI */
+/* ===== شعار CANLI ===== */
 .live-badge {
     position: fixed;
     top: 20px;
@@ -394,7 +396,7 @@ body.day-mode .control-btn {
     }
 }
 
-/* زر حذف القائمة */
+/* ===== زر حذف القائمة ===== */
 .delete-card-btn {
     position: absolute;
     top: 15px;
@@ -425,7 +427,7 @@ body.day-mode .control-btn {
     }
 }
 
-/* ===== لوحة المطور ===== */
+/* ===== لوحة المطور الشفافة القابلة للتحريك ===== */
 @media (max-width: 768px) {
     .dev-panel {
         display: none !important;
@@ -441,16 +443,21 @@ body.day-mode .control-btn {
     max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(15px);
+    background: rgba(20, 20, 20, 0.85); /* شفاف */
+    backdrop-filter: blur(15px); /* تأثير الزجاج */
     padding: 20px;
     border: 2px solid #ff8c00;
     border-radius: 20px;
     z-index: 2000;
     transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    cursor: move;
+    cursor: move; /* مؤشر السحب */
     user-select: none;
     color: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.dev-panel:active {
+    cursor: grabbing;
 }
 
 .dev-panel.open {
@@ -521,6 +528,7 @@ body.day-mode .control-btn {
 
 .dev-panel button:hover {
     transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
 }
 
 .dev-panel .save-btn { background: #28a745; }
@@ -549,7 +557,7 @@ body.day-mode .control-btn {
     cursor: pointer;
 }
 
-/* ===== قسم تعديل الأسماء ثنائي اللغة - جديد ===== */
+/* ===== قسم تعديل الأسماء ثنائي اللغة ===== */
 .language-section {
     background: rgba(255, 140, 0, 0.15);
     border: 2px solid #ff8c00;
@@ -683,6 +691,12 @@ body.day-mode .control-btn {
     50% { transform: translateY(-5px); }
 }
 
+body.day-mode .f5-hint {
+    background: rgba(51, 51, 51, 0.2);
+    border: 1px solid #333;
+    color: #333;
+}
+
 @media (max-width: 768px) {
     .f5-hint { display: none; }
 }
@@ -703,7 +717,7 @@ body.day-mode .control-btn {
 <!-- تلميح F5 -->
 <div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli</div>
 
-<!-- لوحة المطور -->
+<!-- لوحة المطور الشفافة القابلة للتحريك -->
 <div class="dev-panel" id="devPanel">
     <div class="dev-panel-header" id="panelHeader">
         <h3 class="panel-title">⚙️ Geliştirici Paneli</h3>
@@ -726,21 +740,18 @@ body.day-mode .control-btn {
         <button class="save-btn" id="addCategoryBtn">📁 Kategori Ekle</button>
     </div>
     
-    <!-- ===== قسم تعديل الأسماء ثنائي اللغة (جديد) ===== -->
+    <!-- قسم تعديل الأسماء ثنائي اللغة -->
     <div class="dev-section language-section">
         <h4 class="section-title-names">📝 İsimleri Düzenle (TR/EN)</h4>
         
-        <!-- ألسنة اللغة -->
         <div class="language-tabs">
             <button class="lang-tab active" id="tabTurkish">🇹🇷 Türkçe</button>
             <button class="lang-tab" id="tabEnglish">🇬🇧 English</button>
         </div>
         
-        <!-- قسم تعديل أسماء الفئات -->
         <div class="category-header">Kategoriler</div>
         <div id="categoryNamesContainer"></div>
         
-        <!-- قسم تعديل أسماء المنتجات -->
         <div class="category-header" style="margin-top: 20px;">Ürünler</div>
         <div id="productNamesContainer"></div>
         
@@ -888,18 +899,11 @@ let clickCount = 0;
 let ctrlPressed = false;
 let isDragging = false;
 let xOffset = 0, yOffset = 0;
-let currentNameLang = 'tr'; // اللغة الحالية للتعديل (tr/en)
+let currentNameLang = 'tr';
 
 // أسماء العناصر (للحفظ)
-let categoryNames = {
-    tr: {},
-    en: {}
-};
-
-let productNames = {
-    tr: {},
-    en: {}
-};
+let categoryNames = { tr: {}, en: {} };
+let productNames = { tr: {}, en: {} };
 
 // Varsayılan renkler
 const defaultColors = {
@@ -912,131 +916,59 @@ const defaultColors = {
 // Varsayılan isimler
 const defaultNames = {
     tr: {
-        cat1: "🥪 Tostlar",
-        cat2: "🥤 İçecekler",
-        cat3: "🍰 Tatlılar",
-        item1: "Kaşarlı Tost",
-        item2: "Sucuklu Tost",
-        item3: "Karışık Tost",
-        item4: "Çay",
-        item5: "Kahve",
-        item6: "Meyve Suyu",
-        item7: "Künefe",
-        item8: "Baklava",
-        item9: "Sütlaç"
+        cat1: "🥪 Tostlar", cat2: "🥤 İçecekler", cat3: "🍰 Tatlılar",
+        item1: "Kaşarlı Tost", item2: "Sucuklu Tost", item3: "Karışık Tost",
+        item4: "Çay", item5: "Kahve", item6: "Meyve Suyu",
+        item7: "Künefe", item8: "Baklava", item9: "Sütlaç"
     },
     en: {
-        cat1: "🥪 Toasts",
-        cat2: "🥤 Drinks",
-        cat3: "🍰 Desserts",
-        item1: "Cheese Toast",
-        item2: "Sausage Toast",
-        item3: "Mixed Toast",
-        item4: "Tea",
-        item5: "Coffee",
-        item6: "Juice",
-        item7: "Kunefe",
-        item8: "Baklava",
-        item9: "Rice Pudding"
+        cat1: "🥪 Toasts", cat2: "🥤 Drinks", cat3: "🍰 Desserts",
+        item1: "Cheese Toast", item2: "Sausage Toast", item3: "Mixed Toast",
+        item4: "Tea", item5: "Coffee", item6: "Juice",
+        item7: "Kunefe", item8: "Baklava", item9: "Rice Pudding"
     }
 };
 
 const translations = {
     tr: {
-        workTime: "🕒 08:00 - 02:30",
-        menuBtn: "Menüyü Gör",
-        menuTitle: "🍽️ Menü",
-        cat1: "🥪 Tostlar",
-        cat2: "🥤 İçecekler",
-        cat3: "🍰 Tatlılar",
-        item1: "Kaşarlı Tost",
-        item2: "Sucuklu Tost",
-        item3: "Karışık Tost",
-        item4: "Çay",
-        item5: "Kahve",
-        item6: "Meyve Suyu",
-        item7: "Künefe",
-        item8: "Baklava",
-        item9: "Sütlaç",
+        workTime: "🕒 08:00 - 02:30", menuBtn: "Menüyü Gör", menuTitle: "🍽️ Menü",
+        cat1: "🥪 Tostlar", cat2: "🥤 İçecekler", cat3: "🍰 Tatlılar",
+        item1: "Kaşarlı Tost", item2: "Sucuklu Tost", item3: "Karışık Tost",
+        item4: "Çay", item5: "Kahve", item6: "Meyve Suyu",
+        item7: "Künefe", item8: "Baklava", item9: "Sütlaç",
         contactTitle: "📞 İletişim",
         panelTitle: "⚙️ Geliştirici Paneli",
-        sectionAdd: "➕ Ürün Ekle",
-        productNamePlaceholder: "Ürün adı",
-        productPricePlaceholder: "Fiyat",
-        addProductBtn: "✅ Ürün Ekle",
-        sectionCat: "📁 Kategori Ekle",
-        newCategoryPlaceholder: "Yeni kategori adı",
-        addCategoryBtn: "📁 Kategori Ekle",
+        sectionAdd: "➕ Ürün Ekle", productNamePlaceholder: "Ürün adı", productPricePlaceholder: "Fiyat", addProductBtn: "✅ Ürün Ekle",
+        sectionCat: "📁 Kategori Ekle", newCategoryPlaceholder: "Yeni kategori adı", addCategoryBtn: "📁 Kategori Ekle",
         sectionNames: "📝 İsimleri Düzenle (TR/EN)",
         sectionColor: "🎨 Renkleri Düzenle",
-        colorLabelCat: "Kategori Başlığı",
-        colorLabelName: "Ürün Adı",
-        colorLabelPrice: "Fiyat",
-        colorLabelBtn: "Buton Rengi",
-        applyColorsBtn: "🎨 Renkleri Uygula",
-        resetColorsBtn: "🔄 Sıfırla",
+        colorLabelCat: "Kategori Başlığı", colorLabelName: "Ürün Adı", colorLabelPrice: "Fiyat", colorLabelBtn: "Buton Rengi",
+        applyColorsBtn: "🎨 Renkleri Uygula", resetColorsBtn: "🔄 Sıfırla",
         sectionTools: "🔧 Araçlar",
-        deleteModeBtn: "🗑️ Ürün Silme Modu",
-        editModeBtn: "✏️ Fiyat Düzenleme Modu",
-        instagramBtn: "📷 Instagram Güncelle",
-        locationBtn: "📍 Konum Güncelle",
-        sectionBroadcast: "📡 Canlı Yayın",
-        broadcastBtn: "🌐 Herkese Gönder",
-        broadcastText: "Tüm değişiklikler anında herkese ulaşır",
-        closeBtn: "❌ Kapat",
-        tabTurkish: "🇹🇷 Türkçe",
-        tabEnglish: "🇬🇧 English",
-        saveNamesBtn: "💾 İsimleri Kaydet",
-        categories: "Kategoriler",
-        products: "Ürünler"
+        deleteModeBtn: "🗑️ Ürün Silme Modu", editModeBtn: "✏️ Fiyat Düzenleme Modu",
+        instagramBtn: "📷 Instagram Güncelle", locationBtn: "📍 Konum Güncelle",
+        sectionBroadcast: "📡 Canlı Yayın", broadcastBtn: "🌐 Herkese Gönder", broadcastText: "Tüm değişiklikler anında herkese ulaşır",
+        closeBtn: "❌ Kapat", tabTurkish: "🇹🇷 Türkçe", tabEnglish: "🇬🇧 English", saveNamesBtn: "💾 İsimleri Kaydet"
     },
     en: {
-        workTime: "🕒 08:00 - 02:30",
-        menuBtn: "View Menu",
-        menuTitle: "🍽️ Menu",
-        cat1: "🥪 Toasts",
-        cat2: "🥤 Drinks",
-        cat3: "🍰 Desserts",
-        item1: "Cheese Toast",
-        item2: "Sausage Toast",
-        item3: "Mixed Toast",
-        item4: "Tea",
-        item5: "Coffee",
-        item6: "Juice",
-        item7: "Kunefe",
-        item8: "Baklava",
-        item9: "Rice Pudding",
+        workTime: "🕒 08:00 - 02:30", menuBtn: "View Menu", menuTitle: "🍽️ Menu",
+        cat1: "🥪 Toasts", cat2: "🥤 Drinks", cat3: "🍰 Desserts",
+        item1: "Cheese Toast", item2: "Sausage Toast", item3: "Mixed Toast",
+        item4: "Tea", item5: "Coffee", item6: "Juice",
+        item7: "Kunefe", item8: "Baklava", item9: "Rice Pudding",
         contactTitle: "📞 Contact",
         panelTitle: "⚙️ Developer Panel",
-        sectionAdd: "➕ Add Product",
-        productNamePlaceholder: "Product name",
-        productPricePlaceholder: "Price",
-        addProductBtn: "✅ Add Product",
-        sectionCat: "📁 Add Category",
-        newCategoryPlaceholder: "New category name",
-        addCategoryBtn: "📁 Add Category",
+        sectionAdd: "➕ Add Product", productNamePlaceholder: "Product name", productPricePlaceholder: "Price", addProductBtn: "✅ Add Product",
+        sectionCat: "📁 Add Category", newCategoryPlaceholder: "New category name", addCategoryBtn: "📁 Add Category",
         sectionNames: "📝 Edit Names (TR/EN)",
         sectionColor: "🎨 Edit Colors",
-        colorLabelCat: "Category Title",
-        colorLabelName: "Product Name",
-        colorLabelPrice: "Price",
-        colorLabelBtn: "Button Color",
-        applyColorsBtn: "🎨 Apply Colors",
-        resetColorsBtn: "🔄 Reset",
+        colorLabelCat: "Category Title", colorLabelName: "Product Name", colorLabelPrice: "Price", colorLabelBtn: "Button Color",
+        applyColorsBtn: "🎨 Apply Colors", resetColorsBtn: "🔄 Reset",
         sectionTools: "🔧 Tools",
-        deleteModeBtn: "🗑️ Delete Mode",
-        editModeBtn: "✏️ Edit Mode",
-        instagramBtn: "📷 Update Instagram",
-        locationBtn: "📍 Update Location",
-        sectionBroadcast: "📡 Live Broadcast",
-        broadcastBtn: "🌐 Send to All",
-        broadcastText: "All changes instantly reach everyone",
-        closeBtn: "❌ Close",
-        tabTurkish: "🇹🇷 Turkish",
-        tabEnglish: "🇬🇧 English",
-        saveNamesBtn: "💾 Save Names",
-        categories: "Categories",
-        products: "Products"
+        deleteModeBtn: "🗑️ Delete Mode", editModeBtn: "✏️ Edit Mode",
+        instagramBtn: "📷 Update Instagram", locationBtn: "📍 Update Location",
+        sectionBroadcast: "📡 Live Broadcast", broadcastBtn: "🌐 Send to All", broadcastText: "All changes instantly reach everyone",
+        closeBtn: "❌ Close", tabTurkish: "🇹🇷 Turkish", tabEnglish: "🇬🇧 English", saveNamesBtn: "💾 Save Names"
     }
 };
 
@@ -1099,7 +1031,6 @@ function applyLanguage(lang) {
     document.getElementById('menuBtn').innerText = t.menuBtn;
     document.getElementById('menuTitle').innerText = t.menuTitle;
     
-    // تطبيق أسماء الفئات والمنتجات من الكائنات المحفوظة
     document.getElementById('cat1').innerText = categoryNames[lang]?.cat1 || defaultNames[lang].cat1;
     document.getElementById('cat2').innerText = categoryNames[lang]?.cat2 || defaultNames[lang].cat2;
     document.getElementById('cat3').innerText = categoryNames[lang]?.cat3 || defaultNames[lang].cat3;
@@ -1144,76 +1075,37 @@ function applyLanguage(lang) {
         document.getElementById('broadcastBtn').innerText = t.broadcastBtn;
         document.querySelector('.broadcast-text').innerText = t.broadcastText;
         document.getElementById('closePanelBtn').innerText = t.closeBtn;
-        
-        // تحديث حقول تعديل الأسماء
-        updateNameInputs();
     }
 }
 
-// ===== دوال تعديل الأسماء ثنائية اللغة =====
+// ===== دوال تعديل الأسماء =====
 function initNameEditing() {
-    // تحميل الأسماء المحفوظة
     loadSavedNames();
-    
-    // إضافة مستمعي الأحداث للألسنة
-    document.getElementById('tabTurkish').addEventListener('click', () => switchNameLang('tr'));
-    document.getElementById('tabEnglish').addEventListener('click', () => switchNameLang('en'));
-    
-    // إنشاء حقول الإدخال
     createNameInputs();
-    
-    // تفعيل اللغة التركية افتراضياً
     switchNameLang('tr');
 }
 
 function loadSavedNames() {
-    // تحميل من localStorage إذا وجد
     const savedCategoryNames = localStorage.getItem('categoryNames');
     const savedProductNames = localStorage.getItem('productNames');
     
-    if(savedCategoryNames) {
-        categoryNames = JSON.parse(savedCategoryNames);
-    } else {
+    if(savedCategoryNames) categoryNames = JSON.parse(savedCategoryNames);
+    else {
         categoryNames = {
-            tr: {
-                cat1: defaultNames.tr.cat1,
-                cat2: defaultNames.tr.cat2,
-                cat3: defaultNames.tr.cat3
-            },
-            en: {
-                cat1: defaultNames.en.cat1,
-                cat2: defaultNames.en.cat2,
-                cat3: defaultNames.en.cat3
-            }
+            tr: { cat1: defaultNames.tr.cat1, cat2: defaultNames.tr.cat2, cat3: defaultNames.tr.cat3 },
+            en: { cat1: defaultNames.en.cat1, cat2: defaultNames.en.cat2, cat3: defaultNames.en.cat3 }
         };
     }
     
-    if(savedProductNames) {
-        productNames = JSON.parse(savedProductNames);
-    } else {
+    if(savedProductNames) productNames = JSON.parse(savedProductNames);
+    else {
         productNames = {
-            tr: {
-                item1: defaultNames.tr.item1,
-                item2: defaultNames.tr.item2,
-                item3: defaultNames.tr.item3,
-                item4: defaultNames.tr.item4,
-                item5: defaultNames.tr.item5,
-                item6: defaultNames.tr.item6,
-                item7: defaultNames.tr.item7,
-                item8: defaultNames.tr.item8,
-                item9: defaultNames.tr.item9
-            },
-            en: {
-                item1: defaultNames.en.item1,
-                item2: defaultNames.en.item2,
-                item3: defaultNames.en.item3,
-                item4: defaultNames.en.item4,
-                item5: defaultNames.en.item5,
-                item6: defaultNames.en.item6,
-                item7: defaultNames.en.item7,
-                item8: defaultNames.en.item8,
-                item9: defaultNames.en.item9
-            }
+            tr: { item1: defaultNames.tr.item1, item2: defaultNames.tr.item2, item3: defaultNames.tr.item3,
+                  item4: defaultNames.tr.item4, item5: defaultNames.tr.item5, item6: defaultNames.tr.item6,
+                  item7: defaultNames.tr.item7, item8: defaultNames.tr.item8, item9: defaultNames.tr.item9 },
+            en: { item1: defaultNames.en.item1, item2: defaultNames.en.item2, item3: defaultNames.en.item3,
+                  item4: defaultNames.en.item4, item5: defaultNames.en.item5, item6: defaultNames.en.item6,
+                  item7: defaultNames.en.item7, item8: defaultNames.en.item8, item9: defaultNames.en.item9 }
         };
     }
 }
@@ -1225,42 +1117,31 @@ function createNameInputs() {
     categoryContainer.innerHTML = '';
     productContainer.innerHTML = '';
     
-    // إنشاء حقول للفئات
     for(let i = 1; i <= 3; i++) {
         const row = document.createElement('div');
         row.className = 'name-edit-row';
-        row.innerHTML = `
-            <span class="name-edit-label">Kategori ${i}:</span>
-            <input type="text" class="name-edit-input" id="editCat${i}" data-type="cat" data-index="${i}" value="">
-        `;
+        row.innerHTML = `<span class="name-edit-label">Kategori ${i}:</span>
+            <input type="text" class="name-edit-input" id="editCat${i}" data-type="cat" data-index="${i}" value="">`;
         categoryContainer.appendChild(row);
     }
     
-    // إنشاء حقول للمنتجات
     for(let i = 1; i <= 9; i++) {
         const row = document.createElement('div');
         row.className = 'name-edit-row';
-        row.innerHTML = `
-            <span class="name-edit-label">Ürün ${i}:</span>
-            <input type="text" class="name-edit-input" id="editItem${i}" data-type="item" data-index="${i}" value="">
-        `;
+        row.innerHTML = `<span class="name-edit-label">Ürün ${i}:</span>
+            <input type="text" class="name-edit-input" id="editItem${i}" data-type="item" data-index="${i}" value="">`;
         productContainer.appendChild(row);
     }
 }
 
 function switchNameLang(lang) {
     currentNameLang = lang;
-    
-    // تحديث حالة الألسنة
     document.getElementById('tabTurkish').classList.toggle('active', lang === 'tr');
     document.getElementById('tabEnglish').classList.toggle('active', lang === 'en');
-    
-    // تحديث قيم حقول الإدخال
     updateNameInputs();
 }
 
 function updateNameInputs() {
-    // تحديث حقول الفئات
     for(let i = 1; i <= 3; i++) {
         const input = document.getElementById(`editCat${i}`);
         if(input) {
@@ -1269,7 +1150,6 @@ function updateNameInputs() {
         }
     }
     
-    // تحديث حقول المنتجات
     for(let i = 1; i <= 9; i++) {
         const input = document.getElementById(`editItem${i}`);
         if(input) {
@@ -1280,7 +1160,6 @@ function updateNameInputs() {
 }
 
 function saveNames() {
-    // حفظ أسماء الفئات للغة الحالية
     for(let i = 1; i <= 3; i++) {
         const input = document.getElementById(`editCat${i}`);
         if(input) {
@@ -1290,7 +1169,6 @@ function saveNames() {
         }
     }
     
-    // حفظ أسماء المنتجات للغة الحالية
     for(let i = 1; i <= 9; i++) {
         const input = document.getElementById(`editItem${i}`);
         if(input) {
@@ -1300,14 +1178,11 @@ function saveNames() {
         }
     }
     
-    // حفظ في localStorage
     localStorage.setItem('categoryNames', JSON.stringify(categoryNames));
     localStorage.setItem('productNames', JSON.stringify(productNames));
     
-    // تطبيق الأسماء على الصفحة
     const currentPageLang = document.getElementById('body').getAttribute('data-language');
     applyLanguage(currentPageLang);
-    
     showStatus(`✅ İsimler (${currentNameLang === 'tr' ? 'Türkçe' : 'English'}) kaydedildi!`, 'success');
 }
 
@@ -1325,13 +1200,13 @@ function loadNamesFromData(data) {
     updateNameInputs();
 }
 
-// ===== باقي دوال لوحة المطور =====
+// ===== دوال لوحة المطور =====
 function openDevPanel() {
     if(isMobile()) return;
     document.getElementById('devPanel').classList.add('open');
     updateCategorySelect();
     loadColors();
-    initNameEditing(); // تهيئة تعديل الأسماء
+    initNameEditing();
 }
 
 function closeDevPanel() {
@@ -1576,9 +1451,9 @@ function initDragging() {
     }
 }
 
-// ===== ربط الأزرار =====
+// ===== ربط الأزرار عند تحميل الصفحة =====
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("✅ الصفحة تحمّلت، جاري ربط الأزرار...");
+    console.log("🚀 الموقع بدأ التشغيل...");
     
     // ربط أزرار التحكم الأساسية
     document.getElementById('langToggle').addEventListener('click', toggleLanguage);
@@ -1598,6 +1473,8 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('broadcastBtn').addEventListener('click', saveAndBroadcast);
         document.getElementById('closePanelBtn').addEventListener('click', closeDevPanel);
         document.getElementById('saveNamesBtn').addEventListener('click', saveNames);
+        document.getElementById('tabTurkish').addEventListener('click', () => switchNameLang('tr'));
+        document.getElementById('tabEnglish').addEventListener('click', () => switchNameLang('en'));
         
         document.querySelectorAll('.delete-card-btn').forEach(btn => {
             btn.addEventListener('click', function() { deleteCard(this); });
@@ -1658,37 +1535,29 @@ document.addEventListener('DOMContentLoaded', function() {
             showStatus('✅ Fiyat güncellendi!', 'success');
         }
     }, true);
+    
+    // تحميل الإعدادات المحفوظة
+    loadSavedSettings();
 });
 
-// ===== بدء التشغيل =====
-window.onload = function() {
-    console.log("🚀 الموقع بدأ التشغيل...");
-    
-    // تحميل اللغة المحفوظة
+function loadSavedSettings() {
     const savedLang = localStorage.getItem('language') || 'tr';
     document.getElementById('body').setAttribute('data-language', savedLang);
     document.getElementById('langToggle').innerText = savedLang === 'tr' ? 'TR' : 'EN';
     
-    // تحميل الأسماء المحفوظة
     loadSavedNames();
-    
-    // تطبيق اللغة
     applyLanguage(savedLang);
     
-    // تحميل الوضع المحفوظ
     const savedTheme = localStorage.getItem('theme');
     if(savedTheme === 'day') {
         document.getElementById('body').classList.remove('night-mode');
         document.getElementById('body').classList.add('day-mode');
         document.getElementById('themeToggle').innerText = '🌞';
-        console.log('☀️ الوضع المحمل: النهاري (شمس)');
     } else {
         document.getElementById('body').classList.add('night-mode');
         document.getElementById('themeToggle').innerText = '🌓';
-        console.log('🌙 الوضع المحمل: الليلي (قمر)');
     }
     
-    // تحميل البيانات من Supabase
     supabase.from('settings').select('*').eq('id', 1).single().then(({ data }) => {
         if(data) {
             if(data.menu_data) document.getElementById('menu').innerHTML = data.menu_data;
@@ -1718,7 +1587,7 @@ window.onload = function() {
         updateCategorySelect();
         loadColors();
     }
-};
+}
 </script>
 
 </body>
