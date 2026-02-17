@@ -1,92 +1,718 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo</title>
-
+<title>توستو | Tosttoo</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{margin:0;font-family:Poppins;background:#111;color:#fff}
-.hero{height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#000}
-.hero h1{font-size:60px;color:#ff8c00;margin:0;cursor:pointer}
-.btn{background:#ff8c00;border:none;padding:12px 25px;color:#fff;margin-top:20px;border-radius:6px}
-.container{padding:50px;max-width:900px;margin:auto}
-.card{background:#1e1e1e;padding:20px;border-radius:10px;margin-top:20px}
-.item{display:flex;justify-content:space-between;margin:10px 0}
-.name{color:#ff8c00}
-.dev{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#111;padding:20px;border:2px solid #ff8c00;border-radius:12px;display:none;z-index:999}
-.dev input{width:100%;padding:10px;margin:5px 0;background:#000;border:none;color:#fff}
-.dev button{width:100%;padding:10px;background:#ff8c00;border:none;color:#fff;margin-top:5px}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Cairo', 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #fff;
+    min-height: 100vh;
+}
+
+/* الهيرو */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #2a2a2a 0%, #000 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero h1 {
+    font-size: 80px;
+    color: #ff8c00;
+    margin: 0;
+    cursor: pointer;
+    text-shadow: 0 0 20px rgba(255,140,0,0.5);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.hero h1:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 30px rgba(255,140,0,0.8);
+}
+
+.work-time {
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: rgba(255,140,0,0.1);
+    border-radius: 30px;
+    border: 1px solid #ff8c00;
+    position: relative;
+    z-index: 1;
+}
+
+.price-container {
+    margin: 20px 0;
+    font-size: 28px;
+    position: relative;
+    z-index: 1;
+    background: rgba(0,0,0,0.5);
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 1px solid #ff8c00;
+    box-shadow: 0 0 20px rgba(255,140,0,0.3);
+}
+
+#price {
+    color: #ff8c00;
+    font-weight: bold;
+    font-size: 32px;
+    padding: 0 5px;
+}
+
+.btn {
+    background: #ff8c00;
+    border: none;
+    padding: 15px 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255,140,0,0.3);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
+}
+
+/* المنيو */
+.container {
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.container h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: #ff8c00;
+    border-radius: 3px;
+}
+
+.card {
+    background: rgba(30, 30, 30, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+    border: 1px solid rgba(255,140,0,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ff8c00;
+    box-shadow: 0 15px 40px rgba(255,140,0,0.2);
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.item:hover {
+    background: rgba(255,140,0,0.1);
+    transform: scale(1.02);
+}
+
+.name {
+    color: #ff8c00;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.item span:last-child {
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* الاتصال */
+.contact {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to top, #000, #1a1a1a);
+    margin-top: 50px;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
+}
+
+.contact p {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.contact a {
+    color: #ff8c00;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact a:hover {
+    color: #fff;
+}
+
+iframe {
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 3px solid #ff8c00;
+}
+
+/* لوحة المطور - تصميم فاخر */
+.dev-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 30px;
+    border: 2px solid #ff8c00;
+    border-radius: 20px;
+    display: none;
+    z-index: 1000;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 20px 50px rgba(255,140,0,0.3);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.dev-panel h3 {
+    color: #ff8c00;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+}
+
+.dev-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255,140,0,0.1);
+    border-radius: 10px;
+    border: 1px solid #ff8c00;
+}
+
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.dev-panel input,
+.dev-panel select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(0,0,0,0.5);
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.dev-panel input:focus,
+.dev-panel select:focus {
+    border-color: #ff8c00;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255,140,0,0.3);
+}
+
+.dev-panel button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #ff8c00;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.dev-panel button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
+}
+
+.dev-panel .close-btn {
+    background: #dc3545;
+}
+
+.dev-panel .close-btn:hover {
+    background: #c82333;
+}
+
+/* طبقة الخلفية */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    display: none;
+    z-index: 999;
+}
+
+/* وضع الحذف */
+.delete-mode .item {
+    cursor: pointer;
+    position: relative;
+}
+
+.delete-mode .item:hover {
+    background: rgba(255,0,0,0.2);
+    border: 1px solid red;
+}
+
+.delete-mode .item:hover::after {
+    content: '🗑️';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+/* مؤشر الدخول السري */
+.secret-dot {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    pointer-events: none;
+}
 </style>
 </head>
 
 <body>
 
+<!-- الهيرو -->
 <section class="hero">
-<h1 id="logo">Tosttoo</h1>
-<div>🕒 08:00 - 02:30</div>
-<div style="margin-top:10px">💰 Fiyat: <span id="price">60</span> ₺</div>
-<button class="btn" onclick="menu()">Menüyü Gör</button>
+    <h1 id="logo">Tosttoo</h1>
+    <div class="work-time">🕒 08:00 - 02:30</div>
+    <div class="price-container">
+        💰 السعر: <span id="price">60</span> ₺
+    </div>
+    <button class="btn" onclick="scrollToMenu()">عرض المنيو</button>
 </section>
 
+<!-- المنيو -->
 <div class="container" id="menu">
-<h2>Menü</h2>
-
-<div class="card">
-<h3>Tostlar</h3>
-<div class="item"><span class="name">Kaşarlı</span><span>60₺</span></div>
-<div class="item"><span class="name">Sucuklu</span><span>75₺</span></div>
+    <h2>المنيو</h2>
+    
+    <div class="card">
+        <h3>توست</h3>
+        <div class="item"><span class="name">كشري</span><span>60₺</span></div>
+        <div class="item"><span class="name">سجق</span><span>75₺</span></div>
+        <div class="item"><span class="name">مخلوط</span><span>85₺</span></div>
+    </div>
+    
+    <div class="card">
+        <h3>مشروبات</h3>
+        <div class="item"><span class="name">شاي</span><span>10₺</span></div>
+        <div class="item"><span class="name">قهوة</span><span>15₺</span></div>
+        <div class="item"><span class="name">عصير</span><span>20₺</span></div>
+    </div>
 </div>
 
-</div>
+<!-- الاتصال -->
+<section class="contact">
+    <h2>اتصل بنا</h2>
+    <p>📞 <a href="tel:05321580207">0532 158 0207</a></p>
+    <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank">انستغرام</a></p>
+    <iframe 
+        id="mapFrame"
+        src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"
+        width="100%" 
+        height="300">
+    </iframe>
+</section>
 
-<!-- لوحة المطور -->
-<div class="dev" id="dev">
-<h3>لوحة التحكم</h3>
-<input id="newprice" placeholder="سعر جديد">
-<button onclick="setPrice()">تغيير السعر</button>
-<button onclick="closeDev()">اغلاق</button>
+<!-- طبقة الخلفية -->
+<div class="overlay" id="overlay"></div>
+
+<!-- لوحة المطور الفاخرة -->
+<div class="dev-panel" id="devPanel">
+    <h3>⚙️ لوحة التحكم</h3>
+    
+    <!-- قسم السعر -->
+    <div class="dev-section">
+        <h4>💰 تعديل السعر الرئيسي</h4>
+        <input type="number" id="newPrice" placeholder="أدخل السعر الجديد">
+        <button onclick="updateMainPrice()">تحديث السعر</button>
+        <button onclick="togglePriceEdit()">✏️ تعديل مباشر</button>
+    </div>
+    
+    <!-- قسم إضافة منتج -->
+    <div class="dev-section">
+        <h4>➕ إضافة منتج</h4>
+        <select id="categorySelect">
+            <option value="توست">توست</option>
+            <option value="مشروبات">مشروبات</option>
+        </select>
+        <input type="text" id="productName" placeholder="اسم المنتج">
+        <input type="text" id="productPrice" placeholder="السعر">
+        <button onclick="addProduct()">إضافة منتج</button>
+    </div>
+    
+    <!-- قسم الإضافات -->
+    <div class="dev-section">
+        <h4>🔧 أدوات إضافية</h4>
+        <button onclick="toggleDeleteMode()">🗑️ وضع الحذف</button>
+        <button onclick="enableEditMode()">📝 تعديل الأسعار</button>
+        <button onclick="changeInstagram()">تحديث انستغرام</button>
+        <button onclick="changeLocation()">تحديث الموقع</button>
+    </div>
+    
+    <!-- قسم الحفظ والاستعادة -->
+    <div class="dev-section">
+        <h4>💾 حفظ واستعادة</h4>
+        <button onclick="saveToLocalStorage()">حفظ في المتصفح</button>
+        <button onclick="resetToDefault()">استعادة الإعدادات</button>
+    </div>
+    
+    <button class="close-btn" onclick="closeDev()">إغلاق</button>
 </div>
 
 <script>
-function menu(){
-document.getElementById("menu").scrollIntoView({behavior:"smooth"});
+// ========== المتغيرات الأساسية ==========
+let isDeveloper = false;
+let deleteMode = false;
+let editMode = false;
+const SECRET_PASSWORD = "momotunc0702";
+
+// ========== الدوال الأساسية ==========
+function scrollToMenu() {
+    document.getElementById("menu").scrollIntoView({behavior: "smooth"});
 }
 
-/* دخول سري */
-let clicks=0;
-const pass="momotunc0702";
+// ========== نظام الدخول السري ==========
+let clickCount = 0;
+let clickTimer = null;
 
-document.getElementById("logo").onclick=function(){
-clicks++;
-setTimeout(()=>{clicks=0},3000);
-
-if(clicks==5){
-let p=prompt("كلمة السر");
-if(p==pass){
-document.getElementById("dev").style.display="block";
-}
-}
+document.getElementById("logo").onclick = function() {
+    clickCount++;
+    
+    if(clickTimer) clearTimeout(clickTimer);
+    
+    clickTimer = setTimeout(() => {
+        clickCount = 0;
+    }, 3000);
+    
+    if(clickCount === 5) {
+        clickCount = 0;
+        let password = prompt("🔐 أدخل كلمة السر:");
+        if(password === SECRET_PASSWORD) {
+            openDev();
+        } else {
+            alert("❌ كلمة السر خطأ!");
+        }
+    }
 };
 
-function closeDev(){
-document.getElementById("dev").style.display="none";
+// ========== فتح وإغلاق لوحة المطور ==========
+function openDev() {
+    document.getElementById("devPanel").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+    isDeveloper = true;
+    
+    // تحديث حقل السعر
+    document.getElementById("newPrice").value = document.getElementById("price").innerText;
+    
+    // تحديث قائمة الأقسام
+    updateCategorySelect();
 }
 
-function setPrice(){
-let v=document.getElementById("newprice").value;
-if(v){
-document.getElementById("price").innerText=v;
-localStorage.setItem("price",v);
-}
+function closeDev() {
+    document.getElementById("devPanel").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+    isDeveloper = false;
+    deleteMode = false;
+    editMode = false;
+    
+    // إزالة كل أوضاع التعديل
+    document.querySelectorAll('.price').forEach(p => {
+        p.contentEditable = false;
+        p.style.background = "transparent";
+    });
+    document.getElementById("price").contentEditable = false;
+    document.body.classList.remove("delete-mode");
 }
 
-window.onload=function(){
-let saved=localStorage.getItem("price");
-if(saved) document.getElementById("price").innerText=saved;
+// ========== دوال تعديل السعر ==========
+function updateMainPrice() {
+    if(!isDeveloper) return;
+    let newPrice = document.getElementById("newPrice").value;
+    if(newPrice && !isNaN(newPrice)) {
+        document.getElementById("price").innerText = newPrice;
+        alert("✅ تم تحديث السعر بنجاح!");
+    } else {
+        alert("⚠️ الرجاء إدخال رقم صحيح!");
+    }
 }
+
+let priceEditMode = false;
+function togglePriceEdit() {
+    if(!isDeveloper) return;
+    priceEditMode = !priceEditMode;
+    let priceElement = document.getElementById("price");
+    
+    if(priceEditMode) {
+        priceElement.contentEditable = true;
+        priceElement.style.background = "rgba(255,140,0,0.3)";
+        priceElement.style.outline = "2px solid #ff8c00";
+        priceElement.focus();
+    } else {
+        priceElement.contentEditable = false;
+        priceElement.style.background = "transparent";
+        priceElement.style.outline = "none";
+    }
+}
+
+// حفظ التعديل المباشر عند فقدان التركيز
+document.getElementById("price").addEventListener("blur", function() {
+    if(isDeveloper && priceEditMode) {
+        priceEditMode = false;
+        this.contentEditable = false;
+        this.style.background = "transparent";
+        this.style.outline = "none";
+        alert("✅ تم تحديث السعر!");
+    }
+});
+
+// ========== دوال إدارة المنتجات ==========
+function updateCategorySelect() {
+    let select = document.getElementById("categorySelect");
+    select.innerHTML = "";
+    
+    document.querySelectorAll(".card h3").forEach((h3, index) => {
+        let option = document.createElement("option");
+        option.value = index;
+        option.textContent = h3.innerText;
+        select.appendChild(option);
+    });
+}
+
+function addProduct() {
+    if(!isDeveloper) return;
+    
+    let categoryIndex = document.getElementById("categorySelect").value;
+    let name = document.getElementById("productName").value.trim();
+    let price = document.getElementById("productPrice").value.trim();
+    
+    if(!name || !price) {
+        alert("⚠️ الرجاء إدخال اسم المنتج والسعر!");
+        return;
+    }
+    
+    let cards = document.querySelectorAll(".card");
+    if(cards[categoryIndex]) {
+        let item = document.createElement("div");
+        item.className = "item";
+        item.innerHTML = `<span class="name">${name}</span><span>${price}₺</span>`;
+        cards[categoryIndex].appendChild(item);
+        
+        // تنظيف الحقول
+        document.getElementById("productName").value = "";
+        document.getElementById("productPrice").value = "";
+        
+        alert("✅ تم إضافة المنتج!");
+    }
+}
+
+// ========== وضع الحذف ==========
+function toggleDeleteMode() {
+    if(!isDeveloper) return;
+    deleteMode = !deleteMode;
+    
+    if(deleteMode) {
+        document.body.classList.add("delete-mode");
+        alert("🗑️ وضع الحذف مفعل - انقر على أي منتج لحذفه");
+    } else {
+        document.body.classList.remove("delete-mode");
+    }
+}
+
+// حذف المنتجات
+document.querySelector(".container").addEventListener("click", function(e) {
+    if(!isDeveloper || !deleteMode) return;
+    
+    let item = e.target.closest(".item");
+    if(item && confirm("🗑️ هل أنت متأكد من الحذف؟")) {
+        item.remove();
+        alert("✅ تم الحذف!");
+    }
+});
+
+// ========== وضع تعديل الأسعار ==========
+function enableEditMode() {
+    if(!isDeveloper) return;
+    editMode = !editMode;
+    
+    document.querySelectorAll(".item span:last-child").forEach(price => {
+        if(editMode) {
+            price.contentEditable = true;
+            price.style.background = "#333";
+            price.style.padding = "2px 5px";
+            price.style.borderRadius = "3px";
+        } else {
+            price.contentEditable = false;
+            price.style.background = "transparent";
+            price.style.padding = "0";
+        }
+    });
+    
+    alert(editMode ? "✏️ يمكنك تعديل الأسعار الآن" : "🔒 تم إيقاف تعديل الأسعار");
+}
+
+// ========== دوال التحديث ==========
+function changeInstagram() {
+    if(!isDeveloper) return;
+    let newLink = prompt("أدخل رابط الانستغرام الجديد:");
+    if(newLink) {
+        document.getElementById("instaLink").href = newLink;
+        alert("✅ تم تحديث رابط الانستغرام!");
+    }
+}
+
+function changeLocation() {
+    if(!isDeveloper) return;
+    let newLocation = prompt("أدخل الموقع الجديد (lat,long):");
+    if(newLocation) {
+        document.getElementById("mapFrame").src = 
+            `https://www.google.com/maps?q=${newLocation}&output=embed`;
+        alert("✅ تم تحديث الموقع!");
+    }
+}
+
+// ========== دوال الحفظ والاستعادة ==========
+function saveToLocalStorage() {
+    // حفظ السعر
+    localStorage.setItem("price", document.getElementById("price").innerText);
+    
+    // حفظ المنيو
+    localStorage.setItem("menuHTML", document.querySelector(".container").innerHTML);
+    
+    alert("💾 تم الحفظ في المتصفح!");
+}
+
+function resetToDefault() {
+    if(confirm("⚠️ هل أنت متأكد؟ سيتم استعادة الإعدادات الافتراضية!")) {
+        localStorage.clear();
+        location.reload();
+    }
+}
+
+// ========== التحميل عند بدء الصفحة ==========
+window.onload = function() {
+    // استعادة السعر المحفوظ
+    let savedPrice = localStorage.getItem("price");
+    if(savedPrice) {
+        document.getElementById("price").innerText = savedPrice;
+    }
+    
+    // استعادة المنيو المحفوظ
+    let savedMenu = localStorage.getItem("menuHTML");
+    if(savedMenu) {
+        document.querySelector(".container").innerHTML = savedMenu;
+    }
+};
 </script>
 
 </body>
