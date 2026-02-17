@@ -703,6 +703,50 @@ let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let autoSyncInterval = null;
 let lastCloudData = null;
 
+// ===== المنيو الكامل الجديد =====
+const FULL_MENU = {
+  "menu": [
+    {
+      "category": "Tostlar",
+      "items": [
+        { "name": "Kaşarlı Tost", "price": "60₺" },
+        { "name": "Sucuklu Tost", "price": "75₺" },
+        { "name": "Karışık Tost", "price": "85₺" },
+        { "name": "Izgara Tost", "price": "80₺" },
+        { "name": "Tavuklu Tost", "price": "90₺" }
+      ]
+    },
+    {
+      "category": "İçecekler",
+      "items": [
+        { "name": "Çay", "price": "10₺" },
+        { "name": "Kahve", "price": "15₺" },
+        { "name": "Ayran", "price": "12₺" },
+        { "name": "Kola", "price": "20₺" },
+        { "name": "Fanta", "price": "20₺" },
+        { "name": "Su", "price": "5₺" }
+      ]
+    },
+    {
+      "category": "Tatlılar",
+      "items": [
+        { "name": "Künefe", "price": "70₺" },
+        { "name": "Sütlaç", "price": "30₺" },
+        { "name": "Baklava", "price": "40₺" },
+        { "name": "Dondurma", "price": "25₺" }
+      ]
+    },
+    {
+      "category": "Soğuk içecek",
+      "items": [
+        { "name": "Cola", "price": "93₺" },
+        { "name": "Churchill", "price": "90₺" },
+        { "name": "Sprite", "price": "89₺" }
+      ]
+    }
+  ]
+};
+
 // ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
     loadSavedData();
@@ -720,27 +764,17 @@ async function loadMenuFromCloud() {
         
         if (data.menu && data.menu.length > 0) {
             displayMenuFromCloud(data.menu);
+            showStatus('✅ Menü clouddan yüklendi!', 'success');
         } else {
-            loadDefaultMenu();
+            // إذا كان المنيو فارغاً، استخدم المنيو الكامل الجديد
+            displayMenuFromCloud(FULL_MENU.menu);
+            showStatus('📋 Menü yüklendi!', 'success');
         }
     } catch(error) {
-        loadDefaultMenu();
+        // إذا فشل الاتصال بالسحاب، استخدم المنيو الكامل الجديد
+        displayMenuFromCloud(FULL_MENU.menu);
+        showStatus('📋 Menü yüklendi!', 'success');
     }
-}
-
-// ===== المنيو الافتراضي =====
-function loadDefaultMenu() {
-    const defaultMenu = [
-        { category: 'Tostlar', items: [
-            { name: 'Kaşarlı Tost', price: '60₺' },
-            { name: 'Sucuklu Tost', price: '75₺' }
-        ]},
-        { category: 'İçecekler', items: [
-            { name: 'Çay', price: '10₺' },
-            { name: 'Kahve', price: '15₺' }
-        ]}
-    ];
-    displayMenuFromCloud(defaultMenu);
 }
 
 // ===== عرض المنيو =====
@@ -867,7 +901,6 @@ async function saveToCloud() {
             document.getElementById('cloudVersion').innerText = currentVersion;
             document.getElementById('liveVersion').innerText = 'v' + currentVersion;
             
-            // بث التحديث للجميع
             localStorage.setItem('lastCloudUpdate', Date.now());
             
         } else {
