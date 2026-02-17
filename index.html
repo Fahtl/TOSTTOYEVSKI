@@ -3,14 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo | Ultimate Pro + Qwik API</title>
+<title>Tosttoo | Cloud Sync Live</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<!-- Qwik HTTP Client -->
 <script src="https://cdn.jsdelivr.net/npm/qwest@4.5.0/qwest.min.js"></script>
 
 <style>
-/* ===== الوضع الافتراضي (ليل) ===== */
+/* ===== جميع الأنماط السابقة ===== */
 * {
     margin: 0;
     padding: 0;
@@ -28,63 +26,10 @@ body {
     color: #fff;
 }
 
-/* أنيميشن الخلفية */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-@keyframes slideInDown {
-    from { transform: translateY(-50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes fadeInUp {
-    from { transform: translateY(50px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes pricePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); color: #ff8c00; }
-}
-
-@keyframes bounceIn {
-    0% { transform: scale(0); opacity: 0; }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes livePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
 }
 
 .hero {
@@ -102,15 +47,6 @@ body {
     background-position: center;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
-    animation: rotate 20s linear infinite;
-}
-
 .hero h1 {
     font-size: 60px;
     color: #ff8c00;
@@ -122,8 +58,9 @@ body {
     text-shadow: 0 0 20px currentColor;
 }
 
-.hero h1:hover {
-    animation: shake 0.5s ease-in-out;
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .work-time {
@@ -132,6 +69,11 @@ body {
     color: #ff8c00;
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
 }
 
 .btn {
@@ -145,24 +87,6 @@ body {
     overflow: hidden;
     background: #ff8c00;
     color: #fff;
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
 }
 
 .btn:hover {
@@ -181,7 +105,6 @@ body {
     color: #ff8c00;
     text-align: center;
     margin-bottom: 40px;
-    animation: slideInDown 1s ease;
 }
 
 .grid {
@@ -190,23 +113,14 @@ body {
     gap: 20px;
 }
 
-#menuGrid {
-    scroll-margin-top: 20px;
-}
-
 .card {
     background: #1e1e1e;
     padding: 20px;
     border-radius: 10px;
     transition: all 0.3s ease;
-    animation: fadeInUp 0.8s ease;
-    animation-fill-mode: both;
     position: relative;
     border: 1px solid rgba(255,140,0,0.3);
 }
-
-.card:nth-child(2) { animation-delay: 0.2s; }
-.card:nth-child(3) { animation-delay: 0.4s; }
 
 .card:hover {
     transform: translateY(-10px) scale(1.02);
@@ -220,23 +134,6 @@ body {
     text-align: center;
     border-bottom: 2px solid #ff8c00;
     padding-bottom: 10px;
-    position: relative;
-}
-
-.card h3::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: currentColor;
-    transition: width 0.3s ease;
-}
-
-.card:hover h3::after {
-    width: 100px;
 }
 
 .item {
@@ -244,23 +141,6 @@ body {
     justify-content: space-between;
     margin: 10px 0;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.item:hover::before {
-    left: 100%;
 }
 
 .item:hover {
@@ -275,7 +155,6 @@ body {
 .price {
     color: #fff;
     font-weight: bold;
-    animation: pricePulse 2s ease-in-out infinite;
 }
 
 .contact {
@@ -303,7 +182,6 @@ iframe {
     border: none;
 }
 
-/* أزرار التحكم الأخرى */
 .control-buttons {
     position: fixed;
     top: 20px;
@@ -320,7 +198,6 @@ iframe {
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
-    animation: bounceIn 0.5s ease;
     background: #ff8c00;
     color: white;
 }
@@ -329,7 +206,6 @@ iframe {
     transform: scale(1.1) rotate(5deg);
 }
 
-/* زر تغيير الوضع */
 #modeToggle {
     position: fixed;
     top: 20px;
@@ -351,7 +227,6 @@ iframe {
     transform: scale(1.1) rotate(15deg);
 }
 
-/* شعار البث المباشر */
 .live-badge {
     position: fixed;
     top: 20px;
@@ -375,7 +250,6 @@ iframe {
     50% { transform: scale(1.1); }
 }
 
-/* لوحة المطور */
 .dev-window {
     position: fixed;
     top: 50%;
@@ -395,10 +269,6 @@ iframe {
     box-shadow: 0 0 40px rgba(0,0,0,0.5);
     cursor: move;
     user-select: none;
-}
-
-.dev-window:active {
-    cursor: grabbing;
 }
 
 .dev-window h3 {
@@ -466,7 +336,6 @@ iframe {
     margin-top: 15px;
 }
 
-/* نافذة تعديل الألوان */
 .color-picker-modal {
     position: fixed;
     top: 50%;
@@ -487,7 +356,6 @@ iframe {
 
 .color-picker-modal h3 {
     color: #ff8c00;
-    margin-top: 0;
     text-align: center;
 }
 
@@ -507,12 +375,6 @@ iframe {
     font-weight: 600;
 }
 
-.color-picker-modal button {
-    margin-top: 20px;
-    background: #ff8c00;
-}
-
-/* مؤشرات الحالة */
 .status-message {
     position: fixed;
     top: 20px;
@@ -530,20 +392,18 @@ iframe {
 
 @keyframes slideIn {
     from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
+    to { transform: translateX(0%); opacity: 1; }
 }
 
 .status-success { border-color: #28a745; }
 .status-error { border-color: #dc3545; }
 .status-loading { border-color: #ff8c00; }
 
-/* أوضاع التعديل */
 .delete-mode .item:hover {
     outline: 2px solid red;
     cursor: pointer;
 }
 
-/* زر حذف القائمة */
 .delete-card-btn {
     position: absolute;
     top: 15px;
@@ -568,17 +428,13 @@ iframe {
     opacity: 1;
 }
 
-/* ===== مود النهار الكريمي ===== */
 .light-mode {
     background: #f6f1e8 !important;
     color: #2b2b2b !important;
     animation: none !important;
 }
 
-.light-mode .card,
-.light-mode .menu-box,
-.light-mode .modal-content,
-.light-mode .box {
+.light-mode .card {
     background: #fffaf3 !important;
     border: 1px solid #e6d8c3 !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
@@ -590,23 +446,9 @@ iframe {
     color: #d97706 !important;
 }
 
-.light-mode button:not(.control-btn):not(#modeToggle) {
-    background: #f59e0b !important;
-    color: white !important;
-}
-
 .light-mode .hero {
     background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
                 url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
-}
-
-.light-mode .hero h1 {
-    color: #d97706 !important;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-}
-
-.light-mode .work-time {
-    color: #d97706 !important;
 }
 
 .light-mode .name {
@@ -621,56 +463,18 @@ iframe {
     background: #e6d8c3 !important;
 }
 
-.light-mode .contact h2 {
-    color: #d97706 !important;
-}
-
-.light-mode .contact a {
-    color: #d97706 !important;
-}
-
 .light-mode .dev-window {
     background: rgba(246, 241, 232, 0.95) !important;
     border: 2px solid #d97706 !important;
 }
 
-.light-mode .dev-window h3 {
-    color: #d97706 !important;
-    border-bottom: 2px solid #d97706 !important;
-}
-
-.light-mode .dev-section {
-    background: rgba(255, 250, 243, 0.8) !important;
-    border: 1px solid #e6d8c3 !important;
-}
-
-.light-mode .dev-section h4 {
-    color: #d97706 !important;
-}
-
-.light-mode .dev-window input,
-.light-mode .dev-window select {
+.light-mode .dev-window input {
     background: #fffaf3 !important;
     border: 1px solid #e6d8c3 !important;
     color: #2b2b2b !important;
 }
 
-.light-mode .color-picker-modal {
-    background: rgba(246, 241, 232, 0.98) !important;
-    border: 2px solid #d97706 !important;
-    color: #2b2b2b !important;
-}
-
-.light-mode .color-picker-modal h3 {
-    color: #d97706 !important;
-}
-
-.light-mode .color-picker-modal label {
-    color: #8b6b4f !important;
-}
-
-/* Qwik API Panel */
-.qwik-panel {
+.cloud-panel {
     margin-top: 15px;
     background: rgba(0, 150, 255, 0.1);
     border: 1px solid #0099ff;
@@ -678,7 +482,7 @@ iframe {
     border-radius: 8px;
 }
 
-.qwik-stats {
+.cloud-stats {
     display: flex;
     justify-content: space-between;
     margin: 10px 0;
@@ -688,7 +492,7 @@ iframe {
     font-size: 13px;
 }
 
-.qwik-badge {
+.cloud-badge {
     background: #0066cc;
     color: white;
     padding: 2px 8px;
@@ -697,13 +501,39 @@ iframe {
     display: inline-block;
     margin-left: 5px;
 }
+
+.live-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.version-tag {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
 </style>
 </head>
 
 <body class="" id="body" data-language="tr">
 
 <!-- شعار البث المباشر -->
-<div class="live-badge">🔴 CANLI | Qwik API</div>
+<div class="live-badge">
+    <span class="live-indicator"></span>
+    🔴 CLOUD LIVE
+</div>
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
@@ -723,7 +553,7 @@ iframe {
 </section>
 
 <section class="container" id="menu">
-    <h2 id="menuTitle">Menü</h2>
+    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
         <div class="card">
             <h3 id="cat1">Tostlar</h3>
@@ -748,9 +578,9 @@ iframe {
     <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
 
-<!-- لوحة المطور -->
+<!-- لوحة المطور مع الرابط الجاهز -->
 <div class="dev-window" id="devPanel">
-    <h3 id="dragHandle">⚙️ PRO Developer Panel + Qwik API</h3>
+    <h3 id="dragHandle">⚙️ CLOUD PANEL - HAZIR</h3>
 
     <div class="dev-section">
         <h4>💰 Fiyat Düzenle</h4>
@@ -792,239 +622,109 @@ iframe {
         <button onclick="changeLocation()">📍 Konum Güncelle</button>
     </div>
 
-    <div class="dev-section">
-        <h4>📡 Canlı Yayın</h4>
-        <button onclick="broadcastChanges()" class="save-btn" style="background:#0066cc;">🌐 Herkese Gönder</button>
+    <!-- CLOUD PANEL - API HAZIR! -->
+    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
+        <h4>☁️ CLOUD SYNC <span class="cloud-badge">AKTİF</span></h4>
+        <div class="cloud-panel">
+            <div class="cloud-stats">
+                <span>🌐 API: <span style="color:#00ff00">Hazır</span></span>
+                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
+            </div>
+            <div class="cloud-stats">
+                <span>💾 Son Kayıt: <span id="lastCloudSave">-</span></span>
+                <span>🔄 Durum: <span id="syncStatus">Hazır</span></span>
+            </div>
+            
+            <!-- API URL - الرابط الخاص بك -->
+            <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
+                🔗 <strong>API URL:</strong><br>
+                <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
+            </div>
+            
+            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;" id="cloudSaveBtn">
+                ☁️ BULUTA KAYDET (HERKESE GÖNDER)
+            </button>
+            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
+                📥 BULUTTAN YÜKLE
+            </button>
+            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
+                🔌 BAĞLANTI TESTİ
+            </button>
+        </div>
     </div>
 
-    <!-- Qwik API Section -->
-    <div class="dev-section" style="border-color: #0099ff;">
-        <h4>⚡ Qwik HTTP Client <span class="qwik-badge">v2.0</span></h4>
-        <div class="qwik-panel">
-            <div class="qwik-stats">
-                <span>👥 Ziyaretçi: <span id="visitorCount">0</span></span>
-                <span>🕐 Son Güncelleme: <span id="lastUpdateTime">-</span></span>
-            </div>
-            <button onclick="syncWithAPI()" style="background:#0099ff;" id="syncBtn">🔄 API ile Senkronize Et</button>
-            <button onclick="testAPIConnection()" style="background:#673ab7; margin-top:5px;">🔌 API Bağlantı Testi</button>
-            <button onclick="showAPIStats()" style="background:#ff9800; margin-top:5px;">📊 API İstatistikleri</button>
-        </div>
+    <!-- Auto-sync -->
+    <div class="dev-section">
+        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
+        </label>
+        <select id="syncInterval">
+            <option value="5">5 saniye</option>
+            <option value="10" selected>10 saniye</option>
+            <option value="30">30 saniye</option>
+            <option value="60">1 dakika</option>
+        </select>
     </div>
 
     <button onclick="closeDev()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- نافذة تعديل الألوان المنبثقة -->
+<!-- نافذة تعديل الألوان -->
 <div class="color-picker-modal" id="colorPickerModal">
     <h3>🎨 Renkleri Değiştir</h3>
-    
     <label>Kategori Başlığı (h3)</label>
     <input type="color" id="colorCategory" value="#ff8c00">
     <label>Ürün Adı (.name)</label>
     <input type="color" id="colorName" value="#ff8c00">
     <label>Fiyat (.price)</label>
     <input type="color" id="colorPrice" value="#ffffff">
-
     <button onclick="applyColors()">Renkleri Uygula</button>
     <button onclick="closeColorPicker()">Kapat</button>
 </div>
 
 <script>
-// ===== Qwik API Configuration =====
-const API_BASE = 'https://fahtl.github.io/TOSTTOYEVSKI/';
-let visitorCount = parseInt(localStorage.getItem('visitorCount') || '0');
-let lastSyncTime = localStorage.getItem('lastSyncTime') || null;
-let apiConnected = false;
+// ===== الرابط الخاص بك - جاهز للعمل =====
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 
-// Cache sistemi
-const apiCache = {
-    menu: null,
-    lastFetch: 0,
-    ttl: 30000 // 30 saniye
-};
-
-// ===== API Functions =====
-async function testAPIConnection() {
-    showStatus('🔌 API bağlantısı test ediliyor...', 'loading');
-    
-    try {
-        const response = await qwest.get(API_BASE, null, {
-            timeout: 5000,
-            responseType: 'json'
-        });
-        
-        apiConnected = true;
-        showStatus('✅ API bağlantısı başarılı!', 'success');
-        updateVisitorCount();
-        return true;
-    } catch(error) {
-        apiConnected = false;
-        showStatus('❌ API bağlantısı başarısız!', 'error');
-        console.error('API Error:', error);
-        return false;
-    }
-}
-
-async function fetchMenuFromAPI() {
-    // Cache kontrolü
-    const now = Date.now();
-    if (apiCache.menu && (now - apiCache.lastFetch) < apiCache.ttl) {
-        return apiCache.menu;
-    }
-    
-    try {
-        const response = await qwest.get(API_BASE + 'api/menu', null, {
-            timeout: 5000,
-            responseType: 'json'
-        });
-        
-        apiCache.menu = response;
-        apiCache.lastFetch = now;
-        return response;
-    } catch(error) {
-        console.warn('API fetch failed, using local data:', error);
-        return null;
-    }
-}
-
-async function syncWithAPI() {
-    showStatus('🔄 API ile senkronize ediliyor...', 'loading');
-    document.getElementById('syncBtn').disabled = true;
-    
-    try {
-        // Menüyü API'den al
-        const apiMenu = await fetchMenuFromAPI();
-        
-        if (apiMenu && apiMenu.length > 0) {
-            // Menüyü güncelle
-            updateMenuFromAPIData(apiMenu);
-            showStatus('✅ Menü API ile senkronize edildi!', 'success');
-        } else {
-            // API'den veri yoksa, mevcut menüyü API'ye gönder
-            await pushMenuToAPI();
-        }
-        
-        lastSyncTime = new Date().toLocaleTimeString();
-        localStorage.setItem('lastSyncTime', lastSyncTime);
-        document.getElementById('lastUpdateTime').innerText = lastSyncTime;
-        
-    } catch(error) {
-        showStatus('❌ Senkronizasyon başarısız!', 'error');
-        console.error('Sync error:', error);
-    }
-    
-    document.getElementById('syncBtn').disabled = false;
-}
-
-async function pushMenuToAPI() {
-    const menuData = [];
-    document.querySelectorAll('.card').forEach(card => {
-        const category = card.querySelector('h3').innerText;
-        const items = [];
-        card.querySelectorAll('.item').forEach(item => {
-            const name = item.querySelector('.name').innerText;
-            const price = item.querySelector('.price').innerText;
-            items.push({ name, price });
-        });
-        menuData.push({ category, items });
-    });
-    
-    try {
-        await qwest.post(API_BASE + 'api/sync', menuData, {
-            timeout: 5000,
-            responseType: 'json'
-        });
-        
-        lastSyncTime = new Date().toLocaleTimeString();
-        localStorage.setItem('lastSyncTime', lastSyncTime);
-        document.getElementById('lastUpdateTime').innerText = lastSyncTime;
-        
-        return true;
-    } catch(error) {
-        console.warn('Push to API failed:', error);
-        return false;
-    }
-}
-
-function updateMenuFromAPIData(apiData) {
-    const menuGrid = document.getElementById('menuGrid');
-    menuGrid.innerHTML = '';
-    
-    apiData.forEach((category, idx) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `<h3>${category.category}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
-        
-        category.items.forEach(item => {
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'item';
-            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
-            card.appendChild(itemDiv);
-        });
-        
-        menuGrid.appendChild(card);
-    });
-    
-    saveData();
-}
-
-function updateVisitorCount() {
-    visitorCount++;
-    localStorage.setItem('visitorCount', visitorCount.toString());
-    document.getElementById('visitorCount').innerText = visitorCount;
-}
-
-async function showAPIStats() {
-    try {
-        const stats = await qwest.get(API_BASE + 'api/stats', null, {
-            timeout: 3000,
-            responseType: 'json'
-        });
-        
-        showStatus(`📊 İstatistikler: ${JSON.stringify(stats)}`, 'success');
-    } catch(error) {
-        // İstatistikler alınamazsa lokal verileri göster
-        const localStats = {
-            ziyaretci: visitorCount,
-            sonSenkronizasyon: lastSyncTime || 'Henüz senkronize edilmedi',
-            kategoriSayisi: document.querySelectorAll('.card').length,
-            urunSayisi: document.querySelectorAll('.item').length
-        };
-        
-        showStatus(`📊 Lokal İstatistikler: ${JSON.stringify(localStats)}`, 'success');
-    }
-}
-
-// ===== Mevcut Kodlar (Geliştirilmiş) =====
+// متغيرات عامة
 let isDeveloper = false;
 let deleteMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let autoSyncInterval = null;
+let lastCloudData = null;
 
-// F5 İLE GİRİŞ
+// تهيئة الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    loadSavedData();
+    testCloudConnection();
+    startAutoSync();
+});
+
+// F5 ile giriş
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
         let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
             openDev();
-            showStatus("✅ Hoş geldiniz! API bağlantısı kontrol ediliyor...", "success");
-            testAPIConnection();
-            updateVisitorCount();
+            showStatus("✅ Hoş geldiniz! Cloud Sync Hazır", "success");
         } else {
             showStatus("❌ Yanlış şifre!", "error");
         }
     }
 });
 
-// PANEL KONTROLLERİ
+// Panel aç/kapa
 function openDev() {
     document.getElementById("devPanel").style.display = "block";
     isDeveloper = true;
     updateCategorySelect();
     centerPanel();
     
-    // API bilgilerini güncelle
-    document.getElementById('visitorCount').innerText = visitorCount;
-    document.getElementById('lastUpdateTime').innerText = lastSyncTime || 'Henüz senkronize edilmedi';
+    let lastSave = localStorage.getItem('lastCloudSave');
+    if (lastSave) document.getElementById('lastCloudSave').innerText = lastSave;
+    document.getElementById('cloudVersion').innerText = currentVersion;
 }
 
 function closeDev() {
@@ -1046,7 +746,281 @@ function centerPanel() {
     panel.style.transform = "translate(-50%, -50%)";
 }
 
-// DURUM MESAJI
+// ===== CLOUD FONKSİYONLARI =====
+
+// Buluta kaydet (HERKESE GÖNDER)
+async function saveToCloud() {
+    showStatus("☁️ Buluta kaydediliyor...", "loading");
+    document.getElementById('cloudSaveBtn').disabled = true;
+    
+    // Menü verilerini topla
+    const menuData = [];
+    document.querySelectorAll('.card').forEach(card => {
+        const category = card.querySelector('h3').innerText;
+        const items = [];
+        card.querySelectorAll('.item').forEach(item => {
+            const name = item.querySelector('.name').innerText;
+            const price = item.querySelector('.price').innerText;
+            items.push({ name, price });
+        });
+        menuData.push({ category, items });
+    });
+    
+    // Versiyon güncelle
+    currentVersion = incrementVersion(currentVersion);
+    
+    // Cloud verisi
+    const cloudData = {
+        menu: menuData,
+        version: currentVersion,
+        lastUpdate: new Date().toISOString(),
+        instagram: document.getElementById('instaLink').href,
+        map: document.getElementById('mapFrame').src.split('q=')[1]?.split('&')[0] || '36.484479,32.101147',
+        colors: {
+            category: localStorage.getItem('colorCategory') || '#ff8c00',
+            name: localStorage.getItem('colorName') || '#ff8c00',
+            price: localStorage.getItem('colorPrice') || '#ffffff'
+        },
+        theme: localStorage.getItem('theme') || 'dark',
+        lang: localStorage.getItem('lang') || 'tr'
+    };
+    
+    try {
+        // API'ye kaydet
+        const response = await qwest.post(CLOUD_API_URL, cloudData, {
+            timeout: 10000,
+            responseType: 'json'
+        });
+        
+        // Başarılı
+        const saveTime = new Date().toLocaleTimeString();
+        localStorage.setItem('lastCloudSave', saveTime);
+        localStorage.setItem('cloudData', JSON.stringify(cloudData));
+        localStorage.setItem('menuVersion', currentVersion);
+        
+        document.getElementById('lastCloudSave').innerText = saveTime;
+        document.getElementById('cloudVersion').innerText = currentVersion;
+        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+        document.getElementById('syncStatus').innerText = 'Senkronize';
+        
+        showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+        
+        // Broadcast
+        localStorage.setItem('lastCloudUpdate', Date.now().toString());
+        
+    } catch(error) {
+        console.error('Cloud save error:', error);
+        showStatus("❌ Kayıt başarısız! Link: " + CLOUD_API_URL, "error");
+    }
+    
+    document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+// Buluttan yükle
+async function loadFromCloud() {
+    showStatus("📥 Buluttan yükleniyor...", "loading");
+    document.getElementById('cloudLoadBtn').disabled = true;
+    
+    try {
+        const response = await qwest.get(CLOUD_API_URL, null, {
+            timeout: 10000,
+            responseType: 'json'
+        });
+        
+        // Cloud verisini uygula
+        applyCloudData(response);
+        showStatus("✅ Buluttan yüklendi!", "success");
+        
+    } catch(error) {
+        console.error('Cloud load error:', error);
+        
+        // Yerel yedekten yükle
+        const savedCloudData = localStorage.getItem('cloudData');
+        if (savedCloudData) {
+            applyCloudData(JSON.parse(savedCloudData));
+            showStatus("📦 Yerel yedekten yüklendi", "success");
+        } else {
+            showStatus("❌ Yükleme başarısız!", "error");
+        }
+    }
+    
+    document.getElementById('cloudLoadBtn').disabled = false;
+}
+
+// Bağlantı testi
+async function testCloudConnection() {
+    showStatus("🔌 API bağlantısı test ediliyor...", "loading");
+    
+    try {
+        const response = await qwest.get(CLOUD_API_URL, null, {
+            timeout: 5000,
+            responseType: 'json'
+        });
+        
+        document.getElementById('syncStatus').innerText = 'Bağlı';
+        document.getElementById('syncStatus').style.color = '#00ff00';
+        showStatus("✅ API bağlantısı başarılı! (" + CLOUD_API_URL + ")", "success");
+        
+        // Veriyi uygula
+        applyCloudData(response);
+        
+    } catch(error) {
+        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('syncStatus').style.color = '#ff0000';
+        showStatus("❌ API bağlantısı başarısız!", "error");
+    }
+}
+
+// Cloud verisini uygula
+function applyCloudData(data) {
+    if (!data) return;
+    
+    // Menü
+    if (data.menu && Array.isArray(data.menu) && data.menu.length > 0) {
+        updateMenuFromData(data.menu);
+    }
+    
+    // Instagram
+    if (data.instagram) {
+        document.getElementById('instaLink').href = data.instagram;
+        localStorage.setItem('insta', data.instagram);
+    }
+    
+    // Harita
+    if (data.map) {
+        document.getElementById('mapFrame').src = "https://www.google.com/maps?q=" + data.map + "&output=embed";
+        localStorage.setItem('map', data.map);
+    }
+    
+    // Renkler
+    if (data.colors) {
+        if (data.colors.category) {
+            document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
+            localStorage.setItem('colorCategory', data.colors.category);
+        }
+        if (data.colors.name) {
+            document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
+            localStorage.setItem('colorName', data.colors.name);
+        }
+        if (data.colors.price) {
+            document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
+            localStorage.setItem('colorPrice', data.colors.price);
+        }
+    }
+    
+    // Tema
+    if (data.theme) {
+        if (data.theme === 'light') {
+            document.body.classList.add('light-mode');
+            modeToggle.innerHTML = '☀️';
+        } else {
+            document.body.classList.remove('light-mode');
+            modeToggle.innerHTML = '🌙';
+        }
+        localStorage.setItem('theme', data.theme);
+    }
+    
+    // Versiyon
+    if (data.version) {
+        currentVersion = data.version;
+        localStorage.setItem('menuVersion', currentVersion);
+        document.getElementById('cloudVersion').innerText = currentVersion;
+        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    }
+    
+    // Son güncelleme
+    if (data.lastUpdate) {
+        const date = new Date(data.lastUpdate);
+        document.getElementById('lastCloudSave').innerText = date.toLocaleTimeString();
+    }
+    
+    updateCategorySelect();
+}
+
+// Menüyü güncelle
+function updateMenuFromData(menuData) {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    menuData.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${category.category}</h3><button class="delete-card-btn" onclick="deleteCard(this)">✕</button>`;
+        
+        category.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
+            card.appendChild(itemDiv);
+        });
+        
+        menuGrid.appendChild(card);
+    });
+}
+
+// Versiyon artır
+function incrementVersion(version) {
+    const parts = version.split('.');
+    if (parts.length === 3) {
+        parts[2] = (parseInt(parts[2]) + 1).toString();
+        return parts.join('.');
+    }
+    return '1.0.1';
+}
+
+// Otomatik senkronizasyon
+function startAutoSync() {
+    if (autoSyncInterval) clearInterval(autoSyncInterval);
+    
+    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
+    
+    autoSyncInterval = setInterval(() => {
+        if (document.getElementById('autoSyncCheckbox')?.checked) {
+            qwest.get(CLOUD_API_URL, null, { timeout: 5000 }).then(response => {
+                if (JSON.stringify(response) !== JSON.stringify(lastCloudData)) {
+                    lastCloudData = response;
+                    applyCloudData(response);
+                }
+            }).catch(() => {});
+        }
+    }, interval);
+}
+
+// Kayıtlı verileri yükle
+function loadSavedData() {
+    if (localStorage.getItem("menuData")) {
+        document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
+    }
+    if (localStorage.getItem("insta")) {
+        document.getElementById("instaLink").href = localStorage.getItem("insta");
+    }
+    if (localStorage.getItem("map")) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    }
+    
+    let colorCategory = localStorage.getItem('colorCategory');
+    let colorName = localStorage.getItem('colorName');
+    let colorPrice = localStorage.getItem('colorPrice');
+    
+    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+    
+    if (localStorage.getItem('menuVersion')) {
+        currentVersion = localStorage.getItem('menuVersion');
+        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    }
+}
+
+// Storage event
+window.addEventListener('storage', function(e) {
+    if (e.key === 'lastCloudUpdate') {
+        setTimeout(() => loadFromCloud(), 500);
+    }
+});
+
+// ===== DİĞER FONKSİYONLAR =====
+
 function showStatus(message, type) {
     let oldStatus = document.querySelector(".status-message");
     if (oldStatus) oldStatus.remove();
@@ -1059,7 +1033,7 @@ function showStatus(message, type) {
     setTimeout(() => status.remove(), 3000);
 }
 
-// SÜRÜKLEME
+// Sürükleme
 let devPanel = document.getElementById("devPanel");
 let isDragging = false;
 let offsetX, offsetY;
@@ -1089,7 +1063,7 @@ function stopDrag() {
     devPanel.style.cursor = "move";
 }
 
-// KATEGORİ İŞLEMLERİ
+// Kategori seçici
 function updateCategorySelect() {
     let select = document.getElementById("categorySelect");
     select.innerHTML = "";
@@ -1101,6 +1075,7 @@ function updateCategorySelect() {
     });
 }
 
+// Kategori ekle
 function addCategory() {
     if (!isDeveloper) return;
     let name = document.getElementById("newCategory").value.trim();
@@ -1115,10 +1090,10 @@ function addCategory() {
     document.getElementById("newCategory").value = "";
     updateCategorySelect();
     saveData();
-    pushMenuToAPI(); // API'ye gönder
     showStatus("✅ Kategori eklendi!", "success");
 }
 
+// Ürün ekle
 function addProduct() {
     if (!isDeveloper) return;
     let name = document.getElementById("newName").value.trim();
@@ -1139,33 +1114,22 @@ function addProduct() {
         document.getElementById("newName").value = "";
         document.getElementById("productPrice").value = "";
         saveData();
-        pushMenuToAPI(); // API'ye gönder
         showStatus("✅ Ürün eklendi!", "success");
     }
 }
 
+// Kart sil
 function deleteCard(btn) {
     if (!isDeveloper) return;
     if (confirm("Bu kategoriyi silmek istediğinize emin misiniz?")) {
         btn.closest('.card').remove();
         updateCategorySelect();
         saveData();
-        pushMenuToAPI(); // API'ye gönder
         showStatus("✅ Kategori silindi!", "success");
     }
 }
 
-function updateMainPrice() {
-    if (!isDeveloper) return;
-    let newPrice = document.getElementById("newPrice").value;
-    if (newPrice && !isNaN(newPrice)) {
-        showStatus("✅ Fiyat güncellendi!", "success");
-        document.getElementById("newPrice").value = "";
-    } else {
-        showStatus("Geçerli bir fiyat girin!", "error");
-    }
-}
-
+// Fiyat düzenleme modu
 function enableEdit() {
     if (!isDeveloper) return;
     document.querySelectorAll(".price").forEach(p => {
@@ -1175,6 +1139,7 @@ function enableEdit() {
     showStatus("✏️ Fiyatları düzenleyebilirsiniz", "success");
 }
 
+// Silme modu
 function toggleDeleteMode() {
     if (!isDeveloper) return;
     deleteMode = !deleteMode;
@@ -1182,30 +1147,18 @@ function toggleDeleteMode() {
     showStatus(deleteMode ? "🗑️ Silme modu aktif" : "🔒 Silme modu kapalı", "success");
 }
 
-document.getElementById("menuGrid").addEventListener("click", function(e) {
-    if (!deleteMode) return;
-    let item = e.target.closest(".item");
-    if (item && !e.target.classList.contains('delete-card-btn')) {
-        if (confirm("Silmek istiyor musun?")) {
-            item.remove();
-            saveData();
-            pushMenuToAPI(); // API'ye gönder
-            showStatus("✅ Silindi!", "success");
-        }
-    }
-});
-
+// Tüm menüyü sil
 function deleteAll() {
     if (!isDeveloper) return;
     if (confirm("Tüm menü silinsin mi?")) {
         document.getElementById("menuGrid").innerHTML = "";
         updateCategorySelect();
         saveData();
-        pushMenuToAPI(); // API'ye gönder
         showStatus("🗑️ Tüm menü silindi!", "success");
     }
 }
 
+// Instagram güncelle
 function changeInstagram() {
     if (!isDeveloper) return;
     let val = document.getElementById("newInstagram").value.trim();
@@ -1216,6 +1169,7 @@ function changeInstagram() {
     }
 }
 
+// Konum güncelle
 function changeLocation() {
     if (!isDeveloper) return;
     let val = document.getElementById("newLocation").value.trim();
@@ -1226,43 +1180,20 @@ function changeLocation() {
     }
 }
 
+// Verileri kaydet
 function saveData() {
     localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
-    broadcastChanges();
-}
-
-function broadcastChanges() {
-    localStorage.setItem('lastUpdate', Date.now().toString());
-    showStatus("📡 Değişiklikler yayınlandı!", "success");
-}
-
-// Storage olaylarını dinle
-window.addEventListener('storage', function(e) {
-    if (e.key === 'lastUpdate' || e.key === 'menuData' || e.key === 'insta' || e.key === 'map') {
-        let savedMenu = localStorage.getItem("menuData");
-        if (savedMenu) document.getElementById("menuGrid").innerHTML = savedMenu;
-        
-        let savedInsta = localStorage.getItem("insta");
-        if (savedInsta) document.getElementById("instaLink").href = savedInsta;
-        
-        let savedMap = localStorage.getItem("map");
-        if (savedMap) document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + savedMap + "&output=embed";
-        
-        updateCategorySelect();
-        
-        let colorCategory = localStorage.getItem('colorCategory');
-        let colorName = localStorage.getItem('colorName');
-        let colorPrice = localStorage.getItem('colorPrice');
-
-        if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-        if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-        if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-        
-        showStatus("🔄 Menü güncellendi!", "success");
+    
+    currentVersion = incrementVersion(currentVersion);
+    localStorage.setItem('menuVersion', currentVersion);
+    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    
+    if (document.getElementById('autoSyncCheckbox')?.checked) {
+        saveToCloud();
     }
-});
+}
 
-// Renk işlemleri
+// Renkler
 function openColorPicker() {
     if (!isDeveloper) return;
     document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
@@ -1290,10 +1221,10 @@ function applyColors() {
 
     closeColorPicker();
     showStatus("🎨 Renkler uygulandı!", "success");
-    broadcastChanges();
+    saveData();
 }
 
-// Dil işlemleri
+// Dil
 let currentLang = localStorage.getItem("lang") || "tr";
 
 function applyLanguage() {
@@ -1323,68 +1254,24 @@ modeToggle.addEventListener("click", function() {
     localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
 });
 
-// Sayfa yüklendiğinde
-window.onload = function() {
-    // Kayıtlı menüyü yükle
-    if (localStorage.getItem("menuData")) {
-        document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
-    }
-    
-    // Instagram ve harita
-    if (localStorage.getItem("insta")) {
-        document.getElementById("instaLink").href = localStorage.getItem("insta");
-    }
-    if (localStorage.getItem("map")) {
-        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
-    }
+// Interval değişince
+document.getElementById('syncInterval')?.addEventListener('change', function() {
+    startAutoSync();
+});
 
-    // Renkler
-    let colorCategory = localStorage.getItem('colorCategory');
-    let colorName = localStorage.getItem('colorName');
-    let colorPrice = localStorage.getItem('colorPrice');
-
-    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-
-    // Tema
-    if (localStorage.getItem("theme") === "light") {
-        document.body.classList.add("light-mode");
-        modeToggle.innerHTML = "☀️";
-    }
-
-    // Dil
-    applyLanguage();
-    updateCategorySelect();
-    
-    // Ziyaretçi sayacı
-    updateVisitorCount();
-    
-    // API bağlantısını test et
-    setTimeout(() => testAPIConnection(), 2000);
-    
-    // Son senkronizasyon zamanını göster
-    lastSyncTime = localStorage.getItem('lastSyncTime');
-    if (lastSyncTime && document.getElementById('lastUpdateTime')) {
-        document.getElementById('lastUpdateTime').innerText = lastSyncTime;
-    }
-};
-
-// Her 30 saniyede bir API'den güncelle
-setInterval(async () => {
-    if (isDeveloper && apiConnected) {
-        const apiMenu = await fetchMenuFromAPI();
-        if (apiMenu) {
-            updateMenuFromAPIData(apiMenu);
+// Ürün silme modu
+document.getElementById("menuGrid").addEventListener("click", function(e) {
+    if (!deleteMode) return;
+    let item = e.target.closest(".item");
+    if (item && !e.target.classList.contains('delete-card-btn')) {
+        if (confirm("Silmek istiyor musun?")) {
+            item.remove();
+            saveData();
+            showStatus("✅ Silindi!", "success");
         }
     }
-}, 30000);
-
-// Kullanıcı etkileşimi
-document.addEventListener('click', function() {
-    updateVisitorCount();
 });
 </script>
 
 </body>
-</html>
+    </html>
