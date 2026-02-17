@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tosttoo | Ultimate Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+margin:0;
+font-family:Poppins;
+background:#111;
+color:white;
+}
+
+.hero{
+height:100vh;
+background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url("https://i.postimg.cc/k5TwQCVb/hero.jpg") center/cover no-repeat;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center
+}
+
+.hero h1{
+font-size:60px;
+color:#ff8c00;
+cursor:pointer;
+margin:0
+}
+
+.work-time{
+margin-top:15px;
+font-size:20px;
+color:#ff8c00;
+font-weight:600;
+}
+
+.btn{
+background:#ff8c00;
+padding:12px 25px;
+border:none;
+color:white;
+cursor:pointer;
+margin-top:15px;
+border-radius:6px
+}
+
+.container{
+padding:60px 20px;
+max-width:1100px;
+margin:auto
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:20px
+}
+
+.card{
+background:#1e1e1e;
+padding:20px;
+border-radius:10px;
+}
+
+.card h3{color:#ff8c00;}
+
+.product-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.item{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+align-items: center;
+}
+
+.item-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.name{color:#ff8c00;}
+.price{color:white;font-weight:bold}
+
+.contact{
+text-align:center;
+padding:50px 20px;
+background:#000
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:transparent;
+display:none;
+z-index:999;
+pointer-events:none;
+}
+
+.dev-window{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:95%;
+max-width:420px;
+max-height:90vh;
+overflow:auto;
+padding:20px;
+border-radius:15px;
+display:none;
+z-index:1000;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 0 40px rgba(0,0,0,.6);
+cursor:move;
+}
+
+.dev-window2{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:95%;
+max-width:420px;
+max-height:90vh;
+overflow:auto;
+padding:20px;
+border-radius:15px;
+display:none;
+z-index:1000;
+background:rgba(255,0,0,0.15);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,0,0,0.3);
+box-shadow:0 0 40px rgba(0,0,0,.6);
+cursor:move;
+}
+
+.dev-window input,
+.dev-window select,
+.dev-window2 input,
+.dev-window2 select{
+width:100%;
+padding:8px;
+margin:6px 0;
+background:rgba(0,0,0,.4);
+border:none;
+color:white;
+border-radius:6px
+}
+
+.dev-window button,
+.dev-window2 button{
+width:100%;
+padding:8px;
+margin:6px 0;
+background:#ff8c00;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer
+}
+
+.dev-window2 button {
+    background: #ff4444;
+}
+
+.delete-mode .item:hover,
+.delete-mode .card:hover{
+outline:2px solid red;
+cursor:pointer
+}
+
+.color-picker-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    z-index: 1001;
+    display: none;
+    width: 90%;
+    max-width: 350px;
+    color: white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.color-picker-modal h3 {
+    color: #ff8c00;
+    margin-top: 0;
+    text-align: center;
+}
+
+.color-picker-modal input[type=color] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.color-picker-modal label {
+    display: block;
+    margin-top: 15px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.color-picker-modal button {
+    margin-top: 20px;
+    background: #ff8c00;
+}
+
+/* نافذة كلمة السر */
+.password-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff8c00;
+    z-index: 2000;
+    display: none;
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.password-modal h3 {
+    color: #ff8c00;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.password-modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    background: #333;
+    border: 1px solid #ff8c00;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.password-modal button {
+    background: #ff8c00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    width: 100px;
+}
+
+.password-modal button:last-child {
+    background: #666;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<h1 id="secretTrigger">Tosttoo</h1>
+<div class="work-time">🕒 08:00 - 02:30</div>
+<button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
+</section>
+
+<section class="container" id="menu">
+<h2>Menü</h2>
+<div class="grid" id="menuGrid">
+
+<div class="card">
+<h3>Tostlar</h3>
+<div class="item">
+    <div class="item-left">
+        <img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src='https://via.placeholder.com/40'">
+        <span class="name">Kaşarlı Tost</span>
+    </div>
+    <span class="price">60₺</span>
+</div>
+<div class="item">
+    <div class="item-left">
+        <img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src='https://via.placeholder.com/40'">
+        <span class="name">Sucuklu Tost</span>
+    </div>
+    <span class="price">75₺</span>
+</div>
+</div>
+
+</div>
+</section>
+
+<section class="contact">
+<h2>İletişim</h2>
+<p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
+<p>📷 <a id="instaLink" href="https://instagram.com" target="_blank" style="color:#ff8c00">Instagram</a></p>
+<iframe id="mapFrame"
+src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"
+width="100%" height="300"></iframe>
+</section>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- نافذة كلمة السر -->
+<div class="password-modal" id="passwordModal">
+    <h3>🔐 ŞİFRE GİRİN</h3>
+    <input type="password" id="passwordInput" placeholder="Şifre: momotunc0702">
+    <div>
+        <button onclick="checkPassword()">GİRİŞ</button>
+        <button onclick="closePasswordModal()">İPTAL</button>
+    </div>
+</div>
+
+<!-- لوحة المطور الرئيسية (F1) -->
+<div class="dev-window" id="devPanel">
+<h3>🔧 PRO Developer Panel</h3>
+
+<select id="categorySelect"></select>
+
+<input type="text" id="newName" placeholder="Ürün Adı">
+<input type="text" id="newPrice" placeholder="Fiyat">
+<button onclick="addProduct()">Ürün Ekle</button>
+
+<input type="text" id="newCategory" placeholder="Yeni Kategori">
+<button onclick="addCategory()">Kategori Ekle</button>
+
+<button onclick="enableEdit()">Fiyat Düzenleme</button>
+<button onclick="toggleDeleteMode()">Silme Modu</button>
+
+<button onclick="deleteAll()">Tüm Menü Sil</button>
+
+<input type="text" id="newInstagram" placeholder="Instagram Link">
+<button onclick="changeInstagram()">Instagram Güncelle</button>
+
+<input type="text" id="newLocation" placeholder="Konum lat,long">
+<button onclick="changeLocation()">Konum Güncelle</button>
+
+<button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+
+<button onclick="closeDev()">Çıkış (Kaydet)</button>
+</div>
+
+<!-- لوحة المطور الثانية للصور (F2) -->
+<div class="dev-window2" id="devPanel2">
+<h3>📸 RESİM EKLEME PANELİ</h3>
+
+<select id="categorySelectImage"></select>
+<select id="productSelectImage"></select>
+
+<input type="text" id="productImageUrl" placeholder="Resim URL'si">
+<button onclick="addImageToProduct()">Resim Ekle/Güncelle</button>
+
+<hr style="border-color:#ff4444">
+
+<input type="text" id="categoryImageUrl" placeholder="Kategori Resim URL'si">
+<button onclick="addImageToCategory()">Kategori Resmi Ekle</button>
+
+<button onclick="closeDev2()">Panel Kapat (Kaydet)</button>
+</div>
+
+<!-- نافذة تعديل الألوان المنبثقة -->
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Değiştir</h3>
+    
+    <label>Kategori Başlığı (h3)</label>
+    <input type="color" id="colorCategory" value="#ff8c00">
+
+    <label>Ürün Adı (.name)</label>
+    <input type="color" id="colorName" value="#ff8c00">
+
+    <label>Fiyat (.price)</label>
+    <input type="color" id="colorPrice" value="#ffffff">
+
+    <button onclick="applyColors()">Renkleri Uygula</button>
+    <button onclick="closeColorPicker()">Kapat</button>
+</div>
+
+<script>
+let isDeveloper=false, isDeveloper2=false, deleteMode=false;
+let pendingPanel = null;
+
+// متغيرات لتتبع التغييرات
+let menuChanged = false;
+let colorsChanged = false;
+let instagramChanged = false;
+let locationChanged = false;
+
+/* Scroll */
+function scrollToMenu(){
+document.getElementById("menu")
+.scrollIntoView({behavior:"smooth"});
+}
+
+// فتح نافذة كلمة السر عند الضغط على F1 أو F2
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F1' || e.keyCode === 112) {
+        e.preventDefault();
+        pendingPanel = 'devPanel';
+        openPasswordModal();
+    }
+    else if (e.key === 'F2' || e.keyCode === 113) {
+        e.preventDefault();
+        pendingPanel = 'devPanel2';
+        openPasswordModal();
+    }
+});
+
+// نافذة كلمة السر
+function openPasswordModal() {
+    document.getElementById('passwordModal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordInput').focus();
+}
+
+function closePasswordModal() {
+    document.getElementById('passwordModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+    pendingPanel = null;
+}
+
+function checkPassword() {
+    let pass = document.getElementById('passwordInput').value;
+    if (pass === "momotunc0702") {
+        closePasswordModal();
+        
+        if (pendingPanel === 'devPanel') {
+            openDev();
+        } 
+        else if (pendingPanel === 'devPanel2') {
+            openDev2();
+        }
+        
+        pendingPanel = null;
+    } else {
+        alert("❌ Yanlış şifre! Şifre: momotunc0702");
+        document.getElementById('passwordInput').value = '';
+    }
+}
+
+function openDev(){
+document.getElementById("devPanel").style.display="block";
+document.getElementById("overlay").style.display="block";
+isDeveloper=true;
+updateCategorySelect();
+updateCategorySelectImage();
+
+// إعادة تعيين متغيرات التغيير
+menuChanged = false;
+colorsChanged = false;
+instagramChanged = false;
+locationChanged = false;
+}
+
+function openDev2(){
+document.getElementById("devPanel2").style.display="block";
+document.getElementById("overlay").style.display="block";
+isDeveloper2=true;
+updateCategorySelectImage();
+updateProductSelectImage();
+
+// إعادة تعيين متغيرات التغيير
+menuChanged = false;
+}
+
+/* تحديث قوائم الفئات */
+function updateCategorySelect(){
+let select=document.getElementById("categorySelect");
+select.innerHTML="";
+document.querySelectorAll(".card h3").forEach(h=>{
+let o=document.createElement("option");
+o.textContent=h.innerText;
+select.appendChild(o);
+});
+}
+
+function updateCategorySelectImage(){
+let select=document.getElementById("categorySelectImage");
+select.innerHTML="";
+document.querySelectorAll(".card h3").forEach(h=>{
+let o=document.createElement("option");
+o.textContent=h.innerText;
+select.appendChild(o);
+});
+}
+
+function updateProductSelectImage(){
+let select=document.getElementById("productSelectImage");
+select.innerHTML="";
+let categoryName = document.getElementById("categorySelectImage").value;
+document.querySelectorAll(".card").forEach(card=>{
+if(card.querySelector("h3").innerText === categoryName){
+card.querySelectorAll(".name").forEach(name=>{
+let o=document.createElement("option");
+o.textContent=name.innerText;
+select.appendChild(o);
+});
+}
+});
+}
+
+document.getElementById("categorySelectImage").addEventListener("change", function(){
+updateProductSelectImage();
+});
+
+/* إضافة منتج مع صورة */
+function addProduct(){
+if(!isDeveloper) return;
+let name=document.getElementById("newName").value.trim();
+let price=document.getElementById("newPrice").value.trim();
+if(!name||!price) return;
+document.querySelectorAll(".card").forEach(card=>{
+if(card.querySelector("h3").innerText===
+document.getElementById("categorySelect").value){
+let div=document.createElement("div");
+div.className="item";
+div.innerHTML='<div class="item-left"><img class="product-thumb" src="https://via.placeholder.com/40" alt="product" onerror="this.src=\'https://via.placeholder.com/40\'"><span class="name">'+name+'</span></div><span class="price">'+price+'₺</span>';
+card.appendChild(div);
+}
+});
+menuChanged = true; // تم تغيير المنيو
+}
+
+/* إضافة صورة لمنتج معين */
+function addImageToProduct(){
+if(!isDeveloper2) return;
+let category = document.getElementById("categorySelectImage").value;
+let product = document.getElementById("productSelectImage").value;
+let imageUrl = document.getElementById("productImageUrl").value.trim();
+
+if(!category || !product || !imageUrl) return;
+
+document.querySelectorAll(".card").forEach(card=>{
+if(card.querySelector("h3").innerText === category){
+card.querySelectorAll(".item").forEach(item=>{
+let nameSpan = item.querySelector(".name");
+if(nameSpan && nameSpan.innerText === product){
+let leftDiv = item.querySelector(".item-left");
+if(leftDiv){
+let img = leftDiv.querySelector(".product-thumb");
+if(img){
+img.src = imageUrl;
+} else {
+let newImg = document.createElement("img");
+newImg.className = "product-thumb";
+newImg.src = imageUrl;
+newImg.onerror = function(){this.src='https://via.placeholder.com/40'};
+leftDiv.insertBefore(newImg, leftDiv.firstChild);
+}
+}
+}
+});
+}
+});
+menuChanged = true; // تم تغيير المنيو
+}
+
+/* إضافة صورة للفئة (تظهر في أعلى البطاقة) */
+function addImageToCategory(){
+if(!isDeveloper2) return;
+let category = document.getElementById("categorySelectImage").value;
+let imageUrl = document.getElementById("categoryImageUrl").value.trim();
+
+if(!category || !imageUrl) return;
+
+document.querySelectorAll(".card").forEach(card=>{
+if(card.querySelector("h3").innerText === category){
+let oldImg = card.querySelector(".category-image");
+if(oldImg) oldImg.remove();
+
+let img = document.createElement("img");
+img.className = "product-image category-image";
+img.src = imageUrl;
+img.onerror = function(){this.src='https://via.placeholder.com/300x150'};
+card.insertBefore(img, card.querySelector("h3"));
+}
+});
+menuChanged = true; // تم تغيير المنيو
+}
+
+function addCategory(){
+if(!isDeveloper) return;
+let name=document.getElementById("newCategory").value.trim();
+if(!name) return;
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML="<h3>"+name+"</h3>";
+document.getElementById("menuGrid").appendChild(card);
+updateCategorySelect();
+updateCategorySelectImage();
+menuChanged = true; // تم تغيير المنيو
+}
+
+function enableEdit(){
+if(!isDeveloper) return;
+document.querySelectorAll(".price").forEach(p=>{
+p.contentEditable=true;
+p.style.background="#333";
+});
+}
+
+function toggleDeleteMode(){
+if(!isDeveloper) return;
+deleteMode=!deleteMode;
+document.getElementById("menuGrid")
+.classList.toggle("delete-mode",deleteMode);
+}
+
+document.getElementById("menuGrid")
+.addEventListener("click",function(e){
+if(!deleteMode) return;
+let t=e.target.closest(".item,.card");
+if(t && confirm("Silmek istiyor musun?")){
+t.remove();
+updateCategorySelect();
+updateCategorySelectImage();
+menuChanged = true; // تم تغيير المنيو
+}
+});
+
+function deleteAll(){
+if(!isDeveloper) return;
+if(confirm("Tüm menü silinsin mi?")){
+document.getElementById("menuGrid").innerHTML="";
+updateCategorySelect();
+updateCategorySelectImage();
+menuChanged = true; // تم تغيير المنيو
+}
+}
+
+function changeInstagram(){
+if(!isDeveloper) return;
+let val=document.getElementById("newInstagram").value.trim();
+if(val){
+document.getElementById("instaLink").href=val;
+instagramChanged = true; // تم تغيير الانستغرام
+}
+}
+
+function changeLocation(){
+if(!isDeveloper) return;
+let val=document.getElementById("newLocation").value.trim();
+if(val){
+document.getElementById("mapFrame").src=
+"https://www.google.com/maps?q="+val+"&output=embed";
+locationChanged = true; // تم تغيير الموقع
+}
+}
+
+// دالة حفظ كل التغييرات
+function saveAllChanges() {
+    if (menuChanged) {
+        localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
+        console.log("Menü kaydedildi");
+    }
+    
+    if (instagramChanged) {
+        let instaVal = document.getElementById("newInstagram").value.trim();
+        if (instaVal) {
+            localStorage.setItem("insta", instaVal);
+            console.log("Instagram kaydedildi");
+        }
+    }
+    
+    if (locationChanged) {
+        let locVal = document.getElementById("newLocation").value.trim();
+        if (locVal) {
+            localStorage.setItem("map", locVal);
+            console.log("Konum kaydedildi");
+        }
+    }
+    
+    if (colorsChanged) {
+        // الألوان تحفظ في applyColors
+        console.log("Renkler kaydedildi");
+    }
+    
+    // إعادة تعيين متغيرات التغيير
+    menuChanged = false;
+    colorsChanged = false;
+    instagramChanged = false;
+    locationChanged = false;
+}
+
+function closeDev(){
+// حفظ كل التغييرات قبل الخروج
+saveAllChanges();
+
+isDeveloper=false;
+deleteMode=false;
+document.getElementById("devPanel").style.display="none";
+document.getElementById("overlay").style.display="none";
+document.querySelectorAll(".price").forEach(p=>{
+p.contentEditable=false;
+p.style.background="transparent";
+});
+closeColorPicker();
+}
+
+function closeDev2(){
+// حفظ التغييرات قبل الخروج
+if (menuChanged) {
+    localStorage.setItem("menuData", document.getElementById("menuGrid").innerHTML);
+    console.log("Menü kaydedildi");
+}
+
+isDeveloper2=false;
+document.getElementById("devPanel2").style.display="none";
+if(!isDeveloper) {
+    document.getElementById("overlay").style.display="none";
+}
+}
+
+// دوال تعديل الألوان
+function openColorPicker() {
+    if(!isDeveloper) return;
+    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
+    document.getElementById('colorName').value = localStorage.getItem('colorName') || '#ff8c00';
+    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || '#ffffff';
+    document.getElementById('colorPickerModal').style.display = 'block';
+}
+
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'none';
+}
+
+function applyColors() {
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+
+    colorsChanged = true; // تم تغيير الألوان
+    closeColorPicker();
+}
+
+// تحميل كل البيانات عند فتح الصفحة
+window.onload=function(){
+// تحميل بيانات المنيو
+if(localStorage.getItem("menuData")) {
+    document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
+}
+
+// تحميل رابط الانستغرام
+if(localStorage.getItem("insta")) {
+    document.getElementById("instaLink").href = localStorage.getItem("insta");
+    document.getElementById("newInstagram").value = localStorage.getItem("insta");
+}
+
+// تحميل موقع الخريطة
+if(localStorage.getItem("map")) {
+    document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    document.getElementById("newLocation").value = localStorage.getItem("map");
+}
+
+// استرجاع الألوان المحفوظة وتطبيقها
+let colorCategory = localStorage.getItem('colorCategory');
+let colorName = localStorage.getItem('colorName');
+let colorPrice = localStorage.getItem('colorPrice');
+
+if (colorCategory) {
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+}
+if (colorName) {
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+}
+if (colorPrice) {
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+}
+
+// تحديث القوائم المنسدلة
+updateCategorySelect();
+updateCategorySelectImage();
+
+// إخفاء جميع اللوحات
+document.getElementById('devPanel').style.display = 'none';
+document.getElementById('devPanel2').style.display = 'none';
+document.getElementById('colorPickerModal').style.display = 'none';
+document.getElementById('passwordModal').style.display = 'none';
+document.getElementById('overlay').style.display = 'none';
+
+console.log("Sayfa yüklendi, tüm veriler geri yüklendi!");
+};
+
+// سحب النوافذ
+let devPanel=document.getElementById("devPanel");
+let isDragging=false,offsetX,offsetY;
+devPanel.addEventListener("mousedown",function(e){
+isDragging=true;
+offsetX=e.clientX-devPanel.offsetLeft;
+offsetY=e.clientY-devPanel.offsetTop;
+devPanel.style.transform="none";
+});
+document.addEventListener("mousemove",function(e){
+if(isDragging){
+devPanel.style.left=(e.clientX-offsetX)+"px";
+devPanel.style.top=(e.clientY-offsetY)+"px";
+}
+});
+document.addEventListener("mouseup",function(){
+isDragging=false;
+});
+
+// سحب النافذة الثانية
+let devPanel2=document.getElementById("devPanel2");
+let isDragging2=false,offsetX2,offsetY2;
+devPanel2.addEventListener("mousedown",function(e){
+isDragging2=true;
+offsetX2=e.clientX-devPanel2.offsetLeft;
+offsetY2=e.clientY-devPanel2.offsetTop;
+devPanel2.style.transform="none";
+});
+document.addEventListener("mousemove",function(e){
+if(isDragging2){
+devPanel2.style.left=(e.clientX-offsetX2)+"px";
+devPanel2.style.top=(e.clientY-offsetY2)+"px";
+}
+});
+document.addEventListener("mouseup",function(){
+isDragging2=false;
+});
+</script>
+
+</body>
+</html>
