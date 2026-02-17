@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qwest@4.5.0/qwest.min.js"></script>
 
 <style>
-/* ===== جميع الأنماط السابقة ===== */
+/* ===== جميع الأنماط ===== */
 * {
     margin: 0;
     padding: 0;
@@ -650,6 +650,9 @@ iframe {
             <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
                 🔌 BAĞLANTI TESTİ
             </button>
+            <button onclick="manualSaveGuide()" style="background:#ff9800; margin-top:5px;">
+                📋 MANUEL KAYIT REHBERİ
+            </button>
         </div>
     </div>
 
@@ -686,6 +689,7 @@ iframe {
 <script>
 // ===== الرابط الخاص بك - جاهز للعمل =====
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
+const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
 // متغيرات عامة
 let isDeveloper = false;
@@ -753,67 +757,120 @@ async function saveToCloud() {
     showStatus("☁️ Buluta kaydediliyor...", "loading");
     document.getElementById('cloudSaveBtn').disabled = true;
     
-    // Menü verilerini topla
-    const menuData = [];
-    document.querySelectorAll('.card').forEach(card => {
-        const category = card.querySelector('h3').innerText;
-        const items = [];
-        card.querySelectorAll('.item').forEach(item => {
-            const name = item.querySelector('.name').innerText;
-            const price = item.querySelector('.price').innerText;
-            items.push({ name, price });
-        });
-        menuData.push({ category, items });
-    });
-    
-    // Versiyon güncelle
-    currentVersion = incrementVersion(currentVersion);
-    
-    // Cloud verisi
-    const cloudData = {
-        menu: menuData,
-        version: currentVersion,
-        lastUpdate: new Date().toISOString(),
-        instagram: document.getElementById('instaLink').href,
-        map: document.getElementById('mapFrame').src.split('q=')[1]?.split('&')[0] || '36.484479,32.101147',
-        colors: {
-            category: localStorage.getItem('colorCategory') || '#ff8c00',
-            name: localStorage.getItem('colorName') || '#ff8c00',
-            price: localStorage.getItem('colorPrice') || '#ffffff'
-        },
-        theme: localStorage.getItem('theme') || 'dark',
-        lang: localStorage.getItem('lang') || 'tr'
-    };
-    
     try {
-        // API'ye kaydet
-        const response = await qwest.post(CLOUD_API_URL, cloudData, {
-            timeout: 10000,
-            responseType: 'json'
+        // جمع بيانات المنيو
+        const menuData = [];
+        const cards = document.querySelectorAll('.card');
+        
+        for (let card of cards) {
+            const categoryElement = card.querySelector('h3');
+            if (!categoryElement) continue;
+            const category = categoryElement.innerText;
+            
+            const items = [];
+            const itemElements = card.querySelectorAll('.item');
+            
+            for (let item of itemElements) {
+                const nameElement = item.querySelector('.name');
+                const priceElement = item.querySelector('.price');
+                
+                if (nameElement && priceElement) {
+                    items.push({
+                        name: nameElement.innerText,
+                        price: priceElement.innerText
+                    });
+                }
+            }
+            
+            menuData.push({
+                category: category,
+                items: items
+            });
+        }
+        
+        // تجهيز البيانات الكاملة
+        const saveData = {
+            menu: menuData,
+            settings: {
+                theme: localStorage.getItem('theme') || 'dark'
+            }
+        };
+        
+        // محاولة الإرسال
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(saveData)
         });
         
-        // Başarılı
-        const saveTime = new Date().toLocaleTimeString();
-        localStorage.setItem('lastCloudSave', saveTime);
-        localStorage.setItem('cloudData', JSON.stringify(cloudData));
-        localStorage.setItem('menuVersion', currentVersion);
-        
-        document.getElementById('lastCloudSave').innerText = saveTime;
-        document.getElementById('cloudVersion').innerText = currentVersion;
-        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
-        document.getElementById('syncStatus').innerText = 'Senkronize';
-        
-        showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
-        
-        // Broadcast
-        localStorage.setItem('lastCloudUpdate', Date.now().toString());
+        if (response.ok) {
+            const result = await response.json();
+            showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+            
+            const saveTime = new Date().toLocaleTimeString();
+            localStorage.setItem('lastCloudSave', saveTime);
+            document.getElementById('lastCloudSave').innerText = saveTime;
+            
+            // Versiyon güncelle
+            currentVersion = incrementVersion(currentVersion);
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('cloudVersion').innerText = currentVersion;
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+            
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
         
     } catch(error) {
-        console.error('Cloud save error:', error);
-        showStatus("❌ Kayıt başarısız! Link: " + CLOUD_API_URL, "error");
+        console.error('Kayıt hatası:', error);
+        showStatus("❌ Otomatik kayıt başarısız! Manuel yöntemi dene.", "error");
+        
+        // Manuel yöntem önerisi
+        setTimeout(() => {
+            manualSaveGuide();
+        }, 2000);
     }
     
     document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+// Manuel kayıt rehberi
+function manualSaveGuide() {
+    const guideMessage = 
+        "📋 MANUEL KAYIT İÇİN:\n\n" +
+        "1️⃣ Şu linki aç: " + CLOUD_DOCS_URL + "\n\n" +
+        "2️⃣ Giriş yap (GitHub/Google ile)\n\n" +
+        "3️⃣ 'Edit' butonuna bas\n\n" +
+        "4️⃣ Tüm verileri sil ve şunu yapıştır:\n\n" +
+        "{\n" +
+        '  "menu": [\n' +
+        '    {\n' +
+        '      "category": "Tostlar",\n' +
+        '      "items": [\n' +
+        '        {"name": "Kaşarlı Tost", "price": "60₺"},\n' +
+        '        {"name": "Sucuklu Tost", "price": "75₺"}\n' +
+        '      ]\n' +
+        '    },\n' +
+        '    {\n' +
+        '      "category": "İçecekler",\n' +
+        '      "items": [\n' +
+        '        {"name": "Çay", "price": "10₺"},\n' +
+        '        {"name": "Kahve", "price": "15₺"}\n' +
+        '      ]\n' +
+        '    }\n' +
+        '  ],\n' +
+        '  "settings": {\n' +
+        '    "theme": "' + (localStorage.getItem('theme') || 'dark') + '"\n' +
+        '  }\n' +
+        '}\n\n' +
+        "5️⃣ 'Save' butonuna bas\n\n" +
+        "6️⃣ Şu linki aç ve kontrol et:\n" + CLOUD_API_URL;
+    
+    alert(guideMessage);
+    showStatus("📋 Manuel kayıt rehberi gösteriliyor", "loading");
 }
 
 // Buluttan yükle
@@ -822,26 +879,43 @@ async function loadFromCloud() {
     document.getElementById('cloudLoadBtn').disabled = true;
     
     try {
-        const response = await qwest.get(CLOUD_API_URL, null, {
-            timeout: 10000,
-            responseType: 'json'
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
         
-        // Cloud verisini uygula
-        applyCloudData(response);
-        showStatus("✅ Buluttan yüklendi!", "success");
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Cloud verisini uygula
+            if (data.menu && Array.isArray(data.menu) && data.menu.length > 0) {
+                updateMenuFromData(data.menu);
+            }
+            
+            // Tema
+            if (data.settings && data.settings.theme) {
+                if (data.settings.theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    modeToggle.innerHTML = '☀️';
+                } else {
+                    document.body.classList.remove('light-mode');
+                    modeToggle.innerHTML = '🌙';
+                }
+                localStorage.setItem('theme', data.settings.theme);
+            }
+            
+            showStatus("✅ Buluttan yüklendi!", "success");
+            
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
         
     } catch(error) {
-        console.error('Cloud load error:', error);
-        
-        // Yerel yedekten yükle
-        const savedCloudData = localStorage.getItem('cloudData');
-        if (savedCloudData) {
-            applyCloudData(JSON.parse(savedCloudData));
-            showStatus("📦 Yerel yedekten yüklendi", "success");
-        } else {
-            showStatus("❌ Yükleme başarısız!", "error");
-        }
+        console.error('Yükleme hatası:', error);
+        showStatus("❌ Yükleme başarısız! Linki kontrol et: " + CLOUD_API_URL, "error");
     }
     
     document.getElementById('cloudLoadBtn').disabled = false;
@@ -852,89 +926,28 @@ async function testCloudConnection() {
     showStatus("🔌 API bağlantısı test ediliyor...", "loading");
     
     try {
-        const response = await qwest.get(CLOUD_API_URL, null, {
-            timeout: 5000,
-            responseType: 'json'
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+            }
         });
         
-        document.getElementById('syncStatus').innerText = 'Bağlı';
-        document.getElementById('syncStatus').style.color = '#00ff00';
-        showStatus("✅ API bağlantısı başarılı! (" + CLOUD_API_URL + ")", "success");
-        
-        // Veriyi uygula
-        applyCloudData(response);
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('syncStatus').innerText = 'Bağlı';
+            document.getElementById('syncStatus').style.color = '#00ff00';
+            showStatus("✅ API bağlantısı başarılı! Veri: " + JSON.stringify(data).substring(0, 50) + "...", "success");
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
         
     } catch(error) {
         document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
         document.getElementById('syncStatus').style.color = '#ff0000';
-        showStatus("❌ API bağlantısı başarısız!", "error");
+        showStatus("❌ API bağlantısı başarısız! Link: " + CLOUD_API_URL, "error");
     }
-}
-
-// Cloud verisini uygula
-function applyCloudData(data) {
-    if (!data) return;
-    
-    // Menü
-    if (data.menu && Array.isArray(data.menu) && data.menu.length > 0) {
-        updateMenuFromData(data.menu);
-    }
-    
-    // Instagram
-    if (data.instagram) {
-        document.getElementById('instaLink').href = data.instagram;
-        localStorage.setItem('insta', data.instagram);
-    }
-    
-    // Harita
-    if (data.map) {
-        document.getElementById('mapFrame').src = "https://www.google.com/maps?q=" + data.map + "&output=embed";
-        localStorage.setItem('map', data.map);
-    }
-    
-    // Renkler
-    if (data.colors) {
-        if (data.colors.category) {
-            document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
-            localStorage.setItem('colorCategory', data.colors.category);
-        }
-        if (data.colors.name) {
-            document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
-            localStorage.setItem('colorName', data.colors.name);
-        }
-        if (data.colors.price) {
-            document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
-            localStorage.setItem('colorPrice', data.colors.price);
-        }
-    }
-    
-    // Tema
-    if (data.theme) {
-        if (data.theme === 'light') {
-            document.body.classList.add('light-mode');
-            modeToggle.innerHTML = '☀️';
-        } else {
-            document.body.classList.remove('light-mode');
-            modeToggle.innerHTML = '🌙';
-        }
-        localStorage.setItem('theme', data.theme);
-    }
-    
-    // Versiyon
-    if (data.version) {
-        currentVersion = data.version;
-        localStorage.setItem('menuVersion', currentVersion);
-        document.getElementById('cloudVersion').innerText = currentVersion;
-        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
-    }
-    
-    // Son güncelleme
-    if (data.lastUpdate) {
-        const date = new Date(data.lastUpdate);
-        document.getElementById('lastCloudSave').innerText = date.toLocaleTimeString();
-    }
-    
-    updateCategorySelect();
 }
 
 // Menüyü güncelle
@@ -956,6 +969,9 @@ function updateMenuFromData(menuData) {
         
         menuGrid.appendChild(card);
     });
+    
+    updateCategorySelect();
+    saveData();
 }
 
 // Versiyon artır
@@ -976,12 +992,24 @@ function startAutoSync() {
     
     autoSyncInterval = setInterval(() => {
         if (document.getElementById('autoSyncCheckbox')?.checked) {
-            qwest.get(CLOUD_API_URL, null, { timeout: 5000 }).then(response => {
-                if (JSON.stringify(response) !== JSON.stringify(lastCloudData)) {
-                    lastCloudData = response;
-                    applyCloudData(response);
+            fetch(CLOUD_API_URL, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
                 }
-            }).catch(() => {});
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                    lastCloudData = data;
+                    if (data.menu && Array.isArray(data.menu)) {
+                        updateMenuFromData(data.menu);
+                        showStatus("🔄 Otomatik güncelleme yapıldı", "success");
+                    }
+                }
+            })
+            .catch(() => {});
         }
     }, interval);
 }
@@ -1189,7 +1217,7 @@ function saveData() {
     document.getElementById('liveVersion').innerText = 'v' + currentVersion;
     
     if (document.getElementById('autoSyncCheckbox')?.checked) {
-        saveToCloud();
+        // saveToCloud'u çağırma, sadece yerel kaydet
     }
 }
 
