@@ -324,14 +324,17 @@ width="100%" height="300"></iframe>
     <button onclick="closeColorPicker()">Kapat</button>
 </div>
 
-<!-- كود Supabase -->
+<!-- كود Supabase الصحيح 100% -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const supabase = window.supabase.createClient(
-  "https://cufbyiefzbgygtyibupl.supabase.co",
-  "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr"
-);
 
+<script>
+// Supabase yapılandırması
+const supabaseUrl = "https://cufbyiefzbgygtyibupl.supabase.co";
+const supabaseKey = "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr";
+
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// Değişkenler
 let isDeveloper = false;
 let deleteMode = false;
 let priceEditMode = false;
@@ -339,12 +342,39 @@ let priceEditMode = false;
 // كلمة المرور السرية
 const SECRET_PASSWORD = "momotunc0702";
 
-// تسلسل النقرات السري
-let clickSequence = [];
-let sequenceTimer = null;
+// Fiyatı getir - DOĞRU KOD
+async function getPrice() {
+  const { data, error } = await supabase
+    .from("settings")
+    .select("price")
+    .eq("id", 1)
+    .single();
 
-// تسلسل النقرات المطلوب (يمكن تغييره)
-const REQUIRED_SEQUENCE = [1, 3, 2, 4]; // ترتيب النقرات: مرة، 3 مرات، مرتين، 4 مرات
+  if (error) {
+    console.error("Hata:", error);
+    document.getElementById("price").innerText = "Hata!";
+    return;
+  }
+
+  if (data) {
+    document.getElementById("price").innerText = data.price;
+  }
+}
+
+// Fiyatı güncelle
+async function updatePrice(newPrice) {
+  const { data, error } = await supabase
+    .from("settings")
+    .update({ price: newPrice })
+    .eq("id", 1);
+    
+  if (error) {
+    console.error("Güncelleme hatası:", error);
+    alert("Fiyat güncellenirken hata oluştu!");
+  } else {
+    alert("Fiyat başarıyla güncellendi!");
+  }
+}
 
 /* Scroll */
 function scrollToMenu(){
@@ -352,82 +382,47 @@ document.getElementById("menu")
 .scrollIntoView({behavior:"smooth"});
 }
 
-/* نظام الدخول السري الجديد - النقر على العنوان بأوقات محددة */
-document.getElementById("secretTrigger").onclick = function(e) {
-    // تسجيل الوقت الحالي
-    const now = new Date().getTime();
+/* Gizli giriş - 5 tıklama */
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById("secretTrigger").onclick = function() {
+    clickCount++;
     
-    // إضافة النقرة إلى التسلسل
-    clickSequence.push({
-        time: now,
-        element: e.target
-    });
+    if(clickTimer) clearTimeout(clickTimer);
     
-    // حذف النقرات القديمة (أكثر من 3 ثوان)
-    clickSequence = clickSequence.filter(click => now - click.time < 3000);
+    clickTimer = setTimeout(() => {
+        clickCount = 0;
+    }, 3000);
     
-    // التحقق من التسلسل (5 نقرات خلال 3 ثوان)
-    if(clickSequence.length === 5) {
-        // طلب كلمة المرور
+    if(clickCount === 5) {
+        clickCount = 0;
         let pass = prompt("🔐 Yetkili girişi:");
         if(pass === SECRET_PASSWORD) {
             openDev();
-        } else {
-            alert("Hatalı şifre!");
         }
-        // مسح التسلسل
-        clickSequence = [];
     }
 };
 
-// طريقة دخول بديلة - النقر على السعر 3 مرات متتالية
+// Alternatif giriş - fiyata 3 tıklama
+let priceClicks = 0;
 document.getElementById("price").onclick = function(e) {
     if(!isDeveloper) {
-        let priceClicks = localStorage.getItem('priceClicks') || 0;
-        priceClicks = parseInt(priceClicks) + 1;
-        localStorage.setItem('priceClicks', priceClicks);
+        priceClicks++;
+        
+        setTimeout(() => {
+            priceClicks = 0;
+        }, 2000);
         
         if(priceClicks >= 3) {
-            localStorage.removeItem('priceClicks');
+            priceClicks = 0;
             let pass = prompt("🔐 Geliştirici girişi:");
             if(pass === SECRET_PASSWORD) {
                 openDev();
             }
         }
-        
-        // إعادة تعيين بعد ثانيتين
-        setTimeout(() => {
-            localStorage.removeItem('priceClicks');
-        }, 2000);
     }
 };
-
-// طريقة دخول ثالثة - النقر على الزاوية اليمنى السفلية 7 مرات
-let cornerClicks = 0;
-document.addEventListener('click', function(e) {
-    const x = e.clientX;
-    const y = e.clientY;
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    
-    // التحقق من النقر في الزاوية اليمنى السفلية
-    if(x > width - 50 && y > height - 50) {
-        cornerClicks++;
-        
-        if(cornerClicks >= 7) {
-            cornerClicks = 0;
-            let pass = prompt("🔐 Admin paneli:");
-            if(pass === SECRET_PASSWORD) {
-                openDev();
-            }
-        }
-        
-        // إعادة تعيين بعد 3 ثوان
-        setTimeout(() => {
-            cornerClicks = 0;
-        }, 3000);
-    }
-});
 
 function openDev(){
 document.getElementById("devPanel").style.display="block";
@@ -612,40 +607,6 @@ function applyColors() {
     closeColorPicker();
 }
 
-// دالة تحميل البيانات من Supabase
-async function loadData() {
-  const { data, error } = await supabase
-    .from("settings")
-    .select("price")
-    .eq("id", 1)
-    .single();
-
-  if (error) {
-    console.error("Error:", error);
-    document.getElementById("price").innerText = "0";
-    return;
-  }
-
-  if (data) {
-    document.getElementById("price").innerText = data.price;
-  }
-}
-
-// دالة تحديث السعر في Supabase
-async function updatePrice(newPrice) {
-  const { data, error } = await supabase
-    .from("settings")
-    .update({ price: newPrice })
-    .eq("id", 1);
-    
-  if (error) {
-    console.error("Error updating price:", error);
-    alert("Fiyat güncellenirken hata oluştu!");
-  } else {
-    alert("Fiyat başarıyla güncellendi!");
-  }
-}
-
 // حدث فقدان التركيز للتعديل اليدوي
 document.getElementById("price").addEventListener("blur", async function () {
   if (isDeveloper && priceEditMode) {
@@ -656,15 +617,15 @@ document.getElementById("price").addEventListener("blur", async function () {
     } else {
       alert("Lütfen geçerli bir fiyat girin!");
       // إعادة تحميل القيمة القديمة
-      loadData();
+      getPrice();
     }
     togglePriceEdit(); // إيقاف وضع التعديل
   }
 });
 
 window.onload=function(){
-// تحميل البيانات من Supabase
-loadData();
+// تحميل السعر من Supabase
+getPrice();
 
 if(localStorage.getItem("menuData"))
 document.getElementById("menuGrid").innerHTML=
@@ -678,465 +639,6 @@ document.getElementById("mapFrame").src=
 localStorage.getItem("map")+"&output=embed";
 
 // استرجاع الألوان المحفوظة
-let colorCategory = localStorage.getItem('colorCategory');
-let colorName = localStorage.getItem('colorName');
-let colorPrice = localStorage.getItem('colorPrice');
-
-if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-
-updateCategorySelect();
-};
-
-/* سحب النافذة */
-let devPanel=document.getElementById("devPanel");
-let isDragging=false,offsetX,offsetY;
-devPanel.addEventListener("mousedown",function(e){
-isDragging=true;
-offsetX=e.clientX-devPanel.offsetLeft;
-offsetY=e.clientY-devPanel.offsetTop;
-devPanel.style.transform="none";
-});
-document.addEventListener("mousemove",function(e){
-if(isDragging){
-devPanel.style.left=(e.clientX-offsetX)+"px";
-devPanel.style.top=(e.clientY-offsetY)+"px";
-}
-});
-document.addEventListener("mouseup",function(){
-isDragging=false;
-});
-</script>
-
-</body>
-</html>pointer-events:none;
-}
-
-.dev-window{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:95%;
-max-width:420px;
-max-height:90vh;
-overflow:auto;
-padding:20px;
-border-radius:15px;
-display:none;
-z-index:1000;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,0.15);
-box-shadow:0 0 40px rgba(0,0,0,.6);
-cursor:move;
-}
-
-.dev-window input,
-.dev-window select{
-width:100%;
-padding:8px;
-margin:6px 0;
-background:rgba(0,0,0,.4);
-border:none;
-color:white;
-border-radius:6px
-}
-
-.dev-window button{
-width:100%;
-padding:8px;
-margin:6px 0;
-background:#ff8c00;
-border:none;
-color:white;
-border-radius:6px;
-cursor:pointer
-}
-
-.delete-mode .item:hover,
-.delete-mode .card:hover{
-outline:2px solid red;
-cursor:pointer
-}
-
-/* ستايل نافذة تعديل الألوان */
-.color-picker-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid #ff8c00;
-    z-index: 1001;
-    display: none;
-    width: 90%;
-    max-width: 350px;
-    color: white;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.color-picker-modal h3 {
-    color: #ff8c00;
-    margin-top: 0;
-    text-align: center;
-}
-
-.color-picker-modal input[type=color] {
-    width: 100%;
-    height: 50px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.color-picker-modal label {
-    display: block;
-    margin-top: 15px;
-    color: #ff8c00;
-    font-weight: 600;
-}
-
-.color-picker-modal button {
-    margin-top: 20px;
-    background: #ff8c00;
-}
-</style>
-</head>
-
-<body>
-
-<section class="hero">
-<h1 id="secretTrigger">Tosttoo</h1>
-<div class="work-time">🕒 08:00 - 02:30</div>
-<div class="price-container">
-    💰 Fiyat: <span id="price" contenteditable="false">Yükleniyor...</span> ₺
-</div>
-<button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
-</section>
-
-<section class="container" id="menu">
-<h2>Menü</h2>
-<div class="grid" id="menuGrid">
-
-<div class="card">
-<h3>Tostlar</h3>
-<div class="item"><span class="name">Kaşarlı Tost</span><span class="price">60₺</span></div>
-<div class="item"><span class="name">Sucuklu Tost</span><span class="price">75₺</span></div>
-</div>
-
-</div>
-</section>
-
-<section class="contact">
-<h2>İletişim</h2>
-<p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
-<p>📷 <a id="instaLink" href="https://instagram.com" target="_blank" style="color:#ff8c00">Instagram</a></p>
-<iframe id="mapFrame"
-src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"
-width="100%" height="300"></iframe>
-</section>
-
-<div class="overlay" id="overlay"></div>
-
-<div class="dev-window" id="devPanel">
-<h3>PRO Developer Panel</h3>
-
-<select id="categorySelect"></select>
-
-<input type="text" id="newName" placeholder="Ürün Adı">
-<input type="text" id="newPrice" placeholder="Fiyat">
-<button onclick="addProduct()">Ürün Ekle</button>
-
-<input type="text" id="newCategory" placeholder="Yeni Kategori">
-<button onclick="addCategory()">Kategori Ekle</button>
-
-<button onclick="enableEdit()">Fiyat Düzenleme</button>
-<button onclick="toggleDeleteMode()">Silme Modu</button>
-
-<button onclick="deleteAll()">Tüm Menü Sil</button>
-
-<input type="text" id="newInstagram" placeholder="Instagram Link">
-<button onclick="changeInstagram()">Instagram Güncelle</button>
-
-<input type="text" id="newLocation" placeholder="Konum lat,long">
-<button onclick="changeLocation()">Konum Güncelle</button>
-
-<!-- زر جديد لتعديل الألوان -->
-<button onclick="openColorPicker()" style="background:#purple; background-color: #8a2be2;">🎨 Renkleri Düzenle</button>
-
-<button onclick="closeDev()">Çıkış</button>
-</div>
-
-<!-- نافذة تعديل الألوان المنبثقة -->
-<div class="color-picker-modal" id="colorPickerModal">
-    <h3>🎨 Renkleri Değiştir</h3>
-    
-    <label>Kategori Başlığı (h3)</label>
-    <input type="color" id="colorCategory" value="#ff8c00">
-
-    <label>Ürün Adı (.name)</label>
-    <input type="color" id="colorName" value="#ff8c00">
-
-    <label>Fiyat (.price)</label>
-    <input type="color" id="colorPrice" value="#ffffff">
-
-    <button onclick="applyColors()">Renkleri Uygula</button>
-    <button onclick="closeColorPicker()">Kapat</button>
-</div>
-
-<!-- كود Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-const supabase = window.supabase.createClient(
-  "https://cufbyiefzbgygtyibupl.supabase.co",
-  "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr"
-);
-
-let isDeveloper=false,deleteMode=false;
-
-/* Scroll */
-function scrollToMenu(){
-document.getElementById("menu")
-.scrollIntoView({behavior:"smooth"});
-}
-
-/* 5 ضغطات */
-let tap=0,timer=null;
-document.getElementById("secretTrigger").onclick=function(){
-tap++;
-if(tap==1){timer=setTimeout(()=>tap=0,5000);}
-if(tap==5){
-clearTimeout(timer);
-tap=0;
-let pass=prompt("Şifre gir:");
-if(pass==="momotunc0702") openDev();
-}
-};
-
-function openDev(){
-document.getElementById("devPanel").style.display="block";
-document.getElementById("overlay").style.display="block";
-isDeveloper=true;
-updateCategorySelect();
-// السماح بتعديل السعر عند فتح لوحة المطور
-document.getElementById("price").contentEditable = true;
-}
-
-function updateCategorySelect(){
-let select=document.getElementById("categorySelect");
-select.innerHTML="";
-document.querySelectorAll(".card h3").forEach(h=>{
-let o=document.createElement("option");
-o.textContent=h.innerText;
-select.appendChild(o);
-});
-}
-
-function addCategory(){
-if(!isDeveloper) return;
-let name=document.getElementById("newCategory").value.trim();
-if(!name) return;
-let card=document.createElement("div");
-card.className="card";
-card.innerHTML="<h3>"+name+"</h3>";
-document.getElementById("menuGrid").appendChild(card);
-updateCategorySelect();
-saveData();
-}
-
-function addProduct(){
-if(!isDeveloper) return;
-let name=document.getElementById("newName").value.trim();
-let price=document.getElementById("newPrice").value.trim();
-if(!name||!price) return;
-document.querySelectorAll(".card").forEach(card=>{
-if(card.querySelector("h3").innerText===
-document.getElementById("categorySelect").value){
-let div=document.createElement("div");
-div.className="item";
-div.innerHTML="<span class='name'>"+name+
-"</span><span class='price'>"+price+"₺</span>";
-card.appendChild(div);
-}
-});
-saveData();
-}
-
-function enableEdit(){
-if(!isDeveloper) return;
-document.querySelectorAll(".price").forEach(p=>{
-p.contentEditable=true;
-p.style.background="#333";
-});
-}
-
-function toggleDeleteMode(){
-if(!isDeveloper) return;
-deleteMode=!deleteMode;
-document.getElementById("menuGrid")
-.classList.toggle("delete-mode",deleteMode);
-}
-
-document.getElementById("menuGrid")
-.addEventListener("click",function(e){
-if(!deleteMode) return;
-let t=e.target.closest(".item,.card");
-if(t && confirm("Silmek istiyor musun?")){
-t.remove();
-updateCategorySelect();
-saveData();
-}
-});
-
-function deleteAll(){
-if(!isDeveloper) return;
-if(confirm("Tüm menü silinsin mi?")){
-document.getElementById("menuGrid").innerHTML="";
-updateCategorySelect();
-saveData();
-}
-}
-
-function changeInstagram(){
-if(!isDeveloper) return;
-let val=document.getElementById("newInstagram").value.trim();
-if(val){
-document.getElementById("instaLink").href=val;
-localStorage.setItem("insta",val);
-}
-}
-
-function changeLocation(){
-if(!isDeveloper) return;
-let val=document.getElementById("newLocation").value.trim();
-if(val){
-document.getElementById("mapFrame").src=
-"https://www.google.com/maps?q="+val+"&output=embed";
-localStorage.setItem("map",val);
-}
-}
-
-function saveData(){
-localStorage.setItem("menuData",
-document.getElementById("menuGrid").innerHTML);
-}
-
-function closeDev(){
-isDeveloper=false;
-deleteMode=false;
-document.getElementById("devPanel").style.display="none";
-document.getElementById("overlay").style.display="none";
-document.querySelectorAll(".price").forEach(p=>{
-p.contentEditable=false;
-p.style.background="transparent";
-});
-// تعطيل تعديل السعر عند إغلاق لوحة المطور
-document.getElementById("price").contentEditable = false;
-closeColorPicker(); // إغلاق نافذة الألوان إذا كانت مفتوحة
-}
-
-// دوال تعديل الألوان الجديدة
-function openColorPicker() {
-    if(!isDeveloper) return;
-    // تحميل الألوان المحفوظة مسبقاً إن وجدت
-    document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || '#ff8c00';
-    document.getElementById('colorName').value = localStorage.getItem('colorName') || '#ff8c00';
-    document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || '#ffffff';
-    document.getElementById('colorPickerModal').style.display = 'block';
-}
-
-function closeColorPicker() {
-    document.getElementById('colorPickerModal').style.display = 'none';
-}
-
-function applyColors() {
-    let colorCategory = document.getElementById('colorCategory').value;
-    let colorName = document.getElementById('colorName').value;
-    let colorPrice = document.getElementById('colorPrice').value;
-
-    // تطبيق الألوان على العناصر
-    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
-    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
-    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
-
-    // حفظ الألوان في المتصفح
-    localStorage.setItem('colorCategory', colorCategory);
-    localStorage.setItem('colorName', colorName);
-    localStorage.setItem('colorPrice', colorPrice);
-
-    closeColorPicker();
-}
-
-// دالة تحميل البيانات من Supabase - الطريقة الصحيحة 100%
-async function loadData() {
-  const { data, error } = await supabase
-    .from("settings")
-    .select("price")
-    .eq("id", 1)
-    .single();
-
-  if (error) {
-    console.error("Error:", error);
-    document.getElementById("price").innerText = "0";
-    return;
-  }
-
-  if (data) {
-    document.getElementById("price").innerText = data.price;
-  }
-}
-
-// دالة تحديث السعر في Supabase
-async function updatePrice(newPrice) {
-  const { data, error } = await supabase
-    .from("settings")
-    .update({ price: newPrice })
-    .eq("id", 1);
-    
-  if (error) {
-    console.error("Error updating price:", error);
-    alert("Fiyat güncellenirken hata oluştu!");
-  } else {
-    console.log("Price updated successfully");
-  }
-}
-
-// إضافة حدث فقدان التركيز لعنصر السعر
-document.getElementById("price").addEventListener("blur", async function () {
-  if (isDeveloper) {  // فقط إذا كان المطور مسجل الدخول
-    let newPrice = this.innerText.trim();
-    if (newPrice && !isNaN(newPrice)) {  // التحقق من أن القيمة رقم
-      await updatePrice(newPrice);
-    } else {
-      alert("Lütfen geçerli bir fiyat girin!");
-      // إعادة تحميل القيمة القديمة
-      loadData();
-    }
-  }
-});
-
-window.onload=function(){
-// تحميل البيانات من Supabase
-loadData();
-
-if(localStorage.getItem("menuData"))
-document.getElementById("menuGrid").innerHTML=
-localStorage.getItem("menuData");
-if(localStorage.getItem("insta"))
-document.getElementById("instaLink").href=
-localStorage.getItem("insta");
-if(localStorage.getItem("map"))
-document.getElementById("mapFrame").src=
-"https://www.google.com/maps?q="+
-localStorage.getItem("map")+"&output=embed";
-
-// استرجاع الألوان المحفوظة عند تحميل الصفحة
 let colorCategory = localStorage.getItem('colorCategory');
 let colorName = localStorage.getItem('colorName');
 let colorPrice = localStorage.getItem('colorPrice');
