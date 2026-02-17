@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>توستو | Tosttoo</title>
+<title>Tosttoo | Ana Sayfa</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -16,13 +15,13 @@
 
 body {
     margin: 0;
-    font-family: 'Cairo', 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     color: #fff;
     min-height: 100vh;
 }
 
-/* الهيرو */
+/* الهيرو مع الصورة الخلفية الجديدة */
 .hero {
     height: 100vh;
     display: flex;
@@ -30,9 +29,13 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: radial-gradient(circle at center, #2a2a2a 0%, #000 100%);
     position: relative;
     overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .hero::before {
@@ -71,11 +74,12 @@ body {
     font-size: 20px;
     margin: 20px 0;
     padding: 10px 20px;
-    background: rgba(255,140,0,0.1);
+    background: rgba(0,0,0,0.6);
     border-radius: 30px;
     border: 1px solid #ff8c00;
     position: relative;
     z-index: 1;
+    backdrop-filter: blur(5px);
 }
 
 .price-container {
@@ -83,11 +87,12 @@ body {
     font-size: 28px;
     position: relative;
     z-index: 1;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.7);
     padding: 15px 30px;
     border-radius: 50px;
     border: 1px solid #ff8c00;
     box-shadow: 0 0 20px rgba(255,140,0,0.3);
+    backdrop-filter: blur(5px);
 }
 
 #price {
@@ -145,7 +150,7 @@ body {
 }
 
 .card {
-    background: rgba(30, 30, 30, 0.8);
+    background: rgba(30, 30, 30, 0.9);
     backdrop-filter: blur(10px);
     padding: 30px;
     border-radius: 20px;
@@ -175,14 +180,14 @@ body {
     justify-content: space-between;
     margin: 15px 0;
     padding: 10px 20px;
-    background: rgba(0,0,0,0.3);
+    background: rgba(0,0,0,0.4);
     border-radius: 10px;
     transition: all 0.3s ease;
     cursor: default;
 }
 
 .item:hover {
-    background: rgba(255,140,0,0.1);
+    background: rgba(255,140,0,0.15);
     transform: scale(1.02);
 }
 
@@ -231,9 +236,10 @@ iframe {
     border-radius: 15px;
     margin-top: 30px;
     border: 3px solid #ff8c00;
+    max-width: 100%;
 }
 
-/* لوحة المطور - تصميم فاخر */
+/* لوحة المطور */
 .dev-panel {
     position: fixed;
     top: 50%;
@@ -248,6 +254,8 @@ iframe {
     z-index: 1000;
     width: 90%;
     max-width: 450px;
+    max-height: 90vh;
+    overflow-y: auto;
     box-shadow: 0 20px 50px rgba(255,140,0,0.3);
     animation: slideIn 0.3s ease;
 }
@@ -295,7 +303,7 @@ iframe {
     border: 1px solid #333;
     color: #fff;
     border-radius: 8px;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
 }
 
@@ -316,7 +324,7 @@ iframe {
     font-weight: bold;
     border-radius: 8px;
     cursor: pointer;
-    font-family: 'Cairo', sans-serif;
+    font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
 }
 
@@ -332,6 +340,14 @@ iframe {
 
 .dev-panel .close-btn:hover {
     background: #c82333;
+}
+
+.dev-panel .success-btn {
+    background: #28a745;
+}
+
+.dev-panel .success-btn:hover {
+    background: #218838;
 }
 
 /* طبقة الخلفية */
@@ -367,122 +383,167 @@ iframe {
     font-size: 20px;
 }
 
-/* مؤشر الدخول السري */
-.secret-dot {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    width: 10px;
-    height: 10px;
-    background: transparent;
-    pointer-events: none;
+/* يوكسيرمي هاتاسي */
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.success-message {
+    color: #00C851;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #ff8c00;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- الهيرو -->
+<!-- الهيرو مع الصورة الخلفية الجديدة -->
 <section class="hero">
     <h1 id="logo">Tosttoo</h1>
     <div class="work-time">🕒 08:00 - 02:30</div>
     <div class="price-container">
-        💰 السعر: <span id="price">60</span> ₺
+        💰 Fiyat: <span id="price">Yükleniyor...</span> ₺
     </div>
-    <button class="btn" onclick="scrollToMenu()">عرض المنيو</button>
+    <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
 </section>
 
 <!-- المنيو -->
 <div class="container" id="menu">
-    <h2>المنيو</h2>
+    <h2>Menü</h2>
     
-    <div class="card">
-        <h3>توست</h3>
-        <div class="item"><span class="name">كشري</span><span>60₺</span></div>
-        <div class="item"><span class="name">سجق</span><span>75₺</span></div>
-        <div class="item"><span class="name">مخلوط</span><span>85₺</span></div>
+    <div class="card" id="card1">
+        <h3>Tostlar</h3>
+        <div class="item"><span class="name">Kaşarlı Tost</span><span class="item-price">60₺</span></div>
+        <div class="item"><span class="name">Sucuklu Tost</span><span class="item-price">75₺</span></div>
+        <div class="item"><span class="name">Karışık Tost</span><span class="item-price">85₺</span></div>
     </div>
     
-    <div class="card">
-        <h3>مشروبات</h3>
-        <div class="item"><span class="name">شاي</span><span>10₺</span></div>
-        <div class="item"><span class="name">قهوة</span><span>15₺</span></div>
-        <div class="item"><span class="name">عصير</span><span>20₺</span></div>
+    <div class="card" id="card2">
+        <h3>İçecekler</h3>
+        <div class="item"><span class="name">Çay</span><span class="item-price">10₺</span></div>
+        <div class="item"><span class="name">Kahve</span><span class="item-price">15₺</span></div>
+        <div class="item"><span class="name">Meyve Suyu</span><span class="item-price">20₺</span></div>
+    </div>
+    
+    <div class="card" id="card3">
+        <h3>Tatlılar</h3>
+        <div class="item"><span class="name">Künefe</span><span class="item-price">50₺</span></div>
+        <div class="item"><span class="name">Baklava</span><span class="item-price">45₺</span></div>
+        <div class="item"><span class="name">Sütlaç</span><span class="item-price">30₺</span></div>
     </div>
 </div>
 
 <!-- الاتصال -->
 <section class="contact">
-    <h2>اتصل بنا</h2>
+    <h2>İletişim</h2>
     <p>📞 <a href="tel:05321580207">0532 158 0207</a></p>
-    <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank">انستغرام</a></p>
+    <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank">Instagram</a></p>
     <iframe 
         id="mapFrame"
         src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"
         width="100%" 
-        height="300">
+        height="300"
+        loading="lazy">
     </iframe>
 </section>
 
 <!-- طبقة الخلفية -->
 <div class="overlay" id="overlay"></div>
 
-<!-- لوحة المطور الفاخرة -->
+<!-- لوحة المطور -->
 <div class="dev-panel" id="devPanel">
-    <h3>⚙️ لوحة التحكم</h3>
+    <h3>⚙️ Geliştirici Paneli</h3>
     
-    <!-- قسم السعر -->
+    <!-- Fiyat Bölümü -->
     <div class="dev-section">
-        <h4>💰 تعديل السعر الرئيسي</h4>
-        <input type="number" id="newPrice" placeholder="أدخل السعر الجديد">
-        <button onclick="updateMainPrice()">تحديث السعر</button>
-        <button onclick="togglePriceEdit()">✏️ تعديل مباشر</button>
+        <h4>💰 Ana Fiyatı Düzenle</h4>
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <button onclick="updateMainPrice()" class="success-btn">Fiyatı Güncelle</button>
+        <button onclick="togglePriceEdit()">✏️ Doğrudan Düzenle</button>
     </div>
     
-    <!-- قسم إضافة منتج -->
+    <!-- Ürün Ekleme Bölümü -->
     <div class="dev-section">
-        <h4>➕ إضافة منتج</h4>
-        <select id="categorySelect">
-            <option value="توست">توست</option>
-            <option value="مشروبات">مشروبات</option>
-        </select>
-        <input type="text" id="productName" placeholder="اسم المنتج">
-        <input type="text" id="productPrice" placeholder="السعر">
-        <button onclick="addProduct()">إضافة منتج</button>
+        <h4>➕ Ürün Ekle</h4>
+        <select id="categorySelect"></select>
+        <input type="text" id="productName" placeholder="Ürün adı">
+        <input type="text" id="productPrice" placeholder="Fiyat">
+        <button onclick="addProduct()">Ürün Ekle</button>
     </div>
     
-    <!-- قسم الإضافات -->
+    <!-- Kategori Ekleme -->
     <div class="dev-section">
-        <h4>🔧 أدوات إضافية</h4>
-        <button onclick="toggleDeleteMode()">🗑️ وضع الحذف</button>
-        <button onclick="enableEditMode()">📝 تعديل الأسعار</button>
-        <button onclick="changeInstagram()">تحديث انستغرام</button>
-        <button onclick="changeLocation()">تحديث الموقع</button>
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" placeholder="Yeni kategori adı">
+        <button onclick="addCategory()">Kategori Ekle</button>
     </div>
     
-    <!-- قسم الحفظ والاستعادة -->
+    <!-- Ek Araçlar -->
     <div class="dev-section">
-        <h4>💾 حفظ واستعادة</h4>
-        <button onclick="saveToLocalStorage()">حفظ في المتصفح</button>
-        <button onclick="resetToDefault()">استعادة الإعدادات</button>
+        <h4>🔧 Ek Araçlar</h4>
+        <button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
+        <button onclick="enableEditMode()">📝 Fiyatları Düzenle</button>
+        <button onclick="updateInstagram()">📷 Instagram Güncelle</button>
+        <button onclick="updateLocation()">📍 Konum Güncelle</button>
     </div>
     
-    <button class="close-btn" onclick="closeDev()">إغلاق</button>
+    <!-- Supabase Senkronizasyon -->
+    <div class="dev-section">
+        <h4>💾 Supabase Senkronizasyon</h4>
+        <button onclick="saveToSupabase()" class="success-btn">💾 Supabase'e Kaydet</button>
+        <button onclick="loadFromSupabase()">🔄 Supabase'den Yükle</button>
+        <div id="syncStatus" style="text-align: center; margin-top: 10px; font-size: 14px;"></div>
+    </div>
+    
+    <!-- Yerel Depolama -->
+    <div class="dev-section">
+        <h4>📱 Yerel Depolama</h4>
+        <button onclick="saveToLocal()">📥 Tarayıcıya Kaydet</button>
+        <button onclick="resetToDefault()">🔄 Varsayılana Dön</button>
+    </div>
+    
+    <button class="close-btn" onclick="closeDev()">Kapat</button>
 </div>
 
+<!-- Supabase Script -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-// ========== المتغيرات الأساسية ==========
+// ========== SUPABASE KONFİGÜRASYONU ==========
+const supabaseUrl = "https://cufbyiefzbgygtyibupl.supabase.co";
+const supabaseKey = "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr";
+const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+// ========== DEĞİŞKENLER ==========
 let isDeveloper = false;
 let deleteMode = false;
 let editMode = false;
+let priceEditMode = false;
 const SECRET_PASSWORD = "momotunc0702";
 
-// ========== الدوال الأساسية ==========
+// ========== TEMEL FONKSİYONLAR ==========
 function scrollToMenu() {
     document.getElementById("menu").scrollIntoView({behavior: "smooth"});
 }
 
-// ========== نظام الدخول السري ==========
+// ========== GİZLİ GİRİŞ SİSTEMİ ==========
 let clickCount = 0;
 let clickTimer = null;
 
@@ -497,25 +558,154 @@ document.getElementById("logo").onclick = function() {
     
     if(clickCount === 5) {
         clickCount = 0;
-        let password = prompt("🔐 أدخل كلمة السر:");
+        let password = prompt("🔐 Şifreyi girin:");
         if(password === SECRET_PASSWORD) {
             openDev();
         } else {
-            alert("❌ كلمة السر خطأ!");
+            alert("❌ Yanlış şifre!");
         }
     }
 };
 
-// ========== فتح وإغلاق لوحة المطور ==========
+// ========== SUPABASE FONKSİYONLARI ==========
+async function getPrice() {
+    try {
+        const { data, error } = await supabase
+            .from("settings")
+            .select("price")
+            .eq("id", 1)
+            .single();
+
+        if (error) {
+            console.error("Supabase hatası:", error);
+            document.getElementById("price").innerText = "60";
+            return;
+        }
+
+        if (data) {
+            document.getElementById("price").innerText = data.price;
+            showStatus("✅ Fiyat yüklendi", "success");
+        }
+    } catch (err) {
+        console.error("Bağlantı hatası:", err);
+        document.getElementById("price").innerText = "60";
+    }
+}
+
+async function updatePrice(newPrice) {
+    try {
+        showStatus("🔄 Güncelleniyor...", "loading");
+        
+        const { data, error } = await supabase
+            .from("settings")
+            .update({ price: newPrice })
+            .eq("id", 1);
+            
+        if (error) {
+            console.error("Güncelleme hatası:", error);
+            showStatus("❌ Güncelleme başarısız!", "error");
+            return false;
+        }
+        
+        showStatus("✅ Fiyat güncellendi!", "success");
+        return true;
+    } catch (err) {
+        console.error("Bağlantı hatası:", err);
+        showStatus("❌ Bağlantı hatası!", "error");
+        return false;
+    }
+}
+
+async function saveToSupabase() {
+    try {
+        showStatus("🔄 Kaydediliyor...", "loading");
+        
+        // Ana fiyatı kaydet
+        const mainPrice = document.getElementById("price").innerText;
+        await supabase
+            .from("settings")
+            .update({ price: mainPrice })
+            .eq("id", 1);
+        
+        // Menü verilerini hazırla
+        const menuData = [];
+        document.querySelectorAll(".card").forEach((card, index) => {
+            const category = card.querySelector("h3").innerText;
+            const items = [];
+            card.querySelectorAll(".item").forEach(item => {
+                items.push({
+                    name: item.querySelector(".name").innerText,
+                    price: item.querySelector(".item-price").innerText
+                });
+            });
+            menuData.push({ category, items });
+        });
+        
+        // Menüyü kaydet (settings tablosuna menu_data olarak ekleyebilirsiniz)
+        await supabase
+            .from("settings")
+            .update({ menu_data: JSON.stringify(menuData) })
+            .eq("id", 1);
+        
+        showStatus("✅ Supabase'e kaydedildi!", "success");
+    } catch (err) {
+        console.error("Kayıt hatası:", err);
+        showStatus("❌ Kayıt başarısız!", "error");
+    }
+}
+
+async function loadFromSupabase() {
+    try {
+        showStatus("🔄 Yükleniyor...", "loading");
+        
+        const { data, error } = await supabase
+            .from("settings")
+            .select("*")
+            .eq("id", 1)
+            .single();
+        
+        if (error) {
+            showStatus("❌ Yükleme başarısız!", "error");
+            return;
+        }
+        
+        if (data) {
+            // Fiyatı güncelle
+            if (data.price) {
+                document.getElementById("price").innerText = data.price;
+            }
+            
+            // Menüyü güncelle
+            if (data.menu_data) {
+                const menuData = JSON.parse(data.menu_data);
+                // Menüyü yeniden oluştur
+                // (Bu kısmı menü yapınıza göre düzenleyin)
+            }
+            
+            showStatus("✅ Veriler yüklendi!", "success");
+        }
+    } catch (err) {
+        console.error("Yükleme hatası:", err);
+        showStatus("❌ Yükleme hatası!", "error");
+    }
+}
+
+function showStatus(message, type) {
+    const statusDiv = document.getElementById("syncStatus");
+    if (statusDiv) {
+        statusDiv.innerHTML = message;
+        statusDiv.className = type === "error" ? "error-message" : 
+                             type === "success" ? "success-message" : "";
+    }
+}
+
+// ========== GELİŞTİRİCİ PANELİ ==========
 function openDev() {
     document.getElementById("devPanel").style.display = "block";
     document.getElementById("overlay").style.display = "block";
     isDeveloper = true;
     
-    // تحديث حقل السعر
     document.getElementById("newPrice").value = document.getElementById("price").innerText;
-    
-    // تحديث قائمة الأقسام
     updateCategorySelect();
 }
 
@@ -525,9 +715,9 @@ function closeDev() {
     isDeveloper = false;
     deleteMode = false;
     editMode = false;
+    priceEditMode = false;
     
-    // إزالة كل أوضاع التعديل
-    document.querySelectorAll('.price').forEach(p => {
+    document.querySelectorAll('.item-price').forEach(p => {
         p.contentEditable = false;
         p.style.background = "transparent";
     });
@@ -535,19 +725,19 @@ function closeDev() {
     document.body.classList.remove("delete-mode");
 }
 
-// ========== دوال تعديل السعر ==========
+// ========== FİYAT DÜZENLEME ==========
 function updateMainPrice() {
     if(!isDeveloper) return;
     let newPrice = document.getElementById("newPrice").value;
     if(newPrice && !isNaN(newPrice)) {
         document.getElementById("price").innerText = newPrice;
-        alert("✅ تم تحديث السعر بنجاح!");
+        updatePrice(newPrice); // Supabase'e kaydet
+        alert("✅ Fiyat güncellendi!");
     } else {
-        alert("⚠️ الرجاء إدخال رقم صحيح!");
+        alert("⚠️ Lütfen geçerli bir fiyat girin!");
     }
 }
 
-let priceEditMode = false;
 function togglePriceEdit() {
     if(!isDeveloper) return;
     priceEditMode = !priceEditMode;
@@ -565,18 +755,20 @@ function togglePriceEdit() {
     }
 }
 
-// حفظ التعديل المباشر عند فقدان التركيز
 document.getElementById("price").addEventListener("blur", function() {
     if(isDeveloper && priceEditMode) {
+        let newPrice = this.innerText;
+        if(!isNaN(newPrice)) {
+            updatePrice(newPrice);
+        }
         priceEditMode = false;
         this.contentEditable = false;
         this.style.background = "transparent";
         this.style.outline = "none";
-        alert("✅ تم تحديث السعر!");
     }
 });
 
-// ========== دوال إدارة المنتجات ==========
+// ========== KATEGORİ VE ÜRÜN YÖNETİMİ ==========
 function updateCategorySelect() {
     let select = document.getElementById("categorySelect");
     select.innerHTML = "";
@@ -589,6 +781,26 @@ function updateCategorySelect() {
     });
 }
 
+function addCategory() {
+    if(!isDeveloper) return;
+    
+    let categoryName = document.getElementById("newCategory").value.trim();
+    if(!categoryName) {
+        alert("⚠️ Kategori adı girin!");
+        return;
+    }
+    
+    let container = document.getElementById("menu");
+    let newCard = document.createElement("div");
+    newCard.className = "card";
+    newCard.innerHTML = `<h3>${categoryName}</h3>`;
+    container.appendChild(newCard);
+    
+    document.getElementById("newCategory").value = "";
+    updateCategorySelect();
+    alert("✅ Kategori eklendi!");
+}
+
 function addProduct() {
     if(!isDeveloper) return;
     
@@ -597,7 +809,7 @@ function addProduct() {
     let price = document.getElementById("productPrice").value.trim();
     
     if(!name || !price) {
-        alert("⚠️ الرجاء إدخال اسم المنتج والسعر!");
+        alert("⚠️ Ürün adı ve fiyat girin!");
         return;
     }
     
@@ -605,47 +817,45 @@ function addProduct() {
     if(cards[categoryIndex]) {
         let item = document.createElement("div");
         item.className = "item";
-        item.innerHTML = `<span class="name">${name}</span><span>${price}₺</span>`;
+        item.innerHTML = `<span class="name">${name}</span><span class="item-price">${price}₺</span>`;
         cards[categoryIndex].appendChild(item);
         
-        // تنظيف الحقول
         document.getElementById("productName").value = "";
         document.getElementById("productPrice").value = "";
         
-        alert("✅ تم إضافة المنتج!");
+        alert("✅ Ürün eklendi!");
     }
 }
 
-// ========== وضع الحذف ==========
+// ========== SİLME MODU ==========
 function toggleDeleteMode() {
     if(!isDeveloper) return;
     deleteMode = !deleteMode;
     
     if(deleteMode) {
         document.body.classList.add("delete-mode");
-        alert("🗑️ وضع الحذف مفعل - انقر على أي منتج لحذفه");
+        alert("🗑️ Silme modu aktif - Ürünlere tıklayarak silebilirsiniz");
     } else {
         document.body.classList.remove("delete-mode");
     }
 }
 
-// حذف المنتجات
 document.querySelector(".container").addEventListener("click", function(e) {
     if(!isDeveloper || !deleteMode) return;
     
     let item = e.target.closest(".item");
-    if(item && confirm("🗑️ هل أنت متأكد من الحذف؟")) {
+    if(item && confirm("🗑️ Silmek istediğinize emin misiniz?")) {
         item.remove();
-        alert("✅ تم الحذف!");
+        alert("✅ Silindi!");
     }
 });
 
-// ========== وضع تعديل الأسعار ==========
+// ========== DÜZENLEME MODU ==========
 function enableEditMode() {
     if(!isDeveloper) return;
     editMode = !editMode;
     
-    document.querySelectorAll(".item span:last-child").forEach(price => {
+    document.querySelectorAll(".item-price").forEach(price => {
         if(editMode) {
             price.contentEditable = true;
             price.style.background = "#333";
@@ -658,60 +868,66 @@ function enableEditMode() {
         }
     });
     
-    alert(editMode ? "✏️ يمكنك تعديل الأسعار الآن" : "🔒 تم إيقاف تعديل الأسعار");
+    alert(editMode ? "✏️ Fiyatları düzenleyebilirsiniz" : "🔒 Düzenleme modu kapatıldı");
 }
 
-// ========== دوال التحديث ==========
-function changeInstagram() {
+// ========== İNSTAGRAM VE KONUM GÜNCELLEME ==========
+function updateInstagram() {
     if(!isDeveloper) return;
-    let newLink = prompt("أدخل رابط الانستغرام الجديد:");
+    let newLink = prompt("Yeni Instagram linkini girin:");
     if(newLink) {
         document.getElementById("instaLink").href = newLink;
-        alert("✅ تم تحديث رابط الانستغرام!");
+        alert("✅ Instagram güncellendi!");
     }
 }
 
-function changeLocation() {
+function updateLocation() {
     if(!isDeveloper) return;
-    let newLocation = prompt("أدخل الموقع الجديد (lat,long):");
+    let newLocation = prompt("Yeni konum girin (örn: 36.484479,32.101147):");
     if(newLocation) {
         document.getElementById("mapFrame").src = 
             `https://www.google.com/maps?q=${newLocation}&output=embed`;
-        alert("✅ تم تحديث الموقع!");
+        alert("✅ Konum güncellendi!");
     }
 }
 
-// ========== دوال الحفظ والاستعادة ==========
-function saveToLocalStorage() {
-    // حفظ السعر
+// ========== YEREL DEPOLAMA ==========
+function saveToLocal() {
+    // Fiyatı kaydet
     localStorage.setItem("price", document.getElementById("price").innerText);
     
-    // حفظ المنيو
+    // Menüyü kaydet
     localStorage.setItem("menuHTML", document.querySelector(".container").innerHTML);
     
-    alert("💾 تم الحفظ في المتصفح!");
+    alert("📥 Tarayıcıya kaydedildi!");
 }
 
 function resetToDefault() {
-    if(confirm("⚠️ هل أنت متأكد؟ سيتم استعادة الإعدادات الافتراضية!")) {
+    if(confirm("⚠️ Emin misiniz? Tüm değişiklikler silinecek!")) {
         localStorage.clear();
         location.reload();
     }
 }
 
-// ========== التحميل عند بدء الصفحة ==========
+// ========== SAYFA YÜKLENDİĞİNDE ==========
 window.onload = function() {
-    // استعادة السعر المحفوظ
-    let savedPrice = localStorage.getItem("price");
-    if(savedPrice) {
-        document.getElementById("price").innerText = savedPrice;
-    }
+    // Supabase'den fiyatı yükle
+    getPrice();
     
-    // استعادة المنيو المحفوظ
+    // Yerel depolamadan menüyü yükle
     let savedMenu = localStorage.getItem("menuHTML");
     if(savedMenu) {
         document.querySelector(".container").innerHTML = savedMenu;
     }
+    
+    // Yerel depolamadan Instagram'ı yükle
+    let savedInsta = localStorage.getItem("insta");
+    if(savedInsta) {
+        document.getElementById("instaLink").href = savedInsta;
+    }
+    
+    // Kategori seçimini güncelle
+    updateCategorySelect();
 };
 </script>
 
