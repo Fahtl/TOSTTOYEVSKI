@@ -206,7 +206,7 @@ body.day-mode .contact a {
     padding-right: 40px;
 }
 
-/* ===== زر حذف القائمة ===== */
+/* ===== زر حذف القائمة - يظهر فقط على الكمبيوتر ===== */
 .delete-card-btn {
     position: absolute;
     top: 15px;
@@ -232,10 +232,10 @@ body.day-mode .contact a {
     opacity: 1;
 }
 
-/* للهاتف - أزرار الحذف تظهر دائماً */
+/* إخفاء أزرار الحذف على الجوال */
 @media (max-width: 768px) {
     .delete-card-btn {
-        opacity: 0.8;
+        display: none !important;
     }
 }
 
@@ -322,7 +322,7 @@ body.day-mode .control-btn {
     color: #333;
 }
 
-/* تحسين للهاتف */
+/* تحسين للجوال */
 @media (max-width: 768px) {
     .control-buttons {
         top: 10px;
@@ -344,7 +344,13 @@ body.day-mode .control-btn {
     }
 }
 
-/* ===== لوحة المطور ===== */
+/* ===== لوحة المطور - للكمبيوتر فقط ===== */
+@media (max-width: 768px) {
+    .dev-panel {
+        display: none !important;
+    }
+}
+
 .dev-panel {
     position: fixed;
     top: 50%;
@@ -371,15 +377,6 @@ body.day-mode .control-btn {
     display: block;
 }
 
-/* للهاتف - لوحة المطور تظهر بشكل مناسب */
-@media (max-width: 768px) {
-    .dev-panel {
-        width: 95%;
-        max-height: 85vh;
-        padding: 15px;
-    }
-}
-
 .dev-panel-header {
     padding: 5px 10px 15px 10px;
     cursor: move;
@@ -396,12 +393,6 @@ body.day-mode .control-btn {
     margin: 0;
 }
 
-@media (max-width: 768px) {
-    .dev-panel-header h3 {
-        font-size: 20px;
-    }
-}
-
 .drag-indicator {
     color: rgba(255, 140, 0, 0.7);
     font-size: 20px;
@@ -413,13 +404,6 @@ body.day-mode .control-btn {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 12px;
     border: 1px solid rgba(255, 140, 0, 0.3);
-}
-
-@media (max-width: 768px) {
-    .dev-section {
-        padding: 12px;
-        margin: 10px 0;
-    }
 }
 
 .dev-section h4 {
@@ -444,14 +428,6 @@ body.day-mode .control-btn {
     font-size: 14px;
 }
 
-@media (max-width: 768px) {
-    .dev-panel input,
-    .dev-panel select {
-        padding: 10px;
-        font-size: 13px;
-    }
-}
-
 .dev-panel button {
     width: 100%;
     padding: 12px;
@@ -470,13 +446,6 @@ body.day-mode .control-btn {
 .dev-panel button:hover {
     background: #ffa233;
     transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-    .dev-panel button {
-        padding: 10px;
-        font-size: 13px;
-    }
 }
 
 .dev-panel .save-btn {
@@ -517,17 +486,6 @@ body.day-mode .control-btn {
     border: 2px solid #ff8c00;
     border-radius: 8px;
     cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .color-row label {
-        font-size: 13px;
-    }
-    
-    .color-row input[type="color"] {
-        width: 50px;
-        height: 35px;
-    }
 }
 
 /* ===== البث المباشر ===== */
@@ -598,7 +556,14 @@ body.day-mode .control-btn {
     }
 }
 
-/* ===== أوضاع التعديل ===== */
+/* ===== أوضاع التعديل - للكمبيوتر فقط ===== */
+@media (max-width: 768px) {
+    .delete-mode .item,
+    .edit-mode .item-price {
+        pointer-events: none;
+    }
+}
+
 .delete-mode .item {
     cursor: pointer;
     position: relative;
@@ -616,7 +581,7 @@ body.day-mode .control-btn {
     cursor: text;
 }
 
-/* ===== تلميح ===== */
+/* ===== تلميح للكمبيوتر فقط ===== */
 .f5-hint {
     position: fixed;
     bottom: 20px;
@@ -638,12 +603,10 @@ body.day-mode .f5-hint {
     color: #333;
 }
 
+/* إخفاء تلميح F5 على الجوال */
 @media (max-width: 768px) {
     .f5-hint {
-        bottom: 10px;
-        right: 10px;
-        font-size: 10px;
-        padding: 5px 10px;
+        display: none;
     }
 }
 </style>
@@ -660,10 +623,10 @@ body.day-mode .f5-hint {
     <button class="control-btn" id="themeToggle" onclick="toggleTheme()">🌓</button>
 </div>
 
-<!-- تلميح -->
+<!-- تلميح - يظهر فقط على الكمبيوتر -->
 <div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli</div>
 
-<!-- لوحة المطور -->
+<!-- لوحة المطور - للكمبيوتر فقط -->
 <div class="dev-panel" id="devPanel">
     <div class="dev-panel-header" id="panelHeader">
         <h3 class="panel-title">⚙️ Geliştirici Paneli</h3>
@@ -976,36 +939,38 @@ function applyLanguage(lang) {
     document.getElementById('item9').innerText = t.item9;
     document.getElementById('contactTitle').innerText = t.contactTitle;
     
-    // Developer panel
-    document.querySelector('.panel-title').innerText = t.panelTitle;
-    document.querySelector('.section-title-add').innerText = t.sectionAdd;
-    document.querySelector('.product-name-input').placeholder = t.productNamePlaceholder;
-    document.querySelector('.product-price-input').placeholder = t.productPricePlaceholder;
-    document.querySelector('.add-product-btn').innerText = t.addProductBtn;
-    
-    document.querySelector('.section-title-cat').innerText = t.sectionCat;
-    document.querySelector('.new-category-input').placeholder = t.newCategoryPlaceholder;
-    document.querySelector('.add-category-btn').innerText = t.addCategoryBtn;
-    
-    document.querySelector('.section-title-color').innerText = t.sectionColor;
-    document.querySelector('.color-label-cat').innerText = t.colorLabelCat;
-    document.querySelector('.color-label-name').innerText = t.colorLabelName;
-    document.querySelector('.color-label-price').innerText = t.colorLabelPrice;
-    document.querySelector('.color-label-btn').innerText = t.colorLabelBtn;
-    document.querySelector('.apply-colors-btn').innerText = t.applyColorsBtn;
-    document.querySelector('.reset-colors-btn').innerText = t.resetColorsBtn;
-    
-    document.querySelector('.section-title-tools').innerText = t.sectionTools;
-    document.querySelector('.delete-mode-btn').innerText = t.deleteModeBtn;
-    document.querySelector('.edit-mode-btn').innerText = t.editModeBtn;
-    document.querySelector('.instagram-btn').innerText = t.instagramBtn;
-    document.querySelector('.location-btn').innerText = t.locationBtn;
-    
-    document.querySelector('.section-title-broadcast').innerText = t.sectionBroadcast;
-    document.querySelector('.broadcast-btn').innerText = t.broadcastBtn;
-    document.querySelector('.broadcast-text').innerText = t.broadcastText;
-    
-    document.querySelector('.close-btn').innerText = t.closeBtn;
+    // Developer panel (sadece PC'de var)
+    if(!isMobile()) {
+        document.querySelector('.panel-title').innerText = t.panelTitle;
+        document.querySelector('.section-title-add').innerText = t.sectionAdd;
+        document.querySelector('.product-name-input').placeholder = t.productNamePlaceholder;
+        document.querySelector('.product-price-input').placeholder = t.productPricePlaceholder;
+        document.querySelector('.add-product-btn').innerText = t.addProductBtn;
+        
+        document.querySelector('.section-title-cat').innerText = t.sectionCat;
+        document.querySelector('.new-category-input').placeholder = t.newCategoryPlaceholder;
+        document.querySelector('.add-category-btn').innerText = t.addCategoryBtn;
+        
+        document.querySelector('.section-title-color').innerText = t.sectionColor;
+        document.querySelector('.color-label-cat').innerText = t.colorLabelCat;
+        document.querySelector('.color-label-name').innerText = t.colorLabelName;
+        document.querySelector('.color-label-price').innerText = t.colorLabelPrice;
+        document.querySelector('.color-label-btn').innerText = t.colorLabelBtn;
+        document.querySelector('.apply-colors-btn').innerText = t.applyColorsBtn;
+        document.querySelector('.reset-colors-btn').innerText = t.resetColorsBtn;
+        
+        document.querySelector('.section-title-tools').innerText = t.sectionTools;
+        document.querySelector('.delete-mode-btn').innerText = t.deleteModeBtn;
+        document.querySelector('.edit-mode-btn').innerText = t.editModeBtn;
+        document.querySelector('.instagram-btn').innerText = t.instagramBtn;
+        document.querySelector('.location-btn').innerText = t.locationBtn;
+        
+        document.querySelector('.section-title-broadcast').innerText = t.sectionBroadcast;
+        document.querySelector('.broadcast-btn').innerText = t.broadcastBtn;
+        document.querySelector('.broadcast-text').innerText = t.broadcastText;
+        
+        document.querySelector('.close-btn').innerText = t.closeBtn;
+    }
 }
 
 // ===== TEMA DEĞİŞTİRME =====
@@ -1032,8 +997,10 @@ function toggleTheme() {
 document.addEventListener('keydown', e => { if(e.key === 'Control') ctrlPressed = true; });
 document.addEventListener('keyup', e => { if(e.key === 'Control') ctrlPressed = false; });
 
-// ===== GİRİŞ =====
+// ===== GİRİŞ (SADECE PC) =====
 document.getElementById("logo").addEventListener("click", function() {
+    if(isMobile()) return; // Mobilde çalışmasın
+    
     clickCount++;
     setTimeout(() => clickCount = 0, 3000);
     
@@ -1047,6 +1014,8 @@ document.getElementById("logo").addEventListener("click", function() {
 });
 
 document.addEventListener('keydown', function(e) {
+    if(isMobile()) return; // Mobilde çalışmasın
+    
     if(e.key === 'F5' && ctrlPressed) {
         e.preventDefault();
         let pass = prompt("🔐 Şifre (Ctrl+F5):");
@@ -1057,59 +1026,37 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// ===== SÜRÜKLEME =====
+// ===== SÜRÜKLEME (SADECE PC) =====
 let isDragging = false, xOffset = 0, yOffset = 0;
 const panel = document.getElementById('devPanel');
 const header = document.getElementById('panelHeader');
 
-header.addEventListener('mousedown', e => {
-    if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-    isDragging = true;
-    xOffset = e.clientX - panel.offsetLeft;
-    yOffset = e.clientY - panel.offsetTop;
-    panel.style.transition = 'none';
-});
+if(!isMobile()) {
+    header.addEventListener('mousedown', e => {
+        if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
+        isDragging = true;
+        xOffset = e.clientX - panel.offsetLeft;
+        yOffset = e.clientY - panel.offsetTop;
+        panel.style.transition = 'none';
+    });
 
-document.addEventListener('mousemove', e => {
-    if(!isDragging) return;
-    e.preventDefault();
-    panel.style.left = (e.clientX - xOffset) + 'px';
-    panel.style.top = (e.clientY - yOffset) + 'px';
-    panel.style.transform = 'none';
-});
+    document.addEventListener('mousemove', e => {
+        if(!isDragging) return;
+        e.preventDefault();
+        panel.style.left = (e.clientX - xOffset) + 'px';
+        panel.style.top = (e.clientY - yOffset) + 'px';
+        panel.style.transform = 'none';
+    });
 
-document.addEventListener('mouseup', () => {
-    isDragging = false;
-    panel.style.transition = 'box-shadow 0.3s ease';
-});
-
-// Dokunmatik ekran için
-header.addEventListener('touchstart', e => {
-    if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-    isDragging = true;
-    const touch = e.touches[0];
-    xOffset = touch.clientX - panel.offsetLeft;
-    yOffset = touch.clientY - panel.offsetTop;
-    panel.style.transition = 'none';
-    e.preventDefault();
-});
-
-document.addEventListener('touchmove', e => {
-    if(!isDragging) return;
-    e.preventDefault();
-    const touch = e.touches[0];
-    panel.style.left = (touch.clientX - xOffset) + 'px';
-    panel.style.top = (touch.clientY - yOffset) + 'px';
-    panel.style.transform = 'none';
-});
-
-document.addEventListener('touchend', () => {
-    isDragging = false;
-    panel.style.transition = 'box-shadow 0.3s ease';
-});
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        panel.style.transition = 'box-shadow 0.3s ease';
+    });
+}
 
 // ===== PANEL =====
 function openDevPanel() {
+    if(isMobile()) return; // Mobilde açma
     panel.classList.add('open');
     updateCategorySelect();
     loadColors();
@@ -1125,8 +1072,9 @@ function closeDevPanel() {
     });
 }
 
-// ===== KATEGORİ =====
+// ===== KATEGORİ (SADECE PC) =====
 function updateCategorySelect() {
+    if(isMobile()) return;
     let select = document.getElementById('categorySelect');
     select.innerHTML = '';
     document.querySelectorAll('.card').forEach((card, i) => {
@@ -1138,6 +1086,7 @@ function updateCategorySelect() {
 }
 
 function addCategory() {
+    if(isMobile()) return;
     let name = document.getElementById('newCategory').value.trim();
     if(!name) return;
     
@@ -1152,6 +1101,7 @@ function addCategory() {
 }
 
 function addProduct() {
+    if(isMobile()) return;
     let cat = document.getElementById('categorySelect').value;
     let name = document.getElementById('productName').value.trim();
     let price = document.getElementById('productPrice').value.trim();
@@ -1170,6 +1120,7 @@ function addProduct() {
 }
 
 function deleteCard(btn) {
+    if(isMobile()) return;
     if(confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
         btn.closest('.card').remove();
         updateCategorySelect();
@@ -1177,8 +1128,9 @@ function deleteCard(btn) {
     }
 }
 
-// ===== RENKLER =====
+// ===== RENKLER (SADECE PC) =====
 function loadColors() {
+    if(isMobile()) return;
     document.getElementById('colorCategory').value = localStorage.getItem('colorCategory') || defaultColors.category;
     document.getElementById('colorName').value = localStorage.getItem('colorName') || defaultColors.name;
     document.getElementById('colorPrice').value = localStorage.getItem('colorPrice') || defaultColors.price;
@@ -1214,6 +1166,7 @@ function applyColorsFromData(colors) {
 }
 
 function resetColors() {
+    if(isMobile()) return;
     document.getElementById('colorCategory').value = defaultColors.category;
     document.getElementById('colorName').value = defaultColors.name;
     document.getElementById('colorPrice').value = defaultColors.price;
@@ -1222,8 +1175,9 @@ function resetColors() {
     saveAndBroadcast();
 }
 
-// ===== MODLAR =====
+// ===== MODLAR (SADECE PC) =====
 function toggleDeleteMode() {
+    if(isMobile()) return;
     deleteMode = !deleteMode;
     document.body.classList.toggle('delete-mode', deleteMode);
     
@@ -1237,6 +1191,7 @@ function toggleDeleteMode() {
 }
 
 function toggleEditMode() {
+    if(isMobile()) return;
     editMode = !editMode;
     document.body.classList.toggle('edit-mode', editMode);
     
@@ -1256,9 +1211,9 @@ function toggleEditMode() {
     }
 }
 
-// Ürün silme (delete mode)
+// Ürün silme (delete mode) - SADECE PC
 document.addEventListener('click', function(e) {
-    if(!deleteMode) return;
+    if(isMobile() || !deleteMode) return;
     
     let item = e.target.closest('.item');
     if(item && !e.target.classList.contains('delete-card-btn')) {
@@ -1270,9 +1225,9 @@ document.addEventListener('click', function(e) {
     }
 });
 
-// Fiyat düzenleme (edit mode) - otomatik kaydet
+// Fiyat düzenleme (edit mode) - otomatik kaydet - SADECE PC
 document.addEventListener('blur', function(e) {
-    if(!editMode) return;
+    if(isMobile() || !editMode) return;
     
     if(e.target.classList.contains('item-price')) {
         saveAndBroadcast();
@@ -1280,8 +1235,9 @@ document.addEventListener('blur', function(e) {
     }
 }, true);
 
-// ===== INSTAGRAM & KONUM =====
+// ===== INSTAGRAM & KONUM (SADECE PC) =====
 function updateInstagram() {
+    if(isMobile()) return;
     let link = prompt('Yeni Instagram linki:', 'https://www.instagram.com/tosttooyevski/');
     if(link) {
         document.getElementById('instaLink').href = link;
@@ -1290,6 +1246,7 @@ function updateInstagram() {
 }
 
 function updateLocation() {
+    if(isMobile()) return;
     let loc = prompt('Yeni konum (örn: 36.484479,32.101147):');
     if(loc) {
         document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${loc}&output=embed`;
@@ -1299,6 +1256,7 @@ function updateLocation() {
 
 // ===== SUPABASE KAYIT + CANLI YAYIN =====
 async function saveAndBroadcast() {
+    if(isMobile()) return; // Mobilde kaydetme
     showStatus('🔄 Kaydediliyor...', 'loading');
     
     try {
@@ -1382,7 +1340,7 @@ window.onload = async function() {
         document.getElementById('themeToggle').innerHTML = '🌞';
     }
     
-    // Supabase'den yükle
+    // Supabase'den yükle (sadece PC'de yükleme yap, mobilde görüntüleme için)
     const { data } = await supabase.from('settings').select('*').eq('id', 1).single();
     
     if(data) {
