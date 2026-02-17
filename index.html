@@ -130,7 +130,7 @@ body {
     padding-right: 40px;
 }
 
-/* ===== زر حذف القائمة (الكارد) ===== */
+/* ===== زر حذف القائمة (للكمبيوتر فقط) ===== */
 .delete-card-btn {
     position: absolute;
     top: 15px;
@@ -161,10 +161,10 @@ body {
     transform: scale(1.1);
 }
 
-/* للهواتف - يظهر زر الحذف دائماً */
+/* على الهاتف - إخفاء زر الحذف */
 @media (max-width: 768px) {
     .delete-card-btn {
-        opacity: 0.8;
+        display: none;
     }
 }
 
@@ -224,7 +224,13 @@ iframe {
     height: 250px;
 }
 
-/* ===== لوحة المطور - شفافة وقابلة للتحريك ===== */
+/* ===== لوحة المطور - للكمبيوتر فقط ===== */
+@media (max-width: 768px) {
+    .dev-panel {
+        display: none !important;
+    }
+}
+
 .dev-panel {
     position: fixed;
     top: 50%;
@@ -234,22 +240,20 @@ iframe {
     max-width: 500px;
     max-height: 80vh;
     overflow-y: auto;
-    background: rgba(20, 20, 20, 0.85); /* شفاف */
-    backdrop-filter: blur(15px); /* تأثير الزجاج */
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
     padding: 20px;
-    border: 2px solid rgba(255, 140, 0, 0.5);
+    border: 2px solid #ff8c00;
     border-radius: 20px;
     z-index: 2000;
     display: none;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    cursor: move; /* مؤشر التحريك */
+    cursor: move;
     user-select: none;
-    transition: box-shadow 0.3s ease;
 }
 
 .dev-panel:active {
     cursor: grabbing;
-    box-shadow: 0 20px 60px rgba(255, 140, 0, 0.3);
 }
 
 .dev-panel.open {
@@ -285,7 +289,6 @@ iframe {
     background: rgba(0, 0, 0, 0.5);
     border-radius: 12px;
     border: 1px solid rgba(255, 140, 0, 0.3);
-    backdrop-filter: blur(5px);
 }
 
 .dev-section h4 {
@@ -320,7 +323,7 @@ iframe {
     width: 100%;
     padding: 12px;
     margin: 8px 0;
-    background: rgba(255, 140, 0, 0.8);
+    background: #ff8c00;
     border: none;
     color: #fff;
     font-weight: 600;
@@ -329,62 +332,32 @@ iframe {
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
     transition: all 0.3s ease;
-    backdrop-filter: blur(5px);
 }
 
 .dev-panel button:hover {
-    background: rgba(255, 140, 0, 1);
+    background: #ffa233;
     transform: translateY(-2px);
 }
 
 .dev-panel .save-btn {
-    background: rgba(40, 167, 69, 0.8);
+    background: #28a745;
 }
 
 .dev-panel .save-btn:hover {
-    background: rgba(40, 167, 69, 1);
+    background: #34ce57;
 }
 
 .dev-panel .delete-btn {
-    background: rgba(220, 53, 69, 0.8);
+    background: #dc3545;
 }
 
 .dev-panel .delete-btn:hover {
-    background: rgba(220, 53, 69, 1);
+    background: #ff4757;
 }
 
 .dev-panel .close-btn {
-    background: rgba(108, 117, 125, 0.8);
+    background: #6c757d;
     margin-top: 15px;
-}
-
-.dev-panel .close-btn:hover {
-    background: rgba(108, 117, 125, 1);
-}
-
-/* زر التصغير */
-.minimize-btn {
-    background: rgba(255, 140, 0, 0.3) !important;
-    width: 30px !important;
-    height: 30px !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px !important;
-    margin: 0 5px !important;
-}
-
-.dev-panel.minimized {
-    width: 200px;
-    height: auto;
-    min-height: auto;
-    padding: 10px;
-}
-
-.dev-panel.minimized .dev-section {
-    display: none;
 }
 
 /* ===== مؤشرات الحالة ===== */
@@ -402,7 +375,6 @@ iframe {
     animation: slideIn 0.3s ease;
     font-size: 14px;
     max-width: 90%;
-    backdrop-filter: blur(5px);
 }
 
 @keyframes slideIn {
@@ -414,7 +386,14 @@ iframe {
 .status-error { border-color: #dc3545; }
 .status-loading { border-color: #ff8c00; }
 
-/* ===== أوضاع التعديل ===== */
+/* ===== أوضاع التعديل (للكمبيوتر فقط) ===== */
+@media (max-width: 768px) {
+    .delete-mode .item,
+    .edit-mode .item-price {
+        pointer-events: none;
+    }
+}
+
 .delete-mode .item {
     cursor: pointer;
     position: relative;
@@ -475,10 +454,10 @@ iframe {
 
 <body>
 
-<!-- تلميح Ctrl+F5 للكمبيوتر -->
-<div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli</div>
+<!-- تلميح Ctrl+F5 للكمبيوتر فقط -->
+<div class="f5-hint">💻 Ctrl+F5 - Geliştirici Paneli (Sadece PC)</div>
 
-<!-- لوحة المطور - شفافة وقابلة للتحريك -->
+<!-- لوحة المطور - للكمبيوتر فقط -->
 <div class="dev-panel" id="devPanel">
     <!-- رأس اللوحة القابل للسحب -->
     <div class="dev-panel-header" id="panelHeader">
@@ -598,6 +577,11 @@ let clickCount = 0;
 let clickTimer = null;
 let ctrlPressed = false;
 
+// ===== CİHAZ KONTROLÜ =====
+function isMobile() {
+    return window.innerWidth <= 768;
+}
+
 // ===== TEMEL FONKSİYONLAR =====
 function scrollToMenu() {
     document.getElementById("menu").scrollIntoView({behavior: "smooth"});
@@ -616,9 +600,10 @@ document.addEventListener('keyup', function(e) {
     }
 });
 
-// ===== GİRİŞ SİSTEMLERİ =====
-// 1. Telefon için: Logo'ya 5 tıklama
+// ===== GİRİŞ SİSTEMİ - SADECE PC =====
 document.getElementById("logo").addEventListener("click", function() {
+    if(isMobile()) return; // Mobilde tıklama işlemi yok
+    
     clickCount++;
     
     if(clickTimer) clearTimeout(clickTimer);
@@ -639,26 +624,25 @@ document.getElementById("logo").addEventListener("click", function() {
     }
 });
 
-// 2. Bilgisayar için: Ctrl + F5 tuşu
+// Bilgisayar için: Ctrl + F5 tuşu
 document.addEventListener('keydown', function(e) {
+    if(isMobile()) return; // Mobilde çalışmasın
+    
     // Ctrl + F5 kontrolü
     if(e.key === 'F5' && ctrlPressed) {
         e.preventDefault(); // Sayfanın yenilenmesini engelle
         
-        // Sadece bilgisayarda çalışsın
-        if(window.innerWidth > 768) {
-            let password = prompt("🔐 Geliştirici şifresi (Ctrl+F5):");
-            if(password === "momotunc0702") {
-                openDevPanel();
-                showStatus("✅ Geliştirici paneline hoş geldiniz!", "success");
-            } else {
-                showStatus("❌ Yanlış şifre!", "error");
-            }
+        let password = prompt("🔐 Geliştirici şifresi (Ctrl+F5):");
+        if(password === "momotunc0702") {
+            openDevPanel();
+            showStatus("✅ Geliştirici paneline hoş geldiniz!", "success");
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
         }
     }
 });
 
-// ===== SÜRÜKLEME FONKSİYONU =====
+// ===== SÜRÜKLEME FONKSİYONU (SADECE PC) =====
 let isDragging = false;
 let currentX;
 let currentY;
@@ -670,21 +654,17 @@ let yOffset = 0;
 const devPanel = document.getElementById('devPanel');
 const panelHeader = document.getElementById('panelHeader');
 
-panelHeader.addEventListener('mousedown', dragStart);
-panelHeader.addEventListener('touchstart', dragStart, { passive: false });
-document.addEventListener('mousemove', drag);
-document.addEventListener('touchmove', drag, { passive: false });
-document.addEventListener('mouseup', dragEnd);
-document.addEventListener('touchend', dragEnd);
+if(!isMobile()) {
+    panelHeader.addEventListener('mousedown', dragStart);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', dragEnd);
+}
 
 function dragStart(e) {
-    if (e.type === "touchstart") {
-        initialX = e.touches[0].clientX - xOffset;
-        initialY = e.touches[0].clientY - yOffset;
-    } else {
-        initialX = e.clientX - xOffset;
-        initialY = e.clientY - yOffset;
-    }
+    if(isMobile()) return;
+    
+    initialX = e.clientX - xOffset;
+    initialY = e.clientY - yOffset;
 
     if (e.target === panelHeader || e.target.closest('.dev-panel-header')) {
         isDragging = true;
@@ -694,25 +674,22 @@ function dragStart(e) {
 }
 
 function drag(e) {
-    if (isDragging) {
-        e.preventDefault();
-        
-        if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - initialX;
-            currentY = e.touches[0].clientY - initialY;
-        } else {
-            currentX = e.clientX - initialX;
-            currentY = e.clientY - initialY;
-        }
+    if(isMobile() || !isDragging) return;
+    
+    e.preventDefault();
+    
+    currentX = e.clientX - initialX;
+    currentY = e.clientY - initialY;
 
-        xOffset = currentX;
-        yOffset = currentY;
+    xOffset = currentX;
+    yOffset = currentY;
 
-        setTranslate(currentX, currentY, devPanel);
-    }
+    setTranslate(currentX, currentY, devPanel);
 }
 
 function dragEnd() {
+    if(isMobile()) return;
+    
     isDragging = false;
     devPanel.style.cursor = 'move';
     devPanel.style.transition = 'box-shadow 0.3s ease';
@@ -724,6 +701,8 @@ function setTranslate(xPos, yPos, el) {
 
 // ===== PANEL KONTROLLERİ =====
 function openDevPanel() {
+    if(isMobile()) return; // Mobilde açma
+    
     // Merkeze getir
     const panelWidth = devPanel.offsetWidth;
     const panelHeight = devPanel.offsetHeight;
@@ -742,6 +721,8 @@ function openDevPanel() {
 }
 
 function closeDevPanel() {
+    if(isMobile()) return;
+    
     devPanel.classList.remove("open");
     
     // Modları kapat
@@ -773,6 +754,8 @@ function updateCategorySelect() {
 }
 
 function addCategory() {
+    if(isMobile()) return;
+    
     let name = document.getElementById("newCategory").value.trim();
     if(!name) {
         showStatus("⚠️ Kategori adı girin!", "error");
@@ -792,6 +775,8 @@ function addCategory() {
 }
 
 function addProduct() {
+    if(isMobile()) return;
+    
     let categoryIndex = document.getElementById("categorySelect").value;
     let name = document.getElementById("productName").value.trim();
     let price = document.getElementById("productPrice").value.trim();
@@ -816,6 +801,8 @@ function addProduct() {
 
 // ===== KART SİLME FONKSİYONU =====
 function deleteCard(btn) {
+    if(isMobile()) return;
+    
     if(confirm("🗑️ Bu kategoriyi silmek istediğinize emin misiniz?")) {
         let card = btn.closest(".card");
         card.remove();
@@ -826,6 +813,8 @@ function deleteCard(btn) {
 
 // ===== FİYAT İŞLEMLERİ =====
 function updateMainPrice() {
+    if(isMobile()) return;
+    
     let newPrice = document.getElementById("newPrice").value;
     if(newPrice && !isNaN(newPrice)) {
         document.getElementById("price").innerText = newPrice + "₺";
@@ -836,8 +825,10 @@ function updateMainPrice() {
     }
 }
 
-// ===== MODLAR =====
+// ===== MODLAR (SADECE PC) =====
 function toggleDeleteMode() {
+    if(isMobile()) return;
+    
     deleteMode = !deleteMode;
     if(deleteMode) {
         document.body.classList.add("delete-mode");
@@ -851,6 +842,8 @@ function toggleDeleteMode() {
 }
 
 function toggleEditMode() {
+    if(isMobile()) return;
+    
     editMode = !editMode;
     if(editMode) {
         document.body.classList.add("edit-mode");
@@ -872,19 +865,21 @@ function toggleEditMode() {
 
 // ===== ÜRÜN SİLME (Delete Mode) =====
 document.addEventListener("click", function(e) {
-    if(deleteMode) {
-        let item = e.target.closest(".item");
-        if(item && !e.target.classList.contains("delete-card-btn")) {
-            if(confirm("🗑️ Bu ürünü silmek istediğinize emin misiniz?")) {
-                item.remove();
-                showStatus("✅ Ürün silindi!", "success");
-            }
+    if(isMobile() || !deleteMode) return;
+    
+    let item = e.target.closest(".item");
+    if(item && !e.target.classList.contains("delete-card-btn")) {
+        if(confirm("🗑️ Bu ürünü silmek istediğinize emin misiniz?")) {
+            item.remove();
+            showStatus("✅ Ürün silindi!", "success");
         }
     }
 });
 
 // ===== İNSTAGRAM VE KONUM =====
 function updateInstagram() {
+    if(isMobile()) return;
+    
     let newLink = prompt("Yeni Instagram linkini girin:");
     if(newLink) {
         document.getElementById("instaLink").href = newLink;
@@ -893,6 +888,8 @@ function updateInstagram() {
 }
 
 function updateLocation() {
+    if(isMobile()) return;
+    
     let newLocation = prompt("Yeni konum girin (örn: 36.484479,32.101147):");
     if(newLocation) {
         document.getElementById("mapFrame").src = 
@@ -903,11 +900,15 @@ function updateLocation() {
 
 // ===== MENÜ YÖNETİMİ =====
 function saveToLocal() {
+    if(isMobile()) return;
+    
     localStorage.setItem("menuHTML", document.getElementById("menu").innerHTML);
     showStatus("💾 Tarayıcıya kaydedildi!", "success");
 }
 
 function loadFromLocal() {
+    if(isMobile()) return;
+    
     let savedMenu = localStorage.getItem("menuHTML");
     if(savedMenu) {
         document.getElementById("menu").innerHTML = savedMenu;
@@ -919,6 +920,8 @@ function loadFromLocal() {
 }
 
 function resetToDefault() {
+    if(isMobile()) return;
+    
     if(confirm("⚠️ Varsayılana dönülsün mü? Tüm değişiklikler silinecek!")) {
         localStorage.clear();
         location.reload();
@@ -953,23 +956,16 @@ window.onload = function() {
     let price = document.getElementById("price");
     price.addEventListener("blur", function() {
         let value = this.innerText.replace('₺', '').trim();
-        if(value && !isNaN(value)) {
+        if(value && !isNaN(value) && !isMobile()) {
             showStatus("✅ Fiyat güncellendi!", "success");
         }
     });
     
-    // Pencere boyutu değiştiğinde paneli sınırla
+    // Pencere boyutu değiştiğinde
     window.addEventListener('resize', function() {
-        if(devPanel.classList.contains('open')) {
-            const panelWidth = devPanel.offsetWidth;
-            const panelHeight = devPanel.offsetHeight;
-            const windowWidth = window.innerWidth;
-            const windowHeight = window.innerHeight;
-            
-            xOffset = Math.max(0, Math.min(xOffset, windowWidth - panelWidth));
-            yOffset = Math.max(0, Math.min(yOffset, windowHeight - panelHeight));
-            
-            setTranslate(xOffset, yOffset, devPanel);
+        if(isMobile()) {
+            // Mobilde paneli kapat
+            devPanel.classList.remove("open");
         }
     });
 };
