@@ -7,615 +7,486 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:Poppins;
-background:#111;
-color:white;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.hero{
-height:100vh;
-background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url("https://i.postimg.cc/k5TwQCVb/hero.jpg") center/cover no-repeat;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
 }
 
-.hero h1{
-font-size:60px;
-color:#ff8c00;
-cursor:pointer;
-margin:0
+/* ===== القسم الرئيسي ===== */
+.main-content {
+    flex: 1;
+    margin-left: 450px; /* مساحة للوحة المطور */
+    transition: margin-left 0.3s ease;
 }
 
-.work-time{
-margin-top:15px;
-font-size:20px;
-color:#ff8c00;
-font-weight:600;
+/* الهيرو مع الصورة */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero h1 {
+    font-size: 80px;
+    color: #ff8c00;
+    margin: 0;
+    cursor: pointer;
+    text-shadow: 0 0 20px rgba(255,140,0,0.5);
+}
+
+.work-time {
+    font-size: 20px;
+    margin: 20px 0;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 30px;
+    border: 1px solid #ff8c00;
+    backdrop-filter: blur(5px);
 }
 
 .price-container {
-    margin-top: 15px;
-    font-size: 24px;
+    margin: 20px 0;
+    font-size: 28px;
+    background: rgba(0,0,0,0.7);
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 1px solid #ff8c00;
+    backdrop-filter: blur(5px);
 }
 
 #price {
     color: #ff8c00;
     font-weight: bold;
-    padding: 5px 10px;
+    font-size: 32px;
+}
+
+.btn {
+    background: #ff8c00;
+    border: none;
+    padding: 15px 40px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
+}
+
+/* المنيو */
+.container {
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.container h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: rgba(30, 30, 30, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 30px;
+    border: 1px solid rgba(255,140,0,0.3);
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 10px;
+}
+
+.name {
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+/* الاتصال */
+.contact {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(to top, #000, #1a1a1a);
+    margin-top: 50px;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
+}
+
+.contact a {
+    color: #ff8c00;
+    text-decoration: none;
+}
+
+iframe {
+    border-radius: 15px;
+    margin-top: 30px;
+    border: 3px solid #ff8c00;
+    max-width: 100%;
+}
+
+/* ===== لوحة المطور المرئية ===== */
+.dev-panel {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 430px;
+    background: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(20px);
+    padding: 25px;
+    border-right: 3px solid #ff8c00;
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: 10px 0 30px rgba(255,140,0,0.2);
+    animation: slideInLeft 0.3s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.dev-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dev-panel::-webkit-scrollbar-track {
     background: rgba(255,140,0,0.1);
-    border-radius: 5px;
 }
 
-.btn{
-background:#ff8c00;
-padding:12px 25px;
-border:none;
-color:white;
-cursor:pointer;
-margin-top:15px;
-border-radius:6px
+.dev-panel::-webkit-scrollbar-thumb {
+    background: #ff8c00;
+    border-radius: 4px;
 }
 
-.container{
-padding:60px 20px;
-max-width:1100px;
-margin:auto
+.dev-panel h3 {
+    color: #ff8c00;
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 15px;
 }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px
+.dev-section {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255,140,0,0.1);
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    transition: all 0.3s ease;
 }
 
-.card{
-background:#1e1e1e;
-padding:20px;
-border-radius:10px;
+.dev-section:hover {
+    background: rgba(255,140,0,0.15);
+    transform: scale(1.02);
 }
 
-.card h3{color:#ff8c00;}
-
-.item{
-display:flex;
-justify-content:space-between;
-margin:10px 0;
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-.name{color:#ff8c00;}
-.price{color:white;font-weight:bold}
-
-.contact{
-text-align:center;
-padding:50px 20px;
-background:#000
+.dev-panel input,
+.dev-panel select,
+.dev-panel textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid #333;
+    color: #fff;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
 }
 
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.8);
-backdrop-filter:blur(5px);
-display:none;
-z-index:999;
+.dev-panel input:focus,
+.dev-panel select:focus,
+.dev-panel textarea:focus {
+    border-color: #ff8c00;
+    outline: none;
+    box-shadow: 0 0 10px rgba(255,140,0,0.5);
 }
 
-/* ===== لوحة المطور المتطورة ===== */
-.dev-window{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:95%;
-max-width:500px;
-max-height:90vh;
-overflow-y:auto;
-padding:25px;
-border-radius:20px;
-display:none;
-z-index:1000;
-background:rgba(20,20,20,0.98);
-backdrop-filter:blur(20px);
-border:2px solid #ff8c00;
-box-shadow:0 0 50px rgba(255,140,0,0.3);
-cursor:move;
+.dev-panel button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #ff8c00;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 14px;
 }
 
-.dev-window h3{
-color:#ff8c00;
-font-size:28px;
-text-align:center;
-margin:0 0 20px 0;
-border-bottom:2px solid #ff8c00;
-padding-bottom:10px;
+.dev-panel button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
 }
 
-.dev-section{
-margin:20px 0;
-padding:15px;
-background:rgba(255,140,0,0.1);
-border-radius:12px;
-border:1px solid #ff8c00;
+.dev-panel .save-btn {
+    background: #28a745;
 }
 
-.dev-section h4{
-color:#ff8c00;
-margin:0 0 12px 0;
-font-size:16px;
-display:flex;
-align-items:center;
-gap:8px;
+.dev-panel .save-btn:hover {
+    background: #34ce57;
 }
 
-.dev-window input,
-.dev-window select{
-width:100%;
-padding:10px;
-margin:6px 0;
-background:rgba(0,0,0,.6);
-border:1px solid #333;
-color:white;
-border-radius:8px;
-font-family:Poppins;
+.dev-panel .delete-btn {
+    background: #dc3545;
 }
 
-.dev-window input:focus,
-.dev-window select:focus{
-border-color:#ff8c00;
-outline:none;
-}
-
-.dev-window button{
-width:100%;
-padding:10px;
-margin:6px 0;
-background:#ff8c00;
-border:none;
-color:white;
-border-radius:8px;
-cursor:pointer;
-font-family:Poppins;
-font-weight:600;
-transition:all 0.3s ease;
-}
-
-.dev-window button:hover{
-background:#ffa233;
-transform:translateY(-2px);
-box-shadow:0 5px 15px rgba(255,140,0,0.4);
-}
-
-.save-btn{
-background:#28a745 !important;
-}
-
-.save-btn:hover{
-background:#34ce57 !important;
-}
-
-.delete-btn{
-background:#dc3545 !important;
-}
-
-.delete-btn:hover{
-background:#ff4757 !important;
-}
-
-.close-btn{
-background:#6c757d !important;
-margin-top:20px;
-}
-
-/* وضع الحذف */
-.delete-mode .item:hover{
-outline:2px solid red;
-cursor:pointer;
-background:rgba(255,0,0,0.1);
-}
-
-/* وضع التعديل */
-.edit-mode .price{
-background:#333;
-cursor:text;
+.dev-panel .delete-btn:hover {
+    background: #ff4757;
 }
 
 /* مؤشرات الحالة */
-.status-message{
-position:fixed;
-top:20px;
-right:20px;
-padding:15px 25px;
-border-radius:10px;
-background:rgba(0,0,0,0.9);
-border:2px solid;
-color:white;
-z-index:2000;
-animation:slideIn 0.3s ease;
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 2000;
+    animation: slideInRight 0.3s ease;
 }
 
-@keyframes slideIn{
-from{transform:translateX(100%); opacity:0;}
-to{transform:translateX(0); opacity:1;}
+.status-success {
+    border-color: #28a745;
 }
 
-.status-success{border-color:#28a745;}
-.status-error{border-color:#dc3545;}
-.status-loading{border-color:#ff8c00;}
+.status-error {
+    border-color: #dc3545;
+}
+
+.status-loading {
+    border-color: #ff8c00;
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* وضع الحذف */
+.delete-mode .item {
+    cursor: pointer;
+    position: relative;
+}
+
+.delete-mode .item:hover {
+    background: rgba(255,0,0,0.2);
+    border: 1px solid red;
+}
+
+/* وضع التعديل */
+.edit-mode .item-price {
+    cursor: text;
+    background: rgba(255,140,0,0.2);
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
+/* زر إخفاء/إظهار */
+.toggle-panel {
+    position: fixed;
+    left: 440px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff8c00;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1001;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+}
+
+.toggle-panel:hover {
+    background: #ffa233;
+}
+
+/* لوحة مطوية */
+.dev-panel.collapsed {
+    transform: translateX(-100%);
+}
+
+.main-content.expanded {
+    margin-left: 0;
+}
 </style>
 </head>
 
 <body>
 
-<section class="hero">
-<h1 id="secretTrigger">Tosttoo</h1>
-<div class="work-time">🕒 08:00 - 02:30</div>
-<div class="price-container">💰 Fiyat: <span id="price">60₺</span></div>
-<button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
-</section>
+<!-- زر إخفاء/إظهار اللوحة -->
+<button class="toggle-panel" id="togglePanel" onclick="toggleDevPanel()">◀</button>
 
-<section class="container" id="menu">
-<h2>Menü</h2>
-<div class="grid" id="menuGrid">
-
-<div class="card">
-<h3>Tostlar</h3>
-<div class="item"><span class="name">Kaşarlı Tost</span><span class="price">60₺</span></div>
-<div class="item"><span class="name">Sucuklu Tost</span><span class="price">75₺</span></div>
+<!-- لوحة المطور المرئية -->
+<div class="dev-panel" id="devPanel">
+    <h3>⚙️ Geliştirici Paneli</h3>
+    
+    <!-- Fiyat Bölümü -->
+    <div class="dev-section" id="priceSection">
+        <h4>💰 Fiyat Düzenle</h4>
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
+        <button onclick="hidePriceSection()">👁️ Bölümü Gizle</button>
+    </div>
+    
+    <!-- Ürün Ekleme -->
+    <div class="dev-section">
+        <h4>➕ Ürün Ekle</h4>
+        <select id="categorySelect"></select>
+        <input type="text" id="productName" placeholder="Ürün adı">
+        <input type="text" id="productPrice" placeholder="Fiyat">
+        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
+    </div>
+    
+    <!-- Kategori Ekleme -->
+    <div class="dev-section">
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" placeholder="Yeni kategori adı">
+        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+    </div>
+    
+    <!-- Araçlar -->
+    <div class="dev-section">
+        <h4>🔧 Araçlar</h4>
+        <button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
+        <button onclick="toggleEditMode()">✏️ Düzenleme Modu</button>
+        <button onclick="updateInstagram()">📷 Instagram Güncelle</button>
+        <button onclick="updateLocation()">📍 Konum Güncelle</button>
+    </div>
+    
+    <!-- Supabase -->
+    <div class="dev-section">
+        <h4>💾 Supabase</h4>
+        <button onclick="saveAllToSupabase()" class="save-btn">💾 Tümünü Kaydet</button>
+        <button onclick="loadFromSupabase()">🔄 Verileri Yükle</button>
+        <div id="syncStatus" style="text-align: center; margin-top: 10px;"></div>
+    </div>
+    
+    <!-- Menü Yönetimi -->
+    <div class="dev-section">
+        <h4>📋 Menü Yönetimi</h4>
+        <button onclick="resetToDefault()" class="delete-btn">🔄 Varsayılana Dön</button>
+        <button onclick="clearAllMenu()" class="delete-btn">🗑️ Tüm Menüyü Sil</button>
+    </div>
 </div>
 
-<div class="card">
-<h3>İçecekler</h3>
-<div class="item"><span class="name">Çay</span><span class="price">10₺</span></div>
-<div class="item"><span class="name">Kahve</span><span class="price">15₺</span></div>
-</div>
+<!-- القسم الرئيسي -->
+<div class="main-content" id="mainContent">
+    <!-- الهيرو -->
+    <section class="hero">
+        <h1 id="logo">Tosttoo</h1>
+        <div class="work-time">🕒 08:00 - 02:30</div>
+        <div class="price-container">
+            💰 Fiyat: <span id="price">Yükleniyor...</span> ₺
+        </div>
+        <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
+    </section>
 
-</div>
-</section>
+    <!-- المنيو -->
+    <div class="container" id="menu">
+        <h2>🍽️ Menü</h2>
+        
+        <div class="card" id="card1">
+            <h3>🥪 Tostlar</h3>
+            <div class="item"><span class="name">Kaşarlı Tost</span><span class="item-price">60₺</span></div>
+            <div class="item"><span class="name">Sucuklu Tost</span><span class="item-price">75₺</span></div>
+            <div class="item"><span class="name">Karışık Tost</span><span class="item-price">85₺</span></div>
+        </div>
+        
+        <div class="card" id="card2">
+            <h3>🥤 İçecekler</h3>
+            <div class="item"><span class="name">Çay</span><span class="item-price">10₺</span></div>
+            <div class="item"><span class="name">Kahve</span><span class="item-price">15₺</span></div>
+            <div class="item"><span class="name">Meyve Suyu</span><span class="item-price">20₺</span></div>
+        </div>
+        
+        <div class="card" id="card3">
+            <h3>🍰 Tatlılar</h3>
+            <div class="item"><span class="name">Künefe</span><span class="item-price">50₺</span></div>
+            <div class="item"><span class="name">Baklava</span><span class="item-price">45₺</span></div>
+            <div class="item"><span class="name">Sütlaç</span><span class="item-price">30₺</span></div>
+        </div>
+    </div>
 
-<section class="contact">
-<h2>İletişim</h2>
-<p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
-<p>📷 <a id="instaLink" href="https://instagram.com" target="_blank" style="color:#ff8c00">Instagram</a></p>
-<iframe id="mapFrame"
-src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"
-width="100%" height="300"></iframe>
-</section>
-
-<div class="overlay" id="overlay"></div>
-
-<!-- ===== لوحة المطور المتطورة ===== -->
-<div class="dev-window" id="devPanel">
-<h3>⚡ PRO Developer Panel</h3>
-
-<!-- Fiyat Bölümü -->
-<div class="dev-section">
-<h4>💰 Fiyat Düzenle</h4>
-<input type="number" id="newPrice" placeholder="Yeni fiyat girin">
-<button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
-<button onclick="togglePriceEdit()">✏️ Doğrudan Düzenle</button>
-</div>
-
-<!-- Ürün Ekleme -->
-<div class="dev-section">
-<h4>➕ Ürün Ekle</h4>
-<select id="categorySelect"></select>
-<input type="text" id="newName" placeholder="Ürün Adı">
-<input type="text" id="productPrice" placeholder="Fiyat">
-<button onclick="addProduct()">✅ Ürün Ekle</button>
-</div>
-
-<!-- Kategori Ekleme -->
-<div class="dev-section">
-<h4>📁 Kategori Ekle</h4>
-<input type="text" id="newCategory" placeholder="Yeni Kategori">
-<button onclick="addCategory()">📁 Kategori Ekle</button>
-</div>
-
-<!-- Araçlar -->
-<div class="dev-section">
-<h4>🔧 Araçlar</h4>
-<button onclick="toggleDeleteMode()">🗑️ Silme Modu</button>
-<button onclick="enableEdit()">✏️ Fiyat Düzenleme</button>
-<button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
-</div>
-
-<!-- Sosyal Medya -->
-<div class="dev-section">
-<h4>📱 Sosyal Medya</h4>
-<input type="text" id="newInstagram" placeholder="Instagram Link">
-<button onclick="changeInstagram()">📷 Instagram Güncelle</button>
-<input type="text" id="newLocation" placeholder="Konum (örn: 36.484479,32.101147)">
-<button onclick="changeLocation()">📍 Konum Güncelle</button>
-</div>
-
-<!-- Supabase Senkronizasyon -->
-<div class="dev-section">
-<h4>💾 Supabase</h4>
-<button onclick="saveToSupabase()" class="save-btn">💾 Tümünü Kaydet</button>
-<button onclick="loadFromSupabase()">🔄 Verileri Yükle</button>
-<div id="syncStatus" style="text-align:center; margin-top:10px; font-size:14px;"></div>
-</div>
-
-<button onclick="closeDev()" class="close-btn">❌ Kapat</button>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-// ===== SUPABASE KONFİGÜRASYONU =====
-const supabaseUrl = "https://cufbyiefzbgygtyibupl.supabase.co";
-const supabaseKey = "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr";
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
-
-let isDeveloper = false;
-let deleteMode = false;
-let priceEditMode = false;
-
-// ===== TEMEL FONKSİYONLAR =====
-function scrollToMenu() {
-    document.getElementById("menu").scrollIntoView({behavior:"smooth"});
-}
-
-// ===== GİZLİ GİRİŞ =====
-let tap=0,timer=null;
-document.getElementById("secretTrigger").onclick=function(){
-tap++;
-if(tap==1){timer=setTimeout(()=>tap=0,5000);}
-if(tap==5){
-clearTimeout(timer);
-tap=0;
-let pass=prompt("🔐 Şifre gir:");
-if(pass==="momotunc0702") openDev();
-}
-};
-
-function openDev(){
-document.getElementById("devPanel").style.display="block";
-document.getElementById("overlay").style.display="block";
-isDeveloper=true;
-updateCategorySelect();
-document.getElementById("newPrice").value = document.getElementById("price").innerText.replace('₺','');
-}
-
-function closeDev(){
-isDeveloper=false;
-deleteMode=false;
-priceEditMode=false;
-document.getElementById("devPanel").style.display="none";
-document.getElementById("overlay").style.display="none";
-document.querySelectorAll(".price").forEach(p=>{
-p.contentEditable=false;
-p.style.background="transparent";
-});
-document.body.classList.remove("delete-mode");
-document.body.classList.remove("edit-mode");
-}
-
-// ===== KATEGORİ İŞLEMLERİ =====
-function updateCategorySelect(){
-let select=document.getElementById("categorySelect");
-select.innerHTML="";
-document.querySelectorAll(".card h3").forEach((h,i)=>{
-let o=document.createElement("option");
-o.textContent=h.innerText;
-o.value=i;
-select.appendChild(o);
-});
-}
-
-function addCategory(){
-if(!isDeveloper) return;
-let name=document.getElementById("newCategory").value.trim();
-if(!name) return;
-let card=document.createElement("div");
-card.className="card";
-card.innerHTML="<h3>"+name+"</h3>";
-document.getElementById("menuGrid").appendChild(card);
-updateCategorySelect();
-document.getElementById("newCategory").value="";
-showStatus("✅ Kategori eklendi","success");
-}
-
-function addProduct(){
-if(!isDeveloper) return;
-let name=document.getElementById("newName").value.trim();
-let price=document.getElementById("productPrice").value.trim();
-if(!name||!price) return;
-
-let cards=document.querySelectorAll(".card");
-let index=document.getElementById("categorySelect").value;
-if(cards[index]){
-let div=document.createElement("div");
-div.className="item";
-div.innerHTML="<span class='name'>"+name+"</span><span class='price'>"+price+"₺</span>";
-cards[index].appendChild(div);
-document.getElementById("newName").value="";
-document.getElementById("productPrice").value="";
-showStatus("✅ Ürün eklendi","success");
-}
-}
-
-// ===== FİYAT İŞLEMLERİ =====
-function updateMainPrice(){
-if(!isDeveloper) return;
-let newPrice=document.getElementById("newPrice").value;
-if(newPrice && !isNaN(newPrice)){
-document.getElementById("price").innerText = newPrice+"₺";
-showStatus("✅ Fiyat güncellendi","success");
-}
-}
-
-function togglePriceEdit(){
-if(!isDeveloper) return;
-priceEditMode = !priceEditMode;
-let priceElement = document.getElementById("price");
-if(priceEditMode){
-priceElement.contentEditable = true;
-priceElement.style.background = "#333";
-priceElement.focus();
-} else {
-priceElement.contentEditable = false;
-priceElement.style.background = "transparent";
-}
-}
-
-document.getElementById("price").addEventListener("blur", function(){
-if(priceEditMode){
-priceEditMode = false;
-this.contentEditable = false;
-this.style.background = "transparent";
-showStatus("✅ Fiyat güncellendi","success");
-}
-});
-
-// ===== SİLME MODU =====
-function toggleDeleteMode(){
-if(!isDeveloper) return;
-deleteMode=!deleteMode;
-document.getElementById("menuGrid").classList.toggle("delete-mode",deleteMode);
-showStatus(deleteMode ? "🗑️ Silme modu aktif" : "🔒 Silme modu kapalı","success");
-}
-
-document.getElementById("menuGrid").addEventListener("click",function(e){
-if(!deleteMode) return;
-let item=e.target.closest(".item");
-let card=e.target.closest(".card");
-if(item && confirm("Silmek istiyor musun?")){
-item.remove();
-showStatus("✅ Silindi","success");
-} else if(card && card.querySelectorAll(".item").length === 0 && confirm("Kategoriyi sil?")){
-card.remove();
-updateCategorySelect();
-showStatus("✅ Kategori silindi","success");
-}
-});
-
-// ===== DÜZENLEME MODU =====
-function enableEdit(){
-if(!isDeveloper) return;
-document.querySelectorAll(".price").forEach(p=>{
-p.contentEditable=true;
-p.style.background="#333";
-});
-document.body.classList.add("edit-mode");
-showStatus("✏️ Fiyatları düzenleyebilirsiniz","success");
-}
-
-// ===== TOPLU İŞLEMLER =====
-function deleteAll(){
-if(!isDeveloper) return;
-if(confirm("Tüm menü silinsin mi?")){
-document.getElementById("menuGrid").innerHTML="";
-updateCategorySelect();
-showStatus("🗑️ Tüm menü silindi","success");
-}
-}
-
-function changeInstagram(){
-if(!isDeveloper) return;
-let val=document.getElementById("newInstagram").value.trim();
-if(val){
-document.getElementById("instaLink").href=val;
-showStatus("✅ Instagram güncellendi","success");
-}
-}
-
-function changeLocation(){
-if(!isDeveloper) return;
-let val=document.getElementById("newLocation").value.trim();
-if(val){
-document.getElementById("mapFrame").src=
-"https://www.google.com/maps?q="+val+"&output=embed";
-showStatus("✅ Konum güncellendi","success");
-}
-}
-
-// ===== SUPABASE FONKSİYONLARI =====
-async function saveToSupabase() {
-showStatus("🔄 Kaydediliyor...","loading");
-try {
-const mainPrice = document.getElementById("price").innerText;
-await supabase.from("settings").update({ price: mainPrice }).eq("id", 1);
-
-const menuData = [];
-document.querySelectorAll(".card").forEach(card => {
-let category = card.querySelector("h3").innerText;
-let items = [];
-card.querySelectorAll(".item").forEach(item => {
-items.push({
-name: item.querySelector(".name").innerText,
-price: item.querySelector(".price").innerText
-});
-});
-menuData.push({ category, items });
-});
-
-await supabase.from("settings").update({ menu_data: JSON.stringify(menuData) }).eq("id", 1);
-showStatus("✅ Supabase'e kaydedildi!","success");
-} catch(err) {
-showStatus("❌ Kayıt hatası!","error");
-}
-}
-
-async function loadFromSupabase() {
-showStatus("🔄 Yükleniyor...","loading");
-try {
-const { data, error } = await supabase.from("settings").select("*").eq("id", 1).single();
-if(data) {
-if(data.price) document.getElementById("price").innerText = data.price;
-showStatus("✅ Veriler yüklendi!","success");
-}
-} catch(err) {
-showStatus("❌ Yükleme hatası!","error");
-}
-}
-
-function showStatus(message, type) {
-const status = document.createElement("div");
-status.className = `status-message status-${type}`;
-status.innerHTML = message;
-document.body.appendChild(status);
-setTimeout(() => status.remove(), 3000);
-}
-
-// ===== SAYFA YÜKLENİNCE =====
-window.onload = function(){
-if(localStorage.getItem("menuData"))
-document.getElementById("menuGrid").innerHTML = localStorage.getItem("menuData");
-if(localStorage.getItem("insta"))
-document.getElementById("instaLink").href = localStorage.getItem("insta");
-if(localStorage.getItem("map"))
-document.getElementById("mapFrame").src = "https://www.google.com/maps?q="+localStorage.getItem("map")+"&output=embed";
-updateCategorySelect();
-};
-
-// ===== SÜRÜKLEME =====
-let devPanel=document.getElementById("devPanel");
-let isDragging=false,offsetX,offsetY;
-devPanel.addEventListener("mousedown",function(e){
-if(e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-isDragging=true;
-offsetX=e.clientX-devPanel.offsetLeft;
-offsetY=e.clientY-devPanel.offsetTop;
-devPanel.style.transform="none";
-});
-
-document.addEventListener("mousemove",function(e){
-if(isDragging){
-devPanel.style.left=(e.clientX-offsetX)+"px";
-devPanel.style.top=(e.clientY-offsetY)+"px";
-}
-});
-
-document.addEventListener("mouseup",function(){
-isDragging=false;
-});
-</script>
-
-</body>
-</html>
+    <!-- الاتصال -->
+    <section class="contact">
+        <h2>📞 İletişim</h2>
+        <p>📞 <a href="tel:05321580207">0532 158 0207</a></p>
+        <p>📷 <a id="instaLink" href="https://instagram.com" target="_blank">Instagram</a></p>
+        <iframe 
+            id="mapFrame"
+            src="https://www.google.com/maps?q=36.484479,32.101147&output=
