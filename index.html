@@ -1,4 +1,37 @@
 <!DOCTYPE html>
+<html>
+<head>
+  <title>موقعي</title>
+</head>
+<body>
+
+<h2 id="price">...</h2>
+
+<!-- هنا تلصق كود Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabase = window.supabase.createClient(
+  "https://cufbyiefzbgygtyibupl.supabase.co",
+  "sb_publishable_mTI9Fl-eMcN3TbLqyQAGNw_fzQF7ssr"
+);
+
+async function loadData() {
+  const { data, error } = await supabase
+    .from("settings")
+    .select("price")
+    .limit(1);
+
+  if (data && data.length > 0) {
+    document.getElementById("price").innerText = data[0].price;
+  }
+}
+
+loadData();
+</script>
+
+</body>
+</html> 
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
