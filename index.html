@@ -639,7 +639,7 @@ iframe {
     <!-- تم إخفاء تلميح النقر -->
     <div class="work-time">🕒 08:00 - 02:30</div>
     
-    <!-- زر Menüyü Gör (يقوم بالريستارت + التمرير للأسفل) -->
+    <!-- زر Menüyü Gör (الآن يعمل الاثنين معاً) -->
     <button class="btn" onclick="restartAndScroll()" id="restartBtn">
         <span id="restartText">Menüyü Gör</span>
     </button>
@@ -695,11 +695,6 @@ iframe {
             <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
         </div>
         <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
-        
-        <!-- زر RESTART الجديد -->
-        <button onclick="restartToOriginal()" class="restart-btn" style="margin-top:10px; background:#ffc107; color:#000; font-weight:bold;">
-            🔄 RESTART (Varsayılana Dön)
-        </button>
     </div>
 
     <div class="dev-section">
@@ -848,9 +843,9 @@ const ORIGINAL_MENU = [
     }
 ];
 
-// ===== دالة RESTART + التمرير (بدون إزعاج المستخدم) =====
+// ===== دالة RESTART + التمرير معاً =====
 function restartAndScroll() {
-    // 1. مسح جميع البيانات المخزنة (بصمت)
+    // 1. مسح جميع البيانات المخزنة
     localStorage.removeItem('tosttoo_menu');
     localStorage.removeItem('menuVersion');
     localStorage.removeItem('lastCloudSave');
@@ -883,11 +878,6 @@ function restartAndScroll() {
     setTimeout(() => {
         document.getElementById('menuGrid').scrollIntoView({ behavior: 'smooth' });
     }, 100);
-}
-
-// ===== دالة RESTART العادية (للاستخدام داخل لوحة المطور) =====
-function restartToOriginal() {
-    restartAndScroll(); // نفس الوظيفة
 }
 
 // متغيرات عامة
