@@ -99,7 +99,7 @@ body {
 
 .container {
     padding: 60px 20px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     scroll-margin-top: 20px;
 }
@@ -113,7 +113,7 @@ body {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
 }
 
@@ -144,13 +144,16 @@ body {
 .item {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 8px 0;
+    padding: 4px 0;
     transition: all 0.3s ease;
     position: relative;
+    border-bottom: 1px dashed rgba(255,140,0,0.2);
 }
 
 .item:hover {
     transform: scale(1.02) translateX(5px);
+    border-bottom: 1px dashed rgba(255,140,0,0.8);
 }
 
 .delete-mode .item:hover {
@@ -167,12 +170,14 @@ body {
 
 .name {
     color: #ff8c00;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 .price {
     color: #fff;
     font-weight: bold;
+    font-size: 15px;
 }
 
 .contact {
@@ -620,15 +625,78 @@ iframe {
     background: #138496;
 }
 
+/* ===== قائمة اختيار اللغة المنبثقة ===== */
+.language-menu {
+    position: fixed;
+    top: 70px;
+    right: 90px;
+    background: #1a1a1a;
+    border: 2px solid #ff8c00;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 150px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.language-menu button {
+    background: #333;
+    color: white;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.language-menu button:hover {
+    background: #ff8c00;
+    transform: translateX(5px);
+}
+
+.light-mode .language-menu {
+    background: #f5f5f5;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button {
+    background: #e0e0e0;
+    color: #333;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button:hover {
+    background: #d97706;
+    color: white;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 40px;
+    }
+    .language-menu {
+        top: 70px;
+        right: 20px;
+        min-width: 120px;
     }
 }
 </style>
 </head>
 
 <body class="" id="body" data-language="tr">
+
+<!-- قائمة اختيار اللغة المنبثقة -->
+<div class="language-menu" id="languageMenu">
+    <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+    <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
+</div>
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
@@ -787,189 +855,123 @@ iframe {
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
-// ===== بيانات المنتجات بثلاث لغات =====
-const MENU_DATA = {
-    tr: [
-        {
-            category: "Tostlar",
-            items: [
-                { name: "Kaşarlı Tost", price: "60₺" },
-                { name: "Sucuklu Tost", price: "75₺" },
-                { name: "Karışık Tost", price: "85₺" },
-                { name: "Izgara Tost", price: "80₺" },
-                { name: "Tavuklu Tost", price: "90₺" }
-            ]
-        },
-        {
-            category: "İçecekler",
-            items: [
-                { name: "Çay", price: "10₺" },
-                { name: "Kahve", price: "15₺" },
-                { name: "Ayran", price: "12₺" },
-                { name: "Kola", price: "20₺" },
-                { name: "Fanta", price: "20₺" },
-                { name: "Su", price: "5₺" }
-            ]
-        },
-        {
-            category: "Tatlılar",
-            items: [
-                { name: "Künefe", price: "70₺" },
-                { name: "Sütlaç", price: "30₺" },
-                { name: "Baklava", price: "40₺" },
-                { name: "Dondurma", price: "25₺" }
-            ]
-        },
-        {
-            category: "Soğuk içecek",
-            items: [
-                { name: "Cola", price: "93₺" },
-                { name: "Churchill", price: "90₺" },
-                { name: "Sprite", price: "89₺" }
-            ]
-        },
-        {
-            category: "Sıcak içecekler",
-            items: [
-                { name: "latte", price: "125₺" },
-                { name: "çay", price: "123₺" },
-                { name: "cappucino", price: "95₺" }
-            ]
-        },
-        {
-            category: "snack",
-            items: [
-                { name: "patates", price: "150₺" }
-            ]
-        },
-        {
-            category: "çorba",
-            items: [
-                { name: "mercimek", price: "190₺" }
-            ]
-        }
-    ],
-    en: [
-        {
-            category: "Toasts",
-            items: [
-                { name: "Cheese Toast", price: "60₺" },
-                { name: "Sausage Toast", price: "75₺" },
-                { name: "Mixed Toast", price: "85₺" },
-                { name: "Grilled Toast", price: "80₺" },
-                { name: "Chicken Toast", price: "90₺" }
-            ]
-        },
-        {
-            category: "Drinks",
-            items: [
-                { name: "Tea", price: "10₺" },
-                { name: "Coffee", price: "15₺" },
-                { name: "Ayran", price: "12₺" },
-                { name: "Cola", price: "20₺" },
-                { name: "Fanta", price: "20₺" },
-                { name: "Water", price: "5₺" }
-            ]
-        },
-        {
-            category: "Desserts",
-            items: [
-                { name: "Kunefe", price: "70₺" },
-                { name: "Rice Pudding", price: "30₺" },
-                { name: "Baklava", price: "40₺" },
-                { name: "Ice Cream", price: "25₺" }
-            ]
-        },
-        {
-            category: "Cold Drinks",
-            items: [
-                { name: "Cola", price: "93₺" },
-                { name: "Churchill", price: "90₺" },
-                { name: "Sprite", price: "89₺" }
-            ]
-        },
-        {
-            category: "Hot Drinks",
-            items: [
-                { name: "Latte", price: "125₺" },
-                { name: "Tea", price: "123₺" },
-                { name: "Cappuccino", price: "95₺" }
-            ]
-        },
-        {
-            category: "Snack",
-            items: [
-                { name: "Potato", price: "150₺" }
-            ]
-        },
-        {
-            category: "Soup",
-            items: [
-                { name: "Lentil", price: "190₺" }
-            ]
-        }
-    ],
-    ru: [
-        {
-            category: "Тосты",
-            items: [
-                { name: "Сырный тост", price: "60₺" },
-                { name: "Тост с колбасой", price: "75₺" },
-                { name: "Смешанный тост", price: "85₺" },
-                { name: "Тост на гриле", price: "80₺" },
-                { name: "Тост с курицей", price: "90₺" }
-            ]
-        },
-        {
-            category: "Напитки",
-            items: [
-                { name: "Чай", price: "10₺" },
-                { name: "Кофе", price: "15₺" },
-                { name: "Айран", price: "12₺" },
-                { name: "Кола", price: "20₺" },
-                { name: "Фанта", price: "20₺" },
-                { name: "Вода", price: "5₺" }
-            ]
-        },
-        {
-            category: "Десерты",
-            items: [
-                { name: "Кюнефе", price: "70₺" },
-                { name: "Рисовый пудинг", price: "30₺" },
-                { name: "Пахлава", price: "40₺" },
-                { name: "Мороженое", price: "25₺" }
-            ]
-        },
-        {
-            category: "Холодные напитки",
-            items: [
-                { name: "Кола", price: "93₺" },
-                { name: "Черчилль", price: "90₺" },
-                { name: "Спрайт", price: "89₺" }
-            ]
-        },
-        {
-            category: "Горячие напитки",
-            items: [
-                { name: "Латте", price: "125₺" },
-                { name: "Чай", price: "123₺" },
-                { name: "Капучино", price: "95₺" }
-            ]
-        },
-        {
-            category: "Закуски",
-            items: [
-                { name: "Картошка", price: "150₺" }
-            ]
-        },
-        {
-            category: "Суп",
-            items: [
-                { name: "Чечевичный", price: "190₺" }
-            ]
-        }
-    ]
-};
+// ===== المنيو الجديد الكامل مع جميع الأقسام =====
+const FULL_MENU = [
+    {
+        category: "TOST ÇEŞİTLERİ",
+        items: [
+            { name: "Kaşarlı tost", price: "120₺" },
+            { name: "Sucuklu tost", price: "120₺" },
+            { name: "Kaşar sucuk mix", price: "150₺" },
+            { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" },
+            { name: "3 peynirli tost", price: "150₺" },
+            { name: "Kavurmalı tost", price: "200₺" },
+            { name: "Ayvalık tostu", price: "200₺" },
+            { name: "Simit tost (2 kişilik)", price: "350₺" },
+            { name: "Diyet tost (light kaşar,domates,biber,diyet ekmeği)", price: "150₺" },
+            { name: "Bazlama tost", price: "200₺" },
+            { name: "Bazlama kavurmalı", price: "250₺" },
+            { name: "Kumru", price: "200₺" }
+        ]
+    },
+    {
+        category: "SANDWİCHLER",
+        items: [
+            { name: "Karışık sandwich", price: "150₺" },
+            { name: "Tonbalıklı sandwich", price: "200₺" },
+            { name: "Tavuklu sandwich", price: "170₺" }
+        ]
+    },
+    {
+        category: "ATIŞTIRMALIKLAR",
+        items: [
+            { name: "Patates cips", price: "120₺" },
+            { name: "Tavuk parçacıkları", price: "150₺" },
+            { name: "6 lı soğan halkası", price: "60₺" }
+        ]
+    },
+    {
+        category: "SALATALAR",
+        items: [
+            { name: "Tonbalıklı salata", price: "250₺" },
+            { name: "Tavuklu salata", price: "250₺" },
+            { name: "Peynirli salata", price: "200₺" }
+        ]
+    },
+    {
+        category: "MAKARNALAR",
+        items: [
+            { name: "Bolonez makarna", price: "250₺" },
+            { name: "Tavuklu makarna", price: "250₺" },
+            { name: "Peynirli makarna", price: "200₺" },
+            { name: "Tonbalıklı makarna", price: "250₺" }
+        ]
+    },
+    {
+        category: "BURGERLER",
+        items: [
+            { name: "Classik hamburger", price: "300₺" },
+            { name: "Cheese burger", price: "320₺" },
+            { name: "Tavuk burger", price: "280₺" }
+        ]
+    },
+    {
+        category: "PİZZALAR",
+        items: [
+            { name: "Margarita", price: "200₺" },
+            { name: "Sucuklu pizza", price: "250₺" },
+            { name: "Karışık pizza", price: "300₺" },
+            { name: "Kavurmalı pizza", price: "350₺" },
+            { name: "Tonbalıklı pizza", price: "300₺" },
+            { name: "Vegi pizza", price: "230₺" }
+        ]
+    },
+    {
+        category: "KAHVALTILAR",
+        items: [
+            { name: "Kahvaltı tabağı", price: "250₺" },
+            { name: "Serpme kahvaltı (kişi başı)", price: "300₺" },
+            { name: "Menemen", price: "200₺" },
+            { name: "Sucuklu yumurta", price: "200₺" },
+            { name: "Sahanda yumurta", price: "150₺" },
+            { name: "Peynirli yumurta", price: "170₺" },
+            { name: "Kavurmalı yumurta", price: "250₺" }
+        ]
+    },
+    {
+        category: "SICAK İÇECEKLER",
+        items: [
+            { name: "Çay", price: "20₺" },
+            { name: "Ada çayı", price: "20₺" },
+            { name: "Bitki çayı", price: "30₺" },
+            { name: "Türk kahvesi", price: "60₺" },
+            { name: "Osmanlı kahvesi", price: "80₺" },
+            { name: "Menengiç kahvesi", price: "80₺" }
+        ]
+    },
+    {
+        category: "SOĞUK İÇECEKLER",
+        items: [
+            { name: "Su", price: "20₺" },
+            { name: "Soda", price: "30₺" },
+            { name: "Meyveli soda", price: "30₺" },
+            { name: "Beypazarı co'ala", price: "30₺" },
+            { name: "Çamlıca portakal", price: "30₺" },
+            { name: "Niğde gazozu", price: "30₺" },
+            { name: "Ice tea", price: "40₺" },
+            { name: "Ayran küçük", price: "20₺" },
+            { name: "Ayran büyük", price: "30₺" },
+            { name: "Churchill", price: "50₺" }
+        ]
+    },
+    {
+        category: "TATLILAR",
+        items: [
+            { name: "Fırında sütlaç", price: "120₺" },
+            { name: "Sufle", price: "120₺" }
+        ]
+    }
+];
 
 // ===== دالة الريستارت في كل مرة =====
 function performRestart() {
@@ -984,12 +986,11 @@ function performRestart() {
     // إعادة تعيين المتغيرات
     currentVersion = '1.0.0';
     
-    // عرض المنيو حسب اللغة الحالية
-    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
-    displayMenu(menuToShow);
+    // عرض المنيو الكامل
+    displayMenu(FULL_MENU);
     
-    // حفظ المنيو الأصلي في localStorage
-    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
+    // حفظ المنيو في localStorage
+    localStorage.setItem('tosttoo_menu', JSON.stringify(FULL_MENU));
     localStorage.setItem('menuVersion', currentVersion);
     
     // تحديث الواجهة
@@ -1002,25 +1003,29 @@ function scrollToMenu() {
     document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
 }
 
-// متغيرات عامة
-let isDeveloper = false;
-let deleteMode = false;
-let editMode = false;
-let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
-let autoSyncInterval = null;
-let lastCloudData = null;
-let currentLang = localStorage.getItem('lang') || 'tr';
+// ===== إظهار/إخفاء قائمة اللغة =====
+function toggleLanguageMenu() {
+    const menu = document.getElementById('languageMenu');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
+}
+
+// ===== إغلاق قائمة اللغة عند النقر خارجها =====
+document.addEventListener('click', function(event) {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('languageMenu');
+    
+    if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
+        langMenu.style.display = 'none';
+    }
+});
 
 // ===== دالة تغيير اللغة =====
-function changeLanguage() {
-    // تغيير اللغة بالترتيب: tr -> en -> ru -> tr
-    if (currentLang === 'tr') {
-        currentLang = 'en';
-    } else if (currentLang === 'en') {
-        currentLang = 'ru';
-    } else {
-        currentLang = 'tr';
-    }
+function setLanguage(lang) {
+    currentLang = lang;
     
     // حفظ اللغة في localStorage
     localStorage.setItem('lang', currentLang);
@@ -1031,16 +1036,23 @@ function changeLanguage() {
     else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
     else langBtn.textContent = '🇷🇺';
     
+    // إخفاء قائمة اللغة
+    document.getElementById('languageMenu').style.display = 'none';
+    
     // تحديث النصوص
     applyLanguage();
     
-    // إعادة تحميل المنيو حسب اللغة الجديدة
-    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
-    displayMenu(menuToShow);
-    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
-    
-    showStatus(getText('language_changed'), 'success');
+    showStatus('Dil değiştirildi', 'success');
 }
+
+// متغيرات عامة
+let isDeveloper = false;
+let deleteMode = false;
+let editMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let autoSyncInterval = null;
+let lastCloudData = null;
+let currentLang = localStorage.getItem('lang') || 'tr';
 
 // ===== دالة الحصول على النص حسب اللغة =====
 function getText(key) {
@@ -1199,8 +1211,8 @@ window.addEventListener('load', function() {
     else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
     else langBtn.textContent = '🇷🇺';
     
-    // إضافة حدث تغيير اللغة
-    langBtn.onclick = changeLanguage;
+    // إضافة حدث تغيير اللغة (فتح القائمة)
+    langBtn.onclick = toggleLanguageMenu;
     
     // ريستارت في كل مرة يتم فيها تحميل الصفحة
     performRestart();
@@ -1548,7 +1560,7 @@ function loadSavedData() {
     if (savedMenu) {
         displayMenu(JSON.parse(savedMenu));
     } else {
-        displayMenu(MENU_DATA.tr);
+        displayMenu(FULL_MENU);
     }
     
     if (localStorage.getItem("insta")) {
@@ -1775,7 +1787,7 @@ function deleteAll() {
     if(!isDeveloper) return;
     if(confirm("Tüm menü silinsin mi?")) {
         localStorage.removeItem('tosttoo_menu');
-        displayMenu(MENU_DATA.tr);
+        displayMenu(FULL_MENU);
         showStatus("Varsayılan menü yüklendi", "success");
     }
 }
