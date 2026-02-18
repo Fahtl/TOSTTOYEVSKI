@@ -14,6 +14,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
@@ -639,12 +643,15 @@ iframe {
     <!-- تم إخفاء تلميح النقر -->
     <div class="work-time">🕒 08:00 - 02:30</div>
     
-    <!-- زر Menüyü Gör (الآن يعمل الاثنين معاً) -->
-    <button class="btn" onclick="restartAndScroll()" id="restartBtn">
-        <span id="restartText">Menüyü Gör</span>
-    </button>
+    <!-- زر Menüyü Gör مع رابط سلس -->
+    <a href="#menu" style="text-decoration: none;">
+        <button class="btn" id="restartBtn">
+            <span id="restartText">Menüyü Gör</span>
+        </button>
+    </a>
 </section>
 
+<!-- قسم المنيو مع id="menu" -->
 <section class="container" id="menu">
     <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
@@ -1587,4 +1594,4 @@ applyLanguage();
 </script>
 
 </body>
-</html>
+</html> 
