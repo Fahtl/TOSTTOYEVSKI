@@ -218,6 +218,7 @@ iframe {
     transition: all 0.3s ease;
     background: #ff8c00;
     color: white;
+    font-size: 16px;
 }
 
 .control-btn:hover {
@@ -631,7 +632,7 @@ iframe {
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
-    <button class="control-btn" id="langBtn">🌍 EN / TR</button>
+    <button class="control-btn" id="langBtn">🇹🇷</button>
 </div>
 
 <!-- زر تغيير الوضع -->
@@ -666,16 +667,16 @@ iframe {
 
 <!-- لوحة المطور -->
 <div class="dev-window" id="devPanel">
-    <h3 id="dragHandle">⚙️ CLOUD PANEL - GELİŞTİRİLMİŞ</h3>
+    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ</h3>
 
     <div class="dev-section">
-        <h4>💰 Fiyat Düzenle</h4>
+        <h4 class="panel-title" data-tr="💰 Fiyat Düzenle" data-en="💰 Price Edit" data-ru="💰 Редактировать цену">💰 Fiyat Düzenle</h4>
         <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
         <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
     </div>
 
     <div class="dev-section">
-        <h4>➕ Ürün Ekle</h4>
+        <h4 class="panel-title" data-tr="➕ Ürün Ekle" data-en="➕ Add Product" data-ru="➕ Добавить товар">➕ Ürün Ekle</h4>
         <select id="categorySelect"></select>
         <input type="text" id="newName" placeholder="Ürün Adı">
         <input type="text" id="productPrice" placeholder="Fiyat">
@@ -683,18 +684,18 @@ iframe {
     </div>
 
     <div class="dev-section">
-        <h4>📁 Kategori Ekle</h4>
+        <h4 class="panel-title" data-tr="📁 Kategori Ekle" data-en="📁 Add Category" data-ru="📁 Добавить категорию">📁 Kategori Ekle</h4>
         <input type="text" id="newCategory" placeholder="Yeni Kategori">
         <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
     </div>
 
     <div class="dev-section">
-        <h4>🎨 Renk Düzenle</h4>
+        <h4 class="panel-title" data-tr="🎨 Renk Düzenle" data-en="🎨 Color Edit" data-ru="🎨 Редактировать цвет">🎨 Renk Düzenle</h4>
         <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
     </div>
 
     <div class="dev-section">
-        <h4>🔧 Araçlar</h4>
+        <h4 class="panel-title" data-tr="🔧 Araçlar" data-en="🔧 Tools" data-ru="🔧 Инструменты">🔧 Araçlar</h4>
         <div style="display: flex; gap: 5px; margin-bottom: 5px;">
             <button onclick="enableEdit()" style="flex:1; background:#28a745;" id="editModeBtn">✏️ Düzenle</button>
             <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
@@ -703,7 +704,7 @@ iframe {
     </div>
 
     <div class="dev-section">
-        <h4>📱 Sosyal Medya</h4>
+        <h4 class="panel-title" data-tr="📱 Sosyal Medya" data-en="📱 Social Media" data-ru="📱 Социальные сети">📱 Sosyal Medya</h4>
         <input type="text" id="newInstagram" placeholder="Instagram Link">
         <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
         <input type="text" id="newLocation" placeholder="Konum lat,long">
@@ -712,7 +713,7 @@ iframe {
 
     <!-- CLOUD PANEL GELİŞTİRİLMİŞ -->
     <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
-        <h4>☁️ CLOUD SYNC <span class="cloud-badge">GELİŞMİŞ</span></h4>
+        <h4 class="panel-title" data-tr="☁️ CLOUD SYNC" data-en="☁️ CLOUD SYNC" data-ru="☁️ ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ">☁️ CLOUD SYNC <span class="cloud-badge">GELİŞMİŞ</span></h4>
         <div class="cloud-panel">
             <div class="cloud-stats">
                 <span>🌐 API: <span style="color:#00ff00" id="apiStatus">Hazır</span></span>
@@ -729,7 +730,7 @@ iframe {
             </div>
             
             <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;" id="cloudSaveBtn">
-                ☁️ BULUTA KAYDET (HERKESE GÖNDER)
+                ☁️ BULUTA KAYDET
             </button>
             <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
                 📥 BULUTTAN YÜKLE
@@ -751,7 +752,7 @@ iframe {
 
     <!-- Auto-sync -->
     <div class="dev-section">
-        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <h4 class="panel-title" data-tr="⚡ Otomatik Senkronizasyon" data-en="⚡ Auto Sync" data-ru="⚡ Автосинхронизация">⚡ Otomatik Senkronizasyon</h4>
         <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
             <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
         </label>
@@ -786,67 +787,189 @@ iframe {
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
-// ===== المنيو الأصلي الكامل (النسخة الأصلية) =====
-const ORIGINAL_MENU = [
-    {
-        category: "Tostlar",
-        items: [
-            { name: "Kaşarlı Tost", price: "60₺" },
-            { name: "Sucuklu Tost", price: "75₺" },
-            { name: "Karışık Tost", price: "85₺" },
-            { name: "Izgara Tost", price: "80₺" },
-            { name: "Tavuklu Tost", price: "90₺" }
-        ]
-    },
-    {
-        category: "İçecekler",
-        items: [
-            { name: "Çay", price: "10₺" },
-            { name: "Kahve", price: "15₺" },
-            { name: "Ayran", price: "12₺" },
-            { name: "Kola", price: "20₺" },
-            { name: "Fanta", price: "20₺" },
-            { name: "Su", price: "5₺" }
-        ]
-    },
-    {
-        category: "Tatlılar",
-        items: [
-            { name: "Künefe", price: "70₺" },
-            { name: "Sütlaç", price: "30₺" },
-            { name: "Baklava", price: "40₺" },
-            { name: "Dondurma", price: "25₺" }
-        ]
-    },
-    {
-        category: "Soğuk içecek",
-        items: [
-            { name: "Cola", price: "93₺" },
-            { name: "Churchill", price: "90₺" },
-            { name: "Sprite", price: "89₺" }
-        ]
-    },
-    {
-        category: "Sıcak içecekler",
-        items: [
-            { name: "latte", price: "125₺" },
-            { name: "çay", price: "123₺" },
-            { name: "cappucino", price: "95₺" }
-        ]
-    },
-    {
-        category: "snack",
-        items: [
-            { name: "patates", price: "150₺" }
-        ]
-    },
-    {
-        category: "çorba",
-        items: [
-            { name: "mercimek", price: "190₺" }
-        ]
-    }
-];
+// ===== بيانات المنتجات بثلاث لغات =====
+const MENU_DATA = {
+    tr: [
+        {
+            category: "Tostlar",
+            items: [
+                { name: "Kaşarlı Tost", price: "60₺" },
+                { name: "Sucuklu Tost", price: "75₺" },
+                { name: "Karışık Tost", price: "85₺" },
+                { name: "Izgara Tost", price: "80₺" },
+                { name: "Tavuklu Tost", price: "90₺" }
+            ]
+        },
+        {
+            category: "İçecekler",
+            items: [
+                { name: "Çay", price: "10₺" },
+                { name: "Kahve", price: "15₺" },
+                { name: "Ayran", price: "12₺" },
+                { name: "Kola", price: "20₺" },
+                { name: "Fanta", price: "20₺" },
+                { name: "Su", price: "5₺" }
+            ]
+        },
+        {
+            category: "Tatlılar",
+            items: [
+                { name: "Künefe", price: "70₺" },
+                { name: "Sütlaç", price: "30₺" },
+                { name: "Baklava", price: "40₺" },
+                { name: "Dondurma", price: "25₺" }
+            ]
+        },
+        {
+            category: "Soğuk içecek",
+            items: [
+                { name: "Cola", price: "93₺" },
+                { name: "Churchill", price: "90₺" },
+                { name: "Sprite", price: "89₺" }
+            ]
+        },
+        {
+            category: "Sıcak içecekler",
+            items: [
+                { name: "latte", price: "125₺" },
+                { name: "çay", price: "123₺" },
+                { name: "cappucino", price: "95₺" }
+            ]
+        },
+        {
+            category: "snack",
+            items: [
+                { name: "patates", price: "150₺" }
+            ]
+        },
+        {
+            category: "çorba",
+            items: [
+                { name: "mercimek", price: "190₺" }
+            ]
+        }
+    ],
+    en: [
+        {
+            category: "Toasts",
+            items: [
+                { name: "Cheese Toast", price: "60₺" },
+                { name: "Sausage Toast", price: "75₺" },
+                { name: "Mixed Toast", price: "85₺" },
+                { name: "Grilled Toast", price: "80₺" },
+                { name: "Chicken Toast", price: "90₺" }
+            ]
+        },
+        {
+            category: "Drinks",
+            items: [
+                { name: "Tea", price: "10₺" },
+                { name: "Coffee", price: "15₺" },
+                { name: "Ayran", price: "12₺" },
+                { name: "Cola", price: "20₺" },
+                { name: "Fanta", price: "20₺" },
+                { name: "Water", price: "5₺" }
+            ]
+        },
+        {
+            category: "Desserts",
+            items: [
+                { name: "Kunefe", price: "70₺" },
+                { name: "Rice Pudding", price: "30₺" },
+                { name: "Baklava", price: "40₺" },
+                { name: "Ice Cream", price: "25₺" }
+            ]
+        },
+        {
+            category: "Cold Drinks",
+            items: [
+                { name: "Cola", price: "93₺" },
+                { name: "Churchill", price: "90₺" },
+                { name: "Sprite", price: "89₺" }
+            ]
+        },
+        {
+            category: "Hot Drinks",
+            items: [
+                { name: "Latte", price: "125₺" },
+                { name: "Tea", price: "123₺" },
+                { name: "Cappuccino", price: "95₺" }
+            ]
+        },
+        {
+            category: "Snack",
+            items: [
+                { name: "Potato", price: "150₺" }
+            ]
+        },
+        {
+            category: "Soup",
+            items: [
+                { name: "Lentil", price: "190₺" }
+            ]
+        }
+    ],
+    ru: [
+        {
+            category: "Тосты",
+            items: [
+                { name: "Сырный тост", price: "60₺" },
+                { name: "Тост с колбасой", price: "75₺" },
+                { name: "Смешанный тост", price: "85₺" },
+                { name: "Тост на гриле", price: "80₺" },
+                { name: "Тост с курицей", price: "90₺" }
+            ]
+        },
+        {
+            category: "Напитки",
+            items: [
+                { name: "Чай", price: "10₺" },
+                { name: "Кофе", price: "15₺" },
+                { name: "Айран", price: "12₺" },
+                { name: "Кола", price: "20₺" },
+                { name: "Фанта", price: "20₺" },
+                { name: "Вода", price: "5₺" }
+            ]
+        },
+        {
+            category: "Десерты",
+            items: [
+                { name: "Кюнефе", price: "70₺" },
+                { name: "Рисовый пудинг", price: "30₺" },
+                { name: "Пахлава", price: "40₺" },
+                { name: "Мороженое", price: "25₺" }
+            ]
+        },
+        {
+            category: "Холодные напитки",
+            items: [
+                { name: "Кола", price: "93₺" },
+                { name: "Черчилль", price: "90₺" },
+                { name: "Спрайт", price: "89₺" }
+            ]
+        },
+        {
+            category: "Горячие напитки",
+            items: [
+                { name: "Латте", price: "125₺" },
+                { name: "Чай", price: "123₺" },
+                { name: "Капучино", price: "95₺" }
+            ]
+        },
+        {
+            category: "Закуски",
+            items: [
+                { name: "Картошка", price: "150₺" }
+            ]
+        },
+        {
+            category: "Суп",
+            items: [
+                { name: "Чечевичный", price: "190₺" }
+            ]
+        }
+    ]
+};
 
 // ===== دالة الريستارت في كل مرة =====
 function performRestart() {
@@ -861,11 +984,12 @@ function performRestart() {
     // إعادة تعيين المتغيرات
     currentVersion = '1.0.0';
     
-    // عرض المنيو الأصلي مباشرة
-    displayMenu(ORIGINAL_MENU);
+    // عرض المنيو حسب اللغة الحالية
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
     
     // حفظ المنيو الأصلي في localStorage
-    localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
     localStorage.setItem('menuVersion', currentVersion);
     
     // تحديث الواجهة
@@ -885,9 +1009,199 @@ let editMode = false;
 let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let autoSyncInterval = null;
 let lastCloudData = null;
+let currentLang = localStorage.getItem('lang') || 'tr';
+
+// ===== دالة تغيير اللغة =====
+function changeLanguage() {
+    // تغيير اللغة بالترتيب: tr -> en -> ru -> tr
+    if (currentLang === 'tr') {
+        currentLang = 'en';
+    } else if (currentLang === 'en') {
+        currentLang = 'ru';
+    } else {
+        currentLang = 'tr';
+    }
+    
+    // حفظ اللغة في localStorage
+    localStorage.setItem('lang', currentLang);
+    
+    // تحديث زر اللغة
+    const langBtn = document.getElementById('langBtn');
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else langBtn.textContent = '🇷🇺';
+    
+    // تحديث النصوص
+    applyLanguage();
+    
+    // إعادة تحميل المنيو حسب اللغة الجديدة
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
+    
+    showStatus(getText('language_changed'), 'success');
+}
+
+// ===== دالة الحصول على النص حسب اللغة =====
+function getText(key) {
+    const texts = {
+        tr: {
+            menu: 'Menü',
+            contact: 'İletişim',
+            view_menu: 'Menüyü Gör',
+            price_edit: '💰 Fiyat Düzenle',
+            add_product: '➕ Ürün Ekle',
+            add_category: '📁 Kategori Ekle',
+            color_edit: '🎨 Renk Düzenle',
+            tools: '🔧 Araçlar',
+            social: '📱 Sosyal Medya',
+            cloud_sync: '☁️ CLOUD SYNC',
+            auto_sync: '⚡ Otomatik Senkronizasyon',
+            save_price: '💾 Fiyatı Kaydet',
+            product_name: 'Ürün Adı',
+            price: 'Fiyat',
+            category_name: 'Yeni Kategori',
+            edit: '✏️ Düzenle',
+            delete: '🗑️ Silme',
+            delete_all: '🗑️ Tüm Menü Sil',
+            insta_update: '📷 Instagram Güncelle',
+            location_update: '📍 Konum Güncelle',
+            save_cloud: '☁️ BULUTA KAYDET',
+            load_cloud: '📥 BULUTTAN YÜKLE',
+            test_connection: '🔌 BAĞLANTI TESTİ',
+            copy_code: '📋 Kodu Kopyala',
+            paste_code: '📋 Kodu Yapıştır',
+            exit: '❌ Çıkış',
+            language_changed: 'Dil değiştirildi'
+        },
+        en: {
+            menu: 'Menu',
+            contact: 'Contact',
+            view_menu: 'View Menu',
+            price_edit: '💰 Price Edit',
+            add_product: '➕ Add Product',
+            add_category: '📁 Add Category',
+            color_edit: '🎨 Color Edit',
+            tools: '🔧 Tools',
+            social: '📱 Social Media',
+            cloud_sync: '☁️ CLOUD SYNC',
+            auto_sync: '⚡ Auto Sync',
+            save_price: '💾 Save Price',
+            product_name: 'Product Name',
+            price: 'Price',
+            category_name: 'New Category',
+            edit: '✏️ Edit',
+            delete: '🗑️ Delete',
+            delete_all: '🗑️ Delete All Menu',
+            insta_update: '📷 Update Instagram',
+            location_update: '📍 Update Location',
+            save_cloud: '☁️ SAVE TO CLOUD',
+            load_cloud: '📥 LOAD FROM CLOUD',
+            test_connection: '🔌 TEST CONNECTION',
+            copy_code: '📋 Copy Code',
+            paste_code: '📋 Paste Code',
+            exit: '❌ Exit',
+            language_changed: 'Language changed'
+        },
+        ru: {
+            menu: 'Меню',
+            contact: 'Контакты',
+            view_menu: 'Посмотреть меню',
+            price_edit: '💰 Редактировать цену',
+            add_product: '➕ Добавить товар',
+            add_category: '📁 Добавить категорию',
+            color_edit: '🎨 Редактировать цвет',
+            tools: '🔧 Инструменты',
+            social: '📱 Социальные сети',
+            cloud_sync: '☁️ ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ',
+            auto_sync: '⚡ Автосинхронизация',
+            save_price: '💾 Сохранить цену',
+            product_name: 'Название товара',
+            price: 'Цена',
+            category_name: 'Новая категория',
+            edit: '✏️ Редактировать',
+            delete: '🗑️ Удалить',
+            delete_all: '🗑️ Удалить всё меню',
+            insta_update: '📷 Обновить Instagram',
+            location_update: '📍 Обновить местоположение',
+            save_cloud: '☁️ СОХРАНИТЬ В ОБЛАКО',
+            load_cloud: '📥 ЗАГРУЗИТЬ ИЗ ОБЛАКА',
+            test_connection: '🔌 ПРОВЕРИТЬ СОЕДИНЕНИЕ',
+            copy_code: '📋 Копировать код',
+            paste_code: '📋 Вставить код',
+            exit: '❌ Выход',
+            language_changed: 'Язык изменен'
+        }
+    };
+    
+    return texts[currentLang]?.[key] || texts.tr[key];
+}
+
+// ===== تطبيق اللغة على الواجهة =====
+function applyLanguage() {
+    // تحديث عناوين الصفحة الرئيسية
+    document.getElementById('menuTitle').innerText = getText('menu');
+    document.getElementById('contactTitle').innerText = getText('contact');
+    document.getElementById('scrollText').innerText = getText('view_menu');
+    
+    // تحديث لوحة المطور إذا كانت مفتوحة
+    if (isDeveloper) {
+        // تحديث جميع عناوين الأقسام
+        document.querySelectorAll('.panel-title').forEach(el => {
+            const tr = el.getAttribute('data-tr');
+            const en = el.getAttribute('data-en');
+            const ru = el.getAttribute('data-ru');
+            
+            if (currentLang === 'tr' && tr) el.innerText = tr;
+            else if (currentLang === 'en' && en) el.innerText = en;
+            else if (currentLang === 'ru' && ru) el.innerText = ru;
+        });
+        
+        // تحديث الأزرار
+        document.querySelectorAll('.dev-section button').forEach(btn => {
+            if (btn.id === 'editModeBtn') {
+                btn.innerHTML = `✏️ ${getText('edit')}`;
+            } else if (btn.id === 'deleteModeBtn') {
+                btn.innerHTML = `🗑️ ${getText('delete')}`;
+            } else if (btn.onclick?.toString().includes('deleteAll')) {
+                btn.innerHTML = `🗑️ ${getText('delete_all')}`;
+            } else if (btn.onclick?.toString().includes('changeInstagram')) {
+                btn.innerHTML = `📷 ${getText('insta_update')}`;
+            } else if (btn.onclick?.toString().includes('changeLocation')) {
+                btn.innerHTML = `📍 ${getText('location_update')}`;
+            } else if (btn.id === 'cloudSaveBtn') {
+                btn.innerHTML = `☁️ ${getText('save_cloud')}`;
+            } else if (btn.id === 'cloudLoadBtn') {
+                btn.innerHTML = `📥 ${getText('load_cloud')}`;
+            } else if (btn.onclick?.toString().includes('testCloudConnection')) {
+                btn.innerHTML = `🔌 ${getText('test_connection')}`;
+            } else if (btn.onclick?.toString().includes('copyBackupCode')) {
+                btn.innerHTML = `📋 ${getText('copy_code')}`;
+            } else if (btn.onclick?.toString().includes('pasteBackupCode')) {
+                btn.innerHTML = `📋 ${getText('paste_code')}`;
+            } else if (btn.onclick?.toString().includes('closeDev')) {
+                btn.innerHTML = `❌ ${getText('exit')}`;
+            }
+        });
+        
+        // تحديث الـ placeholders
+        document.getElementById('newName').placeholder = getText('product_name');
+        document.getElementById('productPrice').placeholder = getText('price');
+        document.getElementById('newCategory').placeholder = getText('category_name');
+    }
+}
 
 // ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
+    // إعداد زر اللغة
+    const langBtn = document.getElementById('langBtn');
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else langBtn.textContent = '🇷🇺';
+    
+    // إضافة حدث تغيير اللغة
+    langBtn.onclick = changeLanguage;
+    
     // ريستارت في كل مرة يتم فيها تحميل الصفحة
     performRestart();
     
@@ -1234,7 +1548,7 @@ function loadSavedData() {
     if (savedMenu) {
         displayMenu(JSON.parse(savedMenu));
     } else {
-        displayMenu(ORIGINAL_MENU);
+        displayMenu(MENU_DATA.tr);
     }
     
     if (localStorage.getItem("insta")) {
@@ -1322,6 +1636,7 @@ function openDev() {
     isDeveloper = true;
     updateCategorySelect();
     centerPanel();
+    applyLanguage(); // تطبيق اللغة على لوحة المطور
     
     // Menüyü geliştirici modunda yeniden göster
     const savedMenu = localStorage.getItem('tosttoo_menu');
@@ -1414,14 +1729,14 @@ function enableEdit() {
     
     if (editMode) {
         btn.style.background = '#28a745';
-        btn.innerHTML = '✏️ Düzenleme Aktif';
+        btn.innerHTML = `✏️ ${getText('edit')} Aktif`;
         grid.classList.add('edit-mode');
         grid.classList.remove('delete-mode');
-        document.getElementById('deleteModeBtn').innerHTML = '🗑️ Silme';
-        showStatus("✏️ Düzenleme modu aktif! Ürüne tıkla", "success");
+        document.getElementById('deleteModeBtn').innerHTML = `🗑️ ${getText('delete')}`;
+        showStatus(`✏️ ${getText('edit')} modu aktif! Ürüne tıkla`, "success");
     } else {
         btn.style.background = '#28a745';
-        btn.innerHTML = '✏️ Düzenle';
+        btn.innerHTML = `✏️ ${getText('edit')}`;
         grid.classList.remove('edit-mode');
     }
 }
@@ -1438,14 +1753,14 @@ function toggleDeleteMode() {
     
     if (deleteMode) {
         btn.style.background = '#dc3545';
-        btn.innerHTML = '🗑️ Silme Aktif';
+        btn.innerHTML = `🗑️ ${getText('delete')} Aktif`;
         grid.classList.add('delete-mode');
         grid.classList.remove('edit-mode');
-        document.getElementById('editModeBtn').innerHTML = '✏️ Düzenle';
-        showStatus("🗑️ Silme modu aktif! Ürüne tıkla", "success");
+        document.getElementById('editModeBtn').innerHTML = `✏️ ${getText('edit')}`;
+        showStatus(`🗑️ ${getText('delete')} modu aktif! Ürüne tıkla`, "success");
     } else {
         btn.style.background = '#dc3545';
-        btn.innerHTML = '🗑️ Silme';
+        btn.innerHTML = `🗑️ ${getText('delete')}`;
         grid.classList.remove('delete-mode');
     }
 }
@@ -1460,7 +1775,7 @@ function deleteAll() {
     if(!isDeveloper) return;
     if(confirm("Tüm menü silinsin mi?")) {
         localStorage.removeItem('tosttoo_menu');
-        displayMenu(ORIGINAL_MENU);
+        displayMenu(MENU_DATA.tr);
         showStatus("Varsayılan menü yüklendi", "success");
     }
 }
@@ -1511,28 +1826,6 @@ function applyColors() {
     showStatus("🎨 Renkler uygulandı!", "success");
 }
 
-// ===== Dil =====
-let currentLang = localStorage.getItem("lang") || "tr";
-
-function applyLanguage() {
-    const menuTitle = document.getElementById("menuTitle");
-    const contactTitle = document.getElementById("contactTitle");
-    const langBtn = document.getElementById("langBtn");
-    const menuBtn = document.getElementById("scrollBtn").querySelector('span');
-
-    if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
-    if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
-    if (menuBtn) menuBtn.innerText = currentLang === "tr" ? "Menüyü Gör" : "View Menu";
-    if (langBtn) langBtn.innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
-}
-
-document.getElementById("langBtn").onclick = function() {
-    currentLang = currentLang === "tr" ? "en" : "tr";
-    localStorage.setItem("lang", currentLang);
-    applyLanguage();
-    showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
-};
-
 // ===== Tema =====
 const modeToggle = document.getElementById("modeToggle");
 modeToggle.addEventListener("click", function() {
@@ -1577,7 +1870,6 @@ function stopDrag() {
 }
 
 // Başlangıç
-applyLanguage();
 </script>
 
 </body>
