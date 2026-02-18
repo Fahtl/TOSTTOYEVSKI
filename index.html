@@ -703,7 +703,7 @@ let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let autoSyncInterval = null;
 let lastCloudData = null;
 
-// ===== المنيو الكامل الجديد (مع إضافة ₺ للأسعار الناقصة) =====
+// ===== المنيو الكامل الجديد (مع إضافة ₺ للأسعار) =====
 const FULL_MENU = {
   "menu": [
     {
@@ -755,10 +755,33 @@ const FULL_MENU = {
   ]
 };
 
-// ===== تحميل المنيو عند فتح الصفحة =====
+// ===== عرض المنيو مباشرة عند تحميل الصفحة =====
+(function displayMenuImmediately() {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    FULL_MENU.menu.forEach(category => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<h3>${category.category}</h3>`;
+        
+        category.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
+            card.appendChild(itemDiv);
+        });
+        
+        menuGrid.appendChild(card);
+    });
+    
+    updateCategorySelect();
+})();
+
+// ===== تحميل المنيو عند فتح الصفحة (تحديث من السحاب) =====
 window.addEventListener('load', function() {
     loadSavedData();
-    loadMenuFromCloud();
+    loadMenuFromCloud(); // هذا سيحدث المنيو إذا كان هناك جديد في السحاب
     testCloudConnection();
     startAutoSync();
 });
@@ -772,16 +795,11 @@ async function loadMenuFromCloud() {
         
         if (data.menu && data.menu.length > 0) {
             displayMenuFromCloud(data.menu);
-            showStatus('✅ Menü clouddan yüklendi!', 'success');
-        } else {
-            // إذا كان المنيو فارغاً، استخدم المنيو الكامل الجديد
-            displayMenuFromCloud(FULL_MENU.menu);
-            showStatus('📋 Menü yüklendi!', 'success');
+            showStatus('✅ Menü clouddan güncellendi!', 'success');
         }
     } catch(error) {
-        // إذا فشل الاتصال بالسحاب، استخدم المنيو الكامل الجديد
-        displayMenuFromCloud(FULL_MENU.menu);
-        showStatus('📋 Menü yüklendi!', 'success');
+        // إذا فشل الاتصال، المنيو المحلي موجود بالفعل
+        console.log('Cloud bağlantısı başarısız, yerel menü gösteriliyor');
     }
 }
 
@@ -808,13 +826,460 @@ function displayMenuFromCloud(menuData) {
     updateCategorySelect();
 }
 
-// ===== باقي الدوال (نفس الكود السابق) =====
-// [جميع الدوال الأخرى كما هي دون تغيير]
-// النقر المزدوج، F5، الفتح/الإغلاق، الحفظ، التحميل، إلخ...
+// ===== النقر المزدوج للهاتف =====
+let clickCount = 0;
+let clickTimer = null;
 
-// (لقد قمت بحذف باقي الدوال للاختصار، لكنها موجودة في الكود الكامل)
-// عند النسخ، يجب أن تأخذ الكود الكامل من الرد السابق
+document.getElementById('secretTrigger').addEventListener('click', function() {
+    clickCount++;
+    
+    if (clickCount === 1) {
+        clickTimer = setTimeout(() => clickCount = 0, 300);
+    } else if (clickCount === 2) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz! (Çift tıklama)", "success");
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
 
+// ===== F5 =====
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F5') {
+        e.preventDefault();
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz! (F5)", "success");
+        }
+    }
+});
+
+// ===== فتح/إغلاق اللوحة =====
+function openDev() {
+    document.getElementById("devPanel").style.display = "block";
+    isDeveloper = true;
+    updateCategorySelect();
+    centerPanel();
+    
+    let lastSave = localStorage.getItem('lastCloudSave');
+    if (lastSave) document.getElementById('lastCloudSave').innerText = lastSave;
+    document.getElementById('cloudVersion').innerText = currentVersion;
+}
+
+function closeDev() {
+    isDeveloper = false;
+    deleteMode = false;
+    document.getElementById("devPanel").style.display = "none";
+    document.getElementById("menuGrid").classList.remove("delete-mode");
+    closeColorPicker();
+}
+
+function centerPanel() {
+    let panel = document.getElementById("devPanel");
+    panel.style.left = "50%";
+    panel.style.top = "50%";
+    panel.style.transform = "translate(-50%, -50%)";
+}
+
+// ===== الحفظ في السحاب =====
+async function saveToCloud() {
+    showStatus("☁️ Buluta kaydediliyor...", "loading");
+    document.getElementById('cloudSaveBtn').disabled = true;
+    
+    try {
+        const menuData = [];
+        document.querySelectorAll('.card').forEach(card => {
+            const category = card.querySelector('h3').innerText;
+            const items = [];
+            card.querySelectorAll('.item').forEach(item => {
+                items.push({
+                    name: item.querySelector('.name').innerText,
+                    price: item.querySelector('.price').innerText
+                });
+            });
+            menuData.push({ category, items });
+        });
+        
+        const saveData = { menu: menuData };
+        
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+        });
+        
+        if (response.ok) {
+            showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+            
+            const saveTime = new Date().toLocaleTimeString();
+            localStorage.setItem('lastCloudSave', saveTime);
+            document.getElementById('lastCloudSave').innerText = saveTime;
+            
+            currentVersion = (parseFloat(currentVersion) + 0.1).toFixed(1);
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('cloudVersion').innerText = currentVersion;
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+            
+            localStorage.setItem('lastCloudUpdate', Date.now());
+            
+        } else {
+            throw new Error('HTTP error');
+        }
+    } catch(error) {
+        showStatus("❌ Kayıt başarısız! Manuel yöntemi dene.", "error");
+        setTimeout(() => manualSaveGuide(), 2000);
+    }
+    
+    document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+// ===== تحميل من السحاب =====
+async function loadFromCloud() {
+    showStatus("📥 Buluttan yükleniyor...", "loading");
+    document.getElementById('cloudLoadBtn').disabled = true;
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenuFromCloud(data.menu);
+            showStatus("✅ Buluttan yüklendi!", "success");
+        }
+    } catch(error) {
+        showStatus("❌ Yükleme başarısız!", "error");
+    }
+    
+    document.getElementById('cloudLoadBtn').disabled = false;
+}
+
+// ===== اختبار الاتصال =====
+async function testCloudConnection() {
+    showStatus("🔌 API bağlantısı test ediliyor...", "loading");
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        if (response.ok) {
+            document.getElementById('apiStatus').innerText = 'Bağlı';
+            document.getElementById('apiStatus').style.color = '#00ff00';
+            document.getElementById('syncStatus').innerText = 'Bağlı';
+            document.getElementById('syncStatus').style.color = '#00ff00';
+            showStatus("✅ API bağlantısı başarılı!", "success");
+        } else {
+            throw new Error('Bağlantı hatası');
+        }
+    } catch(error) {
+        document.getElementById('apiStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('apiStatus').style.color = '#ff0000';
+        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('syncStatus').style.color = '#ff0000';
+        showStatus("❌ API bağlantısı başarısız!", "error");
+    }
+}
+
+// ===== دليل الحفظ اليدوي =====
+function manualSaveGuide() {
+    const menuData = [];
+    document.querySelectorAll('.card').forEach(card => {
+        const category = card.querySelector('h3').innerText;
+        const items = [];
+        card.querySelectorAll('.item').forEach(item => {
+            items.push({
+                name: item.querySelector('.name').innerText,
+                price: item.querySelector('.price').innerText
+            });
+        });
+        menuData.push({ category, items });
+    });
+    
+    const jsonData = JSON.stringify({ menu: menuData }, null, 2);
+    
+    const guideMessage = 
+        "📋 MANUEL KAYIT İÇİN:\n\n" +
+        "1️⃣ Şu linki aç: " + CLOUD_DOCS_URL + "\n\n" +
+        "2️⃣ Giriş yap (GitHub/Google ile)\n\n" +
+        "3️⃣ 'Edit' butonuna bas\n\n" +
+        "4️⃣ Tüm verileri sil ve şunu yapıştır:\n\n" +
+        jsonData + "\n\n" +
+        "5️⃣ 'Save' butonuna bas\n\n" +
+        "6️⃣ Şu linki aç ve kontrol et:\n" + CLOUD_API_URL;
+    
+    alert(guideMessage);
+    navigator.clipboard?.writeText(jsonData);
+    showStatus("📋 JSON kopyalandı!", "success");
+}
+
+// ===== بدء المزامنة التلقائية =====
+function startAutoSync() {
+    if (autoSyncInterval) clearInterval(autoSyncInterval);
+    
+    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
+    
+    autoSyncInterval = setInterval(() => {
+        if (document.getElementById('autoSyncCheckbox')?.checked) {
+            fetch(CLOUD_API_URL)
+                .then(response => response.json())
+                .then(data => {
+                    if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                        lastCloudData = data;
+                        if (data.menu && data.menu.length > 0) {
+                            displayMenuFromCloud(data.menu);
+                            showStatus("🔄 Menü güncellendi!", "success");
+                        }
+                    }
+                })
+                .catch(() => {});
+        }
+    }, interval);
+}
+
+// ===== تحميل البيانات المحفوظة =====
+function loadSavedData() {
+    if (localStorage.getItem("insta")) {
+        document.getElementById("instaLink").href = localStorage.getItem("insta");
+    }
+    if (localStorage.getItem("map")) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    }
+    
+    let colorCategory = localStorage.getItem('colorCategory');
+    let colorName = localStorage.getItem('colorName');
+    let colorPrice = localStorage.getItem('colorPrice');
+    
+    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+    
+    if (localStorage.getItem('menuVersion')) {
+        currentVersion = localStorage.getItem('menuVersion');
+        document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    }
+}
+
+// ===== عرض رسالة =====
+function showStatus(message, type) {
+    let oldStatus = document.querySelector(".status-message");
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement("div");
+    status.className = `status-message status-${type}`;
+    status.innerText = message;
+    document.body.appendChild(status);
+
+    setTimeout(() => status.remove(), 2000);
+}
+
+// ===== سحب وإفلات اللوحة =====
+let devPanel = document.getElementById("devPanel");
+let isDragging = false;
+let offsetX, offsetY;
+let dragHandle = document.getElementById("dragHandle");
+
+dragHandle.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", stopDrag);
+
+function startDrag(e) {
+    isDragging = true;
+    offsetX = e.clientX - devPanel.offsetLeft;
+    offsetY = e.clientY - devPanel.offsetTop;
+    devPanel.style.transform = "none";
+    devPanel.style.cursor = "grabbing";
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    devPanel.style.left = (e.clientX - offsetX) + "px";
+    devPanel.style.top = (e.clientY - offsetY) + "px";
+}
+
+function stopDrag() {
+    isDragging = false;
+    devPanel.style.cursor = "move";
+}
+
+// ===== تحديث قائمة التصنيفات =====
+function updateCategorySelect() {
+    let select = document.getElementById("categorySelect");
+    select.innerHTML = "";
+    document.querySelectorAll(".card h3").forEach((h, i) => {
+        let o = document.createElement("option");
+        o.textContent = h.innerText;
+        o.value = i;
+        select.appendChild(o);
+    });
+}
+
+// ===== إضافة تصنيف =====
+function addCategory() {
+    if (!isDeveloper) return;
+    let name = document.getElementById("newCategory").value.trim();
+    if (!name) {
+        showStatus("Kategori adı girin!", "error");
+        return;
+    }
+    let card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `<h3>${name}</h3>`;
+    document.getElementById("menuGrid").appendChild(card);
+    document.getElementById("newCategory").value = "";
+    updateCategorySelect();
+    showStatus("✅ Kategori eklendi!", "success");
+}
+
+// ===== إضافة منتج =====
+function addProduct() {
+    if (!isDeveloper) return;
+    let name = document.getElementById("newName").value.trim();
+    let price = document.getElementById("productPrice").value.trim();
+    if (!name || !price) {
+        showStatus("Ürün adı ve fiyat girin!", "error");
+        return;
+    }
+
+    let cards = document.querySelectorAll(".card");
+    let index = document.getElementById("categorySelect").value;
+
+    if (cards[index]) {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<span class="name">${name}</span><span class="price">${price}</span>`;
+        cards[index].appendChild(div);
+        document.getElementById("newName").value = "";
+        document.getElementById("productPrice").value = "";
+        showStatus("✅ Ürün eklendi!", "success");
+    }
+}
+
+// ===== تحديث السعر =====
+function updateMainPrice() {
+    showStatus("Fiyat güncellendi", "success");
+}
+
+// ===== تفعيل وضع التحرير =====
+function enableEdit() {
+    showStatus("Düzenleme modu aktif", "success");
+}
+
+// ===== تبديل وضع الحذف =====
+function toggleDeleteMode() {
+    deleteMode = !deleteMode;
+    if (deleteMode) {
+        document.getElementById("menuGrid").classList.add("delete-mode");
+        showStatus("🗑️ Silme modu aktif! Ürünlere tıkla", "success");
+    } else {
+        document.getElementById("menuGrid").classList.remove("delete-mode");
+        showStatus("🔒 Silme modu kapalı", "success");
+    }
+}
+
+// ===== حذف المنتج =====
+document.getElementById("menuGrid").addEventListener("click", function(e) {
+    if (!deleteMode || !isDeveloper) return;
+    
+    let item = e.target.closest(".item");
+    if (item && confirm("Silmek istiyor musun?")) {
+        item.remove();
+        showStatus("✅ Silindi!", "success");
+    }
+});
+
+// ===== حذف الكل =====
+function deleteAll() {
+    if(!isDeveloper) return;
+    if(confirm("Tüm menü silinsin mi?")) {
+        document.getElementById("menuGrid").innerHTML = "";
+        updateCategorySelect();
+        showStatus("🗑️ Tüm menü silindi!", "success");
+    }
+}
+
+// ===== تحديث Instagram =====
+function changeInstagram() {
+    let val = document.getElementById("newInstagram").value.trim();
+    if(val) {
+        document.getElementById("instaLink").href = val;
+        localStorage.setItem("insta", val);
+        showStatus("✅ Instagram güncellendi!", "success");
+    }
+}
+
+// ===== تحديث الموقع =====
+function changeLocation() {
+    let val = document.getElementById("newLocation").value.trim();
+    if(val) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
+        localStorage.setItem("map", val);
+        showStatus("📍 Konum güncellendi!", "success");
+    }
+}
+
+// ===== ألوان =====
+function openColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'block';
+}
+
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'none';
+}
+
+function applyColors() {
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+
+    closeColorPicker();
+    showStatus("🎨 Renkler uygulandı!", "success");
+}
+
+// ===== اللغة =====
+let currentLang = localStorage.getItem("lang") || "tr";
+
+function applyLanguage() {
+    document.getElementById("menuTitle").innerText = currentLang === "tr" ? "Menü" : "Menu";
+    document.getElementById("contactTitle").innerText = currentLang === "tr" ? "İletişim" : "Contact";
+    document.querySelector('.btn').innerText = currentLang === "tr" ? "Menüyü Gör" : "View Menu";
+    document.getElementById("langBtn").innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
+}
+
+document.getElementById("langBtn").onclick = function() {
+    currentLang = currentLang === "tr" ? "en" : "tr";
+    localStorage.setItem("lang", currentLang);
+    applyLanguage();
+    showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
+};
+
+// ===== الوضع =====
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+    document.body.classList.toggle("light-mode");
+    modeToggle.innerHTML = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+});
+
+// ===== تغيير فترة المزامنة =====
+document.getElementById('syncInterval')?.addEventListener('change', function() {
+    startAutoSync();
+});
+
+// ===== تشغيل أولي =====
+applyLanguage();
 </script>
 
 </body>
