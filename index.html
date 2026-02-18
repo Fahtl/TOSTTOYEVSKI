@@ -1,598 +1,825 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tosttoo | Bulut Senkronizasyon</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
-            color: white;
-            min-height: 100vh;
-        }
-        
-        body.light-mode {
-            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-            color: #333;
-        }
-        
-        body.light-mode .card {
-            background: white;
-            border: 1px solid #ddd;
-        }
-        
-        body.light-mode .card h3 {
-            color: #ff6b00;
-        }
-        
-        body.light-mode .name {
-            color: #ff6b00;
-        }
-        
-        body.light-mode .price {
-            color: #333;
-        }
-        
-        body.light-mode .contact {
-            background: #333;
-            color: white;
-        }
-        
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            color: #ff6b00;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        .work-time {
-            font-size: 1.5rem;
-            color: #ff6b00;
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .btn {
-            padding: 1rem 2rem;
-            background: #ff6b00;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-            margin: 0.5rem;
-        }
-        
-        .btn:hover {
-            transform: scale(1.1);
-        }
-        
-        .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-        }
-        
-        .btn-danger {
-            background: #dc3545;
-        }
-        
-        .btn-danger:hover {
-            background: #c82333;
-        }
-        
-        .btn-success {
-            background: #28a745;
-        }
-        
-        .btn-success:hover {
-            background: #218838;
-        }
-        
-        .btn-cloud {
-            background: #0066cc;
-        }
-        
-        .btn-cloud:hover {
-            background: #0052a3;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-        
-        h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: #ff6b00;
-            margin-bottom: 3rem;
-        }
-        
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-        
-        .card {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            transition: transform 0.3s;
-            position: relative;
-        }
-        
-        .card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .card h3 {
-            color: #ff6b00;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            border-bottom: 2px solid #ff6b00;
-            padding-bottom: 0.5rem;
-        }
-        
-        .item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.5rem 0;
-            border-bottom: 1px dashed rgba(255,107,0,0.3);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        .item:hover {
-            background: rgba(255,107,0,0.1);
-        }
-        
-        .delete-mode .item:hover {
-            background: rgba(220,53,69,0.3);
-            outline: 2px solid #dc3545;
-        }
-        
-        .edit-mode .item:hover {
-            background: rgba(40,167,69,0.3);
-            outline: 2px solid #28a745;
-        }
-        
-        .name {
-            color: #ff6b00;
-            font-weight: 500;
-        }
-        
-        .price {
-            font-weight: bold;
-        }
-        
-        .category-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .delete-category {
-            background: #dc3545;
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        
-        .delete-category:hover {
-            transform: scale(1.1);
-        }
-        
-        .control-buttons {
-            position: fixed;
-            top: 20px;
-            right: 90px;
-            z-index: 1000;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .control-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            background: #ff6b00;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        
-        .control-btn:hover {
-            transform: scale(1.1);
-        }
-        
-        #modeToggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            background: #ff6b00;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            z-index: 1000;
-            transition: transform 0.3s;
-        }
-        
-        #modeToggle:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-        
-        .live-badge {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: #ff0000;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: bold;
-            z-index: 1000;
-            animation: blink 1.5s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        .cloud-badge {
-            position: fixed;
-            top: 80px;
-            left: 20px;
-            background: #0066cc;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-weight: bold;
-            z-index: 1000;
-            font-size: 12px;
-        }
-        
-        .control-panel {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 500px;
-            background: #1a1a1a;
-            border: 2px solid #ff6b00;
-            border-radius: 15px;
-            padding: 2rem;
-            z-index: 2000;
-            display: none;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .control-panel h3 {
-            color: #ff6b00;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .panel-section {
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-        }
-        
-        .panel-section h4 {
-            color: #ff6b00;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .panel-section input,
-        .panel-section select {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: 1px solid #ff6b00;
-            border-radius: 5px;
-            background: #333;
-            color: white;
-            font-size: 1rem;
-        }
-        
-        .panel-section button {
-            width: 100%;
-            padding: 0.8rem;
-            margin: 0.5rem 0;
-            border: none;
-            border-radius: 5px;
-            background: #ff6b00;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        
-        .panel-section button:hover {
-            background: #ff8533;
-        }
-        
-        .button-group {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .button-group button {
-            flex: 1;
-        }
-        
-        .close-btn {
-            background: #666 !important;
-            margin-top: 1rem;
-        }
-        
-        .close-btn:hover {
-            background: #888 !important;
-        }
-        
-        .status-message {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            padding: 1rem;
-            border-radius: 5px;
-            background: #333;
-            color: white;
-            border-left: 4px solid #ff6b00;
-            z-index: 1500;
-            animation: slideIn 0.3s;
-            max-width: 300px;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .status-success {
-            border-left-color: #28a745;
-        }
-        
-        .status-error {
-            border-left-color: #dc3545;
-        }
-        
-        .status-loading {
-            border-left-color: #0066cc;
-        }
-        
-        .double-tap-hint {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255,107,0,0.3);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 12px;
-            backdrop-filter: blur(5px);
-            border: 1px solid #ff6b00;
-            animation: fadeInOut 3s ease-in-out infinite;
-            white-space: nowrap;
-        }
-        
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-        
-        .contact {
-            background: #000;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-        
-        .contact h2 {
-            color: #ff6b00;
-            margin-bottom: 2rem;
-        }
-        
-        .contact p {
-            margin: 1rem 0;
-            font-size: 1.2rem;
-        }
-        
-        .contact a {
-            color: #ff6b00;
-            text-decoration: none;
-        }
-        
-        iframe {
-            width: 100%;
-            height: 300px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 2rem;
-        }
-        
-        .version-tag {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #333;
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 12px;
-            z-index: 1000;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 40px;
-            }
-            .double-tap-hint {
-                font-size: 10px;
-                bottom: 10px;
-            }
-            .control-panel {
-                width: 95%;
-                padding: 1rem;
-            }
-        }
-    </style>
-</head>
-<body class="dark-mode" id="body">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tosttoo | Cloud Sync Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<!-- شارة البث المباشر -->
-<div class="live-badge">🔴 CANLI</div>
-<div class="cloud-badge" id="cloudStatus">☁️ Bulut: Bağlı</div>
-<div class="version-tag" id="versionTag">v1.0.0</div>
+<style>
+/* ===== جميع الأنماط كما هي ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    transition: all 0.5s ease;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #fff;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero h1 {
+    font-size: 60px;
+    color: #ff8c00;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    animation: floatTitle 3s ease-in-out infinite;
+    text-shadow: 0 0 20px currentColor;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.work-time {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ff8c00;
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: #ff8c00;
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.container {
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: auto;
+    scroll-margin-top: 20px;
+}
+
+.container h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(255,140,0,0.3);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.item:hover {
+    transform: scale(1.02) translateX(5px);
+}
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+    background: rgba(255,0,0,0.1);
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+    background: rgba(40,167,69,0.1);
+}
+
+.name {
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.price {
+    color: #fff;
+    font-weight: bold;
+}
+
+.contact {
+    text-align: center;
+    padding: 50px 20px;
+    background: #000;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: #ff8c00;
+}
+
+iframe {
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    right: 90px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.control-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: #ff8c00;
+    color: white;
+}
+
+.control-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+#modeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #ff8c00;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255,140,0,0.3);
+}
+
+#modeToggle:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.live-badge {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 0, 0, 0.9);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    pointer-events: none;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.dev-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 140, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    cursor: move;
+    user-select: none;
+}
+
+.dev-window h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    cursor: move;
+}
+
+.dev-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.dev-window input,
+.dev-window select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: white;
+}
+
+.dev-window button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: #ff8c00;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dev-window button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+}
+
+.dev-window .save-btn {
+    background: #28a745;
+}
+
+.dev-window .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+.color-picker-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    z-index: 1001;
+    display: none;
+    width: 90%;
+    max-width: 350px;
+    color: white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.color-picker-modal h3 {
+    color: #ff8c00;
+    text-align: center;
+}
+
+.color-picker-modal input[type=color] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.color-picker-modal label {
+    display: block;
+    margin-top: 15px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 2000;
+    animation: slideIn 0.3s ease;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0%); opacity: 1; }
+}
+
+.status-success { border-color: #28a745; }
+.status-error { border-color: #dc3545; }
+.status-loading { border-color: #ff8c00; }
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+}
+
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+.light-mode {
+    background: #f6f1e8 !important;
+    color: #2b2b2b !important;
+    animation: none !important;
+}
+
+.light-mode .card {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3 {
+    color: #d97706 !important;
+}
+
+.light-mode .hero {
+    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+}
+
+.light-mode .name {
+    color: #8b6b4f !important;
+}
+
+.light-mode .price {
+    color: #d97706 !important;
+}
+
+.light-mode .contact {
+    background: #e6d8c3 !important;
+}
+
+.light-mode .dev-window {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-window input {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    color: #2b2b2b !important;
+}
+
+.cloud-panel {
+    margin-top: 15px;
+    background: rgba(0, 150, 255, 0.1);
+    border: 1px solid #0099ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cloud-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.cloud-badge {
+    background: #0066cc;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.version-tag {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.double-tap-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,107,0,0.3);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 12px;
+    backdrop-filter: blur(5px);
+    border: 1px solid #ff8c00;
+    animation: fadeInOut 3s ease-in-out infinite;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-header h3 {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.delete-category {
+    background: #dc3545;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.delete-category:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.backup-section {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.backup-section small {
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+}
+
+/* زر RESTART الجديد */
+.restart-btn {
+    background: #ffc107 !important;
+    color: #000 !important;
+    font-weight: bold;
+}
+
+.restart-btn:hover {
+    background: #ffdb58 !important;
+}
+
+.code-export {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.code-export button {
+    flex: 1;
+    background: #17a2b8;
+}
+
+.code-export button:hover {
+    background: #138496;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 40px;
+    }
+    .double-tap-hint {
+        display: block;
+        font-size: 10px;
+        bottom: 10px;
+    }
+}
+</style>
+</head>
+
+<body class="" id="body" data-language="tr">
+
+<!-- شعار البث المباشر -->
+<div class="live-badge">
+    <span class="live-indicator"></span>
+    🔴 CLOUD LIVE
+</div>
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
-    <button class="control-btn" id="langBtn">🇹🇷</button>
+    <button class="control-btn" id="langBtn">🌍 EN / TR</button>
 </div>
+
+<!-- زر تغيير الوضع -->
 <button id="modeToggle">🌙</button>
 
 <!-- القسم الرئيسي -->
 <section class="hero">
-    <h1 id="mainTitle">Tosttoo</h1>
-    <div class="double-tap-hint">👆👆 ÇİFT TIKLA (YÖNETİM)</div>
+    <h1 id="secretTrigger">Tosttoo</h1>
+    <!-- تلميح النقر المزدوج للهاتف -->
+    <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
     <div class="work-time">🕒 08:00 - 02:30</div>
-    <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
+    <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
+        Menüyü Gör
+    </button>
 </section>
 
-<!-- المنيو -->
 <section class="container" id="menu">
-    <h2 id="menuTitle">Menü</h2>
-    <div class="menu-grid" id="menuGrid"></div>
+    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
+    <div class="grid" id="menuGrid">
+        <!-- المنيو سيتم تحميله من السحاب تلقائياً -->
+    </div>
 </section>
 
-<!-- قسم الاتصال -->
 <section class="contact">
     <h2 id="contactTitle">İletişim</h2>
-    <p>📞 <a href="tel:05321580207">0532 158 02 07</a></p>
-    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">@tosttooyevski</a></p>
-    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
+    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
+    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
+    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
 
-<!-- لوحة التحكم -->
-<div class="control-panel" id="controlPanel">
-    <h3>⚙️ YÖNETİM PANELİ</h3>
-    
-    <!-- Cloud Senkronizasyon -->
-    <div class="panel-section" style="border: 1px solid #0066cc;">
-        <h4>☁️ BULUT SENKRONİZASYON</h4>
-        <div class="button-group">
-            <button onclick="saveToCloud()" class="btn-cloud">☁️ Buluta Kaydet</button>
-            <button onclick="loadFromCloud()" class="btn-cloud">📥 Buluttan Yükle</button>
-        </div>
-        <div class="button-group" style="margin-top:5px;">
-            <button onclick="copyBackupCode()" class="btn-success">📋 Yedek Kodu Kopyala</button>
-            <button onclick="pasteBackupCode()" class="btn-success">📋 Yedek Kodu Yapıştır</button>
-        </div>
-        <small style="color:#aaa; display:block; margin-top:5px;">Son kayıt: <span id="lastCloudSave">-</span></small>
+<!-- لوحة المطور -->
+<div class="dev-window" id="devPanel">
+    <h3 id="dragHandle">⚙️ CLOUD PANEL - GELİŞTİRİLMİŞ</h3>
+
+    <div class="dev-section">
+        <h4>💰 Fiyat Düzenle</h4>
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
     </div>
-    
-    <!-- قسم إضافة منتج -->
-    <div class="panel-section">
+
+    <div class="dev-section">
         <h4>➕ Ürün Ekle</h4>
         <select id="categorySelect"></select>
-        <input type="text" id="productName" placeholder="Ürün Adı">
-        <input type="text" id="productPrice" placeholder="Fiyat (örn: 60₺)">
-        <button onclick="addProduct()" class="btn-success">Ürün Ekle</button>
+        <input type="text" id="newName" placeholder="Ürün Adı">
+        <input type="text" id="productPrice" placeholder="Fiyat">
+        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
     </div>
-    
-    <!-- قسم إضافة تصنيف -->
-    <div class="panel-section">
+
+    <div class="dev-section">
         <h4>📁 Kategori Ekle</h4>
-        <input type="text" id="categoryName" placeholder="Kategori Adı">
-        <button onclick="addCategory()" class="btn-success">Kategori Ekle</button>
+        <input type="text" id="newCategory" placeholder="Yeni Kategori">
+        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
     </div>
-    
-    <!-- قسم أدوات التعديل -->
-    <div class="panel-section">
+
+    <div class="dev-section">
+        <h4>🎨 Renk Düzenle</h4>
+        <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+    </div>
+
+    <div class="dev-section">
         <h4>🔧 Araçlar</h4>
-        <div class="button-group">
-            <button onclick="toggleDeleteMode()" id="deleteModeBtn" class="btn-danger">🗑️ Silme Modu</button>
-            <button onclick="toggleEditMode()" id="editModeBtn" class="btn-success">✏️ Düzenle</button>
+        <div style="display: flex; gap: 5px; margin-bottom: 5px;">
+            <button onclick="enableEdit()" style="flex:1; background:#28a745;" id="editModeBtn">✏️ Düzenle</button>
+            <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
         </div>
-        <button onclick="deleteAllCategories()" class="btn-danger" style="margin-top:10px;">⚠️ Tüm Kategorileri Sil</button>
-        <button onclick="resetToDefault()" class="btn-warning" style="margin-top:10px; background:#ffc107; color:#000;">🔄 Varsayılana Dön</button>
+        <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
+        
+        <!-- زر RESTART الجديد -->
+        <button onclick="restartToDefault()" class="restart-btn" style="margin-top:10px; background:#ffc107; color:#000; font-weight:bold;">
+            🔄 RESTART (Varsayılana Dön)
+        </button>
     </div>
-    
-    <!-- قسم الإعدادات -->
-    <div class="panel-section">
-        <h4>⚙️ Ayarlar</h4>
+
+    <div class="dev-section">
+        <h4>📱 Sosyal Medya</h4>
         <input type="text" id="newInstagram" placeholder="Instagram Link">
-        <button onclick="updateInstagram()">Güncelle</button>
-        <input type="text" id="newLocation" placeholder="Konum (örn: 36.484479,32.101147)">
-        <button onclick="updateLocation()">Güncelle</button>
+        <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
+        <input type="text" id="newLocation" placeholder="Konum lat,long">
+        <button onclick="changeLocation()">📍 Konum Güncelle</button>
     </div>
-    
-    <button onclick="closePanel()" class="close-btn">❌ Kapat</button>
+
+    <!-- CLOUD PANEL GELİŞTİRİLMİŞ -->
+    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
+        <h4>☁️ CLOUD SYNC <span class="cloud-badge">GELİŞMİŞ</span></h4>
+        <div class="cloud-panel">
+            <div class="cloud-stats">
+                <span>🌐 API: <span style="color:#00ff00" id="apiStatus">Hazır</span></span>
+                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
+            </div>
+            <div class="cloud-stats">
+                <span>💾 Son Kayıt: <span id="lastCloudSave">-</span></span>
+                <span>🔄 Durum: <span id="syncStatus">Hazır</span></span>
+            </div>
+            
+            <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
+                🔗 <strong>API URL:</strong><br>
+                <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
+            </div>
+            
+            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;" id="cloudSaveBtn">
+                ☁️ BULUTA KAYDET (HERKESE GÖNDER)
+            </button>
+            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
+                📥 BULUTTAN YÜKLE
+            </button>
+            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
+                🔌 BAĞLANTI TESTİ
+            </button>
+            
+            <!-- Yeni Yedekleme Özellikleri -->
+            <div class="backup-section">
+                <div class="code-export">
+                    <button onclick="copyBackupCode()" style="background:#17a2b8;">📋 Kodu Kopyala</button>
+                    <button onclick="pasteBackupCode()" style="background:#17a2b8;">📋 Kodu Yapıştır</button>
+                </div>
+                <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-sync -->
+    <div class="dev-section">
+        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
+        </label>
+        <select id="syncInterval">
+            <option value="5">5 saniye</option>
+            <option value="10" selected>10 saniye</option>
+            <option value="30">30 saniye</option>
+            <option value="60">1 dakika</option>
+        </select>
+    </div>
+
+    <button onclick="closeDev()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- رسالة الحالة -->
-<div id="statusMessage" class="status-message" style="display: none;"></div>
+<!-- نافذة تعديل الألوان -->
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Değiştir</h3>
+    <label>Kategori Başlığı (h3)</label>
+    <input type="color" id="colorCategory" value="#ff8c00">
+    <label>Ürün Adı (.name)</label>
+    <input type="color" id="colorName" value="#ff8c00">
+    <label>Fiyat (.price)</label>
+    <input type="color" id="colorPrice" value="#ffffff">
+    <button onclick="applyColors()">Renkleri Uygula</button>
+    <button onclick="closeColorPicker()">Kapat</button>
+</div>
+
+<div id="statusMessage" class="status-message" style="display:none;"></div>
 
 <script>
-// ===== المنيو الافتراضي =====
+// ===== الرابط الخاص بك =====
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
+const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
+
+// ===== المنيو الافتراضي الكامل (الأصلي) =====
 const DEFAULT_MENU = [
     {
         category: "Tostlar",
@@ -642,168 +869,44 @@ const DEFAULT_MENU = [
     }
 ];
 
-// ===== متغيرات عامة =====
-let isAdmin = false;
+// متغيرات عامة
+let isDeveloper = false;
 let deleteMode = false;
 let editMode = false;
 let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let autoSyncInterval = null;
 let lastCloudData = null;
 
 // ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
-    loadMenu();
-    loadSettings();
-    startCloudSync();
+    loadSavedData();
+    loadMenuFromCloud();
+    testCloudConnection();
+    startAutoSync();
     updateVersion();
 });
 
-// ===== بدء مزامنة السحاب =====
-function startCloudSync() {
-    // كل 10 ثواني تحقق من التحديثات
-    setInterval(() => {
-        checkCloudUpdates();
-    }, 10000);
-}
-
-// ===== التحقق من التحديثات في السحاب =====
-async function checkCloudUpdates() {
-    try {
-        const response = await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a');
-        const data = await response.json();
+// ===== RESTART - العودة إلى المنيو الأصلي =====
+function restartToDefault() {
+    if (!isDeveloper) return;
+    
+    if (confirm('Tüm menü varsayılan haline dönecek! Emin misiniz?')) {
+        // حفظ المنيو الأصلي في localStorage
+        localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
         
-        if (data.menu && data.menu.length > 0) {
-            if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
-                lastCloudData = data;
-                displayMenu(data.menu);
-                document.getElementById('cloudStatus').innerHTML = '☁️ Bulut: Güncellendi';
-                document.getElementById('cloudStatus').style.background = '#28a745';
-                showStatus('🔄 Menü güncellendi!', 'success');
-                
-                // Yerel depolamaya da kaydet
-                localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
-            }
-        }
-        document.getElementById('cloudStatus').innerHTML = '☁️ Bulut: Bağlı';
-        document.getElementById('cloudStatus').style.background = '#0066cc';
-    } catch(error) {
-        document.getElementById('cloudStatus').innerHTML = '☁️ Bulut: Bağlantı Yok';
-        document.getElementById('cloudStatus').style.background = '#dc3545';
-    }
-}
-
-// ===== Buluta kaydet (HERKES GÖRECEK) =====
-async function saveToCloud() {
-    showStatus('☁️ Buluta kaydediliyor...', 'loading');
-    
-    const menu = getCurrentMenu();
-    const saveData = {
-        menu: menu,
-        version: incrementVersion(currentVersion),
-        lastUpdate: new Date().toISOString()
-    };
-    
-    try {
-        const response = await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(saveData)
-        });
-        
-        if (response.ok) {
-            currentVersion = saveData.version;
-            localStorage.setItem('menuVersion', currentVersion);
-            document.getElementById('versionTag').textContent = 'v' + currentVersion;
-            document.getElementById('lastCloudSave').textContent = new Date().toLocaleTimeString();
-            
-            showStatus('✅ Buluta kaydedildi! Herkes görecek!', 'success');
-            
-            // Yerel depolamaya da kaydet
-            localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
-            localStorage.setItem('tosttoo_cloud_backup', JSON.stringify(saveData));
-        } else {
-            throw new Error('Kayıt başarısız');
-        }
-    } catch(error) {
-        showStatus('❌ Kayıt başarısız! Yedek kodu kullan.', 'error');
-    }
-}
-
-// ===== Buluttan yükle =====
-async function loadFromCloud() {
-    showStatus('📥 Buluttan yükleniyor...', 'loading');
-    
-    try {
-        const response = await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a');
-        const data = await response.json();
-        
-        if (data.menu && data.menu.length > 0) {
-            displayMenu(data.menu);
-            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
-            showStatus('✅ Buluttan yüklendi!', 'success');
-        }
-    } catch(error) {
-        showStatus('❌ Yükleme başarısız!', 'error');
-    }
-}
-
-// ===== Yedek kodu kopyala =====
-function copyBackupCode() {
-    const menu = getCurrentMenu();
-    const backupData = {
-        menu: menu,
-        version: currentVersion,
-        date: new Date().toISOString()
-    };
-    
-    const jsonString = JSON.stringify(backupData, null, 2);
-    
-    navigator.clipboard.writeText(jsonString).then(() => {
-        showStatus('📋 Yedek kodu kopyalandı!', 'success');
-    }).catch(() => {
-        prompt('Kodu kopyala:', jsonString);
-    });
-}
-
-// ===== Yedek kodu yapıştır =====
-function pasteBackupCode() {
-    const code = prompt('Yedek kodunu yapıştır:');
-    if (!code) return;
-    
-    try {
-        const data = JSON.parse(code);
-        if (data.menu && data.menu.length > 0) {
-            displayMenu(data.menu);
-            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
-            showStatus('✅ Yedek kodu yüklendi!', 'success');
-        }
-    } catch(error) {
-        showStatus('❌ Geçersiz kod!', 'error');
-    }
-}
-
-// ===== Versiyon numarasını artır =====
-function incrementVersion(version) {
-    const parts = version.split('.');
-    parts[2] = (parseInt(parts[2]) + 1).toString();
-    return parts.join('.');
-}
-
-// ===== Versiyonu güncelle =====
-function updateVersion() {
-    document.getElementById('versionTag').textContent = 'v' + currentVersion;
-}
-
-// ===== Menüyü yükle =====
-function loadMenu() {
-    const savedMenu = localStorage.getItem('tosttoo_menu');
-    if (savedMenu) {
-        displayMenu(JSON.parse(savedMenu));
-    } else {
+        // عرض المنيو الأصلي
         displayMenu(DEFAULT_MENU);
+        
+        // إعادة تعيين الإصدار
+        currentVersion = '1.0.0';
+        localStorage.setItem('menuVersion', currentVersion);
+        updateVersion();
+        
+        showStatus('🔄 Menü varsayılana döndürüldü!', 'success');
     }
 }
 
-// ===== Menüyü göster =====
+// ===== عرض المنيو =====
 function displayMenu(menuData) {
     const menuGrid = document.getElementById('menuGrid');
     menuGrid.innerHTML = '';
@@ -813,23 +916,28 @@ function displayMenu(menuData) {
         card.className = 'card';
         card.setAttribute('data-category-index', catIndex);
         
+        // Kategori başlığı ve sil butonu
         const header = document.createElement('div');
         header.className = 'category-header';
-        header.innerHTML = `<h3>${category.category}</h3>`;
         
-        if (isAdmin) {
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-category';
-            deleteBtn.innerHTML = '✕';
-            deleteBtn.onclick = (e) => {
+        const title = document.createElement('h3');
+        title.textContent = category.category;
+        header.appendChild(title);
+        
+        if (isDeveloper) {
+            const deleteCatBtn = document.createElement('button');
+            deleteCatBtn.className = 'delete-category';
+            deleteCatBtn.innerHTML = '✕';
+            deleteCatBtn.onclick = (e) => {
                 e.stopPropagation();
                 deleteCategory(catIndex);
             };
-            header.appendChild(deleteBtn);
+            header.appendChild(deleteCatBtn);
         }
         
         card.appendChild(header);
         
+        // Ürünler
         category.items.forEach((item, itemIndex) => {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item';
@@ -838,10 +946,10 @@ function displayMenu(menuData) {
             itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
             
             itemDiv.addEventListener('click', function(e) {
-                if (deleteMode && isAdmin) {
+                if (deleteMode && isDeveloper) {
                     e.stopPropagation();
                     deleteProduct(catIndex, itemIndex);
-                } else if (editMode && isAdmin) {
+                } else if (editMode && isDeveloper) {
                     e.stopPropagation();
                     editProduct(catIndex, itemIndex);
                 }
@@ -858,55 +966,31 @@ function displayMenu(menuData) {
 
 // ===== Kategori sil =====
 function deleteCategory(catIndex) {
-    if (!isAdmin) return;
+    if (!isDeveloper) return;
     
     if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
         const menu = getCurrentMenu();
         menu.splice(catIndex, 1);
-        saveMenu(menu);
+        saveMenuToLocal(menu);
         showStatus('✅ Kategori silindi!', 'success');
     }
 }
 
 // ===== Ürün sil =====
 function deleteProduct(catIndex, itemIndex) {
-    if (!isAdmin) return;
+    if (!isDeveloper) return;
     
     if (confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
         const menu = getCurrentMenu();
         menu[catIndex].items.splice(itemIndex, 1);
-        saveMenu(menu);
+        saveMenuToLocal(menu);
         showStatus('✅ Ürün silindi!', 'success');
-    }
-}
-
-// ===== Düzenleme modu =====
-function toggleEditMode() {
-    if (!isAdmin) return;
-    
-    editMode = !editMode;
-    deleteMode = false;
-    const btn = document.getElementById('editModeBtn');
-    const grid = document.getElementById('menuGrid');
-    
-    if (editMode) {
-        btn.style.background = '#28a745';
-        btn.textContent = '✏️ Düzenleme Aktif';
-        grid.classList.add('edit-mode');
-        grid.classList.remove('delete-mode');
-        document.getElementById('deleteModeBtn').style.background = '#dc3545';
-        document.getElementById('deleteModeBtn').textContent = '🗑️ Silme Modu';
-        showStatus('✏️ Düzenleme modu aktif! Ürünlere tıklayın', 'success');
-    } else {
-        btn.style.background = '#28a745';
-        btn.textContent = '✏️ Düzenle';
-        grid.classList.remove('edit-mode');
     }
 }
 
 // ===== Ürün düzenle =====
 function editProduct(catIndex, itemIndex) {
-    if (!isAdmin || !editMode) return;
+    if (!isDeveloper) return;
     
     const menu = getCurrentMenu();
     const product = menu[catIndex].items[itemIndex];
@@ -918,28 +1002,8 @@ function editProduct(catIndex, itemIndex) {
     if (newPrice === null) return;
     
     menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
-    saveMenu(menu);
+    saveMenuToLocal(menu);
     showStatus('✅ Ürün güncellendi!', 'success');
-}
-
-// ===== Tüm kategorileri sil =====
-function deleteAllCategories() {
-    if (!isAdmin) return;
-    
-    if (confirm('TÜM kategoriler silinsin mi? Bu işlem geri alınamaz!')) {
-        saveMenu([]);
-        showStatus('🗑️ Tüm kategoriler silindi!', 'success');
-    }
-}
-
-// ===== Varsayılana dön =====
-function resetToDefault() {
-    if (!isAdmin) return;
-    
-    if (confirm('Varsayılan menüye dönmek istediğinize emin misiniz?')) {
-        saveMenu(DEFAULT_MENU);
-        showStatus('🔄 Varsayılan menü yüklendi!', 'success');
-    }
 }
 
 // ===== Mevcut menüyü al =====
@@ -959,221 +1023,572 @@ function getCurrentMenu() {
     return menu;
 }
 
-// ===== Menüyü kaydet =====
-function saveMenu(menu) {
+// ===== Menüyü yerel depolamaya kaydet =====
+function saveMenuToLocal(menu) {
     localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
     displayMenu(menu);
-    showStatus('💾 Menü kaydedildi!', 'success');
+}
+
+// ===== تحميل المنيو من السحاب =====
+async function loadMenuFromCloud() {
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        lastCloudData = data;
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus('✅ Menü clouddan yüklendi!', 'success');
+        } else {
+            // Varsayılan menüyü yükle
+            displayMenu(DEFAULT_MENU);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
+        }
+    } catch(error) {
+        console.log('Cloud yükleme hatası, varsayılan menü kullanılıyor');
+        displayMenu(DEFAULT_MENU);
+        localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
+    }
+}
+
+// ===== Buluta kaydet =====
+async function saveToCloud() {
+    showStatus("☁️ Buluta kaydediliyor...", "loading");
+    document.getElementById('cloudSaveBtn').disabled = true;
+    
+    try {
+        const menuData = getCurrentMenu();
+        
+        const saveData = {
+            menu: menuData,
+            version: incrementVersion(currentVersion),
+            lastUpdate: new Date().toISOString()
+        };
+        
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+        });
+        
+        if (response.ok) {
+            showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+            
+            const saveTime = new Date().toLocaleTimeString();
+            localStorage.setItem('lastCloudSave', saveTime);
+            document.getElementById('lastCloudSave').innerText = saveTime;
+            
+            currentVersion = saveData.version;
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('cloudVersion').innerText = currentVersion;
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+            
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
+        
+    } catch(error) {
+        console.error('Kayıt hatası:', error);
+        showStatus("❌ Kayıt başarısız! Manuel yöntemi dene.", "error");
+        setTimeout(() => manualSaveGuide(), 2000);
+    }
+    
+    document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+// ===== Yedek kodunu kopyala (BANA GÖNDERMEK İÇİN) =====
+function copyBackupCode() {
+    const menu = getCurrentMenu();
+    const backupData = {
+        menu: menu,
+        version: currentVersion,
+        date: new Date().toISOString()
+    };
+    
+    const jsonString = JSON.stringify(backupData, null, 2);
+    
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showStatus('📋 Kod kopyalandı! Bana gönderebilirsin!', 'success');
+    }).catch(() => {
+        prompt('Kodu kopyala ve bana gönder:', jsonString);
+    });
+}
+
+// ===== Yedek kodunu yapıştır (BENDEN ALDIĞIN KODU YAPIŞTIR) =====
+function pasteBackupCode() {
+    const code = prompt('Benden aldığın kodu yapıştır:');
+    if (!code) return;
+    
+    try {
+        const data = JSON.parse(code);
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            
+            if (data.version) {
+                currentVersion = data.version;
+                localStorage.setItem('menuVersion', currentVersion);
+                updateVersion();
+            }
+            
+            showStatus('✅ Kod yüklendi! Değişiklikler uygulandı!', 'success');
+        }
+    } catch(error) {
+        showStatus('❌ Geçersiz kod!', 'error');
+    }
+}
+
+// ===== Manuel kayıt rehberi =====
+function manualSaveGuide() {
+    const menuData = getCurrentMenu();
+    const jsonData = JSON.stringify({ menu: menuData }, null, 2);
+    
+    const guideMessage = 
+        "📋 MANUEL KAYIT İÇİN:\n\n" +
+        "1️⃣ Şu linki aç: " + CLOUD_DOCS_URL + "\n\n" +
+        "2️⃣ Giriş yap (GitHub/Google ile)\n\n" +
+        "3️⃣ 'Edit' butonuna bas\n\n" +
+        "4️⃣ Tüm verileri sil ve şunu yapıştır:\n\n" +
+        jsonData + "\n\n" +
+        "5️⃣ 'Save' butonuna bas\n\n" +
+        "6️⃣ Şu linki aç ve kontrol et:\n" + CLOUD_API_URL;
+    
+    alert(guideMessage);
+    navigator.clipboard?.writeText(jsonData);
+    showStatus("📋 JSON kopyalandı!", "success");
+}
+
+// ===== Buluttan yükle =====
+async function loadFromCloud() {
+    showStatus("📥 Buluttan yükleniyor...", "loading");
+    document.getElementById('cloudLoadBtn').disabled = true;
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus("✅ Buluttan yüklendi!", "success");
+        }
+    } catch(error) {
+        showStatus("❌ Yükleme başarısız!", "error");
+    }
+    
+    document.getElementById('cloudLoadBtn').disabled = false;
+}
+
+// ===== Bağlantı testi =====
+async function testCloudConnection() {
+    showStatus("🔌 API bağlantısı test ediliyor...", "loading");
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        
+        if (response.ok) {
+            document.getElementById('apiStatus').innerText = 'Bağlı';
+            document.getElementById('apiStatus').style.color = '#00ff00';
+            document.getElementById('syncStatus').innerText = 'Bağlı';
+            document.getElementById('syncStatus').style.color = '#00ff00';
+            showStatus("✅ API bağlantısı başarılı!", "success");
+        } else {
+            throw new Error('Bağlantı hatası');
+        }
+        
+    } catch(error) {
+        document.getElementById('apiStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('apiStatus').style.color = '#ff0000';
+        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('syncStatus').style.color = '#ff0000';
+        showStatus("❌ API bağlantısı başarısız!", "error");
+    }
+}
+
+// ===== Versiyon artır =====
+function incrementVersion(version) {
+    const parts = version.split('.');
+    parts[2] = (parseInt(parts[2]) + 1).toString();
+    return parts.join('.');
+}
+
+// ===== Versiyon güncelle =====
+function updateVersion() {
+    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    document.getElementById('cloudVersion').innerText = currentVersion;
+}
+
+// ===== Otomatik senkronizasyon =====
+function startAutoSync() {
+    if (autoSyncInterval) clearInterval(autoSyncInterval);
+    
+    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
+    
+    autoSyncInterval = setInterval(() => {
+        if (document.getElementById('autoSyncCheckbox')?.checked) {
+            fetch(CLOUD_API_URL)
+            .then(response => response.json())
+            .then(data => {
+                if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                    lastCloudData = data;
+                    if (data.menu && data.menu.length > 0) {
+                        displayMenu(data.menu);
+                        showStatus("🔄 Menü güncellendi!", "success");
+                    }
+                }
+            })
+            .catch(() => {});
+        }
+    }, interval);
+}
+
+// ===== Kayıtlı verileri yükle =====
+function loadSavedData() {
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    } else {
+        displayMenu(DEFAULT_MENU);
+    }
+    
+    if (localStorage.getItem("insta")) {
+        document.getElementById("instaLink").href = localStorage.getItem("insta");
+    }
+    if (localStorage.getItem("map")) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    }
+    
+    let colorCategory = localStorage.getItem('colorCategory');
+    let colorName = localStorage.getItem('colorName');
+    let colorPrice = localStorage.getItem('colorPrice');
+    
+    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+    
+    if (localStorage.getItem('menuVersion')) {
+        currentVersion = localStorage.getItem('menuVersion');
+        updateVersion();
+    }
+    
+    let lastSave = localStorage.getItem('lastCloudSave');
+    if (lastSave) document.getElementById('lastCloudSave').innerText = lastSave;
+}
+
+// ===== Mesaj göster =====
+function showStatus(message, type) {
+    let oldStatus = document.querySelector(".status-message");
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement("div");
+    status.className = `status-message status-${type}`;
+    status.innerText = message;
+    document.body.appendChild(status);
+
+    setTimeout(() => status.remove(), 3000);
+}
+
+// ===== خاصية النقر المزدوج للهاتف =====
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById('secretTrigger').addEventListener('click', function(e) {
+    clickCount++;
+    
+    if (clickCount === 1) {
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 300);
+    } else if (clickCount === 2) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz! (Çift tıklama ile)", "success");
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
+
+// F5 ile giriş
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'F5') {
+        e.preventDefault();
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            openDev();
+            showStatus("✅ Hoş geldiniz! (F5 ile)", "success");
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
+
+// Panel aç/kapa
+function openDev() {
+    document.getElementById("devPanel").style.display = "block";
+    isDeveloper = true;
+    updateCategorySelect();
+    centerPanel();
+    
+    // Menüyü geliştirici modunda yeniden göster
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    }
+}
+
+function closeDev() {
+    isDeveloper = false;
+    deleteMode = false;
+    editMode = false;
+    document.getElementById("devPanel").style.display = "none";
+    document.getElementById("menuGrid").classList.remove("delete-mode", "edit-mode");
+    closeColorPicker();
+    
+    // Menüyü normal modda yeniden göster
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    }
+}
+
+function centerPanel() {
+    let panel = document.getElementById("devPanel");
+    panel.style.left = "50%";
+    panel.style.top = "50%";
+    panel.style.transform = "translate(-50%, -50%)";
 }
 
 // ===== Kategori seçiciyi güncelle =====
 function updateCategorySelect() {
-    const select = document.getElementById('categorySelect');
-    select.innerHTML = '';
-    document.querySelectorAll('.card h3').forEach((h3, i) => {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = h3.textContent;
-        select.appendChild(option);
+    let select = document.getElementById("categorySelect");
+    select.innerHTML = "";
+    document.querySelectorAll(".card h3").forEach((h, i) => {
+        let o = document.createElement("option");
+        o.textContent = h.innerText;
+        o.value = i;
+        select.appendChild(o);
     });
-}
-
-// ===== Ürün ekle =====
-function addProduct() {
-    if (!isAdmin) return;
-    
-    const name = document.getElementById('productName').value.trim();
-    const price = document.getElementById('productPrice').value.trim();
-    const catIndex = document.getElementById('categorySelect').value;
-    
-    if (!name || !price) {
-        showStatus('❌ Ürün adı ve fiyat girin!', 'error');
-        return;
-    }
-    
-    const menu = getCurrentMenu();
-    menu[catIndex].items.push({ name, price });
-    saveMenu(menu);
-    
-    document.getElementById('productName').value = '';
-    document.getElementById('productPrice').value = '';
-    showStatus('✅ Ürün eklendi!', 'success');
 }
 
 // ===== Kategori ekle =====
 function addCategory() {
-    if (!isAdmin) return;
-    
-    const name = document.getElementById('categoryName').value.trim();
+    if (!isDeveloper) return;
+    let name = document.getElementById("newCategory").value.trim();
     if (!name) {
-        showStatus('❌ Kategori adı girin!', 'error');
+        showStatus("Kategori adı girin!", "error");
         return;
     }
     
     const menu = getCurrentMenu();
     menu.push({ category: name, items: [] });
-    saveMenu(menu);
+    saveMenuToLocal(menu);
     
-    document.getElementById('categoryName').value = '';
-    showStatus('✅ Kategori eklendi!', 'success');
+    document.getElementById("newCategory").value = "";
+    showStatus("✅ Kategori eklendi!", "success");
+}
+
+// ===== Ürün ekle =====
+function addProduct() {
+    if (!isDeveloper) return;
+    let name = document.getElementById("newName").value.trim();
+    let price = document.getElementById("productPrice").value.trim();
+    let index = document.getElementById("categorySelect").value;
+    
+    if (!name || !price) {
+        showStatus("Ürün adı ve fiyat girin!", "error");
+        return;
+    }
+
+    const menu = getCurrentMenu();
+    menu[index].items.push({ name, price });
+    saveMenuToLocal(menu);
+    
+    document.getElementById("newName").value = "";
+    document.getElementById("productPrice").value = "";
+    showStatus("✅ Ürün eklendi!", "success");
+}
+
+// ===== Düzenleme modu =====
+function enableEdit() {
+    if (!isDeveloper) return;
+    
+    editMode = !editMode;
+    deleteMode = false;
+    
+    const btn = document.getElementById('editModeBtn');
+    const grid = document.getElementById('menuGrid');
+    
+    if (editMode) {
+        btn.style.background = '#28a745';
+        btn.innerHTML = '✏️ Düzenleme Aktif';
+        grid.classList.add('edit-mode');
+        grid.classList.remove('delete-mode');
+        document.getElementById('deleteModeBtn').innerHTML = '🗑️ Silme';
+        showStatus("✏️ Düzenleme modu aktif! Ürüne tıkla", "success");
+    } else {
+        btn.style.background = '#28a745';
+        btn.innerHTML = '✏️ Düzenle';
+        grid.classList.remove('edit-mode');
+    }
 }
 
 // ===== Silme modu =====
 function toggleDeleteMode() {
-    if (!isAdmin) return;
+    if (!isDeveloper) return;
     
     deleteMode = !deleteMode;
     editMode = false;
+    
     const btn = document.getElementById('deleteModeBtn');
     const grid = document.getElementById('menuGrid');
     
     if (deleteMode) {
         btn.style.background = '#dc3545';
-        btn.textContent = '🗑️ Silme Aktif';
+        btn.innerHTML = '🗑️ Silme Aktif';
         grid.classList.add('delete-mode');
         grid.classList.remove('edit-mode');
-        document.getElementById('editModeBtn').style.background = '#28a745';
-        document.getElementById('editModeBtn').textContent = '✏️ Düzenle';
-        showStatus('🗑️ Silme modu aktif! Ürünlere tıklayın', 'success');
+        document.getElementById('editModeBtn').innerHTML = '✏️ Düzenle';
+        showStatus("🗑️ Silme modu aktif! Ürüne tıkla", "success");
     } else {
         btn.style.background = '#dc3545';
-        btn.textContent = '🗑️ Silme Modu';
+        btn.innerHTML = '🗑️ Silme';
         grid.classList.remove('delete-mode');
     }
 }
 
-// ===== Admin girişi =====
-function openAdminPanel() {
-    const pass = prompt('🔐 Yönetici şifresi:');
-    if (pass === 'momotunc0702') {
-        isAdmin = true;
-        document.getElementById('controlPanel').style.display = 'block';
-        showStatus('✅ Hoş geldiniz!', 'success');
-        loadMenu();
-    } else {
-        showStatus('❌ Yanlış şifre!', 'error');
-    }
+// ===== Fiyat güncelle (placeholder) =====
+function updateMainPrice() {
+    showStatus("Fiyat güncellendi", "success");
 }
 
-// ===== Çift tıklama =====
-let clickCount = 0;
-document.getElementById('mainTitle').addEventListener('click', function() {
-    clickCount++;
-    setTimeout(() => clickCount = 0, 300);
-    if (clickCount === 2) {
-        openAdminPanel();
+// ===== Tüm menüyü sil =====
+function deleteAll() {
+    if(!isDeveloper) return;
+    if(confirm("Tüm menü silinsin mi?")) {
+        localStorage.removeItem('tosttoo_menu');
+        displayMenu(DEFAULT_MENU);
+        showStatus("Varsayılan menü yüklendi", "success");
     }
-});
-
-// ===== F5 =====
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'F5') {
-        e.preventDefault();
-        openAdminPanel();
-    }
-});
-
-// ===== Paneli kapat =====
-function closePanel() {
-    document.getElementById('controlPanel').style.display = 'none';
-    isAdmin = false;
-    deleteMode = false;
-    editMode = false;
-    document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
-    loadMenu();
 }
 
 // ===== Instagram güncelle =====
-function updateInstagram() {
-    if (!isAdmin) return;
-    const val = document.getElementById('newInstagram').value.trim();
-    if (val) {
-        document.getElementById('instaLink').href = val;
-        localStorage.setItem('insta', val);
-        showStatus('✅ Instagram güncellendi!', 'success');
+function changeInstagram() {
+    let val = document.getElementById("newInstagram").value;
+    if(val) {
+        document.getElementById("instaLink").href = val;
+        localStorage.setItem("insta", val);
+        showStatus("Instagram güncellendi", "success");
     }
 }
 
 // ===== Konum güncelle =====
-function updateLocation() {
-    if (!isAdmin) return;
-    const val = document.getElementById('newLocation').value.trim();
-    if (val) {
-        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
-        localStorage.setItem('map', val);
-        showStatus('📍 Konum güncellendi!', 'success');
+function changeLocation() {
+    let val = document.getElementById("newLocation").value;
+    if(val) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
+        localStorage.setItem("map", val);
+        showStatus("Konum güncellendi", "success");
     }
 }
 
-// ===== Ayarları yükle =====
-function loadSettings() {
-    if (localStorage.getItem('insta')) {
-        document.getElementById('instaLink').href = localStorage.getItem('insta');
-    }
-    if (localStorage.getItem('map')) {
-        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${localStorage.getItem('map')}&output=embed`;
-    }
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-        modeToggle.innerHTML = '☀️';
-    }
-    if (localStorage.getItem('lang')) {
-        currentLang = localStorage.getItem('lang');
-        applyLanguage();
-    }
+// ===== Renkler =====
+function openColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'block';
 }
 
-// ===== Mesaj göster =====
-function showStatus(msg, type) {
-    const status = document.getElementById('statusMessage');
-    status.textContent = msg;
-    status.className = `status-message status-${type}`;
-    status.style.display = 'block';
-    setTimeout(() => status.style.display = 'none', 2000);
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'none';
 }
 
-// ===== Menüye kaydır =====
-function scrollToMenu() {
-    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+function applyColors() {
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+
+    closeColorPicker();
+    showStatus("🎨 Renkler uygulandı!", "success");
 }
 
 // ===== Dil =====
-let currentLang = localStorage.getItem('lang') || 'tr';
-
-function toggleLanguage() {
-    currentLang = currentLang === 'tr' ? 'en' : 'tr';
-    localStorage.setItem('lang', currentLang);
-    applyLanguage();
-}
+let currentLang = localStorage.getItem("lang") || "tr";
 
 function applyLanguage() {
-    const langBtn = document.getElementById('langBtn');
-    langBtn.textContent = currentLang === 'tr' ? '🇹🇷' : '🇬🇧';
-    
-    if (currentLang === 'tr') {
-        document.getElementById('menuTitle').textContent = 'Menü';
-        document.getElementById('contactTitle').textContent = 'İletişim';
-        document.querySelector('.btn').textContent = 'Menüyü Gör';
-    } else {
-        document.getElementById('menuTitle').textContent = 'Menu';
-        document.getElementById('contactTitle').textContent = 'Contact';
-        document.querySelector('.btn').textContent = 'View Menu';
-    }
+    const menuTitle = document.getElementById("menuTitle");
+    const contactTitle = document.getElementById("contactTitle");
+    const langBtn = document.getElementById("langBtn");
+    const menuBtn = document.querySelector('.btn');
+
+    if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
+    if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
+    if (menuBtn) menuBtn.innerText = currentLang === "tr" ? "Menüyü Gör" : "View Menu";
+    if (langBtn) langBtn.innerText = currentLang === "tr" ? "🌍 EN / TR" : "🌍 TR / EN";
 }
 
+document.getElementById("langBtn").onclick = function() {
+    currentLang = currentLang === "tr" ? "en" : "tr";
+    localStorage.setItem("lang", currentLang);
+    applyLanguage();
+    showStatus(currentLang === "tr" ? "🇹🇷 Türkçe" : "🇬🇧 English", "success");
+};
+
 // ===== Tema =====
-const modeToggle = document.getElementById('modeToggle');
-modeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('light-mode');
-    const isLight = document.body.classList.contains('light-mode');
-    modeToggle.innerHTML = isLight ? '☀️' : '🌙';
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+    document.body.classList.toggle("light-mode");
+    modeToggle.innerHTML = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
 });
 
-// ===== Dil butonu =====
-document.getElementById('langBtn').onclick = toggleLanguage;
+// ===== Interval değişince =====
+document.getElementById('syncInterval')?.addEventListener('change', function() {
+    startAutoSync();
+});
 
-// ===== Başlangıç =====
+// ===== Sürükleme =====
+let devPanel = document.getElementById("devPanel");
+let isDragging = false;
+let offsetX, offsetY;
+let dragHandle = document.getElementById("dragHandle");
+
+dragHandle.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", drag);
+document.addEventListener("mouseup", stopDrag);
+
+function startDrag(e) {
+    isDragging = true;
+    offsetX = e.clientX - devPanel.offsetLeft;
+    offsetY = e.clientY - devPanel.offsetTop;
+    devPanel.style.transform = "none";
+    devPanel.style.cursor = "grabbing";
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    devPanel.style.left = (e.clientX - offsetX) + "px";
+    devPanel.style.top = (e.clientY - offsetY) + "px";
+}
+
+function stopDrag() {
+    isDragging = false;
+    devPanel.style.cursor = "move";
+}
+
+// Başlangıç
 applyLanguage();
 </script>
 
