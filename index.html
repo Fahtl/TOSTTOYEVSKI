@@ -643,9 +643,9 @@ iframe {
     <!-- تم إخفاء تلميح النقر -->
     <div class="work-time">🕒 08:00 - 02:30</div>
     
-    <!-- الزر الذي يعمل وظيفتين -->
-    <button class="btn" id="doubleActionBtn">
-        <span id="restartText">Menüyü Gör</span>
+    <!-- الزر الآن فقط للنزول -->
+    <button class="btn" onclick="scrollToMenu()" id="scrollBtn">
+        <span id="scrollText">Menüyü Gör</span>
     </button>
 </section>
 
@@ -848,58 +848,29 @@ const ORIGINAL_MENU = [
     }
 ];
 
-// ===== متغيرات للزر المزدوج =====
-let buttonClickCount = 0;
-let buttonClickTimer = null;
-
-// ===== إعداد الزر ذو الوظيفتين =====
-document.getElementById('doubleActionBtn').addEventListener('click', function() {
-    buttonClickCount++;
+// ===== دالة الريستارت في كل مرة =====
+function performRestart() {
+    console.log('Restart yapılıyor - menü sıfırlanıyor');
     
-    if (buttonClickTimer) clearTimeout(buttonClickTimer);
-    
-    buttonClickTimer = setTimeout(() => {
-        if (buttonClickCount === 1) {
-            // الضغطة الأولى: ريستارت (بدون إظهار)
-            restartSilently();
-        } else if (buttonClickCount === 2) {
-            // الضغطة الثانية: التمرير للقوائم
-            scrollToMenu();
-        }
-        buttonClickCount = 0;
-    }, 300); // 300 ميلي ثانية بين الضغطات
-});
-
-// ===== دالة الريستارت الصامت =====
-function restartSilently() {
-    // 1. مسح جميع البيانات المخزنة
+    // مسح جميع البيانات المخزنة
     localStorage.removeItem('tosttoo_menu');
     localStorage.removeItem('menuVersion');
     localStorage.removeItem('lastCloudSave');
     localStorage.removeItem('cloudData');
     
-    // 2. إعادة تعيين المتغيرات
+    // إعادة تعيين المتغيرات
     currentVersion = '1.0.0';
     
-    // 3. عرض المنيو الأصلي
+    // عرض المنيو الأصلي مباشرة
     displayMenu(ORIGINAL_MENU);
     
-    // 4. حفظ المنيو الأصلي في localStorage
+    // حفظ المنيو الأصلي في localStorage
     localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
     localStorage.setItem('menuVersion', currentVersion);
     
-    // 5. تحديث الواجهة
+    // تحديث الواجهة
     updateVersion();
     document.getElementById('lastCloudSave').innerText = '-';
-    
-    // 6. إلغاء أي وضع تعديل
-    if (isDeveloper) {
-        deleteMode = false;
-        editMode = false;
-        document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
-        document.getElementById('editModeBtn').innerHTML = '✏️ Düzenle';
-        document.getElementById('deleteModeBtn').innerHTML = '🗑️ Silme';
-    }
 }
 
 // ===== دالة التمرير للقوائم =====
@@ -917,11 +888,13 @@ let lastCloudData = null;
 
 // ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
-    loadSavedData();
+    // ريستارت في كل مرة يتم فيها تحميل الصفحة
+    performRestart();
+    
+    // تحميل البيانات من السحاب بعد الريستارت
     loadMenuFromCloud();
     testCloudConnection();
     startAutoSync();
-    updateVersion();
 });
 
 // ===== عرض المنيو =====
@@ -1058,15 +1031,9 @@ async function loadMenuFromCloud() {
             displayMenu(data.menu);
             localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
             showStatus('✅ Menü clouddan yüklendi!', 'success');
-        } else {
-            // Varsayılan menüyü yükle
-            displayMenu(ORIGINAL_MENU);
-            localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
         }
     } catch(error) {
-        console.log('Cloud yükleme hatası, varsayılan menü kullanılıyor');
-        displayMenu(ORIGINAL_MENU);
-        localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
+        console.log('Cloud yükleme hatası');
     }
 }
 
@@ -1551,7 +1518,7 @@ function applyLanguage() {
     const menuTitle = document.getElementById("menuTitle");
     const contactTitle = document.getElementById("contactTitle");
     const langBtn = document.getElementById("langBtn");
-    const menuBtn = document.getElementById("doubleActionBtn").querySelector('span');
+    const menuBtn = document.getElementById("scrollBtn").querySelector('span');
 
     if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
     if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
