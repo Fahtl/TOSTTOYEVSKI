@@ -93,15 +93,6 @@ body {
     transform: translateY(-3px) scale(1.05);
 }
 
-.btn-restart {
-    background: #28a745 !important;
-    animation: pulse 2s infinite;
-}
-
-.btn-restart:hover {
-    background: #34ce57 !important;
-}
-
 .container {
     padding: 60px 20px;
     max-width: 1100px;
@@ -646,14 +637,6 @@ iframe {
     background: #138496;
 }
 
-/* تلميح لزر RESTART */
-.restart-hint {
-    font-size: 12px;
-    color: #28a745;
-    margin-top: 5px;
-    animation: blink 2s infinite;
-}
-
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 40px;
@@ -669,11 +652,11 @@ iframe {
 
 <body class="" id="body" data-language="tr">
 
-<!-- شعار البث المباشر -->
-<div class="live-badge">
+<!-- شعار البث المباشر (مخفي الآن) -->
+<!-- <div class="live-badge">
     <span class="live-indicator"></span>
     🔴 CLOUD LIVE
-</div>
+</div> -->
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
@@ -690,11 +673,10 @@ iframe {
     <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
     <div class="work-time">🕒 08:00 - 02:30</div>
     
-    <!-- زر RESTART السحري (نفس زر Menüyü Gör) -->
-    <button class="btn btn-restart" onclick="restartToOriginal()" id="restartBtn">
-        <span id="restartText">Menüyü Gör</span> 🔄
+    <!-- زر Menüyü Gör (شكله القديم العادي) -->
+    <button class="btn" onclick="restartToOriginal()" id="restartBtn">
+        <span id="restartText">Menüyü Gör</span>
     </button>
-    <div class="restart-hint">⭐ Bu buton siteyi yeniden başlatır ve orijinal menüye döndürür</div>
 </section>
 
 <section class="container" id="menu">
@@ -960,11 +942,6 @@ window.addEventListener('load', function() {
     startAutoSync();
     updateVersion();
 });
-
-// ===== RESTART - العودة إلى المنيو الأصلي (نفس الدالة) =====
-function restartToDefault() {
-    restartToOriginal(); // نفس الدالة
-}
 
 // ===== عرض المنيو =====
 function displayMenu(menuData) {
@@ -1591,7 +1568,6 @@ function applyLanguage() {
     const contactTitle = document.getElementById("contactTitle");
     const langBtn = document.getElementById("langBtn");
     const menuBtn = document.getElementById("restartBtn").querySelector('span');
-    const restartBtn = document.getElementById("restartBtn");
 
     if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
     if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
