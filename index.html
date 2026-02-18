@@ -722,7 +722,7 @@ iframe {
 <section class="container" id="menu">
     <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
-        <!-- المنيو سيتم تحميله من السحاب تلقائياً -->
+        <!-- المنيو سيتم تحميله حسب اللغة -->
     </div>
 </section>
 
@@ -855,123 +855,357 @@ iframe {
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
-// ===== المنيو الجديد الكامل مع جميع الأقسام =====
-const FULL_MENU = [
-    {
-        category: "TOST ÇEŞİTLERİ",
-        items: [
-            { name: "Kaşarlı tost", price: "120₺" },
-            { name: "Sucuklu tost", price: "120₺" },
-            { name: "Kaşar sucuk mix", price: "150₺" },
-            { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" },
-            { name: "3 peynirli tost", price: "150₺" },
-            { name: "Kavurmalı tost", price: "200₺" },
-            { name: "Ayvalık tostu", price: "200₺" },
-            { name: "Simit tost (2 kişilik)", price: "350₺" },
-            { name: "Diyet tost (light kaşar,domates,biber,diyet ekmeği)", price: "150₺" },
-            { name: "Bazlama tost", price: "200₺" },
-            { name: "Bazlama kavurmalı", price: "250₺" },
-            { name: "Kumru", price: "200₺" }
-        ]
-    },
-    {
-        category: "SANDWİCHLER",
-        items: [
-            { name: "Karışık sandwich", price: "150₺" },
-            { name: "Tonbalıklı sandwich", price: "200₺" },
-            { name: "Tavuklu sandwich", price: "170₺" }
-        ]
-    },
-    {
-        category: "ATIŞTIRMALIKLAR",
-        items: [
-            { name: "Patates cips", price: "120₺" },
-            { name: "Tavuk parçacıkları", price: "150₺" },
-            { name: "6 lı soğan halkası", price: "60₺" }
-        ]
-    },
-    {
-        category: "SALATALAR",
-        items: [
-            { name: "Tonbalıklı salata", price: "250₺" },
-            { name: "Tavuklu salata", price: "250₺" },
-            { name: "Peynirli salata", price: "200₺" }
-        ]
-    },
-    {
-        category: "MAKARNALAR",
-        items: [
-            { name: "Bolonez makarna", price: "250₺" },
-            { name: "Tavuklu makarna", price: "250₺" },
-            { name: "Peynirli makarna", price: "200₺" },
-            { name: "Tonbalıklı makarna", price: "250₺" }
-        ]
-    },
-    {
-        category: "BURGERLER",
-        items: [
-            { name: "Classik hamburger", price: "300₺" },
-            { name: "Cheese burger", price: "320₺" },
-            { name: "Tavuk burger", price: "280₺" }
-        ]
-    },
-    {
-        category: "PİZZALAR",
-        items: [
-            { name: "Margarita", price: "200₺" },
-            { name: "Sucuklu pizza", price: "250₺" },
-            { name: "Karışık pizza", price: "300₺" },
-            { name: "Kavurmalı pizza", price: "350₺" },
-            { name: "Tonbalıklı pizza", price: "300₺" },
-            { name: "Vegi pizza", price: "230₺" }
-        ]
-    },
-    {
-        category: "KAHVALTILAR",
-        items: [
-            { name: "Kahvaltı tabağı", price: "250₺" },
-            { name: "Serpme kahvaltı (kişi başı)", price: "300₺" },
-            { name: "Menemen", price: "200₺" },
-            { name: "Sucuklu yumurta", price: "200₺" },
-            { name: "Sahanda yumurta", price: "150₺" },
-            { name: "Peynirli yumurta", price: "170₺" },
-            { name: "Kavurmalı yumurta", price: "250₺" }
-        ]
-    },
-    {
-        category: "SICAK İÇECEKLER",
-        items: [
-            { name: "Çay", price: "20₺" },
-            { name: "Ada çayı", price: "20₺" },
-            { name: "Bitki çayı", price: "30₺" },
-            { name: "Türk kahvesi", price: "60₺" },
-            { name: "Osmanlı kahvesi", price: "80₺" },
-            { name: "Menengiç kahvesi", price: "80₺" }
-        ]
-    },
-    {
-        category: "SOĞUK İÇECEKLER",
-        items: [
-            { name: "Su", price: "20₺" },
-            { name: "Soda", price: "30₺" },
-            { name: "Meyveli soda", price: "30₺" },
-            { name: "Beypazarı co'ala", price: "30₺" },
-            { name: "Çamlıca portakal", price: "30₺" },
-            { name: "Niğde gazozu", price: "30₺" },
-            { name: "Ice tea", price: "40₺" },
-            { name: "Ayran küçük", price: "20₺" },
-            { name: "Ayran büyük", price: "30₺" },
-            { name: "Churchill", price: "50₺" }
-        ]
-    },
-    {
-        category: "TATLILAR",
-        items: [
-            { name: "Fırında sütlaç", price: "120₺" },
-            { name: "Sufle", price: "120₺" }
-        ]
-    }
-];
+// ===== بيانات المنتجات بثلاث لغات =====
+const MENU_DATA = {
+    tr: [
+        {
+            category: "TOST ÇEŞİTLERİ",
+            items: [
+                { name: "Kaşarlı tost", price: "120₺" },
+                { name: "Sucuklu tost", price: "120₺" },
+                { name: "Kaşar sucuk mix", price: "150₺" },
+                { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" },
+                { name: "3 peynirli tost", price: "150₺" },
+                { name: "Kavurmalı tost", price: "200₺" },
+                { name: "Ayvalık tostu", price: "200₺" },
+                { name: "Simit tost (2 kişilik)", price: "350₺" },
+                { name: "Diyet tost (light kaşar,domates,biber,diyet ekmeği)", price: "150₺" },
+                { name: "Bazlama tost", price: "200₺" },
+                { name: "Bazlama kavurmalı", price: "250₺" },
+                { name: "Kumru", price: "200₺" }
+            ]
+        },
+        {
+            category: "SANDWİCHLER",
+            items: [
+                { name: "Karışık sandwich", price: "150₺" },
+                { name: "Tonbalıklı sandwich", price: "200₺" },
+                { name: "Tavuklu sandwich", price: "170₺" }
+            ]
+        },
+        {
+            category: "ATIŞTIRMALIKLAR",
+            items: [
+                { name: "Patates cips", price: "120₺" },
+                { name: "Tavuk parçacıkları", price: "150₺" },
+                { name: "6 lı soğan halkası", price: "60₺" }
+            ]
+        },
+        {
+            category: "SALATALAR",
+            items: [
+                { name: "Tonbalıklı salata", price: "250₺" },
+                { name: "Tavuklu salata", price: "250₺" },
+                { name: "Peynirli salata", price: "200₺" }
+            ]
+        },
+        {
+            category: "MAKARNALAR",
+            items: [
+                { name: "Bolonez makarna", price: "250₺" },
+                { name: "Tavuklu makarna", price: "250₺" },
+                { name: "Peynirli makarna", price: "200₺" },
+                { name: "Tonbalıklı makarna", price: "250₺" }
+            ]
+        },
+        {
+            category: "BURGERLER",
+            items: [
+                { name: "Classik hamburger", price: "300₺" },
+                { name: "Cheese burger", price: "320₺" },
+                { name: "Tavuk burger", price: "280₺" }
+            ]
+        },
+        {
+            category: "PİZZALAR",
+            items: [
+                { name: "Margarita", price: "200₺" },
+                { name: "Sucuklu pizza", price: "250₺" },
+                { name: "Karışık pizza", price: "300₺" },
+                { name: "Kavurmalı pizza", price: "350₺" },
+                { name: "Tonbalıklı pizza", price: "300₺" },
+                { name: "Vegi pizza", price: "230₺" }
+            ]
+        },
+        {
+            category: "KAHVALTILAR",
+            items: [
+                { name: "Kahvaltı tabağı", price: "250₺" },
+                { name: "Serpme kahvaltı (kişi başı)", price: "300₺" },
+                { name: "Menemen", price: "200₺" },
+                { name: "Sucuklu yumurta", price: "200₺" },
+                { name: "Sahanda yumurta", price: "150₺" },
+                { name: "Peynirli yumurta", price: "170₺" },
+                { name: "Kavurmalı yumurta", price: "250₺" }
+            ]
+        },
+        {
+            category: "SICAK İÇECEKLER",
+            items: [
+                { name: "Çay", price: "20₺" },
+                { name: "Ada çayı", price: "20₺" },
+                { name: "Bitki çayı", price: "30₺" },
+                { name: "Türk kahvesi", price: "60₺" },
+                { name: "Osmanlı kahvesi", price: "80₺" },
+                { name: "Menengiç kahvesi", price: "80₺" }
+            ]
+        },
+        {
+            category: "SOĞUK İÇECEKLER",
+            items: [
+                { name: "Su", price: "20₺" },
+                { name: "Soda", price: "30₺" },
+                { name: "Meyveli soda", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca portakal", price: "30₺" },
+                { name: "Niğde gazozu", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Ayran küçük", price: "20₺" },
+                { name: "Ayran büyük", price: "30₺" },
+                { name: "Churchill", price: "50₺" }
+            ]
+        },
+        {
+            category: "TATLILAR",
+            items: [
+                { name: "Fırında sütlaç", price: "120₺" },
+                { name: "Sufle", price: "120₺" }
+            ]
+        }
+    ],
+    en: [
+        {
+            category: "TOAST TYPES",
+            items: [
+                { name: "Cheese toast", price: "120₺" },
+                { name: "Sausage toast", price: "120₺" },
+                { name: "Cheese sausage mix", price: "150₺" },
+                { name: "Atom (sausage,salami,sausage,cheese,egg)", price: "200₺" },
+                { name: "3 cheese toast", price: "150₺" },
+                { name: "Roasted meat toast", price: "200₺" },
+                { name: "Ayvalık toast", price: "200₺" },
+                { name: "Bagel toast (for 2)", price: "350₺" },
+                { name: "Diet toast (light cheese,tomato,pepper,diet bread)", price: "150₺" },
+                { name: "Flatbread toast", price: "200₺" },
+                { name: "Flatbread with roasted meat", price: "250₺" },
+                { name: "Kumru", price: "200₺" }
+            ]
+        },
+        {
+            category: "SANDWICHES",
+            items: [
+                { name: "Mixed sandwich", price: "150₺" },
+                { name: "Tuna sandwich", price: "200₺" },
+                { name: "Chicken sandwich", price: "170₺" }
+            ]
+        },
+        {
+            category: "SNACKS",
+            items: [
+                { name: "Potato chips", price: "120₺" },
+                { name: "Chicken pieces", price: "150₺" },
+                { name: "6 onion rings", price: "60₺" }
+            ]
+        },
+        {
+            category: "SALADS",
+            items: [
+                { name: "Tuna salad", price: "250₺" },
+                { name: "Chicken salad", price: "250₺" },
+                { name: "Cheese salad", price: "200₺" }
+            ]
+        },
+        {
+            category: "PASTA",
+            items: [
+                { name: "Bolognese pasta", price: "250₺" },
+                { name: "Chicken pasta", price: "250₺" },
+                { name: "Cheese pasta", price: "200₺" },
+                { name: "Tuna pasta", price: "250₺" }
+            ]
+        },
+        {
+            category: "BURGERS",
+            items: [
+                { name: "Classic hamburger", price: "300₺" },
+                { name: "Cheese burger", price: "320₺" },
+                { name: "Chicken burger", price: "280₺" }
+            ]
+        },
+        {
+            category: "PIZZAS",
+            items: [
+                { name: "Margherita", price: "200₺" },
+                { name: "Sausage pizza", price: "250₺" },
+                { name: "Mixed pizza", price: "300₺" },
+                { name: "Roasted meat pizza", price: "350₺" },
+                { name: "Tuna pizza", price: "300₺" },
+                { name: "Veggie pizza", price: "230₺" }
+            ]
+        },
+        {
+            category: "BREAKFAST",
+            items: [
+                { name: "Breakfast plate", price: "250₺" },
+                { name: "Spread breakfast (per person)", price: "300₺" },
+                { name: "Menemen", price: "200₺" },
+                { name: "Sausage eggs", price: "200₺" },
+                { name: "Fried eggs", price: "150₺" },
+                { name: "Cheese eggs", price: "170₺" },
+                { name: "Roasted meat eggs", price: "250₺" }
+            ]
+        },
+        {
+            category: "HOT DRINKS",
+            items: [
+                { name: "Tea", price: "20₺" },
+                { name: "Sage tea", price: "20₺" },
+                { name: "Herbal tea", price: "30₺" },
+                { name: "Turkish coffee", price: "60₺" },
+                { name: "Ottoman coffee", price: "80₺" },
+                { name: "Menengiç coffee", price: "80₺" }
+            ]
+        },
+        {
+            category: "COLD DRINKS",
+            items: [
+                { name: "Water", price: "20₺" },
+                { name: "Soda", price: "30₺" },
+                { name: "Fruit soda", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca orange", price: "30₺" },
+                { name: "Niğde soda", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Ayran small", price: "20₺" },
+                { name: "Ayran large", price: "30₺" },
+                { name: "Churchill", price: "50₺" }
+            ]
+        },
+        {
+            category: "DESSERTS",
+            items: [
+                { name: "Baked rice pudding", price: "120₺" },
+                { name: "Souffle", price: "120₺" }
+            ]
+        }
+    ],
+    ru: [
+        {
+            category: "ВИДЫ ТОСТОВ",
+            items: [
+                { name: "Сырный тост", price: "120₺" },
+                { name: "Тост с колбасой", price: "120₺" },
+                { name: "Сыр с колбасой микс", price: "150₺" },
+                { name: "Атом (колбаса,салями,сосиски,сыр,яйцо)", price: "200₺" },
+                { name: "3 сырный тост", price: "150₺" },
+                { name: "Тост с жареным мясом", price: "200₺" },
+                { name: "Айвалык тост", price: "200₺" },
+                { name: "Тост с бубликом (на 2)", price: "350₺" },
+                { name: "Диетический тост (легкий сыр,помидор,перец,диетический хлеб)", price: "150₺" },
+                { name: "Тост на лепешке", price: "200₺" },
+                { name: "Лепешка с жареным мясом", price: "250₺" },
+                { name: "Кумру", price: "200₺" }
+            ]
+        },
+        {
+            category: "СЭНДВИЧИ",
+            items: [
+                { name: "Смешанный сэндвич", price: "150₺" },
+                { name: "Сэндвич с тунцом", price: "200₺" },
+                { name: "Сэндвич с курицей", price: "170₺" }
+            ]
+        },
+        {
+            category: "ЗАКУСКИ",
+            items: [
+                { name: "Картофельные чипсы", price: "120₺" },
+                { name: "Кусочки курицы", price: "150₺" },
+                { name: "6 луковых колец", price: "60₺" }
+            ]
+        },
+        {
+            category: "САЛАТЫ",
+            items: [
+                { name: "Салат с тунцом", price: "250₺" },
+                { name: "Салат с курицей", price: "250₺" },
+                { name: "Сырный салат", price: "200₺" }
+            ]
+        },
+        {
+            category: "МАКАРОНЫ",
+            items: [
+                { name: "Болоньезе", price: "250₺" },
+                { name: "С курицей", price: "250₺" },
+                { name: "С сыром", price: "200₺" },
+                { name: "С тунцом", price: "250₺" }
+            ]
+        },
+        {
+            category: "БУРГЕРЫ",
+            items: [
+                { name: "Классический гамбургер", price: "300₺" },
+                { name: "Чизбургер", price: "320₺" },
+                { name: "Куриный бургер", price: "280₺" }
+            ]
+        },
+        {
+            category: "ПИЦЦА",
+            items: [
+                { name: "Маргарита", price: "200₺" },
+                { name: "С колбасой", price: "250₺" },
+                { name: "Смешанная", price: "300₺" },
+                { name: "С жареным мясом", price: "350₺" },
+                { name: "С тунцом", price: "300₺" },
+                { name: "Овощная", price: "230₺" }
+            ]
+        },
+        {
+            category: "ЗАВТРАКИ",
+            items: [
+                { name: "Завтрак тарелка", price: "250₺" },
+                { name: "Разложенной завтрак (на человека)", price: "300₺" },
+                { name: "Менемен", price: "200₺" },
+                { name: "Яйца с колбасой", price: "200₺" },
+                { name: "Яичница", price: "150₺" },
+                { name: "Яйца с сыром", price: "170₺" },
+                { name: "Яйца с жареным мясом", price: "250₺" }
+            ]
+        },
+        {
+            category: "ГОРЯЧИЕ НАПИТКИ",
+            items: [
+                { name: "Чай", price: "20₺" },
+                { name: "Шалфей", price: "20₺" },
+                { name: "Травяной чай", price: "30₺" },
+                { name: "Турецкий кофе", price: "60₺" },
+                { name: "Османский кофе", price: "80₺" },
+                { name: "Мененгич кофе", price: "80₺" }
+            ]
+        },
+        {
+            category: "ХОЛОДНЫЕ НАПИТКИ",
+            items: [
+                { name: "Вода", price: "20₺" },
+                { name: "Сода", price: "30₺" },
+                { name: "Фруктовая сода", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca апельсин", price: "30₺" },
+                { name: "Niğde газировка", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Айран маленький", price: "20₺" },
+                { name: "Айран большой", price: "30₺" },
+                { name: "Черчилль", price: "50₺" }
+            ]
+        },
+        {
+            category: "ДЕСЕРТЫ",
+            items: [
+                { name: "Запеченный рисовый пудинг", price: "120₺" },
+                { name: "Суфле", price: "120₺" }
+            ]
+        }
+    ]
+};
 
 // ===== دالة الريستارت في كل مرة =====
 function performRestart() {
@@ -986,11 +1220,12 @@ function performRestart() {
     // إعادة تعيين المتغيرات
     currentVersion = '1.0.0';
     
-    // عرض المنيو الكامل
-    displayMenu(FULL_MENU);
+    // عرض المنيو حسب اللغة الحالية
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
     
     // حفظ المنيو في localStorage
-    localStorage.setItem('tosttoo_menu', JSON.stringify(FULL_MENU));
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
     localStorage.setItem('menuVersion', currentVersion);
     
     // تحديث الواجهة
@@ -1039,8 +1274,13 @@ function setLanguage(lang) {
     // إخفاء قائمة اللغة
     document.getElementById('languageMenu').style.display = 'none';
     
-    // تحديث النصوص
+    // تحديث جميع النصوص
     applyLanguage();
+    
+    // إعادة تحميل المنيو حسب اللغة الجديدة
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
     
     showStatus('Dil değiştirildi', 'success');
 }
@@ -1149,7 +1389,7 @@ function getText(key) {
     return texts[currentLang]?.[key] || texts.tr[key];
 }
 
-// ===== تطبيق اللغة على الواجهة =====
+// ===== تطبيق اللغة على كل شيء =====
 function applyLanguage() {
     // تحديث عناوين الصفحة الرئيسية
     document.getElementById('menuTitle').innerText = getText('menu');
@@ -1158,6 +1398,9 @@ function applyLanguage() {
     
     // تحديث لوحة المطور إذا كانت مفتوحة
     if (isDeveloper) {
+        // تحديث عنوان لوحة المطور
+        document.querySelector('#devPanel h3').innerText = `⚙️ ${getText('tools').replace('🔧', '').trim()} PANELİ`;
+        
         // تحديث جميع عناوين الأقسام
         document.querySelectorAll('.panel-title').forEach(el => {
             const tr = el.getAttribute('data-tr');
@@ -1200,6 +1443,7 @@ function applyLanguage() {
         document.getElementById('newName').placeholder = getText('product_name');
         document.getElementById('productPrice').placeholder = getText('price');
         document.getElementById('newCategory').placeholder = getText('category_name');
+        document.getElementById('newPrice').placeholder = getText('price');
     }
 }
 
@@ -1213,6 +1457,9 @@ window.addEventListener('load', function() {
     
     // إضافة حدث تغيير اللغة (فتح القائمة)
     langBtn.onclick = toggleLanguageMenu;
+    
+    // تطبيق اللغة
+    applyLanguage();
     
     // ريستارت في كل مرة يتم فيها تحميل الصفحة
     performRestart();
@@ -1560,7 +1807,7 @@ function loadSavedData() {
     if (savedMenu) {
         displayMenu(JSON.parse(savedMenu));
     } else {
-        displayMenu(FULL_MENU);
+        displayMenu(MENU_DATA.tr);
     }
     
     if (localStorage.getItem("insta")) {
@@ -1787,7 +2034,7 @@ function deleteAll() {
     if(!isDeveloper) return;
     if(confirm("Tüm menü silinsin mi?")) {
         localStorage.removeItem('tosttoo_menu');
-        displayMenu(FULL_MENU);
+        displayMenu(MENU_DATA.tr);
         showStatus("Varsayılan menü yüklendi", "success");
     }
 }
