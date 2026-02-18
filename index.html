@@ -93,6 +93,15 @@ body {
     transform: translateY(-3px) scale(1.05);
 }
 
+.btn-restart {
+    background: #28a745 !important;
+    animation: pulse 2s infinite;
+}
+
+.btn-restart:hover {
+    background: #34ce57 !important;
+}
+
 .container {
     padding: 60px 20px;
     max-width: 1100px;
@@ -637,6 +646,14 @@ iframe {
     background: #138496;
 }
 
+/* تلميح لزر RESTART */
+.restart-hint {
+    font-size: 12px;
+    color: #28a745;
+    margin-top: 5px;
+    animation: blink 2s infinite;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 40px;
@@ -672,9 +689,12 @@ iframe {
     <!-- تلميح النقر المزدوج للهاتف -->
     <div class="double-tap-hint">👆👆 ÇİFT TIKLA (GELİŞTİRİCİ)</div>
     <div class="work-time">🕒 08:00 - 02:30</div>
-    <button class="btn" onclick="document.getElementById('menuGrid').scrollIntoView({behavior:'smooth'})">
-        Menüyü Gör
+    
+    <!-- زر RESTART السحري (نفس زر Menüyü Gör) -->
+    <button class="btn btn-restart" onclick="restartToOriginal()" id="restartBtn">
+        <span id="restartText">Menüyü Gör</span> 🔄
     </button>
+    <div class="restart-hint">⭐ Bu buton siteyi yeniden başlatır ve orijinal menüye döndürür</div>
 </section>
 
 <section class="container" id="menu">
@@ -729,7 +749,7 @@ iframe {
         <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
         
         <!-- زر RESTART الجديد -->
-        <button onclick="restartToDefault()" class="restart-btn" style="margin-top:10px; background:#ffc107; color:#000; font-weight:bold;">
+        <button onclick="restartToOriginal()" class="restart-btn" style="margin-top:10px; background:#ffc107; color:#000; font-weight:bold;">
             🔄 RESTART (Varsayılana Dön)
         </button>
     </div>
@@ -818,8 +838,8 @@ iframe {
 const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
 
-// ===== المنيو الافتراضي الكامل مع الأقسام الجديدة =====
-const DEFAULT_MENU = [
+// ===== المنيو الأصلي الكامل (النسخة الأصلية) =====
+const ORIGINAL_MENU = [
     {
         category: "Tostlar",
         items: [
@@ -880,6 +900,50 @@ const DEFAULT_MENU = [
     }
 ];
 
+// ===== دالة RESTART السحرية =====
+function restartToOriginal() {
+    // رسالة تأكيد
+    if (confirm('🔄 Site yeniden başlatılacak ve orijinal menüye dönülecek! Emin misiniz?')) {
+        
+        // 1. مسح جميع البيانات المخزنة
+        localStorage.removeItem('tosttoo_menu');
+        localStorage.removeItem('menuVersion');
+        localStorage.removeItem('lastCloudSave');
+        localStorage.removeItem('cloudData');
+        
+        // 2. إعادة تعيين المتغيرات
+        currentVersion = '1.0.0';
+        
+        // 3. عرض المنيو الأصلي
+        displayMenu(ORIGINAL_MENU);
+        
+        // 4. حفظ المنيو الأصلي في localStorage
+        localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
+        localStorage.setItem('menuVersion', currentVersion);
+        
+        // 5. تحديث الواجهة
+        updateVersion();
+        document.getElementById('lastCloudSave').innerText = '-';
+        
+        // 6. إلغاء أي وضع تعديل
+        if (isDeveloper) {
+            deleteMode = false;
+            editMode = false;
+            document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
+            document.getElementById('editModeBtn').innerHTML = '✏️ Düzenle';
+            document.getElementById('deleteModeBtn').innerHTML = '🗑️ Silme';
+        }
+        
+        // 7. رسالة نجاح
+        showStatus('✅ Site yeniden başlatıldı! Orijinal menüye dönüldü.', 'success');
+        
+        // 8. التمرير إلى المنيو
+        setTimeout(() => {
+            document.getElementById('menuGrid').scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+    }
+}
+
 // متغيرات عامة
 let isDeveloper = false;
 let deleteMode = false;
@@ -897,24 +961,9 @@ window.addEventListener('load', function() {
     updateVersion();
 });
 
-// ===== RESTART - العودة إلى المنيو الأصلي =====
+// ===== RESTART - العودة إلى المنيو الأصلي (نفس الدالة) =====
 function restartToDefault() {
-    if (!isDeveloper) return;
-    
-    if (confirm('Tüm menü varsayılan haline dönecek! Emin misiniz?')) {
-        // حفظ المنيو الأصلي في localStorage
-        localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
-        
-        // عرض المنيو الأصلي
-        displayMenu(DEFAULT_MENU);
-        
-        // إعادة تعيين الإصدار
-        currentVersion = '1.0.0';
-        localStorage.setItem('menuVersion', currentVersion);
-        updateVersion();
-        
-        showStatus('🔄 Menü varsayılana döndürüldü!', 'success');
-    }
+    restartToOriginal(); // نفس الدالة
 }
 
 // ===== عرض المنيو =====
@@ -1053,13 +1102,13 @@ async function loadMenuFromCloud() {
             showStatus('✅ Menü clouddan yüklendi!', 'success');
         } else {
             // Varsayılan menüyü yükle
-            displayMenu(DEFAULT_MENU);
-            localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
+            displayMenu(ORIGINAL_MENU);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
         }
     } catch(error) {
         console.log('Cloud yükleme hatası, varsayılan menü kullanılıyor');
-        displayMenu(DEFAULT_MENU);
-        localStorage.setItem('tosttoo_menu', JSON.stringify(DEFAULT_MENU));
+        displayMenu(ORIGINAL_MENU);
+        localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
     }
 }
 
@@ -1260,7 +1309,7 @@ function loadSavedData() {
     if (savedMenu) {
         displayMenu(JSON.parse(savedMenu));
     } else {
-        displayMenu(DEFAULT_MENU);
+        displayMenu(ORIGINAL_MENU);
     }
     
     if (localStorage.getItem("insta")) {
@@ -1483,7 +1532,7 @@ function deleteAll() {
     if(!isDeveloper) return;
     if(confirm("Tüm menü silinsin mi?")) {
         localStorage.removeItem('tosttoo_menu');
-        displayMenu(DEFAULT_MENU);
+        displayMenu(ORIGINAL_MENU);
         showStatus("Varsayılan menü yüklendi", "success");
     }
 }
@@ -1541,7 +1590,8 @@ function applyLanguage() {
     const menuTitle = document.getElementById("menuTitle");
     const contactTitle = document.getElementById("contactTitle");
     const langBtn = document.getElementById("langBtn");
-    const menuBtn = document.querySelector('.btn');
+    const menuBtn = document.getElementById("restartBtn").querySelector('span');
+    const restartBtn = document.getElementById("restartBtn");
 
     if (menuTitle) menuTitle.innerText = currentLang === "tr" ? "Menü" : "Menu";
     if (contactTitle) contactTitle.innerText = currentLang === "tr" ? "İletişim" : "Contact";
