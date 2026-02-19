@@ -2,13 +2,13 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>Tosttoo | Developer V1 & V2</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط كما هي ===== */
+/* ===== جميع الأنماط كما هي مع إضافات جديدة ===== */
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +28,7 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: #fff;
+    padding-bottom: 70px; /* مساحة للزر العائم */
 }
 
 @keyframes gradientBG {
@@ -1260,6 +1261,63 @@ iframe {
     color: white;
 }
 
+/* ===== زر المطور العائم الجديد ===== */
+.floating-dev-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ff8c00;
+    color: white;
+    border: 3px solid #fff;
+    box-shadow: 0 5px 20px rgba(255,140,0,0.5);
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1500;
+    transition: all 0.3s ease;
+    animation: float 2s ease-in-out infinite;
+}
+
+.floating-dev-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    background: #ffa233;
+}
+
+.floating-dev-btn.hidden {
+    display: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ===== زر إغلاق لوحة المطور في الجوال ===== */
+.mobile-close-btn {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding: 15px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    display: none;
+}
+
+.mobile-close-btn:hover {
+    background: #c82333;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 40px;
@@ -1272,6 +1330,24 @@ iframe {
     .dev-window-v2 {
         width: 95%;
         padding: 15px;
+    }
+    .mobile-close-btn {
+        display: block;
+    }
+    .control-buttons {
+        top: 10px;
+        right: 80px;
+    }
+    #modeToggle {
+        top: 10px;
+        right: 10px;
+    }
+    .floating-dev-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
     }
 }
 </style>
@@ -1332,6 +1408,9 @@ iframe {
     <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
     <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
+
+<!-- زر المطور العائم (يظهر عند تفعيل وضع المطور) -->
+<div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()" style="display: none;">🔧</div>
 
 <!-- لوحة المطور V1 (القديمة) -->
 <div class="dev-window" id="devPanelV1">
@@ -1424,6 +1503,7 @@ iframe {
         </select>
     </div>
 
+    <button class="mobile-close-btn" onclick="closeDevV1()">❌ Paneli Kapat</button>
     <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
 </div>
 
@@ -1469,9 +1549,6 @@ iframe {
         <div class="image-upload-section">
             <label>Kategori Resim URL'si:</label>
             <input type="url" id="categoryImageUrlExist" placeholder="https://...jpg" value="">
-            <div class="image-preview" id="categoryExistImagePreview">
-                <span>URL'den önizleme (kaydettikten sonra gösterilir)</span>
-            </div>
         </div>
         <button onclick="addImageToExistingCategory()">📁 Kategoriye Resim Ekle (URL)</button>
     </div>
@@ -1488,9 +1565,6 @@ iframe {
         <div class="image-upload-section">
             <label>Ürün Resim URL'si:</label>
             <input type="url" id="productImageUrlExist" placeholder="https://...jpg" value="">
-            <div class="image-preview" id="productExistImagePreview">
-                <span>URL'den önizleme (kaydettikten sonra gösterilir)</span>
-            </div>
         </div>
         <button onclick="addImageToExistingProduct()">📦 Ürüne Resim Ekle (URL)</button>
     </div>
@@ -1502,9 +1576,6 @@ iframe {
         <div class="image-upload-section">
             <label>Kategori Resim URL'si (İsteğe bağlı):</label>
             <input type="url" id="categoryImageUrl" placeholder="https://...jpg">
-            <div class="image-preview" id="categoryImagePreview">
-                <span>URL önizleme (kaydettikten sonra gösterilir)</span>
-            </div>
         </div>
         <button onclick="addCategoryWithImage()">📁 Kategori Ekle (URL'li)</button>
     </div>
@@ -1518,16 +1589,13 @@ iframe {
         <div class="image-upload-section">
             <label>Ürün Resim URL'si (İsteğe bağlı):</label>
             <input type="url" id="productImageUrl" placeholder="https://...jpg">
-            <div class="image-preview" id="productImagePreview">
-                <span>URL önizleme (kaydettikten sonra gösterilir)</span>
-            </div>
         </div>
         <button onclick="addProductWithImage()">✅ Ürün Ekle (URL'li)</button>
     </div>
 
-    <!-- قسم: Resim Galerisi -->
+    <!-- قسم: Resim Galerisi (مع إمكانية المسح) -->
     <div class="dev-section-v2">
-        <h4>🖼️ Resim Galerisi</h4>
+        <h4>🖼️ Resim Galerisi (Tıklayarak Sil)</h4>
         <div style="display: flex; gap: 10px; margin-bottom: 10px;">
             <button onclick="showAllImages()" style="flex:1; background:#6c5ce7;">Tümü</button>
             <button onclick="showCategoryImages()" style="flex:1; background:#ff8c00;">Kategoriler</button>
@@ -1536,6 +1604,7 @@ iframe {
         <div id="imageGallery" class="image-gallery">
             <!-- الصور ستظهر هنا -->
         </div>
+        <p style="color:#aaa; font-size:12px; margin-top:5px;">👉 Resmin üzerine tıklayarak silebilirsiniz</p>
     </div>
 
     <!-- قسم: CLOUD SYNC للصور -->
@@ -1545,6 +1614,7 @@ iframe {
         <button onclick="loadImagesFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Resimleri Buluttan Yükle</button>
     </div>
 
+    <button class="mobile-close-btn" onclick="closeDevV2()">❌ Paneli Kapat</button>
     <button onclick="closeDevV2()" class="close-btn">❌ Çıkış</button>
 </div>
 
@@ -2127,8 +2197,8 @@ function saveV2Progress() {
     
     const progress = {
         menu: getCurrentMenu(),
-        categoryImages: categoryImages, // الآن هذه روابط URLs وليست Base64
-        productImages: productImages,   // الآن هذه روابط URLs وليست Base64
+        categoryImages: categoryImages,
+        productImages: productImages,
         colors: {
             category: localStorage.getItem('colorCategory'),
             name: localStorage.getItem('colorName'),
@@ -2208,7 +2278,6 @@ function loadV2Progress() {
             }
         }
         
-        // عرض المنيو مرة أخرى بعد تحميل الصور
         displayMenu(getCurrentMenu());
         updateGallery();
         updateImageStats();
@@ -2273,18 +2342,36 @@ function deleteProductImages() {
 function performRestart() {
     console.log('🔄 Restart yapılıyor - menü sıfırlanıyor');
     
-    // عرض المنيو الأصلي
     displayMenu(ORIGINAL_MENU);
     
-    // حفظ في localStorage
     localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
     
-    // تحديث الإصدار
     currentVersion = '1.0.0';
     localStorage.setItem('menuVersion', currentVersion);
     updateVersion();
     
     showStatus('🔄 Menü yenilendi!', 'success');
+}
+
+// ===== دوال إظهار وإخفاء لوحة المطور (للهاتف) =====
+function toggleDevPanel() {
+    if (currentVersion === 'v1') {
+        if (document.getElementById('devPanelV1').style.display === 'block') {
+            document.getElementById('devPanelV1').style.display = 'none';
+            document.getElementById('floatingDevBtn').style.display = 'flex';
+        } else {
+            document.getElementById('devPanelV1').style.display = 'block';
+            document.getElementById('floatingDevBtn').style.display = 'none';
+        }
+    } else if (currentVersion === 'v2') {
+        if (document.getElementById('devPanelV2').style.display === 'block') {
+            document.getElementById('devPanelV2').style.display = 'none';
+            document.getElementById('floatingDevBtn').style.display = 'flex';
+        } else {
+            document.getElementById('devPanelV2').style.display = 'block';
+            document.getElementById('floatingDevBtn').style.display = 'none';
+        }
+    }
 }
 
 // ===== دالة التمرير للقوائم =====
@@ -2332,7 +2419,6 @@ function setLanguage(lang) {
     
     applyLanguage();
     
-    // تغيير المنيو حسب اللغة
     displayMenu(MENU_DATA[currentLang]);
 }
 
@@ -2343,6 +2429,8 @@ let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let autoSyncInterval = null;
 let lastCloudData = null;
 let currentLang = localStorage.getItem('lang') || 'tr';
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
+const CLOUD_DOCS_URL = 'https://www.npoint.io/';
 
 function getText(key) {
     const texts = {
@@ -2379,10 +2467,8 @@ function applyLanguage() {
 
 // ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
-    // 🔄 ريستارت عند كل تحميل صفحة (يعيد الموقع للحالة الأصلية)
     performRestart();
     
-    // إعداد زر اللغة
     const langBtn = document.getElementById('langBtn');
     if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
     else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
@@ -2393,7 +2479,6 @@ window.addEventListener('load', function() {
     applyLanguage();
     loadImages();
     
-    // تحميل البيانات من السحاب بعد الريستارت
     loadMenuFromCloud();
     testCloudConnection();
     startAutoSync();
@@ -2404,7 +2489,7 @@ function displayMenu(menuData) {
     menuGrid.innerHTML = '';
     
     menuData.forEach((category, catIndex) => {
-        if (category.items.length === 0) return; // تجاهل الأقسام الفارغة
+        if (category.items.length === 0) return;
         
         const card = document.createElement('div');
         card.className = 'card';
@@ -2623,20 +2708,12 @@ async function testCloudConnection() {
         const response = await fetch(CLOUD_API_URL);
         
         if (response.ok) {
-            document.getElementById('apiStatus').innerText = 'Bağlı';
-            document.getElementById('apiStatus').style.color = '#00ff00';
-            document.getElementById('syncStatus').innerText = 'Bağlı';
-            document.getElementById('syncStatus').style.color = '#00ff00';
             showStatus("✅ API bağlantısı başarılı!", "success");
         } else {
             throw new Error('Bağlantı hatası');
         }
         
     } catch(error) {
-        document.getElementById('apiStatus').innerText = 'Bağlantı Yok';
-        document.getElementById('apiStatus').style.color = '#ff0000';
-        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
-        document.getElementById('syncStatus').style.color = '#ff0000';
         showStatus("❌ API bağlantısı başarısız!", "error");
     }
 }
@@ -2749,12 +2826,18 @@ function closeVersionModal() {
 function selectDevVersion(version) {
     closeVersionModal();
     isDeveloper = true;
+    currentVersion = version;
+    
+    // إظهار الزر العائم
+    document.getElementById('floatingDevBtn').style.display = 'flex';
     
     if (version === 'v1') {
         document.getElementById('devPanelV1').style.display = 'block';
+        document.getElementById('devPanelV2').style.display = 'none';
         updateCategorySelect();
     } else {
         document.getElementById('devPanelV2').style.display = 'block';
+        document.getElementById('devPanelV1').style.display = 'none';
         updateCategorySelectV2();
         updateExistingCategorySelect();
         updateImageStats();
@@ -2764,10 +2847,7 @@ function selectDevVersion(version) {
 // ===== دوال V1 =====
 function closeDevV1() {
     document.getElementById('devPanelV1').style.display = 'none';
-    isDeveloper = false;
-    deleteMode = false;
-    editMode = false;
-    document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
+    document.getElementById('floatingDevBtn').style.display = 'flex';
 }
 
 function updateCategorySelect() {
@@ -2897,7 +2977,7 @@ function applyColors() {
 // ===== دوال V2 (مع الصور - باستخدام URL) =====
 function closeDevV2() {
     document.getElementById('devPanelV2').style.display = 'none';
-    isDeveloper = false;
+    document.getElementById('floatingDevBtn').style.display = 'flex';
 }
 
 function updateCategorySelectV2() {
@@ -2949,12 +3029,6 @@ document.getElementById('existingCategoryForProductSelect')?.addEventListener('c
     }
 });
 
-// دوال معاينة الصور لم تعد ضرورية لأننا نستخدم URL، لكن سنبقيها لعرض الصورة بعد الحفظ
-function previewCategoryImage() {}
-function previewProductImage() {}
-function previewCategoryExistImage() {}
-function previewProductExistImage() {}
-
 function addImageToExistingCategory() {
     if (!isDeveloper) return;
     
@@ -2984,7 +3058,6 @@ function addImageToExistingCategory() {
     showStatus('✅ Kategori resmi (URL) eklendi!', 'success');
     
     document.getElementById('categoryImageUrlExist').value = '';
-    document.getElementById('categoryExistImagePreview').innerHTML = '<span>URL\'den önizleme (kaydettikten sonra gösterilir)</span>';
 }
 
 function addImageToExistingProduct() {
@@ -3018,7 +3091,6 @@ function addImageToExistingProduct() {
     showStatus('✅ Ürün resmi (URL) eklendi!', 'success');
     
     document.getElementById('productImageUrlExist').value = '';
-    document.getElementById('productExistImagePreview').innerHTML = '<span>URL\'den önizleme (kaydettikten sonra gösterilir)</span>';
 }
 
 function addCategoryWithImage() {
@@ -3094,8 +3166,12 @@ function updateImageStats() {
         prodCount += Object.keys(productImages[catIndex]).length;
     });
     
-    document.getElementById('v2CategoryCount').innerText = catCount;
-    document.getElementById('v2ProductCount').innerText = prodCount;
+    if (document.getElementById('v2CategoryCount')) {
+        document.getElementById('v2CategoryCount').innerText = catCount;
+    }
+    if (document.getElementById('v2ProductCount')) {
+        document.getElementById('v2ProductCount').innerText = prodCount;
+    }
 }
 
 function updateGallery(filter = 'all') {
@@ -3106,7 +3182,7 @@ function updateGallery(filter = 'all') {
     
     if (filter === 'all' || filter === 'categories') {
         Object.keys(categoryImages).forEach(cat => {
-            html += `<div class="gallery-item category-item" onclick="showImageDetails('category', '${cat}')">
+            html += `<div class="gallery-item category-item" onclick="deleteSingleImage('category', '${cat}')">
                 <img src="${categoryImages[cat]}" alt="${cat}">
                 <div class="item-name">📁 ${cat}</div>
             </div>`;
@@ -3116,7 +3192,7 @@ function updateGallery(filter = 'all') {
     if (filter === 'all' || filter === 'products') {
         Object.keys(productImages).forEach(catIndex => {
             Object.keys(productImages[catIndex]).forEach(prod => {
-                html += `<div class="gallery-item product-item" onclick="showImageDetails('product', '${catIndex}', '${prod}')">
+                html += `<div class="gallery-item product-item" onclick="deleteSingleImage('product', '${catIndex}', '${prod}')">
                     <img src="${productImages[catIndex][prod]}" alt="${prod}">
                     <div class="item-name">📦 ${prod}</div>
                 </div>`;
@@ -3143,7 +3219,8 @@ function showProductImages() {
     updateGallery('products');
 }
 
-function showImageDetails(type, cat, prod = null) {
+// ===== دالة جديدة لحذف صورة واحدة =====
+function deleteSingleImage(type, cat, prod = null) {
     if (!isDeveloper) return;
     
     if (type === 'category') {
