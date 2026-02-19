@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo | Ultimate Pro</title>
+<title>Tosttoo | Developer V1 & V2</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط كما هي ولكن بتحسينات جبارة ===== */
+/* ===== جميع الأنماط كما هي مع تحسينات جبارة ===== */
 * {
     margin: 0;
     padding: 0;
@@ -29,7 +30,7 @@ body {
     color: #fff;
 }
 
-/* تحسين 1: خلفية أكثر حيوية */
+/* تحسين 1: خلفية أكثر حيوية مع حركة أبطأ وأكثر سلاسة */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     25% { background-position: 50% 25%; }
@@ -38,7 +39,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* تحسين 2: تأثير جزيئات متحركة */
+/* تحسين 2: إضافة جزيئات ضوئية متحركة في الخلفية */
 body::before {
     content: '';
     position: fixed;
@@ -75,10 +76,11 @@ body::before {
                 url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* تحسين: خلفية ثابتة */
+    /* تحسين 3: خلفية ثابتة */
+    background-attachment: fixed;
 }
 
-/* تحسين 3: تأثير ضوئي متحرك */
+/* تحسين 4: تأثير ضوئي دوار في الخلفية */
 .hero::before {
     content: '';
     position: absolute;
@@ -96,7 +98,6 @@ body::before {
     to { transform: rotate(360deg); }
 }
 
-/* تحسين 4: تأثير لمعان على العنوان */
 .hero h1 {
     font-size: 60px;
     color: #ff8c00;
@@ -105,12 +106,15 @@ body::before {
     user-select: none;
     position: relative;
     animation: floatTitle 3s ease-in-out infinite;
-    text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255,140,0,0.5);
+    text-shadow: 0 0 20px #ff8c00;
     -webkit-tap-highlight-color: transparent;
+    /* تحسين 5: إضافة طبقات للظل */
+    text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255,140,0,0.5);
     transition: all 0.3s;
 }
 
 .hero h1:hover {
+    /* تحسين 6: تكبير النص مع زيادة اللمعان */
     text-shadow: 0 0 30px #ff8c00, 0 0 60px #ff8c00, 0 0 90px #ff8c00;
     transform: scale(1.05);
 }
@@ -126,6 +130,7 @@ body::before {
     color: #ff8c00;
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
+    /* تحسين 7: خلفية زجاجية مع تأثير ضبابي */
     background: rgba(255,140,0,0.1);
     padding: 10px 30px;
     border-radius: 50px;
@@ -149,12 +154,13 @@ body::before {
     overflow: hidden;
     background: #ff8c00;
     color: #fff;
+    /* تحسين 8: إضافة ظل ناعم */
+    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
     font-weight: 600;
     letter-spacing: 0.5px;
-    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
 }
 
-/* تحسين 5: تأثير تموج عند النقر */
+/* تحسين 9: تأثير تموج عند النقر */
 .btn::before {
     content: '';
     position: absolute;
@@ -180,7 +186,7 @@ body::before {
 
 .container {
     padding: 60px 20px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: auto;
     scroll-margin-top: 20px;
 }
@@ -196,7 +202,7 @@ body::before {
     transform: translateX(-50%);
 }
 
-/* تحسين 6: خطوط تحت العنوان متحركة */
+/* تحسين 10: خطوط متحركة تحت العناوين */
 .container h2::before {
     content: '';
     position: absolute;
@@ -235,11 +241,10 @@ body::before {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
 }
 
-/* تحسين 7: بطاقات أكثر جمالاً */
 .card {
     background: #1e1e1e;
     padding: 20px;
@@ -247,11 +252,12 @@ body::before {
     transition: all 0.3s ease;
     position: relative;
     border: 1px solid rgba(255,140,0,0.3);
+    /* تحسين 11: خلفية زجاجية خفيفة */
     backdrop-filter: blur(5px);
     overflow: hidden;
 }
 
-/* تحسين 8: تأثير لمعان على البطاقة */
+/* تحسين 12: تأثير لمعان على البطاقة */
 .card::before {
     content: '';
     position: absolute;
@@ -273,7 +279,7 @@ body::before {
     border-color: rgba(255,140,0,0.6);
 }
 
-/* تحسين 9: تأثير انعكاس */
+/* تحسين 13: تأثير انعكاس ضوئي */
 .card::after {
     content: '';
     position: absolute;
@@ -301,7 +307,7 @@ body::before {
     position: relative;
 }
 
-/* تحسين 10: خط تحت العنوان متحرك */
+/* تحسين 14: خط تحت متحرك */
 .card h3::after {
     content: '';
     position: absolute;
@@ -321,19 +327,24 @@ body::before {
 .item {
     display: flex;
     justify-content: space-between;
-    margin: 10px 0;
+    margin: 8px 0;
+    padding: 4px 0;
     transition: all 0.3s ease;
     position: relative;
+    border-bottom: 1px dashed rgba(255,140,0,0.2);
+    /* تحسين 15: إضافة padding للعناصر */
     padding: 5px 10px;
     border-radius: 5px;
 }
 
-/* تحسين 11: تأثير حركي على العناصر */
 .item:hover {
     transform: scale(1.02) translateX(5px);
+    border-bottom: 1px dashed rgba(255,140,0,0.8);
+    /* تحسين 16: خلفية خفيفة عند التمرير */
     background: rgba(255,140,0,0.1);
 }
 
+/* تحسين 17: شريط جانبي ملون */
 .item::before {
     content: '';
     position: absolute;
@@ -351,14 +362,29 @@ body::before {
     opacity: 1;
 }
 
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+    background: rgba(255,0,0,0.1);
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+    background: rgba(40,167,69,0.1);
+}
+
 .name {
     color: #ff8c00;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 15px;
 }
 
 .price {
     color: #fff;
     font-weight: bold;
+    font-size: 15px;
+    /* تحسين 18: تأثير خط تحت السعر */
     position: relative;
 }
 
@@ -381,11 +407,11 @@ body::before {
     text-align: center;
     padding: 50px 20px;
     background: #000;
+    /* تحسين 19: خلفية متحركة */
     position: relative;
     overflow: hidden;
 }
 
-/* تحسين 12: خلفية متحركة لقسم الاتصال */
 .contact::before {
     content: '';
     position: absolute;
@@ -445,9 +471,10 @@ iframe {
     width: 100%;
     height: 300px;
     border: none;
+    /* تحسين 20: ظل للخريطة */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     position: relative;
     z-index: 1;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .control-buttons {
@@ -468,6 +495,8 @@ iframe {
     transition: all 0.3s ease;
     background: #ff8c00;
     color: white;
+    font-size: 16px;
+    /* تحسين 21: ظل للأزرار */
     box-shadow: 0 5px 15px rgba(255,140,0,0.3);
 }
 
@@ -498,12 +527,11 @@ iframe {
     box-shadow: 0 0 30px rgba(255,140,0,0.5);
 }
 
-/* تحسين 13: شارة البث أكثر جمالاً */
 .live-badge {
     position: fixed;
     top: 20px;
     left: 20px;
-    background: linear-gradient(135deg, #ff0000, #ff4444);
+    background: rgba(255, 0, 0, 0.9);
     color: #fff;
     padding: 6px 16px;
     border-radius: 30px;
@@ -522,7 +550,89 @@ iframe {
     50% { transform: scale(1.1); }
 }
 
-/* تحسين 14: لوحة المطور أكثر أناقة */
+/* ===== نافذة اختيار نسخة المطور ===== */
+.dev-version-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #ff8c00;
+    border-radius: 15px;
+    padding: 30px;
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.dev-version-modal h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.dev-version-modal p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.version-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.version-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.version-btn.v1 {
+    background: #ff8c00;
+    color: white;
+}
+
+.version-btn.v1:hover {
+    background: #ffa233;
+    transform: scale(1.05);
+}
+
+.version-btn.v2 {
+    background: #6c5ce7;
+    color: white;
+}
+
+.version-btn.v2:hover {
+    background: #8b7cf0;
+    transform: scale(1.05);
+}
+
+.close-version-btn {
+    margin-top: 10px;
+    padding: 8px;
+    background: #333;
+    color: white;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-version-btn:hover {
+    background: #444;
+}
+
+/* ===== لوحة المطور V1 (القديمة) ===== */
 .dev-window {
     position: fixed;
     top: 50%;
@@ -536,10 +646,10 @@ iframe {
     border-radius: 15px;
     display: none;
     z-index: 1000;
-    background: rgba(20, 20, 20, 0.95);
+    background: rgba(20, 20, 20, 0.85);
     backdrop-filter: blur(15px);
-    border: 2px solid #ff8c00;
-    box-shadow: 0 0 40px rgba(255,140,0,0.3);
+    border: 2px solid rgba(255, 140, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
     cursor: move;
     user-select: none;
 }
@@ -559,7 +669,7 @@ iframe {
     padding: 15px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    border: 1px solid rgba(255,140,0,0.3);
+    border: 1px solid rgba(255, 140, 0, 0.3);
 }
 
 .dev-section h4 {
@@ -577,11 +687,11 @@ iframe {
     border: 1px solid #333;
     border-radius: 6px;
     color: white;
-    transition: all 0.3s;
 }
 
 .dev-window input:focus,
 .dev-window select:focus {
+    /* تحسين 22: تأثير عند التركيز */
     border-color: #ff8c00;
     box-shadow: 0 0 10px rgba(255,140,0,0.3);
     outline: none;
@@ -597,13 +707,11 @@ iframe {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: 600;
 }
 
 .dev-window button:hover {
     background: #ffa233;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
 }
 
 .dev-window .save-btn {
@@ -619,7 +727,149 @@ iframe {
     margin-top: 15px;
 }
 
-/* تحسين 15: نافذة الألوان */
+/* ===== لوحة المطور V2 (مع الصور) ===== */
+.dev-window-v2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
+    border: 2px solid #6c5ce7;
+    box-shadow: 0 0 40px rgba(108,92,231,0.3);
+}
+
+.dev-window-v2 h3 {
+    color: #6c5ce7;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #6c5ce7;
+    padding-bottom: 10px;
+}
+
+.dev-section-v2 {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(108,92,231,0.3);
+}
+
+.dev-section-v2 h4 {
+    color: #6c5ce7;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.dev-window-v2 input,
+.dev-window-v2 select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #6c5ce7;
+    border-radius: 6px;
+    color: white;
+}
+
+.dev-window-v2 button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: #6c5ce7;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dev-window-v2 button:hover {
+    background: #8b7cf0;
+    transform: translateY(-2px);
+}
+
+.dev-window-v2 .save-btn {
+    background: #28a745;
+}
+
+.dev-window-v2 .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window-v2 .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+/* ===== قسم الصور للمنتجات ===== */
+.image-upload-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    border: 1px dashed #6c5ce7;
+}
+
+.image-preview {
+    width: 100%;
+    height: 150px;
+    background: #333;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #6c5ce7;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.category-with-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.category-image-small {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #6c5ce7;
+}
+
+.product-with-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
+
+.product-image-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #6c5ce7;
+}
+
+/* ===== نافذة تعديل الألوان ===== */
 .color-picker-modal {
     position: fixed;
     top: 50%;
@@ -635,7 +885,7 @@ iframe {
     width: 90%;
     max-width: 350px;
     color: white;
-    box-shadow: 0 0 50px rgba(255,140,0,0.3);
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
 }
 
 .color-picker-modal h3 {
@@ -650,7 +900,6 @@ iframe {
     background: transparent;
     cursor: pointer;
     margin: 10px 0;
-    border-radius: 5px;
 }
 
 .color-picker-modal label {
@@ -660,7 +909,6 @@ iframe {
     font-weight: 600;
 }
 
-/* تحسين 16: رسائل الحالة */
 .status-message {
     position: fixed;
     top: 20px;
@@ -668,13 +916,12 @@ iframe {
     padding: 12px 20px;
     border-radius: 10px;
     background: rgba(0,0,0,0.9);
-    border-left: 4px solid;
+    border: 2px solid;
     color: #fff;
     font-weight: 600;
     z-index: 2000;
-    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    animation: slideIn 0.3s ease;
     font-size: 14px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 @keyframes slideIn {
@@ -682,14 +929,9 @@ iframe {
     to { transform: translateX(0); opacity: 1; }
 }
 
-@keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-.status-success { border-left-color: #28a745; }
-.status-error { border-left-color: #dc3545; }
-.status-loading { border-left-color: #ff8c00; }
+.status-success { border-color: #28a745; }
+.status-error { border-color: #dc3545; }
+.status-loading { border-color: #ff8c00; }
 
 .delete-mode .item:hover {
     outline: 2px solid red;
@@ -727,7 +969,6 @@ iframe {
     opacity: 1;
 }
 
-/* تحسين 17: الوضع النهاري */
 .light-mode {
     background: #f6f1e8 !important;
     color: #2b2b2b !important;
@@ -774,7 +1015,60 @@ iframe {
     color: #2b2b2b !important;
 }
 
-/* تحسين 18: تأثيرات إضافية */
+.light-mode .dev-window-v2 {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #6c5ce7 !important;
+}
+
+.light-mode .dev-window-v2 input {
+    background: #fffaf3 !important;
+    border: 1px solid #6c5ce7 !important;
+    color: #2b2b2b !important;
+}
+
+.cloud-panel {
+    margin-top: 15px;
+    background: rgba(0, 150, 255, 0.1);
+    border: 1px solid #0099ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cloud-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.cloud-badge {
+    background: #0066cc;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
 .version-tag {
     font-size: 10px;
     background: #333;
@@ -816,106 +1110,127 @@ iframe {
     transform: scale(1.1);
 }
 
-/* تحسين 19: نافذة اختيار نسخة المطور */
-.dev-version-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(15px);
-    border: 2px solid #ff8c00;
-    border-radius: 15px;
-    padding: 30px;
-    z-index: 2000;
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 300px;
-    box-shadow: 0 10px 40px rgba(255,140,0,0.3);
-    text-align: center;
-}
-
-.dev-version-modal h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.dev-version-modal p {
-    color: #ccc;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.version-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.version-btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s;
-    flex: 1;
-}
-
-.version-btn.v1 {
-    background: #ff8c00;
-    color: white;
-}
-
-.version-btn.v1:hover {
-    background: #ffa233;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
-}
-
-.version-btn.v2 {
-    background: #6c5ce7;
-    color: white;
-}
-
-.version-btn.v2:hover {
-    background: #8b7cf0;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
-}
-
-.close-version-btn {
+.backup-section {
     margin-top: 10px;
-    padding: 8px;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.backup-section small {
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+}
+
+.restart-btn {
+    background: #ffc107 !important;
+    color: #000 !important;
+    font-weight: bold;
+}
+
+.restart-btn:hover {
+    background: #ffdb58 !important;
+}
+
+.code-export {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.code-export button {
+    flex: 1;
+    background: #17a2b8;
+}
+
+.code-export button:hover {
+    background: #138496;
+}
+
+/* ===== قائمة اختيار اللغة ===== */
+.language-menu {
+    position: fixed;
+    top: 70px;
+    right: 90px;
+    background: #1a1a1a;
+    border: 2px solid #ff8c00;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 150px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.language-menu button {
     background: #333;
     color: white;
     border: 1px solid #ff8c00;
     border-radius: 5px;
+    padding: 10px;
     cursor: pointer;
+    font-size: 16px;
+    text-align: left;
     transition: all 0.3s;
+    width: 100%;
 }
 
-.close-version-btn:hover {
-    background: #444;
+.language-menu button:hover {
+    background: #ff8c00;
+    transform: translateX(5px);
+}
+
+.light-mode .language-menu {
+    background: #f5f5f5;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button {
+    background: #e0e0e0;
+    color: #333;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button:hover {
+    background: #d97706;
+    color: white;
 }
 
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 40px;
     }
+    .language-menu {
+        top: 70px;
+        right: 20px;
+        min-width: 120px;
+    }
 }
 </style>
 </head>
 
-<body class="" id="body" data-language="tr">
+<body class="" id="body" data-language="tr" dir="ltr">
 
-<!-- شعار البث المباشر -->
-<div class="live-badge">
-    <span class="live-indicator"></span>
-    🔴 CLOUD LIVE
+<!-- قائمة اختيار اللغة -->
+<div class="language-menu" id="languageMenu">
+    <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+    <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
+    <button onclick="setLanguage('ar')">🇮🇶 العربية</button>
+</div>
+
+<!-- نافذة اختيار نسخة المطور -->
+<div class="dev-version-modal" id="devVersionModal">
+    <h3>🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
+    <p>Hangi sürümü kullanmak istiyorsunuz?</p>
+    <div class="version-buttons">
+        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
+        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
+    </div>
+    <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
 </div>
 
 <!-- أزرار التحكم -->
@@ -929,40 +1244,31 @@ iframe {
 <!-- القسم الرئيسي -->
 <section class="hero">
     <h1 id="secretTrigger">Tosttoo</h1>
+    <!-- تم إخفاء تلميح النقر -->
     <div class="work-time">🕒 08:00 - 02:30</div>
+    
+    <!-- الزر الآن فقط للنزول -->
     <button class="btn" onclick="scrollToMenu()" id="scrollBtn">
         <span id="scrollText">Menüyü Gör</span>
     </button>
 </section>
 
-<!-- قسم المنيو -->
+<!-- قسم المنيو مع id="menu" -->
 <section class="container" id="menu">
     <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
-        <!-- المنيو سيتم تحميله هنا -->
+        <!-- المنيو سيتم تحميله حسب اللغة -->
     </div>
 </section>
 
-<!-- قسم الاتصال -->
 <section class="contact">
     <h2 id="contactTitle">İletişim</h2>
-    <p>📞 <a href="tel:05321580207">0532 158 02 07</a></p>
-    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">@tosttooyevski</a></p>
-    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
+    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
+    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
+    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
 </section>
 
-<!-- نافذة اختيار نسخة المطور -->
-<div class="dev-version-modal" id="devVersionModal">
-    <h3>🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
-    <p>Hangi sürümü kullanmak istiyorsunuz?</p>
-    <div class="version-buttons">
-        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
-        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
-    </div>
-    <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
-</div>
-
-<!-- لوحة المطور V1 -->
+<!-- لوحة المطور V1 (القديمة) -->
 <div class="dev-window" id="devPanelV1">
     <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ V1</h3>
 
@@ -1008,39 +1314,104 @@ iframe {
         <button onclick="changeLocation()">📍 Konum Güncelle</button>
     </div>
 
+    <!-- CLOUD PANEL -->
+    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
+        <h4>☁️ CLOUD SYNC <span class="cloud-badge">GELİŞMİŞ</span></h4>
+        <div class="cloud-panel">
+            <div class="cloud-stats">
+                <span>🌐 API: <span style="color:#00ff00" id="apiStatus">Hazır</span></span>
+                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
+            </div>
+            <div class="cloud-stats">
+                <span>💾 Son Kayıt: <span id="lastCloudSave">-</span></span>
+                <span>🔄 Durum: <span id="syncStatus">Hazır</span></span>
+            </div>
+            
+            <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
+                🔗 <strong>API URL:</strong><br>
+                <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
+            </div>
+            
+            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;" id="cloudSaveBtn">
+                ☁️ BULUTA KAYDET
+            </button>
+            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
+                📥 BULUTTAN YÜKLE
+            </button>
+            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
+                🔌 BAĞLANTI TESTİ
+            </button>
+            
+            <div class="backup-section">
+                <div class="code-export">
+                    <button onclick="copyBackupCode()" style="background:#17a2b8;">📋 Kodu Kopyala</button>
+                    <button onclick="pasteBackupCode()" style="background:#17a2b8;">📋 Kodu Yapıştır</button>
+                </div>
+                <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auto-sync -->
     <div class="dev-section">
-        <h4>☁️ CLOUD SYNC</h4>
-        <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;">☁️ Buluta Kaydet</button>
-        <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Buluttan Yükle</button>
+        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
+        </label>
+        <select id="syncInterval">
+            <option value="5">5 saniye</option>
+            <option value="10" selected>10 saniye</option>
+            <option value="30">30 saniye</option>
+            <option value="60">1 dakika</option>
+        </select>
     </div>
 
     <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- لوحة المطور V2 -->
-<div class="dev-window" id="devPanelV2" style="border-color: #6c5ce7;">
-    <h3 style="color: #6c5ce7; border-bottom-color: #6c5ce7;">🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
+<!-- لوحة المطور V2 (مع الصور) -->
+<div class="dev-window-v2" id="devPanelV2">
+    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
 
-    <div class="dev-section" style="border-color: rgba(108,92,231,0.3);">
-        <h4 style="color: #6c5ce7;">➕ Kategori Ekle (Resimli)</h4>
+    <div class="dev-section-v2">
+        <h4>➕ Kategori Ekle (Resimli)</h4>
         <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
-        <div style="margin: 10px 0;">
+        <div class="image-upload-section">
             <label>Kategori Resmi:</label>
-            <input type="file" id="categoryImage" accept="image/*" style="background: #333; padding: 5px;">
+            <input type="file" id="categoryImage" accept="image/*" onchange="previewCategoryImage()">
+            <div class="image-preview" id="categoryImagePreview">
+                <span>Resim önizleme</span>
+            </div>
         </div>
-        <button onclick="addCategoryWithImage()" style="background: #6c5ce7;">📁 Kategori Ekle</button>
+        <button onclick="addCategoryWithImage()">📁 Kategori Ekle (Resimli)</button>
     </div>
 
-    <div class="dev-section" style="border-color: rgba(108,92,231,0.3);">
-        <h4 style="color: #6c5ce7;">➕ Ürün Ekle (Resimli)</h4>
+    <div class="dev-section-v2">
+        <h4>➕ Ürün Ekle (Resimli)</h4>
         <select id="categorySelectV2"></select>
         <input type="text" id="newNameV2" placeholder="Ürün Adı">
         <input type="text" id="productPriceV2" placeholder="Fiyat">
-        <div style="margin: 10px 0;">
+        <div class="image-upload-section">
             <label>Ürün Resmi:</label>
-            <input type="file" id="productImage" accept="image/*" style="background: #333; padding: 5px;">
+            <input type="file" id="productImage" accept="image/*" onchange="previewProductImage()">
+            <div class="image-preview" id="productImagePreview">
+                <span>Resim önizleme</span>
+            </div>
         </div>
-        <button onclick="addProductWithImage()" style="background: #6c5ce7;">✅ Ürün Ekle</button>
+        <button onclick="addProductWithImage()">✅ Ürün Ekle (Resimli)</button>
+    </div>
+
+    <div class="dev-section-v2">
+        <h4>🖼️ Kategoriler ve Ürünler</h4>
+        <div id="imageGallery">
+            <p>Resimli kategoriler burada görünecek</p>
+        </div>
+    </div>
+
+    <div class="dev-section-v2">
+        <h4>☁️ CLOUD SYNC</h4>
+        <button onclick="saveToCloudV2()" class="save-btn">☁️ Buluta Kaydet (Resimli)</button>
+        <button onclick="loadFromCloudV2()" style="background:#673ab7;">📥 Buluttan Yükle</button>
     </div>
 
     <button onclick="closeDevV2()" class="close-btn">❌ Çıkış</button>
@@ -1062,7 +1433,11 @@ iframe {
 <div id="statusMessage" class="status-message" style="display:none;"></div>
 
 <script>
-// ===== بيانات المنيو =====
+// ===== الرابط الخاص بك =====
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
+const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
+
+// ===== بيانات المنتجات بثلاث لغات =====
 const MENU_DATA = {
     tr: [
         {
@@ -1071,15 +1446,113 @@ const MENU_DATA = {
                 { name: "Kaşarlı tost", price: "120₺" },
                 { name: "Sucuklu tost", price: "120₺" },
                 { name: "Kaşar sucuk mix", price: "150₺" },
-                { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" }
+                { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" },
+                { name: "3 peynirli tost", price: "150₺" },
+                { name: "Kavurmalı tost", price: "200₺" },
+                { name: "Ayvalık tostu", price: "200₺" },
+                { name: "Simit tost (2 kişilik)", price: "350₺" },
+                { name: "Diyet tost (light kaşar,domates,biber,diyet ekmeği)", price: "150₺" },
+                { name: "Bazlama tost", price: "200₺" },
+                { name: "Bazlama kavurmalı", price: "250₺" },
+                { name: "Kumru", price: "200₺" }
             ]
         },
         {
-            category: "İÇECEKLER",
+            category: "SANDWİCHLER",
             items: [
-                { name: "Çay", price: "10₺" },
-                { name: "Kahve", price: "15₺" },
-                { name: "Ayran", price: "12₺" }
+                { name: "Karışık sandwich", price: "150₺" },
+                { name: "Tonbalıklı sandwich", price: "200₺" },
+                { name: "Tavuklu sandwich", price: "170₺" }
+            ]
+        },
+        {
+            category: "ATIŞTIRMALIKLAR",
+            items: [
+                { name: "Patates cips", price: "120₺" },
+                { name: "Tavuk parçacıkları", price: "150₺" },
+                { name: "6 lı soğan halkası", price: "60₺" }
+            ]
+        },
+        {
+            category: "SALATALAR",
+            items: [
+                { name: "Tonbalıklı salata", price: "250₺" },
+                { name: "Tavuklu salata", price: "250₺" },
+                { name: "Peynirli salata", price: "200₺" }
+            ]
+        },
+        {
+            category: "MAKARNALAR",
+            items: [
+                { name: "Bolonez makarna", price: "250₺" },
+                { name: "Tavuklu makarna", price: "250₺" },
+                { name: "Peynirli makarna", price: "200₺" },
+                { name: "Tonbalıklı makarna", price: "250₺" }
+            ]
+        },
+        {
+            category: "BURGERLER",
+            items: [
+                { name: "Classik hamburger", price: "300₺" },
+                { name: "Cheese burger", price: "320₺" },
+                { name: "Tavuk burger", price: "280₺" }
+            ]
+        },
+        {
+            category: "PİZZALAR",
+            items: [
+                { name: "Margarita", price: "200₺" },
+                { name: "Sucuklu pizza", price: "250₺" },
+                { name: "Karışık pizza", price: "300₺" },
+                { name: "Kavurmalı pizza", price: "350₺" },
+                { name: "Tonbalıklı pizza", price: "300₺" },
+                { name: "Vegi pizza", price: "230₺" },
+                { name: "Dört Peynirli pizza", price: "300₺" }
+            ]
+        },
+        {
+            category: "KAHVALTILAR",
+            items: [
+                { name: "Kahvaltı tabağı", price: "250₺" },
+                { name: "Serpme kahvaltı (kişi başı)", price: "300₺" },
+                { name: "Menemen", price: "200₺" },
+                { name: "Sucuklu yumurta", price: "200₺" },
+                { name: "Sahanda yumurta", price: "150₺" },
+                { name: "Peynirli yumurta", price: "170₺" },
+                { name: "Kavurmalı yumurta", price: "250₺" }
+            ]
+        },
+        {
+            category: "SICAK İÇECEKLER",
+            items: [
+                { name: "Çay", price: "20₺" },
+                { name: "Ada çayı", price: "20₺" },
+                { name: "Bitki çayı", price: "30₺" },
+                { name: "Türk kahvesi", price: "60₺" },
+                { name: "Osmanlı kahvesi", price: "80₺" },
+                { name: "Menengiç kahvesi", price: "80₺" }
+            ]
+        },
+        {
+            category: "SOĞUK İÇECEKLER",
+            items: [
+                { name: "Su", price: "20₺" },
+                { name: "Soda", price: "30₺" },
+                { name: "Meyveli soda", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca portakal", price: "30₺" },
+                { name: "Niğde gazozu", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Ayran küçük", price: "20₺" },
+                { name: "Ayran büyük", price: "30₺" },
+                { name: "Churchill", price: "50₺" }
+            ]
+        },
+        {
+            category: "TATLILAR",
+            items: [
+                { name: "Fırında sütlaç", price: "120₺" },
+                { name: "Sufle", price: "120₺" }
             ]
         }
     ],
@@ -1090,55 +1563,513 @@ const MENU_DATA = {
                 { name: "Cheese toast", price: "120₺" },
                 { name: "Sausage toast", price: "120₺" },
                 { name: "Cheese sausage mix", price: "150₺" },
-                { name: "Atom (sausage,salami,cheese,egg)", price: "200₺" }
+                { name: "Atom (sausage,salami,sausage,cheese,egg)", price: "200₺" },
+                { name: "3 cheese toast", price: "150₺" },
+                { name: "Roasted meat toast", price: "200₺" },
+                { name: "Ayvalık toast", price: "200₺" },
+                { name: "Bagel toast (for 2)", price: "350₺" },
+                { name: "Diet toast (light cheese,tomato,pepper,diet bread)", price: "150₺" },
+                { name: "Flatbread toast", price: "200₺" },
+                { name: "Flatbread with roasted meat", price: "250₺" },
+                { name: "Kumru", price: "200₺" }
             ]
         },
         {
-            category: "DRINKS",
+            category: "SANDWICHES",
             items: [
-                { name: "Tea", price: "10₺" },
-                { name: "Coffee", price: "15₺" },
-                { name: "Ayran", price: "12₺" }
+                { name: "Mixed sandwich", price: "150₺" },
+                { name: "Tuna sandwich", price: "200₺" },
+                { name: "Chicken sandwich", price: "170₺" }
+            ]
+        },
+        {
+            category: "SNACKS",
+            items: [
+                { name: "Potato chips", price: "120₺" },
+                { name: "Chicken pieces", price: "150₺" },
+                { name: "6 onion rings", price: "60₺" }
+            ]
+        },
+        {
+            category: "SALADS",
+            items: [
+                { name: "Tuna salad", price: "250₺" },
+                { name: "Chicken salad", price: "250₺" },
+                { name: "Cheese salad", price: "200₺" }
+            ]
+        },
+        {
+            category: "PASTA",
+            items: [
+                { name: "Bolognese pasta", price: "250₺" },
+                { name: "Chicken pasta", price: "250₺" },
+                { name: "Cheese pasta", price: "200₺" },
+                { name: "Tuna pasta", price: "250₺" }
+            ]
+        },
+        {
+            category: "BURGERS",
+            items: [
+                { name: "Classic hamburger", price: "300₺" },
+                { name: "Cheese burger", price: "320₺" },
+                { name: "Chicken burger", price: "280₺" }
+            ]
+        },
+        {
+            category: "PIZZAS",
+            items: [
+                { name: "Margherita", price: "200₺" },
+                { name: "Sausage pizza", price: "250₺" },
+                { name: "Mixed pizza", price: "300₺" },
+                { name: "Roasted meat pizza", price: "350₺" },
+                { name: "Tuna pizza", price: "300₺" },
+                { name: "Veggie pizza", price: "230₺" },
+                { name: "Four Cheese pizza", price: "300₺" }
+            ]
+        },
+        {
+            category: "BREAKFAST",
+            items: [
+                { name: "Breakfast plate", price: "250₺" },
+                { name: "Spread breakfast (per person)", price: "300₺" },
+                { name: "Menemen", price: "200₺" },
+                { name: "Sausage eggs", price: "200₺" },
+                { name: "Fried eggs", price: "150₺" },
+                { name: "Cheese eggs", price: "170₺" },
+                { name: "Roasted meat eggs", price: "250₺" }
+            ]
+        },
+        {
+            category: "HOT DRINKS",
+            items: [
+                { name: "Tea", price: "20₺" },
+                { name: "Sage tea", price: "20₺" },
+                { name: "Herbal tea", price: "30₺" },
+                { name: "Turkish coffee", price: "60₺" },
+                { name: "Ottoman coffee", price: "80₺" },
+                { name: "Menengiç coffee", price: "80₺" }
+            ]
+        },
+        {
+            category: "COLD DRINKS",
+            items: [
+                { name: "Water", price: "20₺" },
+                { name: "Soda", price: "30₺" },
+                { name: "Fruit soda", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca orange", price: "30₺" },
+                { name: "Niğde soda", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Ayran small", price: "20₺" },
+                { name: "Ayran large", price: "30₺" },
+                { name: "Churchill", price: "50₺" }
+            ]
+        },
+        {
+            category: "DESSERTS",
+            items: [
+                { name: "Baked rice pudding", price: "120₺" },
+                { name: "Souffle", price: "120₺" }
+            ]
+        }
+    ],
+    ru: [
+        {
+            category: "ВИДЫ ТОСТОВ",
+            items: [
+                { name: "Сырный тост", price: "120₺" },
+                { name: "Тост с колбасой", price: "120₺" },
+                { name: "Сыр с колбасой микс", price: "150₺" },
+                { name: "Атом (колбаса,салями,сосиски,сыр,яйцо)", price: "200₺" },
+                { name: "3 сырный тост", price: "150₺" },
+                { name: "Тост с жареным мясом", price: "200₺" },
+                { name: "Айвалык тост", price: "200₺" },
+                { name: "Тост с бубликом (на 2)", price: "350₺" },
+                { name: "Диетический тост (легкий сыр,помидор,перец,диетический хлеб)", price: "150₺" },
+                { name: "Тост на лепешке", price: "200₺" },
+                { name: "Лепешка с жареным мясом", price: "250₺" },
+                { name: "Кумру", price: "200₺" }
+            ]
+        },
+        {
+            category: "СЭНДВИЧИ",
+            items: [
+                { name: "Смешанный сэндвич", price: "150₺" },
+                { name: "Сэндвич с тунцом", price: "200₺" },
+                { name: "Сэндвич с курицей", price: "170₺" }
+            ]
+        },
+        {
+            category: "ЗАКУСКИ",
+            items: [
+                { name: "Картофельные чипсы", price: "120₺" },
+                { name: "Кусочки курицы", price: "150₺" },
+                { name: "6 луковых колец", price: "60₺" }
+            ]
+        },
+        {
+            category: "САЛАТЫ",
+            items: [
+                { name: "Салат с тунцом", price: "250₺" },
+                { name: "Салат с курицей", price: "250₺" },
+                { name: "Сырный салат", price: "200₺" }
+            ]
+        },
+        {
+            category: "МАКАРОНЫ",
+            items: [
+                { name: "Болоньезе", price: "250₺" },
+                { name: "С курицей", price: "250₺" },
+                { name: "С сыром", price: "200₺" },
+                { name: "С тунцом", price: "250₺" }
+            ]
+        },
+        {
+            category: "БУРГЕРЫ",
+            items: [
+                { name: "Классический гамбургер", price: "300₺" },
+                { name: "Чизбургер", price: "320₺" },
+                { name: "Куриный бургер", price: "280₺" }
+            ]
+        },
+        {
+            category: "ПИЦЦА",
+            items: [
+                { name: "Маргарита", price: "200₺" },
+                { name: "С колбасой", price: "250₺" },
+                { name: "Смешанная", price: "300₺" },
+                { name: "С жареным мясом", price: "350₺" },
+                { name: "С тунцом", price: "300₺" },
+                { name: "Овощная", price: "230₺" },
+                { name: "Четыре сыра", price: "300₺" }
+            ]
+        },
+        {
+            category: "ЗАВТРАКИ",
+            items: [
+                { name: "Завтрак тарелка", price: "250₺" },
+                { name: "Разложенной завтрак (на человека)", price: "300₺" },
+                { name: "Менемен", price: "200₺" },
+                { name: "Яйца с колбасой", price: "200₺" },
+                { name: "Яичница", price: "150₺" },
+                { name: "Яйца с сыром", price: "170₺" },
+                { name: "Яйца с жареным мясом", price: "250₺" }
+            ]
+        },
+        {
+            category: "ГОРЯЧИЕ НАПИТКИ",
+            items: [
+                { name: "Чай", price: "20₺" },
+                { name: "Шалфей", price: "20₺" },
+                { name: "Травяной чай", price: "30₺" },
+                { name: "Турецкий кофе", price: "60₺" },
+                { name: "Османский кофе", price: "80₺" },
+                { name: "Мененгич кофе", price: "80₺" }
+            ]
+        },
+        {
+            category: "ХОЛОДНЫЕ НАПИТКИ",
+            items: [
+                { name: "Вода", price: "20₺" },
+                { name: "Сода", price: "30₺" },
+                { name: "Фруктовая сода", price: "30₺" },
+                { name: "Beypazarı co'ala", price: "30₺" },
+                { name: "Çamlıca апельсин", price: "30₺" },
+                { name: "Niğde газировка", price: "30₺" },
+                { name: "Ice tea", price: "40₺" },
+                { name: "Айран маленький", price: "20₺" },
+                { name: "Айран большой", price: "30₺" },
+                { name: "Черчилль", price: "50₺" }
+            ]
+        },
+        {
+            category: "ДЕСЕРТЫ",
+            items: [
+                { name: "Запеченный рисовый пудинг", price: "120₺" },
+                { name: "Суфле", price: "120₺" }
+            ]
+        }
+    ],
+    ar: [
+        {
+            category: "أنواع التوست",
+            items: [
+                { name: "توست بالجبن", price: "120₺" },
+                { name: "توست بالسجق", price: "120₺" },
+                { name: "مكس جبن وسجق", price: "150₺" },
+                { name: "أتوم (سجق,سلامي,سوسيس,جبن,بيض)", price: "200₺" },
+                { name: "توست 3 أجبان", price: "150₺" },
+                { name: "توست باللحم المقلي", price: "200₺" },
+                { name: "توست آياليك", price: "200₺" },
+                { name: "توست بالخبز الحلقي (لشخصين)", price: "350₺" },
+                { name: "توست دايت (جبن خفيف,طماطم,فلفل,خبز دايت)", price: "150₺" },
+                { name: "توست بالخبز المسطح", price: "200₺" },
+                { name: "خبز مسطح مع لحم مقلي", price: "250₺" },
+                { name: "كومرو", price: "200₺" }
+            ]
+        },
+        {
+            category: "الساندويشات",
+            items: [
+                { name: "ساندويش مشكل", price: "150₺" },
+                { name: "ساندويش تونة", price: "200₺" },
+                { name: "ساندويش دجاج", price: "170₺" }
+            ]
+        },
+        {
+            category: "الوجبات الخفيفة",
+            items: [
+                { name: "رقائق بطاطس", price: "120₺" },
+                { name: "قطع دجاج", price: "150₺" },
+                { name: "6 حلقات بصل", price: "60₺" }
+            ]
+        },
+        {
+            category: "السلطات",
+            items: [
+                { name: "سلطة تونة", price: "250₺" },
+                { name: "سلطة دجاج", price: "250₺" },
+                { name: "سلطة جبن", price: "200₺" }
+            ]
+        },
+        {
+            category: "المعكرونة",
+            items: [
+                { name: "معكرونة بولونيز", price: "250₺" },
+                { name: "معكرونة بالدجاج", price: "250₺" },
+                { name: "معكرونة بالجبن", price: "200₺" },
+                { name: "معكرونة بالتونة", price: "250₺" }
+            ]
+        },
+        {
+            category: "البرغر",
+            items: [
+                { name: "هامبرغر كلاسيك", price: "300₺" },
+                { name: "تشيز برغر", price: "320₺" },
+                { name: "برغر دجاج", price: "280₺" }
+            ]
+        },
+        {
+            category: "البيتزا",
+            items: [
+                { name: "مارغريتا", price: "200₺" },
+                { name: "بيتزا بالسجق", price: "250₺" },
+                { name: "بيتزا مشكلة", price: "300₺" },
+                { name: "بيتزا باللحم المقلي", price: "350₺" },
+                { name: "بيتزا بالتونة", price: "300₺" },
+                { name: "بيتزا خضار", price: "230₺" },
+                { name: "بيتزا أربعة أجبان", price: "300₺" }
+            ]
+        },
+        {
+            category: "الفطور",
+            items: [
+                { name: "طبق فطور", price: "250₺" },
+                { name: "فطور مفتوح (للشخص)", price: "300₺" },
+                { name: "منمن", price: "200₺" },
+                { name: "بيض بالسجق", price: "200₺" },
+                { name: "بيض مقلي", price: "150₺" },
+                { name: "بيض بالجبن", price: "170₺" },
+                { name: "بيض باللحم المقلي", price: "250₺" }
+            ]
+        },
+        {
+            category: "المشروبات الساخنة",
+            items: [
+                { name: "شاي", price: "20₺" },
+                { name: "شاي مريمية", price: "20₺" },
+                { name: "شاي أعشاب", price: "30₺" },
+                { name: "قهوة تركية", price: "60₺" },
+                { name: "قهوة عثمانية", price: "80₺" },
+                { name: "قهوة مننجتش", price: "80₺" }
+            ]
+        },
+        {
+            category: "المشروبات الباردة",
+            items: [
+                { name: "ماء", price: "20₺" },
+                { name: "صودا", price: "30₺" },
+                { name: "صودا فواكه", price: "30₺" },
+                { name: "بيبازاري كولا", price: "30₺" },
+                { name: "تشامليكا برتقال", price: "30₺" },
+                { name: "غازوز نيده", price: "30₺" },
+                { name: "آيس تي", price: "40₺" },
+                { name: "عيران صغير", price: "20₺" },
+                { name: "عيران كبير", price: "30₺" },
+                { name: "تشرشل", price: "50₺" }
+            ]
+        },
+        {
+            category: "الحلويات",
+            items: [
+                { name: "بودنغ الأرز المخبوز", price: "120₺" },
+                { name: "سوفليه", price: "120₺" }
             ]
         }
     ]
 };
 
-// ===== متغيرات عامة =====
-let isDeveloper = false;
-let deleteMode = false;
-let editMode = false;
-let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
-let currentLang = localStorage.getItem('lang') || 'tr';
+// ===== متغيرات الصور =====
 let categoryImages = {};
 let productImages = {};
+
+// ===== دالة الريستارت =====
+function performRestart() {
+    console.log('Restart yapılıyor - menü sıfırlanıyor');
+    
+    // مسح جميع البيانات المخزنة
+    localStorage.removeItem('tosttoo_menu');
+    localStorage.removeItem('menuVersion');
+    localStorage.removeItem('lastCloudSave');
+    localStorage.removeItem('cloudData');
+    localStorage.removeItem('categoryImages');
+    localStorage.removeItem('productImages');
+    
+    // إعادة تعيين المتغيرات
+    currentVersion = '1.0.0';
+    
+    // عرض المنيو حسب اللغة الحالية
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
+    
+    // حفظ المنيو في localStorage
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
+    localStorage.setItem('menuVersion', currentVersion);
+    
+    // تحديث الواجهة
+    updateVersion();
+    document.getElementById('lastCloudSave').innerText = '-';
+}
 
 // ===== دالة التمرير للقوائم =====
 function scrollToMenu() {
     document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ===== دوال اللغة =====
+// ===== إظهار/إخفاء قائمة اللغة =====
 function toggleLanguageMenu() {
-    setLanguage(currentLang === 'tr' ? 'en' : 'tr');
+    const menu = document.getElementById('languageMenu');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
 }
 
+// ===== إغلاق قائمة اللغة عند النقر خارجها =====
+document.addEventListener('click', function(event) {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('languageMenu');
+    
+    if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
+        langMenu.style.display = 'none';
+    }
+});
+
+// ===== دالة تغيير اللغة =====
 function setLanguage(lang) {
     currentLang = lang;
+    
+    // حفظ اللغة في localStorage
     localStorage.setItem('lang', currentLang);
     
+    // تحديث زر اللغة
     const langBtn = document.getElementById('langBtn');
-    langBtn.textContent = currentLang === 'tr' ? '🇹🇷' : '🇬🇧';
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
+    else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
     
+    // تغيير اتجاه الصفحة للعربية
+    if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+    } else {
+        document.body.setAttribute('dir', 'ltr');
+    }
+    
+    // إخفاء قائمة اللغة
+    const langMenu = document.getElementById('languageMenu');
+    if (langMenu) langMenu.style.display = 'none';
+    
+    // تحديث جميع النصوص
     applyLanguage();
-    displayMenu(MENU_DATA[currentLang] || MENU_DATA.tr);
+    
+    // إعادة تحميل المنيو حسب اللغة الجديدة
+    const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
+    displayMenu(menuToShow);
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
+    
+    showStatus('Dil değiştirildi', 'success');
 }
 
-function applyLanguage() {
-    document.getElementById('menuTitle').innerText = currentLang === 'tr' ? 'Menü' : 'Menu';
-    document.getElementById('contactTitle').innerText = currentLang === 'tr' ? 'İletişim' : 'Contact';
-    document.getElementById('scrollText').innerText = currentLang === 'tr' ? 'Menüyü Gör' : 'View Menu';
+// متغيرات عامة
+let isDeveloper = false;
+let deleteMode = false;
+let editMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let autoSyncInterval = null;
+let lastCloudData = null;
+let currentLang = localStorage.getItem('lang') || 'tr';
+
+// ===== دالة الحصول على النص حسب اللغة =====
+function getText(key) {
+    const texts = {
+        tr: {
+            menu: 'Menü',
+            contact: 'İletişim',
+            view_menu: 'Menüyü Gör'
+        },
+        en: {
+            menu: 'Menu',
+            contact: 'Contact',
+            view_menu: 'View Menu'
+        },
+        ru: {
+            menu: 'Меню',
+            contact: 'Контакты',
+            view_menu: 'Посмотреть меню'
+        },
+        ar: {
+            menu: 'القائمة',
+            contact: 'اتصل بنا',
+            view_menu: 'عرض القائمة'
+        }
+    };
+    
+    return texts[currentLang]?.[key] || texts.tr[key];
 }
+
+// ===== تطبيق اللغة =====
+function applyLanguage() {
+    // تحديث عناوين الصفحة الرئيسية
+    document.getElementById('menuTitle').innerText = getText('menu');
+    document.getElementById('contactTitle').innerText = getText('contact');
+    document.getElementById('scrollText').innerText = getText('view_menu');
+}
+
+// ===== تحميل المنيو عند فتح الصفحة =====
+window.addEventListener('load', function() {
+    // إعداد زر اللغة
+    const langBtn = document.getElementById('langBtn');
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
+    else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
+    
+    // إضافة حدث تغيير اللغة (فتح القائمة)
+    langBtn.onclick = toggleLanguageMenu;
+    
+    // تطبيق اللغة
+    applyLanguage();
+    
+    // ريستارت في كل مرة يتم فيها تحميل الصفحة
+    performRestart();
+    
+    // تحميل البيانات من السحاب بعد الريستارت
+    loadMenuFromCloud();
+    testCloudConnection();
+    startAutoSync();
+});
 
 // ===== عرض المنيو =====
 function displayMenu(menuData) {
@@ -1150,10 +2081,28 @@ function displayMenu(menuData) {
         card.className = 'card';
         card.setAttribute('data-category-index', catIndex);
         
+        // Kategori başlığı ve sil butonu
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        
         const title = document.createElement('h3');
         title.textContent = category.category;
-        card.appendChild(title);
+        header.appendChild(title);
         
+        if (isDeveloper) {
+            const deleteCatBtn = document.createElement('button');
+            deleteCatBtn.className = 'delete-category';
+            deleteCatBtn.innerHTML = '✕';
+            deleteCatBtn.onclick = (e) => {
+                e.stopPropagation();
+                deleteCategory(catIndex);
+            };
+            header.appendChild(deleteCatBtn);
+        }
+        
+        card.appendChild(header);
+        
+        // Ürünler
         category.items.forEach((item, itemIndex) => {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item';
@@ -1161,17 +2110,15 @@ function displayMenu(menuData) {
             itemDiv.setAttribute('data-item', itemIndex);
             itemDiv.innerHTML = `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
             
-            if (isDeveloper) {
-                itemDiv.addEventListener('click', function(e) {
-                    if (deleteMode) {
-                        e.stopPropagation();
-                        deleteProduct(catIndex, itemIndex);
-                    } else if (editMode) {
-                        e.stopPropagation();
-                        editProduct(catIndex, itemIndex);
-                    }
-                });
-            }
+            itemDiv.addEventListener('click', function(e) {
+                if (deleteMode && isDeveloper) {
+                    e.stopPropagation();
+                    deleteProduct(catIndex, itemIndex);
+                } else if (editMode && isDeveloper) {
+                    e.stopPropagation();
+                    editProduct(catIndex, itemIndex);
+                }
+            });
             
             card.appendChild(itemDiv);
         });
@@ -1183,15 +2130,320 @@ function displayMenu(menuData) {
     updateCategorySelectV2();
 }
 
+// ===== دوال V1 (النسخة القديمة) =====
+function deleteCategory(catIndex) {
+    if (!isDeveloper) return;
+    
+    if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
+        const menu = getCurrentMenu();
+        menu.splice(catIndex, 1);
+        saveMenuToLocal(menu);
+        showStatus('✅ Kategori silindi!', 'success');
+    }
+}
+
+function deleteProduct(catIndex, itemIndex) {
+    if (!isDeveloper) return;
+    
+    if (confirm('Bu ürünü silmek istediğinize emin misiniz?')) {
+        const menu = getCurrentMenu();
+        menu[catIndex].items.splice(itemIndex, 1);
+        saveMenuToLocal(menu);
+        showStatus('✅ Ürün silindi!', 'success');
+    }
+}
+
+function editProduct(catIndex, itemIndex) {
+    if (!isDeveloper) return;
+    
+    const menu = getCurrentMenu();
+    const product = menu[catIndex].items[itemIndex];
+    
+    const newName = prompt('Yeni ürün adı:', product.name);
+    if (newName === null) return;
+    
+    const newPrice = prompt('Yeni fiyat:', product.price);
+    if (newPrice === null) return;
+    
+    menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
+    saveMenuToLocal(menu);
+    showStatus('✅ Ürün güncellendi!', 'success');
+}
+
+function getCurrentMenu() {
+    const menu = [];
+    document.querySelectorAll('.card').forEach(card => {
+        const category = card.querySelector('h3').textContent;
+        const items = [];
+        card.querySelectorAll('.item').forEach(item => {
+            items.push({
+                name: item.querySelector('.name').textContent,
+                price: item.querySelector('.price').textContent
+            });
+        });
+        menu.push({ category, items });
+    });
+    return menu;
+}
+
+function saveMenuToLocal(menu) {
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
+    displayMenu(menu);
+}
+
+async function loadMenuFromCloud() {
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        lastCloudData = data;
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus('✅ Menü clouddan yüklendi!', 'success');
+        }
+    } catch(error) {
+        console.log('Cloud yükleme hatası');
+    }
+}
+
+async function saveToCloud() {
+    showStatus("☁️ Buluta kaydediliyor...", "loading");
+    document.getElementById('cloudSaveBtn').disabled = true;
+    
+    try {
+        const menuData = getCurrentMenu();
+        
+        const saveData = {
+            menu: menuData,
+            version: incrementVersion(currentVersion),
+            lastUpdate: new Date().toISOString()
+        };
+        
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+        });
+        
+        if (response.ok) {
+            showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+            
+            const saveTime = new Date().toLocaleTimeString();
+            localStorage.setItem('lastCloudSave', saveTime);
+            document.getElementById('lastCloudSave').innerText = saveTime;
+            
+            currentVersion = saveData.version;
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('cloudVersion').innerText = currentVersion;
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+            
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
+        
+    } catch(error) {
+        console.error('Kayıt hatası:', error);
+        showStatus("❌ Kayıt başarısız! Manuel yöntemi dene.", "error");
+        setTimeout(() => manualSaveGuide(), 2000);
+    }
+    
+    document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+function copyBackupCode() {
+    const menu = getCurrentMenu();
+    const backupData = {
+        menu: menu,
+        version: currentVersion,
+        date: new Date().toISOString()
+    };
+    
+    const jsonString = JSON.stringify(backupData, null, 2);
+    
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showStatus('📋 Kod kopyalandı! Bana gönderebilirsin!', 'success');
+    }).catch(() => {
+        prompt('Kodu kopyala ve bana gönder:', jsonString);
+    });
+}
+
+function pasteBackupCode() {
+    const code = prompt('Benden aldığın kodu yapıştır:');
+    if (!code) return;
+    
+    try {
+        const data = JSON.parse(code);
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            
+            if (data.version) {
+                currentVersion = data.version;
+                localStorage.setItem('menuVersion', currentVersion);
+                updateVersion();
+            }
+            
+            showStatus('✅ Kod yüklendi! Değişiklikler uygulandı!', 'success');
+        }
+    } catch(error) {
+        showStatus('❌ Geçersiz kod!', 'error');
+    }
+}
+
+function manualSaveGuide() {
+    const menuData = getCurrentMenu();
+    const jsonData = JSON.stringify({ menu: menuData }, null, 2);
+    
+    const guideMessage = 
+        "📋 MANUEL KAYIT İÇİN:\n\n" +
+        "1️⃣ Şu linki aç: " + CLOUD_DOCS_URL + "\n\n" +
+        "2️⃣ Giriş yap (GitHub/Google ile)\n\n" +
+        "3️⃣ 'Edit' butonuna bas\n\n" +
+        "4️⃣ Tüm verileri sil ve şunu yapıştır:\n\n" +
+        jsonData + "\n\n" +
+        "5️⃣ 'Save' butonuna bas\n\n" +
+        "6️⃣ Şu linki aç ve kontrol et:\n" + CLOUD_API_URL;
+    
+    alert(guideMessage);
+    navigator.clipboard?.writeText(jsonData);
+    showStatus("📋 JSON kopyalandı!", "success");
+}
+
+async function loadFromCloud() {
+    showStatus("📥 Buluttan yükleniyor...", "loading");
+    document.getElementById('cloudLoadBtn').disabled = true;
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus("✅ Buluttan yüklendi!", "success");
+        }
+    } catch(error) {
+        showStatus("❌ Yükleme başarısız!", "error");
+    }
+    
+    document.getElementById('cloudLoadBtn').disabled = false;
+}
+
+async function testCloudConnection() {
+    showStatus("🔌 API bağlantısı test ediliyor...", "loading");
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        
+        if (response.ok) {
+            document.getElementById('apiStatus').innerText = 'Bağlı';
+            document.getElementById('apiStatus').style.color = '#00ff00';
+            document.getElementById('syncStatus').innerText = 'Bağlı';
+            document.getElementById('syncStatus').style.color = '#00ff00';
+            showStatus("✅ API bağlantısı başarılı!", "success");
+        } else {
+            throw new Error('Bağlantı hatası');
+        }
+        
+    } catch(error) {
+        document.getElementById('apiStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('apiStatus').style.color = '#ff0000';
+        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('syncStatus').style.color = '#ff0000';
+        showStatus("❌ API bağlantısı başarısız!", "error");
+    }
+}
+
+function incrementVersion(version) {
+    const parts = version.split('.');
+    parts[2] = (parseInt(parts[2]) + 1).toString();
+    return parts.join('.');
+}
+
+function updateVersion() {
+    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    document.getElementById('cloudVersion').innerText = currentVersion;
+}
+
+function startAutoSync() {
+    if (autoSyncInterval) clearInterval(autoSyncInterval);
+    
+    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
+    
+    autoSyncInterval = setInterval(() => {
+        if (document.getElementById('autoSyncCheckbox')?.checked) {
+            fetch(CLOUD_API_URL)
+            .then(response => response.json())
+            .then(data => {
+                if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                    lastCloudData = data;
+                    if (data.menu && data.menu.length > 0) {
+                        displayMenu(data.menu);
+                        showStatus("🔄 Menü güncellendi!", "success");
+                    }
+                }
+            })
+            .catch(() => {});
+        }
+    }, interval);
+}
+
+function loadSavedData() {
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    } else {
+        displayMenu(MENU_DATA.tr);
+    }
+    
+    if (localStorage.getItem("insta")) {
+        document.getElementById("instaLink").href = localStorage.getItem("insta");
+    }
+    if (localStorage.getItem("map")) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + localStorage.getItem("map") + "&output=embed";
+    }
+    
+    let colorCategory = localStorage.getItem('colorCategory');
+    let colorName = localStorage.getItem('colorName');
+    let colorPrice = localStorage.getItem('colorPrice');
+    
+    if (colorCategory) document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    if (colorName) document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    if (colorPrice) document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+    
+    if (localStorage.getItem('menuVersion')) {
+        currentVersion = localStorage.getItem('menuVersion');
+        updateVersion();
+    }
+    
+    let lastSave = localStorage.getItem('lastCloudSave');
+    if (lastSave) document.getElementById('lastCloudSave').innerText = lastSave;
+}
+
+function showStatus(message, type) {
+    let oldStatus = document.querySelector(".status-message");
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement("div");
+    status.className = `status-message status-${type}`;
+    status.innerText = message;
+    document.body.appendChild(status);
+
+    setTimeout(() => status.remove(), 3000);
+}
+
 // ===== دوال الدخول للمطور =====
 let clickCount = 0;
 let clickTimer = null;
 
-document.getElementById('secretTrigger').addEventListener('click', function() {
+document.getElementById('secretTrigger').addEventListener('click', function(e) {
     clickCount++;
     
     if (clickTimer) clearTimeout(clickTimer);
-    clickTimer = setTimeout(() => clickCount = 0, 3000);
+    clickTimer = setTimeout(() => {
+        clickCount = 0;
+    }, 3000);
     
     if (clickCount === 7) {
         clearTimeout(clickTimer);
@@ -1199,6 +2451,7 @@ document.getElementById('secretTrigger').addEventListener('click', function() {
         
         let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
+            // فتح نافذة اختيار النسخة
             document.getElementById('devVersionModal').style.display = 'flex';
         } else {
             showStatus("❌ Yanlış şifre!", "error");
@@ -1224,266 +2477,172 @@ function closeVersionModal() {
 
 function selectDevVersion(version) {
     closeVersionModal();
-    isDeveloper = true;
     
     if (version === 'v1') {
-        document.getElementById('devPanelV1').style.display = 'block';
-        updateCategorySelect();
-    } else {
-        document.getElementById('devPanelV2').style.display = 'block';
-        updateCategorySelectV2();
-        loadImages();
+        openDevV1();
+    } else if (version === 'v2') {
+        openDevV2();
     }
 }
 
 // ===== دوال V1 =====
+function openDevV1() {
+    document.getElementById("devPanelV1").style.display = "block";
+    isDeveloper = true;
+    updateCategorySelect();
+    centerPanelV1();
+    
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    }
+}
+
 function closeDevV1() {
-    document.getElementById('devPanelV1').style.display = 'none';
     isDeveloper = false;
     deleteMode = false;
     editMode = false;
-    document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
+    document.getElementById("devPanelV1").style.display = "none";
+    document.getElementById("menuGrid").classList.remove("delete-mode", "edit-mode");
+    closeColorPicker();
+    
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    }
+}
+
+function centerPanelV1() {
+    let panel = document.getElementById("devPanelV1");
+    panel.style.left = "50%";
+    panel.style.top = "50%";
+    panel.style.transform = "translate(-50%, -50%)";
 }
 
 function updateCategorySelect() {
-    let select = document.getElementById('categorySelect');
-    if (select) {
-        select.innerHTML = '';
-        document.querySelectorAll('.card h3').forEach((h, i) => {
-            select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
-        });
-    }
+    let select = document.getElementById("categorySelect");
+    select.innerHTML = "";
+    document.querySelectorAll(".card h3").forEach((h, i) => {
+        let o = document.createElement("option");
+        o.textContent = h.innerText;
+        o.value = i;
+        select.appendChild(o);
+    });
 }
 
 function addCategory() {
     if (!isDeveloper) return;
-    
-    let name = document.getElementById('newCategory').value.trim();
+    let name = document.getElementById("newCategory").value.trim();
     if (!name) {
-        showStatus('Kategori adı girin!', 'error');
+        showStatus("Kategori adı girin!", "error");
         return;
     }
     
     const menu = getCurrentMenu();
     menu.push({ category: name, items: [] });
-    saveMenu(menu);
+    saveMenuToLocal(menu);
     
-    document.getElementById('newCategory').value = '';
-    showStatus('✅ Kategori eklendi!', 'success');
+    document.getElementById("newCategory").value = "";
+    showStatus("✅ Kategori eklendi!", "success");
 }
 
 function addProduct() {
     if (!isDeveloper) return;
-    
-    let name = document.getElementById('newName').value.trim();
-    let price = document.getElementById('productPrice').value.trim();
-    let index = document.getElementById('categorySelect').value;
+    let name = document.getElementById("newName").value.trim();
+    let price = document.getElementById("productPrice").value.trim();
+    let index = document.getElementById("categorySelect").value;
     
     if (!name || !price) {
-        showStatus('Ürün adı ve fiyat girin!', 'error');
+        showStatus("Ürün adı ve fiyat girin!", "error");
         return;
     }
-    
+
     const menu = getCurrentMenu();
     menu[index].items.push({ name, price });
-    saveMenu(menu);
+    saveMenuToLocal(menu);
     
-    document.getElementById('newName').value = '';
-    document.getElementById('productPrice').value = '';
-    showStatus('✅ Ürün eklendi!', 'success');
-}
-
-function deleteProduct(catIndex, itemIndex) {
-    if (!isDeveloper || !deleteMode) return;
-    
-    const menu = getCurrentMenu();
-    menu[catIndex].items.splice(itemIndex, 1);
-    saveMenu(menu);
-    showStatus('✅ Silindi!', 'success');
-}
-
-function editProduct(catIndex, itemIndex) {
-    if (!isDeveloper || !editMode) return;
-    
-    const menu = getCurrentMenu();
-    const product = menu[catIndex].items[itemIndex];
-    
-    const newName = prompt('Yeni ürün adı:', product.name);
-    if (!newName) return;
-    
-    const newPrice = prompt('Yeni fiyat:', product.price);
-    if (!newPrice) return;
-    
-    menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
-    saveMenu(menu);
-    showStatus('✅ Ürün güncellendi!', 'success');
+    document.getElementById("newName").value = "";
+    document.getElementById("productPrice").value = "";
+    showStatus("✅ Ürün eklendi!", "success");
 }
 
 function enableEdit() {
+    if (!isDeveloper) return;
+    
     editMode = !editMode;
     deleteMode = false;
-    document.getElementById('menuGrid').classList.toggle('edit-mode', editMode);
-    document.getElementById('menuGrid').classList.remove('delete-mode');
-    showStatus(editMode ? '✏️ Düzenleme modu aktif' : '✏️ Düzenleme kapalı', 'success');
+    
+    const btn = document.getElementById('editModeBtn');
+    const grid = document.getElementById('menuGrid');
+    
+    if (editMode) {
+        btn.style.background = '#28a745';
+        btn.innerHTML = '✏️ Düzenleme Aktif';
+        grid.classList.add('edit-mode');
+        grid.classList.remove('delete-mode');
+        document.getElementById('deleteModeBtn').innerHTML = '🗑️ Silme';
+        showStatus("✏️ Düzenleme modu aktif! Ürüne tıkla", "success");
+    } else {
+        btn.style.background = '#28a745';
+        btn.innerHTML = '✏️ Düzenle';
+        grid.classList.remove('edit-mode');
+    }
 }
 
 function toggleDeleteMode() {
+    if (!isDeveloper) return;
+    
     deleteMode = !deleteMode;
     editMode = false;
-    document.getElementById('menuGrid').classList.toggle('delete-mode', deleteMode);
-    document.getElementById('menuGrid').classList.remove('edit-mode');
-    showStatus(deleteMode ? '🗑️ Silme modu aktif' : '🗑️ Silme kapalı', 'success');
+    
+    const btn = document.getElementById('deleteModeBtn');
+    const grid = document.getElementById('menuGrid');
+    
+    if (deleteMode) {
+        btn.style.background = '#dc3545';
+        btn.innerHTML = '🗑️ Silme Aktif';
+        grid.classList.add('delete-mode');
+        grid.classList.remove('edit-mode');
+        document.getElementById('editModeBtn').innerHTML = '✏️ Düzenle';
+        showStatus("🗑️ Silme modu aktif! Ürüne tıkla", "success");
+    } else {
+        btn.style.background = '#dc3545';
+        btn.innerHTML = '🗑️ Silme';
+        grid.classList.remove('delete-mode');
+    }
 }
 
 function updateMainPrice() {
-    showStatus('Fiyat güncellendi', 'success');
+    showStatus("Fiyat güncellendi", "success");
 }
 
 function deleteAll() {
-    if (confirm('Tüm menü silinsin mi?')) {
+    if(!isDeveloper) return;
+    if(confirm("Tüm menü silinsin mi?")) {
         localStorage.removeItem('tosttoo_menu');
         displayMenu(MENU_DATA.tr);
-        showStatus('Varsayılan menü yüklendi', 'success');
+        showStatus("Varsayılan menü yüklendi", "success");
     }
 }
 
 function changeInstagram() {
-    let val = document.getElementById('newInstagram').value.trim();
-    if (val) {
-        document.getElementById('instaLink').href = val;
-        localStorage.setItem('insta', val);
-        showStatus('Instagram güncellendi', 'success');
+    let val = document.getElementById("newInstagram").value;
+    if(val) {
+        document.getElementById("instaLink").href = val;
+        localStorage.setItem("insta", val);
+        showStatus("Instagram güncellendi", "success");
     }
 }
 
 function changeLocation() {
-    let val = document.getElementById('newLocation').value.trim();
-    if (val) {
-        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
-        localStorage.setItem('map', val);
-        showStatus('Konum güncellendi', 'success');
+    let val = document.getElementById("newLocation").value;
+    if(val) {
+        document.getElementById("mapFrame").src = "https://www.google.com/maps?q=" + val + "&output=embed";
+        localStorage.setItem("map", val);
+        showStatus("Konum güncellendi", "success");
     }
 }
 
-// ===== دوال V2 =====
-function closeDevV2() {
-    document.getElementById('devPanelV2').style.display = 'none';
-    isDeveloper = false;
-}
-
-function updateCategorySelectV2() {
-    let select = document.getElementById('categorySelectV2');
-    if (select) {
-        select.innerHTML = '';
-        document.querySelectorAll('.card h3').forEach((h, i) => {
-            select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
-        });
-    }
-}
-
-function loadImages() {
-    const savedCatImages = localStorage.getItem('categoryImages');
-    const savedProdImages = localStorage.getItem('productImages');
-    
-    if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
-    if (savedProdImages) productImages = JSON.parse(savedProdImages);
-}
-
-function addCategoryWithImage() {
-    if (!isDeveloper) return;
-    
-    const name = document.getElementById('newCategoryV2').value.trim();
-    const file = document.getElementById('categoryImage').files[0];
-    
-    if (!name) {
-        showStatus('Kategori adı girin!', 'error');
-        return;
-    }
-    
-    const menu = getCurrentMenu();
-    menu.push({ category: name, items: [] });
-    saveMenu(menu);
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            categoryImages[name] = e.target.result;
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        }
-        reader.readAsDataURL(file);
-    }
-    
-    document.getElementById('newCategoryV2').value = '';
-    document.getElementById('categoryImage').value = '';
-    showStatus('✅ Kategori eklendi!', 'success');
-}
-
-function addProductWithImage() {
-    if (!isDeveloper) return;
-    
-    const name = document.getElementById('newNameV2').value.trim();
-    const price = document.getElementById('productPriceV2').value.trim();
-    const index = document.getElementById('categorySelectV2').value;
-    const file = document.getElementById('productImage').files[0];
-    
-    if (!name || !price) {
-        showStatus('Ürün adı ve fiyat girin!', 'error');
-        return;
-    }
-    
-    const menu = getCurrentMenu();
-    menu[index].items.push({ name, price });
-    saveMenu(menu);
-    
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            if (!productImages[index]) productImages[index] = {};
-            productImages[index][name] = e.target.result;
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-        }
-        reader.readAsDataURL(file);
-    }
-    
-    document.getElementById('newNameV2').value = '';
-    document.getElementById('productPriceV2').value = '';
-    document.getElementById('productImage').value = '';
-    showStatus('✅ Ürün eklendi!', 'success');
-}
-
-// ===== دوال عامة =====
-function getCurrentMenu() {
-    const menu = [];
-    document.querySelectorAll('.card').forEach(card => {
-        const category = card.querySelector('h3').textContent;
-        const items = [];
-        card.querySelectorAll('.item').forEach(item => {
-            items.push({
-                name: item.querySelector('.name').textContent,
-                price: item.querySelector('.price').textContent
-            });
-        });
-        menu.push({ category, items });
-    });
-    return menu;
-}
-
-function saveMenu(menu) {
-    localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
-    displayMenu(menu);
-}
-
-async function saveToCloud() {
-    showStatus('☁️ Buluta kaydediliyor...', 'loading');
-    setTimeout(() => showStatus('✅ Kaydedildi!', 'success'), 1000);
-}
-
-async function loadFromCloud() {
-    showStatus('📥 Buluttan yükleniyor...', 'loading');
-    setTimeout(() => showStatus('✅ Yüklendi!', 'success'), 1000);
-}
-
-// ===== دوال الألوان =====
 function openColorPicker() {
     document.getElementById('colorPickerModal').style.display = 'block';
 }
@@ -1506,87 +2665,258 @@ function applyColors() {
     localStorage.setItem('colorPrice', colorPrice);
 
     closeColorPicker();
-    showStatus('🎨 Renkler uygulandı!', 'success');
+    showStatus("🎨 Renkler uygulandı!", "success");
 }
 
-// ===== دوال الحالة =====
-function showStatus(message, type) {
-    let oldStatus = document.querySelector('.status-message');
-    if (oldStatus) oldStatus.remove();
-
-    let status = document.createElement('div');
-    status.className = `status-message status-${type}`;
-    status.innerText = message;
-    document.body.appendChild(status);
-
-    setTimeout(() => status.remove(), 3000);
+// ===== دوال V2 (مع الصور) =====
+function openDevV2() {
+    document.getElementById("devPanelV2").style.display = "block";
+    isDeveloper = true;
+    updateCategorySelectV2();
+    
+    // تحميل الصور المحفوظة
+    loadImages();
 }
 
-// ===== سحب اللوحة =====
-let devPanel = document.getElementById('devPanelV1');
+function closeDevV2() {
+    isDeveloper = false;
+    document.getElementById("devPanelV2").style.display = "none";
+}
+
+function updateCategorySelectV2() {
+    let select = document.getElementById("categorySelectV2");
+    if (select) {
+        select.innerHTML = "";
+        document.querySelectorAll(".card h3").forEach((h, i) => {
+            let o = document.createElement("option");
+            o.textContent = h.innerText;
+            o.value = i;
+            select.appendChild(o);
+        });
+    }
+}
+
+function previewCategoryImage() {
+    const file = document.getElementById('categoryImage').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('categoryImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:cover;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewProductImage() {
+    const file = document.getElementById('productImage').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('productImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:cover;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function addCategoryWithImage() {
+    if (!isDeveloper) return;
+    
+    const name = document.getElementById('newCategoryV2').value.trim();
+    const file = document.getElementById('categoryImage').files[0];
+    
+    if (!name) {
+        showStatus('Kategori adı girin!', 'error');
+        return;
+    }
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Kategoriyi kaydet
+            const menu = getCurrentMenu();
+            menu.push({ category: name, items: [] });
+            saveMenuToLocal(menu);
+            
+            // Resmi kaydet
+            categoryImages[name] = e.target.result;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            
+            showStatus('✅ Kategori resimli olarak eklendi!', 'success');
+            updateGallery();
+            
+            // Temizle
+            document.getElementById('newCategoryV2').value = '';
+            document.getElementById('categoryImage').value = '';
+            document.getElementById('categoryImagePreview').innerHTML = '<span>Resim önizleme</span>';
+        }
+        reader.readAsDataURL(file);
+    } else {
+        // Sadece kategori ekle
+        const menu = getCurrentMenu();
+        menu.push({ category: name, items: [] });
+        saveMenuToLocal(menu);
+        showStatus('✅ Kategori eklendi! (Resimsiz)', 'success');
+        
+        document.getElementById('newCategoryV2').value = '';
+    }
+}
+
+function addProductWithImage() {
+    if (!isDeveloper) return;
+    
+    const name = document.getElementById('newNameV2').value.trim();
+    const price = document.getElementById('productPriceV2').value.trim();
+    const catIndex = document.getElementById('categorySelectV2').value;
+    const file = document.getElementById('productImage').files[0];
+    
+    if (!name || !price) {
+        showStatus('Ürün adı ve fiyat girin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            // Ürünü kaydet
+            menu[catIndex].items.push({ name, price });
+            saveMenuToLocal(menu);
+            
+            // Resmi kaydet
+            if (!productImages[catIndex]) productImages[catIndex] = {};
+            productImages[catIndex][name] = e.target.result;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+            
+            showStatus('✅ Ürün resimli olarak eklendi!', 'success');
+            updateGallery();
+            
+            // Temizle
+            document.getElementById('newNameV2').value = '';
+            document.getElementById('productPriceV2').value = '';
+            document.getElementById('productImage').value = '';
+            document.getElementById('productImagePreview').innerHTML = '<span>Resim önizleme</span>';
+        }
+        reader.readAsDataURL(file);
+    } else {
+        // Sadece ürün ekle
+        menu[catIndex].items.push({ name, price });
+        saveMenuToLocal(menu);
+        showStatus('✅ Ürün eklendi! (Resimsiz)', 'success');
+        
+        document.getElementById('newNameV2').value = '';
+        document.getElementById('productPriceV2').value = '';
+    }
+}
+
+function loadImages() {
+    const savedCatImages = localStorage.getItem('categoryImages');
+    const savedProdImages = localStorage.getItem('productImages');
+    
+    if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
+    if (savedProdImages) productImages = JSON.parse(savedProdImages);
+    
+    updateGallery();
+}
+
+function updateGallery() {
+    const gallery = document.getElementById('imageGallery');
+    if (!gallery) return;
+    
+    let html = '';
+    
+    // Kategorileri göster
+    Object.keys(categoryImages).forEach(cat => {
+        html += `<div class="category-with-image">
+            <img src="${categoryImages[cat]}" class="category-image-small">
+            <span>${cat}</span>
+        </div>`;
+    });
+    
+    // Ürünleri göster (basit)
+    Object.keys(productImages).forEach(catIndex => {
+        Object.keys(productImages[catIndex]).forEach(prod => {
+            html += `<div class="product-with-image">
+                <img src="${productImages[catIndex][prod]}" class="product-image-small">
+                <span>${prod}</span>
+            </div>`;
+        });
+    });
+    
+    if (html === '') {
+        html = '<p>Resimli kategori ve ürün bulunmuyor</p>';
+    }
+    
+    gallery.innerHTML = html;
+}
+
+function saveToCloudV2() {
+    showStatus('☁️ Resimli menü buluta kaydediliyor...', 'loading');
+    
+    // Kaydetme işlemi burada yapılacak
+    setTimeout(() => {
+        showStatus('✅ Resimli menü kaydedildi!', 'success');
+    }, 1500);
+}
+
+function loadFromCloudV2() {
+    showStatus('📥 Resimli menü buluttan yükleniyor...', 'loading');
+    
+    // Yükleme işlemi burada yapılacak
+    setTimeout(() => {
+        showStatus('✅ Resimli menü yüklendi!', 'success');
+    }, 1500);
+}
+
+// ===== سحب وإفلات اللوحة V1 =====
+let devPanelV1 = document.getElementById("devPanelV1");
 let isDragging = false;
 let offsetX, offsetY;
-let dragHandle = document.getElementById('dragHandle');
+let dragHandle = document.getElementById("dragHandle");
 
 if (dragHandle) {
-    dragHandle.addEventListener('mousedown', startDrag);
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
+    dragHandle.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", stopDrag);
 }
 
 function startDrag(e) {
     isDragging = true;
-    offsetX = e.clientX - devPanel.offsetLeft;
-    offsetY = e.clientY - devPanel.offsetTop;
-    devPanel.style.transform = 'none';
-    devPanel.style.cursor = 'grabbing';
+    offsetX = e.clientX - devPanelV1.offsetLeft;
+    offsetY = e.clientY - devPanelV1.offsetTop;
+    devPanelV1.style.transform = "none";
+    devPanelV1.style.cursor = "grabbing";
 }
 
 function drag(e) {
     if (!isDragging) return;
     e.preventDefault();
-    devPanel.style.left = (e.clientX - offsetX) + 'px';
-    devPanel.style.top = (e.clientY - offsetY) + 'px';
+    devPanelV1.style.left = (e.clientX - offsetX) + "px";
+    devPanelV1.style.top = (e.clientY - offsetY) + "px";
 }
 
 function stopDrag() {
     isDragging = false;
-    devPanel.style.cursor = 'move';
+    devPanelV1.style.cursor = "move";
 }
 
 // ===== Tema =====
-const modeToggle = document.getElementById('modeToggle');
-modeToggle.addEventListener('click', function() {
-    document.body.classList.toggle('light-mode');
-    modeToggle.innerHTML = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+    document.body.classList.toggle("light-mode");
+    modeToggle.innerHTML = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
 });
 
-// ===== بدء التشغيل =====
-window.addEventListener('load', function() {
-    applyLanguage();
-    
-    const savedMenu = localStorage.getItem('tosttoo_menu');
-    if (savedMenu) {
-        displayMenu(JSON.parse(savedMenu));
-    } else {
-        displayMenu(MENU_DATA.tr);
-    }
-    
-    const savedInsta = localStorage.getItem('insta');
-    if (savedInsta) document.getElementById('instaLink').href = savedInsta;
-    
-    const savedMap = localStorage.getItem('map');
-    if (savedMap) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${savedMap}&output=embed`;
-    
-    if (localStorage.getItem('theme') === 'light') {
-        document.body.classList.add('light-mode');
-        modeToggle.innerHTML = '☀️';
-    }
+// ===== Interval değişince =====
+document.getElementById('syncInterval')?.addEventListener('change', function() {
+    startAutoSync();
 });
 
-// ===== زر اللغة =====
-document.getElementById('langBtn').onclick = toggleLanguageMenu;
+// Başlangıç
+applyLanguage();
 </script>
 
 </body>
