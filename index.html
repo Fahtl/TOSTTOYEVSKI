@@ -1740,8 +1740,8 @@ iframe {
 <div id="statusMessage" class="status-message" style="display:none;"></div>
 
 <script>
-// ===== جميع المنتجات الـ 58 من ملف JSON الذي أرسلته =====
-const ORIGINAL_MENU = [
+// ===== GÖNDERDİĞİNİZ JSON VERİSİ - TÜM ÜRÜNLER =====
+const CUSTOM_MENU = [
     {
         category: "TOST ÇEŞİTLERİ",
         items: [
@@ -1860,10 +1860,10 @@ const ORIGINAL_MENU = [
 
 // ===== بيانات المنتجات بجميع اللغات =====
 const MENU_DATA = {
-    tr: ORIGINAL_MENU,
-    en: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
-    ru: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
-    ar: JSON.parse(JSON.stringify(ORIGINAL_MENU))
+    tr: CUSTOM_MENU,
+    en: JSON.parse(JSON.stringify(CUSTOM_MENU)),
+    ru: JSON.parse(JSON.stringify(CUSTOM_MENU)),
+    ar: JSON.parse(JSON.stringify(CUSTOM_MENU))
 };
 
 // ===== متغيرات الصور =====
@@ -2128,9 +2128,10 @@ function deleteProductImages() {
 function performRestart() {
     console.log('🔄 Restart yapılıyor - menü sıfırlanıyor');
     
-    displayMenu(ORIGINAL_MENU);
+    // استخدام المنيو المخصص بدلاً من ORIGINAL_MENU
+    displayMenu(CUSTOM_MENU);
     
-    localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
+    localStorage.setItem('tosttoo_menu', JSON.stringify(CUSTOM_MENU));
     
     currentVersion = '1.0.0';
     localStorage.setItem('menuVersion', currentVersion);
@@ -2205,7 +2206,6 @@ function setLanguage(lang) {
     
     applyLanguage();
     
-    // ===== التعديل المهم هنا =====
     // عرض المنيو حسب اللغة المختارة مباشرة
     displayMenu(MENU_DATA[currentLang]);
 }
@@ -2272,7 +2272,7 @@ window.addEventListener('load', function() {
     startAutoSync();
 });
 
-// ===== دالة عرض المنيو المعدلة =====
+// ===== دالة عرض المنيو =====
 function displayMenu(menuData) {
     const menuGrid = document.getElementById('menuGrid');
     if (!menuGrid) return;
@@ -2280,7 +2280,7 @@ function displayMenu(menuData) {
     menuGrid.innerHTML = '';
     
     // التأكد من أن menuData موجود
-    const dataToShow = menuData || currentMenu || ORIGINAL_MENU;
+    const dataToShow = menuData || CUSTOM_MENU;
     
     dataToShow.forEach((category, catIndex) => {
         if (category.items.length === 0) return;
@@ -2761,7 +2761,7 @@ function deleteAll() {
         localStorage.removeItem('productImages');
         categoryImages = {};
         productImages = {};
-        displayMenu(ORIGINAL_MENU);
+        displayMenu(CUSTOM_MENU);
         showStatus('Varsayılan menü yüklendi', 'success');
     });
 }
