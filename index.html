@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط كما هي مع تحسينات ===== */
+/* ===== جميع الأنماط كما هي ===== */
 * {
     margin: 0;
     padding: 0;
@@ -1212,11 +1212,27 @@ iframe {
     <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- لوحة المطور V2 المتطورة (مع الصور الحقيقية) -->
+<!-- لوحة المطور V2 المتطورة (مع الصور) -->
 <div class="dev-window-v2" id="devPanelV2">
-    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (GERÇEK RESİMLİ)</h3>
+    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
 
-    <!-- قسم: إضافة صورة لقسم موجود -->
+    <!-- قسم: حفظ واستعادة البيانات (مثل V1) -->
+    <div class="dev-section-v2" style="border-color: #ff8c00; background: rgba(255,140,0,0.1);">
+        <h4 style="color: #ff8c00;">💾 VERİ YEDEKLEME (V2)</h4>
+        <div class="cloud-panel" style="border-color: #ff8c00;">
+            <div class="cloud-stats">
+                <span>📦 Kategori Resmi: <span style="color:#ff8c00" id="v2CategoryCount">0</span></span>
+                <span>🖼️ Ürün Resmi: <span style="color:#6c5ce7" id="v2ProductCount">0</span></span>
+            </div>
+            <div class="code-export">
+                <button onclick="saveV2Progress()" style="background:#28a745;">📋 Kodu Kopyala</button>
+                <button onclick="loadV2Progress()" style="background:#ff8c00;">📋 Kodu Yapıştır</button>
+            </div>
+            <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
+        </div>
+    </div>
+
+    <!-- قسم: Var Olan Kategoriye Resim Ekle -->
     <div class="dev-section-v2">
         <h4>📁 Var Olan Kategoriye Resim Ekle</h4>
         <select id="existingCategorySelect">
@@ -1232,7 +1248,7 @@ iframe {
         <button onclick="addImageToExistingCategory()">📁 Kategoriye Resim Ekle</button>
     </div>
 
-    <!-- قسم: إضافة صورة لمنتج موجود -->
+    <!-- قسم: Var Olan Ürüne Resim Ekle -->
     <div class="dev-section-v2">
         <h4>📦 Var Olan Ürüne Resim Ekle</h4>
         <select id="existingCategoryForProductSelect">
@@ -1251,7 +1267,7 @@ iframe {
         <button onclick="addImageToExistingProduct()">📦 Ürüne Resim Ekle</button>
     </div>
 
-    <!-- قسم: إضافة قسم جديد مع صورة -->
+    <!-- قسم: Yeni Kategori (Resimli) -->
     <div class="dev-section-v2">
         <h4>➕ Yeni Kategori (Resimli)</h4>
         <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
@@ -1265,7 +1281,7 @@ iframe {
         <button onclick="addCategoryWithImage()">📁 Kategori Ekle (Resimli)</button>
     </div>
 
-    <!-- قسم: إضافة منتج جديد مع صورة -->
+    <!-- قسم: Yeni Ürün (Resimli) -->
     <div class="dev-section-v2">
         <h4>➕ Yeni Ürün (Resimli)</h4>
         <select id="categorySelectV2"></select>
@@ -1281,7 +1297,7 @@ iframe {
         <button onclick="addProductWithImage()">✅ Ürün Ekle (Resimli)</button>
     </div>
 
-    <!-- قسم: معرض الصور -->
+    <!-- قسم: Resim Galerisi -->
     <div class="dev-section-v2">
         <h4>🖼️ Resim Galerisi</h4>
         <div style="display: flex; gap: 10px; margin-bottom: 10px;">
@@ -1294,28 +1310,9 @@ iframe {
         </div>
     </div>
 
-    <!-- قسم: إحصائيات الصور -->
+    <!-- قسم: CLOUD SYNC -->
     <div class="dev-section-v2">
-        <h4>📊 Resim İstatistikleri</h4>
-        <div style="display: flex; justify-content: space-around; text-align: center;">
-            <div>
-                <div style="font-size: 24px; color: #ff8c00;" id="categoryImageCount">0</div>
-                <div>Kategori Resmi</div>
-            </div>
-            <div>
-                <div style="font-size: 24px; color: #6c5ce7;" id="productImageCount">0</div>
-                <div>Ürün Resmi</div>
-            </div>
-            <div>
-                <div style="font-size: 24px; color: #28a745;" id="totalImageCount">0</div>
-                <div>Toplam</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- قسم: CLOUD SYNC للصور -->
-    <div class="dev-section-v2">
-        <h4>☁️ CLOUD SYNC (Resimli)</h4>
+        <h4>☁️ CLOUD SYNC</h4>
         <button onclick="saveImagesToCloud()" class="save-btn" style="background:#0066cc;">☁️ Resimleri Buluta Kaydet</button>
         <button onclick="loadImagesFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Resimleri Buluttan Yükle</button>
     </div>
@@ -1819,28 +1816,128 @@ const MENU_DATA = {
 let categoryImages = {};
 let productImages = {};
 
+// ===== دوال حفظ واستعادة البيانات في V2 (مثل V1) =====
+function saveV2Progress() {
+    showStatus('📋 Veriler kopyalanıyor...', 'loading');
+    
+    // جمع كل البيانات
+    const progress = {
+        menu: getCurrentMenu(),
+        categoryImages: categoryImages,
+        productImages: productImages,
+        colors: {
+            category: localStorage.getItem('colorCategory'),
+            name: localStorage.getItem('colorName'),
+            price: localStorage.getItem('colorPrice')
+        },
+        settings: {
+            lang: currentLang,
+            theme: localStorage.getItem('theme'),
+            version: currentVersion
+        },
+        savedAt: new Date().toISOString()
+    };
+    
+    const jsonString = JSON.stringify(progress, null, 2);
+    
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showStatus('✅ Tüm V2 verileri kopyalandı! Bana gönderebilirsin!', 'success');
+    }).catch(() => {
+        prompt('Kodu kopyala ve bana gönder:', jsonString);
+    });
+}
+
+function loadV2Progress() {
+    const code = prompt('Benden aldığın kodu yapıştır:');
+    if (!code) return;
+    
+    showStatus('📥 Veriler yükleniyor...', 'loading');
+    
+    try {
+        const data = JSON.parse(code);
+        
+        // استعادة المنيو
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+        }
+        
+        // استعادة صور الأقسام
+        if (data.categoryImages) {
+            categoryImages = data.categoryImages;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        }
+        
+        // استعادة صور المنتجات
+        if (data.productImages) {
+            productImages = data.productImages;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+        }
+        
+        // استعادة الألوان
+        if (data.colors) {
+            if (data.colors.category) {
+                document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
+                localStorage.setItem('colorCategory', data.colors.category);
+            }
+            if (data.colors.name) {
+                document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
+                localStorage.setItem('colorName', data.colors.name);
+            }
+            if (data.colors.price) {
+                document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
+                localStorage.setItem('colorPrice', data.colors.price);
+            }
+        }
+        
+        // استعادة الإعدادات
+        if (data.settings) {
+            if (data.settings.lang) {
+                currentLang = data.settings.lang;
+                setLanguage(currentLang);
+            }
+            if (data.settings.theme) {
+                if (data.settings.theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    modeToggle.innerHTML = '☀️';
+                }
+                localStorage.setItem('theme', data.settings.theme);
+            }
+            if (data.settings.version) {
+                currentVersion = data.settings.version;
+                updateVersion();
+            }
+        }
+        
+        // تحديث المعرض والإحصائيات
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('✅ Tüm V2 verileri yüklendi!', 'success');
+        
+    } catch(error) {
+        console.error('Yükleme hatası:', error);
+        showStatus('❌ Geçersiz kod!', 'error');
+    }
+}
+
 // ===== دالة الريستارت =====
 function performRestart() {
     console.log('Restart yapılıyor - menü sıfırlanıyor');
     
-    // مسح جميع البيانات المخزنة
     localStorage.removeItem('tosttoo_menu');
     localStorage.removeItem('menuVersion');
     localStorage.removeItem('lastCloudSave');
     localStorage.removeItem('cloudData');
     
-    // إعادة تعيين المتغيرات
     currentVersion = '1.0.0';
     
-    // عرض المنيو حسب اللغة الحالية
     const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
     displayMenu(menuToShow);
     
-    // حفظ المنيو في localStorage
     localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
     localStorage.setItem('menuVersion', currentVersion);
     
-    // تحديث الواجهة
     updateVersion();
     document.getElementById('lastCloudSave').innerText = '-';
 }
@@ -1860,7 +1957,6 @@ function toggleLanguageMenu() {
     }
 }
 
-// ===== إغلاق قائمة اللغة عند النقر خارجها =====
 document.addEventListener('click', function(event) {
     const langBtn = document.getElementById('langBtn');
     const langMenu = document.getElementById('languageMenu');
@@ -1870,35 +1966,27 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// ===== دالة تغيير اللغة =====
 function setLanguage(lang) {
     currentLang = lang;
-    
-    // حفظ اللغة في localStorage
     localStorage.setItem('lang', currentLang);
     
-    // تحديث زر اللغة
     const langBtn = document.getElementById('langBtn');
     if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
     else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
     else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
     else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
     
-    // تغيير اتجاه الصفحة للعربية
     if (currentLang === 'ar') {
         document.body.setAttribute('dir', 'rtl');
     } else {
         document.body.setAttribute('dir', 'ltr');
     }
     
-    // إخفاء قائمة اللغة
     const langMenu = document.getElementById('languageMenu');
     if (langMenu) langMenu.style.display = 'none';
     
-    // تحديث جميع النصوص
     applyLanguage();
     
-    // إعادة تحميل المنيو حسب اللغة الجديدة
     const menuToShow = MENU_DATA[currentLang] || MENU_DATA.tr;
     displayMenu(menuToShow);
     localStorage.setItem('tosttoo_menu', JSON.stringify(menuToShow));
@@ -1906,7 +1994,6 @@ function setLanguage(lang) {
     showStatus('Dil değiştirildi', 'success');
 }
 
-// متغيرات عامة
 let isDeveloper = false;
 let deleteMode = false;
 let editMode = false;
@@ -1915,7 +2002,6 @@ let autoSyncInterval = null;
 let lastCloudData = null;
 let currentLang = localStorage.getItem('lang') || 'tr';
 
-// ===== دالة الحصول على النص حسب اللغة =====
 function getText(key) {
     const texts = {
         tr: {
@@ -1943,33 +2029,23 @@ function getText(key) {
     return texts[currentLang]?.[key] || texts.tr[key];
 }
 
-// ===== تطبيق اللغة =====
 function applyLanguage() {
-    // تحديث عناوين الصفحة الرئيسية
     document.getElementById('menuTitle').innerText = getText('menu');
     document.getElementById('contactTitle').innerText = getText('contact');
     document.getElementById('scrollText').innerText = getText('view_menu');
 }
 
-// ===== تحميل المنيو عند فتح الصفحة =====
 window.addEventListener('load', function() {
-    // إعداد زر اللغة
     const langBtn = document.getElementById('langBtn');
     if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
     else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
     else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
     else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
     
-    // إضافة حدث تغيير اللغة (فتح القائمة)
     langBtn.onclick = toggleLanguageMenu;
-    
-    // تطبيق اللغة
     applyLanguage();
-    
-    // تحميل الصور المحفوظة
     loadImages();
     
-    // تحميل المنيو المحفوظ أو الافتراضي
     const savedMenu = localStorage.getItem('tosttoo_menu');
     if (savedMenu) {
         displayMenu(JSON.parse(savedMenu));
@@ -1977,13 +2053,11 @@ window.addEventListener('load', function() {
         displayMenu(MENU_DATA.tr);
     }
     
-    // تحميل البيانات من السحاب
     loadMenuFromCloud();
     testCloudConnection();
     startAutoSync();
 });
 
-// ===== عرض المنيو مع الصور =====
 function displayMenu(menuData) {
     const menuGrid = document.getElementById('menuGrid');
     menuGrid.innerHTML = '';
@@ -1993,7 +2067,6 @@ function displayMenu(menuData) {
         card.className = 'card';
         card.setAttribute('data-category-index', catIndex);
         
-        // إضافة صورة القسم إذا وجدت
         if (categoryImages[category.category]) {
             card.classList.add('has-image');
             const catImg = document.createElement('img');
@@ -2011,8 +2084,6 @@ function displayMenu(menuData) {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item';
             
-            // إضافة صورة المنتج إذا وجدت
-            const productKey = `${catIndex}_${item.name}`;
             if (productImages[catIndex] && productImages[catIndex][item.name]) {
                 itemDiv.classList.add('has-image');
                 const prodImg = document.createElement('img');
@@ -2047,9 +2118,9 @@ function displayMenu(menuData) {
     updateCategorySelect();
     updateCategorySelectV2();
     updateExistingCategorySelect();
+    updateImageStats();
 }
 
-// ===== دوال V1 (النسخة القديمة) =====
 function deleteCategory(catIndex) {
     if (!isDeveloper) return;
     
@@ -2057,7 +2128,6 @@ function deleteCategory(catIndex) {
         const menu = getCurrentMenu();
         const categoryName = menu[catIndex].category;
         
-        // حذف صورة القسم
         if (categoryImages[categoryName]) {
             delete categoryImages[categoryName];
             localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
@@ -2075,7 +2145,6 @@ function deleteProduct(catIndex, itemIndex) {
     const menu = getCurrentMenu();
     const productName = menu[catIndex].items[itemIndex].name;
     
-    // حذف صورة المنتج
     if (productImages[catIndex] && productImages[catIndex][productName]) {
         delete productImages[catIndex][productName];
         localStorage.setItem('productImages', JSON.stringify(productImages));
@@ -2521,7 +2590,7 @@ function applyColors() {
     showStatus('🎨 Renkler uygulandı!', 'success');
 }
 
-// ===== دوال V2 المتطورة (مع الصور) =====
+// ===== دوال V2 (مع الصور) =====
 function closeDevV2() {
     document.getElementById('devPanelV2').style.display = 'none';
     isDeveloper = false;
@@ -2556,7 +2625,6 @@ function updateExistingCategorySelect() {
     }
 }
 
-// تحديث قائمة المنتجات حسب القسم المختار
 document.getElementById('existingCategoryForProductSelect')?.addEventListener('change', function() {
     const catIndex = this.value;
     const productSelect = document.getElementById('existingProductSelect');
@@ -2577,7 +2645,6 @@ document.getElementById('existingCategoryForProductSelect')?.addEventListener('c
     }
 });
 
-// معاينة الصور
 function previewCategoryImage() {
     const file = document.getElementById('categoryImage').files[0];
     if (file) {
@@ -2626,7 +2693,6 @@ function previewProductExistImage() {
     }
 }
 
-// إضافة صورة لقسم موجود
 function addImageToExistingCategory() {
     if (!isDeveloper) return;
     
@@ -2657,14 +2723,12 @@ function addImageToExistingCategory() {
         
         showStatus('✅ Kategori resmi eklendi!', 'success');
         
-        // Temizle
         document.getElementById('categoryImageExist').value = '';
         document.getElementById('categoryExistImagePreview').innerHTML = '<span>Resim önizleme</span>';
     }
     reader.readAsDataURL(file);
 }
 
-// إضافة صورة لمنتج موجود
 function addImageToExistingProduct() {
     if (!isDeveloper) return;
     
@@ -2697,14 +2761,12 @@ function addImageToExistingProduct() {
         
         showStatus('✅ Ürün resmi eklendi!', 'success');
         
-        // Temizle
         document.getElementById('productImageExist').value = '';
         document.getElementById('productExistImagePreview').innerHTML = '<span>Resim önizleme</span>';
     }
     reader.readAsDataURL(file);
 }
 
-// إضافة قسم جديد مع صورة
 function addCategoryWithImage() {
     if (!isDeveloper) return;
     
@@ -2735,13 +2797,11 @@ function addCategoryWithImage() {
         showStatus('✅ Kategori eklendi! (Resimsiz)', 'success');
     }
     
-    // Temizle
     document.getElementById('newCategoryV2').value = '';
     document.getElementById('categoryImage').value = '';
     document.getElementById('categoryImagePreview').innerHTML = '<span>Resim önizleme</span>';
 }
 
-// إضافة منتج جديد مع صورة
 function addProductWithImage() {
     if (!isDeveloper) return;
     
@@ -2775,23 +2835,33 @@ function addProductWithImage() {
         showStatus('✅ Ürün eklendi! (Resimsiz)', 'success');
     }
     
-    // Temizle
     document.getElementById('newNameV2').value = '';
     document.getElementById('productPriceV2').value = '';
     document.getElementById('productImage').value = '';
     document.getElementById('productImagePreview').innerHTML = '<span>Resim önizleme</span>';
 }
 
-// تحميل الصور المحفوظة
 function loadImages() {
     const savedCatImages = localStorage.getItem('categoryImages');
     const savedProdImages = localStorage.getItem('productImages');
     
     if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
     if (savedProdImages) productImages = JSON.parse(savedProdImages);
+    
+    updateImageStats();
 }
 
-// تحديث معرض الصور
+function updateImageStats() {
+    const catCount = Object.keys(categoryImages).length;
+    let prodCount = 0;
+    Object.keys(productImages).forEach(catIndex => {
+        prodCount += Object.keys(productImages[catIndex]).length;
+    });
+    
+    document.getElementById('v2CategoryCount').innerText = catCount;
+    document.getElementById('v2ProductCount').innerText = prodCount;
+}
+
 function updateGallery(filter = 'all') {
     const gallery = document.getElementById('imageGallery');
     if (!gallery) return;
@@ -2845,20 +2915,6 @@ function showImageDetails(type, cat, prod = null) {
     }
 }
 
-// تحديث إحصائيات الصور
-function updateImageStats() {
-    const catCount = Object.keys(categoryImages).length;
-    let prodCount = 0;
-    Object.keys(productImages).forEach(catIndex => {
-        prodCount += Object.keys(productImages[catIndex]).length;
-    });
-    
-    document.getElementById('categoryImageCount').innerText = catCount;
-    document.getElementById('productImageCount').innerText = prodCount;
-    document.getElementById('totalImageCount').innerText = catCount + prodCount;
-}
-
-// حفظ الصور في السحاب
 function saveImagesToCloud() {
     showStatus('☁️ Resimler buluta kaydediliyor...', 'loading');
     
@@ -2868,14 +2924,12 @@ function saveImagesToCloud() {
         date: new Date().toISOString()
     };
     
-    // محاكاة حفظ في السحاب
     setTimeout(() => {
         localStorage.setItem('cloudImagesBackup', JSON.stringify(imagesData));
         showStatus('✅ Resimler kaydedildi!', 'success');
     }, 1500);
 }
 
-// تحميل الصور من السحاب
 function loadImagesFromCloud() {
     showStatus('📥 Resimler buluttan yükleniyor...', 'loading');
     
