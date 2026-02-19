@@ -1,1715 +1,1157 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>Tosttoo | Tüm Menü 58 Ürün</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-/* ===== جميع الأنماط كما هي مع تحسين الأزرار العلوية ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    min-height: 100vh;
-    transition: all 0.5s ease;
-    overflow-x: hidden;
-    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: #fff;
-    padding-bottom: 70px;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.hero {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 50%);
-    animation: rotate 20s linear infinite;
-    pointer-events: none;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-.hero h1 {
-    font-size: 60px;
-    color: #ff8c00;
-    margin: 0;
-    cursor: pointer;
-    user-select: none;
-    position: relative;
-    animation: floatTitle 3s ease-in-out infinite;
-    text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255,140,0,0.5);
-    -webkit-tap-highlight-color: transparent;
-}
-
-.hero h1:hover {
-    text-shadow: 0 0 30px #ff8c00, 0 0 60px #ff8c00, 0 0 90px #ff8c00;
-    transform: scale(1.05);
-}
-
-@keyframes floatTitle {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.work-time {
-    margin-top: 15px;
-    font-size: 20px;
-    color: #ff8c00;
-    font-weight: 600;
-    animation: pulse 2s ease-in-out infinite;
-    background: rgba(255,140,0,0.1);
-    padding: 10px 30px;
-    border-radius: 50px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,140,0,0.3);
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-}
-
-.btn {
-    padding: 12px 25px;
-    border: none;
-    cursor: pointer;
-    margin-top: 15px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    background: #ff8c00;
-    color: #fff;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
-}
-
-.btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 10px 25px rgba(255,140,0,0.5);
-}
-
-.container {
-    padding: 60px 20px;
-    max-width: 1200px;
-    margin: auto;
-    scroll-margin-top: 20px;
-}
-
-.container h2 {
-    font-size: 40px;
-    color: #ff8c00;
-    text-align: center;
-    margin-bottom: 40px;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.container h2::before {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: #ff8c00;
-    border-radius: 3px;
-    animation: lineWidth 3s ease-in-out infinite;
-}
-
-@keyframes lineWidth {
-    0%, 100% { width: 100px; opacity: 0.7; }
-    50% { width: 150px; opacity: 1; }
-}
-
-.container h2::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background: #ffa233;
-    border-radius: 3px;
-    animation: lineWidth2 3s ease-in-out infinite;
-}
-
-@keyframes lineWidth2 {
-    0%, 100% { width: 50px; opacity: 0.5; }
-    50% { width: 80px; opacity: 1; }
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #1e1e1e;
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    position: relative;
-    border: 1px solid rgba(255,140,0,0.3);
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-}
-
-.card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.card:hover::before {
-    left: 100%;
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
-    border-color: rgba(255,140,0,0.6);
-}
-
-.card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,140,0,0.2), transparent 70%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-}
-
-.card:hover::after {
-    opacity: 1;
-}
-
-.card h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 15px;
-    text-align: center;
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 10px;
-    position: relative;
-}
-
-.card h3::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: #ffa233;
-    transition: width 0.3s ease;
-}
-
-.card:hover h3::after {
-    width: 100px;
-}
-
-.card.has-image {
-    padding-top: 0;
-}
-
-.card-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-    margin-bottom: 15px;
-    transition: transform 0.3s;
-}
-
-.card:hover .card-image {
-    transform: scale(1.05);
-}
-
-.item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
-    padding: 8px 10px;
-    transition: all 0.3s ease;
-    position: relative;
-    border-bottom: 1px dashed rgba(255,140,0,0.2);
-    border-radius: 5px;
-    background: rgba(0,0,0,0.2);
-}
-
-.item:hover {
-    transform: scale(1.02) translateX(5px);
-    border-bottom: 1px dashed rgba(255,140,0,0.8);
-    background: rgba(255,140,0,0.1);
-}
-
-.item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 3px;
-    background: #ff8c00;
-    border-radius: 3px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.item:hover::before {
-    opacity: 1;
-}
-
-.item.has-image {
-    padding-left: 60px;
-    min-height: 50px;
-}
-
-.item-image {
-    position: absolute;
-    left: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
-    object-fit: cover;
-    border: 2px solid #ff8c00;
-}
-
-.delete-mode .item:hover {
-    outline: 2px solid red;
-    cursor: pointer;
-    background: rgba(255,0,0,0.1);
-}
-
-.edit-mode .item:hover {
-    outline: 2px solid #28a745;
-    cursor: pointer;
-    background: rgba(40,167,69,0.1);
-}
-
-.name {
-    color: #ff8c00;
-    font-weight: 500;
-    font-size: 15px;
-    flex: 1;
-}
-
-.price {
-    color: #fff;
-    font-weight: bold;
-    font-size: 15px;
-    position: relative;
-}
-
-.price::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    right: 0;
-    width: 0;
-    height: 1px;
-    background: #ff8c00;
-    transition: width 0.3s;
-}
-
-.item:hover .price::after {
-    width: 100%;
-}
-
-.contact {
-    text-align: center;
-    padding: 50px 20px;
-    background: #000;
-    position: relative;
-    overflow: hidden;
-}
-
-.contact::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
-    animation: rotate 20s linear infinite;
-    pointer-events: none;
-}
-
-.contact h2 {
-    font-size: 40px;
-    color: #ff8c00;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 1;
-}
-
-.contact p {
-    margin: 1rem 0;
-    font-size: 1.2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.contact a {
-    text-decoration: none;
-    color: #ff8c00;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.contact a:hover {
-    color: #ffa233;
-}
-
-.contact a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: #ff8c00;
-    transition: width 0.3s;
-}
-
-.contact a:hover::after {
-    width: 100%;
-}
-
-iframe {
-    border-radius: 10px;
-    margin-top: 20px;
-    width: 100%;
-    height: 300px;
-    border: none;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 1;
-}
-
-/* ===== أزرار التحكم المحسنة ===== */
-.top-controls {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    display: flex;
-    gap: 12px;
-    z-index: 1000;
-}
-
-.control-btn {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: none;
-    background: #ff8c00;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(255,140,0,0.3);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.control-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
-    background: #ffa233;
-}
-
-#modeToggle {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    border: none;
-    background: #ff8c00;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(255,140,0,0.3);
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-#modeToggle:hover {
-    transform: scale(1.1) rotate(15deg);
-    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
-    background: #ffa233;
-}
-
-.live-badge {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background: rgba(255, 0, 0, 0.9);
-    color: #fff;
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: bold;
-    z-index: 100;
-    backdrop-filter: blur(5px);
-    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.3);
-    pointer-events: none;
-    animation: livePulse 1.5s ease-in-out infinite;
-}
-
-@keyframes livePulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.dev-version-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #1a1a1a;
-    border: 2px solid #ff8c00;
-    border-radius: 15px;
-    padding: 30px;
-    z-index: 2000;
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 300px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-    text-align: center;
-}
-
-.dev-version-modal h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.dev-version-modal p {
-    color: #ccc;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.version-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.version-btn {
-    padding: 15px 25px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: bold;
-    transition: all 0.3s;
-    flex: 1;
-}
-
-.version-btn.v1 {
-    background: #ff8c00;
-    color: white;
-}
-
-.version-btn.v1:hover {
-    background: #ffa233;
-    transform: scale(1.05);
-}
-
-.version-btn.v2 {
-    background: #6c5ce7;
-    color: white;
-}
-
-.version-btn.v2:hover {
-    background: #8b7cf0;
-    transform: scale(1.05);
-}
-
-.close-version-btn {
-    margin-top: 10px;
-    padding: 8px;
-    background: #333;
-    color: white;
-    border: 1px solid #ff8c00;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.close-version-btn:hover {
-    background: #444;
-}
-
-.dev-window {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 420px;
-    max-height: 90vh;
-    overflow: auto;
-    padding: 20px;
-    border-radius: 15px;
-    display: none;
-    z-index: 1000;
-    background: rgba(20, 20, 20, 0.85);
-    backdrop-filter: blur(15px);
-    border: 2px solid rgba(255, 140, 0, 0.5);
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
-    cursor: move;
-    user-select: none;
-}
-
-.dev-window h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 10px;
-    cursor: move;
-}
-
-.dev-section {
-    margin: 15px 0;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 140, 0, 0.3);
-}
-
-.dev-section h4 {
-    color: #ff8c00;
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.dev-window input,
-.dev-window select {
-    width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #333;
-    border-radius: 6px;
-    color: white;
-}
-
-.dev-window button {
-    width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    background: #ff8c00;
-    border: none;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.dev-window button:hover {
-    background: #ffa233;
-    transform: translateY(-2px);
-}
-
-.dev-window .save-btn {
-    background: #28a745;
-}
-
-.dev-window .delete-btn {
-    background: #dc3545;
-}
-
-.dev-window .close-btn {
-    background: #6c757d;
-    margin-top: 15px;
-}
-
-.dev-window-v2 {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 95%;
-    max-width: 600px;
-    max-height: 90vh;
-    overflow: auto;
-    padding: 25px;
-    border-radius: 20px;
-    display: none;
-    z-index: 1000;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(15px);
-    border: 2px solid #6c5ce7;
-    box-shadow: 0 0 40px rgba(108,92,231,0.3);
-}
-
-.dev-window-v2 h3 {
-    color: #6c5ce7;
-    font-size: 26px;
-    text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #6c5ce7;
-    padding-bottom: 15px;
-}
-
-.dev-section-v2 {
-    margin: 20px 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    border: 1px solid rgba(108,92,231,0.3);
-}
-
-.dev-section-v2 h4 {
-    color: #6c5ce7;
-    margin-bottom: 15px;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.dev-window-v2 input,
-.dev-window-v2 select {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid #6c5ce7;
-    border-radius: 8px;
-    color: white;
-    font-size: 14px;
-}
-
-.dev-window-v2 button {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    background: #6c5ce7;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.dev-window-v2 button:hover {
-    background: #8b7cf0;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
-}
-
-.dev-window-v2 .save-btn {
-    background: #28a745;
-}
-
-.dev-window-v2 .delete-btn {
-    background: #dc3545;
-}
-
-.dev-window-v2 .close-btn {
-    background: #6c757d;
-    margin-top: 20px;
-}
-
-.image-upload-section {
-    margin: 15px 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    border: 2px dashed #6c5ce7;
-}
-
-.image-upload-section label {
-    display: block;
-    color: #6c5ce7;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.image-preview {
-    width: 100%;
-    height: 180px;
-    background: #222;
-    border-radius: 10px;
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border: 2px solid #6c5ce7;
-    position: relative;
-}
-
-.image-preview img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.image-preview span {
-    color: #666;
-}
-
-.image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 15px;
-    max-height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 10px;
-}
-
-.gallery-item {
-    position: relative;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 2px solid #6c5ce7;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 80px;
-    object-fit: cover;
-    display: block;
-}
-
-.gallery-item .item-name {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    font-size: 10px;
-    padding: 3px;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.gallery-item.category-item {
-    border-color: #ff8c00;
-}
-
-.gallery-item.product-item {
-    border-color: #6c5ce7;
-}
-
-.existing-items-list {
-    max-height: 200px;
-    overflow-y: auto;
-    margin: 10px 0;
-    padding: 10px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 8px;
-}
-
-.existing-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px;
-    margin: 5px 0;
-    background: rgba(108,92,231,0.1);
-    border-radius: 5px;
-    border-left: 3px solid #6c5ce7;
-}
-
-.existing-item span {
-    flex: 1;
-    margin-left: 10px;
-}
-
-.existing-item button {
-    width: auto;
-    padding: 5px 10px;
-    margin: 0;
-    font-size: 12px;
-}
-
-.custom-confirm-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 15px;
-    border: 2px solid #ff8c00;
-    z-index: 3000;
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 300px;
-    max-width: 90%;
-    color: white;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    text-align: center;
-}
-
-.custom-confirm-modal h3 {
-    color: #ff8c00;
-    font-size: 22px;
-    margin-bottom: 10px;
-}
-
-.custom-confirm-modal p {
-    color: #fff;
-    font-size: 16px;
-    margin-bottom: 10px;
-    line-height: 1.5;
-}
-
-.confirm-buttons {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.confirm-btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s;
-    flex: 1;
-    max-width: 120px;
-}
-
-.confirm-btn.yes {
-    background: #dc3545;
-    color: white;
-}
-
-.confirm-btn.yes:hover {
-    background: #c82333;
-    transform: scale(1.05);
-}
-
-.confirm-btn.no {
-    background: #6c757d;
-    color: white;
-}
-
-.confirm-btn.no:hover {
-    background: #5a6268;
-    transform: scale(1.05);
-}
-
-.color-picker-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(30, 30, 30, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid #ff8c00;
-    z-index: 1001;
-    display: none;
-    width: 90%;
-    max-width: 350px;
-    color: white;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.color-picker-modal h3 {
-    color: #ff8c00;
-    text-align: center;
-}
-
-.color-picker-modal input[type=color] {
-    width: 100%;
-    height: 50px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-.color-picker-modal label {
-    display: block;
-    margin-top: 15px;
-    color: #ff8c00;
-    font-weight: 600;
-}
-
-.status-message {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 20px;
-    border-radius: 10px;
-    background: rgba(0,0,0,0.9);
-    border: 2px solid;
-    color: #fff;
-    font-weight: 600;
-    z-index: 2000;
-    animation: slideIn 0.3s ease;
-    font-size: 14px;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-.status-success { border-color: #28a745; }
-.status-error { border-color: #dc3545; }
-.status-loading { border-color: #ff8c00; }
-
-.delete-mode .item:hover {
-    outline: 2px solid red;
-    cursor: pointer;
-    background: rgba(255,0,0,0.1);
-}
-
-.edit-mode .item:hover {
-    outline: 2px solid #28a745;
-    cursor: pointer;
-    background: rgba(40,167,69,0.1);
-}
-
-.delete-card-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #dc3545;
-    color: #fff;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0;
-    z-index: 10;
-}
-
-.card:hover .delete-card-btn {
-    opacity: 1;
-}
-
-.item-actions {
-    display: flex;
-    gap: 5px;
-    margin-left: 10px;
-}
-
-.item-edit-btn, .item-delete-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-}
-
-.item-edit-btn {
-    background: #28a745;
-    color: white;
-}
-
-.item-delete-btn {
-    background: #dc3545;
-    color: white;
-}
-
-.item-edit-btn:hover, .item-delete-btn:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.light-mode {
-    background: #f6f1e8 !important;
-    color: #2b2b2b !important;
-    animation: none !important;
-}
-
-.light-mode .card {
-    background: #fffaf3 !important;
-    border: 1px solid #e6d8c3 !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
-}
-
-.light-mode h1,
-.light-mode h2,
-.light-mode h3 {
-    color: #d97706 !important;
-}
-
-.light-mode .hero {
-    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
-                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
-}
-
-.light-mode .name {
-    color: #8b6b4f !important;
-}
-
-.light-mode .price {
-    color: #d97706 !important;
-}
-
-.light-mode .contact {
-    background: #e6d8c3 !important;
-}
-
-.light-mode .dev-window {
-    background: rgba(246, 241, 232, 0.95) !important;
-    border: 2px solid #d97706 !important;
-}
-
-.light-mode .dev-window input {
-    background: #fffaf3 !important;
-    border: 1px solid #e6d8c3 !important;
-    color: #2b2b2b !important;
-}
-
-.light-mode .dev-window-v2 {
-    background: rgba(246, 241, 232, 0.95) !important;
-    border: 2px solid #6c5ce7 !important;
-}
-
-.light-mode .dev-window-v2 input {
-    background: #fffaf3 !important;
-    border: 1px solid #6c5ce7 !important;
-    color: #2b2b2b !important;
-}
-
-.cloud-panel {
-    margin-top: 15px;
-    background: rgba(0, 150, 255, 0.1);
-    border: 1px solid #0099ff;
-    padding: 10px;
-    border-radius: 8px;
-}
-
-.cloud-stats {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-    padding: 8px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 6px;
-    font-size: 13px;
-}
-
-.cloud-badge {
-    background: #0066cc;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.live-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    background: #00ff00;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-}
-
-.version-tag {
-    font-size: 10px;
-    background: #333;
-    padding: 2px 6px;
-    border-radius: 10px;
-    margin-left: 5px;
-}
-
-.category-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.category-header h3 {
-    margin-bottom: 0;
-    flex-grow: 1;
-}
-
-.delete-category {
-    background: #dc3545;
-    color: white;
-    border: none;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-}
-
-.delete-category:hover {
-    opacity: 1;
-    transform: scale(1.1);
-}
-
-.backup-section {
-    margin-top: 10px;
-    padding: 10px;
-    background: rgba(0,0,0,0.3);
-    border-radius: 5px;
-}
-
-.backup-section small {
-    color: #aaa;
-    display: block;
-    margin-top: 5px;
-}
-
-.restart-btn {
-    background: #ffc107 !important;
-    color: #000 !important;
-    font-weight: bold;
-}
-
-.restart-btn:hover {
-    background: #ffdb58 !important;
-}
-
-.code-export {
-    display: flex;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.code-export button {
-    flex: 1;
-    background: #17a2b8;
-}
-
-.code-export button:hover {
-    background: #138496;
-}
-
-.language-menu {
-    position: fixed;
-    top: 70px;
-    right: 15px;
-    background: #1a1a1a;
-    border: 2px solid #ff8c00;
-    border-radius: 10px;
-    padding: 10px;
-    display: none;
-    z-index: 1001;
-    flex-direction: column;
-    gap: 5px;
-    min-width: 150px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-}
-
-.language-menu button {
-    background: #333;
-    color: white;
-    border: 1px solid #ff8c00;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: left;
-    transition: all 0.3s;
-    width: 100%;
-}
-
-.language-menu button:hover {
-    background: #ff8c00;
-    transform: translateX(5px);
-}
-
-.light-mode .language-menu {
-    background: #f5f5f5;
-    border-color: #d97706;
-}
-
-.light-mode .language-menu button {
-    background: #e0e0e0;
-    color: #333;
-    border-color: #d97706;
-}
-
-.light-mode .language-menu button:hover {
-    background: #d97706;
-    color: white;
-}
-
-.floating-dev-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #ff8c00;
-    color: white;
-    border: 3px solid #fff;
-    box-shadow: 0 5px 20px rgba(255,140,0,0.5);
-    font-size: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1500;
-    transition: all 0.3s ease;
-    animation: float 2s ease-in-out infinite;
-}
-
-.floating-dev-btn:hover {
-    transform: scale(1.1) rotate(10deg);
-    background: #ffa233;
-}
-
-.floating-dev-btn.hidden {
-    display: none;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.mobile-close-btn {
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    padding: 15px;
-    background: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    display: none;
-}
-
-.mobile-close-btn:hover {
-    background: #c82333;
-}
-
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 40px;
-    }
-    .language-menu {
-        top: 70px;
-        right: 15px;
-        min-width: 120px;
-    }
-    .dev-window-v2 {
-        width: 95%;
-        padding: 15px;
-    }
-    .mobile-close-btn {
-        display: block;
-    }
-    .top-controls {
-        top: 10px;
-        right: 10px;
-        gap: 8px;
-    }
-    .control-btn, #modeToggle {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-    }
-    .floating-dev-btn {
-        bottom: 15px;
-        right: 15px;
-        width: 55px;
-        height: 55px;
-        font-size: 24px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Tosttoo | Menü Tasarımı</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            background: #0a0a0f;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* خلفية متحركة ثلاثية الأبعاد */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 0, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
+                        repeating-linear-gradient(45deg, rgba(255, 140, 0, 0.02) 0px, rgba(255, 140, 0, 0.02) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+            z-index: -1;
+            animation: backgroundShift 20s ease infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+
+        /* جزيئات متحركة */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 140, 0, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); }
+            to { transform: translateY(-100vh) rotate(360deg); }
+        }
+
+        /* هيدر أنيق */
+        .header {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 8px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 140, 0, 0.1);
+            color: #ff8c00;
+            font-size: 22px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 140, 0, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .header-btn:hover::before {
+            width: 100px;
+            height: 100px;
+        }
+
+        .header-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 140, 0, 0.2);
+            border-color: rgba(255, 140, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
+        }
+
+        /* القسم الرئيسي */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: heroAppear 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes heroAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: 100px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff8c00, #ffb347, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(255, 140, 0, 0.3);
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            position: relative;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.3)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 140, 0, 0.6)); }
+        }
+
+        .hero h1::after {
+            content: '⚡';
+            position: absolute;
+            top: -10px;
+            right: -40px;
+            font-size: 40px;
+            animation: spark 2s ease infinite;
+        }
+
+        @keyframes spark {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.3) rotate(10deg); opacity: 0.8; }
+        }
+
+        .work-time {
+            font-size: 22px;
+            color: #ff8c00;
+            background: rgba(255, 140, 0, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            margin: 20px 0;
+            display: inline-block;
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: timePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes timePulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 140, 0, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(255, 140, 0, 0.4); }
+        }
+
+        .btn {
+            padding: 18px 50px;
+            border: none;
+            border-radius: 60px;
+            background: linear-gradient(45deg, #ff8c00, #ffa233);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 30px;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.5);
+        }
+
+        /* المنيو */
+        .menu-section {
+            padding: 80px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .menu-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .menu-title h2 {
+            font-size: 60px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+
+        .menu-title h2::before {
+            content: '✨';
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: starRotate 4s linear infinite;
+        }
+
+        .menu-title h2::after {
+            content: '✨';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            animation: starRotate 4s linear infinite reverse;
+        }
+
+        @keyframes starRotate {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+            border-radius: 30px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .category-card:nth-child(1) { animation-delay: 0.1s; }
+        .category-card:nth-child(2) { animation-delay: 0.15s; }
+        .category-card:nth-child(3) { animation-delay: 0.2s; }
+        .category-card:nth-child(4) { animation-delay: 0.25s; }
+        .category-card:nth-child(5) { animation-delay: 0.3s; }
+        .category-card:nth-child(6) { animation-delay: 0.35s; }
+        .category-card:nth-child(7) { animation-delay: 0.4s; }
+        .category-card:nth-child(8) { animation-delay: 0.45s; }
+        .category-card:nth-child(9) { animation-delay: 0.5s; }
+        .category-card:nth-child(10) { animation-delay: 0.55s; }
+        .category-card:nth-child(11) { animation-delay: 0.6s; }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .category-card:hover::before {
+            opacity: 1;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 140, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 140, 0, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 140, 0, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .category-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff8c00, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .delete-category {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4444;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .category-card:hover .delete-category {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .delete-category:hover {
+            background: rgba(255, 0, 0, 0.3);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .items-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 140, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: itemAppear 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .menu-item:nth-child(2) { animation-delay: 0.15s; }
+        .menu-item:nth-child(3) { animation-delay: 0.2s; }
+        .menu-item:nth-child(4) { animation-delay: 0.25s; }
+        .menu-item:nth-child(5) { animation-delay: 0.3s; }
+        .menu-item:nth-child(6) { animation-delay: 0.35s; }
+        .menu-item:nth-child(7) { animation-delay: 0.4s; }
+        .menu-item:nth-child(8) { animation-delay: 0.45s; }
+        .menu-item:nth-child(9) { animation-delay: 0.5s; }
+        .menu-item:nth-child(10) { animation-delay: 0.55s; }
+        .menu-item:nth-child(11) { animation-delay: 0.6s; }
+        .menu-item:nth-child(12) { animation-delay: 0.65s; }
+
+        @keyframes itemAppear {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 140, 0, 0.1);
+            border-color: rgba(255, 140, 0, 0.3);
+            transform: translateX(5px);
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .item-image {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.05);
+            border-color: rgba(255, 140, 0, 0.6);
+        }
+
+        .item-name {
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover .item-name {
+            color: #ff8c00;
+        }
+
+        .item-price {
+            color: #ff8c00;
+            font-weight: 700;
+            font-size: 18px;
+            position: relative;
+            padding: 0 15px;
+        }
+
+        .item-price::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 140, 0, 0.5);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item:hover .item-actions {
+            opacity: 1;
+        }
+
+        .item-edit, .item-delete {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 14px;
+        }
+
+        .item-edit {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+            border: 1px solid rgba(40, 167, 69, 0.3);
+        }
+
+        .item-edit:hover {
+            background: rgba(40, 167, 69, 0.3);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        .item-delete {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+            border: 1px solid rgba(220, 53, 69, 0.3);
+        }
+
+        .item-delete:hover {
+            background: rgba(220, 53, 69, 0.3);
+            transform: scale(1.15) rotate(5deg);
+        }
+
+        /* قسم الاتصال */
+        .contact-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0a0a0f, #1a1a1f);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .contact-title {
+            font-size: 50px;
+            font-weight: 700;
+            color: #ff8c00;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .contact-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff8c00, transparent);
+            animation: lineWidth 2s ease-in-out infinite;
+        }
+
+        @keyframes lineWidth {
+            0%, 100% { width: 100px; opacity: 0.7; }
+            50% { width: 150px; opacity: 1; }
+        }
+
+        .contact-info {
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-info p {
+            margin: 20px 0;
+            font-size: 24px;
+        }
+
+        .contact-info a {
+            color: #ff8c00;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff8c00;
+            transition: width 0.3s ease;
+        }
+
+        .contact-info a:hover::after {
+            width: 100%;
+        }
+
+        .contact-info a:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+        }
+
+        .map-frame {
+            border-radius: 30px;
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+            height: 350px;
+            border: 3px solid rgba(255, 140, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .map-frame:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 140, 0, 0.6);
+            box-shadow: 0 25px 50px rgba(255, 140, 0, 0.2);
+        }
+
+        /* زر المطور العائم */
+        .dev-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff8c00, #ffa233);
+            color: white;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99;
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.05); }
+        }
+
+        .dev-float:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 15px 40px rgba(255, 140, 0, 0.6);
+        }
+
+        /* لوحات المطور */
+        .dev-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 30px;
+            padding: 30px;
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .dev-panel.active {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .dev-panel h3 {
+            color: #ff8c00;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 140, 0, 0.3);
+            padding-bottom: 15px;
+        }
+
+        .dev-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 140, 0, 0.2);
+        }
+
+        .dev-section h4 {
+            color: #ff8c00;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .dev-panel input, .dev-panel select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .dev-panel button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            background: linear-gradient(135deg, #ff8c00, #ffa233);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dev-panel button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 140, 0, 0.4);
+        }
+
+        .close-btn {
+            background: rgba(220, 53, 69, 0.8) !important;
+        }
+
+        .close-btn:hover {
+            background: #dc3545 !important;
+        }
+
+        /* قائمة اللغة */
+        .lang-menu {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            border-radius: 20px;
+            padding: 15px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 101;
+            min-width: 150px;
+        }
+
+        .lang-menu button {
+            background: rgba(255, 140, 0, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 140, 0, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .lang-menu button:hover {
+            background: rgba(255, 140, 0, 0.2);
+            transform: translateX(5px);
+        }
+
+        /* نافذة التأكيد */
+        .confirm-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(20, 20, 30, 0.98);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 140, 0, 0.5);
+            border-radius: 30px;
+            padding: 30px;
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-modal.active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .confirm-modal h3 {
+            color: #ff8c00;
+            font-size: 24px;
+        }
+
+        .confirm-modal p {
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .confirm-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .confirm-btn.yes {
+            background: #dc3545;
+            color: white;
+        }
+
+        .confirm-btn.no {
+            background: #6c757d;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* الوضع النهاري */
+        body.light-mode {
+            background: #f8f9fa;
+        }
+
+        body.light-mode::before {
+            background: radial-gradient(circle at 30% 50%, rgba(255, 140, 0, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 140, 0, 0.03) 0%, transparent 50%);
+        }
+
+        body.light-mode .category-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 140, 0, 0.2);
+        }
+
+        body.light-mode .item-name {
+            color: #333;
+        }
+
+        body.light-mode .contact-section {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        }
+
+        body.light-mode .dev-panel {
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        body.light-mode .dev-panel input {
+            background: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        /* معرض الصور */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 140, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 140, 0, 0.8);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 70px;
+            object-fit: cover;
+        }
+
+        .gallery-item .item-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            font-size: 9px;
+            padding: 3px;
+            text-align: center;
+        }
+
+        /* تحسينات الجوال */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 50px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .header-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .menu-title h2 {
+                font-size: 40px;
+            }
+            
+            .menu-title h2::before,
+            .menu-title h2::after {
+                font-size: 20px;
+                left: -30px;
+                right: -30px;
+            }
+        }
+    </style>
 </head>
+<body>
 
-<body class="" id="body" data-language="tr" dir="ltr">
+<!-- هيدر -->
+<div class="header">
+    <button class="header-btn" id="langBtn">🇹🇷</button>
+    <button class="header-btn" id="themeToggle">🌙</button>
+</div>
 
-<!-- قائمة اختيار اللغة -->
-<div class="language-menu" id="languageMenu">
+<!-- قائمة اللغة -->
+<div class="lang-menu" id="langMenu">
     <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
     <button onclick="setLanguage('en')">🇬🇧 English</button>
     <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
     <button onclick="setLanguage('ar')">🇮🇶 العربية</button>
 </div>
 
-<!-- نافذة اختيار نسخة المطور -->
-<div class="dev-version-modal" id="devVersionModal">
-    <h3>🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
-    <p>Hangi sürümü kullanmak istiyorsunuz?</p>
-    <div class="version-buttons">
-        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
-        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
-    </div>
-    <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
-</div>
-
-<!-- نافذة تأكيد مخصصة جديدة -->
-<div class="custom-confirm-modal" id="customConfirmModal">
+<!-- نافذة التأكيد -->
+<div class="confirm-modal" id="confirmModal">
     <h3 id="confirmTitle">⚠️ Onay</h3>
     <p id="confirmMessage">Bu işlemi yapmak istediğinize emin misiniz?</p>
     <div class="confirm-buttons">
-        <button class="confirm-btn yes" id="confirmYesBtn">Evet</button>
-        <button class="confirm-btn no" id="confirmNoBtn">Hayır</button>
+        <button class="confirm-btn yes" id="confirmYes">Evet</button>
+        <button class="confirm-btn no" id="confirmNo">Hayır</button>
     </div>
-</div>
-
-<!-- أزرار التحكم المحسنة -->
-<div class="top-controls">
-    <button class="control-btn" id="langBtn">🇹🇷</button>
-    <button id="modeToggle">🌙</button>
 </div>
 
 <!-- القسم الرئيسي -->
 <section class="hero">
-    <h1 id="secretTrigger">Tosttoo</h1>
-    <div class="work-time">🕒 08:00 - 02:30</div>
-    <button class="btn" onclick="scrollToMenu()" id="scrollBtn">
-        <span id="scrollText">Menüyü Gör</span>
-    </button>
+    <div class="hero-content">
+        <h1 id="mainTitle">Tosttoo</h1>
+        <div class="work-time">🕒 08:00 - 02:30</div>
+        <button class="btn" onclick="scrollToMenu()">Menüyü Gör</button>
+    </div>
 </section>
 
 <!-- قسم المنيو -->
-<section class="container" id="menu">
-    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
-    <div class="grid" id="menuGrid"></div>
+<section class="menu-section" id="menuSection">
+    <div class="menu-title">
+        <h2 id="menuTitle">Menü</h2>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
 </section>
 
-<section class="contact">
-    <h2 id="contactTitle">İletişim</h2>
-    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
-    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
-    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
+<!-- قسم الاتصال -->
+<section class="contact-section">
+    <h2 class="contact-title" id="contactTitle">İletişim</h2>
+    <div class="contact-info">
+        <p>📞 <a href="tel:05321580207">05321580207</a></p>
+        <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">Instagram</a></p>
+    </div>
+    <iframe class="map-frame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
 </section>
 
 <!-- زر المطور العائم -->
-<div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()" style="display: none;">🔧</div>
+<div class="dev-float" id="devFloat" onclick="toggleDevPanel()" style="display: none;">⚙️</div>
 
 <!-- لوحة المطور V1 -->
-<div class="dev-window" id="devPanelV1">
-    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ V1</h3>
-    <div class="dev-section">
-        <h4>💰 Fiyat Düzenle</h4>
-        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
-        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
-    </div>
+<div class="dev-panel" id="devPanelV1">
+    <h3>⚙️ Geliştirici V1</h3>
+    
     <div class="dev-section">
         <h4>➕ Ürün Ekle</h4>
         <select id="categorySelect"></select>
         <input type="text" id="newName" placeholder="Ürün Adı">
         <input type="text" id="productPrice" placeholder="Fiyat">
-        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
+        <button onclick="addProduct()">Ürün Ekle</button>
     </div>
+
     <div class="dev-section">
         <h4>📁 Kategori Ekle</h4>
-        <input type="text" id="newCategory" placeholder="Yeni Kategori">
-        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+        <input type="text" id="newCategory" placeholder="Kategori Adı">
+        <button onclick="addCategory()">Kategori Ekle</button>
     </div>
+
     <div class="dev-section">
-        <h4>🎨 Renk Düzenle</h4>
-        <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+        <h4>🗑️ Tüm Menü Sil</h4>
+        <button onclick="deleteAll()" style="background:#dc3545;">Sil</button>
     </div>
-    <div class="dev-section">
-        <h4>🔧 Araçlar</h4>
-        <div style="display: flex; gap: 5px; margin-bottom: 5px;">
-            <button onclick="enableEdit()" style="flex:1; background:#28a745;" id="editModeBtn">✏️ Düzenle</button>
-            <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
-        </div>
-        <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
-    </div>
+
     <div class="dev-section">
         <h4>📱 Sosyal Medya</h4>
         <input type="text" id="newInstagram" placeholder="Instagram Link">
-        <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
-        <input type="text" id="newLocation" placeholder="Konum lat,long">
-        <button onclick="changeLocation()">📍 Konum Güncelle</button>
+        <button onclick="changeInstagram()">Güncelle</button>
+        <input type="text" id="newLocation" placeholder="Konum (örn: 36.484479,32.101147)">
+        <button onclick="changeLocation()">Güncelle</button>
     </div>
-    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
-        <h4>💾 VERİ YEDEKLEME (V1)</h4>
-        <div class="cloud-panel">
-            <div class="cloud-stats">
-                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
-                <span>💾 Son Kayıt: <span id="lastCloudSave">-</span></span>
-            </div>
-            <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
-                🔗 <strong>API URL:</strong><br>
-                <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
-            </div>
-            <div class="code-export">
-                <button onclick="saveV1Progress()" style="background:#28a745;">📋 Kodu Kopyala (V1)</button>
-                <button onclick="loadV1Progress()" style="background:#ff8c00;">📋 Kodu Yapıştır (V1)</button>
-            </div>
-            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc; margin-top:10px;" id="cloudSaveBtn">
-                ☁️ BULUTA KAYDET
-            </button>
-            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
-                📥 BULUTTAN YÜKLE
-            </button>
-            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
-                🔌 BAĞLANTI TESTİ
-            </button>
-        </div>
-    </div>
+
     <div class="dev-section">
-        <h4>⚡ Otomatik Senkronizasyon</h4>
-        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
-            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
-        </label>
-        <select id="syncInterval">
-            <option value="5">5 saniye</option>
-            <option value="10" selected>10 saniye</option>
-            <option value="30">30 saniye</option>
-            <option value="60">1 dakika</option>
-        </select>
+        <h4>💾 Yedekleme</h4>
+        <button onclick="saveV1Progress()">Kodu Kopyala</button>
+        <button onclick="loadV1Progress()" style="background:#ff8c00;">Kodu Yapıştır</button>
     </div>
-    <button class="mobile-close-btn" onclick="closeDevV1()">❌ Paneli Kapat</button>
-    <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
+
+    <button class="close-btn" onclick="closeDevV1()">Kapat</button>
 </div>
 
 <!-- لوحة المطور V2 -->
-<div class="dev-window-v2" id="devPanelV2">
-    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
-    <div class="dev-section-v2" style="border-color: #ff8c00; background: rgba(255,140,0,0.1);">
-        <h4 style="color: #ff8c00;">💾 VERİ YEDEKLEME (V2)</h4>
-        <div class="cloud-panel" style="border-color: #ff8c00;">
-            <div class="cloud-stats">
-                <span>📦 Kategori Resmi: <span style="color:#ff8c00" id="v2CategoryCount">0</span></span>
-                <span>🖼️ Ürün Resmi: <span style="color:#6c5ce7" id="v2ProductCount">0</span></span>
-            </div>
-            <div class="code-export">
-                <button onclick="saveV2Progress()" style="background:#28a745;">📋 Kodu Kopyala (V2)</button>
-                <button onclick="loadV2Progress()" style="background:#ff8c00;">📋 Kodu Yapıştır (V2)</button>
-            </div>
-            <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
-        </div>
+<div class="dev-panel" id="devPanelV2">
+    <h3>🖼️ Geliştirici V2</h3>
+
+    <div class="dev-section">
+        <h4>💾 Yedekleme</h4>
+        <button onclick="saveV2Progress()">Kodu Kopyala</button>
+        <button onclick="loadV2Progress()" style="background:#ff8c00;">Kodu Yapıştır</button>
     </div>
-    <div class="dev-section-v2">
-        <h4>🗑️ Resim Yönetimi</h4>
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <button onclick="deleteAllImages()" style="flex:1; background:#dc3545;" class="delete-btn">🗑️ Tüm Resimleri Sil</button>
-        </div>
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <button onclick="deleteCategoryImages()" style="flex:1; background:#ff8c00;">📁 Kategori Resimlerini Sil</button>
-            <button onclick="deleteProductImages()" style="flex:1; background:#6c5ce7;">📦 Ürün Resimlerini Sil</button>
-        </div>
-        <small style="color:#aaa;">Galerideki resimlerin üzerine tıklayarak tek tek silebilirsiniz</small>
-    </div>
-    <div class="dev-section-v2">
-        <h4>📁 Var Olan Kategoriye Resim Ekle (URL)</h4>
+
+    <div class="dev-section">
+        <h4>📁 Kategoriye Resim Ekle</h4>
         <select id="existingCategorySelect">
             <option value="">Kategori seçin</option>
         </select>
-        <div class="image-upload-section">
-            <label>Kategori Resim URL'si:</label>
-            <input type="url" id="categoryImageUrlExist" placeholder="https://...jpg" value="">
-        </div>
-        <button onclick="addImageToExistingCategory()">📁 Kategoriye Resim Ekle (URL)</button>
+        <input type="url" id="categoryImageUrlExist" placeholder="Resim URL">
+        <button onclick="addImageToExistingCategory()">Ekle</button>
     </div>
-    <div class="dev-section-v2">
-        <h4>📦 Var Olan Ürüne Resim Ekle (URL)</h4>
+
+    <div class="dev-section">
+        <h4>📦 Ürüne Resim Ekle</h4>
         <select id="existingCategoryForProductSelect">
             <option value="">Kategori seçin</option>
         </select>
         <select id="existingProductSelect" disabled>
             <option value="">Önce kategori seçin</option>
         </select>
-        <div class="image-upload-section">
-            <label>Ürün Resim URL'si:</label>
-            <input type="url" id="productImageUrlExist" placeholder="https://...jpg" value="">
-        </div>
-        <button onclick="addImageToExistingProduct()">📦 Ürüne Resim Ekle (URL)</button>
+        <input type="url" id="productImageUrlExist" placeholder="Resim URL">
+        <button onclick="addImageToExistingProduct()">Ekle</button>
     </div>
-    <div class="dev-section-v2">
-        <h4>➕ Yeni Kategori (URL'li)</h4>
+
+    <div class="dev-section">
+        <h4>➕ Yeni Kategori</h4>
         <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
-        <div class="image-upload-section">
-            <label>Kategori Resim URL'si (İsteğe bağlı):</label>
-            <input type="url" id="categoryImageUrl" placeholder="https://...jpg">
-        </div>
-        <button onclick="addCategoryWithImage()">📁 Kategori Ekle (URL'li)</button>
+        <input type="url" id="categoryImageUrl" placeholder="Resim URL (opsiyonel)">
+        <button onclick="addCategoryWithImage()">Ekle</button>
     </div>
-    <div class="dev-section-v2">
-        <h4>➕ Yeni Ürün (URL'li)</h4>
+
+    <div class="dev-section">
+        <h4>➕ Yeni Ürün</h4>
         <select id="categorySelectV2"></select>
         <input type="text" id="newNameV2" placeholder="Ürün Adı">
         <input type="text" id="productPriceV2" placeholder="Fiyat">
-        <div class="image-upload-section">
-            <label>Ürün Resim URL'si (İsteğe bağlı):</label>
-            <input type="url" id="productImageUrl" placeholder="https://...jpg">
-        </div>
-        <button onclick="addProductWithImage()">✅ Ürün Ekle (URL'li)</button>
+        <input type="url" id="productImageUrl" placeholder="Resim URL (opsiyonel)">
+        <button onclick="addProductWithImage()">Ekle</button>
     </div>
-    <div class="dev-section-v2">
-        <h4>🖼️ Resim Galerisi (Tıklayarak Sil)</h4>
-        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+
+    <div class="dev-section">
+        <h4>🖼️ Resim Galerisi</h4>
+        <div style="display: flex; gap: 5px; margin-bottom: 10px;">
             <button onclick="showAllImages()" style="flex:1; background:#6c5ce7;">Tümü</button>
             <button onclick="showCategoryImages()" style="flex:1; background:#ff8c00;">Kategoriler</button>
             <button onclick="showProductImages()" style="flex:1; background:#28a745;">Ürünler</button>
         </div>
         <div id="imageGallery" class="image-gallery"></div>
-        <p style="color:#aaa; font-size:12px; margin-top:5px;">👉 Resmin üzerine tıklayarak silebilirsiniz</p>
     </div>
-    <div class="dev-section-v2">
-        <h4>☁️ CLOUD SYNC (Resimli)</h4>
-        <button onclick="saveImagesToCloud()" class="save-btn" style="background:#0066cc;">☁️ Resimleri Buluta Kaydet</button>
-        <button onclick="loadImagesFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Resimleri Buluttan Yükle</button>
-    </div>
-    <button class="mobile-close-btn" onclick="closeDevV2()">❌ Paneli Kapat</button>
-    <button onclick="closeDevV2()" class="close-btn">❌ Çıkış</button>
+
+    <button class="close-btn" onclick="closeDevV2()">Kapat</button>
 </div>
 
-<!-- نافذة تعديل الألوان -->
-<div class="color-picker-modal" id="colorPickerModal">
+<!-- نافذة تعديل الألوان (مخفية) -->
+<div class="color-picker-modal" style="display: none;">
     <h3>🎨 Renkleri Değiştir</h3>
-    <label>Kategori Başlığı (h3)</label>
+    <label>Kategori Başlığı</label>
     <input type="color" id="colorCategory" value="#ff8c00">
-    <label>Ürün Adı (.name)</label>
+    <label>Ürün Adı</label>
     <input type="color" id="colorName" value="#ff8c00">
-    <label>Fiyat (.price)</label>
+    <label>Fiyat</label>
     <input type="color" id="colorPrice" value="#ffffff">
     <button onclick="applyColors()">Renkleri Uygula</button>
     <button onclick="closeColorPicker()">Kapat</button>
 </div>
 
-<div id="statusMessage" class="status-message" style="display:none;"></div>
+<!-- رسالة الحالة -->
+<div id="statusMessage" style="display: none;"></div>
 
 <script>
-// ===== TÜM ÜRÜNLER (Gönderdiğiniz JSON'dan alındı) =====
+// ===== TÜM ÜRÜNLER =====
 const FULL_MENU = [
     {
         category: "TOST ÇEŞİTLERİ",
@@ -1837,212 +1279,166 @@ const MENU_DATA = {
 
 // ===== Genel Değişkenler =====
 let isDeveloper = false;
-let deleteMode = false;
-let editMode = false;
 let currentVersion = 'v1';
 let currentLang = 'tr';
 let categoryImages = {};
 let productImages = {};
 let pendingAction = null;
-let autoSyncInterval = null;
-let lastCloudData = null;
-const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
-const CLOUD_DOCS_URL = 'https://www.npoint.io/';
+let currentMenu = FULL_MENU;
 
-// ===== Menü Gösterme Fonksiyonu =====
-function displayMenu(menuData) {
+// ===== Menü Gösterme =====
+function displayMenu() {
     const menuGrid = document.getElementById('menuGrid');
     if (!menuGrid) return;
+    
     menuGrid.innerHTML = '';
-
-    (menuData || FULL_MENU).forEach((category, catIndex) => {
+    
+    currentMenu.forEach((category, catIndex) => {
         if (!category.items || category.items.length === 0) return;
-
+        
         const card = document.createElement('div');
-        card.className = 'card';
-        card.setAttribute('data-category-index', catIndex);
-
-        if (categoryImages[category.category]) {
-            card.classList.add('has-image');
-            const catImg = document.createElement('img');
-            catImg.src = categoryImages[category.category];
-            catImg.className = 'card-image';
-            catImg.alt = category.category;
-            catImg.onerror = function() { this.style.display = 'none'; };
-            card.appendChild(catImg);
-        }
-
+        card.className = 'category-card';
+        
+        // Kategori başlığı
+        const header = document.createElement('div');
+        header.className = 'category-header';
+        
         const title = document.createElement('h3');
         title.textContent = category.category;
-        card.appendChild(title);
-
+        
+        header.appendChild(title);
+        
         if (isDeveloper) {
-            const deleteCatBtn = document.createElement('button');
-            deleteCatBtn.className = 'delete-card-btn';
-            deleteCatBtn.innerHTML = '🗑️';
-            deleteCatBtn.onclick = (e) => {
-                e.stopPropagation();
-                showConfirm('🗑️ Kategori Sil', `"${category.category}" kategorisini silmek istediğinize emin misiniz?`, () => deleteCategory(catIndex));
-            };
-            card.appendChild(deleteCatBtn);
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-category';
+            deleteBtn.innerHTML = '🗑️';
+            deleteBtn.onclick = () => showConfirm('Kategori Sil', `"${category.category}" silinsin mi?`, () => deleteCategory(catIndex));
+            header.appendChild(deleteBtn);
         }
-
+        
+        card.appendChild(header);
+        
+        // Ürünler
+        const itemsList = document.createElement('div');
+        itemsList.className = 'items-list';
+        
         category.items.forEach((item, itemIndex) => {
             const itemDiv = document.createElement('div');
-            itemDiv.className = 'item';
-
+            itemDiv.className = 'menu-item';
+            
+            const itemInfo = document.createElement('div');
+            itemInfo.className = 'item-info';
+            
+            // Resim varsa
             if (productImages[catIndex] && productImages[catIndex][item.name]) {
-                itemDiv.classList.add('has-image');
-                const prodImg = document.createElement('img');
-                prodImg.src = productImages[catIndex][item.name];
-                prodImg.className = 'item-image';
-                prodImg.alt = item.name;
-                prodImg.onerror = function() { this.style.display = 'none'; };
-                itemDiv.appendChild(prodImg);
+                const img = document.createElement('img');
+                img.src = productImages[catIndex][item.name];
+                img.className = 'item-image';
+                img.alt = item.name;
+                img.onerror = function() { this.style.display = 'none'; };
+                itemInfo.appendChild(img);
             }
-
-            itemDiv.setAttribute('data-category', catIndex);
-            itemDiv.setAttribute('data-item', itemIndex);
-
+            
             const nameSpan = document.createElement('span');
-            nameSpan.className = 'name';
+            nameSpan.className = 'item-name';
             nameSpan.textContent = item.name;
-
+            itemInfo.appendChild(nameSpan);
+            
+            itemDiv.appendChild(itemInfo);
+            
             const priceSpan = document.createElement('span');
-            priceSpan.className = 'price';
+            priceSpan.className = 'item-price';
             priceSpan.textContent = item.price;
-
-            itemDiv.appendChild(nameSpan);
             itemDiv.appendChild(priceSpan);
-
+            
             if (isDeveloper) {
-                const actionsDiv = document.createElement('div');
-                actionsDiv.className = 'item-actions';
-
+                const actions = document.createElement('div');
+                actions.className = 'item-actions';
+                
                 const editBtn = document.createElement('button');
-                editBtn.className = 'item-edit-btn';
+                editBtn.className = 'item-edit';
                 editBtn.innerHTML = '✏️';
-                editBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    editProduct(catIndex, itemIndex);
-                };
-
+                editBtn.onclick = () => editProduct(catIndex, itemIndex);
+                
                 const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'item-delete-btn';
+                deleteBtn.className = 'item-delete';
                 deleteBtn.innerHTML = '🗑️';
-                deleteBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    showConfirm('🗑️ Ürün Sil', `"${item.name}" ürününü silmek istediğinize emin misiniz?`, () => deleteProduct(catIndex, itemIndex));
-                };
-
-                actionsDiv.appendChild(editBtn);
-                actionsDiv.appendChild(deleteBtn);
-                itemDiv.appendChild(actionsDiv);
+                deleteBtn.onclick = () => showConfirm('Ürün Sil', `"${item.name}" silinsin mi?`, () => deleteProduct(catIndex, itemIndex));
+                
+                actions.appendChild(editBtn);
+                actions.appendChild(deleteBtn);
+                itemDiv.appendChild(actions);
             }
-
-            card.appendChild(itemDiv);
+            
+            itemsList.appendChild(itemDiv);
         });
-
+        
+        card.appendChild(itemsList);
         menuGrid.appendChild(card);
     });
-
+    
     updateCategorySelect();
     updateCategorySelectV2();
     updateExistingCategorySelect();
-    updateImageStats();
 }
 
 // ===== Kategori ve Ürün İşlemleri =====
-function deleteCategory(catIndex) {
-    if (!isDeveloper) return;
-    const menu = getCurrentMenu();
-    const categoryName = menu[catIndex].category;
-    if (categoryImages[categoryName]) {
-        delete categoryImages[categoryName];
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-    }
-    menu.splice(catIndex, 1);
-    saveMenuToLocal(menu);
-    showStatus('✅ Kategori silindi!', 'success');
+function deleteCategory(index) {
+    currentMenu.splice(index, 1);
+    displayMenu();
+    showStatus('Kategori silindi', 'success');
 }
 
 function deleteProduct(catIndex, itemIndex) {
-    if (!isDeveloper) return;
-    const menu = getCurrentMenu();
-    const productName = menu[catIndex].items[itemIndex].name;
-    if (productImages[catIndex] && productImages[catIndex][productName]) {
-        delete productImages[catIndex][productName];
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-    }
-    menu[catIndex].items.splice(itemIndex, 1);
-    saveMenuToLocal(menu);
-    showStatus('✅ Ürün silindi!', 'success');
+    currentMenu[catIndex].items.splice(itemIndex, 1);
+    displayMenu();
+    showStatus('Ürün silindi', 'success');
 }
 
 function editProduct(catIndex, itemIndex) {
-    if (!isDeveloper) return;
-    const menu = getCurrentMenu();
-    const product = menu[catIndex].items[itemIndex];
+    const product = currentMenu[catIndex].items[itemIndex];
     const newName = prompt('Yeni ürün adı:', product.name);
     if (!newName) return;
     const newPrice = prompt('Yeni fiyat:', product.price);
     if (!newPrice) return;
-    menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
-    saveMenuToLocal(menu);
-    showStatus('✅ Ürün güncellendi!', 'success');
-}
-
-function getCurrentMenu() {
-    const menu = [];
-    document.querySelectorAll('.card').forEach(card => {
-        const category = card.querySelector('h3').textContent;
-        const items = [];
-        card.querySelectorAll('.item').forEach(item => {
-            items.push({
-                name: item.querySelector('.name').textContent,
-                price: item.querySelector('.price').textContent
-            });
-        });
-        if (items.length > 0) menu.push({ category, items });
-    });
-    return menu;
-}
-
-function saveMenuToLocal(menu) {
-    localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
-    displayMenu(menu);
+    
+    currentMenu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
+    displayMenu();
+    showStatus('Ürün güncellendi', 'success');
 }
 
 // ===== Dropdown Güncellemeleri =====
 function updateCategorySelect() {
     const select = document.getElementById('categorySelect');
-    if (!select) return;
-    select.innerHTML = '';
-    document.querySelectorAll('.card h3').forEach((h, i) => {
-        select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
-    });
+    if (select) {
+        select.innerHTML = '';
+        currentMenu.forEach((cat, i) => {
+            select.innerHTML += `<option value="${i}">${cat.category}</option>`;
+        });
+    }
 }
 
 function updateCategorySelectV2() {
     const select = document.getElementById('categorySelectV2');
-    if (!select) return;
-    select.innerHTML = '';
-    document.querySelectorAll('.card h3').forEach((h, i) => {
-        select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
-    });
+    if (select) {
+        select.innerHTML = '';
+        currentMenu.forEach((cat, i) => {
+            select.innerHTML += `<option value="${i}">${cat.category}</option>`;
+        });
+    }
 }
 
 function updateExistingCategorySelect() {
-    const selects = [
-        document.getElementById('existingCategorySelect'),
-        document.getElementById('existingCategoryForProductSelect')
-    ];
-    selects.forEach(sel => {
-        if (!sel) return;
-        sel.innerHTML = '<option value="">Kategori seçin</option>';
-        document.querySelectorAll('.card h3').forEach((h, i) => {
-            sel.innerHTML += `<option value="${i}">${h.textContent}</option>`;
-        });
+    const select = document.getElementById('existingCategorySelect');
+    const productCatSelect = document.getElementById('existingCategoryForProductSelect');
+    
+    [select, productCatSelect].forEach(s => {
+        if (s) {
+            s.innerHTML = '<option value="">Kategori seçin</option>';
+            currentMenu.forEach((cat, i) => {
+                s.innerHTML += `<option value="${i}">${cat.category}</option>`;
+            });
+        }
     });
 }
 
@@ -2050,223 +1446,139 @@ function updateExistingCategorySelect() {
 document.getElementById('existingCategoryForProductSelect')?.addEventListener('change', function() {
     const catIndex = this.value;
     const productSelect = document.getElementById('existingProductSelect');
-    if (!catIndex || !productSelect) {
-        if (productSelect) productSelect.disabled = true;
-        return;
-    }
-    productSelect.disabled = false;
-    productSelect.innerHTML = '<option value="">Ürün seçin</option>';
-    const menu = getCurrentMenu();
-    if (menu[catIndex] && menu[catIndex].items) {
-        menu[catIndex].items.forEach((item, i) => {
-            productSelect.innerHTML += `<option value="${i}">${item.name}</option>`;
-        });
+    if (catIndex && productSelect) {
+        productSelect.disabled = false;
+        productSelect.innerHTML = '<option value="">Ürün seçin</option>';
+        if (currentMenu[catIndex] && currentMenu[catIndex].items) {
+            currentMenu[catIndex].items.forEach((item, i) => {
+                productSelect.innerHTML += `<option value="${i}">${item.name}</option>`;
+            });
+        }
     }
 });
 
 // ===== V1 İşlemleri =====
 function addCategory() {
-    if (!isDeveloper) return;
     const name = document.getElementById('newCategory').value.trim();
-    if (!name) { showStatus('Kategori adı girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    menu.push({ category: name, items: [] });
-    saveMenuToLocal(menu);
+    if (!name) { showStatus('Kategori adı girin', 'error'); return; }
+    currentMenu.push({ category: name, items: [] });
+    displayMenu();
     document.getElementById('newCategory').value = '';
-    showStatus('✅ Kategori eklendi!', 'success');
+    showStatus('Kategori eklendi', 'success');
 }
 
 function addProduct() {
-    if (!isDeveloper) return;
     const name = document.getElementById('newName').value.trim();
     const price = document.getElementById('productPrice').value.trim();
     const index = document.getElementById('categorySelect').value;
-    if (!name || !price) { showStatus('Ürün adı ve fiyat girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    menu[index].items.push({ name, price });
-    saveMenuToLocal(menu);
+    if (!name || !price) { showStatus('Ad ve fiyat girin', 'error'); return; }
+    
+    currentMenu[index].items.push({ name, price });
+    displayMenu();
     document.getElementById('newName').value = '';
     document.getElementById('productPrice').value = '';
-    showStatus('✅ Ürün eklendi!', 'success');
-}
-
-function enableEdit() {
-    editMode = !editMode;
-    deleteMode = false;
-    document.getElementById('menuGrid').classList.toggle('edit-mode', editMode);
-    document.getElementById('menuGrid').classList.remove('delete-mode');
-    showStatus(editMode ? '✏️ Düzenleme modu aktif' : '✏️ Düzenleme kapalı', 'success');
-}
-
-function toggleDeleteMode() {
-    deleteMode = !deleteMode;
-    editMode = false;
-    document.getElementById('menuGrid').classList.toggle('delete-mode', deleteMode);
-    document.getElementById('menuGrid').classList.remove('edit-mode');
-    showStatus(deleteMode ? '🗑️ Silme modu aktif' : '🗑️ Silme kapalı', 'success');
-}
-
-function updateMainPrice() {
-    showStatus('Fiyat güncellendi', 'success');
-}
-
-function deleteAll() {
-    if (!isDeveloper) return;
-    showConfirm('🗑️ Tüm Menü Sil', 'Tüm menü silinsin mi? Varsayılan menü yüklenecek.', () => {
-        localStorage.removeItem('tosttoo_menu');
-        localStorage.removeItem('categoryImages');
-        localStorage.removeItem('productImages');
-        categoryImages = {};
-        productImages = {};
-        displayMenu(FULL_MENU);
-        showStatus('Varsayılan menü yüklendi', 'success');
-    });
-}
-
-function changeInstagram() {
-    const val = document.getElementById('newInstagram').value.trim();
-    if (val) {
-        document.getElementById('instaLink').href = val;
-        localStorage.setItem('insta', val);
-        showStatus('Instagram güncellendi', 'success');
-    }
-}
-
-function changeLocation() {
-    const val = document.getElementById('newLocation').value.trim();
-    if (val) {
-        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
-        localStorage.setItem('map', val);
-        showStatus('Konum güncellendi', 'success');
-    }
-}
-
-function openColorPicker() { document.getElementById('colorPickerModal').style.display = 'block'; }
-function closeColorPicker() { document.getElementById('colorPickerModal').style.display = 'none'; }
-
-function applyColors() {
-    document.querySelectorAll('.card h3').forEach(el => el.style.color = document.getElementById('colorCategory').value);
-    document.querySelectorAll('.name').forEach(el => el.style.color = document.getElementById('colorName').value);
-    document.querySelectorAll('.price').forEach(el => el.style.color = document.getElementById('colorPrice').value);
-    closeColorPicker();
+    showStatus('Ürün eklendi', 'success');
 }
 
 // ===== V2 İşlemleri =====
-function addImageToExistingCategory() {
-    if (!isDeveloper) return;
-    const catIndex = document.getElementById('existingCategorySelect').value;
-    const imageUrl = document.getElementById('categoryImageUrlExist').value.trim();
-    if (!catIndex || !imageUrl) { showStatus('Kategori ve URL girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    const categoryName = menu[catIndex].category;
-    categoryImages[categoryName] = imageUrl;
-    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-    displayMenu(menu);
-    updateGallery();
-    showStatus('✅ Kategori resmi eklendi!', 'success');
-    document.getElementById('categoryImageUrlExist').value = '';
-}
-
-function addImageToExistingProduct() {
-    if (!isDeveloper) return;
-    const catIndex = document.getElementById('existingCategoryForProductSelect').value;
-    const prodIndex = document.getElementById('existingProductSelect').value;
-    const imageUrl = document.getElementById('productImageUrlExist').value.trim();
-    if (!catIndex || !prodIndex || !imageUrl) { showStatus('Kategori, ürün ve URL girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    const productName = menu[catIndex].items[prodIndex].name;
-    if (!productImages[catIndex]) productImages[catIndex] = {};
-    productImages[catIndex][productName] = imageUrl;
-    localStorage.setItem('productImages', JSON.stringify(productImages));
-    displayMenu(menu);
-    updateGallery();
-    showStatus('✅ Ürün resmi eklendi!', 'success');
-    document.getElementById('productImageUrlExist').value = '';
-}
-
 function addCategoryWithImage() {
-    if (!isDeveloper) return;
     const name = document.getElementById('newCategoryV2').value.trim();
-    const imageUrl = document.getElementById('categoryImageUrl').value.trim();
-    if (!name) { showStatus('Kategori adı girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    menu.push({ category: name, items: [] });
-    if (imageUrl) {
-        categoryImages[name] = imageUrl;
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-    }
-    saveMenuToLocal(menu);
+    const url = document.getElementById('categoryImageUrl').value.trim();
+    if (!name) { showStatus('Kategori adı girin', 'error'); return; }
+    
+    currentMenu.push({ category: name, items: [] });
+    if (url) categoryImages[name] = url;
+    displayMenu();
     document.getElementById('newCategoryV2').value = '';
     document.getElementById('categoryImageUrl').value = '';
-    showStatus('✅ Kategori eklendi!', 'success');
+    showStatus('Kategori eklendi', 'success');
 }
 
 function addProductWithImage() {
-    if (!isDeveloper) return;
     const name = document.getElementById('newNameV2').value.trim();
     const price = document.getElementById('productPriceV2').value.trim();
     const catIndex = document.getElementById('categorySelectV2').value;
-    const imageUrl = document.getElementById('productImageUrl').value.trim();
-    if (!name || !price) { showStatus('Ürün adı ve fiyat girin!', 'error'); return; }
-    const menu = getCurrentMenu();
-    menu[catIndex].items.push({ name, price });
-    if (imageUrl) {
+    const url = document.getElementById('productImageUrl').value.trim();
+    
+    if (!name || !price) { showStatus('Ad ve fiyat girin', 'error'); return; }
+    
+    currentMenu[catIndex].items.push({ name, price });
+    if (url) {
         if (!productImages[catIndex]) productImages[catIndex] = {};
-        productImages[catIndex][name] = imageUrl;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
+        productImages[catIndex][name] = url;
     }
-    saveMenuToLocal(menu);
+    displayMenu();
     document.getElementById('newNameV2').value = '';
     document.getElementById('productPriceV2').value = '';
     document.getElementById('productImageUrl').value = '';
-    showStatus('✅ Ürün eklendi!', 'success');
+    showStatus('Ürün eklendi', 'success');
 }
 
-function loadImages() {
-    const savedCatImages = localStorage.getItem('categoryImages');
-    const savedProdImages = localStorage.getItem('productImages');
-    if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
-    if (savedProdImages) productImages = JSON.parse(savedProdImages);
-    updateImageStats();
+function addImageToExistingCategory() {
+    const catIndex = document.getElementById('existingCategorySelect').value;
+    const url = document.getElementById('categoryImageUrlExist').value.trim();
+    if (!catIndex || !url) { showStatus('Kategori ve URL girin', 'error'); return; }
+    
+    const catName = currentMenu[catIndex].category;
+    categoryImages[catName] = url;
+    displayMenu();
+    showStatus('Resim eklendi', 'success');
 }
 
-function updateImageStats() {
-    const catCount = Object.keys(categoryImages).length;
-    let prodCount = 0;
-    Object.keys(productImages).forEach(catIndex => {
-        prodCount += Object.keys(productImages[catIndex]).length;
-    });
-    if (document.getElementById('v2CategoryCount')) {
-        document.getElementById('v2CategoryCount').innerText = catCount;
-    }
-    if (document.getElementById('v2ProductCount')) {
-        document.getElementById('v2ProductCount').innerText = prodCount;
-    }
+function addImageToExistingProduct() {
+    const catIndex = document.getElementById('existingCategoryForProductSelect').value;
+    const prodIndex = document.getElementById('existingProductSelect').value;
+    const url = document.getElementById('productImageUrlExist').value.trim();
+    if (!catIndex || !prodIndex || !url) { showStatus('Kategori, ürün ve URL girin', 'error'); return; }
+    
+    const prodName = currentMenu[catIndex].items[prodIndex].name;
+    if (!productImages[catIndex]) productImages[catIndex] = {};
+    productImages[catIndex][prodName] = url;
+    displayMenu();
+    showStatus('Resim eklendi', 'success');
 }
 
+// ===== Resim Galerisi =====
 function updateGallery(filter = 'all') {
     const gallery = document.getElementById('imageGallery');
     if (!gallery) return;
+    
     let html = '';
+    
     if (filter === 'all' || filter === 'categories') {
         Object.keys(categoryImages).forEach(cat => {
-            html += `<div class="gallery-item category-item" onclick="deleteSingleImage('category', '${cat}')">
+            html += `<div class="gallery-item" onclick="deleteSingleImage('category','${cat}')">
                 <img src="${categoryImages[cat]}" onerror="this.style.display='none'">
                 <div class="item-name">📁 ${cat}</div>
             </div>`;
         });
     }
+    
     if (filter === 'all' || filter === 'products') {
         Object.keys(productImages).forEach(catIndex => {
             Object.keys(productImages[catIndex]).forEach(prod => {
-                html += `<div class="gallery-item product-item" onclick="deleteSingleImage('product', '${catIndex}', '${prod}')">
+                html += `<div class="gallery-item" onclick="deleteSingleImage('product','${catIndex}','${prod}')">
                     <img src="${productImages[catIndex][prod]}" onerror="this.style.display='none'">
                     <div class="item-name">📦 ${prod}</div>
                 </div>`;
             });
         });
     }
-    gallery.innerHTML = html || '<p style="text-align:center; color:#666;">Henüz resim eklenmemiş</p>';
+    
+    gallery.innerHTML = html || '<p style="color:#666; text-align:center;">Henüz resim eklenmemiş</p>';
+}
+
+function deleteSingleImage(type, cat, prod = null) {
+    showConfirm('Resim Sil', 'Bu resmi silmek istediğinize emin misiniz?', () => {
+        if (type === 'category') {
+            delete categoryImages[cat];
+        } else {
+            delete productImages[cat][prod];
+            if (Object.keys(productImages[cat]).length === 0) delete productImages[cat];
+        }
+        updateGallery();
+        showStatus('Resim silindi', 'success');
+    });
 }
 
 function showAllImages() { updateGallery('all'); }
@@ -2274,205 +1586,109 @@ function showCategoryImages() { updateGallery('categories'); }
 function showProductImages() { updateGallery('products'); }
 
 function deleteAllImages() {
-    if (!isDeveloper) return;
-    showConfirm('🗑️ Tüm Resimler Silinsin mi?', 'Tüm kategori ve ürün resimleri silinecek!', () => {
+    showConfirm('Tüm Resimler Sil', 'Tüm resimler silinsin mi?', () => {
         categoryImages = {};
         productImages = {};
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-        displayMenu(getCurrentMenu());
         updateGallery();
-        showStatus('🗑️ Tüm resimler silindi!', 'success');
+        showStatus('Resimler silindi', 'success');
     });
-}
-
-function deleteCategoryImages() {
-    if (!isDeveloper) return;
-    showConfirm('📁 Kategori Resimleri Silinsin mi?', 'Tüm kategori resimleri silinecek!', () => {
-        categoryImages = {};
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        displayMenu(getCurrentMenu());
-        updateGallery();
-        showStatus('📁 Kategori resimleri silindi!', 'success');
-    });
-}
-
-function deleteProductImages() {
-    if (!isDeveloper) return;
-    showConfirm('📦 Ürün Resimleri Silinsin mi?', 'Tüm ürün resimleri silinecek!', () => {
-        productImages = {};
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-        displayMenu(getCurrentMenu());
-        updateGallery();
-        showStatus('📦 Ürün resimleri silindi!', 'success');
-    });
-}
-
-function deleteSingleImage(type, cat, prod = null) {
-    if (!isDeveloper) return;
-    showConfirm('🗑️ Resim Sil', 'Bu resmi silmek istediğinize emin misiniz?', () => {
-        if (type === 'category') {
-            delete categoryImages[cat];
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        } else {
-            delete productImages[cat][prod];
-            if (Object.keys(productImages[cat]).length === 0) delete productImages[cat];
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-        }
-        displayMenu(getCurrentMenu());
-        updateGallery();
-        showStatus('✅ Resim silindi!', 'success');
-    });
-}
-
-function saveImagesToCloud() {
-    showStatus('☁️ Resimler buluta kaydediliyor...', 'loading');
-    setTimeout(() => {
-        localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-        showStatus('✅ Resimler kaydedildi!', 'success');
-    }, 1500);
-}
-
-function loadImagesFromCloud() {
-    showStatus('📥 Resimler buluttan yükleniyor...', 'loading');
-    setTimeout(() => {
-        const backup = localStorage.getItem('cloudImagesBackup');
-        if (backup) {
-            const data = JSON.parse(backup);
-            categoryImages = data.categories || {};
-            productImages = data.products || {};
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            displayMenu(getCurrentMenu());
-            updateGallery();
-            showStatus('✅ Resimler yüklendi!', 'success');
-        } else {
-            showStatus('❌ Yedek bulunamadı!', 'error');
-        }
-    }, 1500);
 }
 
 // ===== Onay Modalı =====
 function showConfirm(title, message, onYes) {
     document.getElementById('confirmTitle').textContent = title;
     document.getElementById('confirmMessage').textContent = message;
-    document.getElementById('customConfirmModal').style.display = 'flex';
+    document.getElementById('confirmModal').style.display = 'flex';
     pendingAction = onYes;
 }
 
-document.getElementById('confirmYesBtn').addEventListener('click', function() {
+document.getElementById('confirmYes').onclick = () => {
     if (pendingAction) pendingAction();
-    document.getElementById('customConfirmModal').style.display = 'none';
-    pendingAction = null;
-});
+    document.getElementById('confirmModal').style.display = 'none';
+};
+document.getElementById('confirmNo').onclick = () => {
+    document.getElementById('confirmModal').style.display = 'none';
+};
 
-document.getElementById('confirmNoBtn').addEventListener('click', function() {
-    document.getElementById('customConfirmModal').style.display = 'none';
-    pendingAction = null;
-});
+// ===== Diğer Fonksiyonlar =====
+function deleteAll() {
+    showConfirm('Tüm Menü Sil', 'Tüm menü silinsin mi?', () => {
+        currentMenu = [];
+        displayMenu();
+        showStatus('Menü silindi', 'success');
+    });
+}
 
-// ===== Dil İşlemleri =====
+function changeInstagram() {
+    const val = document.getElementById('newInstagram').value.trim();
+    if (val) document.getElementById('instaLink').href = val;
+}
+
+function changeLocation() {
+    const val = document.getElementById('newLocation').value.trim();
+    if (val) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
+}
+
 function toggleLanguageMenu() {
-    const menu = document.getElementById('languageMenu');
+    const menu = document.getElementById('langMenu');
     menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
 }
 
 function setLanguage(lang) {
     currentLang = lang;
-    localStorage.setItem('lang', currentLang);
-    const langBtn = document.getElementById('langBtn');
-    const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
-    langBtn.textContent = flags[lang] || '🇹🇷';
-    document.body.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
-    document.getElementById('languageMenu').style.display = 'none';
-
+    document.getElementById('langBtn').textContent = 
+        lang === 'tr' ? '🇹🇷' : lang === 'en' ? '🇬🇧' : lang === 'ru' ? '🇷🇺' : '🇮🇶';
+    document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('langMenu').style.display = 'none';
+    
     const texts = {
         tr: { menu: 'Menü', contact: 'İletişim', view_menu: 'Menüyü Gör' },
         en: { menu: 'Menu', contact: 'Contact', view_menu: 'View Menu' },
         ru: { menu: 'Меню', contact: 'Контакты', view_menu: 'Посмотреть меню' },
         ar: { menu: 'القائمة', contact: 'اتصل بنا', view_menu: 'عرض القائمة' }
     };
+    
     document.getElementById('menuTitle').innerText = texts[lang].menu;
     document.getElementById('contactTitle').innerText = texts[lang].contact;
-    document.getElementById('scrollText').innerText = texts[lang].view_menu;
-
-    displayMenu(MENU_DATA[lang]);
+    document.getElementById('mainTitle').innerText = 'Tosttoo';
+    
+    currentMenu = MENU_DATA[lang];
+    displayMenu();
 }
 
-// ===== Diğer Fonksiyonlar =====
-function scrollToMenu() { document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); }
+function scrollToMenu() {
+    document.getElementById('menuSection').scrollIntoView({ behavior: 'smooth' });
+}
 
-function showStatus(message, type) {
-    const old = document.querySelector('.status-message');
-    if (old) old.remove();
-    const status = document.createElement('div');
+function showStatus(msg, type) {
+    const status = document.getElementById('statusMessage');
+    status.style.display = 'block';
     status.className = `status-message status-${type}`;
-    status.textContent = message;
-    document.body.appendChild(status);
-    setTimeout(() => status.remove(), 3000);
+    status.textContent = msg;
+    setTimeout(() => status.style.display = 'none', 2000);
 }
 
-// ===== Yedekleme Fonksiyonları =====
+// ===== Yedekleme =====
 function saveV1Progress() {
-    const progress = {
-        menu: getCurrentMenu(),
-        colors: {
-            category: localStorage.getItem('colorCategory'),
-            name: localStorage.getItem('colorName'),
-            price: localStorage.getItem('colorPrice')
-        },
-        settings: {
-            lang: currentLang,
-            theme: localStorage.getItem('theme'),
-            version: currentVersion
-        },
-        savedAt: new Date().toISOString()
-    };
-    navigator.clipboard.writeText(JSON.stringify(progress, null, 2))
-        .then(() => showStatus('✅ Kopyalandı!', 'success'))
-        .catch(() => prompt('Kodu kopyala:', JSON.stringify(progress)));
+    const data = JSON.stringify(currentMenu);
+    navigator.clipboard.writeText(data);
+    showStatus('Kopyalandı', 'success');
 }
 
 function loadV1Progress() {
     const code = prompt('Kodu yapıştır:');
     if (!code) return;
     try {
-        const data = JSON.parse(code);
-        if (data.menu) displayMenu(data.menu);
-        if (data.colors) {
-            if (data.colors.category) document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
-            if (data.colors.name) document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
-            if (data.colors.price) document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
-        }
-        if (data.settings) {
-            if (data.settings.lang) setLanguage(data.settings.lang);
-            if (data.settings.theme === 'light') document.body.classList.add('light-mode');
-            if (data.settings.version) currentVersion = data.settings.version;
-        }
-        showStatus('✅ Yüklendi!', 'success');
-    } catch { showStatus('❌ Hata!', 'error'); }
+        currentMenu = JSON.parse(code);
+        displayMenu();
+        showStatus('Yüklendi', 'success');
+    } catch { showStatus('Hata', 'error'); }
 }
 
 function saveV2Progress() {
-    const progress = {
-        menu: getCurrentMenu(),
-        categoryImages,
-        productImages,
-        colors: {
-            category: localStorage.getItem('colorCategory'),
-            name: localStorage.getItem('colorName'),
-            price: localStorage.getItem('colorPrice')
-        },
-        settings: {
-            lang: currentLang,
-            theme: localStorage.getItem('theme'),
-            version: currentVersion
-        },
-        savedAt: new Date().toISOString()
-    };
-    navigator.clipboard.writeText(JSON.stringify(progress, null, 2))
-        .then(() => showStatus('✅ Kopyalandı!', 'success'))
-        .catch(() => prompt('Kodu kopyala:', JSON.stringify(progress)));
+    const data = JSON.stringify({ menu: currentMenu, categoryImages, productImages });
+    navigator.clipboard.writeText(data);
+    showStatus('Kopyalandı', 'success');
 }
 
 function loadV2Progress() {
@@ -2480,105 +1696,13 @@ function loadV2Progress() {
     if (!code) return;
     try {
         const data = JSON.parse(code);
-        if (data.menu) displayMenu(data.menu);
+        if (data.menu) currentMenu = data.menu;
         if (data.categoryImages) categoryImages = data.categoryImages;
         if (data.productImages) productImages = data.productImages;
-        if (data.colors) {
-            if (data.colors.category) document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
-            if (data.colors.name) document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
-            if (data.colors.price) document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
-        }
-        if (data.settings) {
-            if (data.settings.lang) setLanguage(data.settings.lang);
-            if (data.settings.theme === 'light') document.body.classList.add('light-mode');
-            if (data.settings.version) currentVersion = data.settings.version;
-        }
-        displayMenu(getCurrentMenu());
+        displayMenu();
         updateGallery();
-        showStatus('✅ Yüklendi!', 'success');
-    } catch { showStatus('❌ Hata!', 'error'); }
-}
-
-// ===== Cloud Fonksiyonları =====
-async function saveToCloud() {
-    showStatus('☁️ Kaydediliyor...', 'loading');
-    document.getElementById('cloudSaveBtn').disabled = true;
-    try {
-        const response = await fetch(CLOUD_API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ menu: getCurrentMenu(), version: currentVersion, lastUpdate: new Date().toISOString() })
-        });
-        if (response.ok) {
-            showStatus('✅ Kaydedildi!', 'success');
-            const saveTime = new Date().toLocaleTimeString();
-            localStorage.setItem('lastCloudSave', saveTime);
-            document.getElementById('lastCloudSave').innerText = saveTime;
-            currentVersion = incrementVersion(currentVersion);
-            document.getElementById('cloudVersion').innerText = currentVersion;
-            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
-        } else throw new Error();
-    } catch {
-        showStatus('❌ Kayıt başarısız!', 'error');
-        setTimeout(manualSaveGuide, 2000);
-    }
-    document.getElementById('cloudSaveBtn').disabled = false;
-}
-
-async function loadFromCloud() {
-    showStatus('📥 Yükleniyor...', 'loading');
-    document.getElementById('cloudLoadBtn').disabled = true;
-    try {
-        const response = await fetch(CLOUD_API_URL);
-        const data = await response.json();
-        if (data.menu) {
-            displayMenu(data.menu);
-            showStatus('✅ Yüklendi!', 'success');
-        }
-    } catch { showStatus('❌ Hata!', 'error'); }
-    document.getElementById('cloudLoadBtn').disabled = false;
-}
-
-async function testCloudConnection() {
-    try {
-        await fetch(CLOUD_API_URL);
-        showStatus('✅ Bağlantı başarılı!', 'success');
-    } catch { showStatus('❌ Bağlantı hatası!', 'error'); }
-}
-
-function incrementVersion(version) {
-    const parts = version.split('.');
-    parts[2] = (parseInt(parts[2]) + 1).toString();
-    return parts.join('.');
-}
-
-function updateVersion() {
-    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
-    document.getElementById('cloudVersion').innerText = currentVersion;
-}
-
-function startAutoSync() {
-    if (autoSyncInterval) clearInterval(autoSyncInterval);
-    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
-    autoSyncInterval = setInterval(() => {
-        if (document.getElementById('autoSyncCheckbox')?.checked) {
-            fetch(CLOUD_API_URL)
-                .then(r => r.json())
-                .then(data => {
-                    if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
-                        lastCloudData = data;
-                        if (data.menu) displayMenu(data.menu);
-                    }
-                })
-                .catch(() => {});
-        }
-    }, interval);
-}
-
-function manualSaveGuide() {
-    const jsonData = JSON.stringify({ menu: getCurrentMenu() }, null, 2);
-    alert(`Manuel kayıt için:\n1. ${CLOUD_DOCS_URL} adresine git\n2. Verileri sil ve şunu yapıştır:\n${jsonData}`);
-    navigator.clipboard?.writeText(jsonData);
+        showStatus('Yüklendi', 'success');
+    } catch { showStatus('Hata', 'error'); }
 }
 
 // ===== Developer Girişi =====
@@ -2586,126 +1710,105 @@ function selectDevVersion(version) {
     closeVersionModal();
     isDeveloper = true;
     currentVersion = version;
-    document.getElementById('floatingDevBtn').style.display = 'flex';
+    document.getElementById('devFloat').style.display = 'flex';
+    document.getElementById(`devPanel${version.toUpperCase()}`).classList.add('active');
     document.getElementById(`devPanel${version.toUpperCase()}`).style.display = 'block';
-    displayMenu(getCurrentMenu());
+    displayMenu();
 }
 
 function closeDevV1() {
     document.getElementById('devPanelV1').style.display = 'none';
-    document.getElementById('floatingDevBtn').style.display = 'flex';
+    document.getElementById('devFloat').style.display = 'flex';
 }
 
 function closeDevV2() {
     document.getElementById('devPanelV2').style.display = 'none';
-    document.getElementById('floatingDevBtn').style.display = 'flex';
+    document.getElementById('devFloat').style.display = 'flex';
 }
 
 function toggleDevPanel() {
     const panel = document.getElementById(`devPanel${currentVersion.toUpperCase()}`);
     if (panel.style.display === 'block') {
         panel.style.display = 'none';
-        document.getElementById('floatingDevBtn').style.display = 'flex';
+        document.getElementById('devFloat').style.display = 'flex';
     } else {
         panel.style.display = 'block';
-        document.getElementById('floatingDevBtn').style.display = 'none';
+        document.getElementById('devFloat').style.display = 'none';
     }
 }
 
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', e => {
     if (e.key === 'F5') {
         e.preventDefault();
         const pass = prompt('Şifre:');
-        if (pass === 'momotunc0702') document.getElementById('devVersionModal').style.display = 'flex';
-        else showStatus('❌ Yanlış şifre!', 'error');
+        if (pass === 'momotunc0702') {
+            document.getElementById('devVersionModal').style.display = 'flex';
+            showVersionModal();
+        } else showStatus('Yanlış şifre', 'error');
     }
 });
 
+function showVersionModal() {
+    const modal = document.createElement('div');
+    modal.className = 'dev-panel active';
+    modal.style.position = 'fixed';
+    modal.style.top = '50%';
+    modal.style.left = '50%';
+    modal.style.transform = 'translate(-50%, -50%)';
+    modal.style.maxWidth = '400px';
+    modal.innerHTML = `
+        <h3>🔧 Geliştirici Seçenekleri</h3>
+        <p style="text-align: center; color: #ccc; margin-bottom: 20px;">Hangi sürümü kullanmak istiyorsunuz?</p>
+        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 20px;">
+            <button onclick="selectDevVersion('v1')" style="flex:1; background:#ff8c00;">V1 (Klasik)</button>
+            <button onclick="selectDevVersion('v2')" style="flex:1; background:#6c5ce7;">V2 (Resimli)</button>
+        </div>
+        <button class="close-btn" onclick="this.parentElement.remove()">Kapat</button>
+    `;
+    document.body.appendChild(modal);
+}
+
 let clickCount = 0;
-document.getElementById('secretTrigger').addEventListener('click', function() {
+document.getElementById('mainTitle').onclick = () => {
     clickCount++;
     setTimeout(() => clickCount = 0, 3000);
     if (clickCount === 7) {
         const pass = prompt('Şifre:');
-        if (pass === 'momotunc0702') document.getElementById('devVersionModal').style.display = 'flex';
-        else showStatus('❌ Yanlış şifre!', 'error');
+        if (pass === 'momotunc0702') showVersionModal();
+        else showStatus('Yanlış şifre', 'error');
         clickCount = 0;
     }
-});
-
-function closeVersionModal() { document.getElementById('devVersionModal').style.display = 'none'; }
-
-// ===== Sayfa Yüklendiğinde =====
-document.addEventListener('DOMContentLoaded', function() {
-    // Ana menüyü göster
-    displayMenu(FULL_MENU);
-
-    const langBtn = document.getElementById('langBtn');
-    const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
-    langBtn.textContent = flags[currentLang] || '🇹🇷';
-    langBtn.onclick = toggleLanguageMenu;
-
-    const texts = {
-        tr: { menu: 'Menü', contact: 'İletişim', view_menu: 'Menüyü Gör' },
-        en: { menu: 'Menu', contact: 'Contact', view_menu: 'View Menu' },
-        ru: { menu: 'Меню', contact: 'Контакты', view_menu: 'Посмотреть меню' },
-        ar: { menu: 'القائمة', contact: 'اتصل بنا', view_menu: 'عرض القائمة' }
-    };
-    document.getElementById('menuTitle').innerText = texts[currentLang].menu;
-    document.getElementById('contactTitle').innerText = texts[currentLang].contact;
-    document.getElementById('scrollText').innerText = texts[currentLang].view_menu;
-
-    // Resimleri yükle
-    loadImages();
-    
-    // Cloud bağlantılarını test et
-    testCloudConnection();
-    startAutoSync();
-
-    // Dil menüsünü kapatma
-    document.addEventListener('click', function(e) {
-        if (!langBtn.contains(e.target) && !document.getElementById('languageMenu').contains(e.target)) {
-            document.getElementById('languageMenu').style.display = 'none';
-        }
-    });
-});
+};
 
 // ===== Tema =====
-document.getElementById('modeToggle').addEventListener('click', function() {
+document.getElementById('themeToggle').onclick = function() {
     document.body.classList.toggle('light-mode');
     this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-});
+};
 
-// ===== Sürükle Bırak =====
-let devPanelV1 = document.getElementById('devPanelV1');
-let isDragging = false;
-let offsetX, offsetY;
-const dragHandle = document.getElementById('dragHandle');
+// ===== Sayfa Yüklendiğinde =====
+window.onload = function() {
+    displayMenu();
+    document.getElementById('langBtn').onclick = toggleLanguageMenu;
+    document.getElementById('langMenu').style.display = 'none';
+    
+    document.addEventListener('click', function(e) {
+        const langBtn = document.getElementById('langBtn');
+        const langMenu = document.getElementById('langMenu');
+        if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+            langMenu.style.display = 'none';
+        }
+    });
+};
 
-if (dragHandle) {
-    dragHandle.addEventListener('mousedown', startDrag);
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
-}
-
-function startDrag(e) {
-    isDragging = true;
-    offsetX = e.clientX - devPanelV1.offsetLeft;
-    offsetY = e.clientY - devPanelV1.offsetTop;
-    devPanelV1.style.cursor = 'grabbing';
-}
-
-function drag(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-    devPanelV1.style.left = (e.clientX - offsetX) + 'px';
-    devPanelV1.style.top = (e.clientY - offsetY) + 'px';
-}
-
-function stopDrag() {
-    isDragging = false;
-    devPanelV1.style.cursor = 'move';
+// ===== Jeneratör =====
+for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 10 + 's';
+    particle.style.opacity = Math.random() * 0.5;
+    document.body.appendChild(particle);
 }
 </script>
 
