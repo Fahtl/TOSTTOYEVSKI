@@ -976,6 +976,30 @@
                 right: -30px;
             }
         }
+
+        /* رسالة الحالة */
+        .status-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 25px;
+            border-radius: 50px;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            font-weight: 600;
+            z-index: 3000;
+            animation: slideDown 0.3s ease;
+            border: 2px solid;
+        }
+
+        .status-success { border-color: #28a745; }
+        .status-error { border-color: #dc3545; }
+
+        @keyframes slideDown {
+            from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -1148,11 +1172,11 @@
 </div>
 
 <!-- رسالة الحالة -->
-<div id="statusMessage" style="display: none;"></div>
+<div id="statusMessage" class="status-message" style="display: none;"></div>
 
 <script>
-// ===== TÜM ÜRÜNLER =====
-const FULL_MENU = [
+// ===== TÜM ÜRÜNLER (ORİJİNAL KAYNAK) =====
+const ORIGINAL_MENU = [
     {
         category: "TOST ÇEŞİTLERİ",
         items: [
@@ -1271,10 +1295,10 @@ const FULL_MENU = [
 
 // ===== Çoklu Dil Desteği =====
 const MENU_DATA = {
-    tr: FULL_MENU,
-    en: JSON.parse(JSON.stringify(FULL_MENU)),
-    ru: JSON.parse(JSON.stringify(FULL_MENU)),
-    ar: JSON.parse(JSON.stringify(FULL_MENU))
+    tr: ORIGINAL_MENU,
+    en: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
+    ru: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
+    ar: JSON.parse(JSON.stringify(ORIGINAL_MENU))
 };
 
 // ===== Genel Değişkenler =====
@@ -1284,7 +1308,14 @@ let currentLang = 'tr';
 let categoryImages = {};
 let productImages = {};
 let pendingAction = null;
-let currentMenu = FULL_MENU;
+let currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU)); // Kopya oluştur
+
+// ===== Menüyü Sıfırlama Fonksiyonu =====
+function resetToOriginal() {
+    currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU));
+    displayMenu();
+    showStatus('Menü sıfırlandı', 'success');
+}
 
 // ===== Menü Gösterme =====
 function displayMenu() {
@@ -1652,7 +1683,8 @@ function setLanguage(lang) {
     document.getElementById('contactTitle').innerText = texts[lang].contact;
     document.getElementById('mainTitle').innerText = 'Tosttoo';
     
-    currentMenu = MENU_DATA[lang];
+    // Menüyü değiştir
+    currentMenu = JSON.parse(JSON.stringify(MENU_DATA[lang]));
     displayMenu();
 }
 
@@ -1711,7 +1743,6 @@ function selectDevVersion(version) {
     isDeveloper = true;
     currentVersion = version;
     document.getElementById('devFloat').style.display = 'flex';
-    document.getElementById(`devPanel${version.toUpperCase()}`).classList.add('active');
     document.getElementById(`devPanel${version.toUpperCase()}`).style.display = 'block';
     displayMenu();
 }
@@ -1742,7 +1773,6 @@ document.addEventListener('keydown', e => {
         e.preventDefault();
         const pass = prompt('Şifre:');
         if (pass === 'momotunc0702') {
-            document.getElementById('devVersionModal').style.display = 'flex';
             showVersionModal();
         } else showStatus('Yanlış şifre', 'error');
     }
@@ -1768,6 +1798,11 @@ function showVersionModal() {
     document.body.appendChild(modal);
 }
 
+function closeVersionModal() {
+    const modal = document.querySelector('.dev-panel.active');
+    if (modal) modal.remove();
+}
+
 let clickCount = 0;
 document.getElementById('mainTitle').onclick = () => {
     clickCount++;
@@ -1788,7 +1823,10 @@ document.getElementById('themeToggle').onclick = function() {
 
 // ===== Sayfa Yüklendiğinde =====
 window.onload = function() {
+    // Her zaman orijinal menüyü yükle
+    currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU));
     displayMenu();
+    
     document.getElementById('langBtn').onclick = toggleLanguageMenu;
     document.getElementById('langMenu').style.display = 'none';
     
@@ -1799,17 +1837,17 @@ window.onload = function() {
             langMenu.style.display = 'none';
         }
     });
+    
+    // Jeneratör
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.opacity = Math.random() * 0.5;
+        document.body.appendChild(particle);
+    }
 };
-
-// ===== Jeneratör =====
-for (let i = 0; i < 20; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = Math.random() * 100 + '%';
-    particle.style.animationDelay = Math.random() * 10 + 's';
-    particle.style.opacity = Math.random() * 0.5;
-    document.body.appendChild(particle);
-}
 </script>
 
 </body>
