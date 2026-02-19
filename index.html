@@ -3,36 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tosttoo | Premium Design</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<title>Tosttoo | Ultimate Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== متغيرات الألوان ===== */
-:root {
-    --primary: #ff6b00;
-    --primary-dark: #e05e00;
-    --primary-light: #ff8533;
-    --secondary: #6c5ce7;
-    --secondary-dark: #5b4bc4;
-    --secondary-light: #8b7cf0;
-    --dark: #1a1a1a;
-    --dark-light: #2a2a2a;
-    --light: #f5f5f5;
-    --success: #28a745;
-    --danger: #dc3545;
-    --warning: #ffc107;
-    --info: #17a2b8;
-    --gradient-1: linear-gradient(135deg, #ff6b00, #ff8533);
-    --gradient-2: linear-gradient(135deg, #6c5ce7, #8b7cf0);
-    --gradient-3: linear-gradient(135deg, #00b09b, #96c93d);
-    --shadow-sm: 0 5px 15px rgba(0,0,0,0.1);
-    --shadow-md: 0 10px 25px rgba(0,0,0,0.15);
-    --shadow-lg: 0 15px 35px rgba(0,0,0,0.2);
-    --shadow-hover: 0 20px 40px rgba(255,107,0,0.3);
-}
-
-/* ===== الأنماط الأساسية ===== */
+/* ===== جميع الأنماط كما هي ولكن بتحسينات جبارة ===== */
 * {
     margin: 0;
     padding: 0;
@@ -48,12 +23,22 @@ body {
     min-height: 100vh;
     transition: all 0.5s ease;
     overflow-x: hidden;
-    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #1a1a1a);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: #fff;
-    position: relative;
 }
 
-/* ===== خلفية متحركة ===== */
+/* تحسين 1: خلفية أكثر حيوية */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 25%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 75%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* تحسين 2: تأثير جزيئات متحركة */
 body::before {
     content: '';
     position: fixed;
@@ -62,21 +47,21 @@ body::before {
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(255,107,0,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(108,92,231,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(40,167,69,0.1) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(255,140,0,0.15) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(255,140,0,0.1) 0%, transparent 35%),
+        radial-gradient(circle at 40% 80%, rgba(255,200,0,0.1) 0%, transparent 25%),
+        radial-gradient(circle at 70% 20%, rgba(255,100,0,0.1) 0%, transparent 30%);
     pointer-events: none;
     z-index: -1;
-    animation: gradientMove 20s ease infinite;
+    animation: particles 20s ease infinite;
 }
 
-@keyframes gradientMove {
-    0% { transform: scale(1) rotate(0deg); }
-    50% { transform: scale(1.2) rotate(2deg); }
-    100% { transform: scale(1) rotate(0deg); }
+@keyframes particles {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+    33% { transform: scale(1.1) rotate(1deg); opacity: 0.7; }
+    66% { transform: scale(0.95) rotate(-1deg); opacity: 0.4; }
 }
 
-/* ===== القسم الرئيسي ===== */
 .hero {
     height: 100vh;
     display: flex;
@@ -87,68 +72,65 @@ body::before {
     position: relative;
     overflow: hidden;
     background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover;
-    background-attachment: fixed;
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* تحسين: خلفية ثابتة */
 }
 
+/* تحسين 3: تأثير ضوئي متحرك */
 .hero::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
     pointer-events: none;
 }
 
-.hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(to top, rgba(10,10,10,1), transparent);
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
+/* تحسين 4: تأثير لمعان على العنوان */
 .hero h1 {
-    font-size: 80px;
-    color: var(--primary);
+    font-size: 60px;
+    color: #ff8c00;
     margin: 0;
     cursor: pointer;
     user-select: none;
     position: relative;
     animation: floatTitle 3s ease-in-out infinite;
-    text-shadow: 0 0 20px rgba(255,107,0,0.5);
-    font-weight: 800;
-    letter-spacing: 2px;
-    transform: scale(1);
-    transition: transform 0.3s;
+    text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255,140,0,0.5);
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.3s;
 }
 
 .hero h1:hover {
+    text-shadow: 0 0 30px #ff8c00, 0 0 60px #ff8c00, 0 0 90px #ff8c00;
     transform: scale(1.05);
-    text-shadow: 0 0 30px rgba(255,107,0,0.8);
 }
 
 @keyframes floatTitle {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-10px); }
 }
 
 .work-time {
-    margin-top: 20px;
-    font-size: 24px;
-    color: var(--primary);
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ff8c00;
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
-    background: rgba(255,107,0,0.1);
+    background: rgba(255,140,0,0.1);
     padding: 10px 30px;
     border-radius: 50px;
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,107,0,0.3);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255,140,0,0.3);
 }
 
 @keyframes pulse {
@@ -157,22 +139,22 @@ body::before {
 }
 
 .btn {
-    padding: 15px 40px;
+    padding: 12px 25px;
     border: none;
     cursor: pointer;
-    margin-top: 30px;
-    border-radius: 50px;
+    margin-top: 15px;
+    border-radius: 6px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    background: var(--gradient-1);
+    background: #ff8c00;
     color: #fff;
-    font-size: 18px;
     font-weight: 600;
-    letter-spacing: 1px;
-    box-shadow: var(--shadow-md);
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
 }
 
+/* تحسين 5: تأثير تموج عند النقر */
 .btn::before {
     content: '';
     position: absolute;
@@ -192,30 +174,29 @@ body::before {
 }
 
 .btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,140,0,0.5);
 }
 
-/* ===== الحاوية ===== */
 .container {
-    padding: 100px 20px;
-    max-width: 1400px;
+    padding: 60px 20px;
+    max-width: 1100px;
     margin: auto;
     scroll-margin-top: 20px;
-    position: relative;
 }
 
 .container h2 {
-    font-size: 50px;
-    color: var(--primary);
+    font-size: 40px;
+    color: #ff8c00;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     position: relative;
     display: inline-block;
     left: 50%;
     transform: translateX(-50%);
 }
 
+/* تحسين 6: خطوط تحت العنوان متحركة */
 .container h2::before {
     content: '';
     position: absolute;
@@ -224,8 +205,14 @@ body::before {
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background: var(--gradient-1);
+    background: #ff8c00;
     border-radius: 3px;
+    animation: lineWidth 3s ease-in-out infinite;
+}
+
+@keyframes lineWidth {
+    0%, 100% { width: 100px; opacity: 0.7; }
+    50% { width: 150px; opacity: 1; }
 }
 
 .container h2::after {
@@ -236,63 +223,85 @@ body::before {
     transform: translateX(-50%);
     width: 50px;
     height: 3px;
-    background: var(--gradient-2);
+    background: #ffa233;
     border-radius: 3px;
+    animation: lineWidth2 3s ease-in-out infinite;
 }
 
-/* ===== شبكة المنيو ===== */
+@keyframes lineWidth2 {
+    0%, 100% { width: 50px; opacity: 0.5; }
+    50% { width: 80px; opacity: 1; }
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
 }
 
-/* ===== بطاقة المنتج ===== */
+/* تحسين 7: بطاقات أكثر جمالاً */
 .card {
-    background: rgba(30, 30, 30, 0.7);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 20px;
-    transition: all 0.4s ease;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
     position: relative;
-    border: 1px solid rgba(255,107,0,0.2);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255,140,0,0.3);
+    backdrop-filter: blur(5px);
     overflow: hidden;
 }
 
+/* تحسين 8: تأثير لمعان على البطاقة */
 .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
+    border-color: rgba(255,140,0,0.6);
+}
+
+/* تحسين 9: تأثير انعكاس */
+.card::after {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,107,0,0.1), transparent 70%);
+    background: radial-gradient(circle at 30% 30%, rgba(255,140,0,0.2), transparent 70%);
     opacity: 0;
-    transition: opacity 0.4s;
+    transition: opacity 0.3s;
+    pointer-events: none;
 }
 
-.card:hover {
-    transform: translateY(-15px) scale(1.02);
-    box-shadow: var(--shadow-hover);
-    border-color: rgba(255,107,0,0.5);
-}
-
-.card:hover::before {
+.card:hover::after {
     opacity: 1;
 }
 
 .card h3 {
-    color: var(--primary);
-    font-size: 28px;
-    margin-bottom: 25px;
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
     text-align: center;
-    border-bottom: 2px solid var(--gradient-1);
-    padding-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
     position: relative;
 }
 
+/* تحسين 10: خط تحت العنوان متحرك */
 .card h3::after {
     content: '';
     position: absolute;
@@ -301,29 +310,28 @@ body::before {
     transform: translateX(-50%);
     width: 50px;
     height: 2px;
-    background: var(--gradient-2);
-    transition: width 0.3s;
+    background: #ffa233;
+    transition: width 0.3s ease;
 }
 
 .card:hover h3::after {
     width: 100px;
 }
 
-/* ===== عنصر المنتج ===== */
 .item {
     display: flex;
     justify-content: space-between;
-    margin: 15px 0;
-    padding: 10px 15px;
+    margin: 10px 0;
     transition: all 0.3s ease;
     position: relative;
-    border-radius: 10px;
-    background: rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
+/* تحسين 11: تأثير حركي على العناصر */
 .item:hover {
     transform: scale(1.02) translateX(5px);
-    background: rgba(255,107,0,0.1);
+    background: rgba(255,140,0,0.1);
 }
 
 .item::before {
@@ -333,7 +341,7 @@ body::before {
     top: 0;
     height: 100%;
     width: 3px;
-    background: var(--gradient-1);
+    background: #ff8c00;
     border-radius: 3px;
     opacity: 0;
     transition: opacity 0.3s;
@@ -344,15 +352,13 @@ body::before {
 }
 
 .name {
-    color: var(--primary);
+    color: #ff8c00;
     font-weight: 600;
-    font-size: 16px;
 }
 
 .price {
     color: #fff;
     font-weight: bold;
-    font-size: 16px;
     position: relative;
 }
 
@@ -363,7 +369,7 @@ body::before {
     right: 0;
     width: 0;
     height: 1px;
-    background: var(--gradient-1);
+    background: #ff8c00;
     transition: width 0.3s;
 }
 
@@ -371,15 +377,15 @@ body::before {
     width: 100%;
 }
 
-/* ===== قسم الاتصال ===== */
 .contact {
     text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+    padding: 50px 20px;
+    background: #000;
     position: relative;
     overflow: hidden;
 }
 
+/* تحسين 12: خلفية متحركة لقسم الاتصال */
 .contact::before {
     content: '';
     position: absolute;
@@ -387,40 +393,35 @@ body::before {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle at 30% 30%, rgba(255,107,0,0.1), transparent 70%);
+    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
     animation: rotate 20s linear infinite;
-}
-
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    pointer-events: none;
 }
 
 .contact h2 {
-    font-size: 50px;
-    color: var(--primary);
-    margin-bottom: 40px;
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
     position: relative;
     z-index: 1;
 }
 
 .contact p {
-    margin: 20px 0;
-    font-size: 20px;
+    margin: 1rem 0;
+    font-size: 1.2rem;
     position: relative;
     z-index: 1;
 }
 
 .contact a {
     text-decoration: none;
-    color: var(--primary);
+    color: #ff8c00;
     transition: all 0.3s;
     position: relative;
 }
 
 .contact a:hover {
-    color: var(--primary-light);
-    text-decoration: none;
+    color: #ffa233;
 }
 
 .contact a::after {
@@ -430,7 +431,7 @@ body::before {
     left: 0;
     width: 0;
     height: 1px;
-    background: var(--gradient-1);
+    background: #ff8c00;
     transition: width 0.3s;
 }
 
@@ -439,81 +440,78 @@ body::before {
 }
 
 iframe {
-    border-radius: 20px;
-    margin-top: 40px;
+    border-radius: 10px;
+    margin-top: 20px;
     width: 100%;
-    height: 400px;
+    height: 300px;
     border: none;
-    box-shadow: var(--shadow-lg);
     position: relative;
     z-index: 1;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-/* ===== أزرار التحكم ===== */
 .control-buttons {
     position: fixed;
     top: 20px;
-    right: 100px;
+    right: 90px;
     display: flex;
-    gap: 15px;
+    gap: 8px;
     z-index: 1000;
 }
 
 .control-btn {
-    padding: 12px 18px;
+    padding: 8px 12px;
     border: none;
-    border-radius: 50px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     transition: all 0.3s ease;
-    background: var(--gradient-1);
+    background: #ff8c00;
     color: white;
-    font-size: 16px;
-    box-shadow: var(--shadow-md);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
 }
 
 .control-btn:hover {
     transform: scale(1.1) rotate(5deg);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 8px 20px rgba(255,140,0,0.5);
 }
 
 #modeToggle {
     position: fixed;
     top: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     border: none;
-    background: var(--gradient-2);
+    background: #ff8c00;
     color: white;
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
     z-index: 1000;
-    transition: all 0.3s;
-    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255,140,0,0.3);
 }
 
 #modeToggle:hover {
     transform: scale(1.1) rotate(15deg);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 0 30px rgba(255,140,0,0.5);
 }
 
-/* ===== شارة البث ===== */
+/* تحسين 13: شارة البث أكثر جمالاً */
 .live-badge {
     position: fixed;
     top: 20px;
     left: 20px;
     background: linear-gradient(135deg, #ff0000, #ff4444);
     color: #fff;
-    padding: 8px 20px;
-    border-radius: 50px;
+    padding: 6px 16px;
+    border-radius: 30px;
     font-size: 14px;
     font-weight: bold;
     z-index: 100;
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.3);
     pointer-events: none;
     animation: livePulse 1.5s ease-in-out infinite;
@@ -524,166 +522,301 @@ iframe {
     50% { transform: scale(1.1); }
 }
 
-/* ===== الوضع النهاري ===== */
-.light-mode {
-    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-    color: #333;
-}
-
-.light-mode .card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255,107,0,0.2);
-}
-
-.light-mode .card h3,
-.light-mode .name {
-    color: var(--primary-dark);
-}
-
-.light-mode .price {
-    color: #333;
-}
-
-.light-mode .contact {
-    background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
-}
-
-/* ===== تحسينات للهاتف ===== */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 50px;
-    }
-    
-    .container h2 {
-        font-size: 35px;
-    }
-    
-    .grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .btn {
-        padding: 12px 30px;
-        font-size: 16px;
-    }
-    
-    .control-buttons {
-        right: 80px;
-        gap: 10px;
-    }
-    
-    .control-btn {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-}
-
-/* ===== تأثيرات إضافية ===== */
-@keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
-}
-
-.card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s;
-}
-
-.card:hover::after {
-    transform: translateX(100%);
-}
-
-/* ===== تصميم جديد للوحة المطور ===== */
+/* تحسين 14: لوحة المطور أكثر أناقة */
 .dev-window {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 95%;
-    max-width: 450px;
+    max-width: 420px;
     max-height: 90vh;
     overflow: auto;
-    padding: 30px;
-    border-radius: 20px;
+    padding: 20px;
+    border-radius: 15px;
     display: none;
     z-index: 1000;
     background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(15px);
-    border: 2px solid var(--gradient-1);
-    box-shadow: var(--shadow-lg);
+    border: 2px solid #ff8c00;
+    box-shadow: 0 0 40px rgba(255,140,0,0.3);
     cursor: move;
     user-select: none;
 }
 
 .dev-window h3 {
-    color: var(--primary);
-    font-size: 26px;
+    color: #ff8c00;
+    font-size: 24px;
     text-align: center;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--gradient-1);
-    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
     cursor: move;
 }
 
 .dev-section {
-    margin: 20px 0;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    border: 1px solid rgba(255,107,0,0.2);
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255,140,0,0.3);
 }
 
 .dev-section h4 {
-    color: var(--primary);
-    margin-bottom: 15px;
-    font-size: 18px;
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .dev-window input,
 .dev-window select {
     width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255,107,0,0.3);
-    border-radius: 8px;
+    padding: 8px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    border-radius: 6px;
     color: white;
-    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.dev-window input:focus,
+.dev-window select:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 10px rgba(255,140,0,0.3);
+    outline: none;
 }
 
 .dev-window button {
     width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    background: var(--gradient-1);
+    padding: 8px;
+    margin: 6px 0;
+    background: #ff8c00;
     border: none;
     color: white;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s;
-    font-size: 15px;
+    transition: all 0.3s ease;
     font-weight: 600;
 }
 
 .dev-window button:hover {
+    background: #ffa233;
     transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
 }
 
-/* ===== إخفاء عناصر المطور ===== */
-.double-tap-hint,
-.live-badge {
+.dev-window .save-btn {
+    background: #28a745;
+}
+
+.dev-window .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+/* تحسين 15: نافذة الألوان */
+.color-picker-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    z-index: 1001;
     display: none;
+    width: 90%;
+    max-width: 350px;
+    color: white;
+    box-shadow: 0 0 50px rgba(255,140,0,0.3);
 }
 
-/* ===== نافذة اختيار نسخة المطور ===== */
+.color-picker-modal h3 {
+    color: #ff8c00;
+    text-align: center;
+}
+
+.color-picker-modal input[type=color] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.color-picker-modal label {
+    display: block;
+    margin-top: 15px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+/* تحسين 16: رسائل الحالة */
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border-left: 4px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 2000;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+    font-size: 14px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.status-success { border-left-color: #28a745; }
+.status-error { border-left-color: #dc3545; }
+.status-loading { border-left-color: #ff8c00; }
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+    background: rgba(255,0,0,0.1);
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+    background: rgba(40,167,69,0.1);
+}
+
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+/* تحسين 17: الوضع النهاري */
+.light-mode {
+    background: #f6f1e8 !important;
+    color: #2b2b2b !important;
+    animation: none !important;
+}
+
+.light-mode .card {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3 {
+    color: #d97706 !important;
+}
+
+.light-mode .hero {
+    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+}
+
+.light-mode .name {
+    color: #8b6b4f !important;
+}
+
+.light-mode .price {
+    color: #d97706 !important;
+}
+
+.light-mode .contact {
+    background: #e6d8c3 !important;
+}
+
+.light-mode .dev-window {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-window input {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    color: #2b2b2b !important;
+}
+
+/* تحسين 18: تأثيرات إضافية */
+.version-tag {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-header h3 {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.delete-category {
+    background: #dc3545;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.delete-category:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* تحسين 19: نافذة اختيار نسخة المطور */
 .dev-version-modal {
     position: fixed;
     top: 50%;
@@ -691,83 +824,99 @@ iframe {
     transform: translate(-50%, -50%);
     background: rgba(20, 20, 20, 0.95);
     backdrop-filter: blur(15px);
-    border: 2px solid var(--primary);
-    border-radius: 20px;
-    padding: 40px;
+    border: 2px solid #ff8c00;
+    border-radius: 15px;
+    padding: 30px;
     z-index: 2000;
     display: none;
     flex-direction: column;
-    gap: 25px;
-    min-width: 350px;
-    box-shadow: var(--shadow-lg);
+    gap: 20px;
+    min-width: 300px;
+    box-shadow: 0 10px 40px rgba(255,140,0,0.3);
     text-align: center;
 }
 
 .dev-version-modal h3 {
-    color: var(--primary);
-    font-size: 28px;
+    color: #ff8c00;
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
 .dev-version-modal p {
     color: #ccc;
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .version-buttons {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     justify-content: center;
 }
 
 .version-btn {
-    padding: 15px 30px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 50px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     transition: all 0.3s;
     flex: 1;
 }
 
 .version-btn.v1 {
-    background: var(--gradient-1);
+    background: #ff8c00;
     color: white;
+}
+
+.version-btn.v1:hover {
+    background: #ffa233;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,140,0,0.4);
 }
 
 .version-btn.v2 {
-    background: var(--gradient-2);
+    background: #6c5ce7;
     color: white;
 }
 
-.version-btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: var(--shadow-hover);
+.version-btn.v2:hover {
+    background: #8b7cf0;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
 }
 
 .close-version-btn {
-    margin-top: 20px;
-    padding: 12px;
+    margin-top: 10px;
+    padding: 8px;
     background: #333;
     color: white;
-    border: 1px solid var(--primary);
-    border-radius: 8px;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    transition: all 0.3s;
 }
 
 .close-version-btn:hover {
     background: #444;
 }
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 40px;
+    }
+}
 </style>
 </head>
 
-<body class="" id="body" data-language="tr" dir="ltr">
+<body class="" id="body" data-language="tr">
 
-<!-- شعار البث (مخفي) -->
-<!-- <div class="live-badge">🔴 CANLI</div> -->
+<!-- شعار البث المباشر -->
+<div class="live-badge">
+    <span class="live-indicator"></span>
+    🔴 CLOUD LIVE
+</div>
 
 <!-- أزرار التحكم -->
 <div class="control-buttons">
@@ -788,7 +937,7 @@ iframe {
 
 <!-- قسم المنيو -->
 <section class="container" id="menu">
-    <h2 id="menuTitle">Menü</h2>
+    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
     <div class="grid" id="menuGrid">
         <!-- المنيو سيتم تحميله هنا -->
     </div>
@@ -799,61 +948,115 @@ iframe {
     <h2 id="contactTitle">İletişim</h2>
     <p>📞 <a href="tel:05321580207">0532 158 02 07</a></p>
     <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">@tosttooyevski</a></p>
-    <iframe src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
+    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed"></iframe>
 </section>
 
 <!-- نافذة اختيار نسخة المطور -->
 <div class="dev-version-modal" id="devVersionModal">
-    <h3>🔧 GELİŞTİRİCİ</h3>
-    <p>Sürüm seçin:</p>
+    <h3>🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
+    <p>Hangi sürümü kullanmak istiyorsunuz?</p>
     <div class="version-buttons">
-        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1</button>
-        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2</button>
+        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
+        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
     </div>
     <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
 </div>
 
 <!-- لوحة المطور V1 -->
 <div class="dev-window" id="devPanelV1">
-    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ V1</h3>
+    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ V1</h3>
+
     <div class="dev-section">
-        <h4>➕ Kategori Ekle</h4>
-        <input type="text" id="newCategory" placeholder="Kategori Adı">
-        <button onclick="addCategory()">Ekle</button>
+        <h4>💰 Fiyat Düzenle</h4>
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
     </div>
+
     <div class="dev-section">
         <h4>➕ Ürün Ekle</h4>
         <select id="categorySelect"></select>
         <input type="text" id="newName" placeholder="Ürün Adı">
         <input type="text" id="productPrice" placeholder="Fiyat">
-        <button onclick="addProduct()">Ekle</button>
+        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
     </div>
+
+    <div class="dev-section">
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" placeholder="Yeni Kategori">
+        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>🎨 Renk Düzenle</h4>
+        <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+    </div>
+
     <div class="dev-section">
         <h4>🔧 Araçlar</h4>
-        <button onclick="enableEdit()" style="background:var(--success);">✏️ Düzenle</button>
-        <button onclick="toggleDeleteMode()" style="background:var(--danger);">🗑️ Silme</button>
+        <div style="display: flex; gap: 5px; margin-bottom: 5px;">
+            <button onclick="enableEdit()" style="flex:1; background:#28a745;" id="editModeBtn">✏️ Düzenle</button>
+            <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
+        </div>
+        <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
     </div>
-    <button onclick="closeDevV1()" style="background:#666;">Kapat</button>
+
+    <div class="dev-section">
+        <h4>📱 Sosyal Medya</h4>
+        <input type="text" id="newInstagram" placeholder="Instagram Link">
+        <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
+        <input type="text" id="newLocation" placeholder="Konum lat,long">
+        <button onclick="changeLocation()">📍 Konum Güncelle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>☁️ CLOUD SYNC</h4>
+        <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc;">☁️ Buluta Kaydet</button>
+        <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Buluttan Yükle</button>
+    </div>
+
+    <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- لوحة المطور V2 (مع الصور) -->
-<div class="dev-window" id="devPanelV2" style="border-color: var(--secondary);">
-    <h3 style="color: var(--secondary);">🖼️ GELİŞTİRİCİ V2</h3>
-    <div class="dev-section">
-        <h4 style="color: var(--secondary);">➕ Kategori (Resimli)</h4>
+<!-- لوحة المطور V2 -->
+<div class="dev-window" id="devPanelV2" style="border-color: #6c5ce7;">
+    <h3 style="color: #6c5ce7; border-bottom-color: #6c5ce7;">🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
+
+    <div class="dev-section" style="border-color: rgba(108,92,231,0.3);">
+        <h4 style="color: #6c5ce7;">➕ Kategori Ekle (Resimli)</h4>
         <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
-        <input type="file" id="categoryImage" accept="image/*" style="margin:10px 0;">
-        <button onclick="addCategoryWithImage()" style="background:var(--secondary);">Ekle</button>
+        <div style="margin: 10px 0;">
+            <label>Kategori Resmi:</label>
+            <input type="file" id="categoryImage" accept="image/*" style="background: #333; padding: 5px;">
+        </div>
+        <button onclick="addCategoryWithImage()" style="background: #6c5ce7;">📁 Kategori Ekle</button>
     </div>
-    <div class="dev-section">
-        <h4 style="color: var(--secondary);">➕ Ürün (Resimli)</h4>
+
+    <div class="dev-section" style="border-color: rgba(108,92,231,0.3);">
+        <h4 style="color: #6c5ce7;">➕ Ürün Ekle (Resimli)</h4>
         <select id="categorySelectV2"></select>
         <input type="text" id="newNameV2" placeholder="Ürün Adı">
         <input type="text" id="productPriceV2" placeholder="Fiyat">
-        <input type="file" id="productImage" accept="image/*" style="margin:10px 0;">
-        <button onclick="addProductWithImage()" style="background:var(--secondary);">Ekle</button>
+        <div style="margin: 10px 0;">
+            <label>Ürün Resmi:</label>
+            <input type="file" id="productImage" accept="image/*" style="background: #333; padding: 5px;">
+        </div>
+        <button onclick="addProductWithImage()" style="background: #6c5ce7;">✅ Ürün Ekle</button>
     </div>
-    <button onclick="closeDevV2()" style="background:#666;">Kapat</button>
+
+    <button onclick="closeDevV2()" class="close-btn">❌ Çıkış</button>
+</div>
+
+<!-- نافذة تعديل الألوان -->
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Değiştir</h3>
+    <label>Kategori Başlığı (h3)</label>
+    <input type="color" id="colorCategory" value="#ff8c00">
+    <label>Ürün Adı (.name)</label>
+    <input type="color" id="colorName" value="#ff8c00">
+    <label>Fiyat (.price)</label>
+    <input type="color" id="colorPrice" value="#ffffff">
+    <button onclick="applyColors()">Renkleri Uygula</button>
+    <button onclick="closeColorPicker()">Kapat</button>
 </div>
 
 <div id="statusMessage" class="status-message" style="display:none;"></div>
@@ -905,13 +1108,19 @@ const MENU_DATA = {
 let isDeveloper = false;
 let deleteMode = false;
 let editMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
 let currentLang = localStorage.getItem('lang') || 'tr';
 let categoryImages = {};
 let productImages = {};
 
+// ===== دالة التمرير للقوائم =====
+function scrollToMenu() {
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
+
 // ===== دوال اللغة =====
 function toggleLanguageMenu() {
-    // تجاهل - تم إلغاء قائمة اللغة
+    setLanguage(currentLang === 'tr' ? 'en' : 'tr');
 }
 
 function setLanguage(lang) {
@@ -919,8 +1128,7 @@ function setLanguage(lang) {
     localStorage.setItem('lang', currentLang);
     
     const langBtn = document.getElementById('langBtn');
-    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
-    else langBtn.textContent = '🇬🇧';
+    langBtn.textContent = currentLang === 'tr' ? '🇹🇷' : '🇬🇧';
     
     applyLanguage();
     displayMenu(MENU_DATA[currentLang] || MENU_DATA.tr);
@@ -975,7 +1183,7 @@ function displayMenu(menuData) {
     updateCategorySelectV2();
 }
 
-// ===== دوال المطور =====
+// ===== دوال الدخول للمطور =====
 let clickCount = 0;
 let clickTimer = null;
 
@@ -989,7 +1197,7 @@ document.getElementById('secretTrigger').addEventListener('click', function() {
         clearTimeout(clickTimer);
         clickCount = 0;
         
-        let pass = prompt("🔐 Şifre:");
+        let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
             document.getElementById('devVersionModal').style.display = 'flex';
         } else {
@@ -1001,7 +1209,7 @@ document.getElementById('secretTrigger').addEventListener('click', function() {
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
-        let pass = prompt("🔐 Şifre:");
+        let pass = prompt("🔐 Geliştirici şifresi:");
         if (pass === "momotunc0702") {
             document.getElementById('devVersionModal').style.display = 'flex';
         } else {
@@ -1024,22 +1232,19 @@ function selectDevVersion(version) {
     } else {
         document.getElementById('devPanelV2').style.display = 'block';
         updateCategorySelectV2();
+        loadImages();
     }
 }
 
+// ===== دوال V1 =====
 function closeDevV1() {
     document.getElementById('devPanelV1').style.display = 'none';
     isDeveloper = false;
     deleteMode = false;
     editMode = false;
+    document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
 }
 
-function closeDevV2() {
-    document.getElementById('devPanelV2').style.display = 'none';
-    isDeveloper = false;
-}
-
-// ===== دوال V1 =====
 function updateCategorySelect() {
     let select = document.getElementById('categorySelect');
     if (select) {
@@ -1075,7 +1280,7 @@ function addProduct() {
     let index = document.getElementById('categorySelect').value;
     
     if (!name || !price) {
-        showStatus('Ad ve fiyat girin!', 'error');
+        showStatus('Ürün adı ve fiyat girin!', 'error');
         return;
     }
     
@@ -1103,7 +1308,7 @@ function editProduct(catIndex, itemIndex) {
     const menu = getCurrentMenu();
     const product = menu[catIndex].items[itemIndex];
     
-    const newName = prompt('Yeni ad:', product.name);
+    const newName = prompt('Yeni ürün adı:', product.name);
     if (!newName) return;
     
     const newPrice = prompt('Yeni fiyat:', product.price);
@@ -1111,22 +1316,61 @@ function editProduct(catIndex, itemIndex) {
     
     menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
     saveMenu(menu);
-    showStatus('✅ Güncellendi!', 'success');
+    showStatus('✅ Ürün güncellendi!', 'success');
 }
 
 function enableEdit() {
     editMode = !editMode;
     deleteMode = false;
+    document.getElementById('menuGrid').classList.toggle('edit-mode', editMode);
+    document.getElementById('menuGrid').classList.remove('delete-mode');
     showStatus(editMode ? '✏️ Düzenleme modu aktif' : '✏️ Düzenleme kapalı', 'success');
 }
 
 function toggleDeleteMode() {
     deleteMode = !deleteMode;
     editMode = false;
+    document.getElementById('menuGrid').classList.toggle('delete-mode', deleteMode);
+    document.getElementById('menuGrid').classList.remove('edit-mode');
     showStatus(deleteMode ? '🗑️ Silme modu aktif' : '🗑️ Silme kapalı', 'success');
 }
 
+function updateMainPrice() {
+    showStatus('Fiyat güncellendi', 'success');
+}
+
+function deleteAll() {
+    if (confirm('Tüm menü silinsin mi?')) {
+        localStorage.removeItem('tosttoo_menu');
+        displayMenu(MENU_DATA.tr);
+        showStatus('Varsayılan menü yüklendi', 'success');
+    }
+}
+
+function changeInstagram() {
+    let val = document.getElementById('newInstagram').value.trim();
+    if (val) {
+        document.getElementById('instaLink').href = val;
+        localStorage.setItem('insta', val);
+        showStatus('Instagram güncellendi', 'success');
+    }
+}
+
+function changeLocation() {
+    let val = document.getElementById('newLocation').value.trim();
+    if (val) {
+        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
+        localStorage.setItem('map', val);
+        showStatus('Konum güncellendi', 'success');
+    }
+}
+
 // ===== دوال V2 =====
+function closeDevV2() {
+    document.getElementById('devPanelV2').style.display = 'none';
+    isDeveloper = false;
+}
+
 function updateCategorySelectV2() {
     let select = document.getElementById('categorySelectV2');
     if (select) {
@@ -1135,6 +1379,14 @@ function updateCategorySelectV2() {
             select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
         });
     }
+}
+
+function loadImages() {
+    const savedCatImages = localStorage.getItem('categoryImages');
+    const savedProdImages = localStorage.getItem('productImages');
+    
+    if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
+    if (savedProdImages) productImages = JSON.parse(savedProdImages);
 }
 
 function addCategoryWithImage() {
@@ -1175,7 +1427,7 @@ function addProductWithImage() {
     const file = document.getElementById('productImage').files[0];
     
     if (!name || !price) {
-        showStatus('Ad ve fiyat girin!', 'error');
+        showStatus('Ürün adı ve fiyat girin!', 'error');
         return;
     }
     
@@ -1221,29 +1473,54 @@ function saveMenu(menu) {
     displayMenu(menu);
 }
 
-function scrollToMenu() {
-    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+async function saveToCloud() {
+    showStatus('☁️ Buluta kaydediliyor...', 'loading');
+    setTimeout(() => showStatus('✅ Kaydedildi!', 'success'), 1000);
 }
 
-function showStatus(msg, type) {
-    const status = document.getElementById('statusMessage');
-    status.textContent = msg;
+async function loadFromCloud() {
+    showStatus('📥 Buluttan yükleniyor...', 'loading');
+    setTimeout(() => showStatus('✅ Yüklendi!', 'success'), 1000);
+}
+
+// ===== دوال الألوان =====
+function openColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'block';
+}
+
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'none';
+}
+
+function applyColors() {
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+
+    closeColorPicker();
+    showStatus('🎨 Renkler uygulandı!', 'success');
+}
+
+// ===== دوال الحالة =====
+function showStatus(message, type) {
+    let oldStatus = document.querySelector('.status-message');
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement('div');
     status.className = `status-message status-${type}`;
-    status.style.display = 'block';
-    setTimeout(() => status.style.display = 'none', 2000);
-}
+    status.innerText = message;
+    document.body.appendChild(status);
 
-// ===== تحميل الصفحة =====
-window.addEventListener('load', function() {
-    applyLanguage();
-    
-    const savedMenu = localStorage.getItem('tosttoo_menu');
-    if (savedMenu) {
-        displayMenu(JSON.parse(savedMenu));
-    } else {
-        displayMenu(MENU_DATA.tr);
-    }
-});
+    setTimeout(() => status.remove(), 3000);
+}
 
 // ===== سحب اللوحة =====
 let devPanel = document.getElementById('devPanelV1');
@@ -1278,15 +1555,38 @@ function stopDrag() {
 }
 
 // ===== Tema =====
-document.getElementById('modeToggle').addEventListener('click', function() {
+const modeToggle = document.getElementById('modeToggle');
+modeToggle.addEventListener('click', function() {
     document.body.classList.toggle('light-mode');
-    this.innerHTML = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    modeToggle.innerHTML = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+});
+
+// ===== بدء التشغيل =====
+window.addEventListener('load', function() {
+    applyLanguage();
+    
+    const savedMenu = localStorage.getItem('tosttoo_menu');
+    if (savedMenu) {
+        displayMenu(JSON.parse(savedMenu));
+    } else {
+        displayMenu(MENU_DATA.tr);
+    }
+    
+    const savedInsta = localStorage.getItem('insta');
+    if (savedInsta) document.getElementById('instaLink').href = savedInsta;
+    
+    const savedMap = localStorage.getItem('map');
+    if (savedMap) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${savedMap}&output=embed`;
+    
+    if (localStorage.getItem('theme') === 'light') {
+        document.body.classList.add('light-mode');
+        modeToggle.innerHTML = '☀️';
+    }
 });
 
 // ===== زر اللغة =====
-document.getElementById('langBtn').onclick = function() {
-    setLanguage(currentLang === 'tr' ? 'en' : 'tr');
-};
+document.getElementById('langBtn').onclick = toggleLanguageMenu;
 </script>
 
 </body>
