@@ -49,6 +49,24 @@ body {
                 url('https://i.postimg.cc/k5TwQCVb/hero.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .hero h1 {
@@ -59,8 +77,13 @@ body {
     user-select: none;
     position: relative;
     animation: floatTitle 3s ease-in-out infinite;
-    text-shadow: 0 0 20px currentColor;
+    text-shadow: 0 0 20px #ff8c00, 0 0 40px rgba(255,140,0,0.5);
     -webkit-tap-highlight-color: transparent;
+}
+
+.hero h1:hover {
+    text-shadow: 0 0 30px #ff8c00, 0 0 60px #ff8c00, 0 0 90px #ff8c00;
+    transform: scale(1.05);
 }
 
 @keyframes floatTitle {
@@ -74,6 +97,11 @@ body {
     color: #ff8c00;
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
+    background: rgba(255,140,0,0.1);
+    padding: 10px 30px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,140,0,0.3);
 }
 
 @keyframes pulse {
@@ -92,10 +120,32 @@ body {
     overflow: hidden;
     background: #ff8c00;
     color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn:hover {
     transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,140,0,0.5);
 }
 
 .container {
@@ -110,6 +160,46 @@ body {
     color: #ff8c00;
     text-align: center;
     margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.container h2::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: #ff8c00;
+    border-radius: 3px;
+    animation: lineWidth 3s ease-in-out infinite;
+}
+
+@keyframes lineWidth {
+    0%, 100% { width: 100px; opacity: 0.7; }
+    50% { width: 150px; opacity: 1; }
+}
+
+.container h2::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #ffa233;
+    border-radius: 3px;
+    animation: lineWidth2 3s ease-in-out infinite;
+}
+
+@keyframes lineWidth2 {
+    0%, 100% { width: 50px; opacity: 0.5; }
+    50% { width: 80px; opacity: 1; }
 }
 
 .grid {
@@ -127,6 +217,71 @@ body {
     position: relative;
     border: 1px solid rgba(255,140,0,0.3);
     overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
+    border-color: rgba(255,140,0,0.6);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,140,0,0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #ffa233;
+    transition: width 0.3s ease;
+}
+
+.card:hover h3::after {
+    width: 100px;
 }
 
 .card.has-image {
@@ -146,22 +301,6 @@ body {
     transform: scale(1.05);
 }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
-    border-color: rgba(255,140,0,0.6);
-}
-
-.card h3 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 15px;
-    text-align: center;
-    border-bottom: 2px solid #ff8c00;
-    padding-bottom: 10px;
-    position: relative;
-}
-
 /* ===== عنصر المنتج مع صورة ===== */
 .item {
     display: flex;
@@ -174,6 +313,29 @@ body {
     border-bottom: 1px dashed rgba(255,140,0,0.2);
     border-radius: 5px;
     background: rgba(0,0,0,0.2);
+}
+
+.item:hover {
+    transform: scale(1.02) translateX(5px);
+    border-bottom: 1px dashed rgba(255,140,0,0.8);
+    background: rgba(255,140,0,0.1);
+}
+
+.item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: #ff8c00;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.item:hover::before {
+    opacity: 1;
 }
 
 .item.has-image {
@@ -191,12 +353,6 @@ body {
     border-radius: 5px;
     object-fit: cover;
     border: 2px solid #ff8c00;
-}
-
-.item:hover {
-    transform: scale(1.02) translateX(5px);
-    border-bottom: 1px dashed rgba(255,140,0,0.8);
-    background: rgba(255,140,0,0.1);
 }
 
 .delete-mode .item:hover {
@@ -222,23 +378,83 @@ body {
     color: #fff;
     font-weight: bold;
     font-size: 15px;
+    position: relative;
+}
+
+.price::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: 0;
+    width: 0;
+    height: 1px;
+    background: #ff8c00;
+    transition: width 0.3s;
+}
+
+.item:hover .price::after {
+    width: 100%;
 }
 
 .contact {
     text-align: center;
     padding: 50px 20px;
     background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,140,0,0.1) 0%, transparent 50%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
 }
 
 .contact h2 {
     font-size: 40px;
     color: #ff8c00;
     margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact p {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .contact a {
     text-decoration: none;
     color: #ff8c00;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.contact a:hover {
+    color: #ffa233;
+}
+
+.contact a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #ff8c00;
+    transition: width 0.3s;
+}
+
+.contact a:hover::after {
+    width: 100%;
 }
 
 iframe {
@@ -247,6 +463,9 @@ iframe {
     width: 100%;
     height: 300px;
     border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    z-index: 1;
 }
 
 .control-buttons {
@@ -268,10 +487,12 @@ iframe {
     background: #ff8c00;
     color: white;
     font-size: 16px;
+    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
 }
 
 .control-btn:hover {
     transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 20px rgba(255,140,0,0.5);
 }
 
 #modeToggle {
@@ -293,6 +514,7 @@ iframe {
 
 #modeToggle:hover {
     transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 0 30px rgba(255,140,0,0.5);
 }
 
 .live-badge {
@@ -1342,11 +1564,7 @@ iframe {
 <div id="statusMessage" class="status-message" style="display:none;"></div>
 
 <script>
-// ===== الرابط الخاص بك =====
-const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
-const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
-
-// ===== بيانات المنتجات الكاملة =====
+// ===== جميع المنتجات الـ 58 (حسب الـ JSON الذي أرسلته) =====
 const ORIGINAL_MENU = [
     {
         category: "TOST ÇEŞİTLERİ",
@@ -1414,8 +1632,7 @@ const ORIGINAL_MENU = [
             { name: "Karışık pizza", price: "300₺" },
             { name: "Kavurmalı pizza", price: "350₺" },
             { name: "Tonbalıklı pizza", price: "300₺" },
-            { name: "Vegi pizza", price: "230₺" },
-            { name: "Dört Peynirli pizza", price: "300₺" }
+            { name: "Vegi pizza", price: "230₺" }
         ]
     },
     {
@@ -1464,6 +1681,32 @@ const ORIGINAL_MENU = [
         ]
     }
 ];
+
+// ===== بيانات المنتجات للغات الأخرى =====
+const MENU_DATA = {
+    tr: ORIGINAL_MENU,
+    en: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    })),
+    ru: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    })),
+    ar: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    }))
+};
 
 // ===== متغيرات الصور =====
 let categoryImages = {};
@@ -1829,6 +2072,8 @@ function displayMenu(menuData) {
     menuGrid.innerHTML = '';
     
     menuData.forEach((category, catIndex) => {
+        if (category.items.length === 0) return; // تجاهل الأقسام الفارغة
+        
         const card = document.createElement('div');
         card.className = 'card';
         card.setAttribute('data-category-index', catIndex);
@@ -2129,7 +2374,7 @@ function showStatus(message, type) {
     setTimeout(() => status.remove(), 3000);
 }
 
-// ===== دوال الدخول للمطور (F5 فقط للمطور) =====
+// ===== دوال الدخول للمطور (F5 + 7 نقرات) =====
 document.addEventListener('keydown', function(e) {
     if (e.key === 'F5') {
         e.preventDefault();
