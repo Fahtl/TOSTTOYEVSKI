@@ -1225,6 +1225,19 @@ iframe {
         </div>
     </div>
 
+    <!-- قسم: حذف الصور (جديد) -->
+    <div class="dev-section-v2">
+        <h4>🗑️ Resim Yönetimi</h4>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <button onclick="deleteAllImages()" style="flex:1; background:#dc3545;" class="delete-btn">🗑️ Tüm Resimleri Sil</button>
+        </div>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <button onclick="deleteCategoryImages()" style="flex:1; background:#ff8c00;">📁 Kategori Resimlerini Sil</button>
+            <button onclick="deleteProductImages()" style="flex:1; background:#6c5ce7;">📦 Ürün Resimlerini Sil</button>
+        </div>
+        <small style="color:#aaa;">Galerideki resimlerin üzerine tıklayarak tek tek silebilirsiniz</small>
+    </div>
+
     <!-- قسم: Var Olan Kategoriye Resim Ekle -->
     <div class="dev-section-v2">
         <h4>📁 Var Olan Kategoriye Resim Ekle</h4>
@@ -1452,32 +1465,6 @@ const ORIGINAL_MENU = [
     }
 ];
 
-// ===== بيانات المنتجات للغات الأخرى =====
-const MENU_DATA = {
-    tr: ORIGINAL_MENU,
-    en: ORIGINAL_MENU.map(cat => ({
-        category: cat.category,
-        items: cat.items.map(item => ({
-            name: item.name,
-            price: item.price
-        }))
-    })),
-    ru: ORIGINAL_MENU.map(cat => ({
-        category: cat.category,
-        items: cat.items.map(item => ({
-            name: item.name,
-            price: item.price
-        }))
-    })),
-    ar: ORIGINAL_MENU.map(cat => ({
-        category: cat.category,
-        items: cat.items.map(item => ({
-            name: item.name,
-            price: item.price
-        }))
-    }))
-};
-
 // ===== متغيرات الصور =====
 let categoryImages = {};
 let productImages = {};
@@ -1658,6 +1645,55 @@ function loadV2Progress() {
         
     } catch(error) {
         showStatus('❌ Geçersiz V2 kodu!', 'error');
+    }
+}
+
+// ===== دوال حذف الصور في V2 =====
+function deleteAllImages() {
+    if (!isDeveloper) return;
+    
+    if (confirm('TÜM resimler silinsin mi? (Kategori ve ürün resimleri)')) {
+        categoryImages = {};
+        productImages = {};
+        
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+        
+        displayMenu(getCurrentMenu());
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('🗑️ Tüm resimler silindi!', 'success');
+    }
+}
+
+function deleteCategoryImages() {
+    if (!isDeveloper) return;
+    
+    if (confirm('TÜM kategori resimleri silinsin mi?')) {
+        categoryImages = {};
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        
+        displayMenu(getCurrentMenu());
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('📁 Kategori resimleri silindi!', 'success');
+    }
+}
+
+function deleteProductImages() {
+    if (!isDeveloper) return;
+    
+    if (confirm('TÜM ürün resimleri silinsin mi?')) {
+        productImages = {};
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+        
+        displayMenu(getCurrentMenu());
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('📦 Ürün resimleri silindi!', 'success');
     }
 }
 
@@ -2093,9 +2129,8 @@ function showStatus(message, type) {
     setTimeout(() => status.remove(), 3000);
 }
 
-// ===== دوال الدخول للمطور (F5 + 7 نقرات) =====
+// ===== دوال الدخول للمطور (F5 فقط للمطور) =====
 document.addEventListener('keydown', function(e) {
-    // F5 للمطور فقط
     if (e.key === 'F5') {
         e.preventDefault();
         
@@ -2600,10 +2635,33 @@ function showProductImages() {
 }
 
 function showImageDetails(type, cat, prod = null) {
+    if (!isDeveloper) return;
+    
     if (type === 'category') {
-        showStatus(`📁 Kategori: ${cat}`, 'success');
+        if (confirm(`📁 "${cat}" kategorisinin resmini silmek istiyor musunuz?`)) {
+            delete categoryImages[cat];
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            
+            displayMenu(getCurrentMenu());
+            updateGallery();
+            updateImageStats();
+            
+            showStatus('✅ Kategori resmi silindi!', 'success');
+        }
     } else {
-        showStatus(`📦 Ürün: ${prod}`, 'success');
+        if (confirm(`📦 "${prod}" ürününün resmini silmek istiyor musunuz?`)) {
+            delete productImages[cat][prod];
+            if (Object.keys(productImages[cat]).length === 0) {
+                delete productImages[cat];
+            }
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+            
+            displayMenu(getCurrentMenu());
+            updateGallery();
+            updateImageStats();
+            
+            showStatus('✅ Ürün resmi silindi!', 'success');
+        }
     }
 }
 
