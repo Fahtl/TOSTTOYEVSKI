@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* جميع الأنماط كما هي من الكود الثاني (مع تحسينات RTL) */
         * {
             margin: 0;
             padding: 0;
@@ -934,7 +933,8 @@
         }
 
         .dev-window-v2 input,
-        .dev-window-v2 select {
+        .dev-window-v2 select,
+        .dev-window-v2 textarea {
             width: 100%;
             padding: 8px;
             margin: 6px 0;
@@ -942,6 +942,12 @@
             border: 1px solid #6c5ce7;
             border-radius: 6px;
             color: white;
+            font-family: inherit;
+        }
+
+        .dev-window-v2 textarea {
+            min-height: 60px;
+            resize: vertical;
         }
 
         .dev-window-v2 button {
@@ -1471,7 +1477,8 @@
             border: 2px solid #6c5ce7 !important;
         }
 
-        .light-mode .dev-window-v2 input {
+        .light-mode .dev-window-v2 input,
+        .light-mode .dev-window-v2 textarea {
             background: #fffaf3 !important;
             border: 1px solid #6c5ce7 !important;
             color: #2b2b2b !important;
@@ -1519,7 +1526,7 @@
     <p>Hangi sürümü kullanmak istiyorsunuz?</p>
     <div class="version-buttons">
         <button class="version-btn v1" onclick="window.selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
-        <button class="version-btn v2" onclick="window.selectDevVersion('v2')">🖼️ V2 (Resimli + Gelişmiş)</button>
+        <button class="version-btn v2" onclick="window.selectDevVersion('v2')">🖼️ V2 (Resimli URL)</button>
     </div>
     <button class="close-version-btn" onclick="window.closeVersionModal()">Kapat</button>
 </div>
@@ -1577,7 +1584,7 @@
 <!-- زر المطور العائم -->
 <div class="floating-dev-btn" id="floatingDevBtn" onclick="window.toggleDevPanel()" style="display: none;">🔧</div>
 
-<!-- لوحة المطور V1 -->
+<!-- لوحة المطور V1 (كلاسيكية) -->
 <div class="dev-window" id="devPanelV1">
     <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ V1</h3>
     
@@ -1682,36 +1689,75 @@
     <button onclick="window.closeDevV1()" class="close-btn">❌ Çıkış</button>
 </div>
 
-<!-- لوحة المطور V2 (Gelişmiş) -->
+<!-- لوحة المطور V2 (مع صور من الرابط) -->
 <div class="dev-window-v2" id="devPanelV2">
-    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
+    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ URL)</h3>
 
     <div class="dev-section-v2">
-        <h4>➕ Kategori Ekle (Resimli)</h4>
+        <h4>➕ Kategori Ekle (Resimli URL)</h4>
         <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
         <div class="image-upload-section">
-            <label>Kategori Resmi:</label>
-            <input type="file" id="categoryImage" accept="image/*" onchange="window.previewCategoryImage()">
+            <label>Kategori Resim URL:</label>
+            <input type="url" id="categoryImageUrl" placeholder="https://...">
             <div class="image-preview" id="categoryImagePreview">
-                <span>Resim önizleme</span>
+                <span>URL girip "Önizle" butonuna basın</span>
+            </div>
+            <div class="button-group">
+                <button onclick="window.previewCategoryImage()" style="background:#ff8c00;">🔍 Önizle</button>
+                <button onclick="window.addCategoryWithImage()" class="save-btn">📁 Kategori Ekle</button>
             </div>
         </div>
-        <button onclick="window.addCategoryWithImage()" class="save-btn">📁 Kategori Ekle (Resimli)</button>
     </div>
 
     <div class="dev-section-v2">
-        <h4>➕ Ürün Ekle (Resimli)</h4>
+        <h4>➕ Ürün Ekle (Resimli URL)</h4>
         <select id="categorySelectV2"></select>
         <input type="text" id="newNameV2" placeholder="Ürün Adı">
         <input type="text" id="productPriceV2" placeholder="Fiyat">
         <div class="image-upload-section">
-            <label>Ürün Resmi:</label>
-            <input type="file" id="productImage" accept="image/*" onchange="window.previewProductImage()">
+            <label>Ürün Resim URL:</label>
+            <input type="url" id="productImageUrl" placeholder="https://...">
             <div class="image-preview" id="productImagePreview">
-                <span>Resim önizleme</span>
+                <span>URL girip "Önizle" butonuna basın</span>
+            </div>
+            <div class="button-group">
+                <button onclick="window.previewProductImage()" style="background:#ff8c00;">🔍 Önizle</button>
+                <button onclick="window.addProductWithImage()" class="save-btn">✅ Ürün Ekle</button>
             </div>
         </div>
-        <button onclick="window.addProductWithImage()" class="save-btn">✅ Ürün Ekle (Resimli)</button>
+    </div>
+
+    <div class="dev-section-v2">
+        <h4>✏️ Kategori Resim Düzenle</h4>
+        <select id="editCategoryImageSelect">
+            <option value="">Kategori seçin</option>
+        </select>
+        <div style="margin:10px 0;">
+            <img id="currentCategoryImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none;">
+        </div>
+        <input type="url" id="editCategoryImageUrl" placeholder="Yeni resim URL">
+        <div class="button-group">
+            <button onclick="window.updateCategoryImage()" class="edit-btn">✏️ Güncelle</button>
+            <button onclick="window.deleteCategoryImage()" class="delete-btn">🗑️ Resmi Sil</button>
+        </div>
+    </div>
+
+    <div class="dev-section-v2">
+        <h4>✏️ Ürün Resim Düzenle</h4>
+        <select id="editCategoryForProductImageSelect">
+            <option value="">Kategori seçin</option>
+        </select>
+        <select id="editProductImageSelect" disabled>
+            <option value="">Önce kategori seçin</option>
+        </select>
+        <div style="margin:10px 0;">
+            <img id="currentProductImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none;">
+        </div>
+        <input type="url" id="editProductImageUrl" placeholder="Yeni resim URL">
+        <div class="button-group">
+            <button onclick="window.updateProductImage()" class="edit-btn">✏️ Güncelle</button>
+            <button onclick="window.deleteProductImage()" class="delete-btn">🗑️ Resmi Sil</button>
+        </div>
     </div>
 
     <div class="dev-section-v2">
@@ -1761,10 +1807,9 @@
     const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
     const DEV_PASS = 'momotunc0702';
 
-    // ===== بيانات الترجمة الكاملة من الكود الأول =====
+    // ===== بيانات الترجمة =====
     const LANG_DATA = {
         tr: {
-            pageTitle: "Tosttoo | Menü",
             heroTitle: "Tosttoo",
             workTime: "🕒 08:00 - 02:30",
             scrollBtn: "Menüyü Gör",
@@ -1772,52 +1817,12 @@
             contactTitle: "İletişim",
             phone: "05321580207",
             instagram: "Instagram",
-            devModalTitle: "🔧 GELİŞTİRİCİ SEÇENEKLERİ",
-            devModalDesc: "Hangi sürümü kullanmak istiyorsunuz?",
-            devV1Btn: "⚙️ V1 (Klasik)",
-            devV2Btn: "🖼️ V2 (Gelişmiş)",
-            devCloseBtn: "Kapat",
             confirmTitle: "⚠️ Onay",
             confirmYes: "Evet",
             confirmNo: "Hayır",
-            colorTitle: "🎨 Renkleri Değiştir",
-            colorCategory: "Kategori Başlığı",
-            colorName: "Ürün Adı",
-            colorPrice: "Fiyat",
-            colorApply: "Renkleri Uygula",
-            colorClose: "Kapat",
-            v1Title: "⚙️ GELİŞTİRİCİ PANELİ V1",
-            addProduct: "➕ Ürün Ekle",
-            productName: "Ürün Adı",
-            price: "Fiyat",
-            addProductBtn: "✅ Ürün Ekle",
-            addCategory: "📁 Kategori Ekle",
-            newCategory: "Yeni Kategori",
-            addCategoryBtn: "📁 Kategori Ekle",
-            colorEdit: "🎨 Renk Düzenle",
-            tools: "🔧 Araçlar",
-            editMode: "✏️ Düzenle",
-            deleteMode: "🗑️ Silme",
-            deleteAll: "🗑️ Tüm Menü Sil",
-            copyCode: "📋 Kod Kopyala",
-            currentMenuCode: "Mevcut Menü Kodu",
-            copyBtn: "📋 Kopyala",
-            closePanel: "❌ Paneli Kapat",
-            exit: "❌ Çıkış",
-            v2Title: "🖼️ GELİŞTİRİCİ PANELİ V2 (GELİŞMİŞ)",
-            addCategoryImage: "➕ Kategori Ekle (Resimli)",
-            categoryName: "Kategori Adı",
-            categoryImageUrl: "Kategori Resim URL (opsiyonel)",
-            addCategoryImageBtn: "📁 Kategori Ekle (Resimli)",
-            addProductImage: "➕ Ürün Ekle (Resimli)",
-            productImageUrl: "Ürün Resmi",
-            addProductImageBtn: "✅ Ürün Ekle (Resimli)",
-            imageUrls: "🖼️ Resim URL'leri",
-            copyFullCode: "📋 Tam Kod",
-            copyMenuCode: "📋 Menü Kodu"
+            langChanged: "Dil değiştirildi"
         },
         en: {
-            pageTitle: "Tosttoo | Menu",
             heroTitle: "Tosttoo",
             workTime: "🕒 08:00 - 02:30",
             scrollBtn: "View Menu",
@@ -1825,52 +1830,12 @@
             contactTitle: "Contact",
             phone: "05321580207",
             instagram: "Instagram",
-            devModalTitle: "🔧 DEVELOPER OPTIONS",
-            devModalDesc: "Which version do you want to use?",
-            devV1Btn: "⚙️ V1 (Classic)",
-            devV2Btn: "🖼️ V2 (Advanced)",
-            devCloseBtn: "Close",
             confirmTitle: "⚠️ Confirm",
             confirmYes: "Yes",
             confirmNo: "No",
-            colorTitle: "🎨 Change Colors",
-            colorCategory: "Category Title",
-            colorName: "Product Name",
-            colorPrice: "Price",
-            colorApply: "Apply Colors",
-            colorClose: "Close",
-            v1Title: "⚙️ DEVELOPER PANEL V1",
-            addProduct: "➕ Add Product",
-            productName: "Product Name",
-            price: "Price",
-            addProductBtn: "✅ Add Product",
-            addCategory: "📁 Add Category",
-            newCategory: "New Category",
-            addCategoryBtn: "📁 Add Category",
-            colorEdit: "🎨 Edit Colors",
-            tools: "🔧 Tools",
-            editMode: "✏️ Edit",
-            deleteMode: "🗑️ Delete",
-            deleteAll: "🗑️ Delete All Menu",
-            copyCode: "📋 Copy Code",
-            currentMenuCode: "Current Menu Code",
-            copyBtn: "📋 Copy",
-            closePanel: "❌ Close Panel",
-            exit: "❌ Exit",
-            v2Title: "🖼️ DEVELOPER PANEL V2 (ADVANCED)",
-            addCategoryImage: "➕ Add Category (With Image)",
-            categoryName: "Category Name",
-            categoryImageUrl: "Category Image (optional)",
-            addCategoryImageBtn: "📁 Add Category",
-            addProductImage: "➕ Add Product (With Image)",
-            productImageUrl: "Product Image",
-            addProductImageBtn: "✅ Add Product",
-            imageUrls: "🖼️ Image URLs",
-            copyFullCode: "📋 Full Code",
-            copyMenuCode: "📋 Menu Code"
+            langChanged: "Language changed"
         },
         ru: {
-            pageTitle: "Tosttoo | Меню",
             heroTitle: "Tosttoo",
             workTime: "🕒 08:00 - 02:30",
             scrollBtn: "Посмотреть меню",
@@ -1878,52 +1843,12 @@
             contactTitle: "Контакты",
             phone: "05321580207",
             instagram: "Instagram",
-            devModalTitle: "🔧 НАСТРОЙКИ РАЗРАБОТЧИКА",
-            devModalDesc: "Какую версию вы хотите использовать?",
-            devV1Btn: "⚙️ V1 (Классическая)",
-            devV2Btn: "🖼️ V2 (Расширенная)",
-            devCloseBtn: "Закрыть",
             confirmTitle: "⚠️ Подтверждение",
             confirmYes: "Да",
             confirmNo: "Нет",
-            colorTitle: "🎨 Изменить цвета",
-            colorCategory: "Заголовок категории",
-            colorName: "Название товара",
-            colorPrice: "Цена",
-            colorApply: "Применить цвета",
-            colorClose: "Закрыть",
-            v1Title: "⚙️ ПАНЕЛЬ РАЗРАБОТЧИКА V1",
-            addProduct: "➕ Добавить товар",
-            productName: "Название товара",
-            price: "Цена",
-            addProductBtn: "✅ Добавить товар",
-            addCategory: "📁 Добавить категорию",
-            newCategory: "Новая категория",
-            addCategoryBtn: "📁 Добавить категорию",
-            colorEdit: "🎨 Редактировать цвета",
-            tools: "🔧 Инструменты",
-            editMode: "✏️ Редактировать",
-            deleteMode: "🗑️ Удалить",
-            deleteAll: "🗑️ Удалить всё меню",
-            copyCode: "📋 Копировать код",
-            currentMenuCode: "Текущий код меню",
-            copyBtn: "📋 Копировать",
-            closePanel: "❌ Закрыть панель",
-            exit: "❌ Выход",
-            v2Title: "🖼️ ПАНЕЛЬ РАЗРАБОТЧИКА V2 (РАСШИРЕННАЯ)",
-            addCategoryImage: "➕ Добавить категорию (с изображением)",
-            categoryName: "Название категории",
-            categoryImageUrl: "Изображение категории (опционально)",
-            addCategoryImageBtn: "📁 Добавить категорию",
-            addProductImage: "➕ Добавить товар (с изображением)",
-            productImageUrl: "Изображение товара",
-            addProductImageBtn: "✅ Добавить товар",
-            imageUrls: "🖼️ URL изображений",
-            copyFullCode: "📋 Полный код",
-            copyMenuCode: "📋 Код меню"
+            langChanged: "Язык изменен"
         },
         ar: {
-            pageTitle: "توستو | القائمة",
             heroTitle: "توستو",
             workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠",
             scrollBtn: "عرض القائمة",
@@ -1931,53 +1856,14 @@
             contactTitle: "اتصل بنا",
             phone: "٠٥٣٢١٥٨٠٢٠٧",
             instagram: "إنستغرام",
-            devModalTitle: "🔧 خيارات المطور",
-            devModalDesc: "أي إصدار تريد استخدامه؟",
-            devV1Btn: "⚙️ الإصدار V1 (كلاسيكي)",
-            devV2Btn: "🖼️ الإصدار V2 (متقدم)",
-            devCloseBtn: "إغلاق",
             confirmTitle: "⚠️ تأكيد",
             confirmYes: "نعم",
             confirmNo: "لا",
-            colorTitle: "🎨 تغيير الألوان",
-            colorCategory: "عنوان القسم",
-            colorName: "اسم المنتج",
-            colorPrice: "السعر",
-            colorApply: "تطبيق الألوان",
-            colorClose: "إغلاق",
-            v1Title: "⚙️ لوحة المطور V1",
-            addProduct: "➕ إضافة منتج",
-            productName: "اسم المنتج",
-            price: "السعر",
-            addProductBtn: "✅ إضافة منتج",
-            addCategory: "📁 إضافة قسم",
-            newCategory: "قسم جديد",
-            addCategoryBtn: "📁 إضافة قسم",
-            colorEdit: "🎨 تعديل الألوان",
-            tools: "🔧 أدوات",
-            editMode: "✏️ تعديل",
-            deleteMode: "🗑️ حذف",
-            deleteAll: "🗑️ حذف كل القائمة",
-            copyCode: "📋 نسخ الكود",
-            currentMenuCode: "كود القائمة الحالي",
-            copyBtn: "📋 نسخ",
-            closePanel: "❌ إغلاق اللوحة",
-            exit: "❌ خروج",
-            v2Title: "🖼️ لوحة المطور V2 (متقدمة)",
-            addCategoryImage: "➕ إضافة قسم (مع صورة)",
-            categoryName: "اسم القسم",
-            categoryImageUrl: "صورة القسم (اختياري)",
-            addCategoryImageBtn: "📁 إضافة قسم",
-            addProductImage: "➕ إضافة منتج (مع صورة)",
-            productImageUrl: "صورة المنتج",
-            addProductImageBtn: "✅ إضافة منتج",
-            imageUrls: "🖼️ روابط الصور",
-            copyFullCode: "📋 الكود الكامل",
-            copyMenuCode: "📋 كود القائمة"
+            langChanged: "تم تغيير اللغة"
         }
     };
 
-    // ===== قائمة الطعام الكاملة (مترجمة) من الكود الثاني =====
+    // ===== قائمة الطعام الكاملة =====
     const MENU_DATA = {
         tr: [
             {
@@ -2449,9 +2335,9 @@
         ]
     };
 
-    // ===== متغيرات الصور =====
-    let categoryImages = {};
-    let productImages = {};
+    // ===== متغيرات الصور (روابط URL) =====
+    let categoryImages = {};  // { kategoriAdi: "https://..." }
+    let productImages = {};   // { kategoriIndex: { urunAdi: "https://..." } }
 
     // ===== متغيرات عامة =====
     let isDeveloper = false;
@@ -2464,7 +2350,7 @@
     let autoSyncInterval = null;
     let lastCloudData = null;
 
-    // ===== دوال اللغة (من الكود الأول) =====
+    // ===== دوال اللغة =====
     window.toggleLanguageMenu = function() {
         const menu = document.getElementById('languageMenu');
         menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
@@ -2510,7 +2396,7 @@
         document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
     };
 
-    // ===== دوال عرض القائمة (معدلة لاستخدام MENU_DATA متعدد اللغات) =====
+    // ===== دوال عرض القائمة =====
     function displayMenu() {
         const menuGrid = document.getElementById('menuGrid');
         if (!menuGrid) return;
@@ -2526,7 +2412,7 @@
             card.className = 'card';
             card.setAttribute('data-category-index', catIndex);
             
-            // صورة القسم
+            // صورة القسم من الرابط
             if (categoryImages[category.category]) {
                 card.classList.add('has-image');
                 const catImg = document.createElement('img');
@@ -2562,7 +2448,7 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'item';
                 
-                // صورة المنتج
+                // صورة المنتج من الرابط
                 if (productImages[catIndex] && productImages[catIndex][item.name]) {
                     itemDiv.classList.add('has-image');
                     const prodImg = document.createElement('img');
@@ -2607,6 +2493,7 @@
         });
         
         updateAllSelects();
+        updateEditSelects();
         updateGallery();
         updateCodeDisplays();
     }
@@ -2627,6 +2514,28 @@
         });
     }
 
+    function updateEditSelects() {
+        // قائمة تحرير صور الأقسام
+        const editCatSelect = document.getElementById('editCategoryImageSelect');
+        if (editCatSelect) {
+            editCatSelect.innerHTML = '<option value="">Kategori seçin</option>';
+            const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+            menuData.forEach((cat, i) => {
+                editCatSelect.innerHTML += `<option value="${cat.category}">${cat.category}</option>`;
+            });
+        }
+
+        // قائمة تحرير صور المنتجات
+        const editCatForProductSelect = document.getElementById('editCategoryForProductImageSelect');
+        if (editCatForProductSelect) {
+            editCatForProductSelect.innerHTML = '<option value="">Kategori seçin</option>';
+            const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+            menuData.forEach((cat, i) => {
+                editCatForProductSelect.innerHTML += `<option value="${i}">${cat.category}</option>`;
+            });
+        }
+    }
+
     function updateCodeDisplays() {
         const v1Display = document.getElementById('v1CodeDisplay');
         if (v1Display) {
@@ -2640,16 +2549,18 @@
         
         let html = '';
         
+        // عرض صور الأقسام
         Object.keys(categoryImages).forEach(cat => {
-            html += `<div class="category-with-image" onclick="showImageDetails('category', '${cat}')">
+            html += `<div class="category-with-image" onclick="window.showImageDetails('category', '${cat}')">
                 <img src="${categoryImages[cat]}" class="category-image-small">
                 <span>📁 ${cat}</span>
             </div>`;
         });
         
+        // عرض صور المنتجات
         Object.keys(productImages).forEach(catIndex => {
             Object.keys(productImages[catIndex]).forEach(prod => {
-                html += `<div class="product-with-image" onclick="showImageDetails('product', '${catIndex}', '${prod}')">
+                html += `<div class="product-with-image" onclick="window.showImageDetails('product', '${catIndex}', '${prod}')">
                     <img src="${productImages[catIndex][prod]}" class="product-image-small">
                     <span>📦 ${prod}</span>
                 </div>`;
@@ -2804,35 +2715,53 @@
         }
     };
 
-    // ===== دوال المطور V2 =====
+    // ===== دوال المطور V2 (مع صور من الرابط) =====
+    window.previewCategoryImage = function() {
+        const url = document.getElementById('categoryImageUrl').value.trim();
+        const preview = document.getElementById('categoryImagePreview');
+        
+        if (url) {
+            preview.innerHTML = `<img src="${url}" style="max-width:100%; max-height:100%; object-fit:cover;" onerror="this.onerror=null; this.src=''; this.parentElement.innerHTML='<span>Geçersiz URL</span>';">`;
+        } else {
+            preview.innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
+        }
+    };
+
+    window.previewProductImage = function() {
+        const url = document.getElementById('productImageUrl').value.trim();
+        const preview = document.getElementById('productImagePreview');
+        
+        if (url) {
+            preview.innerHTML = `<img src="${url}" style="max-width:100%; max-height:100%; object-fit:cover;" onerror="this.onerror=null; this.src=''; this.parentElement.innerHTML='<span>Geçersiz URL</span>';">`;
+        } else {
+            preview.innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
+        }
+    };
+
     window.addCategoryWithImage = function() {
         if (!isDeveloper) return;
         const name = document.getElementById('newCategoryV2').value.trim();
-        const file = document.getElementById('categoryImage').files[0];
+        const url = document.getElementById('categoryImageUrl').value.trim();
         
         if (!name) { showStatus('Kategori adı girin!', 'error'); return; }
         
         const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
         menuData.push({ category: name, items: [] });
         
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                categoryImages[name] = e.target.result;
-                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-                displayMenu();
-                updateGallery();
-                showStatus('✅ Kategori resimli olarak eklendi!', 'success');
-            }
-            reader.readAsDataURL(file);
-        } else {
-            displayMenu();
-            showStatus('Kategori eklendi (resimsiz)', 'success');
+        if (url) {
+            categoryImages[name] = url;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         }
         
+        displayMenu();
+        updateEditSelects();
+        updateGallery();
+        
         document.getElementById('newCategoryV2').value = '';
-        document.getElementById('categoryImage').value = '';
-        document.getElementById('categoryImagePreview').innerHTML = '<span>Resim önizleme</span>';
+        document.getElementById('categoryImageUrl').value = '';
+        document.getElementById('categoryImagePreview').innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
+        
+        showStatus(url ? '✅ Kategori resimli olarak eklendi!' : 'Kategori eklendi (resimsiz)', 'success');
     };
 
     window.addProductWithImage = function() {
@@ -2840,35 +2769,194 @@
         const name = document.getElementById('newNameV2').value.trim();
         const price = document.getElementById('productPriceV2').value.trim();
         const catIndex = document.getElementById('categorySelectV2').value;
-        const file = document.getElementById('productImage').files[0];
+        const url = document.getElementById('productImageUrl').value.trim();
         
         if (!name || !price) { showStatus('Ad ve fiyat girin!', 'error'); return; }
         
         const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
         menuData[catIndex].items.push({ name, price });
         
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                if (!productImages[catIndex]) productImages[catIndex] = {};
-                productImages[catIndex][name] = e.target.result;
-                localStorage.setItem('productImages', JSON.stringify(productImages));
-                displayMenu();
-                updateGallery();
-                showStatus('✅ Ürün resimli olarak eklendi!', 'success');
-            }
-            reader.readAsDataURL(file);
-        } else {
-            displayMenu();
-            showStatus('Ürün eklendi (resimsiz)', 'success');
+        if (url) {
+            if (!productImages[catIndex]) productImages[catIndex] = {};
+            productImages[catIndex][name] = url;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
         }
+        
+        displayMenu();
+        updateGallery();
         
         document.getElementById('newNameV2').value = '';
         document.getElementById('productPriceV2').value = '';
-        document.getElementById('productImage').value = '';
-        document.getElementById('productImagePreview').innerHTML = '<span>Resim önizleme</span>';
+        document.getElementById('productImageUrl').value = '';
+        document.getElementById('productImagePreview').innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
+        
+        showStatus(url ? '✅ Ürün resimli olarak eklendi!' : 'Ürün eklendi (resimsiz)', 'success');
     };
 
+    window.updateCategoryImage = function() {
+        if (!isDeveloper) return;
+        const categoryName = document.getElementById('editCategoryImageSelect').value;
+        const newUrl = document.getElementById('editCategoryImageUrl').value.trim();
+        
+        if (!categoryName) { showStatus('Kategori seçin!', 'error'); return; }
+        
+        if (newUrl) {
+            categoryImages[categoryName] = newUrl;
+        } else {
+            if (categoryImages[categoryName]) {
+                delete categoryImages[categoryName];
+            }
+        }
+        
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        displayMenu();
+        updateGallery();
+        
+        document.getElementById('editCategoryImageUrl').value = '';
+        document.getElementById('currentCategoryImage').style.display = 'none';
+        
+        showStatus(newUrl ? '✅ Kategori resmi güncellendi!' : '✅ Kategori resmi silindi!', 'success');
+    };
+
+    window.deleteCategoryImage = function() {
+        const categoryName = document.getElementById('editCategoryImageSelect').value;
+        if (!categoryName) { showStatus('Kategori seçin!', 'error'); return; }
+        
+        if (categoryImages[categoryName]) {
+            delete categoryImages[categoryName];
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            displayMenu();
+            updateGallery();
+            document.getElementById('editCategoryImageUrl').value = '';
+            document.getElementById('currentCategoryImage').style.display = 'none';
+            showStatus('✅ Kategori resmi silindi!', 'success');
+        } else {
+            showStatus('Bu kategorinin resmi yok!', 'error');
+        }
+    };
+
+    window.updateProductImage = function() {
+        if (!isDeveloper) return;
+        const catIndex = document.getElementById('editCategoryForProductImageSelect').value;
+        const prodIndex = document.getElementById('editProductImageSelect').value;
+        const newUrl = document.getElementById('editProductImageUrl').value.trim();
+        
+        if (!catIndex || !prodIndex) { showStatus('Kategori ve ürün seçin!', 'error'); return; }
+        
+        const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+        const productName = menuData[catIndex].items[prodIndex].name;
+        
+        if (newUrl) {
+            if (!productImages[catIndex]) productImages[catIndex] = {};
+            productImages[catIndex][productName] = newUrl;
+        } else {
+            if (productImages[catIndex] && productImages[catIndex][productName]) {
+                delete productImages[catIndex][productName];
+                if (Object.keys(productImages[catIndex]).length === 0) {
+                    delete productImages[catIndex];
+                }
+            }
+        }
+        
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+        displayMenu();
+        updateGallery();
+        
+        document.getElementById('editProductImageUrl').value = '';
+        document.getElementById('currentProductImage').style.display = 'none';
+        
+        showStatus(newUrl ? '✅ Ürün resmi güncellendi!' : '✅ Ürün resmi silindi!', 'success');
+    };
+
+    window.deleteProductImage = function() {
+        const catIndex = document.getElementById('editCategoryForProductImageSelect').value;
+        const prodIndex = document.getElementById('editProductImageSelect').value;
+        
+        if (!catIndex || !prodIndex) { showStatus('Kategori ve ürün seçin!', 'error'); return; }
+        
+        const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+        const productName = menuData[catIndex].items[prodIndex].name;
+        
+        if (productImages[catIndex] && productImages[catIndex][productName]) {
+            delete productImages[catIndex][productName];
+            if (Object.keys(productImages[catIndex]).length === 0) {
+                delete productImages[catIndex];
+            }
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+            displayMenu();
+            updateGallery();
+            document.getElementById('editProductImageUrl').value = '';
+            document.getElementById('currentProductImage').style.display = 'none';
+            showStatus('✅ Ürün resmi silindi!', 'success');
+        } else {
+            showStatus('Bu ürünün resmi yok!', 'error');
+        }
+    };
+
+    // تحديث صورة القسم عند اختيار قسم
+    document.getElementById('editCategoryImageSelect')?.addEventListener('change', function() {
+        const categoryName = this.value;
+        const imgElement = document.getElementById('currentCategoryImage');
+        const urlInput = document.getElementById('editCategoryImageUrl');
+        
+        if (categoryName && categoryImages[categoryName]) {
+            imgElement.src = categoryImages[categoryName];
+            imgElement.style.display = 'block';
+            urlInput.value = categoryImages[categoryName];
+        } else {
+            imgElement.style.display = 'none';
+            urlInput.value = '';
+        }
+    });
+
+    // تحديث صورة المنتج عند اختيار منتج
+    document.getElementById('editCategoryForProductImageSelect')?.addEventListener('change', function() {
+        const catIndex = this.value;
+        const productSelect = document.getElementById('editProductImageSelect');
+        const imgElement = document.getElementById('currentProductImage');
+        const urlInput = document.getElementById('editProductImageUrl');
+        
+        if (catIndex && productSelect) {
+            productSelect.disabled = false;
+            productSelect.innerHTML = '<option value="">Ürün seçin</option>';
+            const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+            menuData[catIndex].items.forEach((item, i) => {
+                productSelect.innerHTML += `<option value="${i}">${item.name}</option>`;
+            });
+        } else {
+            productSelect.disabled = true;
+            productSelect.innerHTML = '<option value="">Önce kategori seçin</option>';
+        }
+        
+        imgElement.style.display = 'none';
+        urlInput.value = '';
+    });
+
+    document.getElementById('editProductImageSelect')?.addEventListener('change', function() {
+        const catIndex = document.getElementById('editCategoryForProductImageSelect').value;
+        const prodIndex = this.value;
+        const imgElement = document.getElementById('currentProductImage');
+        const urlInput = document.getElementById('editProductImageUrl');
+        
+        if (catIndex && prodIndex) {
+            const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
+            const productName = menuData[catIndex].items[prodIndex].name;
+            
+            if (productImages[catIndex] && productImages[catIndex][productName]) {
+                imgElement.src = productImages[catIndex][productName];
+                imgElement.style.display = 'block';
+                urlInput.value = productImages[catIndex][productName];
+            } else {
+                imgElement.style.display = 'none';
+                urlInput.value = '';
+            }
+        } else {
+            imgElement.style.display = 'none';
+            urlInput.value = '';
+        }
+    });
+
+    // ===== دوال حذف الصور =====
     window.deleteAllImages = function() {
         if (!isDeveloper) return;
         if (confirm('TÜM resimler silinsin mi?')) {
@@ -2901,30 +2989,6 @@
             displayMenu();
             updateGallery();
             showStatus('📦 Ürün resimleri silindi!', 'success');
-        }
-    };
-
-    window.previewCategoryImage = function() {
-        const file = document.getElementById('categoryImage').files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('categoryImagePreview');
-                preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:cover;">`;
-            }
-            reader.readAsDataURL(file);
-        }
-    };
-
-    window.previewProductImage = function() {
-        const file = document.getElementById('productImage').files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const preview = document.getElementById('productImagePreview');
-                preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:cover;">`;
-            }
-            reader.readAsDataURL(file);
         }
     };
 
@@ -3161,6 +3225,7 @@
         document.getElementById(`devPanel${version.toUpperCase()}`).style.display = 'block';
         displayMenu();
         updateAllSelects();
+        updateEditSelects();
         
         // تحميل الصور
         const savedCatImages = localStorage.getItem('categoryImages');
