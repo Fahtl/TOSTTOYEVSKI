@@ -53,4 +53,2647 @@ body {
 
 .hero h1 {
     font-size: 60px;
-    color
+    color: #ff8c00;
+    margin: 0;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    animation: floatTitle 3s ease-in-out infinite;
+    text-shadow: 0 0 20px currentColor;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes floatTitle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.work-time {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ff8c00;
+    font-weight: 600;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.9; }
+}
+
+.btn {
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    background: #ff8c00;
+    color: #fff;
+}
+
+.btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.container {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: auto;
+    scroll-margin-top: 20px;
+}
+
+.container h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* ===== بطاقة مع صورة ===== */
+.card {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid rgba(255,140,0,0.3);
+    overflow: hidden;
+}
+
+.card.has-image {
+    padding-top: 0;
+}
+
+.card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+.card:hover .card-image {
+    transform: scale(1.05);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(255,140,0,0.2);
+    border-color: rgba(255,140,0,0.6);
+}
+
+.card h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    position: relative;
+}
+
+/* ===== عنصر المنتج مع صورة ===== */
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+    padding: 8px 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 1px dashed rgba(255,140,0,0.2);
+    border-radius: 5px;
+    background: rgba(0,0,0,0.2);
+}
+
+.item.has-image {
+    padding-left: 60px;
+    min-height: 50px;
+}
+
+.item-image {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+    border: 2px solid #ff8c00;
+}
+
+.item:hover {
+    transform: scale(1.02) translateX(5px);
+    border-bottom: 1px dashed rgba(255,140,0,0.8);
+    background: rgba(255,140,0,0.1);
+}
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+    background: rgba(255,0,0,0.1);
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+    background: rgba(40,167,69,0.1);
+}
+
+.name {
+    color: #ff8c00;
+    font-weight: 500;
+    font-size: 15px;
+    flex: 1;
+}
+
+.price {
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.contact {
+    text-align: center;
+    padding: 50px 20px;
+    background: #000;
+}
+
+.contact h2 {
+    font-size: 40px;
+    color: #ff8c00;
+    margin-bottom: 30px;
+}
+
+.contact a {
+    text-decoration: none;
+    color: #ff8c00;
+}
+
+iframe {
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: 300px;
+    border: none;
+}
+
+.control-buttons {
+    position: fixed;
+    top: 20px;
+    right: 90px;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.control-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    background: #ff8c00;
+    color: white;
+    font-size: 16px;
+}
+
+.control-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+#modeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #ff8c00;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(255,140,0,0.3);
+}
+
+#modeToggle:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.live-badge {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 0, 0, 0.9);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(255,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
+    pointer-events: none;
+    animation: livePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ===== نافذة اختيار نسخة المطور ===== */
+.dev-version-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #ff8c00;
+    border-radius: 15px;
+    padding: 30px;
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    text-align: center;
+}
+
+.dev-version-modal h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.dev-version-modal p {
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.version-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.version-btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.version-btn.v1 {
+    background: #ff8c00;
+    color: white;
+}
+
+.version-btn.v1:hover {
+    background: #ffa233;
+    transform: scale(1.05);
+}
+
+.version-btn.v2 {
+    background: #6c5ce7;
+    color: white;
+}
+
+.version-btn.v2:hover {
+    background: #8b7cf0;
+    transform: scale(1.05);
+}
+
+.close-version-btn {
+    margin-top: 10px;
+    padding: 8px;
+    background: #333;
+    color: white;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close-version-btn:hover {
+    background: #444;
+}
+
+/* ===== لوحة المطور V1 ===== */
+.dev-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border-radius: 15px;
+    display: none;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.85);
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 140, 0, 0.5);
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    cursor: move;
+    user-select: none;
+}
+
+.dev-window h3 {
+    color: #ff8c00;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+    padding-bottom: 10px;
+    cursor: move;
+}
+
+.dev-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.dev-section h4 {
+    color: #ff8c00;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.dev-window input,
+.dev-window select {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: white;
+}
+
+.dev-window button {
+    width: 100%;
+    padding: 8px;
+    margin: 6px 0;
+    background: #ff8c00;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dev-window button:hover {
+    background: #ffa233;
+    transform: translateY(-2px);
+}
+
+.dev-window .save-btn {
+    background: #28a745;
+}
+
+.dev-window .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window .close-btn {
+    background: #6c757d;
+    margin-top: 15px;
+}
+
+/* ===== لوحة المطور V2 المتطورة (مع الصور) ===== */
+.dev-window-v2 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 25px;
+    border-radius: 20px;
+    display: none;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(15px);
+    border: 2px solid #6c5ce7;
+    box-shadow: 0 0 40px rgba(108,92,231,0.3);
+}
+
+.dev-window-v2 h3 {
+    color: #6c5ce7;
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #6c5ce7;
+    padding-bottom: 15px;
+}
+
+.dev-section-v2 {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    border: 1px solid rgba(108,92,231,0.3);
+}
+
+.dev-section-v2 h4 {
+    color: #6c5ce7;
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dev-window-v2 input,
+.dev-window-v2 select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #6c5ce7;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.dev-window-v2 button {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #6c5ce7;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dev-window-v2 button:hover {
+    background: #8b7cf0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
+}
+
+.dev-window-v2 .save-btn {
+    background: #28a745;
+}
+
+.dev-window-v2 .delete-btn {
+    background: #dc3545;
+}
+
+.dev-window-v2 .close-btn {
+    background: #6c757d;
+    margin-top: 20px;
+}
+
+/* ===== قسم الصور المتقدم ===== */
+.image-upload-section {
+    margin: 15px 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 2px dashed #6c5ce7;
+}
+
+.image-upload-section label {
+    display: block;
+    color: #6c5ce7;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.image-preview {
+    width: 100%;
+    height: 180px;
+    background: #222;
+    border-radius: 10px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid #6c5ce7;
+    position: relative;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.image-preview span {
+    color: #666;
+}
+
+/* ===== معرض الصور ===== */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid #6c5ce7;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(108,92,231,0.4);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item .item-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    font-size: 10px;
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gallery-item.category-item {
+    border-color: #ff8c00;
+}
+
+.gallery-item.product-item {
+    border-color: #6c5ce7;
+}
+
+/* ===== عناصر الصور في القوائم ===== */
+.existing-items-list {
+    max-height: 200px;
+    overflow-y: auto;
+    margin: 10px 0;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+}
+
+.existing-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    margin: 5px 0;
+    background: rgba(108,92,231,0.1);
+    border-radius: 5px;
+    border-left: 3px solid #6c5ce7;
+}
+
+.existing-item span {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.existing-item button {
+    width: auto;
+    padding: 5px 10px;
+    margin: 0;
+    font-size: 12px;
+}
+
+/* ===== نافذة تعديل الألوان ===== */
+.color-picker-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid #ff8c00;
+    z-index: 1001;
+    display: none;
+    width: 90%;
+    max-width: 350px;
+    color: white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.color-picker-modal h3 {
+    color: #ff8c00;
+    text-align: center;
+}
+
+.color-picker-modal input[type=color] {
+    width: 100%;
+    height: 50px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.color-picker-modal label {
+    display: block;
+    margin-top: 15px;
+    color: #ff8c00;
+    font-weight: 600;
+}
+
+.status-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.9);
+    border: 2px solid;
+    color: #fff;
+    font-weight: 600;
+    z-index: 2000;
+    animation: slideIn 0.3s ease;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.status-success { border-color: #28a745; }
+.status-error { border-color: #dc3545; }
+.status-loading { border-color: #ff8c00; }
+
+.delete-mode .item:hover {
+    outline: 2px solid red;
+    cursor: pointer;
+    background: rgba(255,0,0,0.1);
+}
+
+.edit-mode .item:hover {
+    outline: 2px solid #28a745;
+    cursor: pointer;
+    background: rgba(40,167,69,0.1);
+}
+
+.delete-card-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+}
+
+.card:hover .delete-card-btn {
+    opacity: 1;
+}
+
+.light-mode {
+    background: #f6f1e8 !important;
+    color: #2b2b2b !important;
+    animation: none !important;
+}
+
+.light-mode .card {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
+}
+
+.light-mode h1,
+.light-mode h2,
+.light-mode h3 {
+    color: #d97706 !important;
+}
+
+.light-mode .hero {
+    background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
+                url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
+}
+
+.light-mode .name {
+    color: #8b6b4f !important;
+}
+
+.light-mode .price {
+    color: #d97706 !important;
+}
+
+.light-mode .contact {
+    background: #e6d8c3 !important;
+}
+
+.light-mode .dev-window {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #d97706 !important;
+}
+
+.light-mode .dev-window input {
+    background: #fffaf3 !important;
+    border: 1px solid #e6d8c3 !important;
+    color: #2b2b2b !important;
+}
+
+.light-mode .dev-window-v2 {
+    background: rgba(246, 241, 232, 0.95) !important;
+    border: 2px solid #6c5ce7 !important;
+}
+
+.light-mode .dev-window-v2 input {
+    background: #fffaf3 !important;
+    border: 1px solid #6c5ce7 !important;
+    color: #2b2b2b !important;
+}
+
+.cloud-panel {
+    margin-top: 15px;
+    background: rgba(0, 150, 255, 0.1);
+    border: 1px solid #0099ff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.cloud-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.cloud-badge {
+    background: #0066cc;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.live-indicator {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #00ff00;
+    border-radius: 50%;
+    margin-right: 5px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.version-tag {
+    font-size: 10px;
+    background: #333;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 5px;
+}
+
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.category-header h3 {
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+.delete-category {
+    background: #dc3545;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.delete-category:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.backup-section {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.backup-section small {
+    color: #aaa;
+    display: block;
+    margin-top: 5px;
+}
+
+.restart-btn {
+    background: #ffc107 !important;
+    color: #000 !important;
+    font-weight: bold;
+}
+
+.restart-btn:hover {
+    background: #ffdb58 !important;
+}
+
+.code-export {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.code-export button {
+    flex: 1;
+    background: #17a2b8;
+}
+
+.code-export button:hover {
+    background: #138496;
+}
+
+/* ===== قائمة اختيار اللغة ===== */
+.language-menu {
+    position: fixed;
+    top: 70px;
+    right: 90px;
+    background: #1a1a1a;
+    border: 2px solid #ff8c00;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    z-index: 1001;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 150px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.language-menu button {
+    background: #333;
+    color: white;
+    border: 1px solid #ff8c00;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: left;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.language-menu button:hover {
+    background: #ff8c00;
+    transform: translateX(5px);
+}
+
+.light-mode .language-menu {
+    background: #f5f5f5;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button {
+    background: #e0e0e0;
+    color: #333;
+    border-color: #d97706;
+}
+
+.light-mode .language-menu button:hover {
+    background: #d97706;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 40px;
+    }
+    .language-menu {
+        top: 70px;
+        right: 20px;
+        min-width: 120px;
+    }
+    .dev-window-v2 {
+        width: 95%;
+        padding: 15px;
+    }
+}
+</style>
+</head>
+
+<body class="" id="body" data-language="tr" dir="ltr">
+
+<!-- قائمة اختيار اللغة -->
+<div class="language-menu" id="languageMenu">
+    <button onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
+    <button onclick="setLanguage('ru')">🇷🇺 Русский</button>
+    <button onclick="setLanguage('ar')">🇮🇶 العربية</button>
+</div>
+
+<!-- نافذة اختيار نسخة المطور -->
+<div class="dev-version-modal" id="devVersionModal">
+    <h3>🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
+    <p>Hangi sürümü kullanmak istiyorsunuz?</p>
+    <div class="version-buttons">
+        <button class="version-btn v1" onclick="selectDevVersion('v1')">⚙️ V1 (Klasik)</button>
+        <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
+    </div>
+    <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
+</div>
+
+<!-- أزرار التحكم -->
+<div class="control-buttons">
+    <button class="control-btn" id="langBtn">🇹🇷</button>
+</div>
+
+<!-- زر تغيير الوضع -->
+<button id="modeToggle">🌙</button>
+
+<!-- القسم الرئيسي -->
+<section class="hero">
+    <h1 id="secretTrigger">Tosttoo</h1>
+    <!-- تم إخفاء تلميح النقر -->
+    <div class="work-time">🕒 08:00 - 02:30</div>
+    
+    <!-- الزر الآن فقط للنزول -->
+    <button class="btn" onclick="scrollToMenu()" id="scrollBtn">
+        <span id="scrollText">Menüyü Gör</span>
+    </button>
+</section>
+
+<!-- قسم المنيو مع id="menu" -->
+<section class="container" id="menu">
+    <h2 id="menuTitle">Menü <span id="liveVersion" class="version-tag">v1.0</span></h2>
+    <div class="grid" id="menuGrid">
+        <!-- المنيو سيتم تحميله حسب اللغة -->
+    </div>
+</section>
+
+<section class="contact">
+    <h2 id="contactTitle">İletişim</h2>
+    <p>📞 <a href="tel:05321580207" style="color:#ff8c00">05321580207</a></p>
+    <p>📷 <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank" style="color:#ff8c00">Instagram</a></p>
+    <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" width="100%" height="300"></iframe>
+</section>
+
+<!-- لوحة المطور V1 (القديمة) -->
+<div class="dev-window" id="devPanelV1">
+    <h3 id="dragHandle">⚙️ GELİŞTİRİCİ PANELİ V1</h3>
+
+    <div class="dev-section">
+        <h4>💰 Fiyat Düzenle</h4>
+        <input type="number" id="newPrice" placeholder="Yeni fiyat girin">
+        <button onclick="updateMainPrice()" class="save-btn">💾 Fiyatı Kaydet</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>➕ Ürün Ekle</h4>
+        <select id="categorySelect"></select>
+        <input type="text" id="newName" placeholder="Ürün Adı">
+        <input type="text" id="productPrice" placeholder="Fiyat">
+        <button onclick="addProduct()" class="save-btn">✅ Ürün Ekle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" placeholder="Yeni Kategori">
+        <button onclick="addCategory()" class="save-btn">📁 Kategori Ekle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>🎨 Renk Düzenle</h4>
+        <button onclick="openColorPicker()" style="background:#8a2be2;">🎨 Renkleri Düzenle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>🔧 Araçlar</h4>
+        <div style="display: flex; gap: 5px; margin-bottom: 5px;">
+            <button onclick="enableEdit()" style="flex:1; background:#28a745;" id="editModeBtn">✏️ Düzenle</button>
+            <button onclick="toggleDeleteMode()" style="flex:1; background:#dc3545;" id="deleteModeBtn">🗑️ Silme</button>
+        </div>
+        <button onclick="deleteAll()" class="delete-btn">🗑️ Tüm Menü Sil</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>📱 Sosyal Medya</h4>
+        <input type="text" id="newInstagram" placeholder="Instagram Link">
+        <button onclick="changeInstagram()">📷 Instagram Güncelle</button>
+        <input type="text" id="newLocation" placeholder="Konum lat,long">
+        <button onclick="changeLocation()">📍 Konum Güncelle</button>
+    </div>
+
+    <!-- CLOUD PANEL + YEDEKLEME -->
+    <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
+        <h4>💾 VERİ YEDEKLEME (V1)</h4>
+        <div class="cloud-panel">
+            <div class="cloud-stats">
+                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
+                <span>💾 Son Kayıt: <span id="lastCloudSave">-</span></span>
+            </div>
+            
+            <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center; word-break:break-all;">
+                🔗 <strong>API URL:</strong><br>
+                <span style="font-size:11px;">https://api.npoint.io/2b9acf08c13ba5b3b27a</span>
+            </div>
+            
+            <div class="code-export">
+                <button onclick="saveV1Progress()" style="background:#28a745;">📋 Kodu Kopyala (V1)</button>
+                <button onclick="loadV1Progress()" style="background:#ff8c00;">📋 Kodu Yapıştır (V1)</button>
+            </div>
+            
+            <button onclick="saveToCloud()" class="save-btn" style="background:#0066cc; margin-top:10px;" id="cloudSaveBtn">
+                ☁️ BULUTA KAYDET (HERKESE GÖNDER)
+            </button>
+            <button onclick="loadFromCloud()" style="background:#673ab7; margin-top:5px;" id="cloudLoadBtn">
+                📥 BULUTTAN YÜKLE
+            </button>
+            <button onclick="testCloudConnection()" style="background:#28a745; margin-top:5px;">
+                🔌 BAĞLANTI TESTİ
+            </button>
+        </div>
+    </div>
+
+    <!-- Auto-sync -->
+    <div class="dev-section">
+        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
+        </label>
+        <select id="syncInterval">
+            <option value="5">5 saniye</option>
+            <option value="10" selected>10 saniye</option>
+            <option value="30">30 saniye</option>
+            <option value="60">1 dakika</option>
+        </select>
+    </div>
+
+    <button onclick="closeDevV1()" class="close-btn">❌ Çıkış</button>
+</div>
+
+<!-- لوحة المطور V2 المتطورة (مع الصور) -->
+<div class="dev-window-v2" id="devPanelV2">
+    <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ)</h3>
+
+    <!-- قسم: حفظ واستعادة البيانات في V2 -->
+    <div class="dev-section-v2" style="border-color: #ff8c00; background: rgba(255,140,0,0.1);">
+        <h4 style="color: #ff8c00;">💾 VERİ YEDEKLEME (V2)</h4>
+        <div class="cloud-panel" style="border-color: #ff8c00;">
+            <div class="cloud-stats">
+                <span>📦 Kategori Resmi: <span style="color:#ff8c00" id="v2CategoryCount">0</span></span>
+                <span>🖼️ Ürün Resmi: <span style="color:#6c5ce7" id="v2ProductCount">0</span></span>
+            </div>
+            <div class="code-export">
+                <button onclick="saveV2Progress()" style="background:#28a745;">📋 Kodu Kopyala (V2)</button>
+                <button onclick="loadV2Progress()" style="background:#ff8c00;">📋 Kodu Yapıştır (V2)</button>
+            </div>
+            <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
+        </div>
+    </div>
+
+    <!-- قسم: Var Olan Kategoriye Resim Ekle -->
+    <div class="dev-section-v2">
+        <h4>📁 Var Olan Kategoriye Resim Ekle</h4>
+        <select id="existingCategorySelect">
+            <option value="">Kategori seçin</option>
+        </select>
+        <div class="image-upload-section">
+            <label>Kategori Resmi Yükle:</label>
+            <input type="file" id="categoryImageExist" accept="image/*" onchange="previewCategoryExistImage()">
+            <div class="image-preview" id="categoryExistImagePreview">
+                <span>Resim önizleme</span>
+            </div>
+        </div>
+        <button onclick="addImageToExistingCategory()">📁 Kategoriye Resim Ekle</button>
+    </div>
+
+    <!-- قسم: Var Olan Ürüne Resim Ekle -->
+    <div class="dev-section-v2">
+        <h4>📦 Var Olan Ürüne Resim Ekle</h4>
+        <select id="existingCategoryForProductSelect">
+            <option value="">Kategori seçin</option>
+        </select>
+        <select id="existingProductSelect" disabled>
+            <option value="">Önce kategori seçin</option>
+        </select>
+        <div class="image-upload-section">
+            <label>Ürün Resmi Yükle:</label>
+            <input type="file" id="productImageExist" accept="image/*" onchange="previewProductExistImage()">
+            <div class="image-preview" id="productExistImagePreview">
+                <span>Resim önizleme</span>
+            </div>
+        </div>
+        <button onclick="addImageToExistingProduct()">📦 Ürüne Resim Ekle</button>
+    </div>
+
+    <!-- قسم: Yeni Kategori (Resimli) -->
+    <div class="dev-section-v2">
+        <h4>➕ Yeni Kategori (Resimli)</h4>
+        <input type="text" id="newCategoryV2" placeholder="Kategori Adı">
+        <div class="image-upload-section">
+            <label>Kategori Resmi:</label>
+            <input type="file" id="categoryImage" accept="image/*" onchange="previewCategoryImage()">
+            <div class="image-preview" id="categoryImagePreview">
+                <span>Resim önizleme</span>
+            </div>
+        </div>
+        <button onclick="addCategoryWithImage()">📁 Kategori Ekle (Resimli)</button>
+    </div>
+
+    <!-- قسم: Yeni Ürün (Resimli) -->
+    <div class="dev-section-v2">
+        <h4>➕ Yeni Ürün (Resimli)</h4>
+        <select id="categorySelectV2"></select>
+        <input type="text" id="newNameV2" placeholder="Ürün Adı">
+        <input type="text" id="productPriceV2" placeholder="Fiyat">
+        <div class="image-upload-section">
+            <label>Ürün Resmi:</label>
+            <input type="file" id="productImage" accept="image/*" onchange="previewProductImage()">
+            <div class="image-preview" id="productImagePreview">
+                <span>Resim önizleme</span>
+            </div>
+        </div>
+        <button onclick="addProductWithImage()">✅ Ürün Ekle (Resimli)</button>
+    </div>
+
+    <!-- قسم: Resim Galerisi -->
+    <div class="dev-section-v2">
+        <h4>🖼️ Resim Galerisi</h4>
+        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <button onclick="showAllImages()" style="flex:1; background:#6c5ce7;">Tümü</button>
+            <button onclick="showCategoryImages()" style="flex:1; background:#ff8c00;">Kategoriler</button>
+            <button onclick="showProductImages()" style="flex:1; background:#28a745;">Ürünler</button>
+        </div>
+        <div id="imageGallery" class="image-gallery">
+            <!-- الصور ستظهر هنا -->
+        </div>
+    </div>
+
+    <!-- قسم: CLOUD SYNC للصور -->
+    <div class="dev-section-v2">
+        <h4>☁️ CLOUD SYNC (Resimli)</h4>
+        <button onclick="saveImagesToCloud()" class="save-btn" style="background:#0066cc;">☁️ Resimleri Buluta Kaydet</button>
+        <button onclick="loadImagesFromCloud()" style="background:#673ab7; margin-top:5px;">📥 Resimleri Buluttan Yükle</button>
+    </div>
+
+    <button onclick="closeDevV2()" class="close-btn">❌ Çıkış</button>
+</div>
+
+<!-- نافذة تعديل الألوان -->
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Değiştir</h3>
+    <label>Kategori Başlığı (h3)</label>
+    <input type="color" id="colorCategory" value="#ff8c00">
+    <label>Ürün Adı (.name)</label>
+    <input type="color" id="colorName" value="#ff8c00">
+    <label>Fiyat (.price)</label>
+    <input type="color" id="colorPrice" value="#ffffff">
+    <button onclick="applyColors()">Renkleri Uygula</button>
+    <button onclick="closeColorPicker()">Kapat</button>
+</div>
+
+<div id="statusMessage" class="status-message" style="display:none;"></div>
+
+<script>
+// ===== الرابط الخاص بك =====
+const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
+const CLOUD_DOCS_URL = 'https://www.npoint.io/docs/2b9acf08c13ba5b3b27a';
+
+// ===== بيانات المنتجات الكاملة =====
+const ORIGINAL_MENU = [
+    {
+        category: "TOST ÇEŞİTLERİ",
+        items: [
+            { name: "Kaşarlı tost", price: "120₺" },
+            { name: "Sucuklu tost", price: "120₺" },
+            { name: "Kaşar sucuk mix", price: "150₺" },
+            { name: "Atom (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺" },
+            { name: "3 peynirli tost", price: "150₺" },
+            { name: "Kavurmalı tost", price: "200₺" },
+            { name: "Ayvalık tostu", price: "200₺" },
+            { name: "Simit tost (2 kişilik)", price: "350₺" },
+            { name: "Diyet tost (light kaşar,domates,biber,diyet ekmeği)", price: "150₺" },
+            { name: "Bazlama tost", price: "200₺" },
+            { name: "Bazlama kavurmalı", price: "250₺" },
+            { name: "Kumru", price: "200₺" }
+        ]
+    },
+    {
+        category: "SANDWİCHLER",
+        items: [
+            { name: "Karışık sandwich", price: "150₺" },
+            { name: "Tonbalıklı sandwich", price: "200₺" },
+            { name: "Tavuklu sandwich", price: "170₺" }
+        ]
+    },
+    {
+        category: "ATIŞTIRMALIKLAR",
+        items: [
+            { name: "Patates cips", price: "120₺" },
+            { name: "Tavuk parçacıkları", price: "150₺" },
+            { name: "6 lı soğan halkası", price: "60₺" }
+        ]
+    },
+    {
+        category: "SALATALAR",
+        items: [
+            { name: "Tonbalıklı salata", price: "250₺" },
+            { name: "Tavuklu salata", price: "250₺" },
+            { name: "Peynirli salata", price: "200₺" }
+        ]
+    },
+    {
+        category: "MAKARNALAR",
+        items: [
+            { name: "Bolonez makarna", price: "250₺" },
+            { name: "Tavuklu makarna", price: "250₺" },
+            { name: "Peynirli makarna", price: "200₺" },
+            { name: "Tonbalıklı makarna", price: "250₺" }
+        ]
+    },
+    {
+        category: "BURGERLER",
+        items: [
+            { name: "Classik hamburger", price: "300₺" },
+            { name: "Cheese burger", price: "320₺" },
+            { name: "Tavuk burger", price: "280₺" }
+        ]
+    },
+    {
+        category: "PİZZALAR",
+        items: [
+            { name: "Margarita", price: "200₺" },
+            { name: "Sucuklu pizza", price: "250₺" },
+            { name: "Karışık pizza", price: "300₺" },
+            { name: "Kavurmalı pizza", price: "350₺" },
+            { name: "Tonbalıklı pizza", price: "300₺" },
+            { name: "Vegi pizza", price: "230₺" },
+            { name: "Dört Peynirli pizza", price: "300₺" }
+        ]
+    },
+    {
+        category: "KAHVALTILAR",
+        items: [
+            { name: "Kahvaltı tabağı", price: "250₺" },
+            { name: "Serpme kahvaltı (kişi başı)", price: "300₺" },
+            { name: "Menemen", price: "200₺" },
+            { name: "Sucuklu yumurta", price: "200₺" },
+            { name: "Sahanda yumurta", price: "150₺" },
+            { name: "Peynirli yumurta", price: "170₺" },
+            { name: "Kavurmalı yumurta", price: "250₺" }
+        ]
+    },
+    {
+        category: "SICAK İÇECEKLER",
+        items: [
+            { name: "Çay", price: "20₺" },
+            { name: "Ada çayı", price: "20₺" },
+            { name: "Bitki çayı", price: "30₺" },
+            { name: "Türk kahvesi", price: "60₺" },
+            { name: "Osmanlı kahvesi", price: "80₺" },
+            { name: "Menengiç kahvesi", price: "80₺" }
+        ]
+    },
+    {
+        category: "SOĞUK İÇECEKLER",
+        items: [
+            { name: "Su", price: "20₺" },
+            { name: "Soda", price: "30₺" },
+            { name: "Meyveli soda", price: "30₺" },
+            { name: "Beypazarı co'ala", price: "30₺" },
+            { name: "Çamlıca portakal", price: "30₺" },
+            { name: "Niğde gazozu", price: "30₺" },
+            { name: "Ice tea", price: "40₺" },
+            { name: "Ayran küçük", price: "20₺" },
+            { name: "Ayran büyük", price: "30₺" },
+            { name: "Churchill", price: "50₺" }
+        ]
+    },
+    {
+        category: "TATLILAR",
+        items: [
+            { name: "Fırında sütlaç", price: "120₺" },
+            { name: "Sufle", price: "120₺" }
+        ]
+    }
+];
+
+// ===== بيانات المنتجات للغات الأخرى =====
+const MENU_DATA = {
+    tr: ORIGINAL_MENU,
+    en: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    })),
+    ru: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    })),
+    ar: ORIGINAL_MENU.map(cat => ({
+        category: cat.category,
+        items: cat.items.map(item => ({
+            name: item.name,
+            price: item.price
+        }))
+    }))
+};
+
+// ===== متغيرات الصور =====
+let categoryImages = {};
+let productImages = {};
+
+// ===== دوال حفظ واستعادة البيانات في V1 =====
+function saveV1Progress() {
+    showStatus('📋 V1 verileri kopyalanıyor...', 'loading');
+    
+    const progress = {
+        menu: getCurrentMenu(),
+        colors: {
+            category: localStorage.getItem('colorCategory'),
+            name: localStorage.getItem('colorName'),
+            price: localStorage.getItem('colorPrice')
+        },
+        settings: {
+            lang: currentLang,
+            theme: localStorage.getItem('theme'),
+            version: currentVersion
+        },
+        savedAt: new Date().toISOString()
+    };
+    
+    const jsonString = JSON.stringify(progress, null, 2);
+    
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showStatus('✅ V1 verileri kopyalandı! Bana gönderebilirsin!', 'success');
+    }).catch(() => {
+        prompt('V1 kodu kopyala ve bana gönder:', jsonString);
+    });
+}
+
+function loadV1Progress() {
+    const code = prompt('Benden aldığın V1 kodunu yapıştır:');
+    if (!code) return;
+    
+    showStatus('📥 V1 verileri yükleniyor...', 'loading');
+    
+    try {
+        const data = JSON.parse(code);
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+        }
+        
+        if (data.colors) {
+            if (data.colors.category) {
+                document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
+                localStorage.setItem('colorCategory', data.colors.category);
+            }
+            if (data.colors.name) {
+                document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
+                localStorage.setItem('colorName', data.colors.name);
+            }
+            if (data.colors.price) {
+                document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
+                localStorage.setItem('colorPrice', data.colors.price);
+            }
+        }
+        
+        if (data.settings) {
+            if (data.settings.lang) {
+                currentLang = data.settings.lang;
+                setLanguage(currentLang);
+            }
+            if (data.settings.theme) {
+                if (data.settings.theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    modeToggle.innerHTML = '☀️';
+                }
+                localStorage.setItem('theme', data.settings.theme);
+            }
+            if (data.settings.version) {
+                currentVersion = data.settings.version;
+                updateVersion();
+            }
+        }
+        
+        showStatus('✅ V1 verileri yüklendi!', 'success');
+        
+    } catch(error) {
+        showStatus('❌ Geçersiz V1 kodu!', 'error');
+    }
+}
+
+// ===== دوال حفظ واستعادة البيانات في V2 =====
+function saveV2Progress() {
+    showStatus('📋 V2 verileri kopyalanıyor...', 'loading');
+    
+    const progress = {
+        menu: getCurrentMenu(),
+        categoryImages: categoryImages,
+        productImages: productImages,
+        colors: {
+            category: localStorage.getItem('colorCategory'),
+            name: localStorage.getItem('colorName'),
+            price: localStorage.getItem('colorPrice')
+        },
+        settings: {
+            lang: currentLang,
+            theme: localStorage.getItem('theme'),
+            version: currentVersion
+        },
+        savedAt: new Date().toISOString()
+    };
+    
+    const jsonString = JSON.stringify(progress, null, 2);
+    
+    navigator.clipboard.writeText(jsonString).then(() => {
+        showStatus('✅ V2 verileri kopyalandı! Bana gönderebilirsin!', 'success');
+    }).catch(() => {
+        prompt('V2 kodu kopyala ve bana gönder:', jsonString);
+    });
+}
+
+function loadV2Progress() {
+    const code = prompt('Benden aldığın V2 kodunu yapıştır:');
+    if (!code) return;
+    
+    showStatus('📥 V2 verileri yükleniyor...', 'loading');
+    
+    try {
+        const data = JSON.parse(code);
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+        }
+        
+        if (data.categoryImages) {
+            categoryImages = data.categoryImages;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        }
+        
+        if (data.productImages) {
+            productImages = data.productImages;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+        }
+        
+        if (data.colors) {
+            if (data.colors.category) {
+                document.querySelectorAll('.card h3').forEach(el => el.style.color = data.colors.category);
+                localStorage.setItem('colorCategory', data.colors.category);
+            }
+            if (data.colors.name) {
+                document.querySelectorAll('.name').forEach(el => el.style.color = data.colors.name);
+                localStorage.setItem('colorName', data.colors.name);
+            }
+            if (data.colors.price) {
+                document.querySelectorAll('.price').forEach(el => el.style.color = data.colors.price);
+                localStorage.setItem('colorPrice', data.colors.price);
+            }
+        }
+        
+        if (data.settings) {
+            if (data.settings.lang) {
+                currentLang = data.settings.lang;
+                setLanguage(currentLang);
+            }
+            if (data.settings.theme) {
+                if (data.settings.theme === 'light') {
+                    document.body.classList.add('light-mode');
+                    modeToggle.innerHTML = '☀️';
+                }
+                localStorage.setItem('theme', data.settings.theme);
+            }
+            if (data.settings.version) {
+                currentVersion = data.settings.version;
+                updateVersion();
+            }
+        }
+        
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('✅ V2 verileri yüklendi!', 'success');
+        
+    } catch(error) {
+        showStatus('❌ Geçersiz V2 kodu!', 'error');
+    }
+}
+
+// ===== دالة الريستارت (تعيد الموقع للحالة الأصلية) =====
+function performRestart() {
+    console.log('🔄 Restart yapılıyor - menü sıfırlanıyor');
+    
+    // عرض المنيو الأصلي
+    displayMenu(ORIGINAL_MENU);
+    
+    // حفظ في localStorage
+    localStorage.setItem('tosttoo_menu', JSON.stringify(ORIGINAL_MENU));
+    
+    // تحديث الإصدار
+    currentVersion = '1.0.0';
+    localStorage.setItem('menuVersion', currentVersion);
+    updateVersion();
+    
+    showStatus('🔄 Menü yenilendi!', 'success');
+}
+
+// ===== دالة التمرير للقوائم =====
+function scrollToMenu() {
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== إظهار/إخفاء قائمة اللغة =====
+function toggleLanguageMenu() {
+    const menu = document.getElementById('languageMenu');
+    if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+    } else {
+        menu.style.display = 'flex';
+    }
+}
+
+document.addEventListener('click', function(event) {
+    const langBtn = document.getElementById('langBtn');
+    const langMenu = document.getElementById('languageMenu');
+    
+    if (!langBtn.contains(event.target) && !langMenu.contains(event.target)) {
+        langMenu.style.display = 'none';
+    }
+});
+
+function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', currentLang);
+    
+    const langBtn = document.getElementById('langBtn');
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
+    else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
+    
+    if (currentLang === 'ar') {
+        document.body.setAttribute('dir', 'rtl');
+    } else {
+        document.body.setAttribute('dir', 'ltr');
+    }
+    
+    const langMenu = document.getElementById('languageMenu');
+    if (langMenu) langMenu.style.display = 'none';
+    
+    applyLanguage();
+}
+
+let isDeveloper = false;
+let deleteMode = false;
+let editMode = false;
+let currentVersion = localStorage.getItem('menuVersion') || '1.0.0';
+let autoSyncInterval = null;
+let lastCloudData = null;
+let currentLang = localStorage.getItem('lang') || 'tr';
+
+function getText(key) {
+    const texts = {
+        tr: {
+            menu: 'Menü',
+            contact: 'İletişim',
+            view_menu: 'Menüyü Gör'
+        },
+        en: {
+            menu: 'Menu',
+            contact: 'Contact',
+            view_menu: 'View Menu'
+        },
+        ru: {
+            menu: 'Меню',
+            contact: 'Контакты',
+            view_menu: 'Посмотреть меню'
+        },
+        ar: {
+            menu: 'القائمة',
+            contact: 'اتصل بنا',
+            view_menu: 'عرض القائمة'
+        }
+    };
+    
+    return texts[currentLang]?.[key] || texts.tr[key];
+}
+
+function applyLanguage() {
+    document.getElementById('menuTitle').innerText = getText('menu');
+    document.getElementById('contactTitle').innerText = getText('contact');
+    document.getElementById('scrollText').innerText = getText('view_menu');
+}
+
+// ===== تحميل المنيو عند فتح الصفحة =====
+window.addEventListener('load', function() {
+    // 🔄 ريستارت عند كل تحميل صفحة (يعيد الموقع للحالة الأصلية)
+    performRestart();
+    
+    // إعداد زر اللغة
+    const langBtn = document.getElementById('langBtn');
+    if (currentLang === 'tr') langBtn.textContent = '🇹🇷';
+    else if (currentLang === 'en') langBtn.textContent = '🇬🇧';
+    else if (currentLang === 'ru') langBtn.textContent = '🇷🇺';
+    else if (currentLang === 'ar') langBtn.textContent = '🇮🇶';
+    
+    langBtn.onclick = toggleLanguageMenu;
+    applyLanguage();
+    loadImages();
+    
+    // تحميل البيانات من السحاب بعد الريستارت
+    loadMenuFromCloud();
+    testCloudConnection();
+    startAutoSync();
+});
+
+function displayMenu(menuData) {
+    const menuGrid = document.getElementById('menuGrid');
+    menuGrid.innerHTML = '';
+    
+    menuData.forEach((category, catIndex) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-category-index', catIndex);
+        
+        if (categoryImages[category.category]) {
+            card.classList.add('has-image');
+            const catImg = document.createElement('img');
+            catImg.src = categoryImages[category.category];
+            catImg.className = 'card-image';
+            catImg.alt = category.category;
+            card.appendChild(catImg);
+        }
+        
+        const title = document.createElement('h3');
+        title.textContent = category.category;
+        card.appendChild(title);
+        
+        category.items.forEach((item, itemIndex) => {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item';
+            
+            if (productImages[catIndex] && productImages[catIndex][item.name]) {
+                itemDiv.classList.add('has-image');
+                const prodImg = document.createElement('img');
+                prodImg.src = productImages[catIndex][item.name];
+                prodImg.className = 'item-image';
+                prodImg.alt = item.name;
+                itemDiv.appendChild(prodImg);
+            }
+            
+            itemDiv.setAttribute('data-category', catIndex);
+            itemDiv.setAttribute('data-item', itemIndex);
+            itemDiv.innerHTML += `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
+            
+            if (isDeveloper) {
+                itemDiv.addEventListener('click', function(e) {
+                    if (deleteMode) {
+                        e.stopPropagation();
+                        deleteProduct(catIndex, itemIndex);
+                    } else if (editMode) {
+                        e.stopPropagation();
+                        editProduct(catIndex, itemIndex);
+                    }
+                });
+            }
+            
+            card.appendChild(itemDiv);
+        });
+        
+        menuGrid.appendChild(card);
+    });
+    
+    updateCategorySelect();
+    updateCategorySelectV2();
+    updateExistingCategorySelect();
+    updateImageStats();
+}
+
+function deleteCategory(catIndex) {
+    if (!isDeveloper) return;
+    
+    if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
+        const menu = getCurrentMenu();
+        const categoryName = menu[catIndex].category;
+        
+        if (categoryImages[categoryName]) {
+            delete categoryImages[categoryName];
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        }
+        
+        menu.splice(catIndex, 1);
+        saveMenuToLocal(menu);
+        showStatus('✅ Kategori silindi!', 'success');
+    }
+}
+
+function deleteProduct(catIndex, itemIndex) {
+    if (!isDeveloper || !deleteMode) return;
+    
+    const menu = getCurrentMenu();
+    const productName = menu[catIndex].items[itemIndex].name;
+    
+    if (productImages[catIndex] && productImages[catIndex][productName]) {
+        delete productImages[catIndex][productName];
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+    }
+    
+    menu[catIndex].items.splice(itemIndex, 1);
+    saveMenuToLocal(menu);
+    showStatus('✅ Silindi!', 'success');
+}
+
+function editProduct(catIndex, itemIndex) {
+    if (!isDeveloper || !editMode) return;
+    
+    const menu = getCurrentMenu();
+    const product = menu[catIndex].items[itemIndex];
+    
+    const newName = prompt('Yeni ürün adı:', product.name);
+    if (!newName) return;
+    
+    const newPrice = prompt('Yeni fiyat:', product.price);
+    if (!newPrice) return;
+    
+    menu[catIndex].items[itemIndex] = { name: newName, price: newPrice };
+    saveMenuToLocal(menu);
+    showStatus('✅ Ürün güncellendi!', 'success');
+}
+
+function getCurrentMenu() {
+    const menu = [];
+    document.querySelectorAll('.card').forEach(card => {
+        const category = card.querySelector('h3').textContent;
+        const items = [];
+        card.querySelectorAll('.item').forEach(item => {
+            items.push({
+                name: item.querySelector('.name').textContent,
+                price: item.querySelector('.price').textContent
+            });
+        });
+        menu.push({ category, items });
+    });
+    return menu;
+}
+
+function saveMenuToLocal(menu) {
+    localStorage.setItem('tosttoo_menu', JSON.stringify(menu));
+    displayMenu(menu);
+}
+
+async function loadMenuFromCloud() {
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        lastCloudData = data;
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus('✅ Menü clouddan yüklendi!', 'success');
+        }
+    } catch(error) {
+        console.log('Cloud yükleme hatası');
+    }
+}
+
+async function saveToCloud() {
+    showStatus("☁️ Buluta kaydediliyor...", "loading");
+    document.getElementById('cloudSaveBtn').disabled = true;
+    
+    try {
+        const menuData = getCurrentMenu();
+        
+        const saveData = {
+            menu: menuData,
+            version: incrementVersion(currentVersion),
+            lastUpdate: new Date().toISOString()
+        };
+        
+        const response = await fetch(CLOUD_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(saveData)
+        });
+        
+        if (response.ok) {
+            showStatus("✅ Buluta kaydedildi! Herkes görecek!", "success");
+            
+            const saveTime = new Date().toLocaleTimeString();
+            localStorage.setItem('lastCloudSave', saveTime);
+            document.getElementById('lastCloudSave').innerText = saveTime;
+            
+            currentVersion = saveData.version;
+            localStorage.setItem('menuVersion', currentVersion);
+            document.getElementById('cloudVersion').innerText = currentVersion;
+            document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+            
+        } else {
+            throw new Error('HTTP error: ' + response.status);
+        }
+        
+    } catch(error) {
+        console.error('Kayıt hatası:', error);
+        showStatus("❌ Kayıt başarısız! Manuel yöntemi dene.", "error");
+        setTimeout(() => manualSaveGuide(), 2000);
+    }
+    
+    document.getElementById('cloudSaveBtn').disabled = false;
+}
+
+async function loadFromCloud() {
+    showStatus("📥 Buluttan yükleniyor...", "loading");
+    document.getElementById('cloudLoadBtn').disabled = true;
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        const data = await response.json();
+        
+        if (data.menu && data.menu.length > 0) {
+            displayMenu(data.menu);
+            localStorage.setItem('tosttoo_menu', JSON.stringify(data.menu));
+            showStatus("✅ Buluttan yüklendi!", "success");
+        }
+    } catch(error) {
+        showStatus("❌ Yükleme başarısız!", "error");
+    }
+    
+    document.getElementById('cloudLoadBtn').disabled = false;
+}
+
+async function testCloudConnection() {
+    showStatus("🔌 API bağlantısı test ediliyor...", "loading");
+    
+    try {
+        const response = await fetch(CLOUD_API_URL);
+        
+        if (response.ok) {
+            document.getElementById('apiStatus').innerText = 'Bağlı';
+            document.getElementById('apiStatus').style.color = '#00ff00';
+            document.getElementById('syncStatus').innerText = 'Bağlı';
+            document.getElementById('syncStatus').style.color = '#00ff00';
+            showStatus("✅ API bağlantısı başarılı!", "success");
+        } else {
+            throw new Error('Bağlantı hatası');
+        }
+        
+    } catch(error) {
+        document.getElementById('apiStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('apiStatus').style.color = '#ff0000';
+        document.getElementById('syncStatus').innerText = 'Bağlantı Yok';
+        document.getElementById('syncStatus').style.color = '#ff0000';
+        showStatus("❌ API bağlantısı başarısız!", "error");
+    }
+}
+
+function incrementVersion(version) {
+    const parts = version.split('.');
+    parts[2] = (parseInt(parts[2]) + 1).toString();
+    return parts.join('.');
+}
+
+function updateVersion() {
+    document.getElementById('liveVersion').innerText = 'v' + currentVersion;
+    document.getElementById('cloudVersion').innerText = currentVersion;
+}
+
+function startAutoSync() {
+    if (autoSyncInterval) clearInterval(autoSyncInterval);
+    
+    const interval = parseInt(document.getElementById('syncInterval')?.value || '10') * 1000;
+    
+    autoSyncInterval = setInterval(() => {
+        if (document.getElementById('autoSyncCheckbox')?.checked) {
+            fetch(CLOUD_API_URL)
+            .then(response => response.json())
+            .then(data => {
+                if (JSON.stringify(data) !== JSON.stringify(lastCloudData)) {
+                    lastCloudData = data;
+                    if (data.menu && data.menu.length > 0) {
+                        displayMenu(data.menu);
+                        showStatus("🔄 Menü güncellendi!", "success");
+                    }
+                }
+            })
+            .catch(() => {});
+        }
+    }, interval);
+}
+
+function manualSaveGuide() {
+    const menuData = getCurrentMenu();
+    const jsonData = JSON.stringify({ menu: menuData }, null, 2);
+    
+    const guideMessage = 
+        "📋 MANUEL KAYIT İÇİN:\n\n" +
+        "1️⃣ Şu linki aç: " + CLOUD_DOCS_URL + "\n\n" +
+        "2️⃣ Giriş yap (GitHub/Google ile)\n\n" +
+        "3️⃣ 'Edit' butonuna bas\n\n" +
+        "4️⃣ Tüm verileri sil ve şunu yapıştır:\n\n" +
+        jsonData + "\n\n" +
+        "5️⃣ 'Save' butonuna bas\n\n" +
+        "6️⃣ Şu linki aç ve kontrol et:\n" + CLOUD_API_URL;
+    
+    alert(guideMessage);
+    navigator.clipboard?.writeText(jsonData);
+    showStatus("📋 JSON kopyalandı!", "success");
+}
+
+function showStatus(message, type) {
+    let oldStatus = document.querySelector(".status-message");
+    if (oldStatus) oldStatus.remove();
+
+    let status = document.createElement("div");
+    status.className = `status-message status-${type}`;
+    status.innerText = message;
+    document.body.appendChild(status);
+
+    setTimeout(() => status.remove(), 3000);
+}
+
+// ===== دوال الدخول للمطور (F5 + 7 نقرات) =====
+document.addEventListener('keydown', function(e) {
+    // F5 للمطور فقط
+    if (e.key === 'F5') {
+        e.preventDefault();
+        
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            document.getElementById('devVersionModal').style.display = 'flex';
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
+
+let clickCount = 0;
+let clickTimer = null;
+
+document.getElementById('secretTrigger').addEventListener('click', function() {
+    clickCount++;
+    
+    if (clickTimer) clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => clickCount = 0, 3000);
+    
+    if (clickCount === 7) {
+        clearTimeout(clickTimer);
+        clickCount = 0;
+        
+        let pass = prompt("🔐 Geliştirici şifresi:");
+        if (pass === "momotunc0702") {
+            document.getElementById('devVersionModal').style.display = 'flex';
+        } else {
+            showStatus("❌ Yanlış şifre!", "error");
+        }
+    }
+});
+
+function closeVersionModal() {
+    document.getElementById('devVersionModal').style.display = 'none';
+}
+
+function selectDevVersion(version) {
+    closeVersionModal();
+    isDeveloper = true;
+    
+    if (version === 'v1') {
+        document.getElementById('devPanelV1').style.display = 'block';
+        updateCategorySelect();
+    } else {
+        document.getElementById('devPanelV2').style.display = 'block';
+        updateCategorySelectV2();
+        updateExistingCategorySelect();
+        updateImageStats();
+    }
+}
+
+// ===== دوال V1 =====
+function closeDevV1() {
+    document.getElementById('devPanelV1').style.display = 'none';
+    isDeveloper = false;
+    deleteMode = false;
+    editMode = false;
+    document.getElementById('menuGrid').classList.remove('delete-mode', 'edit-mode');
+}
+
+function updateCategorySelect() {
+    let select = document.getElementById('categorySelect');
+    if (select) {
+        select.innerHTML = '';
+        document.querySelectorAll('.card h3').forEach((h, i) => {
+            select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
+        });
+    }
+}
+
+function addCategory() {
+    if (!isDeveloper) return;
+    
+    let name = document.getElementById('newCategory').value.trim();
+    if (!name) {
+        showStatus('Kategori adı girin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    menu.push({ category: name, items: [] });
+    saveMenuToLocal(menu);
+    
+    document.getElementById('newCategory').value = '';
+    showStatus('✅ Kategori eklendi!', 'success');
+}
+
+function addProduct() {
+    if (!isDeveloper) return;
+    
+    let name = document.getElementById('newName').value.trim();
+    let price = document.getElementById('productPrice').value.trim();
+    let index = document.getElementById('categorySelect').value;
+    
+    if (!name || !price) {
+        showStatus('Ürün adı ve fiyat girin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    menu[index].items.push({ name, price });
+    saveMenuToLocal(menu);
+    
+    document.getElementById('newName').value = '';
+    document.getElementById('productPrice').value = '';
+    showStatus('✅ Ürün eklendi!', 'success');
+}
+
+function enableEdit() {
+    editMode = !editMode;
+    deleteMode = false;
+    document.getElementById('menuGrid').classList.toggle('edit-mode', editMode);
+    document.getElementById('menuGrid').classList.remove('delete-mode');
+    showStatus(editMode ? '✏️ Düzenleme modu aktif' : '✏️ Düzenleme kapalı', 'success');
+}
+
+function toggleDeleteMode() {
+    deleteMode = !deleteMode;
+    editMode = false;
+    document.getElementById('menuGrid').classList.toggle('delete-mode', deleteMode);
+    document.getElementById('menuGrid').classList.remove('edit-mode');
+    showStatus(deleteMode ? '🗑️ Silme modu aktif' : '🗑️ Silme kapalı', 'success');
+}
+
+function updateMainPrice() {
+    showStatus('Fiyat güncellendi', 'success');
+}
+
+function deleteAll() {
+    if (!isDeveloper) return;
+    if (confirm('Tüm menü silinsin mi?')) {
+        localStorage.removeItem('tosttoo_menu');
+        localStorage.removeItem('categoryImages');
+        localStorage.removeItem('productImages');
+        categoryImages = {};
+        productImages = {};
+        displayMenu(ORIGINAL_MENU);
+        showStatus('Varsayılan menü yüklendi', 'success');
+    }
+}
+
+function changeInstagram() {
+    let val = document.getElementById('newInstagram').value.trim();
+    if (val) {
+        document.getElementById('instaLink').href = val;
+        localStorage.setItem('insta', val);
+        showStatus('Instagram güncellendi', 'success');
+    }
+}
+
+function changeLocation() {
+    let val = document.getElementById('newLocation').value.trim();
+    if (val) {
+        document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${val}&output=embed`;
+        localStorage.setItem('map', val);
+        showStatus('Konum güncellendi', 'success');
+    }
+}
+
+function openColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'block';
+}
+
+function closeColorPicker() {
+    document.getElementById('colorPickerModal').style.display = 'none';
+}
+
+function applyColors() {
+    let colorCategory = document.getElementById('colorCategory').value;
+    let colorName = document.getElementById('colorName').value;
+    let colorPrice = document.getElementById('colorPrice').value;
+
+    document.querySelectorAll('.card h3').forEach(el => el.style.color = colorCategory);
+    document.querySelectorAll('.name').forEach(el => el.style.color = colorName);
+    document.querySelectorAll('.price').forEach(el => el.style.color = colorPrice);
+
+    localStorage.setItem('colorCategory', colorCategory);
+    localStorage.setItem('colorName', colorName);
+    localStorage.setItem('colorPrice', colorPrice);
+
+    closeColorPicker();
+    showStatus('🎨 Renkler uygulandı!', 'success');
+}
+
+// ===== دوال V2 (مع الصور) =====
+function closeDevV2() {
+    document.getElementById('devPanelV2').style.display = 'none';
+    isDeveloper = false;
+}
+
+function updateCategorySelectV2() {
+    let select = document.getElementById('categorySelectV2');
+    if (select) {
+        select.innerHTML = '';
+        document.querySelectorAll('.card h3').forEach((h, i) => {
+            select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
+        });
+    }
+}
+
+function updateExistingCategorySelect() {
+    let select = document.getElementById('existingCategorySelect');
+    let productSelect = document.getElementById('existingCategoryForProductSelect');
+    
+    if (select) {
+        select.innerHTML = '<option value="">Kategori seçin</option>';
+        document.querySelectorAll('.card h3').forEach((h, i) => {
+            select.innerHTML += `<option value="${i}">${h.textContent}</option>`;
+        });
+    }
+    
+    if (productSelect) {
+        productSelect.innerHTML = '<option value="">Kategori seçin</option>';
+        document.querySelectorAll('.card h3').forEach((h, i) => {
+            productSelect.innerHTML += `<option value="${i}">${h.textContent}</option>`;
+        });
+    }
+}
+
+document.getElementById('existingCategoryForProductSelect')?.addEventListener('change', function() {
+    const catIndex = this.value;
+    const productSelect = document.getElementById('existingProductSelect');
+    
+    if (catIndex && productSelect) {
+        productSelect.disabled = false;
+        productSelect.innerHTML = '<option value="">Ürün seçin</option>';
+        
+        const menu = getCurrentMenu();
+        if (menu[catIndex] && menu[catIndex].items) {
+            menu[catIndex].items.forEach((item, i) => {
+                productSelect.innerHTML += `<option value="${i}">${item.name}</option>`;
+            });
+        }
+    } else if (productSelect) {
+        productSelect.disabled = true;
+        productSelect.innerHTML = '<option value="">Önce kategori seçin</option>';
+    }
+});
+
+function previewCategoryImage() {
+    const file = document.getElementById('categoryImage').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('categoryImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewProductImage() {
+    const file = document.getElementById('productImage').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('productImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewCategoryExistImage() {
+    const file = document.getElementById('categoryImageExist').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('categoryExistImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function previewProductExistImage() {
+    const file = document.getElementById('productImageExist').files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById('productExistImagePreview');
+            preview.innerHTML = `<img src="${e.target.result}" style="max-width:100%; max-height:100%; object-fit:contain;">`;
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function addImageToExistingCategory() {
+    if (!isDeveloper) return;
+    
+    const catIndex = document.getElementById('existingCategorySelect').value;
+    const file = document.getElementById('categoryImageExist').files[0];
+    
+    if (!catIndex) {
+        showStatus('Kategori seçin!', 'error');
+        return;
+    }
+    
+    if (!file) {
+        showStatus('Resim seçin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    const categoryName = menu[catIndex].category;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        categoryImages[categoryName] = e.target.result;
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        
+        displayMenu(menu);
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('✅ Kategori resmi eklendi!', 'success');
+        
+        document.getElementById('categoryImageExist').value = '';
+        document.getElementById('categoryExistImagePreview').innerHTML = '<span>Resim önizleme</span>';
+    }
+    reader.readAsDataURL(file);
+}
+
+function addImageToExistingProduct() {
+    if (!isDeveloper) return;
+    
+    const catIndex = document.getElementById('existingCategoryForProductSelect').value;
+    const prodIndex = document.getElementById('existingProductSelect').value;
+    const file = document.getElementById('productImageExist').files[0];
+    
+    if (!catIndex || !prodIndex) {
+        showStatus('Kategori ve ürün seçin!', 'error');
+        return;
+    }
+    
+    if (!file) {
+        showStatus('Resim seçin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    const productName = menu[catIndex].items[prodIndex].name;
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        if (!productImages[catIndex]) productImages[catIndex] = {};
+        productImages[catIndex][productName] = e.target.result;
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+        
+        displayMenu(menu);
+        updateGallery();
+        updateImageStats();
+        
+        showStatus('✅ Ürün resmi eklendi!', 'success');
+        
+        document.getElementById('productImageExist').value = '';
+        document.getElementById('productExistImagePreview').innerHTML = '<span>Resim önizleme</span>';
+    }
+    reader.readAsDataURL(file);
+}
+
+function addCategoryWithImage() {
+    if (!isDeveloper) return;
+    
+    const name = document.getElementById('newCategoryV2').value.trim();
+    const file = document.getElementById('categoryImage').files[0];
+    
+    if (!name) {
+        showStatus('Kategori adı girin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    menu.push({ category: name, items: [] });
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            categoryImages[name] = e.target.result;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            saveMenuToLocal(menu);
+            showStatus('✅ Kategori resimli olarak eklendi!', 'success');
+            updateGallery();
+            updateImageStats();
+        }
+        reader.readAsDataURL(file);
+    } else {
+        saveMenuToLocal(menu);
+        showStatus('✅ Kategori eklendi! (Resimsiz)', 'success');
+    }
+    
+    document.getElementById('newCategoryV2').value = '';
+    document.getElementById('categoryImage').value = '';
+    document.getElementById('categoryImagePreview').innerHTML = '<span>Resim önizleme</span>';
+}
+
+function addProductWithImage() {
+    if (!isDeveloper) return;
+    
+    const name = document.getElementById('newNameV2').value.trim();
+    const price = document.getElementById('productPriceV2').value.trim();
+    const catIndex = document.getElementById('categorySelectV2').value;
+    const file = document.getElementById('productImage').files[0];
+    
+    if (!name || !price) {
+        showStatus('Ürün adı ve fiyat girin!', 'error');
+        return;
+    }
+    
+    const menu = getCurrentMenu();
+    menu[catIndex].items.push({ name, price });
+    
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if (!productImages[catIndex]) productImages[catIndex] = {};
+            productImages[catIndex][name] = e.target.result;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+            saveMenuToLocal(menu);
+            showStatus('✅ Ürün resimli olarak eklendi!', 'success');
+            updateGallery();
+            updateImageStats();
+        }
+        reader.readAsDataURL(file);
+    } else {
+        saveMenuToLocal(menu);
+        showStatus('✅ Ürün eklendi! (Resimsiz)', 'success');
+    }
+    
+    document.getElementById('newNameV2').value = '';
+    document.getElementById('productPriceV2').value = '';
+    document.getElementById('productImage').value = '';
+    document.getElementById('productImagePreview').innerHTML = '<span>Resim önizleme</span>';
+}
+
+function loadImages() {
+    const savedCatImages = localStorage.getItem('categoryImages');
+    const savedProdImages = localStorage.getItem('productImages');
+    
+    if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
+    if (savedProdImages) productImages = JSON.parse(savedProdImages);
+    
+    updateImageStats();
+}
+
+function updateImageStats() {
+    const catCount = Object.keys(categoryImages).length;
+    let prodCount = 0;
+    Object.keys(productImages).forEach(catIndex => {
+        prodCount += Object.keys(productImages[catIndex]).length;
+    });
+    
+    document.getElementById('v2CategoryCount').innerText = catCount;
+    document.getElementById('v2ProductCount').innerText = prodCount;
+}
+
+function updateGallery(filter = 'all') {
+    const gallery = document.getElementById('imageGallery');
+    if (!gallery) return;
+    
+    let html = '';
+    
+    if (filter === 'all' || filter === 'categories') {
+        Object.keys(categoryImages).forEach(cat => {
+            html += `<div class="gallery-item category-item" onclick="showImageDetails('category', '${cat}')">
+                <img src="${categoryImages[cat]}" alt="${cat}">
+                <div class="item-name">📁 ${cat}</div>
+            </div>`;
+        });
+    }
+    
+    if (filter === 'all' || filter === 'products') {
+        Object.keys(productImages).forEach(catIndex => {
+            Object.keys(productImages[catIndex]).forEach(prod => {
+                html += `<div class="gallery-item product-item" onclick="showImageDetails('product', '${catIndex}', '${prod}')">
+                    <img src="${productImages[catIndex][prod]}" alt="${prod}">
+                    <div class="item-name">📦 ${prod}</div>
+                </div>`;
+            });
+        });
+    }
+    
+    if (html === '') {
+        html = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Henüz resim eklenmemiş</p>';
+    }
+    
+    gallery.innerHTML = html;
+}
+
+function showAllImages() {
+    updateGallery('all');
+}
+
+function showCategoryImages() {
+    updateGallery('categories');
+}
+
+function showProductImages() {
+    updateGallery('products');
+}
+
+function showImageDetails(type, cat, prod = null) {
+    if (type === 'category') {
+        showStatus(`📁 Kategori: ${cat}`, 'success');
+    } else {
+        showStatus(`📦 Ürün: ${prod}`, 'success');
+    }
+}
+
+function saveImagesToCloud() {
+    showStatus('☁️ Resimler buluta kaydediliyor...', 'loading');
+    
+    const imagesData = {
+        categories: categoryImages,
+        products: productImages,
+        date: new Date().toISOString()
+    };
+    
+    setTimeout(() => {
+        localStorage.setItem('cloudImagesBackup', JSON.stringify(imagesData));
+        showStatus('✅ Resimler kaydedildi!', 'success');
+    }, 1500);
+}
+
+function loadImagesFromCloud() {
+    showStatus('📥 Resimler buluttan yükleniyor...', 'loading');
+    
+    setTimeout(() => {
+        const backup = localStorage.getItem('cloudImagesBackup');
+        if (backup) {
+            const data = JSON.parse(backup);
+            categoryImages = data.categories || {};
+            productImages = data.products || {};
+            
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            localStorage.setItem('productImages', JSON.stringify(productImages));
+            
+            displayMenu(getCurrentMenu());
+            updateGallery();
+            updateImageStats();
+            
+            showStatus('✅ Resimler yüklendi!', 'success');
+        } else {
+            showStatus('❌ Yedek bulunamadı!', 'error');
+        }
+    }, 1500);
+}
+
+// ===== سحب وإفلات اللوحة V1 =====
+let devPanelV1 = document.getElementById("devPanelV1");
+let isDragging = false;
+let offsetX, offsetY;
+let dragHandle = document.getElementById("dragHandle");
+
+if (dragHandle) {
+    dragHandle.addEventListener("mousedown", startDrag);
+    document.addEventListener("mousemove", drag);
+    document.addEventListener("mouseup", stopDrag);
+}
+
+function startDrag(e) {
+    isDragging = true;
+    offsetX = e.clientX - devPanelV1.offsetLeft;
+    offsetY = e.clientY - devPanelV1.offsetTop;
+    devPanelV1.style.transform = "none";
+    devPanelV1.style.cursor = "grabbing";
+}
+
+function drag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    devPanelV1.style.left = (e.clientX - offsetX) + "px";
+    devPanelV1.style.top = (e.clientY - offsetY) + "px";
+}
+
+function stopDrag() {
+    isDragging = false;
+    devPanelV1.style.cursor = "move";
+}
+
+// ===== Tema =====
+const modeToggle = document.getElementById("modeToggle");
+modeToggle.addEventListener("click", function() {
+    document.body.classList.toggle("light-mode");
+    modeToggle.innerHTML = document.body.classList.contains("light-mode") ? "☀️" : "🌙";
+    localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+});
+
+// ===== Interval değişince =====
+document.getElementById('syncInterval')?.addEventListener('change', function() {
+    startAutoSync();
+});
+
+// ===== زر اللغة =====
+document.getElementById('langBtn').onclick = toggleLanguageMenu;
+</script>
+
+</body>
+</html>
