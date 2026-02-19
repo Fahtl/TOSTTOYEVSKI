@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط كما هي مع إضافات جديدة ===== */
+/* ===== جميع الأنماط كما هي ===== */
 * {
     margin: 0;
     padding: 0;
@@ -209,7 +209,6 @@ body {
     gap: 20px;
 }
 
-/* ===== بطاقة مع صورة ===== */
 .card {
     background: #1e1e1e;
     padding: 20px;
@@ -302,7 +301,6 @@ body {
     transform: scale(1.05);
 }
 
-/* ===== عنصر المنتج مع صورة ===== */
 .item {
     display: flex;
     justify-content: space-between;
@@ -541,7 +539,6 @@ iframe {
     50% { transform: scale(1.1); }
 }
 
-/* ===== نافذة اختيار نسخة المطور ===== */
 .dev-version-modal {
     position: fixed;
     top: 50%;
@@ -623,7 +620,6 @@ iframe {
     background: #444;
 }
 
-/* ===== لوحة المطور V1 ===== */
 .dev-window {
     position: fixed;
     top: 50%;
@@ -710,7 +706,6 @@ iframe {
     margin-top: 15px;
 }
 
-/* ===== لوحة المطور V2 المتطورة (مع الصور) ===== */
 .dev-window-v2 {
     position: fixed;
     top: 50%;
@@ -801,7 +796,6 @@ iframe {
     margin-top: 20px;
 }
 
-/* ===== قسم الصور المتقدم ===== */
 .image-upload-section {
     margin: 15px 0;
     padding: 20px;
@@ -841,7 +835,6 @@ iframe {
     color: #666;
 }
 
-/* ===== معرض الصور ===== */
 .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
@@ -898,7 +891,6 @@ iframe {
     border-color: #6c5ce7;
 }
 
-/* ===== عناصر الصور في القوائم ===== */
 .existing-items-list {
     max-height: 200px;
     overflow-y: auto;
@@ -931,7 +923,6 @@ iframe {
     font-size: 12px;
 }
 
-/* ===== نافذة تأكيد مخصصة جديدة ===== */
 .custom-confirm-modal {
     position: fixed;
     top: 50%;
@@ -1005,7 +996,6 @@ iframe {
     transform: scale(1.05);
 }
 
-/* ===== نافذة تعديل الألوان ===== */
 .color-picker-modal {
     position: fixed;
     top: 50%;
@@ -1105,7 +1095,6 @@ iframe {
     opacity: 1;
 }
 
-/* ===== أزرار التعديل والحذف للمنتجات ===== */
 .item-actions {
     display: flex;
     gap: 5px;
@@ -1320,7 +1309,6 @@ iframe {
     background: #138496;
 }
 
-/* ===== قائمة اختيار اللغة ===== */
 .language-menu {
     position: fixed;
     top: 70px;
@@ -1371,7 +1359,6 @@ iframe {
     color: white;
 }
 
-/* ===== زر المطور العائم الجديد ===== */
 .floating-dev-btn {
     position: fixed;
     bottom: 20px;
@@ -1407,7 +1394,6 @@ iframe {
     50% { transform: translateY(-10px); }
 }
 
-/* ===== زر إغلاق لوحة المطور في الجوال ===== */
 .mobile-close-btn {
     position: sticky;
     bottom: 0;
@@ -1875,9 +1861,9 @@ const ORIGINAL_MENU = [
 // ===== بيانات المنتجات بجميع اللغات =====
 const MENU_DATA = {
     tr: ORIGINAL_MENU,
-    en: JSON.parse(JSON.stringify(ORIGINAL_MENU)), // نسخة للإنجليزية (يمكن ترجمتها لاحقاً)
-    ru: JSON.parse(JSON.stringify(ORIGINAL_MENU)), // نسخة للروسية
-    ar: JSON.parse(JSON.stringify(ORIGINAL_MENU))  // نسخة للعربية
+    en: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
+    ru: JSON.parse(JSON.stringify(ORIGINAL_MENU)),
+    ar: JSON.parse(JSON.stringify(ORIGINAL_MENU))
 };
 
 // ===== متغيرات الصور =====
@@ -2219,7 +2205,8 @@ function setLanguage(lang) {
     
     applyLanguage();
     
-    // عرض المنيو حسب اللغة المختارة
+    // ===== التعديل المهم هنا =====
+    // عرض المنيو حسب اللغة المختارة مباشرة
     displayMenu(MENU_DATA[currentLang]);
 }
 
@@ -2285,11 +2272,17 @@ window.addEventListener('load', function() {
     startAutoSync();
 });
 
+// ===== دالة عرض المنيو المعدلة =====
 function displayMenu(menuData) {
     const menuGrid = document.getElementById('menuGrid');
+    if (!menuGrid) return;
+    
     menuGrid.innerHTML = '';
     
-    menuData.forEach((category, catIndex) => {
+    // التأكد من أن menuData موجود
+    const dataToShow = menuData || currentMenu || ORIGINAL_MENU;
+    
+    dataToShow.forEach((category, catIndex) => {
         if (category.items.length === 0) return;
         
         const card = document.createElement('div');
