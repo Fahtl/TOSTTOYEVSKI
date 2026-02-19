@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* ===== جميع الأنماط كما هي (بدون تغيير) ===== */
+/* ===== جميع الأنماط كما هي مع تحسين الأزرار العلوية ===== */
 * {
     margin: 0;
     padding: 0;
@@ -467,37 +467,17 @@ iframe {
     z-index: 1;
 }
 
-.control-buttons {
+/* ===== أزرار التحكم المحسنة ===== */
+.top-controls {
     position: fixed;
-    top: 20px;
-    right: 90px;
+    top: 15px;
+    right: 15px;
     display: flex;
-    gap: 8px;
+    gap: 12px;
     z-index: 1000;
 }
 
 .control-btn {
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    background: #ff8c00;
-    color: white;
-    font-size: 16px;
-    box-shadow: 0 5px 15px rgba(255,140,0,0.3);
-}
-
-.control-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 20px rgba(255,140,0,0.5);
-}
-
-#modeToggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -506,14 +486,41 @@ iframe {
     color: white;
     font-size: 20px;
     cursor: pointer;
-    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255,140,0,0.3);
     transition: all 0.3s ease;
-    box-shadow: 0 0 20px rgba(255,140,0,0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.control-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
+    background: #ffa233;
+}
+
+#modeToggle {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #ff8c00;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(255,140,0,0.3);
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 #modeToggle:hover {
     transform: scale(1.1) rotate(15deg);
-    box-shadow: 0 0 30px rgba(255,140,0,0.5);
+    box-shadow: 0 8px 25px rgba(255,140,0,0.5);
+    background: #ffa233;
 }
 
 .live-badge {
@@ -1312,7 +1319,7 @@ iframe {
 .language-menu {
     position: fixed;
     top: 70px;
-    right: 90px;
+    right: 15px;
     background: #1a1a1a;
     border: 2px solid #ff8c00;
     border-radius: 10px;
@@ -1420,7 +1427,7 @@ iframe {
     }
     .language-menu {
         top: 70px;
-        right: 20px;
+        right: 15px;
         min-width: 120px;
     }
     .dev-window-v2 {
@@ -1430,13 +1437,15 @@ iframe {
     .mobile-close-btn {
         display: block;
     }
-    .control-buttons {
-        top: 10px;
-        right: 80px;
-    }
-    #modeToggle {
+    .top-controls {
         top: 10px;
         right: 10px;
+        gap: 8px;
+    }
+    .control-btn, #modeToggle {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
     }
     .floating-dev-btn {
         bottom: 15px;
@@ -1480,13 +1489,11 @@ iframe {
     </div>
 </div>
 
-<!-- أزرار التحكم -->
-<div class="control-buttons">
+<!-- أزرار التحكم المحسنة -->
+<div class="top-controls">
     <button class="control-btn" id="langBtn">🇹🇷</button>
+    <button id="modeToggle">🌙</button>
 </div>
-
-<!-- زر تغيير الوضع -->
-<button id="modeToggle">🌙</button>
 
 <!-- القسم الرئيسي -->
 <section class="hero">
@@ -1825,7 +1832,7 @@ const FULL_MENU = [
 // ===== Çoklu Dil Desteği =====
 const MENU_DATA = {
     tr: FULL_MENU,
-    en: JSON.parse(JSON.stringify(FULL_MENU)), // Çeviriler eklenebilir
+    en: JSON.parse(JSON.stringify(FULL_MENU)),
     ru: JSON.parse(JSON.stringify(FULL_MENU)),
     ar: JSON.parse(JSON.stringify(FULL_MENU))
 };
@@ -1857,7 +1864,6 @@ function displayMenu(menuData) {
         card.className = 'card';
         card.setAttribute('data-category-index', catIndex);
 
-        // Kategori resmi
         if (categoryImages[category.category]) {
             card.classList.add('has-image');
             const catImg = document.createElement('img');
@@ -1868,12 +1874,10 @@ function displayMenu(menuData) {
             card.appendChild(catImg);
         }
 
-        // Kategori başlığı
         const title = document.createElement('h3');
         title.textContent = category.category;
         card.appendChild(title);
 
-        // Kategori silme düğmesi (geliştirici modunda)
         if (isDeveloper) {
             const deleteCatBtn = document.createElement('button');
             deleteCatBtn.className = 'delete-card-btn';
@@ -1885,12 +1889,10 @@ function displayMenu(menuData) {
             card.appendChild(deleteCatBtn);
         }
 
-        // Ürünleri listele
         category.items.forEach((item, itemIndex) => {
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item';
 
-            // Ürün resmi
             if (productImages[catIndex] && productImages[catIndex][item.name]) {
                 itemDiv.classList.add('has-image');
                 const prodImg = document.createElement('img');
@@ -1915,7 +1917,6 @@ function displayMenu(menuData) {
             itemDiv.appendChild(nameSpan);
             itemDiv.appendChild(priceSpan);
 
-            // Düzenleme ve silme düğmeleri (geliştirici modunda)
             if (isDeveloper) {
                 const actionsDiv = document.createElement('div');
                 actionsDiv.className = 'item-actions';
@@ -2637,21 +2638,34 @@ document.getElementById('secretTrigger').addEventListener('click', function() {
 function closeVersionModal() { document.getElementById('devVersionModal').style.display = 'none'; }
 
 // ===== Sayfa Yüklendiğinde =====
-window.addEventListener('load', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Önce kaydedilmiş menü var mı kontrol et, yoksa FULL_MENU'yu göster
     const saved = localStorage.getItem('tosttoo_menu');
     if (saved) {
         try {
             displayMenu(JSON.parse(saved));
-        } catch { displayMenu(FULL_MENU); }
+        } catch {
+            displayMenu(FULL_MENU);
+        }
     } else {
         displayMenu(FULL_MENU);
     }
 
     const langBtn = document.getElementById('langBtn');
-    langBtn.textContent = currentLang === 'tr' ? '🇹🇷' : currentLang === 'en' ? '🇬🇧' : currentLang === 'ru' ? '🇷🇺' : '🇮🇶';
+    const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
+    langBtn.textContent = flags[currentLang] || '🇹🇷';
     langBtn.onclick = toggleLanguageMenu;
-    applyLanguage();
+
+    const texts = {
+        tr: { menu: 'Menü', contact: 'İletişim', view_menu: 'Menüyü Gör' },
+        en: { menu: 'Menu', contact: 'Contact', view_menu: 'View Menu' },
+        ru: { menu: 'Меню', contact: 'Контакты', view_menu: 'Посмотреть меню' },
+        ar: { menu: 'القائمة', contact: 'اتصل بنا', view_menu: 'عرض القائمة' }
+    };
+    document.getElementById('menuTitle').innerText = texts[currentLang].menu;
+    document.getElementById('contactTitle').innerText = texts[currentLang].contact;
+    document.getElementById('scrollText').innerText = texts[currentLang].view_menu;
+
     loadImages();
     loadMenuFromCloud();
     testCloudConnection();
@@ -2664,18 +2678,6 @@ window.addEventListener('load', function() {
         }
     });
 });
-
-function applyLanguage() {
-    const texts = {
-        tr: { menu: 'Menü', contact: 'İletişim', view_menu: 'Menüyü Gör' },
-        en: { menu: 'Menu', contact: 'Contact', view_menu: 'View Menu' },
-        ru: { menu: 'Меню', contact: 'Контакты', view_menu: 'Посмотреть меню' },
-        ar: { menu: 'القائمة', contact: 'اتصل بنا', view_menu: 'عرض القائمة' }
-    };
-    document.getElementById('menuTitle').innerText = texts[currentLang].menu;
-    document.getElementById('contactTitle').innerText = texts[currentLang].contact;
-    document.getElementById('scrollText').innerText = texts[currentLang].view_menu;
-}
 
 // ===== Tema =====
 document.getElementById('modeToggle').addEventListener('click', function() {
