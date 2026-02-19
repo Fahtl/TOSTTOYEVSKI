@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-<title>Tosttoo | Developer V1 & V2</title>
+<title>Tosttoo | Gelişmiş Menü Yönetimi</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -28,7 +28,7 @@ body {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: #fff;
-    padding-bottom: 70px; /* مساحة للزر العائم */
+    padding-bottom: 70px;
 }
 
 @keyframes gradientBG {
@@ -931,6 +931,80 @@ iframe {
     font-size: 12px;
 }
 
+/* ===== نافذة تأكيد مخصصة جديدة ===== */
+.custom-confirm-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #ff8c00;
+    z-index: 3000;
+    display: none;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px;
+    max-width: 90%;
+    color: white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    text-align: center;
+}
+
+.custom-confirm-modal h3 {
+    color: #ff8c00;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.custom-confirm-modal p {
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.confirm-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.confirm-btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s;
+    flex: 1;
+    max-width: 120px;
+}
+
+.confirm-btn.yes {
+    background: #dc3545;
+    color: white;
+}
+
+.confirm-btn.yes:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.confirm-btn.no {
+    background: #6c757d;
+    color: white;
+}
+
+.confirm-btn.no:hover {
+    background: #5a6268;
+    transform: scale(1.05);
+}
+
 /* ===== نافذة تعديل الألوان ===== */
 .color-picker-modal {
     position: fixed;
@@ -1029,6 +1103,42 @@ iframe {
 
 .card:hover .delete-card-btn {
     opacity: 1;
+}
+
+/* ===== أزرار التعديل والحذف للمنتجات ===== */
+.item-actions {
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.item-edit-btn, .item-delete-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.item-edit-btn {
+    background: #28a745;
+    color: white;
+}
+
+.item-delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.item-edit-btn:hover, .item-delete-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
 .light-mode {
@@ -1372,6 +1482,16 @@ iframe {
         <button class="version-btn v2" onclick="selectDevVersion('v2')">🖼️ V2 (Resimli)</button>
     </div>
     <button class="close-version-btn" onclick="closeVersionModal()">Kapat</button>
+</div>
+
+<!-- نافذة تأكيد مخصصة جديدة -->
+<div class="custom-confirm-modal" id="customConfirmModal">
+    <h3 id="confirmTitle">⚠️ Onay</h3>
+    <p id="confirmMessage">Bu işlemi yapmak istediğinize emin misiniz?</p>
+    <div class="confirm-buttons">
+        <button class="confirm-btn yes" id="confirmYesBtn">Evet</button>
+        <button class="confirm-btn no" id="confirmNoBtn">Hayır</button>
+    </div>
 </div>
 
 <!-- أزرار التحكم -->
@@ -2109,6 +2229,31 @@ const MENU_DATA = {
 let categoryImages = {};
 let productImages = {};
 
+// ===== متغيرات التأكيد =====
+let pendingAction = null;
+
+// ===== دوال التأكيد المخصصة =====
+function showConfirm(title, message, onYes) {
+    document.getElementById('confirmTitle').textContent = title;
+    document.getElementById('confirmMessage').textContent = message;
+    document.getElementById('customConfirmModal').style.display = 'flex';
+    
+    pendingAction = onYes;
+}
+
+document.getElementById('confirmYesBtn').addEventListener('click', function() {
+    if (pendingAction) {
+        pendingAction();
+    }
+    document.getElementById('customConfirmModal').style.display = 'none';
+    pendingAction = null;
+});
+
+document.getElementById('confirmNoBtn').addEventListener('click', function() {
+    document.getElementById('customConfirmModal').style.display = 'none';
+    pendingAction = null;
+});
+
 // ===== دوال حفظ واستعادة البيانات في V1 =====
 function saveV1Progress() {
     showStatus('📋 V1 verileri kopyalanıyor...', 'loading');
@@ -2293,7 +2438,7 @@ function loadV2Progress() {
 function deleteAllImages() {
     if (!isDeveloper) return;
     
-    if (confirm('TÜM resimler silinsin mi? (Kategori ve ürün resimleri)')) {
+    showConfirm('🗑️ Tüm Resimler Silinsin mi?', 'Tüm kategori ve ürün resimleri silinecek!', function() {
         categoryImages = {};
         productImages = {};
         
@@ -2305,13 +2450,13 @@ function deleteAllImages() {
         updateImageStats();
         
         showStatus('🗑️ Tüm resimler silindi!', 'success');
-    }
+    });
 }
 
 function deleteCategoryImages() {
     if (!isDeveloper) return;
     
-    if (confirm('TÜM kategori resimleri silinsin mi?')) {
+    showConfirm('📁 Kategori Resimleri Silinsin mi?', 'Tüm kategori resimleri silinecek!', function() {
         categoryImages = {};
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         
@@ -2320,13 +2465,13 @@ function deleteCategoryImages() {
         updateImageStats();
         
         showStatus('📁 Kategori resimleri silindi!', 'success');
-    }
+    });
 }
 
 function deleteProductImages() {
     if (!isDeveloper) return;
     
-    if (confirm('TÜM ürün resimleri silinsin mi?')) {
+    showConfirm('📦 Ürün Resimleri Silinsin mi?', 'Tüm ürün resimleri silinecek!', function() {
         productImages = {};
         localStorage.setItem('productImages', JSON.stringify(productImages));
         
@@ -2335,7 +2480,7 @@ function deleteProductImages() {
         updateImageStats();
         
         showStatus('📦 Ürün resimleri silindi!', 'success');
-    }
+    });
 }
 
 // ===== دالة الريستارت (تعيد الموقع للحالة الأصلية) =====
@@ -2501,12 +2646,27 @@ function displayMenu(menuData) {
             catImg.src = categoryImages[category.category];
             catImg.className = 'card-image';
             catImg.alt = category.category;
+            catImg.onerror = function() { this.style.display = 'none'; };
             card.appendChild(catImg);
         }
         
         const title = document.createElement('h3');
         title.textContent = category.category;
         card.appendChild(title);
+        
+        // زر حذف الفئة (للمطور فقط)
+        if (isDeveloper) {
+            const deleteCatBtn = document.createElement('button');
+            deleteCatBtn.className = 'delete-card-btn';
+            deleteCatBtn.innerHTML = '🗑️';
+            deleteCatBtn.onclick = (e) => {
+                e.stopPropagation();
+                showConfirm('🗑️ Kategori Sil', `"${category.category}" kategorisini silmek istediğinize emin misiniz?`, function() {
+                    deleteCategory(catIndex);
+                });
+            };
+            card.appendChild(deleteCatBtn);
+        }
         
         category.items.forEach((item, itemIndex) => {
             const itemDiv = document.createElement('div');
@@ -2518,23 +2678,50 @@ function displayMenu(menuData) {
                 prodImg.src = productImages[catIndex][item.name];
                 prodImg.className = 'item-image';
                 prodImg.alt = item.name;
+                prodImg.onerror = function() { this.style.display = 'none'; };
                 itemDiv.appendChild(prodImg);
             }
             
             itemDiv.setAttribute('data-category', catIndex);
             itemDiv.setAttribute('data-item', itemIndex);
-            itemDiv.innerHTML += `<span class="name">${item.name}</span><span class="price">${item.price}</span>`;
             
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'name';
+            nameSpan.textContent = item.name;
+            
+            const priceSpan = document.createElement('span');
+            priceSpan.className = 'price';
+            priceSpan.textContent = item.price;
+            
+            itemDiv.appendChild(nameSpan);
+            itemDiv.appendChild(priceSpan);
+            
+            // أزرار التعديل والحذف للمنتجات (للمطور فقط)
             if (isDeveloper) {
-                itemDiv.addEventListener('click', function(e) {
-                    if (deleteMode) {
-                        e.stopPropagation();
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'item-actions';
+                
+                const editBtn = document.createElement('button');
+                editBtn.className = 'item-edit-btn';
+                editBtn.innerHTML = '✏️';
+                editBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    editProduct(catIndex, itemIndex);
+                };
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'item-delete-btn';
+                deleteBtn.innerHTML = '🗑️';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    showConfirm('🗑️ Ürün Sil', `"${item.name}" ürününü silmek istediğinize emin misiniz?`, function() {
                         deleteProduct(catIndex, itemIndex);
-                    } else if (editMode) {
-                        e.stopPropagation();
-                        editProduct(catIndex, itemIndex);
-                    }
-                });
+                    });
+                };
+                
+                actionsDiv.appendChild(editBtn);
+                actionsDiv.appendChild(deleteBtn);
+                itemDiv.appendChild(actionsDiv);
             }
             
             card.appendChild(itemDiv);
@@ -2552,23 +2739,21 @@ function displayMenu(menuData) {
 function deleteCategory(catIndex) {
     if (!isDeveloper) return;
     
-    if (confirm('Bu kategoriyi silmek istediğinize emin misiniz?')) {
-        const menu = getCurrentMenu();
-        const categoryName = menu[catIndex].category;
-        
-        if (categoryImages[categoryName]) {
-            delete categoryImages[categoryName];
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        }
-        
-        menu.splice(catIndex, 1);
-        saveMenuToLocal(menu);
-        showStatus('✅ Kategori silindi!', 'success');
+    const menu = getCurrentMenu();
+    const categoryName = menu[catIndex].category;
+    
+    if (categoryImages[categoryName]) {
+        delete categoryImages[categoryName];
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
     }
+    
+    menu.splice(catIndex, 1);
+    saveMenuToLocal(menu);
+    showStatus('✅ Kategori silindi!', 'success');
 }
 
 function deleteProduct(catIndex, itemIndex) {
-    if (!isDeveloper || !deleteMode) return;
+    if (!isDeveloper) return;
     
     const menu = getCurrentMenu();
     const productName = menu[catIndex].items[itemIndex].name;
@@ -2580,11 +2765,11 @@ function deleteProduct(catIndex, itemIndex) {
     
     menu[catIndex].items.splice(itemIndex, 1);
     saveMenuToLocal(menu);
-    showStatus('✅ Silindi!', 'success');
+    showStatus('✅ Ürün silindi!', 'success');
 }
 
 function editProduct(catIndex, itemIndex) {
-    if (!isDeveloper || !editMode) return;
+    if (!isDeveloper) return;
     
     const menu = getCurrentMenu();
     const product = menu[catIndex].items[itemIndex];
@@ -2611,7 +2796,7 @@ function getCurrentMenu() {
                 price: item.querySelector('.price').textContent
             });
         });
-        menu.push({ category, items });
+        if (items.length > 0) menu.push({ category, items });
     });
     return menu;
 }
@@ -2920,7 +3105,8 @@ function updateMainPrice() {
 
 function deleteAll() {
     if (!isDeveloper) return;
-    if (confirm('Tüm menü silinsin mi?')) {
+    
+    showConfirm('🗑️ Tüm Menü Sil', 'Tüm menü silinsin mi? Varsayılan menü yüklenecek.', function() {
         localStorage.removeItem('tosttoo_menu');
         localStorage.removeItem('categoryImages');
         localStorage.removeItem('productImages');
@@ -2928,7 +3114,7 @@ function deleteAll() {
         productImages = {};
         displayMenu(ORIGINAL_MENU);
         showStatus('Varsayılan menü yüklendi', 'success');
-    }
+    });
 }
 
 function changeInstagram() {
@@ -3183,7 +3369,7 @@ function updateGallery(filter = 'all') {
     if (filter === 'all' || filter === 'categories') {
         Object.keys(categoryImages).forEach(cat => {
             html += `<div class="gallery-item category-item" onclick="deleteSingleImage('category', '${cat}')">
-                <img src="${categoryImages[cat]}" alt="${cat}">
+                <img src="${categoryImages[cat]}" alt="${cat}" onerror="this.style.display='none'">
                 <div class="item-name">📁 ${cat}</div>
             </div>`;
         });
@@ -3193,7 +3379,7 @@ function updateGallery(filter = 'all') {
         Object.keys(productImages).forEach(catIndex => {
             Object.keys(productImages[catIndex]).forEach(prod => {
                 html += `<div class="gallery-item product-item" onclick="deleteSingleImage('product', '${catIndex}', '${prod}')">
-                    <img src="${productImages[catIndex][prod]}" alt="${prod}">
+                    <img src="${productImages[catIndex][prod]}" alt="${prod}" onerror="this.style.display='none'">
                     <div class="item-name">📦 ${prod}</div>
                 </div>`;
             });
@@ -3224,7 +3410,7 @@ function deleteSingleImage(type, cat, prod = null) {
     if (!isDeveloper) return;
     
     if (type === 'category') {
-        if (confirm(`📁 "${cat}" kategorisinin resmini silmek istiyor musunuz?`)) {
+        showConfirm('🗑️ Kategori Resmi Sil', `"${cat}" kategorisinin resmini silmek istiyor musunuz?`, function() {
             delete categoryImages[cat];
             localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
             
@@ -3233,9 +3419,9 @@ function deleteSingleImage(type, cat, prod = null) {
             updateImageStats();
             
             showStatus('✅ Kategori resmi silindi!', 'success');
-        }
+        });
     } else {
-        if (confirm(`📦 "${prod}" ürününün resmini silmek istiyor musunuz?`)) {
+        showConfirm('🗑️ Ürün Resmi Sil', `"${prod}" ürününün resmini silmek istiyor musunuz?`, function() {
             delete productImages[cat][prod];
             if (Object.keys(productImages[cat]).length === 0) {
                 delete productImages[cat];
@@ -3247,7 +3433,7 @@ function deleteSingleImage(type, cat, prod = null) {
             updateImageStats();
             
             showStatus('✅ Ürün resmi silindi!', 'success');
-        }
+        });
     }
 }
 
