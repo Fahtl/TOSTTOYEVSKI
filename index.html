@@ -2076,7 +2076,7 @@
         }
     };
 
-    // ===== قائمة الطعام الكاملة =====
+    // ===== قائمة الطعام الكاملة (ثابتة - لا تتغير) =====
     const MENU_DATA = {
         tr: [
             {
@@ -2548,9 +2548,9 @@
         ]
     };
 
-    // ===== متغيرات الصور (روابط URL) =====
-    let categoryImages = {};  // { kategoriAdi: "https://..." }
-    let productImages = {};   // { kategoriIndex: { urunAdi: "https://..." } }
+    // ===== متغيرات الصور (روابط URL) منفصلة عن القائمة =====
+    let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}');
+    let productImages = JSON.parse(localStorage.getItem('productImages') || '{}');
     
     // ===== متغيرات نافذة الصور =====
     let currentImageList = [];
@@ -2677,7 +2677,7 @@
         document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
     };
 
-    // ===== دوال عرض القائمة =====
+    // ===== دوال عرض القائمة (تستخدم MENU_DATA الأصلي + الصور المنفصلة) =====
     function displayMenu() {
         const menuGrid = document.getElementById('menuGrid');
         if (!menuGrid) return;
@@ -2693,7 +2693,7 @@
             card.className = 'card';
             card.setAttribute('data-category-index', catIndex);
             
-            // صورة القسم من الرابط
+            // صورة القسم من categoryImages
             if (categoryImages[category.category]) {
                 card.classList.add('has-image');
                 const catImg = document.createElement('img');
@@ -2719,7 +2719,7 @@
                     // إضافة صور المنتجات في هذا القسم
                     if (productImages[catIndex]) {
                         category.items.forEach((item, idx) => {
-                            if (productImages[catIndex][item.name]) {
+                            if (productImages[catIndex] && productImages[catIndex][item.name]) {
                                 imageList.push({
                                     src: productImages[catIndex][item.name],
                                     title: `📦 ${item.name}`
@@ -2759,7 +2759,7 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'item';
                 
-                // صورة المنتج من الرابط
+                // صورة المنتج من productImages
                 if (productImages[catIndex] && productImages[catIndex][item.name]) {
                     itemDiv.classList.add('has-image');
                     const prodImg = document.createElement('img');
@@ -2785,7 +2785,7 @@
                         // جمع صور جميع منتجات هذا القسم
                         if (productImages[catIndex]) {
                             category.items.forEach((itm, idx) => {
-                                if (productImages[catIndex][itm.name]) {
+                                if (productImages[catIndex] && productImages[catIndex][itm.name]) {
                                     imageList.push({
                                         src: productImages[catIndex][itm.name],
                                         title: `📦 ${itm.name}`
@@ -2936,7 +2936,7 @@
         }
     };
 
-    // ===== دوال المطور V1 =====
+    // ===== دوال المطور V1 (تعديل القائمة الأصلية) =====
     function deleteCategory(catIndex) {
         if (!isDeveloper) return;
         const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
@@ -2959,6 +2959,9 @@
         
         if (productImages[catIndex] && productImages[catIndex][productName]) {
             delete productImages[catIndex][productName];
+            if (Object.keys(productImages[catIndex]).length === 0) {
+                delete productImages[catIndex];
+            }
             localStorage.setItem('productImages', JSON.stringify(productImages));
         }
         
@@ -3026,7 +3029,7 @@
 
     window.deleteAll = function() {
         if (!isDeveloper) return;
-        showConfirm(LANG_DATA[currentLang].confirmTitle, LANG_DATA[currentLang].deleteAll + '?', () => {
+        showConfirm(LANG_DATA[currentLang].confirmTitle, 'Tüm menü silinsin mi?', () => {
             const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
             menuData.length = 0;
             categoryImages = {};
@@ -3056,7 +3059,7 @@
         }
     };
 
-    // ===== دوال المطور V2 (مع صور من الرابط) =====
+    // ===== دوال المطور V2 (إدارة الصور فقط - بدون تعديل القائمة) =====
     window.previewCategoryImage = function() {
         const url = document.getElementById('categoryImageUrl').value.trim();
         const preview = document.getElementById('categoryImagePreview');
@@ -3086,8 +3089,14 @@
         
         if (!name) { showStatus('Kategori adı girin!', 'error'); return; }
         
+        // التحقق من وجود القسم في القائمة الأصلية
         const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
-        menuData.push({ category: name, items: [] });
+        const categoryExists = menuData.some(cat => cat.category === name);
+        
+        if (!categoryExists) {
+            showStatus('Bu kategori menüde bulunmuyor! Önce V1 panelden ekleyin.', 'error');
+            return;
+        }
         
         if (url) {
             categoryImages[name] = url;
@@ -3102,7 +3111,7 @@
         document.getElementById('categoryImageUrl').value = '';
         document.getElementById('categoryImagePreview').innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
         
-        showStatus(url ? '✅ Kategori resimli olarak eklendi!' : 'Kategori eklendi (resimsiz)', 'success');
+        showStatus(url ? '✅ Kategori resmi eklendi!' : 'Kategori adı girildi (resimsiz)', 'success');
     };
 
     window.addProductWithImage = function() {
@@ -3114,8 +3123,14 @@
         
         if (!name || !price) { showStatus('Ad ve fiyat girin!', 'error'); return; }
         
+        // التحقق من وجود المنتج في القائمة الأصلية
         const menuData = MENU_DATA[currentLang] || MENU_DATA.tr;
-        menuData[catIndex].items.push({ name, price });
+        const productExists = menuData[catIndex] && menuData[catIndex].items.some(item => item.name === name);
+        
+        if (!productExists) {
+            showStatus('Bu ürün menüde bulunmuyor! Önce V1 panelden ekleyin.', 'error');
+            return;
+        }
         
         if (url) {
             if (!productImages[catIndex]) productImages[catIndex] = {};
@@ -3131,7 +3146,7 @@
         document.getElementById('productImageUrl').value = '';
         document.getElementById('productImagePreview').innerHTML = '<span>URL girip "Önizle" butonuna basın</span>';
         
-        showStatus(url ? '✅ Ürün resimli olarak eklendi!' : 'Ürün eklendi (resimsiz)', 'success');
+        showStatus(url ? '✅ Ürün resmi eklendi!' : 'Ürün bilgileri girildi (resimsiz)', 'success');
     };
 
     window.updateCategoryImage = function() {
@@ -3567,13 +3582,6 @@
         displayMenu();
         updateAllSelects();
         updateEditSelects();
-        
-        // تحميل الصور
-        const savedCatImages = localStorage.getItem('categoryImages');
-        const savedProdImages = localStorage.getItem('productImages');
-        if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
-        if (savedProdImages) productImages = JSON.parse(savedProdImages);
-        
         updateGallery();
         startAutoSync();
         testCloudConnection();
@@ -3661,13 +3669,6 @@
         
         const savedMap = localStorage.getItem('map');
         if (savedMap) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${savedMap}&output=embed`;
-        
-        // تحميل الصور
-        const savedCatImages = localStorage.getItem('categoryImages');
-        const savedProdImages = localStorage.getItem('productImages');
-        
-        if (savedCatImages) categoryImages = JSON.parse(savedCatImages);
-        if (savedProdImages) productImages = JSON.parse(savedProdImages);
         
         displayMenu();
         
