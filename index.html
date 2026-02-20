@@ -376,9 +376,10 @@
             margin-bottom: 15px;
             transition: transform 0.3s;
             cursor: pointer;
+            position: relative;
         }
 
-        .card:hover .card-image {
+        .card-image:hover {
             transform: scale(1.05);
         }
 
@@ -805,7 +806,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 95%;
-            max-width: 600px;
+            max-width: 650px;
             max-height: 90vh;
             overflow: auto;
             padding: 20px;
@@ -902,6 +903,27 @@
         .dev-window .delete-btn { background: #dc3545; }
         .dev-window .close-btn { background: #6c757d; margin-top: 15px; }
 
+        .image-upload-area {
+            border: 2px dashed #ff8c00;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 10px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .image-upload-area:hover {
+            background: rgba(255,140,0,0.1);
+            border-color: #ffa233;
+        }
+
+        .image-upload-area.dragover {
+            background: rgba(255,140,0,0.2);
+            border-color: #28a745;
+            transform: scale(1.02);
+        }
+
         .image-preview {
             width: 100%;
             height: 150px;
@@ -913,6 +935,12 @@
             justify-content: center;
             overflow: hidden;
             border: 2px solid #6c5ce7;
+            transition: all 0.3s;
+        }
+
+        .image-preview:hover {
+            border-color: #ff8c00;
+            transform: scale(1.02);
         }
 
         .image-preview img {
@@ -922,7 +950,7 @@
         }
 
         .image-gallery {
-            max-height: 150px;
+            max-height: 200px;
             overflow-y: auto;
             padding: 10px;
             background: rgba(0,0,0,0.3);
@@ -934,10 +962,17 @@
             align-items: center;
             gap: 10px;
             margin: 5px 0;
-            padding: 5px;
+            padding: 8px;
             background: rgba(255,140,0,0.1);
             border-radius: 5px;
             cursor: pointer;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            background: rgba(255,140,0,0.3);
+            transform: translateX(5px);
         }
 
         .gallery-item img {
@@ -946,6 +981,11 @@
             border-radius: 5px;
             object-fit: cover;
             border: 2px solid #ff8c00;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .custom-confirm-modal {
@@ -1379,36 +1419,42 @@
     <!-- V2 Bölümü -->
     <div id="devTabV2" style="display: none;">
         <div class="dev-section">
-            <h4>➕ Kategori Resim Ekle</h4>
+            <h4>➕ Kategori Resim Ekle (Sürükle & Bırak)</h4>
             <select id="categoryImageSelect">
                 <option value="">Kategori seçin</option>
             </select>
-            <input type="url" id="categoryImageUrl" placeholder="Resim URL">
+            <div class="image-upload-area" id="categoryDropArea" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleCategoryDrop(event)">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: #ff8c00;"></i>
+                <p>Resmi sürükleyip bırakın veya tıklayın</p>
+                <input type="file" id="categoryFileInput" accept="image/*" style="display: none;" onchange="handleCategoryFileSelect(event)">
+            </div>
             <div class="image-preview" id="categoryImagePreview">
                 <span>Önizleme</span>
             </div>
-            <button onclick="previewCategoryImage()">🔍 Önizle</button>
             <button onclick="addCategoryImage()" class="save-btn">📁 Resim Ekle</button>
             <button onclick="deleteCategoryImage()" class="delete-btn" style="margin-top:5px;">🗑️ Resmi Sil</button>
         </div>
 
         <div class="dev-section">
-            <h4>➕ Ürün Resim Ekle</h4>
+            <h4>➕ Ürün Resim Ekle (Sürükle & Bırak)</h4>
             <select id="productCategorySelect"></select>
             <select id="productSelect" disabled>
                 <option value="">Önce kategori seçin</option>
             </select>
-            <input type="url" id="productImageUrl" placeholder="Resim URL">
+            <div class="image-upload-area" id="productDropArea" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleProductDrop(event)">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 40px; color: #6c5ce7;"></i>
+                <p>Resmi sürükleyip bırakın veya tıklayın</p>
+                <input type="file" id="productFileInput" accept="image/*" style="display: none;" onchange="handleProductFileSelect(event)">
+            </div>
             <div class="image-preview" id="productImagePreview">
                 <span>Önizleme</span>
             </div>
-            <button onclick="previewProductImage()">🔍 Önizle</button>
             <button onclick="addProductImage()" class="save-btn">✅ Resim Ekle</button>
             <button onclick="deleteProductImage()" class="delete-btn" style="margin-top:5px;">🗑️ Resmi Sil</button>
         </div>
 
         <div class="dev-section">
-            <h4>🖼️ Resim Galerisi</h4>
+            <h4>🖼️ Resim Galerisi (Tıkla & Sil)</h4>
             <div class="image-gallery" id="imageGallery"></div>
         </div>
 
@@ -1440,10 +1486,16 @@
     height: 100%;
     background-color: rgba(0,0,0,0.95);
     backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
 }
 
 .image-modal.show {
     display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .image-modal-content {
@@ -1454,6 +1506,12 @@
     max-height: 90vh;
     display: flex;
     flex-direction: column;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .image-modal-close {
@@ -1472,11 +1530,13 @@
     background: rgba(255,255,255,0.2);
     border-radius: 50%;
     border: 2px solid #ff8c00;
+    transition: all 0.3s;
 }
 
 .image-modal-close:hover {
     color: #ff8c00;
     transform: rotate(90deg);
+    background: rgba(255,255,255,0.3);
 }
 
 .image-modal-img-container {
@@ -1489,6 +1549,7 @@
     border-radius: 15px;
     border: 3px solid #ff8c00;
     overflow: hidden;
+    box-shadow: 0 0 30px rgba(255,140,0,0.3);
 }
 
 .image-modal-img {
@@ -1507,6 +1568,12 @@
     padding: 10px 20px;
     border-radius: 50px;
     border: 1px solid #ff8c00;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .image-modal-nav {
@@ -1525,6 +1592,7 @@
     align-items: center;
     justify-content: center;
     border: 2px solid #ff8c00;
+    transition: all 0.3s;
 }
 
 .image-modal-nav:hover {
@@ -1537,6 +1605,12 @@
 
 body[dir="rtl"] .image-modal-nav.prev { left: auto; right: 20px; }
 body[dir="rtl"] .image-modal-nav.next { right: auto; left: 20px; }
+
+.image-modal-nav.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
 
 .image-counter {
     position: absolute;
@@ -1830,6 +1904,10 @@ function openImageModal(src, title, imageList, index) {
         document.getElementById('imageCounter').textContent = `${index + 1} / ${currentImageList.length}`;
         document.querySelector('.image-modal-nav.prev').classList.toggle('disabled', index === 0);
         document.querySelector('.image-modal-nav.next').classList.toggle('disabled', index === currentImageList.length - 1);
+    } else {
+        document.getElementById('imageCounter').textContent = '';
+        document.querySelector('.image-modal-nav.prev').classList.add('disabled');
+        document.querySelector('.image-modal-nav.next').classList.add('disabled');
     }
     modal.classList.add('show');
     document.body.style.overflow = 'hidden';
@@ -2073,7 +2151,77 @@ function resetToOriginal() {
     showStatus('Menü sıfırlandı', 'success');
 }
 
-// ===== دوال المطور V2 =====
+// ===== دوال المطور V2 (سحب وإفلات) =====
+function handleDragOver(e) {
+    e.preventDefault();
+    e.currentTarget.classList.add('dragover');
+}
+
+function handleDragLeave(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('dragover');
+}
+
+function handleCategoryDrop(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById('categoryImagePreview').innerHTML = `<img src="${event.target.result}">`;
+            window.categoryImageData = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleProductDrop(e) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('dragover');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById('productImagePreview').innerHTML = `<img src="${event.target.result}">`;
+            window.productImageData = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleCategoryFileSelect(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById('categoryImagePreview').innerHTML = `<img src="${event.target.result}">`;
+            window.categoryImageData = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+function handleProductFileSelect(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            document.getElementById('productImagePreview').innerHTML = `<img src="${event.target.result}">`;
+            window.productImageData = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+document.getElementById('categoryDropArea')?.addEventListener('click', () => {
+    document.getElementById('categoryFileInput').click();
+});
+
+document.getElementById('productDropArea')?.addEventListener('click', () => {
+    document.getElementById('productFileInput').click();
+});
+
 function updateSelects() {
     const menu = getFullMenu();
     const cs = document.getElementById('categorySelect');
@@ -2094,51 +2242,48 @@ function updateSelects() {
     }
 }
 
-function previewCategoryImage() {
-    const url = document.getElementById('categoryImageUrl').value;
-    document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}">` : '<span>Önizleme</span>';
-}
-
-function previewProductImage() {
-    const url = document.getElementById('productImageUrl').value;
-    document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}">` : '<span>Önizleme</span>';
-}
-
 function addCategoryImage() {
     const cat = document.getElementById('categoryImageSelect').value;
-    const url = document.getElementById('categoryImageUrl').value;
-    if (!cat || !url) return showStatus('Kategori ve URL girin!', 'error');
-    categoryImages[cat] = url;
+    const imgData = window.categoryImageData;
+    if (!cat || !imgData) return showStatus('Kategori seçin ve resim yükleyin!', 'error');
+    
+    categoryImages[cat] = imgData;
     localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
     displayMenu();
     updateGallery();
+    document.getElementById('categoryImagePreview').innerHTML = '<span>Önizleme</span>';
+    window.categoryImageData = null;
     showStatus('Kategori resmi eklendi', 'success');
 }
 
 function deleteCategoryImage() {
     const cat = document.getElementById('categoryImageSelect').value;
     if (!cat || !categoryImages[cat]) return showStatus('Kategori seçin!', 'error');
+    
     delete categoryImages[cat];
     localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
     displayMenu();
     updateGallery();
+    document.getElementById('categoryImagePreview').innerHTML = '<span>Önizleme</span>';
     showStatus('Kategori resmi silindi', 'success');
 }
 
 function addProductImage() {
     const catIdx = document.getElementById('productCategorySelect').value;
     const prodIdx = document.getElementById('productSelect').value;
-    const url = document.getElementById('productImageUrl').value;
-    if (!catIdx || !prodIdx || !url) return showStatus('Kategori, ürün ve URL girin!', 'error');
+    const imgData = window.productImageData;
+    if (!catIdx || !prodIdx || !imgData) return showStatus('Kategori, ürün seçin ve resim yükleyin!', 'error');
     
     const menu = getFullMenu();
     const prod = menu[catIdx].items[prodIdx].name;
     
     if (!productImages[catIdx]) productImages[catIdx] = {};
-    productImages[catIdx][prod] = url;
+    productImages[catIdx][prod] = imgData;
     localStorage.setItem('productImages', JSON.stringify(productImages));
     displayMenu();
     updateGallery();
+    document.getElementById('productImagePreview').innerHTML = '<span>Önizleme</span>';
+    window.productImageData = null;
     showStatus('Ürün resmi eklendi', 'success');
 }
 
@@ -2155,6 +2300,7 @@ function deleteProductImage() {
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
         updateGallery();
+        document.getElementById('productImagePreview').innerHTML = '<span>Önizleme</span>';
         showStatus('Ürün resmi silindi', 'success');
     }
 }
@@ -2179,7 +2325,7 @@ function updateGallery() {
 }
 
 function deleteCategoryImageByName(c) {
-    if (confirm(`📁 ${c} resmini sil?`)) {
+    if (confirm(`📁 "${c}" resmini sil?`)) {
         delete categoryImages[c];
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
@@ -2189,7 +2335,7 @@ function deleteCategoryImageByName(c) {
 }
 
 function deleteProductImageByName(ci, p) {
-    if (confirm(`📦 ${p} resmini sil?`)) {
+    if (confirm(`📦 "${p}" resmini sil?`)) {
         delete productImages[ci][p];
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
