@@ -375,6 +375,7 @@
             border-radius: 10px 10px 0 0;
             margin-bottom: 15px;
             transition: transform 0.3s;
+            cursor: pointer;
         }
 
         .card:hover .card-image {
@@ -474,6 +475,7 @@
             object-fit: cover;
             border: 2px solid #ff8c00;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         body[dir="rtl"] .item-image {
@@ -1432,6 +1434,193 @@
             background: #138496;
         }
 
+        /* ===== نافذة تكبير الصور ===== */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-modal-content {
+            position: relative;
+            margin: auto;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            border: 2px solid #ff8c00;
+        }
+
+        .image-modal-close:hover {
+            color: #ff8c00;
+            transform: rotate(90deg);
+            background: rgba(255,255,255,0.3);
+        }
+
+        .image-modal-img-container {
+            width: 100%;
+            max-height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.5);
+            border-radius: 15px;
+            border: 3px solid #ff8c00;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255,140,0,0.3);
+        }
+
+        .image-modal-img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+        }
+
+        .image-modal-info {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255,140,0,0.5);
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid #ff8c00;
+            backdrop-filter: blur(5px);
+        }
+
+        .image-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            background: rgba(255,140,0,0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff8c00;
+        }
+
+        .image-modal-nav:hover {
+            background: #ff8c00;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .image-modal-nav.prev {
+            left: 20px;
+        }
+
+        .image-modal-nav.next {
+            right: 20px;
+        }
+
+        body[dir="rtl"] .image-modal-nav.prev {
+            left: auto;
+            right: 20px;
+        }
+
+        body[dir="rtl"] .image-modal-nav.next {
+            right: auto;
+            left: 20px;
+        }
+
+        .image-modal-nav.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .image-modal-nav.disabled:hover {
+            background: rgba(255,140,0,0.3);
+            transform: translateY(-50%);
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 14px;
+            background: rgba(0,0,0,0.7);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ff8c00;
+        }
+
+        body[dir="rtl"] .image-counter {
+            left: auto;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        @media (max-width: 768px) {
+            .image-modal-nav {
+                font-size: 30px;
+                width: 40px;
+                height: 40px;
+            }
+            
+            .image-modal-nav.prev {
+                left: 5px;
+            }
+            
+            .image-modal-nav.next {
+                right: 5px;
+            }
+            
+            .image-modal-close {
+                top: -50px;
+                right: 0;
+            }
+        }
+
         body.light-mode {
             background: #f6f1e8 !important;
             color: #2b2b2b !important;
@@ -1500,6 +1689,16 @@
             color: white;
         }
 
+        .light-mode .image-modal-info {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border-color: #d97706;
+        }
+
+        .light-mode .image-modal-img-container {
+            border-color: #d97706;
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .mobile-close-btn { display: block; width:100%; padding:15px; background:#dc3545; color:white; border:none; border-radius:10px; margin-top:20px; cursor:pointer; }
@@ -1511,6 +1710,20 @@
     </style>
 </head>
 <body class="" id="body" data-language="tr" dir="ltr">
+
+<!-- ===== نافذة تكبير الصور ===== -->
+<div class="image-modal" id="imageModal">
+    <div class="image-modal-content">
+        <span class="image-modal-close" onclick="window.closeImageModal()">&times;</span>
+        <div class="image-modal-nav prev" onclick="window.navigateImage(-1)">&#10094;</div>
+        <div class="image-modal-nav next" onclick="window.navigateImage(1)">&#10095;</div>
+        <div class="image-modal-img-container">
+            <img class="image-modal-img" id="modalImage" src="" alt="">
+        </div>
+        <div class="image-modal-info" id="modalImageInfo"></div>
+        <div class="image-counter" id="imageCounter"></div>
+    </div>
+</div>
 
 <!-- قائمة اللغة -->
 <div class="language-menu" id="languageMenu">
@@ -1732,8 +1945,8 @@
         <select id="editCategoryImageSelect">
             <option value="">Kategori seçin</option>
         </select>
-        <div style="margin:10px 0;">
-            <img id="currentCategoryImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none;">
+        <div style="margin:10px 0; text-align:center;">
+            <img id="currentCategoryImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none; margin:0 auto; border:2px solid #ff8c00;">
         </div>
         <input type="url" id="editCategoryImageUrl" placeholder="Yeni resim URL">
         <div class="button-group">
@@ -1750,8 +1963,8 @@
         <select id="editProductImageSelect" disabled>
             <option value="">Önce kategori seçin</option>
         </select>
-        <div style="margin:10px 0;">
-            <img id="currentProductImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none;">
+        <div style="margin:10px 0; text-align:center;">
+            <img id="currentProductImage" src="" style="max-width:100px; max-height:100px; border-radius:5px; display:none; margin:0 auto; border:2px solid #6c5ce7;">
         </div>
         <input type="url" id="editProductImageUrl" placeholder="Yeni resim URL">
         <div class="button-group">
@@ -2338,6 +2551,10 @@
     // ===== متغيرات الصور (روابط URL) =====
     let categoryImages = {};  // { kategoriAdi: "https://..." }
     let productImages = {};   // { kategoriIndex: { urunAdi: "https://..." } }
+    
+    // ===== متغيرات نافذة الصور =====
+    let currentImageList = [];
+    let currentImageIndex = 0;
 
     // ===== متغيرات عامة =====
     let isDeveloper = false;
@@ -2349,6 +2566,70 @@
     let pendingAction = null;
     let autoSyncInterval = null;
     let lastCloudData = null;
+
+    // ===== دوال نافذة تكبير الصور =====
+    window.openImageModal = function(src, title, imageList, index) {
+        currentImageList = imageList || [];
+        currentImageIndex = index || 0;
+        
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalInfo = document.getElementById('modalImageInfo');
+        const counter = document.getElementById('imageCounter');
+        const prevBtn = document.querySelector('.image-modal-nav.prev');
+        const nextBtn = document.querySelector('.image-modal-nav.next');
+        
+        modalImg.src = src;
+        modalInfo.textContent = title;
+        
+        if (currentImageList.length > 1) {
+            counter.textContent = `${index + 1} / ${currentImageList.length}`;
+            prevBtn.classList.toggle('disabled', index === 0);
+            nextBtn.classList.toggle('disabled', index === currentImageList.length - 1);
+        } else {
+            counter.textContent = '';
+            prevBtn.classList.add('disabled');
+            nextBtn.classList.add('disabled');
+        }
+        
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeImageModal = function() {
+        const modal = document.getElementById('imageModal');
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+    };
+
+    window.navigateImage = function(direction) {
+        const newIndex = currentImageIndex + direction;
+        
+        if (newIndex >= 0 && newIndex < currentImageList.length) {
+            currentImageIndex = newIndex;
+            const imgData = currentImageList[newIndex];
+            
+            const modalImg = document.getElementById('modalImage');
+            const modalInfo = document.getElementById('modalImageInfo');
+            const counter = document.getElementById('imageCounter');
+            const prevBtn = document.querySelector('.image-modal-nav.prev');
+            const nextBtn = document.querySelector('.image-modal-nav.next');
+            
+            modalImg.src = imgData.src;
+            modalInfo.textContent = imgData.title;
+            counter.textContent = `${newIndex + 1} / ${currentImageList.length}`;
+            
+            prevBtn.classList.toggle('disabled', newIndex === 0);
+            nextBtn.classList.toggle('disabled', newIndex === currentImageList.length - 1);
+        }
+    };
+
+    // إغلاق النافذة بالضغط على ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeImageModal();
+        }
+    });
 
     // ===== دوال اللغة =====
     window.toggleLanguageMenu = function() {
@@ -2421,6 +2702,36 @@
                 catImg.alt = category.category;
                 catImg.loading = 'lazy';
                 catImg.onerror = function() { this.style.display = 'none'; };
+                
+                // إضافة حدث النقر لتكبير الصورة
+                catImg.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const imageList = [];
+                    
+                    // جمع كل صور القسم في القائمة
+                    if (categoryImages[category.category]) {
+                        imageList.push({
+                            src: categoryImages[category.category],
+                            title: `📁 ${category.category}`
+                        });
+                    }
+                    
+                    // إضافة صور المنتجات في هذا القسم
+                    if (productImages[catIndex]) {
+                        category.items.forEach((item, idx) => {
+                            if (productImages[catIndex][item.name]) {
+                                imageList.push({
+                                    src: productImages[catIndex][item.name],
+                                    title: `📦 ${item.name}`
+                                });
+                            }
+                        });
+                    }
+                    
+                    const index = imageList.findIndex(img => img.src === categoryImages[category.category]);
+                    window.openImageModal(categoryImages[category.category], `📁 ${category.category}`, imageList, index);
+                });
+                
                 card.appendChild(catImg);
             }
             
@@ -2457,6 +2768,36 @@
                     prodImg.alt = item.name;
                     prodImg.loading = 'lazy';
                     prodImg.onerror = function() { this.style.display = 'none'; };
+                    
+                    // إضافة حدث النقر لتكبير الصورة
+                    prodImg.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const imageList = [];
+                        
+                        // جمع صور هذا القسم
+                        if (categoryImages[category.category]) {
+                            imageList.push({
+                                src: categoryImages[category.category],
+                                title: `📁 ${category.category}`
+                            });
+                        }
+                        
+                        // جمع صور جميع منتجات هذا القسم
+                        if (productImages[catIndex]) {
+                            category.items.forEach((itm, idx) => {
+                                if (productImages[catIndex][itm.name]) {
+                                    imageList.push({
+                                        src: productImages[catIndex][itm.name],
+                                        title: `📦 ${itm.name}`
+                                    });
+                                }
+                            });
+                        }
+                        
+                        const index = imageList.findIndex(img => img.src === productImages[catIndex][item.name]);
+                        window.openImageModal(productImages[catIndex][item.name], `📦 ${item.name}`, imageList, index);
+                    });
+                    
                     itemDiv.appendChild(prodImg);
                 }
                 
