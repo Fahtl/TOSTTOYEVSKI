@@ -1922,7 +1922,7 @@
     </button>
 </div>
 
-<!-- زر المطور العائم -->
+<!-- زر المطور العائم (يظهر فقط بعد تفعيل وضع المطور) -->
 <div class="floating-dev-btn dev-only" id="floatingDevBtn" onclick="toggleDevPanel()" style="display: none;">
     <i class="fas fa-code"></i>
 </div>
@@ -2016,8 +2016,8 @@
         const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
         const INSTAGRAM_URL = 'https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2';
 
-        // ===== القائمة الأساسية (النسخة الأصلية للحفظ) =====
-        const ORIGINAL_MENU_DATA = {
+        // ===== القائمة الأساسية (النسخة الأصلية) =====
+        const ORIGINAL_MENU = {
             ar: [
                 {
                     category: "أنواع التوست",
@@ -2146,14 +2146,522 @@
                     ]
                 }
             ],
-            tr: [],
-            en: [],
-            ru: [],
-            de: []
+            tr: [
+                {
+                    category: "TOST ÇEŞİTLERİ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Peynirli tost", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sucuklu tost", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Karışık tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Atom tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "3 peynirli tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Kavurmalı tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Ayvalık tostu", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Simit tost", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Diyet tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Bazlama tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Bazlama kavurmalı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "SANDVİÇLER",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Karışık sandviç", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Ton balıklı sandviç", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Tavuklu sandviç", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "ATIŞTIRMALIKLAR",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Patates cipsi", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Tavuk parçaları", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "6 soğan halkası", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "SALATALAR",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Ton balıklı salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Tavuklu salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Peynirli salata", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "MAKARNALAR",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Bolonez makarna", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Tavuklu makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Peynirli makarna", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Ton balıklı makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "BURGERLER",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Klasik hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Tavuk burger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "PİZZALAR",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Margarita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Sucuklu pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Karışık pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Kavurmalı pizza", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Ton balıklı pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Sebzeli pizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Dört peynirli pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "KAHVALTILAR",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Kahvaltı tabağı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Serpme kahvaltı", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sucuklu yumurta", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Sahanda yumurta", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Peynirli yumurta", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Kavurmalı yumurta", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "SICAK İÇECEKLER",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Çay", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Ada çayı", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Bitki çayı", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                        { name: "Türk kahvesi", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Osmanlı kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Menengiç kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "SOĞUK İÇECEKLER",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Su", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Meyveli soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Beypazarı kola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Çamlıca portakal", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Niğde gazozu", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Küçük ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Büyük ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "TATLILAR",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Fırında sütlaç", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sufle", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                }
+            ],
+            en: [
+                {
+                    category: "TOAST TYPES",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Cheese toast", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sausage toast", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Mixed toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Atom toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "3 cheese toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Fried meat toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Ayvalık toast", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Bagel toast", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Diet toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Flatbread toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Flatbread with fried meat", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "SANDWICHES",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Mixed sandwich", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Tuna sandwich", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Chicken sandwich", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "SNACKS",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Potato chips", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Chicken pieces", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "6 onion rings", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "SALADS",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Tuna salad", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Chicken salad", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Cheese salad", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "PASTA",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Bolognese pasta", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Chicken pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Cheese pasta", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Tuna pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "BURGERS",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Classic hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Chicken burger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "PIZZAS",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Margherita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Sausage pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Mixed pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Fried meat pizza", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Tuna pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Vegetable pizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Four cheese pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "BREAKFAST",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Breakfast plate", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Open breakfast", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sausage eggs", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Fried eggs", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Cheese eggs", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Fried meat eggs", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "HOT DRINKS",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Tea", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Sage tea", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Herbal tea", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                        { name: "Turkish coffee", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Ottoman coffee", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Menengiç coffee", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "COLD DRINKS",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Water", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Fruit soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Beypazarı cola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Çamlıca orange", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Niğde soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Small ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Large ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "DESSERTS",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Baked rice pudding", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Souffle", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    category: "ВИДЫ ТОСТОВ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Сырный тост", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Тост с колбасой", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Смешанный тост", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Атом тост", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Тост с 3 сырами", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Тост с жареным мясом", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Айвалык тост", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Тост на бублике", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Диетический тост", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Тост на лепешке", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Лепешка с жареным мясом", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Кумру", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "СЭНДВИЧИ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Смешанный сэндвич", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Сэндвич с тунцом", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Сэндвич с курицей", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "ЗАКУСКИ",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Картофельные чипсы", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Кусочки курицы", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "6 луковых колец", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "САЛАТЫ",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Салат с тунцом", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Салат с курицей", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Сырный салат", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "МАКАРОНЫ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Болоньезе", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "С курицей", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "С сыром", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "С тунцом", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "БУРГЕРЫ",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Классический гамбургер", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Чизбургер", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Куриный бургер", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "ПИЦЦА",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Маргарита", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Пицца с колбасой", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Смешанная пицца", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Пицца с жареным мясом", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Пицца с тунцом", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Овощная пицца", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Четыре сыра", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "ЗАВТРАКИ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Тарелка завтрака", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Открытый завтрак", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Менемен", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Яйца с колбасой", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Яичница", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Яйца с сыром", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Яйца с жареным мясом", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "ГОРЯЧИЕ НАПИТКИ",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Чай", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Шалфей", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Травяной чай", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                        { name: "Турецкий кофе", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Османский кофе", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Мененгич кофе", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "ХОЛОДНЫЕ НАПИТКИ",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Вода", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Сода", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Фруктовая сода", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Beypazarı кола", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Çamlıca апельсин", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Niğde газировка", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Маленький айран", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Большой айран", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Черчилль", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "ДЕСЕРТЫ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Рисовый пудинг", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Суфле", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                }
+            ],
+            de: [
+                {
+                    category: "TOASTSORTEN",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Käse-Toast", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sucuk-Toast", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Gemischter Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Atom-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "3-Käse-Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Toast mit gebratenem Fleisch", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Ayvalık-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Bagel-Toast", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Diät-Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Fladenbrot-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Fladenbrot mit gebratenem Fleisch", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "SANDWICHS",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Gemischtes Sandwich", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Thunfisch-Sandwich", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Hähnchen-Sandwich", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "SNACKS",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Kartoffelchips", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Hähnchenstücke", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "6 Zwiebelringe", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "SALATE",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Thunfischsalat", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Hähnchensalat", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Käsesalat", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "PASTA",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Bolognese", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Hähnchen-Pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Käse-Pasta", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Thunfisch-Pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "BURGER",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Klassischer Hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Hähnchenburger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "PIZZEN",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Margherita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Sucuk-Pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Gemischte Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Pizza mit gebratenem Fleisch", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Thunfisch-Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Gemüsepizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Vier-Käse-Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "FRÜHSTÜCK",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Frühstücksteller", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Offenes Frühstück", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Eier mit Sucuk", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Spiegeleier", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Eier mit Käse", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Eier mit gebratenem Fleisch", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                    ]
+                },
+                {
+                    category: "HEISSGETRÄNKE",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Tee", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Salbeitee", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Kräutertee", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                        { name: "Türkischer Kaffee", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Osmanischer Kaffee", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                        { name: "Menengiç-Kaffee", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                    ]
+                },
+                {
+                    category: "KALTGETRÄNKE",
+                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                    items: [
+                        { name: "Wasser", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Fruchtsoda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Beypazarı Cola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Çamlıca Orange", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Niğde Limonade", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Eistee", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Kleiner Ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Großer Ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                    ]
+                },
+                {
+                    category: "DESSERTS",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Gebackener Milchreis", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Soufflé", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                }
+            ]
         };
 
-        // ===== نسخة العمل الحالية =====
-        let MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU_DATA));
+        // ===== نسخة العمل الحالية (يتم تعديلها) =====
+        let MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
 
         // ===== نصوص الواجهة متعددة اللغات =====
         const TEXTS = {
@@ -2471,7 +2979,7 @@
             if (autoSaveTimer) clearTimeout(autoSaveTimer);
             autoSaveTimer = setTimeout(() => {
                 saveAllToLocalStorage();
-                showStatus('تم الحفظ التلقائي', 'success');
+                if (isDeveloper) showStatus('تم الحفظ التلقائي', 'success');
             }, 500);
         }
 
@@ -2927,7 +3435,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                showStatus('تم تحديث الاسم', 'success');
+                if (isDeveloper) showStatus('تم تحديث الاسم', 'success');
             }
         }
 
@@ -2940,7 +3448,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                showStatus('تم تحديث السعر', 'success');
+                if (isDeveloper) showStatus('تم تحديث السعر', 'success');
             }
         }
 
@@ -2956,7 +3464,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                showStatus('تم حذف المنتج', 'success');
+                if (isDeveloper) showStatus('تم حذف المنتج', 'success');
             }
         }
 
@@ -2971,7 +3479,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                showStatus('تم حذف الفئة', 'success');
+                if (isDeveloper) showStatus('تم حذف الفئة', 'success');
             }
         }
 
@@ -2994,7 +3502,7 @@
             deleteMode = false;
             document.getElementById('menuGrid').classList.add('edit-mode');
             document.getElementById('menuGrid').classList.remove('delete-mode');
-            showStatus(`✏️ ${TEXTS[currentLang].editMode}`, 'success');
+            if (isDeveloper) showStatus(`✏️ ${TEXTS[currentLang].editMode}`, 'success');
         };
 
         window.enableDelete = function() {
@@ -3002,33 +3510,39 @@
             editMode = false;
             document.getElementById('menuGrid').classList.add('delete-mode');
             document.getElementById('menuGrid').classList.remove('edit-mode');
-            showStatus(`🗑️ ${TEXTS[currentLang].deleteMode}`, 'success');
+            if (isDeveloper) showStatus(`🗑️ ${TEXTS[currentLang].deleteMode}`, 'success');
         };
 
         window.disableAllModes = function() {
             editMode = false;
             deleteMode = false;
             document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
-            showStatus(`🔘 ${TEXTS[currentLang].disableModes}`, 'success');
+            if (isDeveloper) showStatus(`🔘 ${TEXTS[currentLang].disableModes}`, 'success');
         };
 
         window.addCategory = function() {
             const name = document.getElementById('newCategory').value.trim();
-            if (!name) return showStatus('أدخل اسم الفئة!', 'error');
+            if (!name) {
+                if (isDeveloper) showStatus('أدخل اسم الفئة!', 'error');
+                return;
+            }
             const menu = getFullMenu();
             menu.push({ category: name, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [] });
             saveFullMenu(menu);
             displayMenu();
             document.getElementById('newCategory').value = '';
             triggerAutoSave();
-            showStatus('تم إضافة الفئة', 'success');
+            if (isDeveloper) showStatus('تم إضافة الفئة', 'success');
         };
 
         window.addProduct = function() {
             const name = document.getElementById('newName').value.trim();
             const price = document.getElementById('productPrice').value.trim();
             const idx = document.getElementById('categorySelect').value;
-            if (!name || !price) return showStatus('أدخل الاسم والسعر!', 'error');
+            if (!name || !price) {
+                if (isDeveloper) showStatus('أدخل الاسم والسعر!', 'error');
+                return;
+            }
             const menu = getFullMenu();
             const category = menu[idx];
             if (category) {
@@ -3042,7 +3556,7 @@
                 document.getElementById('newName').value = '';
                 document.getElementById('productPrice').value = '';
                 triggerAutoSave();
-                showStatus('تم إضافة المنتج', 'success');
+                if (isDeveloper) showStatus('تم إضافة المنتج', 'success');
             }
         };
 
@@ -3084,7 +3598,7 @@
             
             const newUrl = document.getElementById('imageEditUrl').value.trim();
             if (!newUrl) {
-                showStatus('الرجاء إدخال رابط الصورة', 'error');
+                if (isDeveloper) showStatus('الرجاء إدخال رابط الصورة', 'error');
                 return;
             }
 
@@ -3100,7 +3614,7 @@
 
             displayMenu();
             triggerAutoSave();
-            showStatus('تم تحديث الصورة', 'success');
+            if (isDeveloper) showStatus('تم تحديث الصورة', 'success');
             closeImageEdit();
         };
 
@@ -3120,7 +3634,7 @@
                 }
                 displayMenu();
                 triggerAutoSave();
-                showStatus('تم حذف الصورة', 'success');
+                if (isDeveloper) showStatus('تم حذف الصورة', 'success');
                 closeImageEdit();
             });
         };
@@ -3184,7 +3698,7 @@
                 displayMenu();
                 updateGalleryV2();
                 triggerAutoSave();
-                showStatus('تم حذف الصورة', 'success');
+                if (isDeveloper) showStatus('تم حذف الصورة', 'success');
             });
         };
 
@@ -3201,19 +3715,25 @@
         window.addCategoryImageV2 = function() {
             const cat = document.getElementById('categoryImageSelectV2').value;
             const url = document.getElementById('categoryImageUrlV2').value;
-            if (!cat || !url) return showStatus('اختر الفئة وأدخل الرابط!', 'error');
+            if (!cat || !url) {
+                if (isDeveloper) showStatus('اختر الفئة وأدخل الرابط!', 'error');
+                return;
+            }
             categoryImages[cat] = url;
             displayMenu();
             updateGalleryV2();
             triggerAutoSave();
-            showStatus('تم إضافة صورة الفئة', 'success');
+            if (isDeveloper) showStatus('تم إضافة صورة الفئة', 'success');
         };
 
         window.addProductImageV2 = function() {
             const catIdx = document.getElementById('productCategorySelectV2').value;
             const prodIdx = document.getElementById('productSelectV2').value;
             const url = document.getElementById('productImageUrlV2').value;
-            if (!catIdx || !prodIdx || !url) return showStatus('اختر الفئة والمنتج وأدخل الرابط!', 'error');
+            if (!catIdx || !prodIdx || !url) {
+                if (isDeveloper) showStatus('اختر الفئة والمنتج وأدخل الرابط!', 'error');
+                return;
+            }
             
             const menu = getFullMenu();
             const prod = menu[catIdx].items[prodIdx].name;
@@ -3223,7 +3743,7 @@
             displayMenu();
             updateGalleryV2();
             triggerAutoSave();
-            showStatus('تم إضافة صورة المنتج', 'success');
+            if (isDeveloper) showStatus('تم إضافة صورة المنتج', 'success');
         };
 
         document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
@@ -3246,33 +3766,31 @@
             isDeveloper = true;
             document.body.classList.add('developer-mode');
             document.getElementById('floatingDevBtn').style.display = 'flex';
-            document.getElementById(`devPanel${v.toUpperCase()}`).style.display = 'block';
-            displayMenu();
-            updateSelects();
-            updateGalleryV2();
+            // لا نفتح أي لوحة تلقائياً - فقط نظهر زر المطور
+            if (isDeveloper) showStatus('مرحباً أيها المطور - اضغط على زر المطور لفتح اللوحة', 'success');
         };
 
         window.closeDevV1 = function() {
             document.getElementById('devPanelV1').style.display = 'none';
-            document.getElementById('floatingDevBtn').style.display = 'flex';
         };
 
         window.closeDevV2 = function() {
             document.getElementById('devPanelV2').style.display = 'none';
-            document.getElementById('floatingDevBtn').style.display = 'flex';
         };
 
         window.toggleDevPanel = function() {
             const p = document.getElementById(`devPanel${currentVersionType.toUpperCase()}`);
             if (p.style.display === 'block') {
                 p.style.display = 'none';
-                document.getElementById('floatingDevBtn').style.display = 'flex';
                 editMode = false;
                 deleteMode = false;
                 document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
             } else {
+                // إخفاء أي لوحة مفتوحة أولاً
+                document.getElementById('devPanelV1').style.display = 'none';
+                document.getElementById('devPanelV2').style.display = 'none';
+                // فتح اللوحة المختارة
                 p.style.display = 'block';
-                document.getElementById('floatingDevBtn').style.display = 'none';
                 updateSelects();
                 updateGalleryV2();
             }
@@ -3284,15 +3802,16 @@
 
         window.resetToOriginal = function() {
             showConfirm(TEXTS[currentLang].confirmMessage, () => {
-                MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU_DATA));
+                MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
                 categoryImages = {};
                 productImages = {};
                 extraCategories = [];
                 localStorage.clear();
                 document.getElementById('instaLink').href = INSTAGRAM_URL;
+                document.getElementById('newInstagram').value = INSTAGRAM_URL;
                 displayMenu();
                 updateGalleryV2();
-                showStatus('تم إعادة تعيين القائمة', 'success');
+                if (isDeveloper) showStatus('تم إعادة تعيين القائمة', 'success');
             });
         };
 
@@ -3301,7 +3820,7 @@
             if (v) { 
                 document.getElementById('instaLink').href = v; 
                 triggerAutoSave();
-                showStatus('تم تحديث رابط إنستغرام', 'success'); 
+                if (isDeveloper) showStatus('تم تحديث رابط إنستغرام', 'success'); 
             }
         };
 
@@ -3310,7 +3829,7 @@
             if (v) { 
                 document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; 
                 localStorage.setItem('map', v); 
-                showStatus('تم تحديث الموقع', 'success'); 
+                if (isDeveloper) showStatus('تم تحديث الموقع', 'success'); 
             }
         };
 
@@ -3347,17 +3866,17 @@
             document.head.appendChild(style);
             
             closeColorPicker();
-            showStatus('تم تطبيق الألوان', 'success');
+            if (isDeveloper) showStatus('تم تطبيق الألوان', 'success');
         };
 
         window.copyV1Code = function() {
             const code = JSON.stringify(getFullMenu(), null, 2);
             navigator.clipboard.writeText(code);
-            showStatus('📋 تم نسخ الكود', 'success');
+            if (isDeveloper) showStatus('📋 تم نسخ الكود', 'success');
         };
 
         window.saveToCloud = async function() {
-            showStatus('☁️ جاري الحفظ...', 'loading');
+            if (isDeveloper) showStatus('☁️ جاري الحفظ...', 'loading');
             document.getElementById('cloudSaveBtn').disabled = true;
             try {
                 await fetch(CLOUD_API_URL, {
@@ -3368,15 +3887,15 @@
                         images: { categories: categoryImages, products: productImages }
                     })
                 });
-                showStatus('✅ تم الحفظ في السحابة', 'success');
+                if (isDeveloper) showStatus('✅ تم الحفظ في السحابة', 'success');
             } catch (e) {
-                showStatus('❌ خطأ في الاتصال', 'error');
+                if (isDeveloper) showStatus('❌ خطأ في الاتصال', 'error');
             }
             document.getElementById('cloudSaveBtn').disabled = false;
         };
 
         window.loadFromCloud = async function() {
-            showStatus('📥 جاري التحميل...', 'loading');
+            if (isDeveloper) showStatus('📥 جاري التحميل...', 'loading');
             document.getElementById('cloudLoadBtn').disabled = true;
             try {
                 const res = await fetch(CLOUD_API_URL);
@@ -3397,10 +3916,10 @@
                     displayMenu();
                     updateGalleryV2();
                     triggerAutoSave();
-                    showStatus('✅ تم التحميل من السحابة', 'success');
+                    if (isDeveloper) showStatus('✅ تم التحميل من السحابة', 'success');
                 }
             } catch (e) {
-                showStatus('❌ خطأ في التحميل', 'error');
+                if (isDeveloper) showStatus('❌ خطأ في التحميل', 'error');
             }
             document.getElementById('cloudLoadBtn').disabled = false;
         };
@@ -3410,17 +3929,17 @@
                 await fetch(CLOUD_API_URL);
                 document.getElementById('apiStatus').innerHTML = 'متصل';
                 document.getElementById('apiStatus').style.color = '#00ff00';
-                showStatus('✅ اتصال ناجح', 'success');
+                if (isDeveloper) showStatus('✅ اتصال ناجح', 'success');
             } catch {
                 document.getElementById('apiStatus').innerHTML = 'غير متصل';
                 document.getElementById('apiStatus').style.color = '#ff0000';
-                showStatus('❌ فشل الاتصال', 'error');
+                if (isDeveloper) showStatus('❌ فشل الاتصال', 'error');
             }
         };
 
         window.saveImagesToCloud = function() {
             localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-            showStatus('✅ تم حفظ الصور محلياً', 'success');
+            if (isDeveloper) showStatus('✅ تم حفظ الصور محلياً', 'success');
         };
 
         window.loadImagesFromCloud = function() {
@@ -3432,7 +3951,7 @@
                 displayMenu();
                 updateGalleryV2();
                 triggerAutoSave();
-                showStatus('✅ تم تحميل الصور', 'success');
+                if (isDeveloper) showStatus('✅ تم تحميل الصور', 'success');
             }
         };
 
