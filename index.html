@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>توستو | القائمة</title>
+    <title>Tosttoo | Menü</title>
     
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -1475,7 +1475,7 @@
             filter: brightness(1.1);
         }
 
-        /* ===== نافذة اختيار الألوان ===== */
+        /* ===== نافذة اختيار الألوان (تظهر مباشرة) ===== */
         .color-picker-modal {
             position: fixed;
             top: 50%;
@@ -1486,7 +1486,7 @@
             border-radius: 15px;
             padding: 30px;
             z-index: 6000;
-            display: none;
+            display: flex;
             flex-direction: column;
             gap: 20px;
             min-width: 350px;
@@ -1650,7 +1650,7 @@
         }
     </style>
 </head>
-<body dir="rtl" data-theme="dark" data-language="ar" class="">
+<body dir="ltr" data-theme="dark" data-language="tr" class="">
     
 <!-- ===== نافذة تكبير الصور ===== -->
 <div class="image-modal" id="imageModal">
@@ -1659,7 +1659,7 @@
         <div class="image-modal-nav prev" onclick="navigateImage(-1)">&#10094;</div>
         <div class="image-modal-nav next" onclick="navigateImage(1)">&#10095;</div>
         <div class="image-modal-img-container">
-            <img class="image-modal-img" id="modalImage" src="" alt="صورة">
+            <img class="image-modal-img" id="modalImage" src="" alt="Resim">
         </div>
         <div class="image-modal-info" id="modalImageInfo"></div>
     </div>
@@ -1672,17 +1672,17 @@
         <div class="video-container">
             <iframe id="videoFrame" src="" allowfullscreen></iframe>
         </div>
-        <div class="video-counter" id="videoCounter">🎬 فيديو خاص!</div>
+        <div class="video-counter" id="videoCounter">🎬 Özel Video!</div>
     </div>
 </div>
 
 <!-- قائمة اللغات -->
 <div class="language-menu" id="languageMenu">
-    <button class="language-btn" onclick="setLanguage('ar')">
-        <span>🇮🇶 العربية</span>
-    </button>
     <button class="language-btn" onclick="setLanguage('tr')">
         <span>🇹🇷 Türkçe</span>
+    </button>
+    <button class="language-btn" onclick="setLanguage('ar')">
+        <span>🇮🇶 العربية</span>
     </button>
     <button class="language-btn" onclick="setLanguage('en')">
         <span>🇬🇧 English</span>
@@ -1697,216 +1697,216 @@
 
 <!-- نافذة اختيار نسخة المطور (مترجمة) -->
 <div class="dev-version-modal dev-only" id="devVersionModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a1a1a; border: 3px solid #ff8c00; border-radius: 15px; padding: 30px; z-index: 5000; flex-direction: column; gap: 20px; min-width: 350px; text-align: center;">
-    <h3 style="color: #ff8c00;" id="devModalTitle">🔧 خيارات المطور</h3>
-    <p style="color: #ccc;" id="devModalDesc">أي إصدار تريد استخدامه؟</p>
+    <h3 style="color: #ff8c00;" id="devModalTitle">🔧 Geliştirici Seçenekleri</h3>
+    <p style="color: #ccc;" id="devModalDesc">Hangi sürümü kullanmak istiyorsunuz?</p>
     <div style="display: flex; gap: 15px; justify-content: center;">
         <button class="btn" style="flex:1;" id="devV1Btn" onclick="selectDevVersion('v1')">⚙️ V1</button>
         <button class="btn" style="flex:1; background:#6c5ce7;" id="devV2Btn" onclick="selectDevVersion('v2')">🖼️ V2</button>
     </div>
-    <button class="btn" style="background:#6c757d;" id="devCloseBtn" onclick="document.getElementById('devVersionModal').style.display='none'">إغلاق</button>
+    <button class="btn" style="background:#6c757d;" id="devCloseBtn" onclick="document.getElementById('devVersionModal').style.display='none'">Kapat</button>
 </div>
 
 <!-- نافذة تأكيد الحذف (مُصلحة) -->
 <div class="custom-confirm-modal dev-only" id="customConfirmModal">
-    <h3 class="confirm-title" id="confirmTitle">⚠️ تأكيد</h3>
-    <p class="confirm-message" id="confirmMessage">هل أنت متأكد؟</p>
+    <h3 class="confirm-title" id="confirmTitle">⚠️ Onay</h3>
+    <p class="confirm-message" id="confirmMessage">Emin misiniz?</p>
     <div class="confirm-buttons">
-        <button class="confirm-btn yes" id="confirmYesBtn">نعم</button>
-        <button class="confirm-btn no" id="confirmNoBtn">لا</button>
+        <button class="confirm-btn yes" id="confirmYesBtn">Evet</button>
+        <button class="confirm-btn no" id="confirmNoBtn">Hayır</button>
     </div>
 </div>
 
 <!-- نافذة تعديل الصورة -->
 <div class="image-edit-modal dev-only" id="imageEditModal">
-    <h3>🖼️ تعديل الصورة</h3>
+    <h3>🖼️ Resim Düzenle</h3>
     <div class="image-edit-preview" id="imageEditPreview">
-        <img id="imageEditImg" src="" alt="معاينة">
+        <img id="imageEditImg" src="" alt="Önizleme">
     </div>
-    <input type="text" class="image-edit-input" id="imageEditUrl" placeholder="أدخل رابط الصورة الجديد">
+    <input type="text" class="image-edit-input" id="imageEditUrl" placeholder="Yeni resim URL'sini girin">
     <div class="image-edit-actions">
-        <button class="image-edit-save" onclick="saveImageEdit()">💾 حفظ</button>
-        <button class="image-edit-cancel" onclick="closeImageEdit()">❌ إلغاء</button>
-        <button class="image-edit-delete" onclick="deleteImageEdit()">🗑️ حذف</button>
+        <button class="image-edit-save" onclick="saveImageEdit()">💾 Kaydet</button>
+        <button class="image-edit-cancel" onclick="closeImageEdit()">❌ İptal</button>
+        <button class="image-edit-delete" onclick="deleteImageEdit()">🗑️ Sil</button>
     </div>
 </div>
 
-<!-- نافذة اختيار الألوان -->
-<div class="color-picker-modal dev-only" id="colorPickerModal">
-    <h3>🎨 تخصيص الألوان</h3>
-    <label id="colorCategoryLabel">لون عنوان الفئة</label>
+<!-- نافذة اختيار الألوان (تظهر مباشرة) -->
+<div class="color-picker-modal" id="colorPickerModal">
+    <h3>🎨 Renkleri Özelleştir</h3>
+    <label id="colorCategoryLabel">Kategori Başlık Rengi</label>
     <input type="color" id="colorCategory" value="#ff8c00">
-    <label id="colorNameLabel">لون اسم المنتج</label>
+    <label id="colorNameLabel">Ürün Adı Rengi</label>
     <input type="color" id="colorName" value="#ff8c00">
-    <label id="colorPriceLabel">لون السعر</label>
+    <label id="colorPriceLabel">Fiyat Rengi</label>
     <input type="color" id="colorPrice" value="#ffffff">
     <div class="button-group">
-        <button class="btn" style="background:#28a745;" id="applyColorsBtn" onclick="applyColors()">تطبيق</button>
-        <button class="btn" style="background:#dc3545;" id="closeColorPickerBtn" onclick="closeColorPicker()">إلغاء</button>
+        <button class="btn" style="background:#28a745;" id="applyColorsBtn" onclick="applyColors()">Uygula</button>
+        <button class="btn" style="background:#6c757d;" id="closeColorPickerBtn" onclick="closeColorPicker()">Kapat</button>
     </div>
 </div>
 
 <!-- لوحة المطور V1 (مترجمة) -->
 <div class="dev-window dev-only" id="devPanelV1">
     <div class="window-header" id="dragHandle">
-        <h3 id="v1Title"><i class="fas fa-cog"></i> لوحة المطور V1</h3>
+        <h3 id="v1Title"><i class="fas fa-cog"></i> Geliştirici Paneli V1</h3>
         <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV1()"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="dev-section">
-        <h4 id="addProductTitle"><i class="fas fa-plus-circle"></i> إضافة منتج</h4>
+        <h4 id="addProductTitle"><i class="fas fa-plus-circle"></i> Ürün Ekle</h4>
         <div class="form-group">
-            <label class="form-label" id="categorySelectLabel">اختر الفئة</label>
+            <label class="form-label" id="categorySelectLabel">Kategori Seç</label>
             <select id="categorySelect" class="form-control"></select>
         </div>
         <div class="form-group">
-            <label class="form-label" id="productNameLabel">اسم المنتج</label>
-            <input type="text" id="newName" class="form-control" placeholder="اسم المنتج">
+            <label class="form-label" id="productNameLabel">Ürün Adı</label>
+            <input type="text" id="newName" class="form-control" placeholder="Ürün Adı">
         </div>
         <div class="form-group">
-            <label class="form-label" id="priceLabel">السعر</label>
-            <input type="text" id="productPrice" class="form-control" placeholder="السعر">
+            <label class="form-label" id="priceLabel">Fiyat</label>
+            <input type="text" id="productPrice" class="form-control" placeholder="Fiyat">
         </div>
-        <button class="btn btn-success" style="width:100%;" id="addProductBtn" onclick="addProduct()">✅ إضافة منتج</button>
+        <button class="btn btn-success" style="width:100%;" id="addProductBtn" onclick="addProduct()">✅ Ürün Ekle</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="addCategoryTitle"><i class="fas fa-folder-plus"></i> إضافة فئة</h4>
+        <h4 id="addCategoryTitle"><i class="fas fa-folder-plus"></i> Kategori Ekle</h4>
         <div class="form-group">
-            <label class="form-label" id="newCategoryLabel">اسم الفئة الجديدة</label>
-            <input type="text" id="newCategory" class="form-control" placeholder="اسم الفئة">
+            <label class="form-label" id="newCategoryLabel">Yeni Kategori Adı</label>
+            <input type="text" id="newCategory" class="form-control" placeholder="Kategori Adı">
         </div>
-        <button class="btn btn-success" style="width:100%;" id="addCategoryBtn" onclick="addCategory()">📁 إضافة فئة</button>
+        <button class="btn btn-success" style="width:100%;" id="addCategoryBtn" onclick="addCategory()">📁 Kategori Ekle</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="colorEditTitle"><i class="fas fa-palette"></i> تعديل الألوان</h4>
-        <button class="btn btn-primary" style="width:100%;" id="openColorPickerBtn" onclick="openColorPicker()">🎨 فتح منتقي الألوان</button>
+        <h4 id="colorEditTitle"><i class="fas fa-palette"></i> Renk Düzenle</h4>
+        <button class="btn btn-primary" style="width:100%;" id="openColorPickerBtn" onclick="openColorPicker()">🎨 Renk Seçiciyi Aç</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="toolsTitle"><i class="fas fa-tools"></i> الأدوات</h4>
+        <h4 id="toolsTitle"><i class="fas fa-tools"></i> Araçlar</h4>
         <div class="button-group">
-            <button class="btn btn-success" id="enableEditBtn" onclick="enableEdit()">✏️ وضع التعديل</button>
-            <button class="btn btn-danger" id="enableDeleteBtn" onclick="enableDelete()">🗑️ وضع الحذف</button>
+            <button class="btn btn-success" id="enableEditBtn" onclick="enableEdit()">✏️ Düzenleme Modu</button>
+            <button class="btn btn-danger" id="enableDeleteBtn" onclick="enableDelete()">🗑️ Silme Modu</button>
         </div>
-        <button class="btn btn-secondary" style="width:100%; margin-top:5px;" id="disableModesBtn" onclick="disableAllModes()">🔘 إلغاء الأوضاع</button>
-        <button class="btn btn-warning" style="width:100%; margin-top:5px;" id="resetMenuBtn" onclick="resetToOriginal()">🔄 إعادة تعيين القائمة</button>
+        <button class="btn btn-secondary" style="width:100%; margin-top:5px;" id="disableModesBtn" onclick="disableAllModes()">🔘 Modları Kapat</button>
+        <button class="btn btn-warning" style="width:100%; margin-top:5px;" id="resetMenuBtn" onclick="resetToOriginal()">🔄 Menüyü Sıfırla</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="socialTitle"><i class="fas fa-globe"></i> وسائل التواصل</h4>
+        <h4 id="socialTitle"><i class="fas fa-globe"></i> Sosyal Medya</h4>
         <div class="form-group">
-            <label class="form-label" id="instagramLabel">رابط إنستغرام</label>
+            <label class="form-label" id="instagramLabel">Instagram Linki</label>
             <input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" placeholder="https://instagram.com/...">
         </div>
-        <button class="btn btn-info" style="width:100%;" id="updateInstagramBtn" onclick="changeInstagram()">📷 تحديث إنستغرام</button>
+        <button class="btn btn-info" style="width:100%;" id="updateInstagramBtn" onclick="changeInstagram()">📷 Instagram'ı Güncelle</button>
         <div class="form-group">
-            <label class="form-label" id="locationLabel">الموقع (خط العرض،خط الطول)</label>
+            <label class="form-label" id="locationLabel">Konum (enlem,boylam)</label>
             <input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147">
         </div>
-        <button class="btn btn-info" style="width:100%;" id="updateLocationBtn" onclick="changeLocation()">📍 تحديث الموقع</button>
+        <button class="btn btn-info" style="width:100%;" id="updateLocationBtn" onclick="changeLocation()">📍 Konumu Güncelle</button>
     </div>
 
     <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
-        <h4><i class="fas fa-cloud"></i> CLOUD SYNC <span class="cloud-badge">متقدم</span></h4>
+        <h4><i class="fas fa-cloud"></i> CLOUD SYNC <span class="cloud-badge">Gelişmiş</span></h4>
         <div class="cloud-panel">
             <div class="cloud-stats">
-                <span>🌐 API: <span style="color:#00ff00" id="apiStatus">جاهز</span></span>
-                <span>📦 الإصدار: <span id="cloudVersion">1.0.0</span></span>
+                <span>🌐 API: <span style="color:#00ff00" id="apiStatus">Hazır</span></span>
+                <span>📦 Versiyon: <span id="cloudVersion">1.0.0</span></span>
             </div>
             <div style="background:#0066cc; padding:8px; border-radius:6px; margin-bottom:10px; text-align:center;">
                 🔗 API: npoint.io
             </div>
             <button class="btn btn-info" style="width:100%; background:#0066cc;" onclick="saveToCloud()" id="cloudSaveBtn">
-                ☁️ حفظ في السحابة
+                ☁️ Buluta Kaydet
             </button>
             <button class="btn btn-secondary" style="width:100%; margin-top:5px;" onclick="loadFromCloud()" id="cloudLoadBtn">
-                📥 تحميل من السحابة
+                📥 Buluttan Yükle
             </button>
             <button class="btn btn-success" style="width:100%; margin-top:5px;" onclick="testCloudConnection()" id="testConnectionBtn">
-                🔌 اختبار الاتصال
+                🔌 Bağlantı Testi
             </button>
         </div>
     </div>
 
     <div class="dev-section">
-        <h4 id="copyCodeTitle"><i class="fas fa-code"></i> نسخ الكود</h4>
+        <h4 id="copyCodeTitle"><i class="fas fa-code"></i> Kodu Kopyala</h4>
         <div class="code-display" id="v1CodeDisplay"></div>
         <button class="btn btn-info" style="width:100%; margin-top:10px;" id="copyCodeBtn" onclick="copyV1Code()">
-            <i class="fas fa-copy"></i> نسخ الكود
+            <i class="fas fa-copy"></i> Kodu Kopyala
         </button>
     </div>
 
     <button class="btn btn-danger" style="width:100%;" id="closeV1Btn" onclick="closeDevV1()">
-        <i class="fas fa-times"></i> إغلاق
+        <i class="fas fa-times"></i> Kapat
     </button>
 </div>
 
 <!-- لوحة المطور V2 (مدير الصور المتقدم) مترجمة -->
 <div class="dev-window v2 dev-only" id="devPanelV2">
     <div class="window-header">
-        <h3 id="v2Title"><i class="fas fa-paint-brush"></i> مدير الصور المتقدم V2</h3>
+        <h3 id="v2Title"><i class="fas fa-paint-brush"></i> Gelişmiş Resim Yöneticisi V2</h3>
         <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV2()"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="galleryTitle"><i class="fas fa-images"></i> معرض الصور</h4>
+        <h4 id="galleryTitle"><i class="fas fa-images"></i> Resim Galerisi</h4>
         <div class="image-gallery" id="imageGalleryV2">
-            <p class="text-center">جاري تحميل الصور...</p>
+            <p class="text-center">Resimler yükleniyor...</p>
         </div>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="addCategoryImageTitle"><i class="fas fa-folder-plus"></i> إضافة صورة للفئة</h4>
+        <h4 id="addCategoryImageTitle"><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle</h4>
         <div class="form-group">
-            <label class="form-label" id="selectCategoryLabel">اختر الفئة</label>
+            <label class="form-label" id="selectCategoryLabel">Kategori Seç</label>
             <select id="categoryImageSelectV2" class="form-control"></select>
         </div>
         <div class="form-group">
-            <label class="form-label" id="imageUrlLabel">رابط الصورة</label>
+            <label class="form-label" id="imageUrlLabel">Resim URL</label>
             <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="https://...">
         </div>
         <div class="image-preview" id="categoryImagePreviewV2">
-            <span>معاينة الصورة</span>
+            <span>Önizleme</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" id="previewCategoryBtn" onclick="previewCategoryImageV2()">🔍 معاينة</button>
-            <button class="btn btn-success" id="addCategoryImageBtn" onclick="addCategoryImageV2()">➕ إضافة</button>
+            <button class="btn btn-secondary" id="previewCategoryBtn" onclick="previewCategoryImageV2()">🔍 Önizle</button>
+            <button class="btn btn-success" id="addCategoryImageBtn" onclick="addCategoryImageV2()">➕ Ekle</button>
         </div>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="addProductImageTitle"><i class="fas fa-plus-circle"></i> إضافة صورة لمنتج</h4>
+        <h4 id="addProductImageTitle"><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle</h4>
         <div class="form-group">
-            <label class="form-label" id="selectProductCategoryLabel">اختر الفئة</label>
+            <label class="form-label" id="selectProductCategoryLabel">Kategori Seç</label>
             <select id="productCategorySelectV2" class="form-control"></select>
         </div>
         <div class="form-group">
-            <label class="form-label" id="selectProductLabel">اختر المنتج</label>
+            <label class="form-label" id="selectProductLabel">Ürün Seç</label>
             <select id="productSelectV2" class="form-control" disabled></select>
         </div>
         <div class="form-group">
-            <label class="form-label" id="productImageUrlLabel">رابط الصورة</label>
+            <label class="form-label" id="productImageUrlLabel">Resim URL</label>
             <input type="url" id="productImageUrlV2" class="form-control" placeholder="https://...">
         </div>
         <div class="image-preview" id="productImagePreviewV2">
-            <span>معاينة الصورة</span>
+            <span>Önizleme</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" id="previewProductBtn" onclick="previewProductImageV2()">🔍 معاينة</button>
-            <button class="btn btn-success" id="addProductImageBtn" onclick="addProductImageV2()">➕ إضافة</button>
+            <button class="btn btn-secondary" id="previewProductBtn" onclick="previewProductImageV2()">🔍 Önizle</button>
+            <button class="btn btn-success" id="addProductImageBtn" onclick="addProductImageV2()">➕ Ekle</button>
         </div>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="syncImagesTitle"><i class="fas fa-cloud"></i> مزامنة الصور</h4>
+        <h4 id="syncImagesTitle"><i class="fas fa-cloud"></i> Resim Senkronizasyonu</h4>
         <div class="button-group">
-            <button class="btn btn-info" id="saveImagesBtn" onclick="saveImagesToCloud()">💾 حفظ الصور</button>
-            <button class="btn btn-secondary" id="loadImagesBtn" onclick="loadImagesFromCloud()">📥 تحميل الصور</button>
+            <button class="btn btn-info" id="saveImagesBtn" onclick="saveImagesToCloud()">💾 Resimleri Kaydet</button>
+            <button class="btn btn-secondary" id="loadImagesBtn" onclick="loadImagesFromCloud()">📥 Resimleri Yükle</button>
         </div>
     </div>
 
-    <button class="btn btn-danger" style="width:100%;" id="closeV2Btn" onclick="closeDevV2()">إغلاق</button>
+    <button class="btn btn-danger" style="width:100%;" id="closeV2Btn" onclick="closeDevV2()">Kapat</button>
 </div>
 
 <!-- حاوية الرسائل -->
@@ -1914,10 +1914,10 @@
 
 <!-- عناصر التحكم العلوية -->
 <div class="top-controls">
-    <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="تغيير اللغة">
+    <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Dil Değiştir">
         <i class="fas fa-globe"></i>
     </button>
-    <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="تغيير السمة">
+    <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir">
         <i class="fas fa-moon"></i>
     </button>
 </div>
@@ -1930,16 +1930,16 @@
 <!-- القسم الرئيسي -->
 <section class="hero">
     <div class="hero-content">
-        <h1 id="secretTrigger">توستو</h1>
-        <div class="work-time" id="workTime">🕒 ٠٨:٠٠ - ٠٢:٣٠</div>
-        <button class="btn" onclick="scrollToMenu()" id="scrollBtn">عرض القائمة</button>
+        <h1 id="secretTrigger">Tosttoo</h1>
+        <div class="work-time" id="workTime">🕒 08:00 - 02:30</div>
+        <button class="btn" onclick="scrollToMenu()" id="scrollBtn">Menüyü Gör</button>
     </div>
 </section>
 
 <!-- قسم القائمة -->
 <section id="menu" class="section">
     <div class="container">
-        <h2 class="section-title" id="menuTitle">قائمتنا</h2>
+        <h2 class="section-title" id="menuTitle">Menümüz</h2>
         <div class="grid" id="menuGrid"></div>
     </div>
 </section>
@@ -1947,14 +1947,14 @@
 <!-- قسم الاتصال -->
 <section id="contact" class="contact-section">
     <div class="container">
-        <h2 class="section-title" id="contactTitle">اتصل بنا</h2>
+        <h2 class="section-title" id="contactTitle">İletişim</h2>
         <div class="contact-content">
             <div class="contact-item" id="phoneContact" onclick="window.open('tel:905321580207')">
                 <div class="contact-icon">
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <div class="contact-text" id="phoneLink">
-                    📞 ٠٥٣٢ ١٥٨ ٠٢ ٠٧
+                    📞 0532 158 02 07
                 </div>
             </div>
             <div class="contact-item" onclick="window.open('https://wa.me/905321580207')">
@@ -1962,7 +1962,7 @@
                     <i class="fab fa-whatsapp"></i>
                 </div>
                 <div class="contact-text" id="whatsappText">
-                    واتساب
+                    WhatsApp
                 </div>
             </div>
             <div class="contact-item">
@@ -1970,7 +1970,7 @@
                     <i class="fab fa-instagram"></i>
                 </div>
                 <div class="contact-text">
-                    <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank">إنستغرام</a>
+                    <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank">Instagram</a>
                 </div>
             </div>
             <div class="contact-item" id="locationContact" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
@@ -1978,7 +1978,7 @@
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div class="contact-text" id="locationText">
-                    📍 الموقع
+                    📍 Konum
                 </div>
             </div>
             <div class="map-container" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
@@ -1995,7 +1995,7 @@
         let isDeveloper = false;
         let deleteMode = false;
         let editMode = false;
-        let currentLang = localStorage.getItem('lang') || 'ar';
+        let currentLang = localStorage.getItem('lang') || 'tr'; // اللغة الأساسية تركية
         let currentVersionType = 'v1';
         let teaClickCount = 0;
         let videoShown = false;
@@ -2016,136 +2016,8 @@
         const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
         const INSTAGRAM_URL = 'https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2';
 
-        // ===== القائمة الأساسية (النسخة الأصلية) =====
+        // ===== القائمة الأساسية (النسخة الأصلية) - التركية أولاً =====
         const ORIGINAL_MENU = {
-            ar: [
-                {
-                    category: "أنواع التوست",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "توست بالجبن", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "توست بالسجق", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "مكس جبن وسجق", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "أتوم (سجق,سلامي,سوسيس,جبن,بيض)", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "توست 3 أجبان", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "توست باللحم المقلي", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "توست آياليك", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "توست بالخبز الحلقي (لشخصين)", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "توست دايت (جبن خفيف,طماطم,فلفل,خبز دايت)", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "توست بالخبز المسطح", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "خبز مسطح مع لحم مقلي", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "كومرو", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "الساندويشات",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "ساندويش مشكل", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "ساندويش تونة", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "ساندويش دجاج", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "الوجبات الخفيفة",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "رقائق بطاطس", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "قطع دجاج", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "6 حلقات بصل", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "السلطات",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "سلطة تونة", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "سلطة دجاج", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "سلطة جبن", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "المعكرونة",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "معكرونة بولونيز", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "معكرونة بالدجاج", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "معكرونة بالجبن", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "معكرونة بالتونة", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "البرغر",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "هامبرغر كلاسيك", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "تشيز برغر", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "برغر دجاج", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "البيتزا",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "مارغريتا", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا بالسجق", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا مشكلة", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا باللحم المقلي", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا بالتونة", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا خضار", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيتزا أربعة أجبان", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "الفطور",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "طبق فطور", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "فطور مفتوح (للشخص)", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "منمن", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "بيض بالسجق", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "بيض مقلي", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "بيض بالجبن", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "بيض باللحم المقلي", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "المشروبات الساخنة",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "شاي", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "شاي مريمية", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "شاي أعشاب", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
-                        { name: "قهوة تركية", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "قهوة عثمانية", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "قهوة مننجتش", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "المشروبات الباردة",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "ماء", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "صودا", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "صودا فواكه", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "بيبازاري كولا", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "تشامليكا برتقال", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "غازوز نيده", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "آيس تي", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "عيران صغير", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "عيران كبير", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "تشرشل", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "الحلويات",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "بودنغ الأرز المخبوز", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "سوفليه", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                }
-            ],
             tr: [
                 {
                     category: "TOST ÇEŞİTLERİ",
@@ -2154,12 +2026,12 @@
                         { name: "Peynirli tost", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
                         { name: "Sucuklu tost", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "Karışık tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Atom tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Atom tost (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "3 peynirli tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
                         { name: "Kavurmalı tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "Ayvalık tostu", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Simit tost", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Diyet tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Simit tost (iki kişilik)", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Diyet tost (light peynir,domates,biber)", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
                         { name: "Bazlama tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "Bazlama kavurmalı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
                         { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
@@ -2229,7 +2101,7 @@
                     image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
                     items: [
                         { name: "Kahvaltı tabağı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Serpme kahvaltı", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Serpme kahvaltı (kişi başı)", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
                         { name: "Sucuklu yumurta", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
                         { name: "Sahanda yumurta", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
@@ -2274,397 +2146,391 @@
                     ]
                 }
             ],
-            en: [
-                {
-                    category: "TOAST TYPES",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Cheese toast", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sausage toast", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Mixed toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Atom toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "3 cheese toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Fried meat toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Ayvalık toast", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Bagel toast", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Diet toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Flatbread toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Flatbread with fried meat", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "SANDWICHES",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Mixed sandwich", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Tuna sandwich", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Chicken sandwich", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "SNACKS",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Potato chips", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Chicken pieces", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "6 onion rings", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "SALADS",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Tuna salad", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Chicken salad", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Cheese salad", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "PASTA",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Bolognese pasta", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Chicken pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Cheese pasta", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Tuna pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "BURGERS",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Classic hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Chicken burger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "PIZZAS",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Margherita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Sausage pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Mixed pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Fried meat pizza", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Tuna pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Vegetable pizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Four cheese pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "BREAKFAST",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Breakfast plate", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Open breakfast", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sausage eggs", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Fried eggs", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Cheese eggs", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Fried meat eggs", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "HOT DRINKS",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Tea", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Sage tea", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Herbal tea", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
-                        { name: "Turkish coffee", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Ottoman coffee", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Menengiç coffee", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "COLD DRINKS",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Water", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Fruit soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Beypazarı cola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Çamlıca orange", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Niğde soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Small ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Large ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "DESSERTS",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Baked rice pudding", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Souffle", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                }
-            ],
-            ru: [
-                {
-                    category: "ВИДЫ ТОСТОВ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Сырный тост", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Тост с колбасой", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Смешанный тост", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Атом тост", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Тост с 3 сырами", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Тост с жареным мясом", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Айвалык тост", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Тост на бублике", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Диетический тост", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Тост на лепешке", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Лепешка с жареным мясом", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Кумру", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "СЭНДВИЧИ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Смешанный сэндвич", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Сэндвич с тунцом", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Сэндвич с курицей", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "ЗАКУСКИ",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Картофельные чипсы", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Кусочки курицы", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "6 луковых колец", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "САЛАТЫ",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Салат с тунцом", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Салат с курицей", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Сырный салат", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "МАКАРОНЫ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Болоньезе", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "С курицей", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "С сыром", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "С тунцом", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "БУРГЕРЫ",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Классический гамбургер", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Чизбургер", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Куриный бургер", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "ПИЦЦА",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Маргарита", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Пицца с колбасой", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Смешанная пицца", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Пицца с жареным мясом", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Пицца с тунцом", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Овощная пицца", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Четыре сыра", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "ЗАВТРАКИ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Тарелка завтрака", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Открытый завтрак", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Менемен", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Яйца с колбасой", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Яичница", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Яйца с сыром", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Яйца с жареным мясом", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "ГОРЯЧИЕ НАПИТКИ",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Чай", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Шалфей", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Травяной чай", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
-                        { name: "Турецкий кофе", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Османский кофе", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Мененгич кофе", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "ХОЛОДНЫЕ НАПИТКИ",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Вода", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Сода", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Фруктовая сода", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Beypazarı кола", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Çamlıca апельсин", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Niğde газировка", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Маленький айран", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Большой айран", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Черчилль", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "ДЕСЕРТЫ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Рисовый пудинг", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Суфле", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                }
-            ],
-            de: [
-                {
-                    category: "TOASTSORTEN",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Käse-Toast", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sucuk-Toast", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Gemischter Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Atom-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "3-Käse-Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Toast mit gebratenem Fleisch", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Ayvalık-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Bagel-Toast", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Diät-Toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Fladenbrot-Toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Fladenbrot mit gebratenem Fleisch", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "SANDWICHS",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Gemischtes Sandwich", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Thunfisch-Sandwich", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Hähnchen-Sandwich", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "SNACKS",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Kartoffelchips", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Hähnchenstücke", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "6 Zwiebelringe", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "SALATE",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Thunfischsalat", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Hähnchensalat", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Käsesalat", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "PASTA",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Bolognese", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Hähnchen-Pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Käse-Pasta", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Thunfisch-Pasta", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                },
-                {
-                    category: "BURGER",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Klassischer Hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Hähnchenburger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "PIZZEN",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Margherita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Sucuk-Pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Gemischte Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Pizza mit gebratenem Fleisch", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Thunfisch-Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Gemüsepizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Vier-Käse-Pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "FRÜHSTÜCK",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Frühstücksteller", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Offenes Frühstück", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Eier mit Sucuk", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Spiegeleier", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Eier mit Käse", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Eier mit gebratenem Fleisch", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
-                    ]
-                },
-                {
-                    category: "HEISSGETRÄNKE",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-                    items: [
-                        { name: "Tee", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Salbeitee", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Kräutertee", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
-                        { name: "Türkischer Kaffee", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Osmanischer Kaffee", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Menengiç-Kaffee", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
-                    ]
-                },
-                {
-                    category: "KALTGETRÄNKE",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-                    items: [
-                        { name: "Wasser", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Fruchtsoda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Beypazarı Cola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Çamlıca Orange", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Niğde Limonade", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Eistee", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Kleiner Ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Großer Ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
-                    ]
-                },
-                {
-                    category: "DESSERTS",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-                    items: [
-                        { name: "Gebackener Milchreis", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Soufflé", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
-                    ]
-                }
-            ]
+            ar: [],
+            en: [],
+            ru: [],
+            de: []
         };
+
+        // ترجمة القوائم للغات الأخرى
+        ORIGINAL_MENU.ar = ORIGINAL_MENU.tr.map(cat => ({
+            ...cat,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "أنواع التوست" :
+                     cat.category === "SANDVİÇLER" ? "الساندويشات" :
+                     cat.category === "ATIŞTIRMALIKLAR" ? "الوجبات الخفيفة" :
+                     cat.category === "SALATALAR" ? "السلطات" :
+                     cat.category === "MAKARNALAR" ? "المعكرونة" :
+                     cat.category === "BURGERLER" ? "البرغر" :
+                     cat.category === "PİZZALAR" ? "البيتزا" :
+                     cat.category === "KAHVALTILAR" ? "الفطور" :
+                     cat.category === "SICAK İÇECEKLER" ? "المشروبات الساخنة" :
+                     cat.category === "SOĞUK İÇECEKLER" ? "المشروبات الباردة" :
+                     cat.category === "TATLILAR" ? "الحلويات" : cat.category,
+            items: cat.items.map(item => ({
+                ...item,
+                name: item.name === "Peynirli tost" ? "توست بالجبن" :
+                      item.name === "Sucuklu tost" ? "توست بالسجق" :
+                      item.name === "Karışık tost" ? "مكس جبن وسجق" :
+                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "أتوم (سجق,سلامي,سوسيس,جبن,بيض)" :
+                      item.name === "3 peynirli tost" ? "توست 3 أجبان" :
+                      item.name === "Kavurmalı tost" ? "توست باللحم المقلي" :
+                      item.name === "Ayvalık tostu" ? "توست آياليك" :
+                      item.name === "Simit tost (iki kişilik)" ? "توست بالخبز الحلقي (لشخصين)" :
+                      item.name === "Diyet tost (light peynir,domates,biber)" ? "توست دايت (جبن خفيف,طماطم,فلفل,خبز دايت)" :
+                      item.name === "Bazlama tost" ? "توست بالخبز المسطح" :
+                      item.name === "Bazlama kavurmalı" ? "خبز مسطح مع لحم مقلي" :
+                      item.name === "Kumru" ? "كومرو" :
+                      item.name === "Karışık sandviç" ? "ساندويش مشكل" :
+                      item.name === "Ton balıklı sandviç" ? "ساندويش تونة" :
+                      item.name === "Tavuklu sandviç" ? "ساندويش دجاج" :
+                      item.name === "Patates cipsi" ? "رقائق بطاطس" :
+                      item.name === "Tavuk parçaları" ? "قطع دجاج" :
+                      item.name === "6 soğan halkası" ? "6 حلقات بصل" :
+                      item.name === "Ton balıklı salata" ? "سلطة تونة" :
+                      item.name === "Tavuklu salata" ? "سلطة دجاج" :
+                      item.name === "Peynirli salata" ? "سلطة جبن" :
+                      item.name === "Bolonez makarna" ? "معكرونة بولونيز" :
+                      item.name === "Tavuklu makarna" ? "معكرونة بالدجاج" :
+                      item.name === "Peynirli makarna" ? "معكرونة بالجبن" :
+                      item.name === "Ton balıklı makarna" ? "معكرونة بالتونة" :
+                      item.name === "Klasik hamburger" ? "هامبرغر كلاسيك" :
+                      item.name === "Cheeseburger" ? "تشيز برغر" :
+                      item.name === "Tavuk burger" ? "برغر دجاج" :
+                      item.name === "Margarita" ? "مارغريتا" :
+                      item.name === "Sucuklu pizza" ? "بيتزا بالسجق" :
+                      item.name === "Karışık pizza" ? "بيتزا مشكلة" :
+                      item.name === "Kavurmalı pizza" ? "بيتزا باللحم المقلي" :
+                      item.name === "Ton balıklı pizza" ? "بيتزا بالتونة" :
+                      item.name === "Sebzeli pizza" ? "بيتزا خضار" :
+                      item.name === "Dört peynirli pizza" ? "بيتزا أربعة أجبان" :
+                      item.name === "Kahvaltı tabağı" ? "طبق فطور" :
+                      item.name === "Serpme kahvaltı (kişi başı)" ? "فطور مفتوح (للشخص)" :
+                      item.name === "Menemen" ? "منمن" :
+                      item.name === "Sucuklu yumurta" ? "بيض بالسجق" :
+                      item.name === "Sahanda yumurta" ? "بيض مقلي" :
+                      item.name === "Peynirli yumurta" ? "بيض بالجبن" :
+                      item.name === "Kavurmalı yumurta" ? "بيض باللحم المقلي" :
+                      item.name === "Çay" ? "شاي" :
+                      item.name === "Ada çayı" ? "شاي مريمية" :
+                      item.name === "Bitki çayı" ? "شاي أعشاب" :
+                      item.name === "Türk kahvesi" ? "قهوة تركية" :
+                      item.name === "Osmanlı kahvesi" ? "قهوة عثمانية" :
+                      item.name === "Menengiç kahvesi" ? "قهوة مننجتش" :
+                      item.name === "Su" ? "ماء" :
+                      item.name === "Soda" ? "صودا" :
+                      item.name === "Meyveli soda" ? "صودا فواكه" :
+                      item.name === "Beypazarı kola" ? "بيبازاري كولا" :
+                      item.name === "Çamlıca portakal" ? "تشامليكا برتقال" :
+                      item.name === "Niğde gazozu" ? "غازوز نيده" :
+                      item.name === "Ice tea" ? "آيس تي" :
+                      item.name === "Küçük ayran" ? "عيران صغير" :
+                      item.name === "Büyük ayran" ? "عيران كبير" :
+                      item.name === "Churchill" ? "تشرشل" :
+                      item.name === "Fırında sütlaç" ? "بودنغ الأرز المخبوز" :
+                      item.name === "Sufle" ? "سوفليه" : item.name
+            }))
+        }));
+
+        ORIGINAL_MENU.en = ORIGINAL_MENU.tr.map(cat => ({
+            ...cat,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOAST TYPES" :
+                     cat.category === "SANDVİÇLER" ? "SANDWICHES" :
+                     cat.category === "ATIŞTIRMALIKLAR" ? "SNACKS" :
+                     cat.category === "SALATALAR" ? "SALADS" :
+                     cat.category === "MAKARNALAR" ? "PASTA" :
+                     cat.category === "BURGERLER" ? "BURGERS" :
+                     cat.category === "PİZZALAR" ? "PIZZAS" :
+                     cat.category === "KAHVALTILAR" ? "BREAKFAST" :
+                     cat.category === "SICAK İÇECEKLER" ? "HOT DRINKS" :
+                     cat.category === "SOĞUK İÇECEKLER" ? "COLD DRINKS" :
+                     cat.category === "TATLILAR" ? "DESSERTS" : cat.category,
+            items: cat.items.map(item => ({
+                ...item,
+                name: item.name === "Peynirli tost" ? "Cheese toast" :
+                      item.name === "Sucuklu tost" ? "Sausage toast" :
+                      item.name === "Karışık tost" ? "Mixed toast" :
+                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Atom toast" :
+                      item.name === "3 peynirli tost" ? "3 cheese toast" :
+                      item.name === "Kavurmalı tost" ? "Fried meat toast" :
+                      item.name === "Ayvalık tostu" ? "Ayvalık toast" :
+                      item.name === "Simit tost (iki kişilik)" ? "Bagel toast" :
+                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Diet toast" :
+                      item.name === "Bazlama tost" ? "Flatbread toast" :
+                      item.name === "Bazlama kavurmalı" ? "Flatbread with fried meat" :
+                      item.name === "Kumru" ? "Kumru" :
+                      item.name === "Karışık sandviç" ? "Mixed sandwich" :
+                      item.name === "Ton balıklı sandviç" ? "Tuna sandwich" :
+                      item.name === "Tavuklu sandviç" ? "Chicken sandwich" :
+                      item.name === "Patates cipsi" ? "Potato chips" :
+                      item.name === "Tavuk parçaları" ? "Chicken pieces" :
+                      item.name === "6 soğan halkası" ? "6 onion rings" :
+                      item.name === "Ton balıklı salata" ? "Tuna salad" :
+                      item.name === "Tavuklu salata" ? "Chicken salad" :
+                      item.name === "Peynirli salata" ? "Cheese salad" :
+                      item.name === "Bolonez makarna" ? "Bolognese pasta" :
+                      item.name === "Tavuklu makarna" ? "Chicken pasta" :
+                      item.name === "Peynirli makarna" ? "Cheese pasta" :
+                      item.name === "Ton balıklı makarna" ? "Tuna pasta" :
+                      item.name === "Klasik hamburger" ? "Classic hamburger" :
+                      item.name === "Cheeseburger" ? "Cheeseburger" :
+                      item.name === "Tavuk burger" ? "Chicken burger" :
+                      item.name === "Margarita" ? "Margherita" :
+                      item.name === "Sucuklu pizza" ? "Sausage pizza" :
+                      item.name === "Karışık pizza" ? "Mixed pizza" :
+                      item.name === "Kavurmalı pizza" ? "Fried meat pizza" :
+                      item.name === "Ton balıklı pizza" ? "Tuna pizza" :
+                      item.name === "Sebzeli pizza" ? "Vegetable pizza" :
+                      item.name === "Dört peynirli pizza" ? "Four cheese pizza" :
+                      item.name === "Kahvaltı tabağı" ? "Breakfast plate" :
+                      item.name === "Serpme kahvaltı (kişi başı)" ? "Open breakfast" :
+                      item.name === "Menemen" ? "Menemen" :
+                      item.name === "Sucuklu yumurta" ? "Sausage eggs" :
+                      item.name === "Sahanda yumurta" ? "Fried eggs" :
+                      item.name === "Peynirli yumurta" ? "Cheese eggs" :
+                      item.name === "Kavurmalı yumurta" ? "Fried meat eggs" :
+                      item.name === "Çay" ? "Tea" :
+                      item.name === "Ada çayı" ? "Sage tea" :
+                      item.name === "Bitki çayı" ? "Herbal tea" :
+                      item.name === "Türk kahvesi" ? "Turkish coffee" :
+                      item.name === "Osmanlı kahvesi" ? "Ottoman coffee" :
+                      item.name === "Menengiç kahvesi" ? "Menengiç coffee" :
+                      item.name === "Su" ? "Water" :
+                      item.name === "Soda" ? "Soda" :
+                      item.name === "Meyveli soda" ? "Fruit soda" :
+                      item.name === "Beypazarı kola" ? "Beypazarı cola" :
+                      item.name === "Çamlıca portakal" ? "Çamlıca orange" :
+                      item.name === "Niğde gazozu" ? "Niğde soda" :
+                      item.name === "Ice tea" ? "Ice tea" :
+                      item.name === "Küçük ayran" ? "Small ayran" :
+                      item.name === "Büyük ayran" ? "Large ayran" :
+                      item.name === "Churchill" ? "Churchill" :
+                      item.name === "Fırında sütlaç" ? "Baked rice pudding" :
+                      item.name === "Sufle" ? "Souffle" : item.name
+            }))
+        }));
+
+        ORIGINAL_MENU.ru = ORIGINAL_MENU.tr.map(cat => ({
+            ...cat,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "ВИДЫ ТОСТОВ" :
+                     cat.category === "SANDVİÇLER" ? "СЭНДВИЧИ" :
+                     cat.category === "ATIŞTIRMALIKLAR" ? "ЗАКУСКИ" :
+                     cat.category === "SALATALAR" ? "САЛАТЫ" :
+                     cat.category === "MAKARNALAR" ? "МАКАРОНЫ" :
+                     cat.category === "BURGERLER" ? "БУРГЕРЫ" :
+                     cat.category === "PİZZALAR" ? "ПИЦЦА" :
+                     cat.category === "KAHVALTILAR" ? "ЗАВТРАКИ" :
+                     cat.category === "SICAK İÇECEKLER" ? "ГОРЯЧИЕ НАПИТКИ" :
+                     cat.category === "SOĞUK İÇECEKLER" ? "ХОЛОДНЫЕ НАПИТКИ" :
+                     cat.category === "TATLILAR" ? "ДЕСЕРТЫ" : cat.category,
+            items: cat.items.map(item => ({
+                ...item,
+                name: item.name === "Peynirli tost" ? "Сырный тост" :
+                      item.name === "Sucuklu tost" ? "Тост с колбасой" :
+                      item.name === "Karışık tost" ? "Смешанный тост" :
+                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Атом тост" :
+                      item.name === "3 peynirli tost" ? "Тост с 3 сырами" :
+                      item.name === "Kavurmalı tost" ? "Тост с жареным мясом" :
+                      item.name === "Ayvalık tostu" ? "Айвалык тост" :
+                      item.name === "Simit tost (iki kişilik)" ? "Тост на бублике" :
+                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Диетический тост" :
+                      item.name === "Bazlama tost" ? "Тост на лепешке" :
+                      item.name === "Bazlama kavurmalı" ? "Лепешка с жареным мясом" :
+                      item.name === "Kumru" ? "Кумру" :
+                      item.name === "Karışık sandviç" ? "Смешанный сэндвич" :
+                      item.name === "Ton balıklı sandviç" ? "Сэндвич с тунцом" :
+                      item.name === "Tavuklu sandviç" ? "Сэндвич с курицей" :
+                      item.name === "Patates cipsi" ? "Картофельные чипсы" :
+                      item.name === "Tavuk parçaları" ? "Кусочки курицы" :
+                      item.name === "6 soğan halkası" ? "6 луковых колец" :
+                      item.name === "Ton balıklı salata" ? "Салат с тунцом" :
+                      item.name === "Tavuklu salata" ? "Салат с курицей" :
+                      item.name === "Peynirli salata" ? "Сырный салат" :
+                      item.name === "Bolonez makarna" ? "Болоньезе" :
+                      item.name === "Tavuklu makarna" ? "С курицей" :
+                      item.name === "Peynirli makarna" ? "С сыром" :
+                      item.name === "Ton balıklı makarna" ? "С тунцом" :
+                      item.name === "Klasik hamburger" ? "Классический гамбургер" :
+                      item.name === "Cheeseburger" ? "Чизбургер" :
+                      item.name === "Tavuk burger" ? "Куриный бургер" :
+                      item.name === "Margarita" ? "Маргарита" :
+                      item.name === "Sucuklu pizza" ? "Пицца с колбасой" :
+                      item.name === "Karışık pizza" ? "Смешанная пицца" :
+                      item.name === "Kavurmalı pizza" ? "Пицца с жареным мясом" :
+                      item.name === "Ton balıklı pizza" ? "Пицца с тунцом" :
+                      item.name === "Sebzeli pizza" ? "Овощная пицца" :
+                      item.name === "Dört peynirli pizza" ? "Четыре сыра" :
+                      item.name === "Kahvaltı tabağı" ? "Тарелка завтрака" :
+                      item.name === "Serpme kahvaltı (kişi başı)" ? "Открытый завтрак" :
+                      item.name === "Menemen" ? "Менемен" :
+                      item.name === "Sucuklu yumurta" ? "Яйца с колбасой" :
+                      item.name === "Sahanda yumurta" ? "Яичница" :
+                      item.name === "Peynirli yumurta" ? "Яйца с сыром" :
+                      item.name === "Kavurmalı yumurta" ? "Яйца с жареным мясом" :
+                      item.name === "Çay" ? "Чай" :
+                      item.name === "Ada çayı" ? "Шалфей" :
+                      item.name === "Bitki çayı" ? "Травяной чай" :
+                      item.name === "Türk kahvesi" ? "Турецкий кофе" :
+                      item.name === "Osmanlı kahvesi" ? "Османский кофе" :
+                      item.name === "Menengiç kahvesi" ? "Мененгич кофе" :
+                      item.name === "Su" ? "Вода" :
+                      item.name === "Soda" ? "Сода" :
+                      item.name === "Meyveli soda" ? "Фруктовая сода" :
+                      item.name === "Beypazarı kola" ? "Beypazarı кола" :
+                      item.name === "Çamlıca portakal" ? "Çamlıca апельсин" :
+                      item.name === "Niğde gazozu" ? "Niğde газировка" :
+                      item.name === "Ice tea" ? "Ice tea" :
+                      item.name === "Küçük ayran" ? "Маленький айран" :
+                      item.name === "Büyük ayran" ? "Большой айран" :
+                      item.name === "Churchill" ? "Черчилль" :
+                      item.name === "Fırında sütlaç" ? "Рисовый пудинг" :
+                      item.name === "Sufle" ? "Суфле" : item.name
+            }))
+        }));
+
+        ORIGINAL_MENU.de = ORIGINAL_MENU.tr.map(cat => ({
+            ...cat,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOASTSORTEN" :
+                     cat.category === "SANDVİÇLER" ? "SANDWICHS" :
+                     cat.category === "ATIŞTIRMALIKLAR" ? "SNACKS" :
+                     cat.category === "SALATALAR" ? "SALATE" :
+                     cat.category === "MAKARNALAR" ? "PASTA" :
+                     cat.category === "BURGERLER" ? "BURGER" :
+                     cat.category === "PİZZALAR" ? "PIZZEN" :
+                     cat.category === "KAHVALTILAR" ? "FRÜHSTÜCK" :
+                     cat.category === "SICAK İÇECEKLER" ? "HEISSGETRÄNKE" :
+                     cat.category === "SOĞUK İÇECEKLER" ? "KALTGETRÄNKE" :
+                     cat.category === "TATLILAR" ? "DESSERTS" : cat.category,
+            items: cat.items.map(item => ({
+                ...item,
+                name: item.name === "Peynirli tost" ? "Käse-Toast" :
+                      item.name === "Sucuklu tost" ? "Sucuk-Toast" :
+                      item.name === "Karışık tost" ? "Gemischter Toast" :
+                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Atom-Toast" :
+                      item.name === "3 peynirli tost" ? "3-Käse-Toast" :
+                      item.name === "Kavurmalı tost" ? "Toast mit gebratenem Fleisch" :
+                      item.name === "Ayvalık tostu" ? "Ayvalık-Toast" :
+                      item.name === "Simit tost (iki kişilik)" ? "Bagel-Toast" :
+                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Diät-Toast" :
+                      item.name === "Bazlama tost" ? "Fladenbrot-Toast" :
+                      item.name === "Bazlama kavurmalı" ? "Fladenbrot mit gebratenem Fleisch" :
+                      item.name === "Kumru" ? "Kumru" :
+                      item.name === "Karışık sandviç" ? "Gemischtes Sandwich" :
+                      item.name === "Ton balıklı sandviç" ? "Thunfisch-Sandwich" :
+                      item.name === "Tavuklu sandviç" ? "Hähnchen-Sandwich" :
+                      item.name === "Patates cipsi" ? "Kartoffelchips" :
+                      item.name === "Tavuk parçaları" ? "Hähnchenstücke" :
+                      item.name === "6 soğan halkası" ? "6 Zwiebelringe" :
+                      item.name === "Ton balıklı salata" ? "Thunfischsalat" :
+                      item.name === "Tavuklu salata" ? "Hähnchensalat" :
+                      item.name === "Peynirli salata" ? "Käsesalat" :
+                      item.name === "Bolonez makarna" ? "Bolognese" :
+                      item.name === "Tavuklu makarna" ? "Hähnchen-Pasta" :
+                      item.name === "Peynirli makarna" ? "Käse-Pasta" :
+                      item.name === "Ton balıklı makarna" ? "Thunfisch-Pasta" :
+                      item.name === "Klasik hamburger" ? "Klassischer Hamburger" :
+                      item.name === "Cheeseburger" ? "Cheeseburger" :
+                      item.name === "Tavuk burger" ? "Hähnchenburger" :
+                      item.name === "Margarita" ? "Margherita" :
+                      item.name === "Sucuklu pizza" ? "Sucuk-Pizza" :
+                      item.name === "Karışık pizza" ? "Gemischte Pizza" :
+                      item.name === "Kavurmalı pizza" ? "Pizza mit gebratenem Fleisch" :
+                      item.name === "Ton balıklı pizza" ? "Thunfisch-Pizza" :
+                      item.name === "Sebzeli pizza" ? "Gemüsepizza" :
+                      item.name === "Dört peynirli pizza" ? "Vier-Käse-Pizza" :
+                      item.name === "Kahvaltı tabağı" ? "Frühstücksteller" :
+                      item.name === "Serpme kahvaltı (kişi başı)" ? "Offenes Frühstück" :
+                      item.name === "Menemen" ? "Menemen" :
+                      item.name === "Sucuklu yumurta" ? "Eier mit Sucuk" :
+                      item.name === "Sahanda yumurta" ? "Spiegeleier" :
+                      item.name === "Peynirli yumurta" ? "Eier mit Käse" :
+                      item.name === "Kavurmalı yumurta" ? "Eier mit gebratenem Fleisch" :
+                      item.name === "Çay" ? "Tee" :
+                      item.name === "Ada çayı" ? "Salbeitee" :
+                      item.name === "Bitki çayı" ? "Kräutertee" :
+                      item.name === "Türk kahvesi" ? "Türkischer Kaffee" :
+                      item.name === "Osmanlı kahvesi" ? "Osmanischer Kaffee" :
+                      item.name === "Menengiç kahvesi" ? "Menengiç-Kaffee" :
+                      item.name === "Su" ? "Wasser" :
+                      item.name === "Soda" ? "Soda" :
+                      item.name === "Meyveli soda" ? "Fruchtsoda" :
+                      item.name === "Beypazarı kola" ? "Beypazarı Cola" :
+                      item.name === "Çamlıca portakal" ? "Çamlıca Orange" :
+                      item.name === "Niğde gazozu" ? "Niğde Limonade" :
+                      item.name === "Ice tea" ? "Eistee" :
+                      item.name === "Küçük ayran" ? "Kleiner Ayran" :
+                      item.name === "Büyük ayran" ? "Großer Ayran" :
+                      item.name === "Churchill" ? "Churchill" :
+                      item.name === "Fırında sütlaç" ? "Gebackener Milchreis" :
+                      item.name === "Sufle" ? "Soufflé" : item.name
+            }))
+        }));
 
         // ===== نسخة العمل الحالية (يتم تعديلها) =====
         let MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
 
         // ===== نصوص الواجهة متعددة اللغات =====
         const TEXTS = {
+            tr: { 
+                heroTitle: "Tosttoo", 
+                workTime: "🕒 08:00 - 02:30", 
+                viewMenu: "Menüyü Gör", 
+                menuTitle: "Menümüz", 
+                contactTitle: "İletişim", 
+                phone: "0532 158 02 07", 
+                instagram: "Instagram", 
+                location: "📍 Konum",
+                whatsapp: "WhatsApp",
+                devModalTitle: "🔧 Geliştirici Seçenekleri",
+                devModalDesc: "Hangi sürümü kullanmak istiyorsunuz?",
+                devV1Btn: "⚙️ V1",
+                devV2Btn: "🖼️ V2",
+                devCloseBtn: "Kapat",
+                v1Title: "Geliştirici Paneli V1",
+                addProduct: "Ürün Ekle",
+                productName: "Ürün Adı",
+                price: "Fiyat",
+                addProductBtn: "Ürün Ekle",
+                addCategory: "Kategori Ekle",
+                newCategory: "Yeni Kategori Adı",
+                addCategoryBtn: "Kategori Ekle",
+                colorEdit: "Renk Düzenle",
+                openColorPicker: "Renk Seçiciyi Aç",
+                tools: "Araçlar",
+                editMode: "Düzenleme Modu",
+                deleteMode: "Silme Modu",
+                disableModes: "Modları Kapat",
+                resetMenu: "Menüyü Sıfırla",
+                social: "Sosyal Medya",
+                instagramLabel: "Instagram Linki",
+                updateInstagram: "Instagram'ı Güncelle",
+                locationLabel: "Konum",
+                updateLocation: "Konumu Güncelle",
+                copyCode: "Kodu Kopyala",
+                copyBtn: "Kodu Kopyala",
+                closePanel: "Kapat",
+                v2Title: "Gelişmiş Resim Yöneticisi V2",
+                gallery: "Resim Galerisi",
+                addCategoryImage: "Kategori Resmi Ekle",
+                selectCategory: "Kategori Seç",
+                imageUrl: "Resim URL",
+                preview: "Önizle",
+                add: "Ekle",
+                addProductImage: "Ürün Resmi Ekle",
+                selectProduct: "Ürün Seç",
+                syncImages: "Resim Senkronizasyonu",
+                saveImages: "Resimleri Kaydet",
+                loadImages: "Resimleri Yükle",
+                confirmTitle: "⚠️ Onay",
+                confirmMessage: "Emin misiniz?",
+                yes: "Evet",
+                no: "Hayır",
+                colorTitle: "🎨 Renkleri Özelleştir",
+                colorCategory: "Kategori Başlık Rengi",
+                colorName: "Ürün Adı Rengi",
+                colorPrice: "Fiyat Rengi",
+                apply: "Uygula",
+                cancel: "İptal"
+            },
             ar: { 
                 heroTitle: "توستو", 
                 workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠", 
@@ -2725,67 +2591,6 @@
                 colorPrice: "لون السعر",
                 apply: "تطبيق",
                 cancel: "إلغاء"
-            },
-            tr: { 
-                heroTitle: "Tosttoo", 
-                workTime: "🕒 08:00 - 02:30", 
-                viewMenu: "Menüyü Gör", 
-                menuTitle: "Menümüz", 
-                contactTitle: "İletişim", 
-                phone: "0532 158 02 07", 
-                instagram: "Instagram", 
-                location: "📍 Konum",
-                whatsapp: "WhatsApp",
-                devModalTitle: "🔧 Geliştirici Seçenekleri",
-                devModalDesc: "Hangi sürümü kullanmak istiyorsunuz?",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devCloseBtn: "Kapat",
-                v1Title: "Geliştirici Paneli V1",
-                addProduct: "Ürün Ekle",
-                productName: "Ürün Adı",
-                price: "Fiyat",
-                addProductBtn: "Ürün Ekle",
-                addCategory: "Kategori Ekle",
-                newCategory: "Yeni Kategori Adı",
-                addCategoryBtn: "Kategori Ekle",
-                colorEdit: "Renk Düzenle",
-                openColorPicker: "Renk Seçiciyi Aç",
-                tools: "Araçlar",
-                editMode: "Düzenleme Modu",
-                deleteMode: "Silme Modu",
-                disableModes: "Modları Kapat",
-                resetMenu: "Menüyü Sıfırla",
-                social: "Sosyal Medya",
-                instagramLabel: "Instagram Linki",
-                updateInstagram: "Instagram'ı Güncelle",
-                locationLabel: "Konum",
-                updateLocation: "Konumu Güncelle",
-                copyCode: "Kodu Kopyala",
-                copyBtn: "Kodu Kopyala",
-                closePanel: "Kapat",
-                v2Title: "Gelişmiş Görsel Yöneticisi V2",
-                gallery: "Galeri",
-                addCategoryImage: "Kategori Resmi Ekle",
-                selectCategory: "Kategori Seç",
-                imageUrl: "Resim URL",
-                preview: "Önizle",
-                add: "Ekle",
-                addProductImage: "Ürün Resmi Ekle",
-                selectProduct: "Ürün Seç",
-                syncImages: "Görsel Senkronizasyonu",
-                saveImages: "Görselleri Kaydet",
-                loadImages: "Görselleri Yükle",
-                confirmTitle: "⚠️ Onay",
-                confirmMessage: "Emin misiniz?",
-                yes: "Evet",
-                no: "Hayır",
-                colorTitle: "🎨 Renkleri Özelleştir",
-                colorCategory: "Kategori Başlık Rengi",
-                colorName: "Ürün Adı Rengi",
-                colorPrice: "Fiyat Rengi",
-                apply: "Uygula",
-                cancel: "İptal"
             },
             en: { 
                 heroTitle: "Tosttoo", 
@@ -2979,7 +2784,7 @@
             if (autoSaveTimer) clearTimeout(autoSaveTimer);
             autoSaveTimer = setTimeout(() => {
                 saveAllToLocalStorage();
-                if (isDeveloper) showStatus('تم الحفظ التلقائي', 'success');
+                if (isDeveloper) showStatus('Otomatik kaydedildi', 'success');
             }, 500);
         }
 
@@ -3163,7 +2968,7 @@
         window.setLanguage = function(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
-            const flags = { ar: '🇮🇶', tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', de: '🇩🇪' };
+            const flags = { tr: '🇹🇷', ar: '🇮🇶', en: '🇬🇧', ru: '🇷🇺', de: '🇩🇪' };
             document.getElementById('langBtn').textContent = flags[lang];
             document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.getElementById('languageMenu').style.display = 'none';
@@ -3197,7 +3002,7 @@
 
         // ===== دوال القائمة =====
         function getFullMenu() {
-            const base = MENU_DATA[currentLang] || MENU_DATA.ar;
+            const base = MENU_DATA[currentLang] || MENU_DATA.tr;
             const menuWithCustomImages = base.map(cat => ({
                 ...cat,
                 image: categoryImages[cat.category] || cat.image,
@@ -3210,7 +3015,7 @@
         }
 
         function saveFullMenu(menu) {
-            const baseCategories = MENU_DATA[currentLang] || MENU_DATA.ar;
+            const baseCategories = MENU_DATA[currentLang] || MENU_DATA.tr;
             const baseNames = baseCategories.map(c => c.category);
             extraCategories = menu.filter(cat => !baseNames.includes(cat.category));
             triggerAutoSave();
@@ -3235,7 +3040,7 @@
                     img.className = 'card-image';
                     img.loading = 'lazy';
                     img.alt = cat.category;
-                    img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=صورة'; };
+                    img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=Resim'; };
                     img.onclick = function(e) {
                         e.stopPropagation();
                         if (isDeveloper && editMode) {
@@ -3272,7 +3077,7 @@
                         img.className = 'item-image';
                         img.loading = 'lazy';
                         img.alt = item.name;
-                        img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=صورة'; };
+                        img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=Resim'; };
                         img.onclick = function(e) {
                             e.stopPropagation();
                             if (isDeveloper && editMode) {
@@ -3294,7 +3099,7 @@
                     nameSpan.textContent = item.name;
                     
                     // كود الشاي السري
-                    if (item.name.includes('شاي') || item.name.includes('Çay') || item.name.includes('Tea') || item.name.includes('Чай') || item.name.includes('Tee')) {
+                    if (item.name.includes('Çay') || item.name.includes('شاي') || item.name.includes('Tea') || item.name.includes('Чай') || item.name.includes('Tee')) {
                         nameSpan.onclick = function(e) {
                             e.stopPropagation();
                             if (isDeveloper) {
@@ -3435,7 +3240,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم تحديث الاسم', 'success');
+                if (isDeveloper) showStatus('İsim güncellendi', 'success');
             }
         }
 
@@ -3448,7 +3253,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم تحديث السعر', 'success');
+                if (isDeveloper) showStatus('Fiyat güncellendi', 'success');
             }
         }
 
@@ -3464,7 +3269,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم حذف المنتج', 'success');
+                if (isDeveloper) showStatus('Ürün silindi', 'success');
             }
         }
 
@@ -3479,7 +3284,7 @@
                 saveFullMenu(menu);
                 displayMenu();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم حذف الفئة', 'success');
+                if (isDeveloper) showStatus('Kategori silindi', 'success');
             }
         }
 
@@ -3523,7 +3328,7 @@
         window.addCategory = function() {
             const name = document.getElementById('newCategory').value.trim();
             if (!name) {
-                if (isDeveloper) showStatus('أدخل اسم الفئة!', 'error');
+                if (isDeveloper) showStatus('Kategori adı girin!', 'error');
                 return;
             }
             const menu = getFullMenu();
@@ -3532,7 +3337,7 @@
             displayMenu();
             document.getElementById('newCategory').value = '';
             triggerAutoSave();
-            if (isDeveloper) showStatus('تم إضافة الفئة', 'success');
+            if (isDeveloper) showStatus('Kategori eklendi', 'success');
         };
 
         window.addProduct = function() {
@@ -3540,7 +3345,7 @@
             const price = document.getElementById('productPrice').value.trim();
             const idx = document.getElementById('categorySelect').value;
             if (!name || !price) {
-                if (isDeveloper) showStatus('أدخل الاسم والسعر!', 'error');
+                if (isDeveloper) showStatus('Ad ve fiyat girin!', 'error');
                 return;
             }
             const menu = getFullMenu();
@@ -3556,7 +3361,7 @@
                 document.getElementById('newName').value = '';
                 document.getElementById('productPrice').value = '';
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم إضافة المنتج', 'success');
+                if (isDeveloper) showStatus('Ürün eklendi', 'success');
             }
         };
 
@@ -3571,11 +3376,11 @@
                 menu.forEach((c, i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`);
             }
             if (cis) {
-                cis.innerHTML = '<option value="">اختر الفئة</option>';
+                cis.innerHTML = '<option value="">Kategori Seç</option>';
                 menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`);
             }
             if (pcs) {
-                pcs.innerHTML = '<option value="">اختر الفئة</option>';
+                pcs.innerHTML = '<option value="">Kategori Seç</option>';
                 menu.forEach((c, i) => pcs.innerHTML += `<option value="${i}">${c.category}</option>`);
             }
         }
@@ -3598,7 +3403,7 @@
             
             const newUrl = document.getElementById('imageEditUrl').value.trim();
             if (!newUrl) {
-                if (isDeveloper) showStatus('الرجاء إدخال رابط الصورة', 'error');
+                if (isDeveloper) showStatus('Resim URL girin!', 'error');
                 return;
             }
 
@@ -3614,14 +3419,14 @@
 
             displayMenu();
             triggerAutoSave();
-            if (isDeveloper) showStatus('تم تحديث الصورة', 'success');
+            if (isDeveloper) showStatus('Resim güncellendi', 'success');
             closeImageEdit();
         };
 
         window.deleteImageEdit = function() {
             if (!currentEditData) return;
             
-            showConfirm('هل أنت متأكد من حذف هذه الصورة؟', () => {
+            showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
                 if (currentEditData.type === 'category') {
                     const catName = currentEditData.name;
                     delete categoryImages[catName];
@@ -3634,7 +3439,7 @@
                 }
                 displayMenu();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم حذف الصورة', 'success');
+                if (isDeveloper) showStatus('Resim silindi', 'success');
                 closeImageEdit();
             });
         };
@@ -3661,7 +3466,7 @@
             Object.keys(productImages).forEach(ci => {
                 Object.keys(productImages[ci]).forEach(p => {
                     const menu = getFullMenu();
-                    const catName = menu[ci] ? menu[ci].category : 'قسم غير معروف';
+                    const catName = menu[ci] ? menu[ci].category : 'Bilinmeyen Kategori';
                     html += `
                         <div class="image-gallery-item">
                             <img src="${productImages[ci][p]}" alt="${p}">
@@ -3675,7 +3480,7 @@
                 });
             });
             
-            gallery.innerHTML = html || '<p class="text-center">لا توجد صور مخصصة</p>';
+            gallery.innerHTML = html || '<p class="text-center">Özel resim yok</p>';
         }
 
         window.editGalleryImage = function(type, cat, product) {
@@ -3689,7 +3494,7 @@
         };
 
         window.deleteGalleryImage = function(type, cat, product) {
-            showConfirm('هل أنت متأكد من حذف هذه الصورة؟', () => {
+            showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
                 if (type === 'category') {
                     delete categoryImages[cat];
                 } else {
@@ -3698,32 +3503,32 @@
                 displayMenu();
                 updateGalleryV2();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم حذف الصورة', 'success');
+                if (isDeveloper) showStatus('Resim silindi', 'success');
             });
         };
 
         window.previewCategoryImageV2 = function() {
             const url = document.getElementById('categoryImageUrlV2').value;
-            document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+            document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
         };
 
         window.previewProductImageV2 = function() {
             const url = document.getElementById('productImageUrlV2').value;
-            document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+            document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
         };
 
         window.addCategoryImageV2 = function() {
             const cat = document.getElementById('categoryImageSelectV2').value;
             const url = document.getElementById('categoryImageUrlV2').value;
             if (!cat || !url) {
-                if (isDeveloper) showStatus('اختر الفئة وأدخل الرابط!', 'error');
+                if (isDeveloper) showStatus('Kategori ve URL girin!', 'error');
                 return;
             }
             categoryImages[cat] = url;
             displayMenu();
             updateGalleryV2();
             triggerAutoSave();
-            if (isDeveloper) showStatus('تم إضافة صورة الفئة', 'success');
+            if (isDeveloper) showStatus('Kategori resmi eklendi', 'success');
         };
 
         window.addProductImageV2 = function() {
@@ -3731,7 +3536,7 @@
             const prodIdx = document.getElementById('productSelectV2').value;
             const url = document.getElementById('productImageUrlV2').value;
             if (!catIdx || !prodIdx || !url) {
-                if (isDeveloper) showStatus('اختر الفئة والمنتج وأدخل الرابط!', 'error');
+                if (isDeveloper) showStatus('Kategori, ürün ve URL girin!', 'error');
                 return;
             }
             
@@ -3743,7 +3548,7 @@
             displayMenu();
             updateGalleryV2();
             triggerAutoSave();
-            if (isDeveloper) showStatus('تم إضافة صورة المنتج', 'success');
+            if (isDeveloper) showStatus('Ürün resmi eklendi', 'success');
         };
 
         document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
@@ -3751,12 +3556,12 @@
             const ps = document.getElementById('productSelectV2');
             if (!ci) { 
                 ps.disabled = true; 
-                ps.innerHTML = '<option>اختر الفئة أولاً</option>'; 
+                ps.innerHTML = '<option>Önce kategori seçin</option>'; 
                 return; 
             }
             const menu = getFullMenu();
             ps.disabled = false;
-            ps.innerHTML = '<option value="">اختر المنتج</option>';
+            ps.innerHTML = '<option value="">Ürün Seç</option>';
             menu[ci].items.forEach((it, i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
         });
 
@@ -3766,8 +3571,7 @@
             isDeveloper = true;
             document.body.classList.add('developer-mode');
             document.getElementById('floatingDevBtn').style.display = 'flex';
-            // لا نفتح أي لوحة تلقائياً - فقط نظهر زر المطور
-            if (isDeveloper) showStatus('مرحباً أيها المطور - اضغط على زر المطور لفتح اللوحة', 'success');
+            if (isDeveloper) showStatus('Hoş geldiniz geliştirici', 'success');
         };
 
         window.closeDevV1 = function() {
@@ -3786,10 +3590,8 @@
                 deleteMode = false;
                 document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
             } else {
-                // إخفاء أي لوحة مفتوحة أولاً
                 document.getElementById('devPanelV1').style.display = 'none';
                 document.getElementById('devPanelV2').style.display = 'none';
-                // فتح اللوحة المختارة
                 p.style.display = 'block';
                 updateSelects();
                 updateGalleryV2();
@@ -3811,7 +3613,7 @@
                 document.getElementById('newInstagram').value = INSTAGRAM_URL;
                 displayMenu();
                 updateGalleryV2();
-                if (isDeveloper) showStatus('تم إعادة تعيين القائمة', 'success');
+                if (isDeveloper) showStatus('Menü sıfırlandı', 'success');
             });
         };
 
@@ -3820,7 +3622,7 @@
             if (v) { 
                 document.getElementById('instaLink').href = v; 
                 triggerAutoSave();
-                if (isDeveloper) showStatus('تم تحديث رابط إنستغرام', 'success'); 
+                if (isDeveloper) showStatus('Instagram güncellendi', 'success'); 
             }
         };
 
@@ -3829,7 +3631,7 @@
             if (v) { 
                 document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; 
                 localStorage.setItem('map', v); 
-                if (isDeveloper) showStatus('تم تحديث الموقع', 'success'); 
+                if (isDeveloper) showStatus('Konum güncellendi', 'success'); 
             }
         };
 
@@ -3866,17 +3668,17 @@
             document.head.appendChild(style);
             
             closeColorPicker();
-            if (isDeveloper) showStatus('تم تطبيق الألوان', 'success');
+            if (isDeveloper) showStatus('Renkler uygulandı', 'success');
         };
 
         window.copyV1Code = function() {
             const code = JSON.stringify(getFullMenu(), null, 2);
             navigator.clipboard.writeText(code);
-            if (isDeveloper) showStatus('📋 تم نسخ الكود', 'success');
+            if (isDeveloper) showStatus('📋 Kod kopyalandı', 'success');
         };
 
         window.saveToCloud = async function() {
-            if (isDeveloper) showStatus('☁️ جاري الحفظ...', 'loading');
+            if (isDeveloper) showStatus('☁️ Kaydediliyor...', 'loading');
             document.getElementById('cloudSaveBtn').disabled = true;
             try {
                 await fetch(CLOUD_API_URL, {
@@ -3887,21 +3689,21 @@
                         images: { categories: categoryImages, products: productImages }
                     })
                 });
-                if (isDeveloper) showStatus('✅ تم الحفظ في السحابة', 'success');
+                if (isDeveloper) showStatus('✅ Buluta kaydedildi', 'success');
             } catch (e) {
-                if (isDeveloper) showStatus('❌ خطأ في الاتصال', 'error');
+                if (isDeveloper) showStatus('❌ Bağlantı hatası', 'error');
             }
             document.getElementById('cloudSaveBtn').disabled = false;
         };
 
         window.loadFromCloud = async function() {
-            if (isDeveloper) showStatus('📥 جاري التحميل...', 'loading');
+            if (isDeveloper) showStatus('📥 Yükleniyor...', 'loading');
             document.getElementById('cloudLoadBtn').disabled = true;
             try {
                 const res = await fetch(CLOUD_API_URL);
                 const data = await res.json();
                 if (data.menu) {
-                    const base = MENU_DATA[currentLang] || MENU_DATA.ar;
+                    const base = MENU_DATA[currentLang] || MENU_DATA.tr;
                     extraCategories = data.menu.filter(item => !base.some(b => b.category === item.category));
                     
                     if (data.images) {
@@ -3916,10 +3718,10 @@
                     displayMenu();
                     updateGalleryV2();
                     triggerAutoSave();
-                    if (isDeveloper) showStatus('✅ تم التحميل من السحابة', 'success');
+                    if (isDeveloper) showStatus('✅ Buluttan yüklendi', 'success');
                 }
             } catch (e) {
-                if (isDeveloper) showStatus('❌ خطأ في التحميل', 'error');
+                if (isDeveloper) showStatus('❌ Yükleme hatası', 'error');
             }
             document.getElementById('cloudLoadBtn').disabled = false;
         };
@@ -3927,19 +3729,19 @@
         window.testCloudConnection = async function() {
             try {
                 await fetch(CLOUD_API_URL);
-                document.getElementById('apiStatus').innerHTML = 'متصل';
+                document.getElementById('apiStatus').innerHTML = 'Bağlı';
                 document.getElementById('apiStatus').style.color = '#00ff00';
-                if (isDeveloper) showStatus('✅ اتصال ناجح', 'success');
+                if (isDeveloper) showStatus('✅ Bağlantı başarılı', 'success');
             } catch {
-                document.getElementById('apiStatus').innerHTML = 'غير متصل';
+                document.getElementById('apiStatus').innerHTML = 'Bağlantı Yok';
                 document.getElementById('apiStatus').style.color = '#ff0000';
-                if (isDeveloper) showStatus('❌ فشل الاتصال', 'error');
+                if (isDeveloper) showStatus('❌ Bağlantı hatası', 'error');
             }
         };
 
         window.saveImagesToCloud = function() {
             localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-            if (isDeveloper) showStatus('✅ تم حفظ الصور محلياً', 'success');
+            if (isDeveloper) showStatus('✅ Resimler kaydedildi', 'success');
         };
 
         window.loadImagesFromCloud = function() {
@@ -3951,7 +3753,7 @@
                 displayMenu();
                 updateGalleryV2();
                 triggerAutoSave();
-                if (isDeveloper) showStatus('✅ تم تحميل الصور', 'success');
+                if (isDeveloper) showStatus('✅ Resimler yüklendi', 'success');
             }
         };
 
@@ -3997,15 +3799,15 @@
             clickCount++;
             setTimeout(() => clickCount = 0, 3000);
             if (clickCount === 7) {
-                const p = prompt('كلمة المرور:');
+                const p = prompt('Şifre:');
                 if (p === DEV_PASS) {
                     isDeveloper = true;
                     document.body.classList.add('developer-mode');
                     document.getElementById('devVersionModal').style.display = 'flex';
                     updateDevPanelTexts();
-                    showStatus('مرحباً أيها المطور', 'success');
+                    showStatus('Hoş geldiniz geliştirici', 'success');
                 } else {
-                    alert('❌ كلمة مرور خاطئة');
+                    alert('❌ Yanlış şifre!');
                 }
                 clickCount = 0;
             }
@@ -4014,23 +3816,25 @@
         document.addEventListener('keydown', function(e) {
             if (e.key === 'F5') {
                 e.preventDefault();
-                const p = prompt('كلمة المرور:');
+                const p = prompt('Şifre:');
                 if (p === DEV_PASS) {
                     isDeveloper = true;
                     document.body.classList.add('developer-mode');
                     document.getElementById('devVersionModal').style.display = 'flex';
                     updateDevPanelTexts();
                 } else {
-                    alert('❌ كلمة مرور خاطئة');
+                    alert('❌ Yanlış şifre!');
                 }
             }
         });
 
         // ===== تحميل الصفحة =====
         document.addEventListener('DOMContentLoaded', function() {
+            // تحميل البيانات المحفوظة
             loadAllFromLocalStorage();
             
-            const savedLang = localStorage.getItem('lang') || 'ar';
+            // تعيين اللغة الأساسية (تركية)
+            const savedLang = localStorage.getItem('lang') || 'tr';
             setLanguage(savedLang);
             
             if (localStorage.getItem('theme') === 'light') {
@@ -4094,7 +3898,7 @@
             devPanelV1.style.cursor = 'move';
         }
 
-        // منع القائمة اليمنى
+        // منع القائمة اليمنى للمستخدمين العاديين
         document.addEventListener('contextmenu', function(e) {
             if (!isDeveloper) {
                 e.preventDefault();
