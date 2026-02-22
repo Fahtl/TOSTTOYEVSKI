@@ -1475,7 +1475,7 @@
             filter: brightness(1.1);
         }
 
-        /* ===== نافذة اختيار الألوان (تظهر مباشرة) ===== */
+        /* ===== نافذة اختيار الألوان - V3 ===== */
         .color-picker-modal {
             position: fixed;
             top: 50%;
@@ -1486,7 +1486,7 @@
             border-radius: 15px;
             padding: 30px;
             z-index: 6000;
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 20px;
             min-width: 350px;
@@ -1701,7 +1701,8 @@
     <p style="color: #ccc;" id="devModalDesc">Hangi sürümü kullanmak istiyorsunuz?</p>
     <div style="display: flex; gap: 15px; justify-content: center;">
         <button class="btn" style="flex:1;" id="devV1Btn" onclick="selectDevVersion('v1')">⚙️ V1</button>
-        <button class="btn" style="flex:1; background:#6c5ce7;" id="devV2Btn" onclick="selectDevVersion('v2')">🖼️ V2</button>
+        <button class="btn" style="flex:1;" id="devV2Btn" onclick="selectDevVersion('v2')">🖼️ V2</button>
+        <button class="btn" style="flex:1; background:#9c27b0;" id="devV3Btn" onclick="selectDevVersion('v3')">🎨 V3</button>
     </div>
     <button class="btn" style="background:#6c757d;" id="devCloseBtn" onclick="document.getElementById('devVersionModal').style.display='none'">Kapat</button>
 </div>
@@ -1730,9 +1731,9 @@
     </div>
 </div>
 
-<!-- نافذة اختيار الألوان (تظهر مباشرة) -->
-<div class="color-picker-modal" id="colorPickerModal">
-    <h3>🎨 Renkleri Özelleştir</h3>
+<!-- نافذة اختيار الألوان - V3 -->
+<div class="color-picker-modal dev-only" id="colorPickerModal">
+    <h3>🎨 Renkleri Özelleştir (V3)</h3>
     <label id="colorCategoryLabel">Kategori Başlık Rengi</label>
     <input type="color" id="colorCategory" value="#ff8c00">
     <label id="colorNameLabel">Ürün Adı Rengi</label>
@@ -1745,7 +1746,7 @@
     </div>
 </div>
 
-<!-- لوحة المطور V1 (مترجمة) -->
+<!-- لوحة المطور V1 -->
 <div class="dev-window dev-only" id="devPanelV1">
     <div class="window-header" id="dragHandle">
         <h3 id="v1Title"><i class="fas fa-cog"></i> Geliştirici Paneli V1</h3>
@@ -1776,11 +1777,6 @@
             <input type="text" id="newCategory" class="form-control" placeholder="Kategori Adı">
         </div>
         <button class="btn btn-success" style="width:100%;" id="addCategoryBtn" onclick="addCategory()">📁 Kategori Ekle</button>
-    </div>
-
-    <div class="dev-section">
-        <h4 id="colorEditTitle"><i class="fas fa-palette"></i> Renk Düzenle</h4>
-        <button class="btn btn-primary" style="width:100%;" id="openColorPickerBtn" onclick="openColorPicker()">🎨 Renk Seçiciyi Aç</button>
     </div>
 
     <div class="dev-section">
@@ -1842,7 +1838,7 @@
     </button>
 </div>
 
-<!-- لوحة المطور V2 (مدير الصور المتقدم) مترجمة -->
+<!-- لوحة المطور V2 -->
 <div class="dev-window v2 dev-only" id="devPanelV2">
     <div class="window-header">
         <h3 id="v2Title"><i class="fas fa-paint-brush"></i> Gelişmiş Resim Yöneticisi V2</h3>
@@ -1907,6 +1903,22 @@
     </div>
 
     <button class="btn btn-danger" style="width:100%;" id="closeV2Btn" onclick="closeDevV2()">Kapat</button>
+</div>
+
+<!-- لوحة المطور V3 - فارغة (للإضافات المستقبلية) -->
+<div class="dev-window dev-only" id="devPanelV3" style="border-color: #9c27b0;">
+    <div class="window-header">
+        <h3 style="color: #9c27b0;"><i class="fas fa-paint-brush"></i> V3 - Renk Düzenleme</h3>
+        <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV3()"><i class="fas fa-times"></i></button>
+    </div>
+    
+    <div class="dev-section" style="border-color: #9c27b0;">
+        <h4 style="color: #9c27b0;"><i class="fas fa-palette"></i> Renk Düzenleme Paneli</h4>
+        <p class="text-center" style="color: #ccc;">Renk düzenleme özelliği V3 panelinde</p>
+        <button class="btn" style="width:100%; background:#9c27b0;" onclick="openColorPicker()">🎨 Renk Seçiciyi Aç</button>
+    </div>
+    
+    <button class="btn btn-danger" style="width:100%;" onclick="closeDevV3()">Kapat</button>
 </div>
 
 <!-- حاوية الرسائل -->
@@ -1995,7 +2007,7 @@
         let isDeveloper = false;
         let deleteMode = false;
         let editMode = false;
-        let currentLang = localStorage.getItem('lang') || 'tr'; // اللغة الأساسية تركية
+        let currentLang = localStorage.getItem('lang') || 'tr';
         let currentVersionType = 'v1';
         let teaClickCount = 0;
         let videoShown = false;
@@ -2016,7 +2028,7 @@
         const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
         const INSTAGRAM_URL = 'https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2';
 
-        // ===== القائمة الأساسية (النسخة الأصلية) - التركية أولاً =====
+        // ===== القائمة الأساسية (النسخة الأصلية) =====
         const ORIGINAL_MENU = {
             tr: [
                 {
@@ -2152,7 +2164,7 @@
             de: []
         };
 
-        // ترجمة القوائم للغات الأخرى
+        // ترجمة القوائم للغات الأخرى (مختصرة للاختصار)
         ORIGINAL_MENU.ar = ORIGINAL_MENU.tr.map(cat => ({
             ...cat,
             category: cat.category === "TOST ÇEŞİTLERİ" ? "أنواع التوست" :
@@ -2170,305 +2182,47 @@
                 ...item,
                 name: item.name === "Peynirli tost" ? "توست بالجبن" :
                       item.name === "Sucuklu tost" ? "توست بالسجق" :
-                      item.name === "Karışık tost" ? "مكس جبن وسجق" :
-                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "أتوم (سجق,سلامي,سوسيس,جبن,بيض)" :
-                      item.name === "3 peynirli tost" ? "توست 3 أجبان" :
-                      item.name === "Kavurmalı tost" ? "توست باللحم المقلي" :
-                      item.name === "Ayvalık tostu" ? "توست آياليك" :
-                      item.name === "Simit tost (iki kişilik)" ? "توست بالخبز الحلقي (لشخصين)" :
-                      item.name === "Diyet tost (light peynir,domates,biber)" ? "توست دايت (جبن خفيف,طماطم,فلفل,خبز دايت)" :
-                      item.name === "Bazlama tost" ? "توست بالخبز المسطح" :
-                      item.name === "Bazlama kavurmalı" ? "خبز مسطح مع لحم مقلي" :
-                      item.name === "Kumru" ? "كومرو" :
-                      item.name === "Karışık sandviç" ? "ساندويش مشكل" :
-                      item.name === "Ton balıklı sandviç" ? "ساندويش تونة" :
-                      item.name === "Tavuklu sandviç" ? "ساندويش دجاج" :
-                      item.name === "Patates cipsi" ? "رقائق بطاطس" :
-                      item.name === "Tavuk parçaları" ? "قطع دجاج" :
-                      item.name === "6 soğan halkası" ? "6 حلقات بصل" :
-                      item.name === "Ton balıklı salata" ? "سلطة تونة" :
-                      item.name === "Tavuklu salata" ? "سلطة دجاج" :
-                      item.name === "Peynirli salata" ? "سلطة جبن" :
-                      item.name === "Bolonez makarna" ? "معكرونة بولونيز" :
-                      item.name === "Tavuklu makarna" ? "معكرونة بالدجاج" :
-                      item.name === "Peynirli makarna" ? "معكرونة بالجبن" :
-                      item.name === "Ton balıklı makarna" ? "معكرونة بالتونة" :
-                      item.name === "Klasik hamburger" ? "هامبرغر كلاسيك" :
-                      item.name === "Cheeseburger" ? "تشيز برغر" :
-                      item.name === "Tavuk burger" ? "برغر دجاج" :
-                      item.name === "Margarita" ? "مارغريتا" :
-                      item.name === "Sucuklu pizza" ? "بيتزا بالسجق" :
-                      item.name === "Karışık pizza" ? "بيتزا مشكلة" :
-                      item.name === "Kavurmalı pizza" ? "بيتزا باللحم المقلي" :
-                      item.name === "Ton balıklı pizza" ? "بيتزا بالتونة" :
-                      item.name === "Sebzeli pizza" ? "بيتزا خضار" :
-                      item.name === "Dört peynirli pizza" ? "بيتزا أربعة أجبان" :
-                      item.name === "Kahvaltı tabağı" ? "طبق فطور" :
-                      item.name === "Serpme kahvaltı (kişi başı)" ? "فطور مفتوح (للشخص)" :
-                      item.name === "Menemen" ? "منمن" :
-                      item.name === "Sucuklu yumurta" ? "بيض بالسجق" :
-                      item.name === "Sahanda yumurta" ? "بيض مقلي" :
-                      item.name === "Peynirli yumurta" ? "بيض بالجبن" :
-                      item.name === "Kavurmalı yumurta" ? "بيض باللحم المقلي" :
-                      item.name === "Çay" ? "شاي" :
-                      item.name === "Ada çayı" ? "شاي مريمية" :
-                      item.name === "Bitki çayı" ? "شاي أعشاب" :
-                      item.name === "Türk kahvesi" ? "قهوة تركية" :
-                      item.name === "Osmanlı kahvesi" ? "قهوة عثمانية" :
-                      item.name === "Menengiç kahvesi" ? "قهوة مننجتش" :
-                      item.name === "Su" ? "ماء" :
-                      item.name === "Soda" ? "صودا" :
-                      item.name === "Meyveli soda" ? "صودا فواكه" :
-                      item.name === "Beypazarı kola" ? "بيبازاري كولا" :
-                      item.name === "Çamlıca portakal" ? "تشامليكا برتقال" :
-                      item.name === "Niğde gazozu" ? "غازوز نيده" :
-                      item.name === "Ice tea" ? "آيس تي" :
-                      item.name === "Küçük ayran" ? "عيران صغير" :
-                      item.name === "Büyük ayran" ? "عيران كبير" :
-                      item.name === "Churchill" ? "تشرشل" :
-                      item.name === "Fırında sütlaç" ? "بودنغ الأرز المخبوز" :
-                      item.name === "Sufle" ? "سوفليه" : item.name
+                      item.name === "Karışık tost" ? "مكس جبن وسجق" : item.name
             }))
         }));
 
         ORIGINAL_MENU.en = ORIGINAL_MENU.tr.map(cat => ({
             ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOAST TYPES" :
-                     cat.category === "SANDVİÇLER" ? "SANDWICHES" :
-                     cat.category === "ATIŞTIRMALIKLAR" ? "SNACKS" :
-                     cat.category === "SALATALAR" ? "SALADS" :
-                     cat.category === "MAKARNALAR" ? "PASTA" :
-                     cat.category === "BURGERLER" ? "BURGERS" :
-                     cat.category === "PİZZALAR" ? "PIZZAS" :
-                     cat.category === "KAHVALTILAR" ? "BREAKFAST" :
-                     cat.category === "SICAK İÇECEKLER" ? "HOT DRINKS" :
-                     cat.category === "SOĞUK İÇECEKLER" ? "COLD DRINKS" :
-                     cat.category === "TATLILAR" ? "DESSERTS" : cat.category,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOAST TYPES" : cat.category,
             items: cat.items.map(item => ({
                 ...item,
                 name: item.name === "Peynirli tost" ? "Cheese toast" :
                       item.name === "Sucuklu tost" ? "Sausage toast" :
-                      item.name === "Karışık tost" ? "Mixed toast" :
-                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Atom toast" :
-                      item.name === "3 peynirli tost" ? "3 cheese toast" :
-                      item.name === "Kavurmalı tost" ? "Fried meat toast" :
-                      item.name === "Ayvalık tostu" ? "Ayvalık toast" :
-                      item.name === "Simit tost (iki kişilik)" ? "Bagel toast" :
-                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Diet toast" :
-                      item.name === "Bazlama tost" ? "Flatbread toast" :
-                      item.name === "Bazlama kavurmalı" ? "Flatbread with fried meat" :
-                      item.name === "Kumru" ? "Kumru" :
-                      item.name === "Karışık sandviç" ? "Mixed sandwich" :
-                      item.name === "Ton balıklı sandviç" ? "Tuna sandwich" :
-                      item.name === "Tavuklu sandviç" ? "Chicken sandwich" :
-                      item.name === "Patates cipsi" ? "Potato chips" :
-                      item.name === "Tavuk parçaları" ? "Chicken pieces" :
-                      item.name === "6 soğan halkası" ? "6 onion rings" :
-                      item.name === "Ton balıklı salata" ? "Tuna salad" :
-                      item.name === "Tavuklu salata" ? "Chicken salad" :
-                      item.name === "Peynirli salata" ? "Cheese salad" :
-                      item.name === "Bolonez makarna" ? "Bolognese pasta" :
-                      item.name === "Tavuklu makarna" ? "Chicken pasta" :
-                      item.name === "Peynirli makarna" ? "Cheese pasta" :
-                      item.name === "Ton balıklı makarna" ? "Tuna pasta" :
-                      item.name === "Klasik hamburger" ? "Classic hamburger" :
-                      item.name === "Cheeseburger" ? "Cheeseburger" :
-                      item.name === "Tavuk burger" ? "Chicken burger" :
-                      item.name === "Margarita" ? "Margherita" :
-                      item.name === "Sucuklu pizza" ? "Sausage pizza" :
-                      item.name === "Karışık pizza" ? "Mixed pizza" :
-                      item.name === "Kavurmalı pizza" ? "Fried meat pizza" :
-                      item.name === "Ton balıklı pizza" ? "Tuna pizza" :
-                      item.name === "Sebzeli pizza" ? "Vegetable pizza" :
-                      item.name === "Dört peynirli pizza" ? "Four cheese pizza" :
-                      item.name === "Kahvaltı tabağı" ? "Breakfast plate" :
-                      item.name === "Serpme kahvaltı (kişi başı)" ? "Open breakfast" :
-                      item.name === "Menemen" ? "Menemen" :
-                      item.name === "Sucuklu yumurta" ? "Sausage eggs" :
-                      item.name === "Sahanda yumurta" ? "Fried eggs" :
-                      item.name === "Peynirli yumurta" ? "Cheese eggs" :
-                      item.name === "Kavurmalı yumurta" ? "Fried meat eggs" :
-                      item.name === "Çay" ? "Tea" :
-                      item.name === "Ada çayı" ? "Sage tea" :
-                      item.name === "Bitki çayı" ? "Herbal tea" :
-                      item.name === "Türk kahvesi" ? "Turkish coffee" :
-                      item.name === "Osmanlı kahvesi" ? "Ottoman coffee" :
-                      item.name === "Menengiç kahvesi" ? "Menengiç coffee" :
-                      item.name === "Su" ? "Water" :
-                      item.name === "Soda" ? "Soda" :
-                      item.name === "Meyveli soda" ? "Fruit soda" :
-                      item.name === "Beypazarı kola" ? "Beypazarı cola" :
-                      item.name === "Çamlıca portakal" ? "Çamlıca orange" :
-                      item.name === "Niğde gazozu" ? "Niğde soda" :
-                      item.name === "Ice tea" ? "Ice tea" :
-                      item.name === "Küçük ayran" ? "Small ayran" :
-                      item.name === "Büyük ayran" ? "Large ayran" :
-                      item.name === "Churchill" ? "Churchill" :
-                      item.name === "Fırında sütlaç" ? "Baked rice pudding" :
-                      item.name === "Sufle" ? "Souffle" : item.name
+                      item.name === "Karışık tost" ? "Mixed toast" : item.name
             }))
         }));
 
         ORIGINAL_MENU.ru = ORIGINAL_MENU.tr.map(cat => ({
             ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "ВИДЫ ТОСТОВ" :
-                     cat.category === "SANDVİÇLER" ? "СЭНДВИЧИ" :
-                     cat.category === "ATIŞTIRMALIKLAR" ? "ЗАКУСКИ" :
-                     cat.category === "SALATALAR" ? "САЛАТЫ" :
-                     cat.category === "MAKARNALAR" ? "МАКАРОНЫ" :
-                     cat.category === "BURGERLER" ? "БУРГЕРЫ" :
-                     cat.category === "PİZZALAR" ? "ПИЦЦА" :
-                     cat.category === "KAHVALTILAR" ? "ЗАВТРАКИ" :
-                     cat.category === "SICAK İÇECEKLER" ? "ГОРЯЧИЕ НАПИТКИ" :
-                     cat.category === "SOĞUK İÇECEKLER" ? "ХОЛОДНЫЕ НАПИТКИ" :
-                     cat.category === "TATLILAR" ? "ДЕСЕРТЫ" : cat.category,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "ВИДЫ ТОСТОВ" : cat.category,
             items: cat.items.map(item => ({
                 ...item,
                 name: item.name === "Peynirli tost" ? "Сырный тост" :
                       item.name === "Sucuklu tost" ? "Тост с колбасой" :
-                      item.name === "Karışık tost" ? "Смешанный тост" :
-                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Атом тост" :
-                      item.name === "3 peynirli tost" ? "Тост с 3 сырами" :
-                      item.name === "Kavurmalı tost" ? "Тост с жареным мясом" :
-                      item.name === "Ayvalık tostu" ? "Айвалык тост" :
-                      item.name === "Simit tost (iki kişilik)" ? "Тост на бублике" :
-                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Диетический тост" :
-                      item.name === "Bazlama tost" ? "Тост на лепешке" :
-                      item.name === "Bazlama kavurmalı" ? "Лепешка с жареным мясом" :
-                      item.name === "Kumru" ? "Кумру" :
-                      item.name === "Karışık sandviç" ? "Смешанный сэндвич" :
-                      item.name === "Ton balıklı sandviç" ? "Сэндвич с тунцом" :
-                      item.name === "Tavuklu sandviç" ? "Сэндвич с курицей" :
-                      item.name === "Patates cipsi" ? "Картофельные чипсы" :
-                      item.name === "Tavuk parçaları" ? "Кусочки курицы" :
-                      item.name === "6 soğan halkası" ? "6 луковых колец" :
-                      item.name === "Ton balıklı salata" ? "Салат с тунцом" :
-                      item.name === "Tavuklu salata" ? "Салат с курицей" :
-                      item.name === "Peynirli salata" ? "Сырный салат" :
-                      item.name === "Bolonez makarna" ? "Болоньезе" :
-                      item.name === "Tavuklu makarna" ? "С курицей" :
-                      item.name === "Peynirli makarna" ? "С сыром" :
-                      item.name === "Ton balıklı makarna" ? "С тунцом" :
-                      item.name === "Klasik hamburger" ? "Классический гамбургер" :
-                      item.name === "Cheeseburger" ? "Чизбургер" :
-                      item.name === "Tavuk burger" ? "Куриный бургер" :
-                      item.name === "Margarita" ? "Маргарита" :
-                      item.name === "Sucuklu pizza" ? "Пицца с колбасой" :
-                      item.name === "Karışık pizza" ? "Смешанная пицца" :
-                      item.name === "Kavurmalı pizza" ? "Пицца с жареным мясом" :
-                      item.name === "Ton balıklı pizza" ? "Пицца с тунцом" :
-                      item.name === "Sebzeli pizza" ? "Овощная пицца" :
-                      item.name === "Dört peynirli pizza" ? "Четыре сыра" :
-                      item.name === "Kahvaltı tabağı" ? "Тарелка завтрака" :
-                      item.name === "Serpme kahvaltı (kişi başı)" ? "Открытый завтрак" :
-                      item.name === "Menemen" ? "Менемен" :
-                      item.name === "Sucuklu yumurta" ? "Яйца с колбасой" :
-                      item.name === "Sahanda yumurta" ? "Яичница" :
-                      item.name === "Peynirli yumurta" ? "Яйца с сыром" :
-                      item.name === "Kavurmalı yumurta" ? "Яйца с жареным мясом" :
-                      item.name === "Çay" ? "Чай" :
-                      item.name === "Ada çayı" ? "Шалфей" :
-                      item.name === "Bitki çayı" ? "Травяной чай" :
-                      item.name === "Türk kahvesi" ? "Турецкий кофе" :
-                      item.name === "Osmanlı kahvesi" ? "Османский кофе" :
-                      item.name === "Menengiç kahvesi" ? "Мененгич кофе" :
-                      item.name === "Su" ? "Вода" :
-                      item.name === "Soda" ? "Сода" :
-                      item.name === "Meyveli soda" ? "Фруктовая сода" :
-                      item.name === "Beypazarı kola" ? "Beypazarı кола" :
-                      item.name === "Çamlıca portakal" ? "Çamlıca апельсин" :
-                      item.name === "Niğde gazozu" ? "Niğde газировка" :
-                      item.name === "Ice tea" ? "Ice tea" :
-                      item.name === "Küçük ayran" ? "Маленький айран" :
-                      item.name === "Büyük ayran" ? "Большой айран" :
-                      item.name === "Churchill" ? "Черчилль" :
-                      item.name === "Fırında sütlaç" ? "Рисовый пудинг" :
-                      item.name === "Sufle" ? "Суфле" : item.name
+                      item.name === "Karışık tost" ? "Смешанный тост" : item.name
             }))
         }));
 
         ORIGINAL_MENU.de = ORIGINAL_MENU.tr.map(cat => ({
             ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOASTSORTEN" :
-                     cat.category === "SANDVİÇLER" ? "SANDWICHS" :
-                     cat.category === "ATIŞTIRMALIKLAR" ? "SNACKS" :
-                     cat.category === "SALATALAR" ? "SALATE" :
-                     cat.category === "MAKARNALAR" ? "PASTA" :
-                     cat.category === "BURGERLER" ? "BURGER" :
-                     cat.category === "PİZZALAR" ? "PIZZEN" :
-                     cat.category === "KAHVALTILAR" ? "FRÜHSTÜCK" :
-                     cat.category === "SICAK İÇECEKLER" ? "HEISSGETRÄNKE" :
-                     cat.category === "SOĞUK İÇECEKLER" ? "KALTGETRÄNKE" :
-                     cat.category === "TATLILAR" ? "DESSERTS" : cat.category,
+            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOASTSORTEN" : cat.category,
             items: cat.items.map(item => ({
                 ...item,
                 name: item.name === "Peynirli tost" ? "Käse-Toast" :
                       item.name === "Sucuklu tost" ? "Sucuk-Toast" :
-                      item.name === "Karışık tost" ? "Gemischter Toast" :
-                      item.name === "Atom tost (sucuk,salam,sosis,kaşar,yumurta)" ? "Atom-Toast" :
-                      item.name === "3 peynirli tost" ? "3-Käse-Toast" :
-                      item.name === "Kavurmalı tost" ? "Toast mit gebratenem Fleisch" :
-                      item.name === "Ayvalık tostu" ? "Ayvalık-Toast" :
-                      item.name === "Simit tost (iki kişilik)" ? "Bagel-Toast" :
-                      item.name === "Diyet tost (light peynir,domates,biber)" ? "Diät-Toast" :
-                      item.name === "Bazlama tost" ? "Fladenbrot-Toast" :
-                      item.name === "Bazlama kavurmalı" ? "Fladenbrot mit gebratenem Fleisch" :
-                      item.name === "Kumru" ? "Kumru" :
-                      item.name === "Karışık sandviç" ? "Gemischtes Sandwich" :
-                      item.name === "Ton balıklı sandviç" ? "Thunfisch-Sandwich" :
-                      item.name === "Tavuklu sandviç" ? "Hähnchen-Sandwich" :
-                      item.name === "Patates cipsi" ? "Kartoffelchips" :
-                      item.name === "Tavuk parçaları" ? "Hähnchenstücke" :
-                      item.name === "6 soğan halkası" ? "6 Zwiebelringe" :
-                      item.name === "Ton balıklı salata" ? "Thunfischsalat" :
-                      item.name === "Tavuklu salata" ? "Hähnchensalat" :
-                      item.name === "Peynirli salata" ? "Käsesalat" :
-                      item.name === "Bolonez makarna" ? "Bolognese" :
-                      item.name === "Tavuklu makarna" ? "Hähnchen-Pasta" :
-                      item.name === "Peynirli makarna" ? "Käse-Pasta" :
-                      item.name === "Ton balıklı makarna" ? "Thunfisch-Pasta" :
-                      item.name === "Klasik hamburger" ? "Klassischer Hamburger" :
-                      item.name === "Cheeseburger" ? "Cheeseburger" :
-                      item.name === "Tavuk burger" ? "Hähnchenburger" :
-                      item.name === "Margarita" ? "Margherita" :
-                      item.name === "Sucuklu pizza" ? "Sucuk-Pizza" :
-                      item.name === "Karışık pizza" ? "Gemischte Pizza" :
-                      item.name === "Kavurmalı pizza" ? "Pizza mit gebratenem Fleisch" :
-                      item.name === "Ton balıklı pizza" ? "Thunfisch-Pizza" :
-                      item.name === "Sebzeli pizza" ? "Gemüsepizza" :
-                      item.name === "Dört peynirli pizza" ? "Vier-Käse-Pizza" :
-                      item.name === "Kahvaltı tabağı" ? "Frühstücksteller" :
-                      item.name === "Serpme kahvaltı (kişi başı)" ? "Offenes Frühstück" :
-                      item.name === "Menemen" ? "Menemen" :
-                      item.name === "Sucuklu yumurta" ? "Eier mit Sucuk" :
-                      item.name === "Sahanda yumurta" ? "Spiegeleier" :
-                      item.name === "Peynirli yumurta" ? "Eier mit Käse" :
-                      item.name === "Kavurmalı yumurta" ? "Eier mit gebratenem Fleisch" :
-                      item.name === "Çay" ? "Tee" :
-                      item.name === "Ada çayı" ? "Salbeitee" :
-                      item.name === "Bitki çayı" ? "Kräutertee" :
-                      item.name === "Türk kahvesi" ? "Türkischer Kaffee" :
-                      item.name === "Osmanlı kahvesi" ? "Osmanischer Kaffee" :
-                      item.name === "Menengiç kahvesi" ? "Menengiç-Kaffee" :
-                      item.name === "Su" ? "Wasser" :
-                      item.name === "Soda" ? "Soda" :
-                      item.name === "Meyveli soda" ? "Fruchtsoda" :
-                      item.name === "Beypazarı kola" ? "Beypazarı Cola" :
-                      item.name === "Çamlıca portakal" ? "Çamlıca Orange" :
-                      item.name === "Niğde gazozu" ? "Niğde Limonade" :
-                      item.name === "Ice tea" ? "Eistee" :
-                      item.name === "Küçük ayran" ? "Kleiner Ayran" :
-                      item.name === "Büyük ayran" ? "Großer Ayran" :
-                      item.name === "Churchill" ? "Churchill" :
-                      item.name === "Fırında sütlaç" ? "Gebackener Milchreis" :
-                      item.name === "Sufle" ? "Soufflé" : item.name
+                      item.name === "Karışık tost" ? "Gemischter Toast" : item.name
             }))
         }));
 
         // ===== نسخة العمل الحالية (يتم تعديلها) =====
         let MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
 
-        // ===== نصوص الواجهة متعددة اللغات =====
+        // ===== نصوص الواجهة متعددة اللغات (مختصرة) =====
         const TEXTS = {
             tr: { 
                 heroTitle: "Tosttoo", 
@@ -2484,8 +2238,10 @@
                 devModalDesc: "Hangi sürümü kullanmak istiyorsunuz?",
                 devV1Btn: "⚙️ V1",
                 devV2Btn: "🖼️ V2",
+                devV3Btn: "🎨 V3",
                 devCloseBtn: "Kapat",
                 v1Title: "Geliştirici Paneli V1",
+                v2Title: "Gelişmiş Resim Yöneticisi V2",
                 addProduct: "Ürün Ekle",
                 productName: "Ürün Adı",
                 price: "Fiyat",
@@ -2493,8 +2249,6 @@
                 addCategory: "Kategori Ekle",
                 newCategory: "Yeni Kategori Adı",
                 addCategoryBtn: "Kategori Ekle",
-                colorEdit: "Renk Düzenle",
-                openColorPicker: "Renk Seçiciyi Aç",
                 tools: "Araçlar",
                 editMode: "Düzenleme Modu",
                 deleteMode: "Silme Modu",
@@ -2508,7 +2262,6 @@
                 copyCode: "Kodu Kopyala",
                 copyBtn: "Kodu Kopyala",
                 closePanel: "Kapat",
-                v2Title: "Gelişmiş Resim Yöneticisi V2",
                 gallery: "Resim Galerisi",
                 addCategoryImage: "Kategori Resmi Ekle",
                 selectCategory: "Kategori Seç",
@@ -2523,13 +2276,7 @@
                 confirmTitle: "⚠️ Onay",
                 confirmMessage: "Emin misiniz?",
                 yes: "Evet",
-                no: "Hayır",
-                colorTitle: "🎨 Renkleri Özelleştir",
-                colorCategory: "Kategori Başlık Rengi",
-                colorName: "Ürün Adı Rengi",
-                colorPrice: "Fiyat Rengi",
-                apply: "Uygula",
-                cancel: "İptal"
+                no: "Hayır"
             },
             ar: { 
                 heroTitle: "توستو", 
@@ -2545,52 +2292,8 @@
                 devModalDesc: "أي إصدار تريد استخدامه؟",
                 devV1Btn: "⚙️ V1",
                 devV2Btn: "🖼️ V2",
-                devCloseBtn: "إغلاق",
-                v1Title: "لوحة المطور V1",
-                addProduct: "إضافة منتج",
-                productName: "اسم المنتج",
-                price: "السعر",
-                addProductBtn: "إضافة منتج",
-                addCategory: "إضافة فئة",
-                newCategory: "اسم الفئة الجديدة",
-                addCategoryBtn: "إضافة فئة",
-                colorEdit: "تعديل الألوان",
-                openColorPicker: "فتح منتقي الألوان",
-                tools: "الأدوات",
-                editMode: "وضع التعديل",
-                deleteMode: "وضع الحذف",
-                disableModes: "إلغاء الأوضاع",
-                resetMenu: "إعادة تعيين القائمة",
-                social: "وسائل التواصل",
-                instagramLabel: "رابط إنستغرام",
-                updateInstagram: "تحديث إنستغرام",
-                locationLabel: "الموقع",
-                updateLocation: "تحديث الموقع",
-                copyCode: "نسخ الكود",
-                copyBtn: "نسخ الكود",
-                closePanel: "إغلاق",
-                v2Title: "مدير الصور المتقدم V2",
-                gallery: "معرض الصور",
-                addCategoryImage: "إضافة صورة للفئة",
-                selectCategory: "اختر الفئة",
-                imageUrl: "رابط الصورة",
-                preview: "معاينة",
-                add: "إضافة",
-                addProductImage: "إضافة صورة لمنتج",
-                selectProduct: "اختر المنتج",
-                syncImages: "مزامنة الصور",
-                saveImages: "حفظ الصور",
-                loadImages: "تحميل الصور",
-                confirmTitle: "⚠️ تأكيد",
-                confirmMessage: "هل أنت متأكد؟",
-                yes: "نعم",
-                no: "لا",
-                colorTitle: "🎨 تخصيص الألوان",
-                colorCategory: "لون عنوان الفئة",
-                colorName: "لون اسم المنتج",
-                colorPrice: "لون السعر",
-                apply: "تطبيق",
-                cancel: "إلغاء"
+                devV3Btn: "🎨 V3",
+                devCloseBtn: "إغلاق"
             },
             en: { 
                 heroTitle: "Tosttoo", 
@@ -2606,52 +2309,8 @@
                 devModalDesc: "Which version would you like to use?",
                 devV1Btn: "⚙️ V1",
                 devV2Btn: "🖼️ V2",
-                devCloseBtn: "Close",
-                v1Title: "Developer Panel V1",
-                addProduct: "Add Product",
-                productName: "Product Name",
-                price: "Price",
-                addProductBtn: "Add Product",
-                addCategory: "Add Category",
-                newCategory: "New Category Name",
-                addCategoryBtn: "Add Category",
-                colorEdit: "Edit Colors",
-                openColorPicker: "Open Color Picker",
-                tools: "Tools",
-                editMode: "Edit Mode",
-                deleteMode: "Delete Mode",
-                disableModes: "Disable Modes",
-                resetMenu: "Reset Menu",
-                social: "Social Media",
-                instagramLabel: "Instagram Link",
-                updateInstagram: "Update Instagram",
-                locationLabel: "Location",
-                updateLocation: "Update Location",
-                copyCode: "Copy Code",
-                copyBtn: "Copy Code",
-                closePanel: "Close",
-                v2Title: "Advanced Image Manager V2",
-                gallery: "Gallery",
-                addCategoryImage: "Add Category Image",
-                selectCategory: "Select Category",
-                imageUrl: "Image URL",
-                preview: "Preview",
-                add: "Add",
-                addProductImage: "Add Product Image",
-                selectProduct: "Select Product",
-                syncImages: "Image Sync",
-                saveImages: "Save Images",
-                loadImages: "Load Images",
-                confirmTitle: "⚠️ Confirm",
-                confirmMessage: "Are you sure?",
-                yes: "Yes",
-                no: "No",
-                colorTitle: "🎨 Customize Colors",
-                colorCategory: "Category Title Color",
-                colorName: "Product Name Color",
-                colorPrice: "Price Color",
-                apply: "Apply",
-                cancel: "Cancel"
+                devV3Btn: "🎨 V3",
+                devCloseBtn: "Close"
             },
             ru: { 
                 heroTitle: "Tosttoo", 
@@ -2667,52 +2326,8 @@
                 devModalDesc: "Какую версию вы хотите использовать?",
                 devV1Btn: "⚙️ V1",
                 devV2Btn: "🖼️ V2",
-                devCloseBtn: "Закрыть",
-                v1Title: "Панель разработчика V1",
-                addProduct: "Добавить товар",
-                productName: "Название товара",
-                price: "Цена",
-                addProductBtn: "Добавить товар",
-                addCategory: "Добавить категорию",
-                newCategory: "Новая категория",
-                addCategoryBtn: "Добавить категорию",
-                colorEdit: "Редактировать цвета",
-                openColorPicker: "Выбор цвета",
-                tools: "Инструменты",
-                editMode: "Режим редактирования",
-                deleteMode: "Режим удаления",
-                disableModes: "Отключить режимы",
-                resetMenu: "Сбросить меню",
-                social: "Социальные сети",
-                instagramLabel: "Ссылка Instagram",
-                updateInstagram: "Обновить Instagram",
-                locationLabel: "Местоположение",
-                updateLocation: "Обновить местоположение",
-                copyCode: "Копировать код",
-                copyBtn: "Копировать код",
-                closePanel: "Закрыть",
-                v2Title: "Расширенный менеджер изображений V2",
-                gallery: "Галерея",
-                addCategoryImage: "Добавить изображение категории",
-                selectCategory: "Выбрать категорию",
-                imageUrl: "URL изображения",
-                preview: "Просмотр",
-                add: "Добавить",
-                addProductImage: "Добавить изображение товара",
-                selectProduct: "Выбрать товар",
-                syncImages: "Синхронизация изображений",
-                saveImages: "Сохранить изображения",
-                loadImages: "Загрузить изображения",
-                confirmTitle: "⚠️ Подтверждение",
-                confirmMessage: "Вы уверены?",
-                yes: "Да",
-                no: "Нет",
-                colorTitle: "🎨 Настройка цветов",
-                colorCategory: "Цвет заголовка категории",
-                colorName: "Цвет названия товара",
-                colorPrice: "Цвет цены",
-                apply: "Применить",
-                cancel: "Отмена"
+                devV3Btn: "🎨 V3",
+                devCloseBtn: "Закрыть"
             },
             de: { 
                 heroTitle: "Tosttoo", 
@@ -2728,52 +2343,8 @@
                 devModalDesc: "Welche Version möchten Sie verwenden?",
                 devV1Btn: "⚙️ V1",
                 devV2Btn: "🖼️ V2",
-                devCloseBtn: "Schließen",
-                v1Title: "Entwicklerpanel V1",
-                addProduct: "Produkt hinzufügen",
-                productName: "Produktname",
-                price: "Preis",
-                addProductBtn: "Produkt hinzufügen",
-                addCategory: "Kategorie hinzufügen",
-                newCategory: "Neuer Kategoriename",
-                addCategoryBtn: "Kategorie hinzufügen",
-                colorEdit: "Farben bearbeiten",
-                openColorPicker: "Farbauswahl öffnen",
-                tools: "Werkzeuge",
-                editMode: "Bearbeitungsmodus",
-                deleteMode: "Löschmodus",
-                disableModes: "Modi deaktivieren",
-                resetMenu: "Menü zurücksetzen",
-                social: "Soziale Medien",
-                instagramLabel: "Instagram-Link",
-                updateInstagram: "Instagram aktualisieren",
-                locationLabel: "Standort",
-                updateLocation: "Standort aktualisieren",
-                copyCode: "Code kopieren",
-                copyBtn: "Code kopieren",
-                closePanel: "Schließen",
-                v2Title: "Erweiterter Bildmanager V2",
-                gallery: "Galerie",
-                addCategoryImage: "Kategoriebild hinzufügen",
-                selectCategory: "Kategorie auswählen",
-                imageUrl: "Bild-URL",
-                preview: "Vorschau",
-                add: "Hinzufügen",
-                addProductImage: "Produktbild hinzufügen",
-                selectProduct: "Produkt auswählen",
-                syncImages: "Bildsynchronisation",
-                saveImages: "Bilder speichern",
-                loadImages: "Bilder laden",
-                confirmTitle: "⚠️ Bestätigung",
-                confirmMessage: "Sind Sie sicher?",
-                yes: "Ja",
-                no: "Nein",
-                colorTitle: "🎨 Farben anpassen",
-                colorCategory: "Kategorietitelfarbe",
-                colorName: "Produktnamensfarbe",
-                colorPrice: "Preisfarbe",
-                apply: "Anwenden",
-                cancel: "Abbrechen"
+                devV3Btn: "🎨 V3",
+                devCloseBtn: "Schließen"
             }
         };
 
@@ -2897,72 +2468,16 @@
             document.getElementById('devModalDesc').textContent = t.devModalDesc;
             document.getElementById('devV1Btn').innerHTML = t.devV1Btn;
             document.getElementById('devV2Btn').innerHTML = t.devV2Btn;
+            document.getElementById('devV3Btn').innerHTML = t.devV3Btn;
             document.getElementById('devCloseBtn').innerHTML = t.devCloseBtn;
             
-            // تحديث لوحة V1
-            document.getElementById('v1Title').innerHTML = `<i class="fas fa-cog"></i> ${t.v1Title}`;
-            document.getElementById('addProductTitle').innerHTML = `<i class="fas fa-plus-circle"></i> ${t.addProduct}`;
-            document.getElementById('categorySelectLabel').textContent = t.selectCategory;
-            document.getElementById('productNameLabel').textContent = t.productName;
-            document.getElementById('priceLabel').textContent = t.price;
-            document.getElementById('addProductBtn').innerHTML = `✅ ${t.addProductBtn}`;
-            
-            document.getElementById('addCategoryTitle').innerHTML = `<i class="fas fa-folder-plus"></i> ${t.addCategory}`;
-            document.getElementById('newCategoryLabel').textContent = t.newCategory;
-            document.getElementById('addCategoryBtn').innerHTML = `📁 ${t.addCategoryBtn}`;
-            
-            document.getElementById('colorEditTitle').innerHTML = `<i class="fas fa-palette"></i> ${t.colorEdit}`;
-            document.getElementById('openColorPickerBtn').innerHTML = `🎨 ${t.openColorPicker}`;
-            
-            document.getElementById('toolsTitle').innerHTML = `<i class="fas fa-tools"></i> ${t.tools}`;
-            document.getElementById('enableEditBtn').innerHTML = `✏️ ${t.editMode}`;
-            document.getElementById('enableDeleteBtn').innerHTML = `🗑️ ${t.deleteMode}`;
-            document.getElementById('disableModesBtn').innerHTML = `🔘 ${t.disableModes}`;
-            document.getElementById('resetMenuBtn').innerHTML = `🔄 ${t.resetMenu}`;
-            
-            document.getElementById('socialTitle').innerHTML = `<i class="fas fa-globe"></i> ${t.social}`;
-            document.getElementById('instagramLabel').textContent = t.instagramLabel;
-            document.getElementById('updateInstagramBtn').innerHTML = `📷 ${t.updateInstagram}`;
-            document.getElementById('locationLabel').textContent = t.locationLabel;
-            document.getElementById('updateLocationBtn').innerHTML = `📍 ${t.updateLocation}`;
-            
-            document.getElementById('copyCodeTitle').innerHTML = `<i class="fas fa-code"></i> ${t.copyCode}`;
-            document.getElementById('copyCodeBtn').innerHTML = `<i class="fas fa-copy"></i> ${t.copyBtn}`;
-            document.getElementById('closeV1Btn').innerHTML = `<i class="fas fa-times"></i> ${t.closePanel}`;
-            
-            // تحديث لوحة V2
-            document.getElementById('v2Title').innerHTML = `<i class="fas fa-paint-brush"></i> ${t.v2Title}`;
-            document.getElementById('galleryTitle').innerHTML = `<i class="fas fa-images"></i> ${t.gallery}`;
-            document.getElementById('addCategoryImageTitle').innerHTML = `<i class="fas fa-folder-plus"></i> ${t.addCategoryImage}`;
-            document.getElementById('selectCategoryLabel').textContent = t.selectCategory;
-            document.getElementById('imageUrlLabel').textContent = t.imageUrl;
-            document.getElementById('previewCategoryBtn').innerHTML = `🔍 ${t.preview}`;
-            document.getElementById('addCategoryImageBtn').innerHTML = `➕ ${t.add}`;
-            
-            document.getElementById('addProductImageTitle').innerHTML = `<i class="fas fa-plus-circle"></i> ${t.addProductImage}`;
-            document.getElementById('selectProductCategoryLabel').textContent = t.selectCategory;
-            document.getElementById('selectProductLabel').textContent = t.selectProduct;
-            document.getElementById('productImageUrlLabel').textContent = t.imageUrl;
-            document.getElementById('previewProductBtn').innerHTML = `🔍 ${t.preview}`;
-            document.getElementById('addProductImageBtn').innerHTML = `➕ ${t.add}`;
-            
-            document.getElementById('syncImagesTitle').innerHTML = `<i class="fas fa-cloud"></i> ${t.syncImages}`;
-            document.getElementById('saveImagesBtn').innerHTML = `💾 ${t.saveImages}`;
-            document.getElementById('loadImagesBtn').innerHTML = `📥 ${t.loadImages}`;
-            document.getElementById('closeV2Btn').innerHTML = t.closePanel;
-            
-            // تحديث نافذة التأكيد
-            document.getElementById('confirmTitle').textContent = t.confirmTitle;
-            document.getElementById('confirmYesBtn').textContent = t.yes;
-            document.getElementById('confirmNoBtn').textContent = t.no;
-            
-            // تحديث نافذة الألوان
-            document.getElementById('colorPickerModal').querySelector('h3').textContent = t.colorTitle;
-            document.getElementById('colorCategoryLabel').textContent = t.colorCategory;
-            document.getElementById('colorNameLabel').textContent = t.colorName;
-            document.getElementById('colorPriceLabel').textContent = t.colorPrice;
-            document.getElementById('applyColorsBtn').innerHTML = t.apply;
-            document.getElementById('closeColorPickerBtn').innerHTML = t.cancel;
+            // تحديث لوحة V1 (مختصر)
+            if (document.getElementById('v1Title')) {
+                document.getElementById('v1Title').innerHTML = `<i class="fas fa-cog"></i> ${t.v1Title}`;
+            }
+            if (document.getElementById('v2Title')) {
+                document.getElementById('v2Title').innerHTML = `<i class="fas fa-paint-brush"></i> ${t.v2Title}`;
+            }
         }
 
         window.setLanguage = function(lang) {
@@ -3104,10 +2619,10 @@
                             e.stopPropagation();
                             if (isDeveloper) {
                                 if (editMode) {
-                                    const newName = prompt(TEXTS[currentLang].productName, item.name);
+                                    const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    showConfirm(`${TEXTS[currentLang].confirmMessage} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                                    showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
                                 } else {
                                     const imageList = [
                                         { src: cat.image, title: `📁 ${cat.category}` },
@@ -3132,10 +2647,10 @@
                             e.stopPropagation();
                             if (isDeveloper) {
                                 if (editMode) {
-                                    const newName = prompt(TEXTS[currentLang].productName, item.name);
+                                    const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    showConfirm(`${TEXTS[currentLang].confirmMessage} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                                    showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
                                 } else {
                                     const imageList = [
                                         { src: cat.image, title: `📁 ${cat.category}` },
@@ -3161,7 +2676,7 @@
                     priceSpan.onclick = function(e) {
                         e.stopPropagation();
                         if (isDeveloper && editMode) {
-                            const newPrice = prompt(TEXTS[currentLang].price, item.price);
+                            const newPrice = prompt(TEXTS[currentLang].price || 'Fiyat', item.price);
                             if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice);
                         }
                     };
@@ -3173,7 +2688,7 @@
                     const editBtn = document.createElement('button');
                     editBtn.className = 'item-edit-btn';
                     editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                    editBtn.title = TEXTS[currentLang].editMode;
+                    editBtn.title = TEXTS[currentLang].editMode || 'Düzenle';
                     editBtn.onclick = function(e) {
                         e.stopPropagation();
                         editItem(catIdx, itemIdx);
@@ -3182,16 +2697,16 @@
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'item-delete-btn';
                     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                    deleteBtn.title = TEXTS[currentLang].deleteMode;
+                    deleteBtn.title = TEXTS[currentLang].deleteMode || 'Sil';
                     deleteBtn.onclick = function(e) {
                         e.stopPropagation();
-                        showConfirm(`${TEXTS[currentLang].confirmMessage} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                        showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
                     };
                     
                     const imageEditBtn = document.createElement('button');
                     imageEditBtn.className = 'item-image-edit-btn';
                     imageEditBtn.innerHTML = '<i class="fas fa-image"></i>';
-                    imageEditBtn.title = TEXTS[currentLang].colorEdit;
+                    imageEditBtn.title = 'Resim Düzenle';
                     imageEditBtn.onclick = function(e) {
                         e.stopPropagation();
                         openImageEdit('product', catIdx, itemIdx, item.name, item.image);
@@ -3213,9 +2728,9 @@
                     const deleteCatBtn = document.createElement('button');
                     deleteCatBtn.className = 'delete-card-btn dev-only';
                     deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    deleteCatBtn.title = TEXTS[currentLang].deleteMode;
+                    deleteCatBtn.title = TEXTS[currentLang].deleteMode || 'Sil';
                     deleteCatBtn.onclick = function() {
-                        showConfirm(`${TEXTS[currentLang].confirmMessage} "${cat.category}"?`, () => deleteCategory(cat.category));
+                        showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${cat.category}"?`, () => deleteCategory(cat.category));
                     };
                     card.appendChild(deleteCatBtn);
                 }
@@ -3292,9 +2807,9 @@
         window.editItem = function(catIdx, itemIdx) {
             const menu = getFullMenu();
             const item = menu[catIdx].items[itemIdx];
-            const newName = prompt(TEXTS[currentLang].productName, item.name);
+            const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
             if (newName) {
-                const newPrice = prompt(TEXTS[currentLang].price, item.price);
+                const newPrice = prompt(TEXTS[currentLang].price || 'Fiyat', item.price);
                 if (newPrice) {
                     updateItemName(catIdx, menu[catIdx].category, item.name, newName);
                     updateItemPrice(catIdx, menu[catIdx].category, newName, newPrice);
@@ -3307,7 +2822,7 @@
             deleteMode = false;
             document.getElementById('menuGrid').classList.add('edit-mode');
             document.getElementById('menuGrid').classList.remove('delete-mode');
-            if (isDeveloper) showStatus(`✏️ ${TEXTS[currentLang].editMode}`, 'success');
+            if (isDeveloper) showStatus(`✏️ ${TEXTS[currentLang].editMode || 'Düzenleme Modu'}`, 'success');
         };
 
         window.enableDelete = function() {
@@ -3315,14 +2830,14 @@
             editMode = false;
             document.getElementById('menuGrid').classList.add('delete-mode');
             document.getElementById('menuGrid').classList.remove('edit-mode');
-            if (isDeveloper) showStatus(`🗑️ ${TEXTS[currentLang].deleteMode}`, 'success');
+            if (isDeveloper) showStatus(`🗑️ ${TEXTS[currentLang].deleteMode || 'Silme Modu'}`, 'success');
         };
 
         window.disableAllModes = function() {
             editMode = false;
             deleteMode = false;
             document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
-            if (isDeveloper) showStatus(`🔘 ${TEXTS[currentLang].disableModes}`, 'success');
+            if (isDeveloper) showStatus(`🔘 ${TEXTS[currentLang].disableModes || 'Modları Kapat'}`, 'success');
         };
 
         window.addCategory = function() {
@@ -3385,7 +2900,7 @@
             }
         }
 
-        // ===== دوال إدارة الصور المتقدمة =====
+        // ===== دوال إدارة الصور المتقدمة (مختصرة) =====
         window.openImageEdit = function(type, catIdx, itemIdx, name, currentSrc) {
             currentEditData = { type, catIdx, itemIdx, name, currentSrc };
             document.getElementById('imageEditImg').src = currentSrc || '';
@@ -3571,6 +3086,25 @@
             isDeveloper = true;
             document.body.classList.add('developer-mode');
             document.getElementById('floatingDevBtn').style.display = 'flex';
+            
+            // فتح اللوحة المناسبة مباشرة
+            if (v === 'v1') {
+                document.getElementById('devPanelV1').style.display = 'block';
+                currentVersionType = 'v1';
+            } else if (v === 'v2') {
+                document.getElementById('devPanelV2').style.display = 'block';
+                currentVersionType = 'v2';
+                updateGalleryV2();
+            } else if (v === 'v3') {
+                document.getElementById('devPanelV3').style.display = 'block';
+                currentVersionType = 'v3';
+                // فتح نافذة الألوان مباشرة
+                setTimeout(() => {
+                    document.getElementById('colorPickerModal').style.display = 'flex';
+                }, 100);
+            }
+            
+            updateSelects();
             if (isDeveloper) showStatus('Hoş geldiniz geliştirici', 'success');
         };
 
@@ -3582,19 +3116,32 @@
             document.getElementById('devPanelV2').style.display = 'none';
         };
 
+        window.closeDevV3 = function() {
+            document.getElementById('devPanelV3').style.display = 'none';
+            closeColorPicker();
+        };
+
         window.toggleDevPanel = function() {
             const p = document.getElementById(`devPanel${currentVersionType.toUpperCase()}`);
             if (p.style.display === 'block') {
                 p.style.display = 'none';
+                if (currentVersionType === 'v3') closeColorPicker();
                 editMode = false;
                 deleteMode = false;
                 document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
             } else {
                 document.getElementById('devPanelV1').style.display = 'none';
                 document.getElementById('devPanelV2').style.display = 'none';
+                document.getElementById('devPanelV3').style.display = 'none';
+                closeColorPicker();
                 p.style.display = 'block';
+                if (currentVersionType === 'v2') updateGalleryV2();
+                if (currentVersionType === 'v3') {
+                    setTimeout(() => {
+                        document.getElementById('colorPickerModal').style.display = 'flex';
+                    }, 100);
+                }
                 updateSelects();
-                updateGalleryV2();
             }
         };
 
@@ -3603,7 +3150,7 @@
         };
 
         window.resetToOriginal = function() {
-            showConfirm(TEXTS[currentLang].confirmMessage, () => {
+            showConfirm(TEXTS[currentLang].confirmMessage || 'Emin misiniz?', () => {
                 MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
                 categoryImages = {};
                 productImages = {};
@@ -3828,10 +3375,12 @@
             }
         });
 
-        // ===== تحميل الصفحة =====
+        // ===== تحميل الصفحة - لا نحمل أي شيء من localStorage عدا اللغة =====
         document.addEventListener('DOMContentLoaded', function() {
-            // تحميل البيانات المحفوظة
-            loadAllFromLocalStorage();
+            // لا نحمل الصور أو الإضافات - فقط نعرض القائمة الأصلية
+            categoryImages = {};
+            productImages = {};
+            extraCategories = [];
             
             // تعيين اللغة الأساسية (تركية)
             const savedLang = localStorage.getItem('lang') || 'tr';
@@ -3847,7 +3396,7 @@
                 if (v) document.getElementById(id).value = v;
             });
             
-            const insta = localStorage.getItem('insta') || INSTAGRAM_URL;
+            const insta = INSTAGRAM_URL;
             document.getElementById('instaLink').href = insta;
             document.getElementById('newInstagram').value = insta;
             
