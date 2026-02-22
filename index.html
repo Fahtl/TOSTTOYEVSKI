@@ -1475,7 +1475,7 @@
             filter: brightness(1.1);
         }
 
-        /* ===== نافذة اختيار الألوان - V3 ===== */
+        /* ===== نافذة اختيار الألوان ===== */
         .color-picker-modal {
             position: fixed;
             top: 50%;
@@ -1681,35 +1681,31 @@
     <button class="language-btn" onclick="setLanguage('tr')">
         <span>🇹🇷 Türkçe</span>
     </button>
-    <button class="language-btn" onclick="setLanguage('ar')">
-        <span>🇮🇶 العربية</span>
-    </button>
     <button class="language-btn" onclick="setLanguage('en')">
         <span>🇬🇧 English</span>
     </button>
     <button class="language-btn" onclick="setLanguage('ru')">
         <span>🇷🇺 Русский</span>
     </button>
-    <button class="language-btn" onclick="setLanguage('de')">
-        <span>🇩🇪 Deutsch</span>
+    <button class="language-btn" onclick="setLanguage('ar')">
+        <span>🇮🇶 العربية</span>
     </button>
 </div>
 
-<!-- نافذة اختيار نسخة المطور (مترجمة) -->
+<!-- نافذة اختيار نسخة المطور -->
 <div class="dev-version-modal dev-only" id="devVersionModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1a1a1a; border: 3px solid #ff8c00; border-radius: 15px; padding: 30px; z-index: 5000; flex-direction: column; gap: 20px; min-width: 350px; text-align: center;">
-    <h3 style="color: #ff8c00;" id="devModalTitle">🔧 Geliştirici Seçenekleri</h3>
-    <p style="color: #ccc;" id="devModalDesc">Hangi sürümü kullanmak istiyorsunuz?</p>
+    <h3 style="color: #ff8c00;">🔧 GELİŞTİRİCİ SEÇENEKLERİ</h3>
+    <p style="color: #ccc;">Hangi sürümü kullanmak istiyorsunuz?</p>
     <div style="display: flex; gap: 15px; justify-content: center;">
-        <button class="btn" style="flex:1;" id="devV1Btn" onclick="selectDevVersion('v1')">⚙️ V1</button>
-        <button class="btn" style="flex:1;" id="devV2Btn" onclick="selectDevVersion('v2')">🖼️ V2</button>
-        <button class="btn" style="flex:1; background:#9c27b0;" id="devV3Btn" onclick="selectDevVersion('v3')">🎨 V3</button>
+        <button class="btn" style="flex:1;" onclick="selectDevVersion('v1')">⚙️ V1</button>
+        <button class="btn" style="flex:1; background:#6c5ce7;" onclick="selectDevVersion('v2')">🖼️ V2</button>
     </div>
-    <button class="btn" style="background:#6c757d;" id="devCloseBtn" onclick="document.getElementById('devVersionModal').style.display='none'">Kapat</button>
+    <button class="btn" style="background:#6c757d;" onclick="closeVersionModal()">Kapat</button>
 </div>
 
-<!-- نافذة تأكيد الحذف (مُصلحة) -->
+<!-- نافذة تأكيد الحذف -->
 <div class="custom-confirm-modal dev-only" id="customConfirmModal">
-    <h3 class="confirm-title" id="confirmTitle">⚠️ Onay</h3>
+    <h3 class="confirm-title">⚠️ Onay</h3>
     <p class="confirm-message" id="confirmMessage">Emin misiniz?</p>
     <div class="confirm-buttons">
         <button class="confirm-btn yes" id="confirmYesBtn">Evet</button>
@@ -1731,80 +1727,67 @@
     </div>
 </div>
 
-<!-- نافذة اختيار الألوان - V3 -->
+<!-- نافذة اختيار الألوان -->
 <div class="color-picker-modal dev-only" id="colorPickerModal">
-    <h3>🎨 Renkleri Özelleştir (V3)</h3>
-    <label id="colorCategoryLabel">Kategori Başlık Rengi</label>
+    <h3>🎨 Renkleri Değiştir</h3>
+    <label>Kategori Başlığı</label>
     <input type="color" id="colorCategory" value="#ff8c00">
-    <label id="colorNameLabel">Ürün Adı Rengi</label>
+    <label>Ürün Adı</label>
     <input type="color" id="colorName" value="#ff8c00">
-    <label id="colorPriceLabel">Fiyat Rengi</label>
+    <label>Fiyat</label>
     <input type="color" id="colorPrice" value="#ffffff">
     <div class="button-group">
-        <button class="btn" style="background:#28a745;" id="applyColorsBtn" onclick="applyColors()">Uygula</button>
-        <button class="btn" style="background:#6c757d;" id="closeColorPickerBtn" onclick="closeColorPicker()">Kapat</button>
+        <button class="btn" style="background:#28a745;" onclick="applyColors()">Uygula</button>
+        <button class="btn" style="background:#dc3545;" onclick="closeColorPicker()">Kapat</button>
     </div>
 </div>
 
 <!-- لوحة المطور V1 -->
 <div class="dev-window dev-only" id="devPanelV1">
     <div class="window-header" id="dragHandle">
-        <h3 id="v1Title"><i class="fas fa-cog"></i> Geliştirici Paneli V1</h3>
+        <h3>⚙️ GELİŞTİRİCİ PANELİ V1</h3>
         <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV1()"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="dev-section">
-        <h4 id="addProductTitle"><i class="fas fa-plus-circle"></i> Ürün Ekle</h4>
-        <div class="form-group">
-            <label class="form-label" id="categorySelectLabel">Kategori Seç</label>
-            <select id="categorySelect" class="form-control"></select>
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="productNameLabel">Ürün Adı</label>
-            <input type="text" id="newName" class="form-control" placeholder="Ürün Adı">
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="priceLabel">Fiyat</label>
-            <input type="text" id="productPrice" class="form-control" placeholder="Fiyat">
-        </div>
-        <button class="btn btn-success" style="width:100%;" id="addProductBtn" onclick="addProduct()">✅ Ürün Ekle</button>
+        <h4>➕ Ürün Ekle</h4>
+        <select id="categorySelect" class="form-control"></select>
+        <input type="text" id="newName" class="form-control" placeholder="Ürün Adı">
+        <input type="text" id="productPrice" class="form-control" placeholder="Fiyat">
+        <button class="btn btn-success" style="width:100%;" onclick="addProduct()">✅ Ürün Ekle</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="addCategoryTitle"><i class="fas fa-folder-plus"></i> Kategori Ekle</h4>
-        <div class="form-group">
-            <label class="form-label" id="newCategoryLabel">Yeni Kategori Adı</label>
-            <input type="text" id="newCategory" class="form-control" placeholder="Kategori Adı">
-        </div>
-        <button class="btn btn-success" style="width:100%;" id="addCategoryBtn" onclick="addCategory()">📁 Kategori Ekle</button>
+        <h4>📁 Kategori Ekle</h4>
+        <input type="text" id="newCategory" class="form-control" placeholder="Yeni Kategori">
+        <button class="btn btn-success" style="width:100%;" onclick="addCategory()">📁 Kategori Ekle</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="toolsTitle"><i class="fas fa-tools"></i> Araçlar</h4>
+        <h4>🎨 Renk Düzenle</h4>
+        <button class="btn btn-primary" style="width:100%;" onclick="openColorPicker()">🎨 Renkleri Düzenle</button>
+    </div>
+
+    <div class="dev-section">
+        <h4>🔧 Araçlar</h4>
         <div class="button-group">
-            <button class="btn btn-success" id="enableEditBtn" onclick="enableEdit()">✏️ Düzenleme Modu</button>
-            <button class="btn btn-danger" id="enableDeleteBtn" onclick="enableDelete()">🗑️ Silme Modu</button>
+            <button class="btn btn-success" onclick="enableEdit()">✏️ Düzenleme Modu</button>
+            <button class="btn btn-danger" onclick="enableDelete()">🗑️ Silme Modu</button>
         </div>
-        <button class="btn btn-secondary" style="width:100%; margin-top:5px;" id="disableModesBtn" onclick="disableAllModes()">🔘 Modları Kapat</button>
-        <button class="btn btn-warning" style="width:100%; margin-top:5px;" id="resetMenuBtn" onclick="resetToOriginal()">🔄 Menüyü Sıfırla</button>
+        <button class="btn btn-secondary" style="width:100%; margin-top:5px;" onclick="disableAllModes()">🔘 Modları Kapat</button>
+        <button class="btn btn-warning" style="width:100%; margin-top:5px;" onclick="resetToOriginal()">🔄 Menüyü Sıfırla</button>
     </div>
 
     <div class="dev-section">
-        <h4 id="socialTitle"><i class="fas fa-globe"></i> Sosyal Medya</h4>
-        <div class="form-group">
-            <label class="form-label" id="instagramLabel">Instagram Linki</label>
-            <input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" placeholder="https://instagram.com/...">
-        </div>
-        <button class="btn btn-info" style="width:100%;" id="updateInstagramBtn" onclick="changeInstagram()">📷 Instagram'ı Güncelle</button>
-        <div class="form-group">
-            <label class="form-label" id="locationLabel">Konum (enlem,boylam)</label>
-            <input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147">
-        </div>
-        <button class="btn btn-info" style="width:100%;" id="updateLocationBtn" onclick="changeLocation()">📍 Konumu Güncelle</button>
+        <h4>📱 Sosyal Medya</h4>
+        <input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski" placeholder="Instagram Link">
+        <button class="btn btn-info" style="width:100%;" onclick="changeInstagram()">📷 Instagram Güncelle</button>
+        <input type="text" id="newLocation" class="form-control" placeholder="Konum (enlem,boylam)">
+        <button class="btn btn-info" style="width:100%;" onclick="changeLocation()">📍 Konum Güncelle</button>
     </div>
 
     <div class="dev-section" style="border-color: #00ff00; background: rgba(0,255,0,0.1);">
-        <h4><i class="fas fa-cloud"></i> CLOUD SYNC <span class="cloud-badge">Gelişmiş</span></h4>
+        <h4>☁️ CLOUD SYNC <span class="cloud-badge">GELİŞMİŞ</span></h4>
         <div class="cloud-panel">
             <div class="cloud-stats">
                 <span>🌐 API: <span style="color:#00ff00" id="apiStatus">Hazır</span></span>
@@ -1814,111 +1797,115 @@
                 🔗 API: npoint.io
             </div>
             <button class="btn btn-info" style="width:100%; background:#0066cc;" onclick="saveToCloud()" id="cloudSaveBtn">
-                ☁️ Buluta Kaydet
+                ☁️ BULUTA KAYDET
             </button>
             <button class="btn btn-secondary" style="width:100%; margin-top:5px;" onclick="loadFromCloud()" id="cloudLoadBtn">
-                📥 Buluttan Yükle
+                📥 BULUTTAN YÜKLE
             </button>
-            <button class="btn btn-success" style="width:100%; margin-top:5px;" onclick="testCloudConnection()" id="testConnectionBtn">
-                🔌 Bağlantı Testi
+            <button class="btn btn-success" style="width:100%; margin-top:5px;" onclick="testCloudConnection()">
+                🔌 BAĞLANTI TESTİ
             </button>
+            
+            <div class="backup-section">
+                <div class="code-export">
+                    <button class="btn btn-sm btn-info" style="flex:1;" onclick="copyBackupCode()">
+                        <i class="fas fa-copy"></i> Kodu Kopyala
+                    </button>
+                    <button class="btn btn-sm btn-info" style="flex:1;" onclick="pasteBackupCode()">
+                        <i class="fas fa-paste"></i> Kodu Yapıştır
+                    </button>
+                </div>
+                <small>Kodu kopyala, bana gönder, ben düzenleyip geri göndereyim</small>
+            </div>
         </div>
     </div>
 
     <div class="dev-section">
-        <h4 id="copyCodeTitle"><i class="fas fa-code"></i> Kodu Kopyala</h4>
-        <div class="code-display" id="v1CodeDisplay"></div>
-        <button class="btn btn-info" style="width:100%; margin-top:10px;" id="copyCodeBtn" onclick="copyV1Code()">
-            <i class="fas fa-copy"></i> Kodu Kopyala
-        </button>
+        <h4>⚡ Otomatik Senkronizasyon</h4>
+        <label style="color:#ff8c00; display:flex; align-items:center; gap:5px;">
+            <input type="checkbox" id="autoSyncCheckbox" checked> Canlı Senkronizasyon Aktif
+        </label>
+        <select id="syncInterval" class="form-control">
+            <option value="5">5 saniye</option>
+            <option value="10" selected>10 saniye</option>
+            <option value="30">30 saniye</option>
+            <option value="60">1 dakika</option>
+        </select>
     </div>
 
-    <button class="btn btn-danger" style="width:100%;" id="closeV1Btn" onclick="closeDevV1()">
-        <i class="fas fa-times"></i> Kapat
-    </button>
+    <div class="dev-section">
+        <h4>📋 Kod Kopyala</h4>
+        <div class="code-header">
+            <span>Mevcut Menü Kodu</span>
+            <button class="btn btn-sm btn-info" onclick="copyV1Code()">📋 Kopyala</button>
+        </div>
+        <div class="code-display" id="v1CodeDisplay"></div>
+    </div>
+
+    <button class="btn btn-danger" style="width:100%;" onclick="closeDevV1()">❌ Çıkış</button>
 </div>
 
 <!-- لوحة المطور V2 -->
 <div class="dev-window v2 dev-only" id="devPanelV2">
     <div class="window-header">
-        <h3 id="v2Title"><i class="fas fa-paint-brush"></i> Gelişmiş Resim Yöneticisi V2</h3>
+        <h3>🖼️ GELİŞTİRİCİ PANELİ V2 (RESİMLİ URL)</h3>
         <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV2()"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="galleryTitle"><i class="fas fa-images"></i> Resim Galerisi</h4>
-        <div class="image-gallery" id="imageGalleryV2">
-            <p class="text-center">Resimler yükleniyor...</p>
-        </div>
-    </div>
-
-    <div class="dev-section v2">
-        <h4 id="addCategoryImageTitle"><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle</h4>
-        <div class="form-group">
-            <label class="form-label" id="selectCategoryLabel">Kategori Seç</label>
-            <select id="categoryImageSelectV2" class="form-control"></select>
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="imageUrlLabel">Resim URL</label>
-            <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="https://...">
-        </div>
-        <div class="image-preview" id="categoryImagePreviewV2">
+        <h4>➕ Kategori Resim Ekle</h4>
+        <select id="categoryImageSelect" class="form-control"></select>
+        <input type="url" id="categoryImageUrl" class="form-control" placeholder="Resim URL">
+        <div class="image-preview" id="categoryImagePreview">
             <span>Önizleme</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" id="previewCategoryBtn" onclick="previewCategoryImageV2()">🔍 Önizle</button>
-            <button class="btn btn-success" id="addCategoryImageBtn" onclick="addCategoryImageV2()">➕ Ekle</button>
+            <button class="btn btn-secondary" onclick="previewCategoryImage()">🔍 Önizle</button>
+            <button class="btn btn-success" onclick="addCategoryImage()">📁 Resim Ekle</button>
         </div>
+        <button class="btn btn-danger" style="width:100%; margin-top:5px;" onclick="deleteCategoryImage()">🗑️ Resmi Sil</button>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="addProductImageTitle"><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle</h4>
-        <div class="form-group">
-            <label class="form-label" id="selectProductCategoryLabel">Kategori Seç</label>
-            <select id="productCategorySelectV2" class="form-control"></select>
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="selectProductLabel">Ürün Seç</label>
-            <select id="productSelectV2" class="form-control" disabled></select>
-        </div>
-        <div class="form-group">
-            <label class="form-label" id="productImageUrlLabel">Resim URL</label>
-            <input type="url" id="productImageUrlV2" class="form-control" placeholder="https://...">
-        </div>
-        <div class="image-preview" id="productImagePreviewV2">
+        <h4>➕ Ürün Resim Ekle</h4>
+        <select id="productCategorySelect" class="form-control"></select>
+        <select id="productSelect" class="form-control" disabled>
+            <option>Önce kategori seçin</option>
+        </select>
+        <input type="url" id="productImageUrl" class="form-control" placeholder="Resim URL">
+        <div class="image-preview" id="productImagePreview">
             <span>Önizleme</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" id="previewProductBtn" onclick="previewProductImageV2()">🔍 Önizle</button>
-            <button class="btn btn-success" id="addProductImageBtn" onclick="addProductImageV2()">➕ Ekle</button>
+            <button class="btn btn-secondary" onclick="previewProductImage()">🔍 Önizle</button>
+            <button class="btn btn-success" onclick="addProductImage()">✅ Resim Ekle</button>
         </div>
+        <button class="btn btn-danger" style="width:100%; margin-top:5px;" onclick="deleteProductImage()">🗑️ Resmi Sil</button>
     </div>
 
     <div class="dev-section v2">
-        <h4 id="syncImagesTitle"><i class="fas fa-cloud"></i> Resim Senkronizasyonu</h4>
+        <h4>🖼️ Resim Galerisi</h4>
+        <div class="image-gallery" id="imageGallery"></div>
+    </div>
+
+    <div class="dev-section v2">
+        <h4>🗑️ Toplu Sil</h4>
         <div class="button-group">
-            <button class="btn btn-info" id="saveImagesBtn" onclick="saveImagesToCloud()">💾 Resimleri Kaydet</button>
-            <button class="btn btn-secondary" id="loadImagesBtn" onclick="loadImagesFromCloud()">📥 Resimleri Yükle</button>
+            <button class="btn btn-warning" onclick="deleteAllCategoryImages()">📁 Kategori Resimleri</button>
+            <button class="btn btn-warning" onclick="deleteAllProductImages()">📦 Ürün Resimleri</button>
+        </div>
+        <button class="btn btn-danger" style="width:100%; margin-top:5px;" onclick="deleteAllImages()">🗑️ Tüm Resimleri Sil</button>
+    </div>
+
+    <div class="dev-section v2">
+        <h4>☁️ CLOUD SYNC (Resimli)</h4>
+        <div class="button-group">
+            <button class="btn btn-info" onclick="saveImagesToCloud()">☁️ Resimleri Kaydet</button>
+            <button class="btn btn-secondary" onclick="loadImagesFromCloud()">📥 Resimleri Yükle</button>
         </div>
     </div>
 
-    <button class="btn btn-danger" style="width:100%;" id="closeV2Btn" onclick="closeDevV2()">Kapat</button>
-</div>
-
-<!-- لوحة المطور V3 - فارغة (للإضافات المستقبلية) -->
-<div class="dev-window dev-only" id="devPanelV3" style="border-color: #9c27b0;">
-    <div class="window-header">
-        <h3 style="color: #9c27b0;"><i class="fas fa-paint-brush"></i> V3 - Renk Düzenleme</h3>
-        <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV3()"><i class="fas fa-times"></i></button>
-    </div>
-    
-    <div class="dev-section" style="border-color: #9c27b0;">
-        <h4 style="color: #9c27b0;"><i class="fas fa-palette"></i> Renk Düzenleme Paneli</h4>
-        <p class="text-center" style="color: #ccc;">Renk düzenleme özelliği V3 panelinde</p>
-        <button class="btn" style="width:100%; background:#9c27b0;" onclick="openColorPicker()">🎨 Renk Seçiciyi Aç</button>
-    </div>
-    
-    <button class="btn btn-danger" style="width:100%;" onclick="closeDevV3()">Kapat</button>
+    <button class="btn btn-danger" style="width:100%;" onclick="closeDevV2()">❌ Çıkış</button>
 </div>
 
 <!-- حاوية الرسائل -->
@@ -1934,7 +1921,7 @@
     </button>
 </div>
 
-<!-- زر المطور العائم (يظهر فقط بعد تفعيل وضع المطور) -->
+<!-- زر المطور العائم -->
 <div class="floating-dev-btn dev-only" id="floatingDevBtn" onclick="toggleDevPanel()" style="display: none;">
     <i class="fas fa-code"></i>
 </div>
@@ -1951,7 +1938,7 @@
 <!-- قسم القائمة -->
 <section id="menu" class="section">
     <div class="container">
-        <h2 class="section-title" id="menuTitle">Menümüz</h2>
+        <h2 class="section-title" id="menuTitle">Menü <span class="version-tag" id="liveVersion">v1.0</span></h2>
         <div class="grid" id="menuGrid"></div>
     </div>
 </section>
@@ -1961,7 +1948,7 @@
     <div class="container">
         <h2 class="section-title" id="contactTitle">İletişim</h2>
         <div class="contact-content">
-            <div class="contact-item" id="phoneContact" onclick="window.open('tel:905321580207')">
+            <div class="contact-item" onclick="window.open('tel:905321580207')">
                 <div class="contact-icon">
                     <i class="fas fa-phone-alt"></i>
                 </div>
@@ -1973,7 +1960,7 @@
                 <div class="contact-icon">
                     <i class="fab fa-whatsapp"></i>
                 </div>
-                <div class="contact-text" id="whatsappText">
+                <div class="contact-text">
                     WhatsApp
                 </div>
             </div>
@@ -1982,10 +1969,10 @@
                     <i class="fab fa-instagram"></i>
                 </div>
                 <div class="contact-text">
-                    <a id="instaLink" href="https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2" target="_blank">Instagram</a>
+                    <a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">Instagram</a>
                 </div>
             </div>
-            <div class="contact-item" id="locationContact" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
+            <div class="contact-item" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <div class="contact-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -2011,7 +1998,7 @@
         let currentVersionType = 'v1';
         let teaClickCount = 0;
         let videoShown = false;
-        let autoSaveTimer = null;
+        let autoSyncInterval = null;
         
         // ===== متغيرات الصور =====
         let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}');
@@ -2026,355 +2013,555 @@
         const DEV_PASS = 'momotunc0702';
         const VIDEO_URL = 'https://www.youtube.com/embed/d6BLnYv_oZE?autoplay=1&mute=0';
         const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
-        const INSTAGRAM_URL = 'https://www.instagram.com/tosttooyevski?igsh=Ymx6bXhrcTJqeGh2';
 
         // ===== القائمة الأساسية (النسخة الأصلية) =====
-        const ORIGINAL_MENU = {
+        let ORIGINAL_MENU = {
             tr: [
                 {
                     category: "TOST ÇEŞİTLERİ",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
                     items: [
-                        { name: "Peynirli tost", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sucuklu tost", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Karışık tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Atom tost (sucuk,salam,sosis,kaşar,yumurta)", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "3 peynirli tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Kavurmalı tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Ayvalık tostu", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Simit tost (iki kişilik)", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Diyet tost (light peynir,domates,biber)", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Bazlama tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Bazlama kavurmalı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                        { name: "Kaşarlı tost", price: "120₺" },
+                        { name: "Sucuklu tost", price: "120₺" },
+                        { name: "Kaşar sucuk mix", price: "150₺" },
+                        { name: "Atom tost", price: "200₺" },
+                        { name: "3 peynirli tost", price: "150₺" },
+                        { name: "Kavurmalı tost", price: "200₺" },
+                        { name: "Ayvalık tostu", price: "200₺" },
+                        { name: "Simit tost", price: "350₺" },
+                        { name: "Diyet tost", price: "150₺" },
+                        { name: "Bazlama tost", price: "200₺" },
+                        { name: "Bazlama kavurmalı", price: "250₺" },
+                        { name: "Kumru", price: "200₺" }
                     ]
                 },
                 {
-                    category: "SANDVİÇLER",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    category: "SANDWİCHLER",
                     items: [
-                        { name: "Karışık sandviç", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Ton balıklı sandviç", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Tavuklu sandviç", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                        { name: "Karışık sandwich", price: "150₺" },
+                        { name: "Tonbalıklı sandwich", price: "200₺" },
+                        { name: "Tavuklu sandwich", price: "170₺" }
                     ]
                 },
                 {
                     category: "ATIŞTIRMALIKLAR",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
                     items: [
-                        { name: "Patates cipsi", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Tavuk parçaları", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "6 soğan halkası", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                        { name: "Patates cips", price: "120₺" },
+                        { name: "Tavuk parçacıkları", price: "150₺" },
+                        { name: "6 lı soğan halkası", price: "60₺" }
                     ]
                 },
                 {
                     category: "SALATALAR",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
                     items: [
-                        { name: "Ton balıklı salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Tavuklu salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Peynirli salata", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                        { name: "Tonbalıklı salata", price: "250₺" },
+                        { name: "Tavuklu salata", price: "250₺" },
+                        { name: "Peynirli salata", price: "200₺" }
                     ]
                 },
                 {
                     category: "MAKARNALAR",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
                     items: [
-                        { name: "Bolonez makarna", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Tavuklu makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Peynirli makarna", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Ton balıklı makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                        { name: "Bolonez makarna", price: "250₺" },
+                        { name: "Tavuklu makarna", price: "250₺" },
+                        { name: "Peynirli makarna", price: "200₺" },
+                        { name: "Tonbalıklı makarna", price: "250₺" }
                     ]
                 },
                 {
                     category: "BURGERLER",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
                     items: [
-                        { name: "Klasik hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Cheeseburger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Tavuk burger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                        { name: "Classik hamburger", price: "300₺" },
+                        { name: "Cheese burger", price: "320₺" },
+                        { name: "Tavuk burger", price: "280₺" }
                     ]
                 },
                 {
                     category: "PİZZALAR",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
                     items: [
-                        { name: "Margarita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Sucuklu pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Karışık pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Kavurmalı pizza", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Ton balıklı pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Sebzeli pizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Dört peynirli pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                        { name: "Margarita", price: "200₺" },
+                        { name: "Sucuklu pizza", price: "250₺" },
+                        { name: "Karışık pizza", price: "300₺" },
+                        { name: "Kavurmalı pizza", price: "350₺" },
+                        { name: "Tonbalıklı pizza", price: "300₺" },
+                        { name: "Vegi pizza", price: "230₺" }
                     ]
                 },
                 {
                     category: "KAHVALTILAR",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
                     items: [
-                        { name: "Kahvaltı tabağı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Serpme kahvaltı (kişi başı)", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sucuklu yumurta", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Sahanda yumurta", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Peynirli yumurta", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
-                        { name: "Kavurmalı yumurta", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                        { name: "Kahvaltı tabağı", price: "250₺" },
+                        { name: "Serpme kahvaltı", price: "300₺" },
+                        { name: "Menemen", price: "200₺" },
+                        { name: "Sucuklu yumurta", price: "200₺" },
+                        { name: "Sahanda yumurta", price: "150₺" },
+                        { name: "Peynirli yumurta", price: "170₺" },
+                        { name: "Kavurmalı yumurta", price: "250₺" }
                     ]
                 },
                 {
                     category: "SICAK İÇECEKLER",
-                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
                     items: [
-                        { name: "Çay", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Ada çayı", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Bitki çayı", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
-                        { name: "Türk kahvesi", price: "60₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
-                        { name: "Osmanlı kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
-                        { name: "Menengiç kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                        { name: "Çay", price: "20₺" },
+                        { name: "Ada çayı", price: "20₺" },
+                        { name: "Bitki çayı", price: "30₺" },
+                        { name: "Türk kahvesi", price: "60₺" },
+                        { name: "Osmanlı kahvesi", price: "80₺" },
+                        { name: "Menengiç kahvesi", price: "80₺" }
                     ]
                 },
                 {
                     category: "SOĞUK İÇECEKLER",
-                    image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
                     items: [
-                        { name: "Su", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Meyveli soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Beypazarı kola", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Çamlıca portakal", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Niğde gazozu", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Küçük ayran", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Büyük ayran", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
-                        { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                        { name: "Su", price: "20₺" },
+                        { name: "Soda", price: "30₺" },
+                        { name: "Meyveli soda", price: "30₺" },
+                        { name: "Beypazarı co'ala", price: "30₺" },
+                        { name: "Çamlıca portakal", price: "30₺" },
+                        { name: "Niğde gazozu", price: "30₺" },
+                        { name: "Ice tea", price: "40₺" },
+                        { name: "Ayran küçük", price: "20₺" },
+                        { name: "Ayran büyük", price: "30₺" },
+                        { name: "Churchill", price: "50₺" }
                     ]
                 },
                 {
                     category: "TATLILAR",
-                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
                     items: [
-                        { name: "Fırında sütlaç", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
-                        { name: "Sufle", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                        { name: "Fırında sütlaç", price: "120₺" },
+                        { name: "Sufle", price: "120₺" }
                     ]
                 }
             ],
-            ar: [],
-            en: [],
-            ru: [],
-            de: []
+            en: [
+                {
+                    category: "TOAST TYPES",
+                    items: [
+                        { name: "Cheese toast", price: "120₺" },
+                        { name: "Sausage toast", price: "120₺" },
+                        { name: "Cheese sausage mix", price: "150₺" },
+                        { name: "Atom toast", price: "200₺" },
+                        { name: "3 cheese toast", price: "150₺" },
+                        { name: "Roasted meat toast", price: "200₺" },
+                        { name: "Ayvalık toast", price: "200₺" },
+                        { name: "Bagel toast", price: "350₺" },
+                        { name: "Diet toast", price: "150₺" },
+                        { name: "Flatbread toast", price: "200₺" },
+                        { name: "Flatbread with meat", price: "250₺" },
+                        { name: "Kumru", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "SANDWICHES",
+                    items: [
+                        { name: "Mixed sandwich", price: "150₺" },
+                        { name: "Tuna sandwich", price: "200₺" },
+                        { name: "Chicken sandwich", price: "170₺" }
+                    ]
+                },
+                {
+                    category: "SNACKS",
+                    items: [
+                        { name: "Potato chips", price: "120₺" },
+                        { name: "Chicken pieces", price: "150₺" },
+                        { name: "6 onion rings", price: "60₺" }
+                    ]
+                },
+                {
+                    category: "SALADS",
+                    items: [
+                        { name: "Tuna salad", price: "250₺" },
+                        { name: "Chicken salad", price: "250₺" },
+                        { name: "Cheese salad", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "PASTA",
+                    items: [
+                        { name: "Bolognese pasta", price: "250₺" },
+                        { name: "Chicken pasta", price: "250₺" },
+                        { name: "Cheese pasta", price: "200₺" },
+                        { name: "Tuna pasta", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "BURGERS",
+                    items: [
+                        { name: "Classic hamburger", price: "300₺" },
+                        { name: "Cheese burger", price: "320₺" },
+                        { name: "Chicken burger", price: "280₺" }
+                    ]
+                },
+                {
+                    category: "PIZZAS",
+                    items: [
+                        { name: "Margherita", price: "200₺" },
+                        { name: "Sausage pizza", price: "250₺" },
+                        { name: "Mixed pizza", price: "300₺" },
+                        { name: "Roasted meat pizza", price: "350₺" },
+                        { name: "Tuna pizza", price: "300₺" },
+                        { name: "Veggie pizza", price: "230₺" }
+                    ]
+                },
+                {
+                    category: "BREAKFAST",
+                    items: [
+                        { name: "Breakfast plate", price: "250₺" },
+                        { name: "Spread breakfast", price: "300₺" },
+                        { name: "Menemen", price: "200₺" },
+                        { name: "Sausage eggs", price: "200₺" },
+                        { name: "Fried eggs", price: "150₺" },
+                        { name: "Cheese eggs", price: "170₺" },
+                        { name: "Roasted meat eggs", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "HOT DRINKS",
+                    items: [
+                        { name: "Tea", price: "20₺" },
+                        { name: "Sage tea", price: "20₺" },
+                        { name: "Herbal tea", price: "30₺" },
+                        { name: "Turkish coffee", price: "60₺" },
+                        { name: "Ottoman coffee", price: "80₺" },
+                        { name: "Menengiç coffee", price: "80₺" }
+                    ]
+                },
+                {
+                    category: "COLD DRINKS",
+                    items: [
+                        { name: "Water", price: "20₺" },
+                        { name: "Soda", price: "30₺" },
+                        { name: "Fruit soda", price: "30₺" },
+                        { name: "Beypazarı cola", price: "30₺" },
+                        { name: "Çamlıca orange", price: "30₺" },
+                        { name: "Niğde soda", price: "30₺" },
+                        { name: "Ice tea", price: "40₺" },
+                        { name: "Ayran small", price: "20₺" },
+                        { name: "Ayran large", price: "30₺" },
+                        { name: "Churchill", price: "50₺" }
+                    ]
+                },
+                {
+                    category: "DESSERTS",
+                    items: [
+                        { name: "Baked rice pudding", price: "120₺" },
+                        { name: "Souffle", price: "120₺" }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    category: "ВИДЫ ТОСТОВ",
+                    items: [
+                        { name: "Сырный тост", price: "120₺" },
+                        { name: "Тост с колбасой", price: "120₺" },
+                        { name: "Сыр с колбасой микс", price: "150₺" },
+                        { name: "Атом тост", price: "200₺" },
+                        { name: "3 сырный тост", price: "150₺" },
+                        { name: "Тост с мясом", price: "200₺" },
+                        { name: "Айвалык тост", price: "200₺" },
+                        { name: "Тост с бубликом", price: "350₺" },
+                        { name: "Диетический тост", price: "150₺" },
+                        { name: "Тост на лепешке", price: "200₺" },
+                        { name: "Лепешка с мясом", price: "250₺" },
+                        { name: "Кумру", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "СЭНДВИЧИ",
+                    items: [
+                        { name: "Смешанный сэндвич", price: "150₺" },
+                        { name: "Сэндвич с тунцом", price: "200₺" },
+                        { name: "Сэндвич с курицей", price: "170₺" }
+                    ]
+                },
+                {
+                    category: "ЗАКУСКИ",
+                    items: [
+                        { name: "Картофельные чипсы", price: "120₺" },
+                        { name: "Кусочки курицы", price: "150₺" },
+                        { name: "6 луковых колец", price: "60₺" }
+                    ]
+                },
+                {
+                    category: "САЛАТЫ",
+                    items: [
+                        { name: "Салат с тунцом", price: "250₺" },
+                        { name: "Салат с курицей", price: "250₺" },
+                        { name: "Сырный салат", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "МАКАРОНЫ",
+                    items: [
+                        { name: "Болоньезе", price: "250₺" },
+                        { name: "С курицей", price: "250₺" },
+                        { name: "С сыром", price: "200₺" },
+                        { name: "С тунцом", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "БУРГЕРЫ",
+                    items: [
+                        { name: "Классический гамбургер", price: "300₺" },
+                        { name: "Чизбургер", price: "320₺" },
+                        { name: "Куриный бургер", price: "280₺" }
+                    ]
+                },
+                {
+                    category: "ПИЦЦА",
+                    items: [
+                        { name: "Маргарита", price: "200₺" },
+                        { name: "С колбасой", price: "250₺" },
+                        { name: "Смешанная", price: "300₺" },
+                        { name: "С мясом", price: "350₺" },
+                        { name: "С тунцом", price: "300₺" },
+                        { name: "Овощная", price: "230₺" }
+                    ]
+                },
+                {
+                    category: "ЗАВТРАКИ",
+                    items: [
+                        { name: "Тарелка завтрака", price: "250₺" },
+                        { name: "Завтрак на двоих", price: "300₺" },
+                        { name: "Менемен", price: "200₺" },
+                        { name: "Яйца с колбасой", price: "200₺" },
+                        { name: "Яичница", price: "150₺" },
+                        { name: "Яйца с сыром", price: "170₺" },
+                        { name: "Яйца с мясом", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "ГОРЯЧИЕ НАПИТКИ",
+                    items: [
+                        { name: "Чай", price: "20₺" },
+                        { name: "Шалфей", price: "20₺" },
+                        { name: "Травяной чай", price: "30₺" },
+                        { name: "Турецкий кофе", price: "60₺" },
+                        { name: "Османский кофе", price: "80₺" },
+                        { name: "Мененгич кофе", price: "80₺" }
+                    ]
+                },
+                {
+                    category: "ХОЛОДНЫЕ НАПИТКИ",
+                    items: [
+                        { name: "Вода", price: "20₺" },
+                        { name: "Сода", price: "30₺" },
+                        { name: "Фруктовая сода", price: "30₺" },
+                        { name: "Beypazarı кола", price: "30₺" },
+                        { name: "Çamlıca апельсин", price: "30₺" },
+                        { name: "Niğde газировка", price: "30₺" },
+                        { name: "Ice tea", price: "40₺" },
+                        { name: "Айран маленький", price: "20₺" },
+                        { name: "Айран большой", price: "30₺" },
+                        { name: "Черчилль", price: "50₺" }
+                    ]
+                },
+                {
+                    category: "ДЕСЕРТЫ",
+                    items: [
+                        { name: "Рисовый пудинг", price: "120₺" },
+                        { name: "Суфле", price: "120₺" }
+                    ]
+                }
+            ],
+            ar: [
+                {
+                    category: "أنواع التوست",
+                    items: [
+                        { name: "توست بالجبن", price: "120₺" },
+                        { name: "توست بالسجق", price: "120₺" },
+                        { name: "مكس جبن وسجق", price: "150₺" },
+                        { name: "توست أتوم", price: "200₺" },
+                        { name: "توست 3 أجبان", price: "150₺" },
+                        { name: "توست باللحم", price: "200₺" },
+                        { name: "توست آياليك", price: "200₺" },
+                        { name: "توست سميط", price: "350₺" },
+                        { name: "توست دايت", price: "150₺" },
+                        { name: "توست بازلاما", price: "200₺" },
+                        { name: "بازلاما باللحم", price: "250₺" },
+                        { name: "كومرو", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "الساندويشات",
+                    items: [
+                        { name: "ساندويش مشكل", price: "150₺" },
+                        { name: "ساندويش تونة", price: "200₺" },
+                        { name: "ساندويش دجاج", price: "170₺" }
+                    ]
+                },
+                {
+                    category: "المقبلات",
+                    items: [
+                        { name: "رقائق بطاطس", price: "120₺" },
+                        { name: "قطع دجاج", price: "150₺" },
+                        { name: "6 حلقات بصل", price: "60₺" }
+                    ]
+                },
+                {
+                    category: "السلطات",
+                    items: [
+                        { name: "سلطة تونة", price: "250₺" },
+                        { name: "سلطة دجاج", price: "250₺" },
+                        { name: "سلطة جبن", price: "200₺" }
+                    ]
+                },
+                {
+                    category: "المعكرونة",
+                    items: [
+                        { name: "معكرونة بولونيز", price: "250₺" },
+                        { name: "معكرونة بالدجاج", price: "250₺" },
+                        { name: "معكرونة بالجبن", price: "200₺" },
+                        { name: "معكرونة بالتونة", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "البرغر",
+                    items: [
+                        { name: "هامبرغر كلاسيك", price: "300₺" },
+                        { name: "تشيز برغر", price: "320₺" },
+                        { name: "برغر دجاج", price: "280₺" }
+                    ]
+                },
+                {
+                    category: "البيتزا",
+                    items: [
+                        { name: "مارغريتا", price: "200₺" },
+                        { name: "بيتزا سجق", price: "250₺" },
+                        { name: "بيتزا مشكلة", price: "300₺" },
+                        { name: "بيتزا لحم", price: "350₺" },
+                        { name: "بيتزا تونة", price: "300₺" },
+                        { name: "بيتزا خضار", price: "230₺" }
+                    ]
+                },
+                {
+                    category: "الفطور",
+                    items: [
+                        { name: "طبق فطور", price: "250₺" },
+                        { name: "فطور مفتوح", price: "300₺" },
+                        { name: "منمن", price: "200₺" },
+                        { name: "بيض بسجق", price: "200₺" },
+                        { name: "بيض مقلي", price: "150₺" },
+                        { name: "بيض بجبن", price: "170₺" },
+                        { name: "بيض بلحم", price: "250₺" }
+                    ]
+                },
+                {
+                    category: "المشروبات الساخنة",
+                    items: [
+                        { name: "شاي", price: "20₺" },
+                        { name: "شاي مريمية", price: "20₺" },
+                        { name: "شاي أعشاب", price: "30₺" },
+                        { name: "قهوة تركية", price: "60₺" },
+                        { name: "قهوة عثمانية", price: "80₺" },
+                        { name: "قهوة مننجتش", price: "80₺" }
+                    ]
+                },
+                {
+                    category: "المشروبات الباردة",
+                    items: [
+                        { name: "ماء", price: "20₺" },
+                        { name: "صودا", price: "30₺" },
+                        { name: "صودا فواكه", price: "30₺" },
+                        { name: "بيبازاري كولا", price: "30₺" },
+                        { name: "تشامليكا برتقال", price: "30₺" },
+                        { name: "غازوز نيده", price: "30₺" },
+                        { name: "آيس تي", price: "40₺" },
+                        { name: "عيران صغير", price: "20₺" },
+                        { name: "عيران كبير", price: "30₺" },
+                        { name: "تشرشل", price: "50₺" }
+                    ]
+                },
+                {
+                    category: "الحلويات",
+                    items: [
+                        { name: "بودنغ الأرز", price: "120₺" },
+                        { name: "سوفليه", price: "120₺" }
+                    ]
+                }
+            ]
         };
 
-        // ترجمة القوائم للغات الأخرى (مختصرة للاختصار)
-        ORIGINAL_MENU.ar = ORIGINAL_MENU.tr.map(cat => ({
-            ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "أنواع التوست" :
-                     cat.category === "SANDVİÇLER" ? "الساندويشات" :
-                     cat.category === "ATIŞTIRMALIKLAR" ? "الوجبات الخفيفة" :
-                     cat.category === "SALATALAR" ? "السلطات" :
-                     cat.category === "MAKARNALAR" ? "المعكرونة" :
-                     cat.category === "BURGERLER" ? "البرغر" :
-                     cat.category === "PİZZALAR" ? "البيتزا" :
-                     cat.category === "KAHVALTILAR" ? "الفطور" :
-                     cat.category === "SICAK İÇECEKLER" ? "المشروبات الساخنة" :
-                     cat.category === "SOĞUK İÇECEKLER" ? "المشروبات الباردة" :
-                     cat.category === "TATLILAR" ? "الحلويات" : cat.category,
-            items: cat.items.map(item => ({
-                ...item,
-                name: item.name === "Peynirli tost" ? "توست بالجبن" :
-                      item.name === "Sucuklu tost" ? "توست بالسجق" :
-                      item.name === "Karışık tost" ? "مكس جبن وسجق" : item.name
-            }))
-        }));
+        // إضافة صور افتراضية للمنتجات
+        function addDefaultImages() {
+            const defaultImages = {
+                tr: {
+                    "Kaşarlı tost": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400",
+                    "Sucuklu tost": "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400",
+                    "Çay": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400",
+                    "Türk kahvesi": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
+                    "Su": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400"
+                }
+            };
+            
+            // تخزين الصور الافتراضية في localStorage إذا لم تكن موجودة
+            if (Object.keys(productImages).length === 0) {
+                Object.keys(ORIGINAL_MENU).forEach(lang => {
+                    ORIGINAL_MENU[lang].forEach((cat, catIdx) => {
+                        cat.items.forEach((item, itemIdx) => {
+                            const imgKey = `${lang}_${cat.category}_${item.name}`;
+                            if (defaultImages.tr[item.name]) {
+                                if (!productImages[catIdx]) productImages[catIdx] = {};
+                                productImages[catIdx][item.name] = defaultImages.tr[item.name];
+                            }
+                        });
+                    });
+                });
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+            }
+        }
+        
+        addDefaultImages();
 
-        ORIGINAL_MENU.en = ORIGINAL_MENU.tr.map(cat => ({
-            ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOAST TYPES" : cat.category,
-            items: cat.items.map(item => ({
-                ...item,
-                name: item.name === "Peynirli tost" ? "Cheese toast" :
-                      item.name === "Sucuklu tost" ? "Sausage toast" :
-                      item.name === "Karışık tost" ? "Mixed toast" : item.name
-            }))
-        }));
-
-        ORIGINAL_MENU.ru = ORIGINAL_MENU.tr.map(cat => ({
-            ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "ВИДЫ ТОСТОВ" : cat.category,
-            items: cat.items.map(item => ({
-                ...item,
-                name: item.name === "Peynirli tost" ? "Сырный тост" :
-                      item.name === "Sucuklu tost" ? "Тост с колбасой" :
-                      item.name === "Karışık tost" ? "Смешанный тост" : item.name
-            }))
-        }));
-
-        ORIGINAL_MENU.de = ORIGINAL_MENU.tr.map(cat => ({
-            ...cat,
-            category: cat.category === "TOST ÇEŞİTLERİ" ? "TOASTSORTEN" : cat.category,
-            items: cat.items.map(item => ({
-                ...item,
-                name: item.name === "Peynirli tost" ? "Käse-Toast" :
-                      item.name === "Sucuklu tost" ? "Sucuk-Toast" :
-                      item.name === "Karışık tost" ? "Gemischter Toast" : item.name
-            }))
-        }));
-
-        // ===== نسخة العمل الحالية (يتم تعديلها) =====
-        let MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
-
-        // ===== نصوص الواجهة متعددة اللغات (مختصرة) =====
+        // ===== نصوص الواجهة =====
         const TEXTS = {
             tr: { 
                 heroTitle: "Tosttoo", 
                 workTime: "🕒 08:00 - 02:30", 
                 viewMenu: "Menüyü Gör", 
-                menuTitle: "Menümüz", 
+                menuTitle: "Menü", 
                 contactTitle: "İletişim", 
                 phone: "0532 158 02 07", 
                 instagram: "Instagram", 
                 location: "📍 Konum",
-                whatsapp: "WhatsApp",
-                devModalTitle: "🔧 Geliştirici Seçenekleri",
-                devModalDesc: "Hangi sürümü kullanmak istiyorsunuz?",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devV3Btn: "🎨 V3",
-                devCloseBtn: "Kapat",
-                v1Title: "Geliştirici Paneli V1",
-                v2Title: "Gelişmiş Resim Yöneticisi V2",
-                addProduct: "Ürün Ekle",
-                productName: "Ürün Adı",
-                price: "Fiyat",
-                addProductBtn: "Ürün Ekle",
-                addCategory: "Kategori Ekle",
-                newCategory: "Yeni Kategori Adı",
-                addCategoryBtn: "Kategori Ekle",
-                tools: "Araçlar",
-                editMode: "Düzenleme Modu",
-                deleteMode: "Silme Modu",
-                disableModes: "Modları Kapat",
-                resetMenu: "Menüyü Sıfırla",
-                social: "Sosyal Medya",
-                instagramLabel: "Instagram Linki",
-                updateInstagram: "Instagram'ı Güncelle",
-                locationLabel: "Konum",
-                updateLocation: "Konumu Güncelle",
-                copyCode: "Kodu Kopyala",
-                copyBtn: "Kodu Kopyala",
-                closePanel: "Kapat",
-                gallery: "Resim Galerisi",
-                addCategoryImage: "Kategori Resmi Ekle",
-                selectCategory: "Kategori Seç",
-                imageUrl: "Resim URL",
-                preview: "Önizle",
-                add: "Ekle",
-                addProductImage: "Ürün Resmi Ekle",
-                selectProduct: "Ürün Seç",
-                syncImages: "Resim Senkronizasyonu",
-                saveImages: "Resimleri Kaydet",
-                loadImages: "Resimleri Yükle",
-                confirmTitle: "⚠️ Onay",
-                confirmMessage: "Emin misiniz?",
-                yes: "Evet",
-                no: "Hayır"
-            },
-            ar: { 
-                heroTitle: "توستو", 
-                workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠", 
-                viewMenu: "عرض القائمة", 
-                menuTitle: "قائمتنا", 
-                contactTitle: "اتصل بنا", 
-                phone: "٠٥٣٢ ١٥٨ ٠٢ ٠٧", 
-                instagram: "إنستغرام", 
-                location: "📍 الموقع",
-                whatsapp: "واتساب",
-                devModalTitle: "🔧 خيارات المطور",
-                devModalDesc: "أي إصدار تريد استخدامه؟",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devV3Btn: "🎨 V3",
-                devCloseBtn: "إغلاق"
+                whatsapp: "WhatsApp"
             },
             en: { 
                 heroTitle: "Tosttoo", 
                 workTime: "🕒 08:00 - 02:30", 
                 viewMenu: "View Menu", 
-                menuTitle: "Our Menu", 
-                contactTitle: "Contact Us", 
+                menuTitle: "Menu", 
+                contactTitle: "Contact", 
                 phone: "0532 158 02 07", 
                 instagram: "Instagram", 
                 location: "📍 Location",
-                whatsapp: "WhatsApp",
-                devModalTitle: "🔧 Developer Options",
-                devModalDesc: "Which version would you like to use?",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devV3Btn: "🎨 V3",
-                devCloseBtn: "Close"
+                whatsapp: "WhatsApp"
             },
             ru: { 
                 heroTitle: "Tosttoo", 
                 workTime: "🕒 08:00 - 02:30", 
                 viewMenu: "Посмотреть меню", 
-                menuTitle: "Наше меню", 
+                menuTitle: "Меню", 
                 contactTitle: "Контакты", 
                 phone: "0532 158 02 07", 
                 instagram: "Instagram", 
                 location: "📍 Местоположение",
-                whatsapp: "WhatsApp",
-                devModalTitle: "🔧 Опции разработчика",
-                devModalDesc: "Какую версию вы хотите использовать?",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devV3Btn: "🎨 V3",
-                devCloseBtn: "Закрыть"
+                whatsapp: "WhatsApp"
             },
-            de: { 
-                heroTitle: "Tosttoo", 
-                workTime: "🕒 08:00 - 02:30", 
-                viewMenu: "Menü ansehen", 
-                menuTitle: "Unser Menü", 
-                contactTitle: "Kontakt", 
-                phone: "0532 158 02 07", 
-                instagram: "Instagram", 
-                location: "📍 Standort",
-                whatsapp: "WhatsApp",
-                devModalTitle: "🔧 Entwickleroptionen",
-                devModalDesc: "Welche Version möchten Sie verwenden?",
-                devV1Btn: "⚙️ V1",
-                devV2Btn: "🖼️ V2",
-                devV3Btn: "🎨 V3",
-                devCloseBtn: "Schließen"
+            ar: { 
+                heroTitle: "توستو", 
+                workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠", 
+                viewMenu: "عرض القائمة", 
+                menuTitle: "القائمة", 
+                contactTitle: "اتصل بنا", 
+                phone: "٠٥٣٢ ١٥٨ ٠٢ ٠٧", 
+                instagram: "إنستغرام", 
+                location: "📍 الموقع",
+                whatsapp: "واتساب"
             }
         };
 
         let extraCategories = JSON.parse(localStorage.getItem('extraCategories') || '[]');
-
-        // ===== دالة الحفظ التلقائي =====
-        function triggerAutoSave() {
-            if (autoSaveTimer) clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(() => {
-                saveAllToLocalStorage();
-                if (isDeveloper) showStatus('Otomatik kaydedildi', 'success');
-            }, 500);
-        }
-
-        // ===== دالة حفظ كل شيء في localStorage =====
-        function saveAllToLocalStorage() {
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
-            localStorage.setItem('insta', document.getElementById('instaLink').href);
-        }
-
-        // ===== دالة تحميل كل شيء من localStorage =====
-        function loadAllFromLocalStorage() {
-            categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}');
-            productImages = JSON.parse(localStorage.getItem('productImages') || '{}');
-            extraCategories = JSON.parse(localStorage.getItem('extraCategories') || '[]');
-            const insta = localStorage.getItem('insta');
-            if (insta) document.getElementById('instaLink').href = insta;
-        }
 
         // ===== دوال نافذة الصور =====
         window.openImageModal = function(src, title, imageList, index) {
@@ -2460,30 +2647,10 @@
             menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         };
 
-        function updateDevPanelTexts() {
-            const t = TEXTS[currentLang];
-            
-            // تحديث نافذة اختيار النسخة
-            document.getElementById('devModalTitle').textContent = t.devModalTitle;
-            document.getElementById('devModalDesc').textContent = t.devModalDesc;
-            document.getElementById('devV1Btn').innerHTML = t.devV1Btn;
-            document.getElementById('devV2Btn').innerHTML = t.devV2Btn;
-            document.getElementById('devV3Btn').innerHTML = t.devV3Btn;
-            document.getElementById('devCloseBtn').innerHTML = t.devCloseBtn;
-            
-            // تحديث لوحة V1 (مختصر)
-            if (document.getElementById('v1Title')) {
-                document.getElementById('v1Title').innerHTML = `<i class="fas fa-cog"></i> ${t.v1Title}`;
-            }
-            if (document.getElementById('v2Title')) {
-                document.getElementById('v2Title').innerHTML = `<i class="fas fa-paint-brush"></i> ${t.v2Title}`;
-            }
-        }
-
         window.setLanguage = function(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
-            const flags = { tr: '🇹🇷', ar: '🇮🇶', en: '🇬🇧', ru: '🇷🇺', de: '🇩🇪' };
+            const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
             document.getElementById('langBtn').textContent = flags[lang];
             document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.getElementById('languageMenu').style.display = 'none';
@@ -2492,15 +2659,15 @@
             document.getElementById('secretTrigger').textContent = t.heroTitle;
             document.getElementById('workTime').textContent = t.workTime;
             document.getElementById('scrollBtn').textContent = t.viewMenu;
-            document.getElementById('menuTitle').textContent = t.menuTitle;
+            document.getElementById('menuTitle').innerHTML = `${t.menuTitle} <span class="version-tag">v1.0</span>`;
             document.getElementById('contactTitle').textContent = t.contactTitle;
             document.getElementById('phoneLink').innerHTML = `📞 ${t.phone}`;
             document.getElementById('instaLink').textContent = t.instagram;
             document.getElementById('locationText').innerHTML = t.location;
-            document.getElementById('whatsappText').textContent = t.whatsapp;
             
-            // تحديث نصوص لوحة المطور
-            updateDevPanelTexts();
+            // تحديث نص واتساب
+            const whatsappItem = document.querySelector('.contact-item:nth-child(2) .contact-text');
+            if (whatsappItem) whatsappItem.textContent = t.whatsapp;
             
             displayMenu();
         };
@@ -2517,23 +2684,26 @@
 
         // ===== دوال القائمة =====
         function getFullMenu() {
-            const base = MENU_DATA[currentLang] || MENU_DATA.tr;
-            const menuWithCustomImages = base.map(cat => ({
+            const base = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
+            // دمج الصور المخصصة مع القائمة الأساسية
+            const menuWithCustomImages = base.map((cat, catIdx) => ({
                 ...cat,
-                image: categoryImages[cat.category] || cat.image,
-                items: cat.items.map(item => ({
+                items: cat.items.map((item, itemIdx) => ({
                     ...item,
-                    image: (productImages[base.indexOf(cat)] && productImages[base.indexOf(cat)][item.name]) || item.image
+                    image: (productImages[catIdx] && productImages[catIdx][item.name]) || 
+                           (productImages[catIdx] && productImages[catIdx][item.name]) || 
+                           "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
                 }))
             }));
             return [...menuWithCustomImages, ...extraCategories];
         }
 
         function saveFullMenu(menu) {
-            const baseCategories = MENU_DATA[currentLang] || MENU_DATA.tr;
+            const baseCategories = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
             const baseNames = baseCategories.map(c => c.category);
+            
             extraCategories = menu.filter(cat => !baseNames.includes(cat.category));
-            triggerAutoSave();
+            localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
         }
 
         function displayMenu() {
@@ -2545,32 +2715,7 @@
             
             menu.forEach((cat, catIdx) => {
                 const card = document.createElement('div');
-                card.className = 'card has-image';
-                
-                if (cat.image) {
-                    const imgContainer = document.createElement('div');
-                    imgContainer.className = 'card-image-container';
-                    const img = document.createElement('img');
-                    img.src = cat.image;
-                    img.className = 'card-image';
-                    img.loading = 'lazy';
-                    img.alt = cat.category;
-                    img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=Resim'; };
-                    img.onclick = function(e) {
-                        e.stopPropagation();
-                        if (isDeveloper && editMode) {
-                            openImageEdit('category', catIdx, null, cat.category, this.src);
-                        } else {
-                            const imageList = [{ src: this.src, title: `📁 ${cat.category}` }];
-                            cat.items.forEach(item => {
-                                imageList.push({ src: item.image, title: `📦 ${item.name}` });
-                            });
-                            openImageModal(this.src, `📁 ${cat.category}`, imageList, 0);
-                        }
-                    };
-                    imgContainer.appendChild(img);
-                    card.appendChild(imgContainer);
-                }
+                card.className = 'card';
                 
                 const header = document.createElement('div');
                 header.className = 'card-header';
@@ -2586,50 +2731,50 @@
                     const itemDiv = document.createElement('div');
                     itemDiv.className = `item has-image`;
                     
-                    if (item.image) {
-                        const img = document.createElement('img');
-                        img.src = item.image;
-                        img.className = 'item-image';
-                        img.loading = 'lazy';
-                        img.alt = item.name;
-                        img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=Resim'; };
-                        img.onclick = function(e) {
-                            e.stopPropagation();
-                            if (isDeveloper && editMode) {
-                                openImageEdit('product', catIdx, itemIdx, item.name, this.src);
-                            } else {
-                                const imageList = [
-                                    { src: cat.image, title: `📁 ${cat.category}` },
-                                    ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
-                                ];
-                                const idx = imageList.findIndex(i => i.src === item.image);
-                                openImageModal(item.image, `📦 ${item.name}`, imageList, idx);
-                            }
-                        };
-                        itemDiv.appendChild(img);
-                    }
+                    // صورة المنتج
+                    const img = document.createElement('img');
+                    img.src = item.image || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400";
+                    img.className = 'item-image';
+                    img.loading = 'lazy';
+                    img.alt = item.name;
+                    img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=Resim'; };
+                    img.onclick = function(e) {
+                        e.stopPropagation();
+                        if (isDeveloper && editMode) {
+                            openImageEdit('product', catIdx, itemIdx, item.name, this.src);
+                        } else {
+                            const imageList = [
+                                ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
+                            ];
+                            const idx = imageList.findIndex(i => i.src === item.image);
+                            openImageModal(item.image, `📦 ${item.name}`, imageList, idx);
+                        }
+                    };
+                    itemDiv.appendChild(img);
                     
                     const nameSpan = document.createElement('span');
                     nameSpan.className = 'name';
                     nameSpan.textContent = item.name;
                     
                     // كود الشاي السري
-                    if (item.name.includes('Çay') || item.name.includes('شاي') || item.name.includes('Tea') || item.name.includes('Чай') || item.name.includes('Tee')) {
+                    if (item.name.includes('Çay') || item.name.includes('شاي') || item.name.includes('Tea') || item.name.includes('Чай')) {
                         nameSpan.onclick = function(e) {
                             e.stopPropagation();
                             if (isDeveloper) {
                                 if (editMode) {
-                                    const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
+                                    const newName = prompt('Yeni ürün adı:', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                                    showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
                                 } else {
-                                    const imageList = [
-                                        { src: cat.image, title: `📁 ${cat.category}` },
-                                        ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
-                                    ];
-                                    const idx = imageList.findIndex(i => i.src === item.image);
-                                    openImageModal(item.image, `📦 ${item.name}`, imageList, idx);
+                                    teaClickCount++;
+                                    if (teaClickCount >= 7 && !videoShown) {
+                                        videoShown = true;
+                                        openVideoModal();
+                                        teaClickCount = 0;
+                                    }
+                                    clearTimeout(window.teaTimer);
+                                    window.teaTimer = setTimeout(() => { teaClickCount = 0; }, 5000);
                                 }
                             } else {
                                 teaClickCount++;
@@ -2647,13 +2792,12 @@
                             e.stopPropagation();
                             if (isDeveloper) {
                                 if (editMode) {
-                                    const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
+                                    const newName = prompt('Yeni ürün adı:', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                                    showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
                                 } else {
                                     const imageList = [
-                                        { src: cat.image, title: `📁 ${cat.category}` },
                                         ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
                                     ];
                                     const idx = imageList.findIndex(i => i.src === item.image);
@@ -2661,7 +2805,6 @@
                                 }
                             } else {
                                 const imageList = [
-                                    { src: cat.image, title: `📁 ${cat.category}` },
                                     ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
                                 ];
                                 const idx = imageList.findIndex(i => i.src === item.image);
@@ -2676,7 +2819,7 @@
                     priceSpan.onclick = function(e) {
                         e.stopPropagation();
                         if (isDeveloper && editMode) {
-                            const newPrice = prompt(TEXTS[currentLang].price || 'Fiyat', item.price);
+                            const newPrice = prompt('Yeni fiyat:', item.price);
                             if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice);
                         }
                     };
@@ -2688,7 +2831,7 @@
                     const editBtn = document.createElement('button');
                     editBtn.className = 'item-edit-btn';
                     editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                    editBtn.title = TEXTS[currentLang].editMode || 'Düzenle';
+                    editBtn.title = 'Düzenle';
                     editBtn.onclick = function(e) {
                         e.stopPropagation();
                         editItem(catIdx, itemIdx);
@@ -2697,10 +2840,10 @@
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'item-delete-btn';
                     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                    deleteBtn.title = TEXTS[currentLang].deleteMode || 'Sil';
+                    deleteBtn.title = 'Sil';
                     deleteBtn.onclick = function(e) {
                         e.stopPropagation();
-                        showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${item.name}"?`, () => deleteProduct(catIdx, cat.category, item.name));
+                        showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
                     };
                     
                     const imageEditBtn = document.createElement('button');
@@ -2728,9 +2871,9 @@
                     const deleteCatBtn = document.createElement('button');
                     deleteCatBtn.className = 'delete-card-btn dev-only';
                     deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
-                    deleteCatBtn.title = TEXTS[currentLang].deleteMode || 'Sil';
+                    deleteCatBtn.title = 'Kategoriyi Sil';
                     deleteCatBtn.onclick = function() {
-                        showConfirm(`${TEXTS[currentLang].confirmMessage || 'Emin misiniz?'} "${cat.category}"?`, () => deleteCategory(cat.category));
+                        showConfirm(`"${cat.category}" kategorisi silinsin mi?`, () => deleteCategory(cat.category));
                     };
                     card.appendChild(deleteCatBtn);
                 }
@@ -2739,7 +2882,7 @@
             });
             
             updateSelects();
-            updateGalleryV2();
+            updateGallery();
         }
 
         function updateItemName(catIdx, catName, oldName, newName) {
@@ -2751,11 +2894,11 @@
                 if (productImages[catIdx] && productImages[catIdx][oldName]) {
                     productImages[catIdx][newName] = productImages[catIdx][oldName];
                     delete productImages[catIdx][oldName];
+                    localStorage.setItem('productImages', JSON.stringify(productImages));
                 }
                 saveFullMenu(menu);
                 displayMenu();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('İsim güncellendi', 'success');
+                showStatus('İsim güncellendi', 'success');
             }
         }
 
@@ -2767,8 +2910,7 @@
                 item.price = newPrice;
                 saveFullMenu(menu);
                 displayMenu();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Fiyat güncellendi', 'success');
+                showStatus('Fiyat güncellendi', 'success');
             }
         }
 
@@ -2780,11 +2922,11 @@
                 category.items.splice(itemIndex, 1);
                 if (productImages[catIdx] && productImages[catIdx][itemName]) {
                     delete productImages[catIdx][itemName];
+                    localStorage.setItem('productImages', JSON.stringify(productImages));
                 }
                 saveFullMenu(menu);
                 displayMenu();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Ürün silindi', 'success');
+                showStatus('Ürün silindi', 'success');
             }
         }
 
@@ -2795,11 +2937,11 @@
                 menu.splice(catIndex, 1);
                 if (categoryImages[catName]) {
                     delete categoryImages[catName];
+                    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
                 }
                 saveFullMenu(menu);
                 displayMenu();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Kategori silindi', 'success');
+                showStatus('Kategori silindi', 'success');
             }
         }
 
@@ -2807,9 +2949,9 @@
         window.editItem = function(catIdx, itemIdx) {
             const menu = getFullMenu();
             const item = menu[catIdx].items[itemIdx];
-            const newName = prompt(TEXTS[currentLang].productName || 'Ürün Adı', item.name);
+            const newName = prompt('Yeni ürün adı:', item.name);
             if (newName) {
-                const newPrice = prompt(TEXTS[currentLang].price || 'Fiyat', item.price);
+                const newPrice = prompt('Yeni fiyat:', item.price);
                 if (newPrice) {
                     updateItemName(catIdx, menu[catIdx].category, item.name, newName);
                     updateItemPrice(catIdx, menu[catIdx].category, newName, newPrice);
@@ -2822,7 +2964,7 @@
             deleteMode = false;
             document.getElementById('menuGrid').classList.add('edit-mode');
             document.getElementById('menuGrid').classList.remove('delete-mode');
-            if (isDeveloper) showStatus(`✏️ ${TEXTS[currentLang].editMode || 'Düzenleme Modu'}`, 'success');
+            showStatus('✏️ Düzenleme modu aktif', 'success');
         };
 
         window.enableDelete = function() {
@@ -2830,39 +2972,32 @@
             editMode = false;
             document.getElementById('menuGrid').classList.add('delete-mode');
             document.getElementById('menuGrid').classList.remove('edit-mode');
-            if (isDeveloper) showStatus(`🗑️ ${TEXTS[currentLang].deleteMode || 'Silme Modu'}`, 'success');
+            showStatus('🗑️ Silme modu aktif', 'success');
         };
 
         window.disableAllModes = function() {
             editMode = false;
             deleteMode = false;
             document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
-            if (isDeveloper) showStatus(`🔘 ${TEXTS[currentLang].disableModes || 'Modları Kapat'}`, 'success');
+            showStatus('🔘 Modlar kapatıldı', 'success');
         };
 
         window.addCategory = function() {
             const name = document.getElementById('newCategory').value.trim();
-            if (!name) {
-                if (isDeveloper) showStatus('Kategori adı girin!', 'error');
-                return;
-            }
+            if (!name) return showStatus('Kategori adı girin!', 'error');
             const menu = getFullMenu();
-            menu.push({ category: name, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [] });
+            menu.push({ category: name, items: [] });
             saveFullMenu(menu);
             displayMenu();
             document.getElementById('newCategory').value = '';
-            triggerAutoSave();
-            if (isDeveloper) showStatus('Kategori eklendi', 'success');
+            showStatus('Kategori eklendi', 'success');
         };
 
         window.addProduct = function() {
             const name = document.getElementById('newName').value.trim();
             const price = document.getElementById('productPrice').value.trim();
             const idx = document.getElementById('categorySelect').value;
-            if (!name || !price) {
-                if (isDeveloper) showStatus('Ad ve fiyat girin!', 'error');
-                return;
-            }
+            if (!name || !price) return showStatus('Ad ve fiyat girin!', 'error');
             const menu = getFullMenu();
             const category = menu[idx];
             if (category) {
@@ -2875,200 +3010,172 @@
                 displayMenu();
                 document.getElementById('newName').value = '';
                 document.getElementById('productPrice').value = '';
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Ürün eklendi', 'success');
+                showStatus('Ürün eklendi', 'success');
             }
         };
 
         function updateSelects() {
             const menu = getFullMenu();
             const cs = document.getElementById('categorySelect');
-            const cis = document.getElementById('categoryImageSelectV2');
-            const pcs = document.getElementById('productCategorySelectV2');
+            const cis = document.getElementById('categoryImageSelect');
+            const pcs = document.getElementById('productCategorySelect');
             
             if (cs) {
                 cs.innerHTML = '';
                 menu.forEach((c, i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`);
             }
             if (cis) {
-                cis.innerHTML = '<option value="">Kategori Seç</option>';
+                cis.innerHTML = '<option value="">Kategori seçin</option>';
                 menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`);
             }
             if (pcs) {
-                pcs.innerHTML = '<option value="">Kategori Seç</option>';
+                pcs.innerHTML = '';
                 menu.forEach((c, i) => pcs.innerHTML += `<option value="${i}">${c.category}</option>`);
             }
         }
 
-        // ===== دوال إدارة الصور المتقدمة (مختصرة) =====
-        window.openImageEdit = function(type, catIdx, itemIdx, name, currentSrc) {
-            currentEditData = { type, catIdx, itemIdx, name, currentSrc };
-            document.getElementById('imageEditImg').src = currentSrc || '';
-            document.getElementById('imageEditUrl').value = currentSrc || '';
-            document.getElementById('imageEditModal').style.display = 'flex';
+        window.previewCategoryImage = function() {
+            const url = document.getElementById('categoryImageUrl').value;
+            document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
         };
 
-        window.closeImageEdit = function() {
-            document.getElementById('imageEditModal').style.display = 'none';
-            currentEditData = null;
+        window.previewProductImage = function() {
+            const url = document.getElementById('productImageUrl').value;
+            document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
         };
 
-        window.saveImageEdit = function() {
-            if (!currentEditData) return;
-            
-            const newUrl = document.getElementById('imageEditUrl').value.trim();
-            if (!newUrl) {
-                if (isDeveloper) showStatus('Resim URL girin!', 'error');
-                return;
-            }
-
-            if (currentEditData.type === 'category') {
-                const catName = currentEditData.name;
-                categoryImages[catName] = newUrl;
-            } else {
-                const catIdx = currentEditData.catIdx;
-                const itemName = currentEditData.name;
-                if (!productImages[catIdx]) productImages[catIdx] = {};
-                productImages[catIdx][itemName] = newUrl;
-            }
-
-            displayMenu();
-            triggerAutoSave();
-            if (isDeveloper) showStatus('Resim güncellendi', 'success');
-            closeImageEdit();
-        };
-
-        window.deleteImageEdit = function() {
-            if (!currentEditData) return;
-            
-            showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
-                if (currentEditData.type === 'category') {
-                    const catName = currentEditData.name;
-                    delete categoryImages[catName];
-                } else {
-                    const catIdx = currentEditData.catIdx;
-                    const itemName = currentEditData.name;
-                    if (productImages[catIdx] && productImages[catIdx][itemName]) {
-                        delete productImages[catIdx][itemName];
-                    }
-                }
-                displayMenu();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Resim silindi', 'success');
-                closeImageEdit();
-            });
-        };
-
-        function updateGalleryV2() {
-            const gallery = document.getElementById('imageGalleryV2');
-            if (!gallery) return;
-            
-            let html = '';
-            
-            Object.keys(categoryImages).forEach(cat => {
-                html += `
-                    <div class="image-gallery-item">
-                        <img src="${categoryImages[cat]}" alt="${cat}">
-                        <span>📁 ${cat}</span>
-                        <div class="image-gallery-actions">
-                            <button class="edit" onclick="editGalleryImage('category', '${cat}')"><i class="fas fa-edit"></i></button>
-                            <button class="delete" onclick="deleteGalleryImage('category', '${cat}')"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            Object.keys(productImages).forEach(ci => {
-                Object.keys(productImages[ci]).forEach(p => {
-                    const menu = getFullMenu();
-                    const catName = menu[ci] ? menu[ci].category : 'Bilinmeyen Kategori';
-                    html += `
-                        <div class="image-gallery-item">
-                            <img src="${productImages[ci][p]}" alt="${p}">
-                            <span>📦 ${p} (${catName})</span>
-                            <div class="image-gallery-actions">
-                                <button class="edit" onclick="editGalleryImage('product', ${ci}, '${p}')"><i class="fas fa-edit"></i></button>
-                                <button class="delete" onclick="deleteGalleryImage('product', ${ci}, '${p}')"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    `;
-                });
-            });
-            
-            gallery.innerHTML = html || '<p class="text-center">Özel resim yok</p>';
-        }
-
-        window.editGalleryImage = function(type, cat, product) {
-            if (type === 'category') {
-                const url = categoryImages[cat];
-                openImageEdit('category', null, null, cat, url);
-            } else {
-                const url = productImages[cat][product];
-                openImageEdit('product', parseInt(cat), null, product, url);
-            }
-        };
-
-        window.deleteGalleryImage = function(type, cat, product) {
-            showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
-                if (type === 'category') {
-                    delete categoryImages[cat];
-                } else {
-                    delete productImages[cat][product];
-                }
-                displayMenu();
-                updateGalleryV2();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Resim silindi', 'success');
-            });
-        };
-
-        window.previewCategoryImageV2 = function() {
-            const url = document.getElementById('categoryImageUrlV2').value;
-            document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
-        };
-
-        window.previewProductImageV2 = function() {
-            const url = document.getElementById('productImageUrlV2').value;
-            document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
-        };
-
-        window.addCategoryImageV2 = function() {
-            const cat = document.getElementById('categoryImageSelectV2').value;
-            const url = document.getElementById('categoryImageUrlV2').value;
-            if (!cat || !url) {
-                if (isDeveloper) showStatus('Kategori ve URL girin!', 'error');
-                return;
-            }
+        window.addCategoryImage = function() {
+            const cat = document.getElementById('categoryImageSelect').value;
+            const url = document.getElementById('categoryImageUrl').value;
+            if (!cat || !url) return showStatus('Kategori ve URL girin!', 'error');
             categoryImages[cat] = url;
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
             displayMenu();
-            updateGalleryV2();
-            triggerAutoSave();
-            if (isDeveloper) showStatus('Kategori resmi eklendi', 'success');
+            updateGallery();
+            showStatus('Kategori resmi eklendi', 'success');
         };
 
-        window.addProductImageV2 = function() {
-            const catIdx = document.getElementById('productCategorySelectV2').value;
-            const prodIdx = document.getElementById('productSelectV2').value;
-            const url = document.getElementById('productImageUrlV2').value;
-            if (!catIdx || !prodIdx || !url) {
-                if (isDeveloper) showStatus('Kategori, ürün ve URL girin!', 'error');
-                return;
-            }
+        window.deleteCategoryImage = function() {
+            const cat = document.getElementById('categoryImageSelect').value;
+            if (!cat || !categoryImages[cat]) return showStatus('Kategori seçin!', 'error');
+            delete categoryImages[cat];
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            displayMenu();
+            updateGallery();
+            showStatus('Kategori resmi silindi', 'success');
+        };
+
+        window.addProductImage = function() {
+            const catIdx = document.getElementById('productCategorySelect').value;
+            const prodIdx = document.getElementById('productSelect').value;
+            const url = document.getElementById('productImageUrl').value;
+            if (!catIdx || !prodIdx || !url) return showStatus('Kategori, ürün ve URL girin!', 'error');
             
             const menu = getFullMenu();
             const prod = menu[catIdx].items[prodIdx].name;
             
             if (!productImages[catIdx]) productImages[catIdx] = {};
             productImages[catIdx][prod] = url;
+            localStorage.setItem('productImages', JSON.stringify(productImages));
             displayMenu();
-            updateGalleryV2();
-            triggerAutoSave();
-            if (isDeveloper) showStatus('Ürün resmi eklendi', 'success');
+            updateGallery();
+            showStatus('Ürün resmi eklendi', 'success');
         };
 
-        document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
+        window.deleteProductImage = function() {
+            const catIdx = document.getElementById('productCategorySelect').value;
+            const prodIdx = document.getElementById('productSelect').value;
+            if (!catIdx || !prodIdx) return showStatus('Kategori ve ürün seçin!', 'error');
+            
+            const menu = getFullMenu();
+            const prod = menu[catIdx].items[prodIdx].name;
+            
+            if (productImages[catIdx] && productImages[catIdx][prod]) {
+                delete productImages[catIdx][prod];
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Ürün resmi silindi', 'success');
+            }
+        };
+
+        function updateGallery() {
+            const gallery = document.getElementById('imageGallery');
+            if (!gallery) return;
+            let html = '';
+            
+            Object.keys(categoryImages).forEach(c => {
+                html += `<div class="category-with-image" onclick="deleteCategoryImageByName('${c}')">
+                    <img src="${categoryImages[c]}"><span>📁 ${c}</span>
+                </div>`;
+            });
+            
+            Object.keys(productImages).forEach(ci => {
+                Object.keys(productImages[ci]).forEach(p => {
+                    html += `<div class="product-with-image" onclick="deleteProductImageByName('${ci}', '${p}')">
+                        <img src="${productImages[ci][p]}"><span>📦 ${p}</span>
+                    </div>`;
+                });
+            });
+            
+            gallery.innerHTML = html || '<p class="text-center">Resim yok</p>';
+        }
+
+        window.deleteCategoryImageByName = function(c) {
+            showConfirm(`📁 "${c}" resmi silinsin mi?`, () => {
+                delete categoryImages[c];
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Resim silindi', 'success');
+            });
+        };
+
+        window.deleteProductImageByName = function(ci, p) {
+            showConfirm(`📦 "${p}" resmi silinsin mi?`, () => {
+                delete productImages[ci][p];
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Resim silindi', 'success');
+            });
+        };
+
+        window.deleteAllCategoryImages = function() {
+            showConfirm('Tüm kategori resimleri silinsin mi?', () => {
+                categoryImages = {};
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Kategori resimleri silindi', 'success');
+            });
+        };
+
+        window.deleteAllProductImages = function() {
+            showConfirm('Tüm ürün resimleri silinsin mi?', () => {
+                productImages = {};
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Ürün resimleri silindi', 'success');
+            });
+        };
+
+        window.deleteAllImages = function() {
+            showConfirm('TÜM resimler silinsin mi?', () => {
+                categoryImages = {};
+                productImages = {};
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                displayMenu();
+                updateGallery();
+                showStatus('Tüm resimler silindi', 'success');
+            });
+        };
+
+        document.getElementById('productCategorySelect')?.addEventListener('change', function() {
             const ci = this.value;
-            const ps = document.getElementById('productSelectV2');
+            const ps = document.getElementById('productSelect');
             if (!ci) { 
                 ps.disabled = true; 
                 ps.innerHTML = '<option>Önce kategori seçin</option>'; 
@@ -3076,7 +3183,7 @@
             }
             const menu = getFullMenu();
             ps.disabled = false;
-            ps.innerHTML = '<option value="">Ürün Seç</option>';
+            ps.innerHTML = '<option value="">Ürün seçin</option>';
             menu[ci].items.forEach((it, i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
         });
 
@@ -3086,62 +3193,36 @@
             isDeveloper = true;
             document.body.classList.add('developer-mode');
             document.getElementById('floatingDevBtn').style.display = 'flex';
-            
-            // فتح اللوحة المناسبة مباشرة
-            if (v === 'v1') {
-                document.getElementById('devPanelV1').style.display = 'block';
-                currentVersionType = 'v1';
-            } else if (v === 'v2') {
-                document.getElementById('devPanelV2').style.display = 'block';
-                currentVersionType = 'v2';
-                updateGalleryV2();
-            } else if (v === 'v3') {
-                document.getElementById('devPanelV3').style.display = 'block';
-                currentVersionType = 'v3';
-                // فتح نافذة الألوان مباشرة
-                setTimeout(() => {
-                    document.getElementById('colorPickerModal').style.display = 'flex';
-                }, 100);
-            }
-            
+            document.getElementById(`devPanel${v.toUpperCase()}`).style.display = 'block';
+            displayMenu();
             updateSelects();
-            if (isDeveloper) showStatus('Hoş geldiniz geliştirici', 'success');
+            updateGallery();
         };
 
         window.closeDevV1 = function() {
             document.getElementById('devPanelV1').style.display = 'none';
+            document.getElementById('floatingDevBtn').style.display = 'flex';
         };
 
         window.closeDevV2 = function() {
             document.getElementById('devPanelV2').style.display = 'none';
-        };
-
-        window.closeDevV3 = function() {
-            document.getElementById('devPanelV3').style.display = 'none';
-            closeColorPicker();
+            document.getElementById('floatingDevBtn').style.display = 'flex';
         };
 
         window.toggleDevPanel = function() {
             const p = document.getElementById(`devPanel${currentVersionType.toUpperCase()}`);
             if (p.style.display === 'block') {
                 p.style.display = 'none';
-                if (currentVersionType === 'v3') closeColorPicker();
+                document.getElementById('floatingDevBtn').style.display = 'flex';
                 editMode = false;
                 deleteMode = false;
                 document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
             } else {
                 document.getElementById('devPanelV1').style.display = 'none';
                 document.getElementById('devPanelV2').style.display = 'none';
-                document.getElementById('devPanelV3').style.display = 'none';
-                closeColorPicker();
                 p.style.display = 'block';
-                if (currentVersionType === 'v2') updateGalleryV2();
-                if (currentVersionType === 'v3') {
-                    setTimeout(() => {
-                        document.getElementById('colorPickerModal').style.display = 'flex';
-                    }, 100);
-                }
                 updateSelects();
+                updateGallery();
             }
         };
 
@@ -3150,17 +3231,8 @@
         };
 
         window.resetToOriginal = function() {
-            showConfirm(TEXTS[currentLang].confirmMessage || 'Emin misiniz?', () => {
-                MENU_DATA = JSON.parse(JSON.stringify(ORIGINAL_MENU));
-                categoryImages = {};
-                productImages = {};
-                extraCategories = [];
-                localStorage.clear();
-                document.getElementById('instaLink').href = INSTAGRAM_URL;
-                document.getElementById('newInstagram').value = INSTAGRAM_URL;
-                displayMenu();
-                updateGalleryV2();
-                if (isDeveloper) showStatus('Menü sıfırlandı', 'success');
+            showConfirm('Menü sıfırlansın mı?', () => {
+                location.reload();
             });
         };
 
@@ -3168,8 +3240,8 @@
             const v = document.getElementById('newInstagram').value;
             if (v) { 
                 document.getElementById('instaLink').href = v; 
-                triggerAutoSave();
-                if (isDeveloper) showStatus('Instagram güncellendi', 'success'); 
+                localStorage.setItem('insta', v); 
+                showStatus('Instagram güncellendi', 'success'); 
             }
         };
 
@@ -3178,7 +3250,7 @@
             if (v) { 
                 document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; 
                 localStorage.setItem('map', v); 
-                if (isDeveloper) showStatus('Konum güncellendi', 'success'); 
+                showStatus('Konum güncellendi', 'success'); 
             }
         };
 
@@ -3215,17 +3287,53 @@
             document.head.appendChild(style);
             
             closeColorPicker();
-            if (isDeveloper) showStatus('Renkler uygulandı', 'success');
+            showStatus('🎨 Renkler uygulandı!', 'success');
         };
 
         window.copyV1Code = function() {
             const code = JSON.stringify(getFullMenu(), null, 2);
             navigator.clipboard.writeText(code);
-            if (isDeveloper) showStatus('📋 Kod kopyalandı', 'success');
+            showStatus('📋 Kod kopyalandı!', 'success');
+        };
+
+        window.copyBackupCode = function() {
+            const data = { menu: getFullMenu(), images: { categories: categoryImages, products: productImages } };
+            navigator.clipboard.writeText(JSON.stringify(data, null, 2));
+            showStatus('📋 Kod kopyalandı!', 'success');
+        };
+
+        window.pasteBackupCode = function() {
+            const code = prompt('Kodu yapıştır:');
+            if (!code) return;
+            try {
+                const data = JSON.parse(code);
+                if (data.menu) {
+                    const base = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
+                    extraCategories = data.menu.filter(item => !base.some(b => b.category === item.category));
+                    localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
+                    
+                    if (data.images) {
+                        if (data.images.categories) {
+                            categoryImages = data.images.categories;
+                            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                        }
+                        if (data.images.products) {
+                            productImages = data.images.products;
+                            localStorage.setItem('productImages', JSON.stringify(productImages));
+                        }
+                    }
+                    
+                    displayMenu();
+                    updateGallery();
+                    showStatus('✅ Kod yüklendi!', 'success');
+                }
+            } catch (e) {
+                showStatus('❌ Geçersiz kod!', 'error');
+            }
         };
 
         window.saveToCloud = async function() {
-            if (isDeveloper) showStatus('☁️ Kaydediliyor...', 'loading');
+            showStatus('☁️ Kaydediliyor...', 'loading');
             document.getElementById('cloudSaveBtn').disabled = true;
             try {
                 await fetch(CLOUD_API_URL, {
@@ -3236,39 +3344,41 @@
                         images: { categories: categoryImages, products: productImages }
                     })
                 });
-                if (isDeveloper) showStatus('✅ Buluta kaydedildi', 'success');
+                showStatus('✅ Kaydedildi!', 'success');
             } catch (e) {
-                if (isDeveloper) showStatus('❌ Bağlantı hatası', 'error');
+                showStatus('❌ Hata!', 'error');
             }
             document.getElementById('cloudSaveBtn').disabled = false;
         };
 
         window.loadFromCloud = async function() {
-            if (isDeveloper) showStatus('📥 Yükleniyor...', 'loading');
+            showStatus('📥 Yükleniyor...', 'loading');
             document.getElementById('cloudLoadBtn').disabled = true;
             try {
                 const res = await fetch(CLOUD_API_URL);
                 const data = await res.json();
                 if (data.menu) {
-                    const base = MENU_DATA[currentLang] || MENU_DATA.tr;
+                    const base = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
                     extraCategories = data.menu.filter(item => !base.some(b => b.category === item.category));
+                    localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
                     
                     if (data.images) {
                         if (data.images.categories) {
                             categoryImages = data.images.categories;
+                            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
                         }
                         if (data.images.products) {
                             productImages = data.images.products;
+                            localStorage.setItem('productImages', JSON.stringify(productImages));
                         }
                     }
                     
                     displayMenu();
-                    updateGalleryV2();
-                    triggerAutoSave();
-                    if (isDeveloper) showStatus('✅ Buluttan yüklendi', 'success');
+                    updateGallery();
+                    showStatus('✅ Yüklendi!', 'success');
                 }
             } catch (e) {
-                if (isDeveloper) showStatus('❌ Yükleme hatası', 'error');
+                showStatus('❌ Hata!', 'error');
             }
             document.getElementById('cloudLoadBtn').disabled = false;
         };
@@ -3278,17 +3388,17 @@
                 await fetch(CLOUD_API_URL);
                 document.getElementById('apiStatus').innerHTML = 'Bağlı';
                 document.getElementById('apiStatus').style.color = '#00ff00';
-                if (isDeveloper) showStatus('✅ Bağlantı başarılı', 'success');
+                showStatus('✅ Bağlantı başarılı!', 'success');
             } catch {
                 document.getElementById('apiStatus').innerHTML = 'Bağlantı Yok';
                 document.getElementById('apiStatus').style.color = '#ff0000';
-                if (isDeveloper) showStatus('❌ Bağlantı hatası', 'error');
+                showStatus('❌ Bağlantı hatası!', 'error');
             }
         };
 
         window.saveImagesToCloud = function() {
             localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-            if (isDeveloper) showStatus('✅ Resimler kaydedildi', 'success');
+            showStatus('✅ Resimler kaydedildi!', 'success');
         };
 
         window.loadImagesFromCloud = function() {
@@ -3297,20 +3407,20 @@
                 const d = JSON.parse(b);
                 categoryImages = d.categories || {};
                 productImages = d.products || {};
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                localStorage.setItem('productImages', JSON.stringify(productImages));
                 displayMenu();
-                updateGalleryV2();
-                triggerAutoSave();
-                if (isDeveloper) showStatus('✅ Resimler yüklendi', 'success');
+                updateGallery();
+                showStatus('✅ Resimler yüklendi!', 'success');
             }
         };
 
         function showStatus(message, type) {
-            if (!isDeveloper) return;
             const toastContainer = document.getElementById('toastContainer');
             const toast = document.createElement('div');
             toast.className = `status-message status-${type}`;
             toast.innerHTML = `
-                <div class="toast-icon"><i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i></div>
+                <div class="toast-icon"><i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i></div>
                 <div class="toast-message">${message}</div>
                 <div class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></div>
             `;
@@ -3351,7 +3461,6 @@
                     isDeveloper = true;
                     document.body.classList.add('developer-mode');
                     document.getElementById('devVersionModal').style.display = 'flex';
-                    updateDevPanelTexts();
                     showStatus('Hoş geldiniz geliştirici', 'success');
                 } else {
                     alert('❌ Yanlış şifre!');
@@ -3368,21 +3477,14 @@
                     isDeveloper = true;
                     document.body.classList.add('developer-mode');
                     document.getElementById('devVersionModal').style.display = 'flex';
-                    updateDevPanelTexts();
                 } else {
                     alert('❌ Yanlış şifre!');
                 }
             }
         });
 
-        // ===== تحميل الصفحة - لا نحمل أي شيء من localStorage عدا اللغة =====
+        // ===== تحميل الصفحة =====
         document.addEventListener('DOMContentLoaded', function() {
-            // لا نحمل الصور أو الإضافات - فقط نعرض القائمة الأصلية
-            categoryImages = {};
-            productImages = {};
-            extraCategories = [];
-            
-            // تعيين اللغة الأساسية (تركية)
             const savedLang = localStorage.getItem('lang') || 'tr';
             setLanguage(savedLang);
             
@@ -3396,7 +3498,7 @@
                 if (v) document.getElementById(id).value = v;
             });
             
-            const insta = INSTAGRAM_URL;
+            const insta = localStorage.getItem('insta') || 'https://www.instagram.com/tosttooyevski';
             document.getElementById('instaLink').href = insta;
             document.getElementById('newInstagram').value = insta;
             
