@@ -41,6 +41,10 @@
             font-family: 'Cairo', 'Poppins', sans-serif;
         }
 
+        body.ltr {
+            font-family: 'Poppins', 'Cairo', sans-serif;
+        }
+
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -439,6 +443,9 @@
             font-size: 15px;
             transition: color 0.3s;
             flex: 1;
+            word-break: break-word;
+            padding-left: 5px;
+            padding-right: 5px;
         }
 
         .item:hover .item-name {
@@ -454,9 +461,14 @@
             transition: all 0.3s;
             white-space: nowrap;
             border: 1px solid rgba(255,140,0,0.3);
+            cursor: pointer;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
         }
 
-        .item:hover .item-price {
+        .item-price:hover {
             background: rgba(255,140,0,0.4);
             transform: scale(1.05);
             border-color: #ff8c00;
@@ -480,7 +492,8 @@
         }
 
         .item-edit-btn,
-        .item-delete-btn {
+        .item-delete-btn,
+        .item-image-edit-btn {
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -503,8 +516,13 @@
             background: #dc3545;
         }
 
+        .item-image-edit-btn {
+            background: #ff8c00;
+        }
+
         .item-edit-btn:hover,
-        .item-delete-btn:hover {
+        .item-delete-btn:hover,
+        .item-image-edit-btn:hover {
             transform: scale(1.15);
         }
 
@@ -576,6 +594,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,140,0,0.3);
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .contact-item:hover {
@@ -599,11 +618,13 @@
             font-size: 24px;
             color: white;
             box-shadow: 0 5px 15px rgba(255,140,0,0.3);
+            pointer-events: none;
         }
 
         .contact-text {
             font-size: 1.2rem;
             font-weight: 500;
+            pointer-events: none;
         }
 
         .contact-text a {
@@ -611,6 +632,7 @@
             color: #ff8c00;
             transition: color 0.3s;
             position: relative;
+            pointer-events: all;
         }
 
         .contact-text a:hover {
@@ -632,15 +654,28 @@
             width: 100%;
         }
 
-        iframe {
+        .map-container {
             border-radius: 15px;
             margin-top: 30px;
             width: 100%;
             height: 350px;
+            border: 2px solid #ff8c00;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .map-container:hover {
+            transform: scale(1.02);
+            border-color: #ffa233;
+            box-shadow: 0 10px 30px rgba(255,140,0,0.3);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
             border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            position: relative;
-            z-index: 1;
+            pointer-events: none;
         }
 
         .top-controls {
@@ -927,18 +962,6 @@
             pointer-events: none;
         }
 
-        @media (max-width: 768px) {
-            .image-modal-nav {
-                font-size: 30px;
-                width: 50px;
-                height: 50px;
-            }
-            .image-modal-nav.prev { left: 5px; }
-            .image-modal-nav.next { right: 5px; }
-            .image-modal-close { top: -50px; }
-            .image-modal-info { font-size: 16px; }
-        }
-
         /* ===== نافذة الفيديو المخفي ===== */
         .video-modal {
             display: none;
@@ -1035,7 +1058,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 95%;
-            max-width: 700px;
+            max-width: 750px;
             max-height: 90vh;
             overflow-y: auto;
             background: rgba(20,20,20,0.98);
@@ -1049,7 +1072,7 @@
         }
 
         .dev-window.v2 {
-            max-width: 800px;
+            max-width: 850px;
             border-color: #6c5ce7;
         }
 
@@ -1080,6 +1103,10 @@
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 20px;
+        }
+
+        .dev-section.v2 {
+            border-color: rgba(108,92,231,0.2);
         }
 
         .dev-section h4 {
@@ -1177,27 +1204,70 @@
             padding: 10px;
             background: rgba(0,0,0,0.5);
             border-radius: 8px;
+            margin-top: 10px;
         }
 
-        .category-with-image,
-        .product-with-image {
+        .image-gallery-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
+            padding: 8px;
             margin: 5px 0;
-            padding: 5px;
             background: rgba(255,140,0,0.1);
             border-radius: 5px;
-            cursor: pointer;
+            border: 1px solid rgba(255,140,0,0.3);
+            transition: all 0.3s;
         }
 
-        .category-with-image img,
-        .product-with-image img {
+        .image-gallery-item:hover {
+            background: rgba(255,140,0,0.2);
+            transform: translateX(5px);
+        }
+
+        .image-gallery-item img {
             width: 40px;
             height: 40px;
             border-radius: 5px;
             object-fit: cover;
             border: 2px solid #ff8c00;
+        }
+
+        .image-gallery-item span {
+            flex: 1;
+            margin: 0 10px;
+            font-size: 13px;
+            color: #fff;
+        }
+
+        .image-gallery-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .image-gallery-actions button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+
+        .image-gallery-actions .edit {
+            background: #28a745;
+        }
+
+        .image-gallery-actions .delete {
+            background: #dc3545;
+        }
+
+        .image-gallery-actions button:hover {
+            transform: scale(1.15);
         }
 
         .cloud-panel {
@@ -1300,6 +1370,100 @@
         }
         .confirm-btn:hover { 
             transform: translateY(-3px); 
+            filter: brightness(1.1);
+        }
+
+        /* ===== نافذة تعديل الصورة ===== */
+        .image-edit-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1a1a1a;
+            border: 3px solid #ff8c00;
+            border-radius: 15px;
+            padding: 30px;
+            z-index: 6000;
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            min-width: 400px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+        }
+
+        .image-edit-modal h3 {
+            color: #ff8c00;
+            text-align: center;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .image-edit-preview {
+            width: 100%;
+            height: 200px;
+            background: #333;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #ff8c00;
+            margin: 10px 0;
+        }
+
+        .image-edit-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .image-edit-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ff8c00;
+            border-radius: 6px;
+            color: white;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .image-edit-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .image-edit-actions button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .image-edit-save {
+            background: #28a745;
+            color: white;
+        }
+
+        .image-edit-cancel {
+            background: #6c757d;
+            color: white;
+        }
+
+        .image-edit-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .image-edit-save:hover,
+        .image-edit-cancel:hover,
+        .image-edit-delete:hover {
+            transform: translateY(-3px);
             filter: brightness(1.1);
         }
 
@@ -1457,6 +1621,8 @@
             .dev-window { width: 95%; padding: 15px; }
             .contact-item { flex-direction: column; text-align: center; padding: 15px; }
             .contact-icon { width: 40px; height: 40px; font-size: 20px; }
+            .item-price { font-size: 13px; padding: 4px 8px; }
+            .image-edit-modal { width: 95%; min-width: auto; }
         }
     </style>
 </head>
@@ -1497,6 +1663,9 @@
     <button class="language-btn" onclick="setLanguage('en')">
         <span>🇬🇧 English</span>
     </button>
+    <button class="language-btn" onclick="setLanguage('ru')">
+        <span>🇷🇺 Русский</span>
+    </button>
 </div>
 
 <!-- نافذة اختيار نسخة المطور -->
@@ -1505,7 +1674,7 @@
     <p style="color: #ccc;">أي إصدار تريد استخدامه؟</p>
     <div style="display: flex; gap: 15px; justify-content: center;">
         <button class="btn" style="flex:1;" onclick="selectDevVersion('v1')">⚙️ V1</button>
-        <button class="btn" style="flex:1; background:#6c5ce7;" onclick="selectDevVersion('v2')">🖼️ V2</button>
+        <button class="btn" style="flex:1; background:#6c5ce7;" onclick="selectDevVersion('v2')">🖼️ V2 (مدير الصور)</button>
     </div>
     <button class="btn" style="background:#6c757d;" onclick="document.getElementById('devVersionModal').style.display='none'">إغلاق</button>
 </div>
@@ -1517,6 +1686,20 @@
     <div class="confirm-buttons">
         <button class="confirm-btn yes" id="confirmYesBtn">نعم</button>
         <button class="confirm-btn no" id="confirmNoBtn">لا</button>
+    </div>
+</div>
+
+<!-- نافذة تعديل الصورة -->
+<div class="image-edit-modal dev-only" id="imageEditModal">
+    <h3>🖼️ تعديل الصورة</h3>
+    <div class="image-edit-preview" id="imageEditPreview">
+        <img id="imageEditImg" src="" alt="معاينة">
+    </div>
+    <input type="text" class="image-edit-input" id="imageEditUrl" placeholder="أدخل رابط الصورة الجديد">
+    <div class="image-edit-actions">
+        <button class="image-edit-save" onclick="saveImageEdit()">💾 حفظ</button>
+        <button class="image-edit-cancel" onclick="closeImageEdit()">❌ إلغاء</button>
+        <button class="image-edit-delete" onclick="deleteImageEdit()">🗑️ حذف</button>
     </div>
 </div>
 
@@ -1632,30 +1815,36 @@
     </button>
 </div>
 
-<!-- لوحة المطور V2 -->
+<!-- لوحة المطور V2 (مدير الصور المتقدم) -->
 <div class="dev-window v2 dev-only" id="devPanelV2">
     <div class="window-header">
-        <h3><i class="fas fa-paint-brush"></i> لوحة المطور V2</h3>
+        <h3><i class="fas fa-paint-brush"></i> مدير الصور المتقدم V2</h3>
         <button class="btn" style="width:40px; height:40px; padding:0; background:#dc3545;" onclick="closeDevV2()"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="dev-section v2">
+        <h4><i class="fas fa-images"></i> معرض الصور</h4>
+        <div class="image-gallery" id="imageGalleryV2">
+            <p class="text-center">جاري تحميل الصور...</p>
+        </div>
     </div>
 
     <div class="dev-section v2">
         <h4><i class="fas fa-folder-plus"></i> إضافة صورة للفئة</h4>
         <div class="form-group">
             <label class="form-label">اختر الفئة</label>
-            <select id="categoryImageSelect" class="form-control"></select>
+            <select id="categoryImageSelectV2" class="form-control"></select>
         </div>
         <div class="form-group">
             <label class="form-label">رابط الصورة</label>
-            <input type="url" id="categoryImageUrl" class="form-control" placeholder="https://...">
+            <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="https://...">
         </div>
-        <div class="image-preview" id="categoryImagePreview">
+        <div class="image-preview" id="categoryImagePreviewV2">
             <span>معاينة الصورة</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" onclick="previewCategoryImage()">🔍 معاينة</button>
-            <button class="btn btn-success" onclick="addCategoryImage()">✅ إضافة</button>
-            <button class="btn btn-danger" onclick="deleteCategoryImage()">🗑️ حذف</button>
+            <button class="btn btn-secondary" onclick="previewCategoryImageV2()">🔍 معاينة</button>
+            <button class="btn btn-success" onclick="addCategoryImageV2()">➕ إضافة</button>
         </div>
     </div>
 
@@ -1663,29 +1852,23 @@
         <h4><i class="fas fa-plus-circle"></i> إضافة صورة لمنتج</h4>
         <div class="form-group">
             <label class="form-label">اختر الفئة</label>
-            <select id="productCategorySelect" class="form-control"></select>
+            <select id="productCategorySelectV2" class="form-control"></select>
         </div>
         <div class="form-group">
             <label class="form-label">اختر المنتج</label>
-            <select id="productSelect" class="form-control" disabled></select>
+            <select id="productSelectV2" class="form-control" disabled></select>
         </div>
         <div class="form-group">
             <label class="form-label">رابط الصورة</label>
-            <input type="url" id="productImageUrl" class="form-control" placeholder="https://...">
+            <input type="url" id="productImageUrlV2" class="form-control" placeholder="https://...">
         </div>
-        <div class="image-preview" id="productImagePreview">
+        <div class="image-preview" id="productImagePreviewV2">
             <span>معاينة الصورة</span>
         </div>
         <div class="button-group">
-            <button class="btn btn-secondary" onclick="previewProductImage()">🔍 معاينة</button>
-            <button class="btn btn-success" onclick="addProductImage()">✅ إضافة</button>
-            <button class="btn btn-danger" onclick="deleteProductImage()">🗑️ حذف</button>
+            <button class="btn btn-secondary" onclick="previewProductImageV2()">🔍 معاينة</button>
+            <button class="btn btn-success" onclick="addProductImageV2()">➕ إضافة</button>
         </div>
-    </div>
-
-    <div class="dev-section v2">
-        <h4><i class="fas fa-images"></i> معرض الصور</h4>
-        <div class="image-gallery" id="imageGallery"></div>
     </div>
 
     <div class="dev-section v2">
@@ -1739,12 +1922,20 @@
     <div class="container">
         <h2 class="section-title" id="contactTitle">اتصل بنا</h2>
         <div class="contact-content">
-            <div class="contact-item">
+            <div class="contact-item" id="phoneContact" onclick="window.open('tel:905321580207')">
                 <div class="contact-icon">
                     <i class="fas fa-phone-alt"></i>
                 </div>
                 <div class="contact-text" id="phoneLink">
                     📞 ٠٥٣٢ ١٥٨ ٠٢ ٠٧
+                </div>
+            </div>
+            <div class="contact-item" onclick="window.open('https://wa.me/905321580207')">
+                <div class="contact-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="contact-text">
+                    واتساب
                 </div>
             </div>
             <div class="contact-item">
@@ -1755,7 +1946,7 @@
                     <a id="instaLink" href="https://www.instagram.com/tosttoo" target="_blank">إنستغرام</a>
                 </div>
             </div>
-            <div class="contact-item">
+            <div class="contact-item" id="locationContact" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <div class="contact-icon">
                     <i class="fas fa-map-marker-alt"></i>
                 </div>
@@ -1763,7 +1954,9 @@
                     📍 الموقع
                 </div>
             </div>
-            <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" loading="lazy"></iframe>
+            <div class="map-container" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
+                <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" loading="lazy"></iframe>
+            </div>
         </div>
     </div>
 </section>
@@ -1787,6 +1980,7 @@
         // ===== متغيرات نافذة الصور =====
         let currentImageList = [];
         let currentImageIndex = 0;
+        let currentEditData = null;
         
         // ===== ثوابت =====
         const DEV_PASS = 'momotunc0702';
@@ -1923,8 +2117,66 @@
                     ]
                 }
             ],
-            tr: [],
-            en: []
+            tr: [
+                {
+                    category: "TOST ÇEŞİTLERİ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Peynirli tost", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sucuklu tost", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Karışık tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Atom tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "İÇECEKLER",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Çay", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Türk kahvesi", price: "60₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" }
+                    ]
+                }
+            ],
+            en: [
+                {
+                    category: "TOAST TYPES",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Cheese toast", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Sausage toast", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Mixed toast", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Atom toast", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "DRINKS",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Tea", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Turkish coffee", price: "60₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" }
+                    ]
+                }
+            ],
+            ru: [
+                {
+                    category: "ВИДЫ ТОСТОВ",
+                    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                    items: [
+                        { name: "Сырный тост", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Тост с колбасой", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                        { name: "Смешанный тост", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                        { name: "Атом тост", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                    ]
+                },
+                {
+                    category: "НАПИТКИ",
+                    image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                    items: [
+                        { name: "Чай", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                        { name: "Турецкий кофе", price: "60₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" }
+                    ]
+                }
+            ]
         };
 
         // ===== نصوص الواجهة =====
@@ -1937,7 +2189,8 @@
                 contactTitle: "اتصل بنا", 
                 phone: "٠٥٣٢ ١٥٨ ٠٢ ٠٧", 
                 instagram: "إنستغرام", 
-                location: "📍 الموقع" 
+                location: "📍 الموقع",
+                whatsapp: "واتساب"
             },
             tr: { 
                 heroTitle: "Tosttoo", 
@@ -1947,7 +2200,8 @@
                 contactTitle: "İletişim", 
                 phone: "0532 158 02 07", 
                 instagram: "Instagram", 
-                location: "📍 Konum" 
+                location: "📍 Konum",
+                whatsapp: "WhatsApp"
             },
             en: { 
                 heroTitle: "Tosttoo", 
@@ -1957,7 +2211,19 @@
                 contactTitle: "Contact Us", 
                 phone: "0532 158 02 07", 
                 instagram: "Instagram", 
-                location: "📍 Location" 
+                location: "📍 Location",
+                whatsapp: "WhatsApp"
+            },
+            ru: { 
+                heroTitle: "Tosttoo", 
+                workTime: "🕒 08:00 - 02:30", 
+                viewMenu: "Посмотреть меню", 
+                menuTitle: "Наше меню", 
+                contactTitle: "Контакты", 
+                phone: "0532 158 02 07", 
+                instagram: "Instagram", 
+                location: "📍 Местоположение",
+                whatsapp: "WhatsApp"
             }
         };
 
@@ -2020,6 +2286,7 @@
             if (e.key === 'Escape') {
                 closeImageModal();
                 closeVideoModal();
+                closeImageEdit();
             }
         });
 
@@ -2049,7 +2316,7 @@
         window.setLanguage = function(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
-            const flags = { ar: '🇮🇶', tr: '🇹🇷', en: '🇬🇧' };
+            const flags = { ar: '🇮🇶', tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺' };
             document.getElementById('langBtn').textContent = flags[lang];
             document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.getElementById('languageMenu').style.display = 'none';
@@ -2063,6 +2330,10 @@
             document.getElementById('phoneLink').innerHTML = `📞 ${t.phone}`;
             document.getElementById('instaLink').textContent = t.instagram;
             document.getElementById('locationText').innerHTML = t.location;
+            
+            // تحديث نص واتساب
+            const whatsappItem = document.querySelector('.contact-item:nth-child(2) .contact-text');
+            if (whatsappItem) whatsappItem.textContent = t.whatsapp;
             
             displayMenu();
         };
@@ -2079,7 +2350,7 @@
 
         // ===== دوال القائمة =====
         function getFullMenu() {
-            const base = MENU_DATA.ar;
+            const base = MENU_DATA[currentLang] || MENU_DATA.ar;
             const menuWithCustomImages = base.map(cat => ({
                 ...cat,
                 image: categoryImages[cat.category] || cat.image,
@@ -2092,7 +2363,7 @@
         }
 
         function saveFullMenu(menu) {
-            const baseCategories = MENU_DATA.ar;
+            const baseCategories = MENU_DATA[currentLang] || MENU_DATA.ar;
             const baseNames = baseCategories.map(c => c.category);
             extraCategories = menu.filter(cat => !baseNames.includes(cat.category));
             localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
@@ -2120,11 +2391,15 @@
                     img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=صورة'; };
                     img.onclick = function(e) {
                         e.stopPropagation();
-                        const imageList = [{ src: this.src, title: `📁 ${cat.category}` }];
-                        cat.items.forEach(item => {
-                            imageList.push({ src: item.image, title: `📦 ${item.name}` });
-                        });
-                        openImageModal(this.src, `📁 ${cat.category}`, imageList, 0);
+                        if (isDeveloper && editMode) {
+                            openImageEdit('category', catIdx, null, cat.category, this.src);
+                        } else {
+                            const imageList = [{ src: this.src, title: `📁 ${cat.category}` }];
+                            cat.items.forEach(item => {
+                                imageList.push({ src: item.image, title: `📦 ${item.name}` });
+                            });
+                            openImageModal(this.src, `📁 ${cat.category}`, imageList, 0);
+                        }
                     };
                     imgContainer.appendChild(img);
                     card.appendChild(imgContainer);
@@ -2153,12 +2428,16 @@
                         img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=صورة'; };
                         img.onclick = function(e) {
                             e.stopPropagation();
-                            const imageList = [
-                                { src: cat.image, title: `📁 ${cat.category}` },
-                                ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
-                            ];
-                            const idx = imageList.findIndex(i => i.src === item.image);
-                            openImageModal(item.image, `📦 ${item.name}`, imageList, idx);
+                            if (isDeveloper && editMode) {
+                                openImageEdit('product', catIdx, itemIdx, item.name, this.src);
+                            } else {
+                                const imageList = [
+                                    { src: cat.image, title: `📁 ${cat.category}` },
+                                    ...cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }))
+                                ];
+                                const idx = imageList.findIndex(i => i.src === item.image);
+                                openImageModal(item.image, `📦 ${item.name}`, imageList, idx);
+                            }
                         };
                         itemDiv.appendChild(img);
                     }
@@ -2167,7 +2446,7 @@
                     nameSpan.className = 'name';
                     nameSpan.textContent = item.name;
                     
-                    if (item.name.includes('شاي')) {
+                    if (item.name.includes('شاي') || item.name.includes('Çay') || item.name.includes('Tea') || item.name.includes('Чай')) {
                         nameSpan.onclick = function(e) {
                             e.stopPropagation();
                             if (isDeveloper) {
@@ -2175,7 +2454,7 @@
                                     const newName = prompt('الاسم الجديد:', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    if (confirm(`حذف "${item.name}"؟`)) deleteProduct(catIdx, cat.category, item.name);
+                                    showConfirm(`حذف "${item.name}"؟`, () => deleteProduct(catIdx, cat.category, item.name));
                                 }
                             } else {
                                 teaClickCount++;
@@ -2196,7 +2475,7 @@
                                     const newName = prompt('الاسم الجديد:', item.name);
                                     if (newName) updateItemName(catIdx, cat.category, item.name, newName);
                                 } else if (deleteMode) {
-                                    if (confirm(`حذف "${item.name}"؟`)) deleteProduct(catIdx, cat.category, item.name);
+                                    showConfirm(`حذف "${item.name}"؟`, () => deleteProduct(catIdx, cat.category, item.name));
                                 }
                             } else {
                                 const imageList = [
@@ -2227,14 +2506,23 @@
                     const editBtn = document.createElement('button');
                     editBtn.className = 'item-edit-btn';
                     editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    editBtn.title = 'تعديل المنتج';
                     editBtn.onclick = () => editItem(catIdx, itemIdx);
                     
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'item-delete-btn';
                     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                    deleteBtn.onclick = () => deleteItem(catIdx, itemIdx);
+                    deleteBtn.title = 'حذف المنتج';
+                    deleteBtn.onclick = () => showConfirm(`حذف "${item.name}"؟`, () => deleteProduct(catIdx, cat.category, item.name));
+                    
+                    const imageEditBtn = document.createElement('button');
+                    imageEditBtn.className = 'item-image-edit-btn';
+                    imageEditBtn.innerHTML = '<i class="fas fa-image"></i>';
+                    imageEditBtn.title = 'تعديل الصورة';
+                    imageEditBtn.onclick = () => openImageEdit('product', catIdx, itemIdx, item.name, item.image);
                     
                     actionsDiv.appendChild(editBtn);
+                    actionsDiv.appendChild(imageEditBtn);
                     actionsDiv.appendChild(deleteBtn);
                     
                     itemDiv.appendChild(nameSpan);
@@ -2249,10 +2537,9 @@
                     const deleteCatBtn = document.createElement('button');
                     deleteCatBtn.className = 'delete-card-btn dev-only';
                     deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    deleteCatBtn.title = 'حذف الفئة';
                     deleteCatBtn.onclick = function() {
-                        if (confirm(`حذف فئة "${cat.category}" بالكامل؟`)) {
-                            deleteCategory(cat.category);
-                        }
+                        showConfirm(`حذف فئة "${cat.category}" بالكامل؟`, () => deleteCategory(cat.category));
                     };
                     card.appendChild(deleteCatBtn);
                 }
@@ -2261,6 +2548,7 @@
             });
             
             updateSelects();
+            updateGalleryV2();
         }
 
         function updateItemName(catIdx, catName, oldName, newName) {
@@ -2337,20 +2625,12 @@
             }
         };
 
-        window.deleteItem = function(catIdx, itemIdx) {
-            const menu = getFullMenu();
-            const item = menu[catIdx].items[itemIdx];
-            if (confirm(`حذف "${item.name}"؟`)) {
-                deleteProduct(catIdx, menu[catIdx].category, item.name);
-            }
-        };
-
         window.enableEdit = function() {
             editMode = true;
             deleteMode = false;
             document.getElementById('menuGrid').classList.add('edit-mode');
             document.getElementById('menuGrid').classList.remove('delete-mode');
-            showStatus('✏️ وضع التعديل نشط', 'success');
+            showStatus('✏️ وضع التعديل نشط (اضغط على الصور لتعديلها)', 'success');
         };
 
         window.enableDelete = function() {
@@ -2358,7 +2638,7 @@
             editMode = false;
             document.getElementById('menuGrid').classList.add('delete-mode');
             document.getElementById('menuGrid').classList.remove('edit-mode');
-            showStatus('🗑️ وضع الحذف نشط', 'success');
+            showStatus('🗑️ وضع الحذف نشط (اضغط على العناصر لحذفها)', 'success');
         };
 
         window.disableAllModes = function() {
@@ -2403,8 +2683,8 @@
         function updateSelects() {
             const menu = getFullMenu();
             const cs = document.getElementById('categorySelect');
-            const cis = document.getElementById('categoryImageSelect');
-            const pcs = document.getElementById('productCategorySelect');
+            const cis = document.getElementById('categoryImageSelectV2');
+            const pcs = document.getElementById('productCategorySelectV2');
             
             if (cs) {
                 cs.innerHTML = '';
@@ -2420,41 +2700,160 @@
             }
         }
 
-        window.previewCategoryImage = function() {
-            const url = document.getElementById('categoryImageUrl').value;
-            document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+        // ===== دوال إدارة الصور المتقدمة =====
+        window.openImageEdit = function(type, catIdx, itemIdx, name, currentSrc) {
+            currentEditData = { type, catIdx, itemIdx, name, currentSrc };
+            document.getElementById('imageEditImg').src = currentSrc || '';
+            document.getElementById('imageEditUrl').value = currentSrc || '';
+            document.getElementById('imageEditModal').style.display = 'flex';
         };
 
-        window.previewProductImage = function() {
-            const url = document.getElementById('productImageUrl').value;
-            document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+        window.closeImageEdit = function() {
+            document.getElementById('imageEditModal').style.display = 'none';
+            currentEditData = null;
         };
 
-        window.addCategoryImage = function() {
-            const cat = document.getElementById('categoryImageSelect').value;
-            const url = document.getElementById('categoryImageUrl').value;
+        window.saveImageEdit = function() {
+            if (!currentEditData) return;
+            
+            const newUrl = document.getElementById('imageEditUrl').value.trim();
+            if (!newUrl) {
+                showStatus('الرجاء إدخال رابط الصورة', 'error');
+                return;
+            }
+
+            if (currentEditData.type === 'category') {
+                const catName = currentEditData.name;
+                categoryImages[catName] = newUrl;
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                showStatus('تم تحديث صورة الفئة', 'success');
+            } else {
+                const catIdx = currentEditData.catIdx;
+                const itemName = currentEditData.name;
+                if (!productImages[catIdx]) productImages[catIdx] = {};
+                productImages[catIdx][itemName] = newUrl;
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                showStatus('تم تحديث صورة المنتج', 'success');
+            }
+
+            displayMenu();
+            closeImageEdit();
+        };
+
+        window.deleteImageEdit = function() {
+            if (!currentEditData) return;
+            
+            showConfirm('هل أنت متأكد من حذف هذه الصورة؟', () => {
+                if (currentEditData.type === 'category') {
+                    const catName = currentEditData.name;
+                    delete categoryImages[catName];
+                    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                    showStatus('تم حذف صورة الفئة', 'success');
+                } else {
+                    const catIdx = currentEditData.catIdx;
+                    const itemName = currentEditData.name;
+                    if (productImages[catIdx] && productImages[catIdx][itemName]) {
+                        delete productImages[catIdx][itemName];
+                        localStorage.setItem('productImages', JSON.stringify(productImages));
+                        showStatus('تم حذف صورة المنتج', 'success');
+                    }
+                }
+                displayMenu();
+                closeImageEdit();
+            });
+        };
+
+        function updateGalleryV2() {
+            const gallery = document.getElementById('imageGalleryV2');
+            if (!gallery) return;
+            
+            let html = '';
+            
+            // عرض صور الفئات
+            Object.keys(categoryImages).forEach(cat => {
+                html += `
+                    <div class="image-gallery-item">
+                        <img src="${categoryImages[cat]}" alt="${cat}">
+                        <span>📁 ${cat}</span>
+                        <div class="image-gallery-actions">
+                            <button class="edit" onclick="editGalleryImage('category', '${cat}')"><i class="fas fa-edit"></i></button>
+                            <button class="delete" onclick="deleteGalleryImage('category', '${cat}')"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // عرض صور المنتجات
+            Object.keys(productImages).forEach(ci => {
+                Object.keys(productImages[ci]).forEach(p => {
+                    const menu = getFullMenu();
+                    const catName = menu[ci] ? menu[ci].category : 'قسم غير معروف';
+                    html += `
+                        <div class="image-gallery-item">
+                            <img src="${productImages[ci][p]}" alt="${p}">
+                            <span>📦 ${p} (${catName})</span>
+                            <div class="image-gallery-actions">
+                                <button class="edit" onclick="editGalleryImage('product', ${ci}, '${p}')"><i class="fas fa-edit"></i></button>
+                                <button class="delete" onclick="deleteGalleryImage('product', ${ci}, '${p}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+            
+            gallery.innerHTML = html || '<p class="text-center">لا توجد صور مخصصة</p>';
+        }
+
+        window.editGalleryImage = function(type, cat, product) {
+            if (type === 'category') {
+                const url = categoryImages[cat];
+                openImageEdit('category', null, null, cat, url);
+            } else {
+                const url = productImages[cat][product];
+                openImageEdit('product', parseInt(cat), null, product, url);
+            }
+        };
+
+        window.deleteGalleryImage = function(type, cat, product) {
+            showConfirm('هل أنت متأكد من حذف هذه الصورة؟', () => {
+                if (type === 'category') {
+                    delete categoryImages[cat];
+                    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                } else {
+                    delete productImages[cat][product];
+                    localStorage.setItem('productImages', JSON.stringify(productImages));
+                }
+                displayMenu();
+                updateGalleryV2();
+                showStatus('تم حذف الصورة', 'success');
+            });
+        };
+
+        window.previewCategoryImageV2 = function() {
+            const url = document.getElementById('categoryImageUrlV2').value;
+            document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+        };
+
+        window.previewProductImageV2 = function() {
+            const url = document.getElementById('productImageUrlV2').value;
+            document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=خطأ'">` : '<span>معاينة الصورة</span>';
+        };
+
+        window.addCategoryImageV2 = function() {
+            const cat = document.getElementById('categoryImageSelectV2').value;
+            const url = document.getElementById('categoryImageUrlV2').value;
             if (!cat || !url) return showStatus('اختر الفئة وأدخل الرابط!', 'error');
             categoryImages[cat] = url;
             localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
             displayMenu();
-            updateGallery();
+            updateGalleryV2();
             showStatus('تم إضافة صورة الفئة', 'success');
         };
 
-        window.deleteCategoryImage = function() {
-            const cat = document.getElementById('categoryImageSelect').value;
-            if (!cat || !categoryImages[cat]) return showStatus('اختر فئة بها صورة!', 'error');
-            delete categoryImages[cat];
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            displayMenu();
-            updateGallery();
-            showStatus('تم حذف صورة الفئة', 'success');
-        };
-
-        window.addProductImage = function() {
-            const catIdx = document.getElementById('productCategorySelect').value;
-            const prodIdx = document.getElementById('productSelect').value;
-            const url = document.getElementById('productImageUrl').value;
+        window.addProductImageV2 = function() {
+            const catIdx = document.getElementById('productCategorySelectV2').value;
+            const prodIdx = document.getElementById('productSelectV2').value;
+            const url = document.getElementById('productImageUrlV2').value;
             if (!catIdx || !prodIdx || !url) return showStatus('اختر الفئة والمنتج وأدخل الرابط!', 'error');
             
             const menu = getFullMenu();
@@ -2464,101 +2863,13 @@
             productImages[catIdx][prod] = url;
             localStorage.setItem('productImages', JSON.stringify(productImages));
             displayMenu();
-            updateGallery();
+            updateGalleryV2();
             showStatus('تم إضافة صورة المنتج', 'success');
         };
 
-        window.deleteProductImage = function() {
-            const catIdx = document.getElementById('productCategorySelect').value;
-            const prodIdx = document.getElementById('productSelect').value;
-            if (!catIdx || !prodIdx) return showStatus('اختر الفئة والمنتج!', 'error');
-            
-            const menu = getFullMenu();
-            const prod = menu[catIdx].items[prodIdx].name;
-            
-            if (productImages[catIdx] && productImages[catIdx][prod]) {
-                delete productImages[catIdx][prod];
-                localStorage.setItem('productImages', JSON.stringify(productImages));
-                displayMenu();
-                updateGallery();
-                showStatus('تم حذف صورة المنتج', 'success');
-            }
-        };
-
-        function updateGallery() {
-            const gallery = document.getElementById('imageGallery');
-            if (!gallery) return;
-            let html = '';
-            
-            Object.keys(categoryImages).forEach(c => {
-                html += `<div class="category-with-image" onclick="deleteCategoryImageByName('${c}')">
-                    <img src="${categoryImages[c]}"><span>📁 ${c}</span>
-                </div>`;
-            });
-            
-            Object.keys(productImages).forEach(ci => {
-                Object.keys(productImages[ci]).forEach(p => {
-                    html += `<div class="product-with-image" onclick="deleteProductImageByName('${ci}', '${p}')">
-                        <img src="${productImages[ci][p]}"><span>📦 ${p}</span>
-                    </div>`;
-                });
-            });
-            
-            gallery.innerHTML = html || '<p class="text-center">لا توجد صور</p>';
-        }
-
-        window.deleteCategoryImageByName = function(c) {
-            if (confirm(`حذف صورة "${c}"؟`)) {
-                delete categoryImages[c];
-                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-                displayMenu();
-                updateGallery();
-                showStatus('تم حذف الصورة', 'success');
-            }
-        };
-
-        window.deleteProductImageByName = function(ci, p) {
-            if (confirm(`حذف صورة "${p}"؟`)) {
-                delete productImages[ci][p];
-                localStorage.setItem('productImages', JSON.stringify(productImages));
-                displayMenu();
-                updateGallery();
-                showStatus('تم حذف الصورة', 'success');
-            }
-        };
-
-        window.deleteAllCategoryImages = function() {
-            if (!confirm('حذف جميع صور الفئات؟')) return;
-            categoryImages = {};
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            displayMenu();
-            updateGallery();
-            showStatus('تم حذف صور الفئات', 'success');
-        };
-
-        window.deleteAllProductImages = function() {
-            if (!confirm('حذف جميع صور المنتجات؟')) return;
-            productImages = {};
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            displayMenu();
-            updateGallery();
-            showStatus('تم حذف صور المنتجات', 'success');
-        };
-
-        window.deleteAllImages = function() {
-            if (!confirm('حذف جميع الصور؟')) return;
-            categoryImages = {};
-            productImages = {};
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            displayMenu();
-            updateGallery();
-            showStatus('تم حذف جميع الصور', 'success');
-        };
-
-        document.getElementById('productCategorySelect')?.addEventListener('change', function() {
+        document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
             const ci = this.value;
-            const ps = document.getElementById('productSelect');
+            const ps = document.getElementById('productSelectV2');
             if (!ci) { 
                 ps.disabled = true; 
                 ps.innerHTML = '<option>اختر الفئة أولاً</option>'; 
@@ -2579,7 +2890,7 @@
             document.getElementById(`devPanel${v.toUpperCase()}`).style.display = 'block';
             displayMenu();
             updateSelects();
-            updateGallery();
+            updateGalleryV2();
         };
 
         window.closeDevV1 = function() {
@@ -2604,7 +2915,7 @@
                 p.style.display = 'block';
                 document.getElementById('floatingDevBtn').style.display = 'none';
                 updateSelects();
-                updateGallery();
+                updateGalleryV2();
             }
         };
 
@@ -2613,16 +2924,17 @@
         };
 
         window.resetToOriginal = function() {
-            if (!confirm('إعادة تعيين القائمة؟ (سيتم حذف جميع الإضافات والصور)')) return;
-            extraCategories = [];
-            categoryImages = {};
-            productImages = {};
-            localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            displayMenu();
-            updateGallery();
-            showStatus('تم إعادة تعيين القائمة', 'success');
+            showConfirm('إعادة تعيين القائمة؟ (سيتم حذف جميع الإضافات والصور)', () => {
+                extraCategories = [];
+                categoryImages = {};
+                productImages = {};
+                localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
+                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                localStorage.setItem('productImages', JSON.stringify(productImages));
+                displayMenu();
+                updateGalleryV2();
+                showStatus('تم إعادة تعيين القائمة', 'success');
+            });
         };
 
         window.changeInstagram = function() {
@@ -2685,42 +2997,6 @@
             showStatus('📋 تم نسخ الكود', 'success');
         };
 
-        window.copyBackupCode = function() {
-            const data = { menu: getFullMenu(), images: { categories: categoryImages, products: productImages } };
-            navigator.clipboard.writeText(JSON.stringify(data, null, 2));
-            showStatus('📋 تم نسخ الكود', 'success');
-        };
-
-        window.pasteBackupCode = function() {
-            const code = prompt('الصق الكود هنا:');
-            if (!code) return;
-            try {
-                const data = JSON.parse(code);
-                if (data.menu) {
-                    const base = MENU_DATA.ar;
-                    extraCategories = data.menu.filter(item => !base.some(b => b.category === item.category));
-                    localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
-                    
-                    if (data.images) {
-                        if (data.images.categories) {
-                            categoryImages = data.images.categories;
-                            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-                        }
-                        if (data.images.products) {
-                            productImages = data.images.products;
-                            localStorage.setItem('productImages', JSON.stringify(productImages));
-                        }
-                    }
-                    
-                    displayMenu();
-                    updateGallery();
-                    showStatus('✅ تم تحميل الكود', 'success');
-                }
-            } catch (e) {
-                showStatus('❌ كود غير صالح', 'error');
-            }
-        };
-
         window.saveToCloud = async function() {
             showStatus('☁️ جاري الحفظ...', 'loading');
             document.getElementById('cloudSaveBtn').disabled = true;
@@ -2747,7 +3023,7 @@
                 const res = await fetch(CLOUD_API_URL);
                 const data = await res.json();
                 if (data.menu) {
-                    const base = MENU_DATA.ar;
+                    const base = MENU_DATA[currentLang] || MENU_DATA.ar;
                     extraCategories = data.menu.filter(item => !base.some(b => b.category === item.category));
                     localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
                     
@@ -2763,7 +3039,7 @@
                     }
                     
                     displayMenu();
-                    updateGallery();
+                    updateGalleryV2();
                     showStatus('✅ تم التحميل من السحابة', 'success');
                 }
             } catch (e) {
@@ -2799,7 +3075,7 @@
                 localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
                 localStorage.setItem('productImages', JSON.stringify(productImages));
                 displayMenu();
-                updateGallery();
+                updateGalleryV2();
                 showStatus('✅ تم تحميل الصور', 'success');
             }
         };
@@ -2818,7 +3094,7 @@
             setTimeout(() => toast.remove(), 3000);
         }
 
-        // ===== دخول المطور مع نافذة تأكيد مُصلحة =====
+        // ===== نظام التأكيد المتقدم =====
         let confirmCallback = null;
 
         window.showConfirm = function(message, onYes) {
@@ -2840,16 +3116,7 @@
             document.getElementById('customConfirmModal').style.display = 'none';
         };
 
-        window.confirm = function(message) {
-            return new Promise((resolve) => {
-                showConfirm(message, () => resolve(true));
-                document.getElementById('confirmNoBtn').onclick = () => {
-                    document.getElementById('customConfirmModal').style.display = 'none';
-                    resolve(false);
-                };
-            });
-        };
-
+        // ===== دخول المطور =====
         let clickCount = 0;
         document.getElementById('secretTrigger').addEventListener('click', function() {
             clickCount++;
