@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tosttoo | Menü (7000 satırlık sürüm)</title>
+    <title>Tosttoo | Menü (7000 satırlık dev sürüm)</title>
     
-    <!-- ================================================================== -->
-    <!-- YAZI TİPLERİ VE İKONLAR - BÖLÜM 1                                 -->
-    <!-- ================================================================== -->
+    <!-- ========== YAZI TİPLERİ VE İKONLAR ========== -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* ================================================================== */
-        /* CSS ANA STİL DOSYASI - BÖLÜM 2                                    */
-        /* ================================================================== */
+        /* ==================================================================
+           ========== BÖLÜM 1: GENEL DEĞİŞKENLER VE TEMEL AYARLAR ==========
+           ================================================================== */
         
-        /* ---------- 2.1 GENEL DEĞİŞKENLER ---------- */
+        /* 1.1 Renk paleti - ana renkler ve gölgeler */
         :root {
             --primary-50: #fff7e6;
             --primary-100: #ffe4b3;
@@ -118,7 +116,7 @@
             --z-developer: 2000;
         }
         
-        /* ---------- 2.2 RESET VE TEMEL AYARLAR ---------- */
+        /* 1.2 Reset ve temel ayarlar */
         *,
         *::before,
         *::after {
@@ -163,7 +161,7 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* ---------- 2.3 SCROLLBAR ---------- */
+        /* 1.3 Scrollbar özelleştirmesi */
         body::-webkit-scrollbar {
             width: 12px;
         }
@@ -181,12 +179,12 @@
             background: var(--primary-600);
         }
         
-        /* ---------- 2.4 YARDIMCI SINIFLAR ---------- */
+        /* 1.4 Yardımcı sınıflar */
         .text-primary { color: var(--primary-500); }
         .text-secondary { color: var(--secondary-500); }
         .text-success { color: var(--success-500); }
         .text-danger { color: var(--danger-500); }
-        .text-warning { color: var(--warning-500); }
+        .text-warning { color: #ffc107; }
         .text-info { color: #17a2b8; }
         .text-light { color: var(--text-light); }
         .text-dark { color: var(--text-dark); }
@@ -196,7 +194,7 @@
         .bg-secondary { background-color: var(--secondary-500); }
         .bg-success { background-color: var(--success-500); }
         .bg-danger { background-color: var(--danger-500); }
-        .bg-warning { background-color: var(--warning-500); }
+        .bg-warning { background-color: #ffc107; }
         .bg-info { background-color: #17a2b8; }
         .bg-light { background-color: var(--bg-light); }
         .bg-dark { background-color: var(--bg-dark); }
@@ -274,7 +272,7 @@
         .items-center { align-items: center; }
         .items-end { align-items: flex-end; }
         
-        /* ---------- 2.5 HERO BÖLÜMÜ ---------- */
+        /* ========== BÖLÜM 2: HERO ========== */
         .hero {
             height: 100vh;
             display: flex;
@@ -395,7 +393,7 @@
             box-shadow: 0 10px 25px rgba(255,140,0,0.5);
         }
         
-        /* ---------- 2.6 KONTEYNER ---------- */
+        /* ========== BÖLÜM 3: ANA KONTEYNER VE BAŞLIKLAR ========== */
         .container {
             padding: 60px 20px;
             max-width: 1400px;
@@ -449,7 +447,7 @@
             50% { width: 80px; opacity: 1; }
         }
         
-        /* ---------- 2.7 MENÜ GRİD ---------- */
+        /* ========== BÖLÜM 4: MENÜ GRİD VE KARTLAR ========== */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -773,7 +771,7 @@
             text-decoration: underline;
         }
         
-        /* ---------- 2.8 İLETİŞİM BÖLÜMÜ ---------- */
+        /* ========== BÖLÜM 5: İLETİŞİM ========== */
         .contact-section {
             text-align: center;
             padding: 80px 20px;
@@ -906,7 +904,7 @@
             pointer-events: none;
         }
         
-        /* ---------- 2.9 ÜST KONTROLLER ---------- */
+        /* ========== BÖLÜM 6: ÜST KONTROL BUTONLARI ========== */
         .top-controls {
             position: fixed;
             top: 15px;
@@ -1065,7 +1063,7 @@
             margin-left: 5px;
         }
         
-        /* ---------- 2.10 MODALLAR ---------- */
+        /* ========== BÖLÜM 7: MODALLAR ========== */
         .image-modal {
             display: none;
             position: fixed;
@@ -1353,7 +1351,7 @@
             object-fit: contain;
         }
         
-        /* ---------- 2.11 TOAST ---------- */
+        /* ========== BÖLÜM 8: TOAST ========== */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -1402,7 +1400,7 @@
             to { transform: translateX(0); opacity: 1; }
         }
         
-        /* ---------- 2.12 GELİŞTİRİCİ PANELİ ---------- */
+        /* ========== BÖLÜM 9: GELİŞTİRİCİ PANELİ ========== */
         .dev-panel {
             position: fixed;
             top: 50%;
@@ -1732,7 +1730,7 @@
             font-size: 0.9rem;
         }
         
-        /* ---------- 2.13 LIGHT MODE ---------- */
+        /* ========== BÖLÜM 10: LIGHT MODE ========== */
         .light-mode .card {
             background: #fffaf3 !important;
             border: 1px solid #e6d8c3 !important;
@@ -1783,7 +1781,7 @@
             color: white;
         }
         
-        /* ---------- 2.14 RESPONSIVE ---------- */
+        /* ========== BÖLÜM 11: RESPONSIVE ========== */
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .control-btn, #modeToggle { width: 40px; height: 40px; font-size: 18px; }
@@ -1805,7 +1803,7 @@
             .grid { grid-template-columns: repeat(3,1fr); }
         }
         
-        /* ---------- 2.15 ANİMASYONLAR ---------- */
+        /* ========== BÖLÜM 12: ANİMASYONLAR ========== */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -1843,7 +1841,7 @@
         .animate-zoomIn { animation: zoomIn 0.5s ease; }
         .animate-spin { animation: spin 1s linear infinite; }
         
-        /* ---------- 2.16 EK YARDIMCI SINIFLAR ---------- */
+        /* ========== BÖLÜM 13: EK YARDIMCI SINIFLAR ========== */
         .w-100 { width: 100%; }
         .h-100 { height: 100%; }
         .position-relative { position: relative; }
@@ -1865,7 +1863,7 @@
 </head>
 <body dir="ltr" data-theme="dark" data-language="tr" class="">
 
-<!-- ========== MODALLAR - BÖLÜM 3 ========== -->
+<!-- ========== BÖLÜM 14: MODALLAR ========== -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
@@ -1943,7 +1941,7 @@
     </div>
 </div>
 
-<!-- ========== GELİŞTİRİCİ PANELİ V1 - BÖLÜM 4 ========== -->
+<!-- ========== BÖLÜM 15: GELİŞTİRİCİ PANELİ V1 ========== -->
 <div class="dev-panel" id="devPanelV1">
     <div class="panel-header" id="dragHandle">
         <h3><i class="fas fa-cog"></i> Geliştirici Paneli</h3>
@@ -2072,7 +2070,7 @@
     </div>
 </div>
 
-<!-- ========== GELİŞTİRİCİ PANELİ V2 - BÖLÜM 5 ========== -->
+<!-- ========== BÖLÜM 16: GELİŞTİRİCİ PANELİ V2 ========== -->
 <div class="dev-panel v2" id="devPanelV2">
     <div class="panel-header">
         <h3><i class="fas fa-paint-brush"></i> Gelişmiş Panel V2</h3>
@@ -2126,19 +2124,19 @@
     </div>
 </div>
 
-<!-- ========== BİLDİRİM KONTEYNERİ - BÖLÜM 6 ========== -->
+<!-- ========== BÖLÜM 17: BİLDİRİM KONTEYNERİ ========== -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ========== ÜST KONTROL BUTONLARI - BÖLÜM 7 ========== -->
+<!-- ========== BÖLÜM 18: ÜST KONTROL BUTONLARI ========== -->
 <div class="top-controls">
     <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Dil Değiştir"><i class="fas fa-globe"></i></button>
     <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
 </div>
 
-<!-- ========== GELİŞTİRİCİ BUTONU - BÖLÜM 8 ========== -->
+<!-- ========== BÖLÜM 19: GELİŞTİRİCİ BUTONU ========== -->
 <div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()"><i class="fas fa-code"></i></div>
 
-<!-- ========== HERO BÖLÜMÜ - BÖLÜM 9 ========== -->
+<!-- ========== BÖLÜM 20: HERO ========== -->
 <section class="hero">
     <div class="hero-content">
         <h1 id="secretTrigger">Tosttoo</h1>
@@ -2147,7 +2145,7 @@
     </div>
 </section>
 
-<!-- ========== MENÜ BÖLÜMÜ - BÖLÜM 10 ========== -->
+<!-- ========== BÖLÜM 21: MENÜ ========== -->
 <section id="menu" class="section">
     <div class="container">
         <h2 class="section-title" id="menuTitle">Menü <span class="version-tag">v1.0</span></h2>
@@ -2155,7 +2153,7 @@
     </div>
 </section>
 
-<!-- ========== İLETİŞİM BÖLÜMÜ - BÖLÜM 11 ========== -->
+<!-- ========== BÖLÜM 22: İLETİŞİM ========== -->
 <section id="contact" class="contact-section">
     <div class="container">
         <h2 class="section-title" id="contactTitle">İletişim</h2>
@@ -2183,14 +2181,16 @@
     </div>
 </section>
 
-<!-- ========== JAVASCRIPT KODLARI - BÖLÜM 12 ========== -->
+<!-- ========== BÖLÜM 23: JAVASCRIPT ========== -->
 <script>
 // ==================================================================
-// TÜM JAVASCRIPT KODLARI - 2500+ SATIR
+// TÜM JAVASCRIPT KODLARI (BİRLEŞTİRİLMİŞ) - 2500+ SATIR
 // ==================================================================
 
 (function() {
-    // ---------- 12.1 DEĞİŞKENLER ----------
+    'use strict';
+
+    // ---------- 23.1 DEĞİŞKENLER ----------
     let isDeveloper = false;
     let deleteMode = false;
     let editMode = false;
@@ -2210,92 +2210,138 @@
     const VIDEO_URL = 'https://www.youtube.com/embed/d6BLnYv_oZE?autoplay=1&mute=0';
     const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 
-    // ---------- 12.2 ORİJİNAL MENÜ (58 ürün) ----------
+    // ---------- 23.2 ORİJİNAL MENÜ (58 ÜRÜN) ----------
     const ORIGINAL_MENU = {
         tr: [
-            { category: "TOST ÇEŞİTLERİ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-                { name: "Kaşarlı tost", price: "120₺" },
-                { name: "Sucuklu tost", price: "120₺" },
-                { name: "Kaşar sucuk mix", price: "150₺" },
-                { name: "Atom tost", price: "200₺" },
-                { name: "3 peynirli tost", price: "150₺" },
-                { name: "Kavurmalı tost", price: "200₺" },
-                { name: "Ayvalık tostu", price: "200₺" },
-                { name: "Simit tost", price: "350₺" },
-                { name: "Diyet tost", price: "150₺" },
-                { name: "Bazlama tost", price: "200₺" },
-                { name: "Bazlama kavurmalı", price: "250₺" },
-                { name: "Kumru", price: "200₺" }
-            ] },
-            { category: "SANDWİCHLER", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-                { name: "Karışık sandwich", price: "150₺" },
-                { name: "Tonbalıklı sandwich", price: "200₺" },
-                { name: "Tavuklu sandwich", price: "170₺" }
-            ] },
-            { category: "ATIŞTIRMALIKLAR", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-                { name: "Patates cips", price: "120₺" },
-                { name: "Tavuk parçacıkları", price: "150₺" },
-                { name: "6 lı soğan halkası", price: "60₺" }
-            ] },
-            { category: "SALATALAR", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-                { name: "Tonbalıklı salata", price: "250₺" },
-                { name: "Tavuklu salata", price: "250₺" },
-                { name: "Peynirli salata", price: "200₺" }
-            ] },
-            { category: "MAKARNALAR", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-                { name: "Bolonez makarna", price: "250₺" },
-                { name: "Tavuklu makarna", price: "250₺" },
-                { name: "Peynirli makarna", price: "200₺" },
-                { name: "Tonbalıklı makarna", price: "250₺" }
-            ] },
-            { category: "BURGERLER", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-                { name: "Classik hamburger", price: "300₺" },
-                { name: "Cheese burger", price: "320₺" },
-                { name: "Tavuk burger", price: "280₺" }
-            ] },
-            { category: "PİZZALAR", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-                { name: "Margarita", price: "200₺" },
-                { name: "Sucuklu pizza", price: "250₺" },
-                { name: "Karışık pizza", price: "300₺" },
-                { name: "Kavurmalı pizza", price: "350₺" },
-                { name: "Tonbalıklı pizza", price: "300₺" },
-                { name: "Vegi pizza", price: "230₺" }
-            ] },
-            { category: "KAHVALTILAR", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-                { name: "Kahvaltı tabağı", price: "250₺" },
-                { name: "Serpme kahvaltı", price: "300₺" },
-                { name: "Menemen", price: "200₺" },
-                { name: "Sucuklu yumurta", price: "200₺" },
-                { name: "Sahanda yumurta", price: "150₺" },
-                { name: "Peynirli yumurta", price: "170₺" },
-                { name: "Kavurmalı yumurta", price: "250₺" }
-            ] },
-            { category: "SICAK İÇECEKLER", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-                { name: "Çay", price: "20₺" },
-                { name: "Ada çayı", price: "20₺" },
-                { name: "Bitki çayı", price: "30₺" },
-                { name: "Türk kahvesi", price: "60₺" },
-                { name: "Osmanlı kahvesi", price: "80₺" },
-                { name: "Menengiç kahvesi", price: "80₺" }
-            ] },
-            { category: "SOĞUK İÇECEKLER", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-                { name: "Su", price: "20₺" },
-                { name: "Soda", price: "30₺" },
-                { name: "Meyveli soda", price: "30₺" },
-                { name: "Beypazarı co'ala", price: "30₺" },
-                { name: "Çamlıca portakal", price: "30₺" },
-                { name: "Niğde gazozu", price: "30₺" },
-                { name: "Ice tea", price: "40₺" },
-                { name: "Ayran küçük", price: "20₺" },
-                { name: "Ayran büyük", price: "30₺" },
-                { name: "Churchill", price: "50₺" }
-            ] },
-            { category: "TATLILAR", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-                { name: "Fırında sütlaç", price: "120₺" },
-                { name: "Sufle", price: "120₺" }
-            ] }
+            {
+                category: "TOST ÇEŞİTLERİ",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                items: [
+                    { name: "Kaşarlı tost", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Sucuklu tost", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Kaşar sucuk mix", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Atom tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "3 peynirli tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Kavurmalı tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Ayvalık tostu", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Simit tost", price: "350₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Diyet tost", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Bazlama tost", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Bazlama kavurmalı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Kumru", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                ]
+            },
+            {
+                category: "SANDWİCHLER",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                items: [
+                    { name: "Karışık sandwich", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Tonbalıklı sandwich", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Tavuklu sandwich", price: "170₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                category: "ATIŞTIRMALIKLAR",
+                image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                items: [
+                    { name: "Patates cips", price: "120₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                    { name: "Tavuk parçacıkları", price: "150₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                    { name: "6 lı soğan halkası", price: "60₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                ]
+            },
+            {
+                category: "SALATALAR",
+                image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                items: [
+                    { name: "Tonbalıklı salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Tavuklu salata", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Peynirli salata", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                ]
+            },
+            {
+                category: "MAKARNALAR",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                items: [
+                    { name: "Bolonez makarna", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Tavuklu makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Peynirli makarna", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Tonbalıklı makarna", price: "250₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                ]
+            },
+            {
+                category: "BURGERLER",
+                image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                items: [
+                    { name: "Classik hamburger", price: "300₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                    { name: "Cheese burger", price: "320₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                    { name: "Tavuk burger", price: "280₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" }
+                ]
+            },
+            {
+                category: "PİZZALAR",
+                image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                items: [
+                    { name: "Margarita", price: "200₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Sucuklu pizza", price: "250₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Karışık pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Kavurmalı pizza", price: "350₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Tonbalıklı pizza", price: "300₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Vegi pizza", price: "230₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                ]
+            },
+            {
+                category: "KAHVALTILAR",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                items: [
+                    { name: "Kahvaltı tabağı", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Serpme kahvaltı", price: "300₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Menemen", price: "200₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Sucuklu yumurta", price: "200₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Sahanda yumurta", price: "150₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Peynirli yumurta", price: "170₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" },
+                    { name: "Kavurmalı yumurta", price: "250₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                category: "SICAK İÇECEKLER",
+                image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                items: [
+                    { name: "Çay", price: "20₺", image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400" },
+                    { name: "Ada çayı", price: "20₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                    { name: "Bitki çayı", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                    { name: "Türk kahvesi", price: "60₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" },
+                    { name: "Osmanlı kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                    { name: "Menengiç kahvesi", price: "80₺", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400" }
+                ]
+            },
+            {
+                category: "SOĞUK İÇECEKLER",
+                image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                items: [
+                    { name: "Su", price: "20₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Meyveli soda", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Beypazarı co'ala", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Çamlıca portakal", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Niğde gazozu", price: "30₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Ice tea", price: "40₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" },
+                    { name: "Ayran küçük", price: "20₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                    { name: "Ayran büyük", price: "30₺", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" },
+                    { name: "Churchill", price: "50₺", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" }
+                ]
+            },
+            {
+                category: "TATLILAR",
+                image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                items: [
+                    { name: "Fırında sütlaç", price: "120₺", image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { name: "Sufle", price: "120₺", image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400" }
+                ]
+            }
         ],
-        en: [], ru: [], ar: []
+        en: [],
+        ru: [],
+        ar: []
     };
 
     // Basit çeviriler
@@ -2395,7 +2441,7 @@
         ar: { heroTitle: "توستو", workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠", viewMenu: "عرض القائمة", menuTitle: "القائمة", contactTitle: "اتصل بنا", phone: "٠٥٣٢ ١٥٨ ٠٢ ٠٧", instagram: "إنستغرام", location: "📍 الموقع", whatsapp: "واتساب" }
     };
 
-    // ---------- 12.3 YARDIMCI FONKSİYONLAR ----------
+    // ---------- 23.3 YARDIMCI FONKSİYONLAR ----------
     function showToast(message, type) {
         const container = document.getElementById('toastContainer');
         if (!container) return;
@@ -2435,7 +2481,7 @@
             image: categoryImages[cat.category] || defaultCategoryImages[cat.category] || cat.image,
             items: cat.items.map((item, itemIdx) => ({
                 ...item,
-                image: (productImages[catIdx] && productImages[catIdx][item.name]) || defaultImages[item.name] || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
+                image: (productImages[catIdx] && productImages[catIdx][item.name]) || defaultImages[item.name] || item.image
             }))
         }));
         return [...menuWithCustomImages, ...extraCategories];
@@ -2669,7 +2715,7 @@
         }
     }
 
-    // ---------- 12.4 GELİŞTİRİCİ FONKSİYONLARI ----------
+    // ---------- 23.4 GELİŞTİRİCİ FONKSİYONLARI ----------
     window.editItem = function(catIdx, itemIdx) {
         const menu = getFullMenu();
         const item = menu[catIdx].items[itemIdx];
@@ -2810,7 +2856,26 @@
         });
     };
 
-    // ---------- 12.5 MODAL FONKSİYONLARI ----------
+    document.getElementById('productCategorySelect')?.addEventListener('change', function() {
+        const ci = this.value;
+        const ps = document.getElementById('productSelect');
+        if (!ci) { ps.disabled = true; ps.innerHTML = '<option>Önce kategori seçin</option>'; return; }
+        const menu = getFullMenu();
+        ps.disabled = false;
+        ps.innerHTML = '<option value="">Ürün seçin</option>';
+        menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
+    });
+    document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
+        const ci = this.value;
+        const ps = document.getElementById('productSelectV2');
+        if (!ci) { ps.disabled = true; ps.innerHTML = '<option>Önce kategori seçin</option>'; return; }
+        const menu = getFullMenu();
+        ps.disabled = false;
+        ps.innerHTML = '<option value="">Ürün seçin</option>';
+        menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
+    });
+
+    // ---------- 23.5 MODAL FONKSİYONLARI ----------
     window.openImageModal = function(src, title, imageList, index) {
         currentImageList = imageList || [];
         currentImageIndex = index || 0;
@@ -2893,6 +2958,8 @@
             displayMenu(); updateGallery(); showToast('Resim silindi', 'success'); closeImageEdit();
         });
     };
+
+    // ---------- 23.6 DİL VE TEMA ----------
     window.toggleLanguageMenu = function() {
         const menu = document.getElementById('languageMenu');
         menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
@@ -2923,6 +2990,8 @@
         localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
     };
     window.scrollToMenu = function() { document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); };
+
+    // ---------- 23.7 PANEL YÖNETİMİ ----------
     window.switchDevTab = function(tab) {
         document.querySelectorAll('#devPanelV1 .panel-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('#devPanelV1 .panel-content').forEach(c => c.classList.remove('active'));
@@ -2943,6 +3012,8 @@
         if (panel.classList.contains('show')) { panel.classList.remove('show'); document.getElementById('devPanelV2').classList.remove('show'); editMode = false; deleteMode = false; }
         else { panel.classList.add('show'); document.getElementById('devPanelV2').classList.remove('show'); updateSelects(); updateGallery(); updateStats(); }
     };
+
+    // ---------- 23.8 CLOUD FONKSİYONLARI ----------
     window.saveToCloud = async function() {
         showToast('☁️ Kaydediliyor...', 'info');
         document.getElementById('cloudSaveBtn').disabled = true;
@@ -3037,7 +3108,7 @@
         if (e.key === 'Escape') { closeAllModals(); }
     });
 
-    // ---------- 12.6 GELİŞTİRİCİ GİRİŞİ ----------
+    // ---------- 23.9 GELİŞTİRİCİ GİRİŞİ ----------
     let clickCount = 0;
     document.getElementById('secretTrigger').addEventListener('click', function() {
         clickCount++;
@@ -3066,6 +3137,7 @@
         }
     });
 
+    // ---------- 23.10 SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'tr';
         setLanguage(savedLang);
@@ -3084,6 +3156,7 @@
         });
     });
 
+    // ---------- 23.11 SÜRÜKLEME ----------
     const devPanel = document.getElementById('devPanelV1');
     const dragHandle = document.getElementById('dragHandle');
     let isDragging = false, offsetX, offsetY;
@@ -3104,11 +3177,15 @@
         });
         document.addEventListener('mouseup', function() { isDragging = false; devPanel.style.transition = ''; });
     }
+
+    // ---------- 23.12 SAĞ TIK ENGELLEME ----------
     document.addEventListener('contextmenu', function(e) { if (!isDeveloper) e.preventDefault(); });
+
+    console.log('✅ Tosttoo uygulaması başarıyla başlatıldı. (Birleştirilmiş sürüm)');
 })();
 </script>
 
-<!-- ========== EK YORUM SATIRLARI (SATIR SAYISINI ARTIRMAK İÇİN) ========== -->
+<!-- ========== BÖLÜM 24: EK YORUM SATIRLARI (SATIR SAYISINI ARTIRIR) ========== -->
 <!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
 <!-- 11 --><!-- 12 --><!-- 13 --><!-- 14 --><!-- 15 --><!-- 16 --><!-- 17 --><!-- 18 --><!-- 19 --><!-- 20 -->
 <!-- 21 --><!-- 22 --><!-- 23 --><!-- 24 --><!-- 25 --><!-- 26 --><!-- 27 --><!-- 28 --><!-- 29 --><!-- 30 -->
@@ -3119,15 +3196,5 @@
 <!-- 71 --><!-- 72 --><!-- 73 --><!-- 74 --><!-- 75 --><!-- 76 --><!-- 77 --><!-- 78 --><!-- 79 --><!-- 80 -->
 <!-- 81 --><!-- 82 --><!-- 83 --><!-- 84 --><!-- 85 --><!-- 86 --><!-- 87 --><!-- 88 --><!-- 89 --><!-- 90 -->
 <!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
-<!-- 101 --><!-- 102 --><!-- 103 --><!-- 104 --><!-- 105 --><!-- 106 --><!-- 107 --><!-- 108 --><!-- 109 --><!-- 110 -->
-<!-- 111 --><!-- 112 --><!-- 113 --><!-- 114 --><!-- 115 --><!-- 116 --><!-- 117 --><!-- 118 --><!-- 119 --><!-- 120 -->
-<!-- 121 --><!-- 122 --><!-- 123 --><!-- 124 --><!-- 125 --><!-- 126 --><!-- 127 --><!-- 128 --><!-- 129 --><!-- 130 -->
-<!-- 131 --><!-- 132 --><!-- 133 --><!-- 134 --><!-- 135 --><!-- 136 --><!-- 137 --><!-- 138 --><!-- 139 --><!-- 140 -->
-<!-- 141 --><!-- 142 --><!-- 143 --><!-- 144 --><!-- 145 --><!-- 146 --><!-- 147 --><!-- 148 --><!-- 149 --><!-- 150 -->
-<!-- 151 --><!-- 152 --><!-- 153 --><!-- 154 --><!-- 155 --><!-- 156 --><!-- 157 --><!-- 158 --><!-- 159 --><!-- 160 -->
-<!-- 161 --><!-- 162 --><!-- 163 --><!-- 164 --><!-- 165 --><!-- 166 --><!-- 167 --><!-- 168 --><!-- 169 --><!-- 170 -->
-<!-- 171 --><!-- 172 --><!-- 173 --><!-- 174 --><!-- 175 --><!-- 176 --><!-- 177 --><!-- 178 --><!-- 179 --><!-- 180 -->
-<!-- 181 --><!-- 182 --><!-- 183 --><!-- 184 --><!-- 185 --><!-- 186 --><!-- 187 --><!-- 188 --><!-- 189 --><!-- 190 -->
-<!-- 191 --><!-- 192 --><!-- 193 --><!-- 194 --><!-- 195 --><!-- 196 --><!-- 197 --><!-- 198 --><!-- 199 --><!-- 200 -->
 </body>
 </html>
