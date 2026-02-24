@@ -1,9 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tosttoo | Menü (7000 satırlık dev sürüm)</title>
+    <title>Tosttoo | Menü (tam düzenlenebilir)</title>
     
     <!-- ========== YAZI TİPLERİ VE İKONLAR ========== -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -12,127 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* ==================================================================
-           ========== BÖLÜM 1: GENEL DEĞİŞKENLER VE TEMEL AYARLAR ==========
-           ================================================================== */
-        
-        /* 1.1 Renk paleti - ana renkler ve gölgeler */
-        :root {
-            --primary-50: #fff7e6;
-            --primary-100: #ffe4b3;
-            --primary-200: #ffd180;
-            --primary-300: #ffbe4d;
-            --primary-400: #ffab1a;
-            --primary-500: #ff8c00;
-            --primary-600: #e68900;
-            --primary-700: #cc7a00;
-            --primary-800: #b36b00;
-            --primary-900: #994c00;
-            
-            --secondary-50: #f3e5f5;
-            --secondary-100: #e1bee7;
-            --secondary-200: #ce93d8;
-            --secondary-300: #ba68c8;
-            --secondary-400: #ab47bc;
-            --secondary-500: #9c27b0;
-            --secondary-600: #8e24aa;
-            --secondary-700: #7b1fa2;
-            --secondary-800: #6a1b9a;
-            --secondary-900: #4a148c;
-            
-            --success-50: #e8f5e9;
-            --success-100: #c8e6c9;
-            --success-200: #a5d6a7;
-            --success-300: #81c784;
-            --success-400: #66bb6a;
-            --success-500: #4caf50;
-            --success-600: #43a047;
-            --success-700: #388e3c;
-            --success-800: #2e7d32;
-            --success-900: #1b5e20;
-            
-            --danger-50: #ffebee;
-            --danger-100: #ffcdd2;
-            --danger-200: #ef9a9a;
-            --danger-300: #e57373;
-            --danger-400: #ef5350;
-            --danger-500: #f44336;
-            --danger-600: #e53935;
-            --danger-700: #d32f2f;
-            --danger-800: #c62828;
-            --danger-900: #b71c1c;
-            
-            --gray-50: #fafafa;
-            --gray-100: #f5f5f5;
-            --gray-200: #eeeeee;
-            --gray-300: #e0e0e0;
-            --gray-400: #bdbdbd;
-            --gray-500: #9e9e9e;
-            --gray-600: #757575;
-            --gray-700: #616161;
-            --gray-800: #424242;
-            --gray-900: #212121;
-            
-            --bg-dark: #121212;
-            --bg-darker: #0a0a0a;
-            --bg-light: #ffffff;
-            --text-dark: #212121;
-            --text-light: #ffffff;
-            --text-muted: #757575;
-            
-            --shadow-xs: 0 2px 4px rgba(0,0,0,0.1);
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.1);
-            --shadow-md: 0 10px 25px rgba(0,0,0,0.2);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.3);
-            --shadow-xl: 0 30px 60px rgba(0,0,0,0.4);
-            --shadow-primary: 0 10px 25px rgba(255,140,0,0.3);
-            --shadow-secondary: 0 10px 25px rgba(156,39,176,0.3);
-            
-            --radius-xs: 4px;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --radius-xl: 30px;
-            --radius-xxl: 50px;
-            --radius-full: 9999px;
-            
-            --transition-fast: 0.2s ease;
-            --transition-normal: 0.3s ease;
-            --transition-slow: 0.5s ease;
-            
-            --header-height: 80px;
-            --footer-height: 60px;
-            --sidebar-width: 300px;
-            --card-width: 350px;
-            
-            --z-dropdown: 1000;
-            --z-sticky: 1020;
-            --z-fixed: 1030;
-            --z-modal-backdrop: 1040;
-            --z-modal: 1050;
-            --z-popover: 1060;
-            --z-tooltip: 1070;
-            --z-toast: 1080;
-            --z-developer: 2000;
-        }
-        
-        /* 1.2 Reset ve temel ayarlar */
-        *,
-        *::before,
-        *::after {
+        /* ========== TÜM CSS KODLARI (AYNI) ========== */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: var(--header-height);
-            font-size: 16px;
-            -webkit-text-size-adjust: 100%;
-            -webkit-tap-highlight-color: transparent;
+            scroll-padding-top: 80px;
         }
-        
+
         body {
             font-family: 'Poppins', 'Cairo', sans-serif;
             min-height: 100vh;
@@ -142,137 +34,18 @@
             color: #fff;
             padding-bottom: 70px;
             transition: background 0.3s ease, color 0.3s ease;
-            line-height: 1.6;
         }
-        
+
         body[dir="rtl"] {
             font-family: 'Cairo', 'Poppins', sans-serif;
         }
-        
-        body.light-mode {
-            background: #f6f1e8 !important;
-            color: #2b2b2b !important;
-            animation: none !important;
-        }
-        
+
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
-        /* 1.3 Scrollbar özelleştirmesi */
-        body::-webkit-scrollbar {
-            width: 12px;
-        }
-        body::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-            border-radius: var(--radius-full);
-        }
-        body::-webkit-scrollbar-thumb {
-            background: var(--primary-500);
-            border-radius: var(--radius-full);
-            border: 2px solid transparent;
-            background-clip: padding-box;
-        }
-        body::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-600);
-        }
-        
-        /* 1.4 Yardımcı sınıflar */
-        .text-primary { color: var(--primary-500); }
-        .text-secondary { color: var(--secondary-500); }
-        .text-success { color: var(--success-500); }
-        .text-danger { color: var(--danger-500); }
-        .text-warning { color: #ffc107; }
-        .text-info { color: #17a2b8; }
-        .text-light { color: var(--text-light); }
-        .text-dark { color: var(--text-dark); }
-        .text-muted { color: var(--text-muted); }
-        
-        .bg-primary { background-color: var(--primary-500); }
-        .bg-secondary { background-color: var(--secondary-500); }
-        .bg-success { background-color: var(--success-500); }
-        .bg-danger { background-color: var(--danger-500); }
-        .bg-warning { background-color: #ffc107; }
-        .bg-info { background-color: #17a2b8; }
-        .bg-light { background-color: var(--bg-light); }
-        .bg-dark { background-color: var(--bg-dark); }
-        .bg-darker { background-color: var(--bg-darker); }
-        
-        .rounded-xs { border-radius: var(--radius-xs); }
-        .rounded-sm { border-radius: var(--radius-sm); }
-        .rounded-md { border-radius: var(--radius-md); }
-        .rounded-lg { border-radius: var(--radius-lg); }
-        .rounded-xl { border-radius: var(--radius-xl); }
-        .rounded-xxl { border-radius: var(--radius-xxl); }
-        .rounded-full { border-radius: var(--radius-full); }
-        
-        .shadow-xs { box-shadow: var(--shadow-xs); }
-        .shadow-sm { box-shadow: var(--shadow-sm); }
-        .shadow-md { box-shadow: var(--shadow-md); }
-        .shadow-lg { box-shadow: var(--shadow-lg); }
-        .shadow-xl { box-shadow: var(--shadow-xl); }
-        .shadow-primary { box-shadow: var(--shadow-primary); }
-        .shadow-secondary { box-shadow: var(--shadow-secondary); }
-        
-        .mt-1 { margin-top: 0.25rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-3 { margin-top: 0.75rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mt-5 { margin-top: 1.25rem; }
-        .mb-1 { margin-bottom: 0.25rem; }
-        .mb-2 { margin-bottom: 0.5rem; }
-        .mb-3 { margin-bottom: 0.75rem; }
-        .mb-4 { margin-bottom: 1rem; }
-        .mb-5 { margin-bottom: 1.25rem; }
-        .ml-1 { margin-left: 0.25rem; }
-        .ml-2 { margin-left: 0.5rem; }
-        .ml-3 { margin-left: 0.75rem; }
-        .ml-4 { margin-left: 1rem; }
-        .ml-5 { margin-left: 1.25rem; }
-        .mr-1 { margin-right: 0.25rem; }
-        .mr-2 { margin-right: 0.5rem; }
-        .mr-3 { margin-right: 0.75rem; }
-        .mr-4 { margin-right: 1rem; }
-        .mr-5 { margin-right: 1.25rem; }
-        .mx-auto { margin-left: auto; margin-right: auto; }
-        
-        .pt-1 { padding-top: 0.25rem; }
-        .pt-2 { padding-top: 0.5rem; }
-        .pt-3 { padding-top: 0.75rem; }
-        .pt-4 { padding-top: 1rem; }
-        .pt-5 { padding-top: 1.25rem; }
-        .pb-1 { padding-bottom: 0.25rem; }
-        .pb-2 { padding-bottom: 0.5rem; }
-        .pb-3 { padding-bottom: 0.75rem; }
-        .pb-4 { padding-bottom: 1rem; }
-        .pb-5 { padding-bottom: 1.25rem; }
-        
-        .text-center { text-align: center; }
-        .text-left { text-align: left; }
-        .text-right { text-align: right; }
-        .text-justify { text-align: justify; }
-        
-        .d-none { display: none; }
-        .d-block { display: block; }
-        .d-inline { display: inline; }
-        .d-inline-block { display: inline-block; }
-        .d-flex { display: flex; }
-        .d-grid { display: grid; }
-        
-        .flex-row { flex-direction: row; }
-        .flex-column { flex-direction: column; }
-        .flex-wrap { flex-wrap: wrap; }
-        .justify-start { justify-content: flex-start; }
-        .justify-end { justify-content: flex-end; }
-        .justify-center { justify-content: center; }
-        .justify-between { justify-content: space-between; }
-        .items-start { align-items: flex-start; }
-        .items-center { align-items: center; }
-        .items-end { align-items: flex-end; }
-        
-        /* ========== BÖLÜM 2: HERO ========== */
+
         .hero {
             height: 100vh;
             display: flex;
@@ -288,7 +61,7 @@
             background-position: center;
             background-attachment: fixed;
         }
-        
+
         .hero::before {
             content: '';
             position: absolute;
@@ -300,12 +73,12 @@
             animation: rotate 20s linear infinite;
             pointer-events: none;
         }
-        
+
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
+
         .hero h1 {
             font-size: clamp(40px, 10vw, 80px);
             color: #ff8c00;
@@ -319,17 +92,17 @@
             letter-spacing: 2px;
             z-index: 10;
         }
-        
+
         .hero h1:hover {
             text-shadow: 0 0 30px #ff8c00, 0 0 60px #ff8c00, 0 0 90px #ff8c00;
             transform: scale(1.05);
         }
-        
+
         @keyframes floatTitle {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         .work-time {
             margin-top: 15px;
             font-size: clamp(18px, 4vw, 24px);
@@ -343,12 +116,12 @@
             border: 1px solid rgba(255,140,0,0.3);
             z-index: 10;
         }
-        
+
         @keyframes pulse {
             0%, 100% { transform: scale(1); opacity: 1; }
             50% { transform: scale(1.05); opacity: 0.9; }
         }
-        
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -369,7 +142,7 @@
             font-size: 16px;
             text-decoration: none;
         }
-        
+
         .btn::before {
             content: '';
             position: absolute;
@@ -378,29 +151,81 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%,-50%);
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
-        
+
         .btn:hover::before {
             width: 300px;
             height: 300px;
         }
-        
+
         .btn:hover {
             transform: translateY(-3px) scale(1.05);
             box-shadow: 0 10px 25px rgba(255,140,0,0.5);
         }
+
+        /* RTL düzeltmeleri */
+        body[dir="rtl"] .hero h1 {
+            letter-spacing: 0;
+        }
         
-        /* ========== BÖLÜM 3: ANA KONTEYNER VE BAŞLIKLAR ========== */
+        body[dir="rtl"] .item::before {
+            left: auto;
+            right: 0;
+        }
+        
+        body[dir="rtl"] .item.has-image {
+            padding-left: 10px;
+            padding-right: 70px;
+        }
+        
+        body[dir="rtl"] .item-image {
+            left: auto;
+            right: 10px;
+        }
+        
+        body[dir="rtl"] .price::after {
+            right: auto;
+            left: 0;
+        }
+        
+        body[dir="rtl"] .item-actions {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+
+        body[dir="rtl"] .top-controls {
+            right: auto;
+            left: 15px;
+        }
+
+        body[dir="rtl"] .language-menu {
+            right: auto;
+            left: 15px;
+        }
+
+        body[dir="rtl"] .language-menu button {
+            text-align: right;
+        }
+
+        body[dir="rtl"] .language-menu button:hover {
+            transform: translateX(-5px);
+        }
+
+        body[dir="rtl"] .floating-dev-btn {
+            right: auto;
+            left: 20px;
+        }
+
         .container {
             padding: 60px 20px;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
         }
-        
+
         .section-title {
             font-size: clamp(30px, 8vw, 48px);
             color: #ff8c00;
@@ -411,7 +236,7 @@
             width: 100%;
             font-weight: 700;
         }
-        
+
         .section-title::before {
             content: '';
             position: absolute;
@@ -424,7 +249,7 @@
             border-radius: 3px;
             animation: lineWidth 3s ease-in-out infinite;
         }
-        
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -437,17 +262,17 @@
             border-radius: 3px;
             animation: lineWidth2 3s ease-in-out infinite;
         }
-        
+
         @keyframes lineWidth {
-            0%,100% { width: 100px; opacity: 0.7; }
+            0%, 100% { width: 100px; opacity: 0.7; }
             50% { width: 150px; opacity: 1; }
         }
+
         @keyframes lineWidth2 {
-            0%,100% { width: 50px; opacity: 0.5; }
+            0%, 100% { width: 50px; opacity: 0.5; }
             50% { width: 80px; opacity: 1; }
         }
-        
-        /* ========== BÖLÜM 4: MENÜ GRİD VE KARTLAR ========== */
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -458,7 +283,7 @@
             margin: 0 auto;
             width: 100%;
         }
-        
+
         .card {
             background: #1e1e1e;
             padding: 20px;
@@ -470,12 +295,12 @@
             backdrop-filter: blur(5px);
             animation: cardFadeIn 0.6s ease-out;
             animation-fill-mode: both;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
         }
-        
+
         .card::before {
             content: '';
             position: absolute;
@@ -486,21 +311,21 @@
             background: linear-gradient(90deg, transparent, rgba(255,140,0,0.2), transparent);
             transition: left 0.5s ease;
         }
-        
+
         .card:hover::before {
             left: 100%;
         }
-        
+
         .card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 20px 40px rgba(255,140,0,0.2);
             border-color: rgba(255,140,0,0.6);
         }
-        
+
         .card.has-image {
             padding-top: 0;
         }
-        
+
         .card-image-container {
             width: 100%;
             height: 200px;
@@ -508,7 +333,7 @@
             border-radius: 15px 15px 0 0;
             margin-bottom: 15px;
         }
-        
+
         .card-image {
             width: 100%;
             height: 100%;
@@ -516,11 +341,11 @@
             transition: transform 0.5s;
             cursor: pointer;
         }
-        
+
         .card:hover .card-image {
             transform: scale(1.1);
         }
-        
+
         .card-header {
             display: flex;
             justify-content: center;
@@ -528,7 +353,7 @@
             margin-bottom: 15px;
             width: 100%;
         }
-        
+
         .card-header h3 {
             color: #ff8c00;
             font-size: 24px;
@@ -539,7 +364,7 @@
             width: 100%;
             margin: 0 auto;
         }
-        
+
         .delete-card-btn {
             position: absolute;
             top: 15px;
@@ -560,28 +385,28 @@
             font-size: 16px;
             box-shadow: 0 5px 15px rgba(220,53,69,0.3);
         }
-        
+
         body[dir="rtl"] .delete-card-btn {
             right: auto;
             left: 15px;
         }
-        
+
         .card:hover .delete-card-btn {
             opacity: 1;
         }
-        
+
         .delete-card-btn:hover {
             transform: scale(1.15) rotate(90deg);
             background: #c82333;
         }
-        
+
         .items-container {
             display: flex;
             flex-direction: column;
             gap: 8px;
             width: 100%;
         }
-        
+
         .item {
             display: flex;
             align-items: center;
@@ -597,18 +422,18 @@
             overflow: hidden;
             width: 100%;
         }
-        
+
         .item:hover {
             transform: translateX(5px);
             border-color: rgba(255,140,0,0.8);
             background: rgba(255,140,0,0.15);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
+
         body[dir="rtl"] .item:hover {
             transform: translateX(-5px);
         }
-        
+
         .item::before {
             content: '';
             position: absolute;
@@ -621,26 +446,26 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         body[dir="rtl"] .item::before {
             left: auto;
             right: 0;
         }
-        
+
         .item:hover::before {
             opacity: 1;
         }
-        
+
         .item.has-image {
             padding-left: 70px;
             min-height: 70px;
         }
-        
+
         body[dir="rtl"] .item.has-image {
             padding-left: 15px;
             padding-right: 70px;
         }
-        
+
         .item-image {
             position: absolute;
             left: 10px;
@@ -654,17 +479,17 @@
             transition: all 0.3s;
             cursor: pointer;
         }
-        
+
         body[dir="rtl"] .item-image {
             left: auto;
             right: 10px;
         }
-        
+
         .item:hover .item-image {
             transform: translateY(-50%) scale(1.1) rotate(5deg);
             border-color: #ffa233;
         }
-        
+
         .item-name {
             color: #ff8c00;
             font-weight: 600;
@@ -676,15 +501,15 @@
             padding-right: 5px;
             text-align: right;
         }
-        
+
         body[dir="ltr"] .item-name {
             text-align: left;
         }
-        
+
         .item:hover .item-name {
             color: #ffa233;
         }
-        
+
         .item-price {
             font-weight: 700;
             font-size: 15px;
@@ -702,13 +527,13 @@
             margin-left: 10px;
             margin-right: 10px;
         }
-        
+
         .item-price:hover {
             background: rgba(255,140,0,0.4);
             transform: scale(1.05);
             border-color: #ff8c00;
         }
-        
+
         .item-actions {
             display: flex;
             gap: 5px;
@@ -717,11 +542,11 @@
             opacity: 0;
             transition: opacity 0.3s;
         }
-        
+
         .item:hover .item-actions {
             opacity: 1;
         }
-        
+
         .item-edit-btn,
         .item-delete-btn,
         .item-image-edit-btn {
@@ -738,40 +563,45 @@
             color: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
-        
+
         .item-edit-btn {
             background: #28a745;
         }
+
         .item-delete-btn {
             background: #dc3545;
         }
+
         .item-image-edit-btn {
             background: #ff8c00;
         }
+
         .item-edit-btn:hover,
         .item-delete-btn:hover,
         .item-image-edit-btn:hover {
             transform: scale(1.15);
         }
-        
+
         .delete-mode .item:hover {
             outline: 2px solid #dc3545;
             background: rgba(220,53,69,0.1);
         }
+
         .edit-mode .item:hover {
             outline: 2px solid #28a745;
             background: rgba(40,167,69,0.1);
         }
+
         .edit-mode .item-name {
             color: #28a745;
             text-decoration: underline;
         }
+
         .edit-mode .item-price {
             color: #ffc107;
             text-decoration: underline;
         }
-        
-        /* ========== BÖLÜM 5: İLETİŞİM ========== */
+
         .contact-section {
             text-align: center;
             padding: 80px 20px;
@@ -779,7 +609,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .contact-section::before {
             content: '';
             position: absolute;
@@ -791,7 +621,7 @@
             animation: rotate 20s linear infinite;
             pointer-events: none;
         }
-        
+
         .contact-section h2 {
             font-size: 40px;
             color: #ff8c00;
@@ -799,14 +629,14 @@
             position: relative;
             z-index: 1;
         }
-        
+
         .contact-content {
             position: relative;
             z-index: 1;
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -822,17 +652,17 @@
             transition: all 0.3s;
             cursor: pointer;
         }
-        
+
         .contact-item:hover {
             transform: translateX(10px);
             background: rgba(255,140,0,0.15);
             border-color: #ff8c00;
         }
-        
+
         body[dir="rtl"] .contact-item:hover {
             transform: translateX(-10px);
         }
-        
+
         .contact-icon {
             width: 50px;
             height: 50px;
@@ -846,13 +676,13 @@
             box-shadow: 0 5px 15px rgba(255,140,0,0.3);
             pointer-events: none;
         }
-        
+
         .contact-text {
             font-size: 1.2rem;
             font-weight: 500;
             pointer-events: none;
         }
-        
+
         .contact-text a {
             text-decoration: none;
             color: #ff8c00;
@@ -860,11 +690,11 @@
             position: relative;
             pointer-events: all;
         }
-        
+
         .contact-text a:hover {
             color: #ffa233;
         }
-        
+
         .contact-text a::after {
             content: '';
             position: absolute;
@@ -875,11 +705,11 @@
             background: #ff8c00;
             transition: width 0.3s;
         }
-        
+
         .contact-text a:hover::after {
             width: 100%;
         }
-        
+
         .map-container {
             border-radius: 15px;
             margin-top: 30px;
@@ -890,35 +720,34 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .map-container:hover {
             transform: scale(1.02);
             border-color: #ffa233;
             box-shadow: 0 10px 30px rgba(255,140,0,0.3);
         }
-        
+
         .map-container iframe {
             width: 100%;
             height: 100%;
             border: none;
             pointer-events: none;
         }
-        
-        /* ========== BÖLÜM 6: ÜST KONTROL BUTONLARI ========== */
+
         .top-controls {
             position: fixed;
             top: 15px;
             right: 15px;
             display: flex;
             gap: 12px;
-            z-index: var(--z-fixed);
+            z-index: 1000;
         }
-        
+
         body[dir="rtl"] .top-controls {
             right: auto;
             left: 15px;
         }
-        
+
         .control-btn {
             width: 45px;
             height: 45px;
@@ -935,13 +764,13 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
         }
-        
+
         .control-btn:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 8px 25px rgba(255,140,0,0.5);
             background: #ffa233;
         }
-        
+
         #modeToggle {
             width: 45px;
             height: 45px;
@@ -957,13 +786,13 @@
             box-shadow: 0 4px 15px rgba(255,140,0,0.3);
             transition: all 0.3s ease;
         }
-        
+
         #modeToggle:hover {
             transform: scale(1.1) rotate(15deg);
             box-shadow: 0 8px 25px rgba(255,140,0,0.5);
             background: #ffa233;
         }
-        
+
         .language-menu {
             position: fixed;
             top: 70px;
@@ -973,18 +802,18 @@
             border-radius: 10px;
             padding: 10px;
             display: none;
-            z-index: var(--z-dropdown);
+            z-index: 1001;
             flex-direction: column;
             gap: 5px;
             min-width: 180px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
-        
+
         body[dir="rtl"] .language-menu {
             right: auto;
             left: 15px;
         }
-        
+
         .language-btn {
             background: #333;
             color: white;
@@ -1000,20 +829,20 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         body[dir="rtl"] .language-btn {
             text-align: right;
         }
-        
+
         .language-btn:hover {
             background: #ff8c00;
             transform: translateX(5px);
         }
-        
+
         body[dir="rtl"] .language-btn:hover {
             transform: translateX(-5px);
         }
-        
+
         .floating-dev-btn {
             position: fixed;
             bottom: 20px;
@@ -1029,32 +858,32 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            z-index: var(--z-developer);
+            z-index: 1500;
             animation: float 2s ease-in-out infinite;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: all 0.3s;
             display: none;
         }
-        
+
         body[dir="rtl"] .floating-dev-btn {
             right: auto;
             left: 20px;
         }
-        
+
         .floating-dev-btn.visible {
             display: flex;
         }
-        
+
         .floating-dev-btn:hover {
             transform: scale(1.1) rotate(10deg);
             background: #ffa233;
         }
-        
+
         @keyframes float {
             0%,100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
+
         .version-tag {
             font-size: 10px;
             background: #333;
@@ -1062,12 +891,12 @@
             border-radius: 10px;
             margin-left: 5px;
         }
-        
-        /* ========== BÖLÜM 7: MODALLAR ========== */
+
+        /* ===== Resim modalı ===== */
         .image-modal {
             display: none;
             position: fixed;
-            z-index: calc(var(--z-modal) + 100);
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
@@ -1075,11 +904,11 @@
             background-color: rgba(0,0,0,0.95);
             backdrop-filter: blur(10px);
         }
-        
+
         .image-modal.show {
             display: flex;
         }
-        
+
         .image-modal-content {
             position: relative;
             margin: auto;
@@ -1089,7 +918,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .image-modal-close {
             position: absolute;
             top: -40px;
@@ -1108,18 +937,18 @@
             border: 2px solid #ff8c00;
             transition: all 0.3s;
         }
-        
+
         body[dir="rtl"] .image-modal-close {
             right: auto;
             left: 0;
         }
-        
+
         .image-modal-close:hover {
             color: #ff8c00;
             transform: rotate(90deg);
             background: rgba(255,140,0,0.3);
         }
-        
+
         .image-modal-img-container {
             width: 100%;
             max-height: 70vh;
@@ -1132,19 +961,19 @@
             overflow: hidden;
             box-shadow: 0 0 50px rgba(255,140,0,0.3);
         }
-        
+
         .image-modal-img {
             max-width: 100%;
             max-height: 70vh;
             object-fit: contain;
             animation: scaleIn 0.3s ease;
         }
-        
+
         @keyframes scaleIn {
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
-        
+
         .image-modal-info {
             text-align: center;
             margin-top: 20px;
@@ -1157,7 +986,7 @@
             backdrop-filter: blur(5px);
             font-weight: 600;
         }
-        
+
         .image-modal-nav {
             position: absolute;
             top: 50%;
@@ -1176,28 +1005,29 @@
             border: 2px solid #ff8c00;
             transition: all 0.3s;
         }
-        
+
         .image-modal-nav:hover {
             background: #ff8c00;
             transform: translateY(-50%) scale(1.1);
         }
-        
+
         .image-modal-nav.prev { left: 20px; }
         .image-modal-nav.next { right: 20px; }
-        
+
         body[dir="rtl"] .image-modal-nav.prev { left: auto; right: 20px; }
         body[dir="rtl"] .image-modal-nav.next { right: auto; left: 20px; }
-        
+
         .image-modal-nav.disabled {
             opacity: 0.3;
             cursor: not-allowed;
             pointer-events: none;
         }
-        
+
+        /* ===== Video modalı ===== */
         .video-modal {
             display: none;
             position: fixed;
-            z-index: calc(var(--z-modal) + 200);
+            z-index: 20000;
             left: 0;
             top: 0;
             width: 100%;
@@ -1205,14 +1035,14 @@
             background-color: rgba(0,0,0,0.95);
             backdrop-filter: blur(10px);
         }
-        
+
         .video-modal-content {
             position: relative;
             margin: auto;
             width: 90%;
             max-width: 800px;
         }
-        
+
         .video-modal-close {
             position: absolute;
             top: -40px;
@@ -1230,17 +1060,17 @@
             border: 2px solid #ff8c00;
             transition: all 0.3s;
         }
-        
+
         body[dir="rtl"] .video-modal-close {
             right: auto;
             left: 0;
         }
-        
+
         .video-modal-close:hover {
             transform: rotate(90deg);
             background: #ff8c00;
         }
-        
+
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -1249,7 +1079,7 @@
             border-radius: 15px;
             border: 3px solid #ff8c00;
         }
-        
+
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -1258,184 +1088,50 @@
             height: 100%;
             border: none;
         }
-        
+
         .video-counter {
             text-align: center;
             margin-top: 20px;
             color: #ff8c00;
             font-size: 18px;
         }
-        
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: var(--z-modal-backdrop);
-        }
-        
-        .modal {
-            background: rgba(20,20,20,0.98);
-            border: 3px solid #ff8c00;
-            border-radius: 20px;
-            padding: 2rem;
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-        }
-        
-        .modal h3 {
-            color: #ff8c00;
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .modal p {
-            margin-bottom: 2rem;
-            color: #ccc;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-        
-        .modal-btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .modal-btn.yes {
-            background: #dc3545;
-            color: white;
-        }
-        
-        .modal-btn.no {
-            background: #6c757d;
-            color: white;
-        }
-        
-        .modal-btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-        
-        .image-preview {
-            width: 100%;
-            height: 150px;
-            background: rgba(0,0,0,0.5);
-            border-radius: 10px;
-            margin: 1rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border: 2px solid #ff8c00;
-        }
-        
-        .image-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        /* ========== BÖLÜM 8: TOAST ========== */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: var(--z-toast);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        body[dir="rtl"] .toast-container {
-            right: auto;
-            left: 20px;
-        }
-        
-        .toast {
-            background: rgba(20,20,20,0.98);
-            border: 2px solid;
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            color: white;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            min-width: 300px;
-            backdrop-filter: blur(10px);
-            animation: slideIn 0.3s ease;
-        }
-        
-        .toast.success { border-color: #28a745; }
-        .toast.error { border-color: #dc3545; }
-        .toast.info { border-color: #ff8c00; }
-        
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        body[dir="rtl"] .toast {
-            animation: slideInRTL 0.3s ease;
-        }
-        
-        @keyframes slideInRTL {
-            from { transform: translateX(-100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        /* ========== BÖLÜM 9: GELİŞTİRİCİ PANELİ ========== */
+
+        /* ===== Geliştirici paneli ===== */
         .dev-panel {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%) scale(0.9);
+            transform: translate(-50%, -50%) scale(0.9);
             width: 90%;
             max-width: 800px;
             max-height: 85vh;
-            background: rgba(20,20,20,0.98);
+            background: rgba(20, 20, 20, 0.98);
             backdrop-filter: blur(20px);
             border: 3px solid #ff8c00;
             border-radius: 20px;
             padding: 2rem;
-            z-index: var(--z-developer);
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             overflow-y: auto;
         }
-        
+
         .dev-panel.show {
             opacity: 1;
             visibility: visible;
-            transform: translate(-50%,-50%) scale(1);
+            transform: translate(-50%, -50%) scale(1);
         }
-        
+
         .dev-panel.v2 {
             border-color: #6c5ce7;
         }
-        
+
         .dev-panel.v2 .panel-header h3 {
             color: #6c5ce7;
         }
-        
+
         .panel-header {
             display: flex;
             align-items: center;
@@ -1445,7 +1141,7 @@
             border-bottom: 2px solid rgba(255,140,0,0.3);
             cursor: move;
         }
-        
+
         .panel-header h3 {
             font-size: 1.8rem;
             color: #ff8c00;
@@ -1454,7 +1150,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .panel-close {
             width: 40px;
             height: 40px;
@@ -1469,11 +1165,11 @@
             font-size: 1.2rem;
             transition: all 0.3s;
         }
-        
+
         .panel-close:hover {
             transform: rotate(90deg) scale(1.1);
         }
-        
+
         .panel-tabs {
             display: flex;
             gap: 1rem;
@@ -1482,7 +1178,7 @@
             padding-bottom: 1rem;
             flex-wrap: wrap;
         }
-        
+
         .panel-tab {
             padding: 0.8rem 1.5rem;
             background: transparent;
@@ -1497,39 +1193,39 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .panel-tab:hover {
             color: #ff8c00;
             background: rgba(255,140,0,0.1);
         }
-        
+
         .panel-tab.active {
             color: white;
             background: #ff8c00;
         }
-        
+
         .panel-content {
             display: none;
         }
-        
+
         .panel-content.active {
             display: block;
         }
-        
+
         .dev-section {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255,140,0,0.2);
             border-radius: 15px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s;
         }
-        
+
         .dev-section:hover {
             border-color: #ff8c00;
             box-shadow: 0 10px 25px rgba(255,140,0,0.3);
         }
-        
+
         .dev-section h4 {
             color: #ff8c00;
             font-size: 1.2rem;
@@ -1538,24 +1234,24 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .dev-section.v2 {
             border-color: rgba(108,92,231,0.2);
         }
-        
+
         .dev-section.v2:hover {
             border-color: #6c5ce7;
             box-shadow: 0 10px 25px rgba(108,92,231,0.3);
         }
-        
+
         .dev-section.v2 h4 {
             color: #6c5ce7;
         }
-        
+
         .form-group {
             margin-bottom: 1rem;
         }
-        
+
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
@@ -1563,31 +1259,31 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 0.8rem 1rem;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             border: 2px solid rgba(255,140,0,0.3);
             border-radius: 8px;
             color: white;
             font-size: 1rem;
             transition: all 0.3s;
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: #ff8c00;
             box-shadow: 0 0 0 3px rgba(255,140,0,0.2);
         }
-        
+
         .btn-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 10px;
             margin: 1rem 0;
         }
-        
+
         .dev-btn {
             padding: 0.8rem 1.2rem;
             border: none;
@@ -1601,45 +1297,68 @@
             justify-content: center;
             gap: 8px;
         }
-        
-        .dev-btn-primary { background: #ff8c00; color: white; }
-        .dev-btn-success { background: #28a745; color: white; }
-        .dev-btn-danger { background: #dc3545; color: white; }
-        .dev-btn-warning { background: #ffc107; color: black; }
-        .dev-btn-info { background: #17a2b8; color: white; }
-        .dev-btn-secondary { background: #6c757d; color: white; }
-        
+
+        .dev-btn-primary {
+            background: #ff8c00;
+            color: white;
+        }
+
+        .dev-btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .dev-btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .dev-btn-warning {
+            background: #ffc107;
+            color: black;
+        }
+
+        .dev-btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .dev-btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
         .dev-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        
+
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(2,1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         .stat-card {
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
             padding: 1rem;
             text-align: center;
         }
-        
+
         .stat-value {
             font-size: 2rem;
             font-weight: 700;
             color: #ff8c00;
         }
-        
+
         .stat-label {
             font-size: 0.9rem;
             color: #aaa;
         }
-        
+
         .code-display {
             background: #0a0a0a;
             border: 2px solid #ff8c00;
@@ -1652,15 +1371,34 @@
             white-space: pre-wrap;
             margin: 1rem 0;
         }
-        
+
+        .image-preview {
+            width: 100%;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 2px solid #ff8c00;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
         .image-gallery {
             max-height: 200px;
             overflow-y: auto;
             padding: 0.5rem;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
         }
-        
+
         .gallery-item {
             display: flex;
             align-items: center;
@@ -1671,25 +1409,25 @@
             border-radius: 5px;
             border: 1px solid rgba(255,140,0,0.2);
         }
-        
+
         .gallery-item img {
             width: 40px;
             height: 40px;
             border-radius: 5px;
             object-fit: cover;
         }
-        
+
         .gallery-item span {
             flex: 1;
             margin: 0 10px;
             font-size: 0.9rem;
         }
-        
+
         .gallery-actions {
             display: flex;
             gap: 5px;
         }
-        
+
         .gallery-actions button {
             width: 30px;
             height: 30px;
@@ -1698,90 +1436,211 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .gallery-edit {
             background: #28a745;
             color: white;
         }
-        
+
         .gallery-delete {
             background: #dc3545;
             color: white;
         }
-        
+
         .gallery-actions button:hover {
             transform: scale(1.1);
         }
-        
+
         .cloud-panel {
-            background: rgba(0,150,255,0.1);
+            background: rgba(0, 150, 255, 0.1);
             border: 2px solid #17a2b8;
             border-radius: 10px;
             padding: 1rem;
         }
-        
+
         .cloud-stats {
             display: flex;
             justify-content: space-between;
             margin: 0.5rem 0;
             padding: 0.5rem;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 5px;
             font-size: 0.9rem;
         }
-        
-        /* ========== BÖLÜM 10: LIGHT MODE ========== */
+
+        /* ===== Onay modalı ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .modal {
+            background: rgba(20, 20, 20, 0.98);
+            border: 3px solid #ff8c00;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h3 {
+            color: #ff8c00;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn.yes {
+            background: #dc3545;
+            color: white;
+        }
+
+        .modal-btn.no {
+            background: #6c757d;
+            color: white;
+        }
+
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        /* ===== Bildirim mesajları ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 4000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        body[dir="rtl"] .toast-container {
+            right: auto;
+            left: 20px;
+        }
+
+        .toast {
+            background: rgba(20, 20, 20, 0.98);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.3s ease;
+        }
+
+        .toast.success { border-color: #28a745; }
+        .toast.error { border-color: #dc3545; }
+        .toast.info { border-color: #ff8c00; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        body[dir="rtl"] .toast {
+            animation: slideInRTL 0.3s ease;
+        }
+
+        @keyframes slideInRTL {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ===== Açık tema ===== */
+        body.light-mode {
+            background: #f6f1e8 !important;
+            color: #2b2b2b !important;
+            animation: none !important;
+        }
+
         .light-mode .card {
             background: #fffaf3 !important;
             border: 1px solid #e6d8c3 !important;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
         }
-        
+
         .light-mode .hero {
             background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
                         url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
         }
-        
+
         .light-mode .item-name {
             color: #8b6b4f !important;
         }
-        
+
         .light-mode .item-price {
             color: #d97706 !important;
         }
-        
+
         .light-mode .contact-section {
             background: #e6d8c3 !important;
         }
-        
+
         .light-mode .dev-panel {
-            background: rgba(255,255,255,0.98) !important;
+            background: rgba(255, 255, 255, 0.98) !important;
         }
-        
+
         .light-mode .dev-panel input,
         .light-mode .dev-panel select {
             background: white;
             color: #2b2b2b;
             border-color: rgba(255,140,0,0.3);
         }
-        
+
         .light-mode .language-menu {
             background: #f5f5f5;
             border-color: #d97706;
         }
-        
+
         .light-mode .language-btn {
             background: #e0e0e0;
             color: #333;
             border-color: #d97706;
         }
-        
+
         .light-mode .language-btn:hover {
             background: #d97706;
             color: white;
         }
-        
-        /* ========== BÖLÜM 11: RESPONSIVE ========== */
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .control-btn, #modeToggle { width: 40px; height: 40px; font-size: 18px; }
@@ -1794,76 +1653,19 @@
             .panel-tabs { flex-wrap: wrap; }
             .stats-grid { grid-template-columns: 1fr; }
         }
-        
-        @media (min-width:769px) and (max-width:1200px) {
-            .grid { grid-template-columns: repeat(2,1fr); }
+
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .grid { grid-template-columns: repeat(2, 1fr); }
         }
-        
-        @media (min-width:1201px) {
-            .grid { grid-template-columns: repeat(3,1fr); }
+
+        @media (min-width: 1201px) {
+            .grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
-        /* ========== BÖLÜM 12: ANİMASYONLAR ========== */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideLeft {
-            from { transform: translateX(30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideRight {
-            from { transform: translateX(-30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .animate-fadeIn { animation: fadeIn 0.5s ease; }
-        .animate-slideUp { animation: slideUp 0.5s ease; }
-        .animate-slideDown { animation: slideDown 0.5s ease; }
-        .animate-slideLeft { animation: slideLeft 0.5s ease; }
-        .animate-slideRight { animation: slideRight 0.5s ease; }
-        .animate-zoomIn { animation: zoomIn 0.5s ease; }
-        .animate-spin { animation: spin 1s linear infinite; }
-        
-        /* ========== BÖLÜM 13: EK YARDIMCI SINIFLAR ========== */
-        .w-100 { width: 100%; }
-        .h-100 { height: 100%; }
-        .position-relative { position: relative; }
-        .position-absolute { position: absolute; }
-        .position-fixed { position: fixed; }
-        .overflow-auto { overflow: auto; }
-        .overflow-hidden { overflow: hidden; }
-        .cursor-pointer { cursor: pointer; }
-        .cursor-move { cursor: move; }
-        .user-select-none { user-select: none; }
-        .pointer-events-none { pointer-events: none; }
-        .opacity-0 { opacity: 0; }
-        .opacity-50 { opacity: 0.5; }
-        .opacity-100 { opacity: 1; }
-        .z-1 { z-index: 1; }
-        .z-10 { z-index: 10; }
-        .z-100 { z-index: 100; }
     </style>
 </head>
 <body dir="ltr" data-theme="dark" data-language="tr" class="">
 
-<!-- ========== BÖLÜM 14: MODALLAR ========== -->
+<!-- ===== MODALLAR ===== -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
@@ -1905,48 +1707,49 @@
 </div>
 
 <div class="modal-overlay" id="imageEditModal">
-    <div class="modal" style="max-width:500px;">
+    <div class="modal" style="max-width: 500px;">
         <h3>🖼️ Resim Düzenle</h3>
         <div class="image-preview" id="imageEditPreview">
             <img id="imageEditImg" src="" alt="Önizleme">
         </div>
-        <input type="text" class="form-control" id="imageEditUrl" placeholder="Yeni resim URL'sini girin" style="margin:1rem 0;">
+        <input type="text" class="form-control" id="imageEditUrl" placeholder="Yeni resim URL'sini girin" style="margin: 1rem 0;">
         <div class="modal-buttons">
-            <button class="modal-btn" style="background:#28a745;" onclick="saveImageEdit()">💾 Kaydet</button>
-            <button class="modal-btn" style="background:#dc3545;" onclick="deleteImageEdit()">🗑️ Sil</button>
+            <button class="modal-btn" style="background: #28a745;" onclick="saveImageEdit()">💾 Kaydet</button>
+            <button class="modal-btn" style="background: #dc3545;" onclick="deleteImageEdit()">🗑️ Sil</button>
             <button class="modal-btn no" onclick="closeImageEdit()">İptal</button>
         </div>
     </div>
 </div>
 
 <div class="modal-overlay" id="colorPickerModal">
-    <div class="modal" style="max-width:350px;">
+    <div class="modal" style="max-width: 350px;">
         <h3>🎨 Renkleri Değiştir</h3>
-        <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Kategori Başlığı</label>
-            <input type="color" id="colorCategory" value="#ff8c00" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
+        <div style="margin: 1rem 0;">
+            <label style="color: #ff8c00; display: block; margin: 10px 0 5px;">Kategori Başlığı</label>
+            <input type="color" id="colorCategory" value="#ff8c00" style="width: 100%; height: 50px; border: 2px solid #ff8c00; border-radius: 8px; background: transparent;">
         </div>
-        <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Ürün Adı</label>
-            <input type="color" id="colorName" value="#ff8c00" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
+        <div style="margin: 1rem 0;">
+            <label style="color: #ff8c00; display: block; margin: 10px 0 5px;">Ürün Adı</label>
+            <input type="color" id="colorName" value="#ff8c00" style="width: 100%; height: 50px; border: 2px solid #ff8c00; border-radius: 8px; background: transparent;">
         </div>
-        <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Fiyat</label>
-            <input type="color" id="colorPrice" value="#ffffff" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
+        <div style="margin: 1rem 0;">
+            <label style="color: #ff8c00; display: block; margin: 10px 0 5px;">Fiyat</label>
+            <input type="color" id="colorPrice" value="#ffffff" style="width: 100%; height: 50px; border: 2px solid #ff8c00; border-radius: 8px; background: transparent;">
         </div>
         <div class="modal-buttons">
-            <button class="modal-btn" style="background:#28a745;" onclick="applyColors()">Uygula</button>
+            <button class="modal-btn" style="background: #28a745;" onclick="applyColors()">Uygula</button>
             <button class="modal-btn no" onclick="closeColorPicker()">Kapat</button>
         </div>
     </div>
 </div>
 
-<!-- ========== BÖLÜM 15: GELİŞTİRİCİ PANELİ V1 ========== -->
+<!-- ===== GELİŞTİRİCİ PANELİ V1 ===== -->
 <div class="dev-panel" id="devPanelV1">
     <div class="panel-header" id="dragHandle">
         <h3><i class="fas fa-cog"></i> Geliştirici Paneli</h3>
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
+    
     <div class="panel-tabs">
         <button class="panel-tab active" onclick="switchDevTab('products')"><i class="fas fa-box"></i> Ürünler</button>
         <button class="panel-tab" onclick="switchDevTab('categories')"><i class="fas fa-folder"></i> Kategoriler</button>
@@ -1954,34 +1757,59 @@
         <button class="panel-tab" onclick="switchDevTab('tools')"><i class="fas fa-tools"></i> Araçlar</button>
         <button class="panel-tab" onclick="switchDevTab('cloud')"><i class="fas fa-cloud"></i> Cloud</button>
     </div>
+    
+    <!-- Ürünler Sekmesi -->
     <div class="panel-content active" id="tab-products">
         <div class="dev-section">
             <h4><i class="fas fa-plus-circle"></i> Ürün Ekle</h4>
-            <div class="form-group"><label class="form-label">Kategori Seç</label><select id="categorySelect" class="form-control"></select></div>
-            <div class="form-group"><label class="form-label">Ürün Adı</label><input type="text" id="newName" class="form-control" placeholder="Ürün adını girin"></div>
-            <div class="form-group"><label class="form-label">Fiyat</label><input type="text" id="productPrice" class="form-control" placeholder="Örn: 120₺"></div>
-            <button class="dev-btn dev-btn-success" style="width:100%;" onclick="addProduct()"><i class="fas fa-check"></i> Ürün Ekle</button>
+            <div class="form-group">
+                <label class="form-label">Kategori Seç</label>
+                <select id="categorySelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Ürün Adı</label>
+                <input type="text" id="newName" class="form-control" placeholder="Ürün adını girin">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Fiyat</label>
+                <input type="text" id="productPrice" class="form-control" placeholder="Örn: 120₺">
+            </div>
+            <button class="dev-btn dev-btn-success" style="width: 100%;" onclick="addProduct()"><i class="fas fa-check"></i> Ürün Ekle</button>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-chart-bar"></i> İstatistikler</h4>
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-value" id="statCategories">0</div><div class="stat-label">Kategori</div></div>
-                <div class="stat-card"><div class="stat-value" id="statProducts">0</div><div class="stat-label">Ürün</div></div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statCategories">0</div>
+                    <div class="stat-label">Kategori</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statProducts">0</div>
+                    <div class="stat-label">Ürün</div>
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Kategoriler Sekmesi -->
     <div class="panel-content" id="tab-categories">
         <div class="dev-section">
             <h4><i class="fas fa-folder-plus"></i> Kategori Ekle</h4>
-            <div class="form-group"><label class="form-label">Kategori Adı</label><input type="text" id="newCategory" class="form-control" placeholder="Yeni kategori adı"></div>
-            <button class="dev-btn dev-btn-success" style="width:100%;" onclick="addCategory()"><i class="fas fa-folder-plus"></i> Kategori Ekle</button>
+            <div class="form-group">
+                <label class="form-label">Kategori Adı</label>
+                <input type="text" id="newCategory" class="form-control" placeholder="Yeni kategori adı">
+            </div>
+            <button class="dev-btn dev-btn-success" style="width: 100%;" onclick="addCategory()"><i class="fas fa-folder-plus"></i> Kategori Ekle</button>
         </div>
     </div>
+    
+    <!-- Resimler Sekmesi -->
     <div class="panel-content" id="tab-images">
         <div class="dev-section">
             <h4><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle</h4>
-            <select id="categoryImageSelect" class="form-control" style="margin-bottom:1rem;"></select>
-            <input type="url" id="categoryImageUrl" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <select id="categoryImageSelect" class="form-control" style="margin-bottom: 1rem;"></select>
+            <input type="url" id="categoryImageUrl" class="form-control" placeholder="Resim URL" style="margin-bottom: 1rem;">
             <div class="image-preview" id="categoryImagePreview"><span>Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewCategoryImage()"><i class="fas fa-eye"></i> Önizle</button>
@@ -1989,11 +1817,12 @@
                 <button class="dev-btn dev-btn-danger" onclick="deleteCategoryImage()"><i class="fas fa-trash"></i> Sil</button>
             </div>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle</h4>
-            <select id="productCategorySelect" class="form-control" style="margin-bottom:1rem;"></select>
-            <select id="productSelect" class="form-control" disabled style="margin-bottom:1rem;"><option>Önce kategori seçin</option></select>
-            <input type="url" id="productImageUrl" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <select id="productCategorySelect" class="form-control" style="margin-bottom: 1rem;"></select>
+            <select id="productSelect" class="form-control" disabled style="margin-bottom: 1rem;"><option>Önce kategori seçin</option></select>
+            <input type="url" id="productImageUrl" class="form-control" placeholder="Resim URL" style="margin-bottom: 1rem;">
             <div class="image-preview" id="productImagePreview"><span>Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewProductImage()"><i class="fas fa-eye"></i> Önizle</button>
@@ -2001,98 +1830,121 @@
                 <button class="dev-btn dev-btn-danger" onclick="deleteProductImage()"><i class="fas fa-trash"></i> Sil</button>
             </div>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-images"></i> Resim Galerisi</h4>
             <div class="image-gallery" id="imageGallery"></div>
         </div>
     </div>
+    
+    <!-- Araçlar Sekmesi -->
     <div class="panel-content" id="tab-tools">
         <div class="dev-section">
             <h4><i class="fas fa-palette"></i> Renk Düzenle</h4>
-            <button class="dev-btn dev-btn-primary" style="width:100%;" onclick="openColorPicker()"><i class="fas fa-palette"></i> Renk Seçiciyi Aç</button>
+            <button class="dev-btn dev-btn-primary" style="width: 100%;" onclick="openColorPicker()"><i class="fas fa-palette"></i> Renk Seçiciyi Aç</button>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-tools"></i> Modlar</h4>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-success" onclick="enableEdit()"><i class="fas fa-edit"></i> Düzenleme Modu</button>
                 <button class="dev-btn dev-btn-danger" onclick="enableDelete()"><i class="fas fa-trash"></i> Silme Modu</button>
             </div>
-            <button class="dev-btn dev-btn-warning" style="width:100%; margin-top:1rem;" onclick="disableAllModes()"><i class="fas fa-ban"></i> Modları Kapat</button>
+            <button class="dev-btn dev-btn-warning" style="width: 100%; margin-top: 1rem;" onclick="disableAllModes()"><i class="fas fa-ban"></i> Modları Kapat</button>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-globe"></i> Sosyal Medya</h4>
-            <div class="form-group"><label class="form-label">Instagram Linki</label><input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski"></div>
-            <button class="dev-btn dev-btn-info" style="width:100%; margin-bottom:1rem;" onclick="changeInstagram()"><i class="fab fa-instagram"></i> Instagram'ı Güncelle</button>
-            <div class="form-group"><label class="form-label">Konum (enlem,boylam)</label><input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147"></div>
-            <button class="dev-btn dev-btn-info" style="width:100%;" onclick="changeLocation()"><i class="fas fa-map-marker-alt"></i> Konumu Güncelle</button>
+            <div class="form-group">
+                <label class="form-label">Instagram Linki</label>
+                <input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski">
+            </div>
+            <button class="dev-btn dev-btn-info" style="width: 100%; margin-bottom: 1rem;" onclick="changeInstagram()"><i class="fab fa-instagram"></i> Instagram'ı Güncelle</button>
+            
+            <div class="form-group">
+                <label class="form-label">Konum (enlem,boylam)</label>
+                <input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147">
+            </div>
+            <button class="dev-btn dev-btn-info" style="width: 100%;" onclick="changeLocation()"><i class="fas fa-map-marker-alt"></i> Konumu Güncelle</button>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-code"></i> Kod</h4>
             <div class="code-display" id="v1CodeDisplay"></div>
-            <button class="dev-btn dev-btn-info" style="width:100%;" onclick="copyV1Code()"><i class="fas fa-copy"></i> Kodu Kopyala</button>
+            <button class="dev-btn dev-btn-info" style="width: 100%;" onclick="copyV1Code()"><i class="fas fa-copy"></i> Kodu Kopyala</button>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-undo"></i> Sıfırlama</h4>
-            <button class="dev-btn dev-btn-danger" style="width:100%;" onclick="resetToOriginal()"><i class="fas fa-undo"></i> Menüyü Sıfırla</button>
+            <button class="dev-btn dev-btn-danger" style="width: 100%;" onclick="resetToOriginal()"><i class="fas fa-undo"></i> Menüyü Sıfırla</button>
         </div>
     </div>
+    
+    <!-- Cloud Sekmesi -->
     <div class="panel-content" id="tab-cloud">
-        <div class="dev-section" style="border-color:#17a2b8;">
+        <div class="dev-section" style="border-color: #17a2b8;">
             <h4><i class="fas fa-cloud"></i> Cloud Sync</h4>
             <div class="cloud-panel">
                 <div class="cloud-stats">
-                    <span>🌐 API: <span style="color:#28a745;" id="apiStatus">Hazır</span></span>
+                    <span>🌐 API: <span style="color: #28a745;" id="apiStatus">Hazır</span></span>
                     <span>📦 Versiyon: 1.0.0</span>
                 </div>
-                <div style="background:rgba(0,150,255,0.2); padding:0.8rem; border-radius:8px; margin:1rem 0; text-align:center;">🔗 api.npoint.io</div>
+                <div style="background: rgba(0,150,255,0.2); padding: 0.8rem; border-radius: 8px; margin: 1rem 0; text-align: center;">🔗 api.npoint.io</div>
                 <div class="btn-group">
                     <button class="dev-btn dev-btn-info" onclick="saveToCloud()" id="cloudSaveBtn"><i class="fas fa-cloud-upload-alt"></i> Buluta Kaydet</button>
                     <button class="dev-btn dev-btn-secondary" onclick="loadFromCloud()" id="cloudLoadBtn"><i class="fas fa-cloud-download-alt"></i> Buluttan Yükle</button>
                 </div>
-                <button class="dev-btn dev-btn-success" style="width:100%; margin-top:1rem;" onclick="testCloudConnection()"><i class="fas fa-plug"></i> Bağlantı Testi</button>
+                <button class="dev-btn dev-btn-success" style="width: 100%; margin-top: 1rem;" onclick="testCloudConnection()"><i class="fas fa-plug"></i> Bağlantı Testi</button>
             </div>
         </div>
-        <div class="dev-section" style="border-color:#17a2b8;">
+        
+        <div class="dev-section" style="border-color: #17a2b8;">
             <h4><i class="fas fa-images"></i> Resim Senkronizasyonu</h4>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="saveImagesToCloud()"><i class="fas fa-save"></i> Resimleri Kaydet</button>
                 <button class="dev-btn dev-btn-secondary" onclick="loadImagesFromCloud()"><i class="fas fa-download"></i> Resimleri Yükle</button>
             </div>
         </div>
+        
         <div class="dev-section">
             <h4><i class="fas fa-copy"></i> Yedekleme</h4>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="copyBackupCode()"><i class="fas fa-copy"></i> Kodu Kopyala</button>
                 <button class="dev-btn dev-btn-secondary" onclick="pasteBackupCode()"><i class="fas fa-paste"></i> Kodu Yapıştır</button>
             </div>
-            <small style="color:#aaa; display:block; margin-top:0.5rem;">Tüm menü ve resimleri yedekler</small>
+            <small style="color: #aaa; display: block; margin-top: 0.5rem;">Tüm menü ve resimleri yedekler</small>
         </div>
     </div>
 </div>
 
-<!-- ========== BÖLÜM 16: GELİŞTİRİCİ PANELİ V2 ========== -->
+<!-- ===== GELİŞTİRİCİ PANELİ V2 ===== -->
 <div class="dev-panel v2" id="devPanelV2">
     <div class="panel-header">
         <h3><i class="fas fa-paint-brush"></i> Gelişmiş Panel V2</h3>
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
+    
     <div class="panel-tabs">
         <button class="panel-tab active" onclick="switchDevTabV2('gallery')"><i class="fas fa-images"></i> Galeri</button>
         <button class="panel-tab" onclick="switchDevTabV2('category')"><i class="fas fa-folder-plus"></i> Kategori</button>
         <button class="panel-tab" onclick="switchDevTabV2('product')"><i class="fas fa-plus-circle"></i> Ürün</button>
         <button class="panel-tab" onclick="switchDevTabV2('sync')"><i class="fas fa-sync"></i> Senkronizasyon</button>
     </div>
+    
+    <!-- Galeri Sekmesi -->
     <div class="panel-content active" id="tab-gallery">
         <div class="dev-section v2">
             <h4><i class="fas fa-images"></i> Resim Galerisi</h4>
             <div class="image-gallery" id="imageGalleryV2"></div>
         </div>
     </div>
+    
+    <!-- Kategori Resmi Sekmesi -->
     <div class="panel-content" id="tab-category-v2">
         <div class="dev-section v2">
             <h4><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle</h4>
-            <select id="categoryImageSelectV2" class="form-control" style="margin-bottom:1rem;"></select>
-            <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <select id="categoryImageSelectV2" class="form-control" style="margin-bottom: 1rem;"></select>
+            <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom: 1rem;">
             <div class="image-preview" id="categoryImagePreviewV2"><span>Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewCategoryImageV2()"><i class="fas fa-eye"></i> Önizle</button>
@@ -2100,12 +1952,14 @@
             </div>
         </div>
     </div>
+    
+    <!-- Ürün Resmi Sekmesi -->
     <div class="panel-content" id="tab-product-v2">
         <div class="dev-section v2">
             <h4><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle</h4>
-            <select id="productCategorySelectV2" class="form-control" style="margin-bottom:1rem;"></select>
-            <select id="productSelectV2" class="form-control" disabled style="margin-bottom:1rem;"><option>Önce kategori seçin</option></select>
-            <input type="url" id="productImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <select id="productCategorySelectV2" class="form-control" style="margin-bottom: 1rem;"></select>
+            <select id="productSelectV2" class="form-control" disabled style="margin-bottom: 1rem;"><option>Önce kategori seçin</option></select>
+            <input type="url" id="productImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom: 1rem;">
             <div class="image-preview" id="productImagePreviewV2"><span>Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewProductImageV2()"><i class="fas fa-eye"></i> Önizle</button>
@@ -2113,6 +1967,8 @@
             </div>
         </div>
     </div>
+    
+    <!-- Senkronizasyon Sekmesi -->
     <div class="panel-content" id="tab-sync">
         <div class="dev-section v2">
             <h4><i class="fas fa-cloud"></i> Resim Senkronizasyonu</h4>
@@ -2124,19 +1980,19 @@
     </div>
 </div>
 
-<!-- ========== BÖLÜM 17: BİLDİRİM KONTEYNERİ ========== -->
+<!-- ===== BİLDİRİM KONTEYNERİ ===== -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ========== BÖLÜM 18: ÜST KONTROL BUTONLARI ========== -->
+<!-- ===== ÜST KONTROL BUTONLARI ===== -->
 <div class="top-controls">
     <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Dil Değiştir"><i class="fas fa-globe"></i></button>
     <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
 </div>
 
-<!-- ========== BÖLÜM 19: GELİŞTİRİCİ BUTONU ========== -->
+<!-- ===== GELİŞTİRİCİ BUTONU ===== -->
 <div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()"><i class="fas fa-code"></i></div>
 
-<!-- ========== BÖLÜM 20: HERO ========== -->
+<!-- ===== HERO BÖLÜMÜ ===== -->
 <section class="hero">
     <div class="hero-content">
         <h1 id="secretTrigger">Tosttoo</h1>
@@ -2145,7 +2001,7 @@
     </div>
 </section>
 
-<!-- ========== BÖLÜM 21: MENÜ ========== -->
+<!-- ===== MENÜ BÖLÜMÜ ===== -->
 <section id="menu" class="section">
     <div class="container">
         <h2 class="section-title" id="menuTitle">Menü <span class="version-tag">v1.0</span></h2>
@@ -2153,7 +2009,7 @@
     </div>
 </section>
 
-<!-- ========== BÖLÜM 22: İLETİŞİM ========== -->
+<!-- ===== İLETİŞİM BÖLÜMÜ ===== -->
 <section id="contact" class="contact-section">
     <div class="container">
         <h2 class="section-title" id="contactTitle">İletişim</h2>
@@ -2162,18 +2018,22 @@
                 <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="contact-text" id="phoneLink">📞 0532 158 02 07</div>
             </div>
+            
             <div class="contact-item" onclick="window.open('https://wa.me/905321580207')">
                 <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
                 <div class="contact-text" id="whatsappText">WhatsApp</div>
             </div>
+            
             <div class="contact-item">
                 <div class="contact-icon"><i class="fab fa-instagram"></i></div>
                 <div class="contact-text"><a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">Instagram</a></div>
             </div>
+            
             <div class="contact-item" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="contact-text" id="locationText">📍 Konum</div>
             </div>
+            
             <div class="map-container" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" loading="lazy"></iframe>
             </div>
@@ -2181,16 +2041,12 @@
     </div>
 </section>
 
-<!-- ========== BÖLÜM 23: JAVASCRIPT ========== -->
 <script>
-// ==================================================================
-// TÜM JAVASCRIPT KODLARI (BİRLEŞTİRİLMİŞ) - 2500+ SATIR
-// ==================================================================
-
+// ===== TÜM JAVASCRIPT KODU (DÜZENLENMİŞ, ORİJİNAL ÜRÜNLER DE DÜZENLENEBİLİR) =====
 (function() {
     'use strict';
 
-    // ---------- 23.1 DEĞİŞKENLER ----------
+    // ---------- DEĞİŞKENLER ----------
     let isDeveloper = false;
     let deleteMode = false;
     let editMode = false;
@@ -2210,8 +2066,9 @@
     const VIDEO_URL = 'https://www.youtube.com/embed/d6BLnYv_oZE?autoplay=1&mute=0';
     const CLOUD_API_URL = 'https://api.npoint.io/2b9acf08c13ba5b3b27a';
 
-    // ---------- 23.2 ORİJİNAL MENÜ (58 ÜRÜN) ----------
-    const ORIGINAL_MENU = {
+    // ---------- ORİJİNAL MENÜ (DEĞİŞTİRİLEBİLİR OLACAK) ----------
+    // Bu değişkeni let olarak tanımlıyoruz, içeriği sonradan değişebilecek.
+    let ORIGINAL_MENU = {
         tr: [
             {
                 category: "TOST ÇEŞİTLERİ",
@@ -2344,7 +2201,7 @@
         ar: []
     };
 
-    // Basit çeviriler
+    // Basit çeviriler (düzenleme yapılmayacak, sadece görüntüleme için)
     ORIGINAL_MENU.en = ORIGINAL_MENU.tr.map(cat => ({
         ...cat,
         category: cat.category === "TOST ÇEŞİTLERİ" ? "TOAST TYPES" :
@@ -2441,7 +2298,7 @@
         ar: { heroTitle: "توستو", workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠", viewMenu: "عرض القائمة", menuTitle: "القائمة", contactTitle: "اتصل بنا", phone: "٠٥٣٢ ١٥٨ ٠٢ ٠٧", instagram: "إنستغرام", location: "📍 الموقع", whatsapp: "واتساب" }
     };
 
-    // ---------- 23.3 YARDIMCI FONKSİYONLAR ----------
+    // ---------- YARDIMCI FONKSİYONLAR ----------
     function showToast(message, type) {
         const container = document.getElementById('toastContainer');
         if (!container) return;
@@ -2474,6 +2331,7 @@
         document.body.style.overflow = 'auto';
     }
 
+    // ---------- MENÜ YÖNETİMİ (DEĞİŞİKLİKLER ORİJİNAL MENÜ'YÜ DE ETKİLER) ----------
     function getFullMenu() {
         const base = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
         const menuWithCustomImages = base.map((cat, catIdx) => ({
@@ -2487,10 +2345,27 @@
         return [...menuWithCustomImages, ...extraCategories];
     }
 
+    // Kaydetme işlemi: ekstra kategoriler ayrılır, orijinal kategoriler ORIGINAL_MENU içinde güncellenir
     function saveFullMenu(menu) {
-        const base = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
-        const baseNames = base.map(c => c.category);
+        const baseCategories = ORIGINAL_MENU[currentLang] || ORIGINAL_MENU.tr;
+        const baseNames = baseCategories.map(c => c.category);
+        
+        // Ekstra kategorileri ayır
         extraCategories = menu.filter(cat => !baseNames.includes(cat.category));
+        // Orijinal kategorileri güncelle
+        const updatedBase = menu.filter(cat => baseNames.includes(cat.category));
+        
+        // ORIGINAL_MENU[currentLang] dizisini güncelle
+        updatedBase.forEach(newCat => {
+            const index = baseCategories.findIndex(c => c.category === newCat.category);
+            if (index !== -1) {
+                // Kategori adı aynı, ürünleri güncelle
+                baseCategories[index].items = newCat.items;
+                // Resim değişmiş olabilir (categoryImages ile yönetiliyor, burada tutmuyoruz)
+            }
+        });
+        
+        // ORIGINAL_MENU nesnesi referansı değişmedi, içeriği güncellendi.
         localStorage.setItem('extraCategories', JSON.stringify(extraCategories));
         updateStats();
     }
@@ -2498,7 +2373,7 @@
     function updateStats() {
         const menu = getFullMenu();
         let total = 0;
-        menu.forEach(c => total += c.items.length);
+        menu.forEach(cat => total += cat.items.length);
         document.getElementById('statCategories').textContent = menu.length;
         document.getElementById('statProducts').textContent = total;
     }
@@ -2510,6 +2385,7 @@
         const cisv2 = document.getElementById('categoryImageSelectV2');
         const pcs = document.getElementById('productCategorySelect');
         const pcsv2 = document.getElementById('productCategorySelectV2');
+        
         if (cs) { cs.innerHTML = ''; menu.forEach((c,i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`); }
         if (cis) { cis.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
         if (cisv2) { cisv2.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cisv2.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
@@ -2655,6 +2531,7 @@
         updateStats();
     }
 
+    // ---------- DÜZENLEME/SİLME FONKSİYONLARI (ORİJİNAL ÜRÜNLERİ DE SİLER) ----------
     function updateItemName(catIdx, catName, oldName, newName) {
         const menu = getFullMenu();
         const category = menu[catIdx];
@@ -2715,7 +2592,7 @@
         }
     }
 
-    // ---------- 23.4 GELİŞTİRİCİ FONKSİYONLARI ----------
+    // ---------- GELİŞTİRİCİ FONKSİYONLARI ----------
     window.editItem = function(catIdx, itemIdx) {
         const menu = getFullMenu();
         const item = menu[catIdx].items[itemIdx];
@@ -2875,7 +2752,7 @@
         menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
     });
 
-    // ---------- 23.5 MODAL FONKSİYONLARI ----------
+    // ---------- MODAL FONKSİYONLARI ----------
     window.openImageModal = function(src, title, imageList, index) {
         currentImageList = imageList || [];
         currentImageIndex = index || 0;
@@ -2959,7 +2836,7 @@
         });
     };
 
-    // ---------- 23.6 DİL VE TEMA ----------
+    // ---------- DİL VE TEMA ----------
     window.toggleLanguageMenu = function() {
         const menu = document.getElementById('languageMenu');
         menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
@@ -2991,7 +2868,7 @@
     };
     window.scrollToMenu = function() { document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); };
 
-    // ---------- 23.7 PANEL YÖNETİMİ ----------
+    // ---------- PANEL YÖNETİMİ ----------
     window.switchDevTab = function(tab) {
         document.querySelectorAll('#devPanelV1 .panel-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('#devPanelV1 .panel-content').forEach(c => c.classList.remove('active'));
@@ -3013,7 +2890,7 @@
         else { panel.classList.add('show'); document.getElementById('devPanelV2').classList.remove('show'); updateSelects(); updateGallery(); updateStats(); }
     };
 
-    // ---------- 23.8 CLOUD FONKSİYONLARI ----------
+    // ---------- CLOUD FONKSİYONLARI ----------
     window.saveToCloud = async function() {
         showToast('☁️ Kaydediliyor...', 'info');
         document.getElementById('cloudSaveBtn').disabled = true;
@@ -3108,7 +2985,7 @@
         if (e.key === 'Escape') { closeAllModals(); }
     });
 
-    // ---------- 23.9 GELİŞTİRİCİ GİRİŞİ ----------
+    // ---------- GELİŞTİRİCİ GİRİŞİ ----------
     let clickCount = 0;
     document.getElementById('secretTrigger').addEventListener('click', function() {
         clickCount++;
@@ -3137,7 +3014,7 @@
         }
     });
 
-    // ---------- 23.10 SAYFA YÜKLENİRKEN ----------
+    // ---------- SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
         const savedLang = localStorage.getItem('lang') || 'tr';
         setLanguage(savedLang);
@@ -3156,7 +3033,7 @@
         });
     });
 
-    // ---------- 23.11 SÜRÜKLEME ----------
+    // ---------- SÜRÜKLEME ----------
     const devPanel = document.getElementById('devPanelV1');
     const dragHandle = document.getElementById('dragHandle');
     let isDragging = false, offsetX, offsetY;
@@ -3178,23 +3055,10 @@
         document.addEventListener('mouseup', function() { isDragging = false; devPanel.style.transition = ''; });
     }
 
-    // ---------- 23.12 SAĞ TIK ENGELLEME ----------
+    // ---------- SAĞ TIK ENGELLEME ----------
     document.addEventListener('contextmenu', function(e) { if (!isDeveloper) e.preventDefault(); });
-
-    console.log('✅ Tosttoo uygulaması başarıyla başlatıldı. (Birleştirilmiş sürüm)');
 })();
 </script>
-
-<!-- ========== BÖLÜM 24: EK YORUM SATIRLARI (SATIR SAYISINI ARTIRIR) ========== -->
-<!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
-<!-- 11 --><!-- 12 --><!-- 13 --><!-- 14 --><!-- 15 --><!-- 16 --><!-- 17 --><!-- 18 --><!-- 19 --><!-- 20 -->
-<!-- 21 --><!-- 22 --><!-- 23 --><!-- 24 --><!-- 25 --><!-- 26 --><!-- 27 --><!-- 28 --><!-- 29 --><!-- 30 -->
-<!-- 31 --><!-- 32 --><!-- 33 --><!-- 34 --><!-- 35 --><!-- 36 --><!-- 37 --><!-- 38 --><!-- 39 --><!-- 40 -->
-<!-- 41 --><!-- 42 --><!-- 43 --><!-- 44 --><!-- 45 --><!-- 46 --><!-- 47 --><!-- 48 --><!-- 49 --><!-- 50 -->
-<!-- 51 --><!-- 52 --><!-- 53 --><!-- 54 --><!-- 55 --><!-- 56 --><!-- 57 --><!-- 58 --><!-- 59 --><!-- 60 -->
-<!-- 61 --><!-- 62 --><!-- 63 --><!-- 64 --><!-- 65 --><!-- 66 --><!-- 67 --><!-- 68 --><!-- 69 --><!-- 70 -->
-<!-- 71 --><!-- 72 --><!-- 73 --><!-- 74 --><!-- 75 --><!-- 76 --><!-- 77 --><!-- 78 --><!-- 79 --><!-- 80 -->
-<!-- 81 --><!-- 82 --><!-- 83 --><!-- 84 --><!-- 85 --><!-- 86 --><!-- 87 --><!-- 88 --><!-- 89 --><!-- 90 -->
-<!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
 </body>
 </html>
+```
