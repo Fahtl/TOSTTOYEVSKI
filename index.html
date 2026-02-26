@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tosttoo | Menü (Tam Düzenlenebilir - Çok Dilli)</title>
+    <title>Tosttoo | Menü (Çok Dilli Tam Sürüm)</title>
     <!-- Yazı tipleri ve ikonlar -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ========== AYNI CSS KODLARI ========== */
-        /* Tüm CSS kodları aynen burada kalacak */
         * {
             margin: 0;
             padding: 0;
@@ -31,11 +29,17 @@
             animation: gradientBG 15s ease infinite;
             color: #fff;
             padding-bottom: 70px;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         body[dir="rtl"] {
             font-family: 'Cairo', 'Poppins', sans-serif;
+        }
+
+        body.light-mode {
+            background: #f5f5f5;
+            color: #333;
+            animation: none;
         }
 
         @keyframes gradientBG {
@@ -44,7 +48,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Hero Bölümü */
         .hero {
             height: 100vh;
             display: flex;
@@ -165,7 +168,6 @@
             box-shadow: 0 10px 25px rgba(255,140,0,0.5);
         }
 
-        /* Konteyner ve Başlıklar */
         .container {
             padding: 60px 20px;
             max-width: 1400px;
@@ -219,7 +221,6 @@
             50% { width: 80px; opacity: 1; }
         }
 
-        /* Menü Grid ve Kartlar */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -246,6 +247,12 @@
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
+        }
+
+        .light-mode .card {
+            background: #fffaf3;
+            border: 1px solid #e6d8c3;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
         }
 
         .card::before {
@@ -312,6 +319,10 @@
             margin: 0 auto;
         }
 
+        .light-mode .card-header h3 {
+            color: #d97706;
+        }
+
         .delete-card-btn {
             position: absolute;
             top: 15px;
@@ -368,6 +379,10 @@
             cursor: pointer;
             overflow: hidden;
             width: 100%;
+        }
+
+        .light-mode .item {
+            background: rgba(0,0,0,0.05);
         }
 
         .item:hover {
@@ -449,6 +464,10 @@
             text-align: right;
         }
 
+        .light-mode .item-name {
+            color: #8b6b4f;
+        }
+
         body[dir="ltr"] .item-name {
             text-align: left;
         }
@@ -473,6 +492,10 @@
             gap: 2px;
             margin-left: 10px;
             margin-right: 10px;
+        }
+
+        .light-mode .item-price {
+            color: #d97706;
         }
 
         .item-price:hover {
@@ -549,13 +572,16 @@
             text-decoration: underline;
         }
 
-        /* İletişim Bölümü */
         .contact-section {
             text-align: center;
             padding: 80px 20px;
             background: #000;
             position: relative;
             overflow: hidden;
+        }
+
+        .light-mode .contact-section {
+            background: #e6d8c3;
         }
 
         .contact-section::before {
@@ -682,7 +708,6 @@
             pointer-events: none;
         }
 
-        /* Üst Kontrol Butonları */
         .top-controls {
             position: fixed;
             top: 15px;
@@ -714,30 +739,12 @@
             backdrop-filter: blur(5px);
         }
 
+        .light-mode .control-btn {
+            border: 2px solid #d97706;
+        }
+
         .control-btn:hover {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(255,140,0,0.5);
-            background: #ffa233;
-        }
-
-        #modeToggle {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.2);
-            background: #ff8c00;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(255,140,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        #modeToggle:hover {
-            transform: scale(1.1) rotate(15deg);
             box-shadow: 0 8px 25px rgba(255,140,0,0.5);
             background: #ffa233;
         }
@@ -756,6 +763,11 @@
             gap: 5px;
             min-width: 180px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+        }
+
+        .light-mode .language-menu {
+            background: #f5f5f5;
+            border-color: #d97706;
         }
 
         body[dir="rtl"] .language-menu {
@@ -777,6 +789,17 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .light-mode .language-btn {
+            background: #e0e0e0;
+            color: #333;
+            border-color: #d97706;
+        }
+
+        .light-mode .language-btn:hover {
+            background: #d97706;
+            color: white;
         }
 
         body[dir="rtl"] .language-btn {
@@ -841,7 +864,6 @@
             margin-left: 5px;
         }
 
-        /* Modallar */
         .image-modal {
             display: none;
             position: fixed;
@@ -1068,6 +1090,10 @@
             text-align: center;
         }
 
+        .light-mode .modal {
+            background: rgba(255,255,255,0.98);
+        }
+
         .modal h3 {
             color: #ff8c00;
             font-size: 1.8rem;
@@ -1077,6 +1103,10 @@
         .modal p {
             margin-bottom: 2rem;
             color: #ccc;
+        }
+
+        .light-mode .modal p {
+            color: #333;
         }
 
         .modal-buttons {
@@ -1129,7 +1159,6 @@
             object-fit: contain;
         }
 
-        /* Bildirimler */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -1160,6 +1189,11 @@
             animation: slideIn 0.3s ease;
         }
 
+        .light-mode .toast {
+            background: rgba(255,255,255,0.98);
+            color: #333;
+        }
+
         .toast.success { border-color: #28a745; }
         .toast.error { border-color: #dc3545; }
         .toast.info { border-color: #ff8c00; }
@@ -1178,7 +1212,6 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Geliştirici Paneli */
         .dev-panel {
             position: fixed;
             top: 50%;
@@ -1198,6 +1231,17 @@
             transition: all 0.3s ease;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             overflow-y: auto;
+        }
+
+        .light-mode .dev-panel {
+            background: rgba(255,255,255,0.98);
+        }
+
+        .light-mode .dev-panel input,
+        .light-mode .dev-panel select {
+            background: white;
+            color: #333;
+            border-color: #d97706;
         }
 
         .dev-panel.show {
@@ -1276,6 +1320,10 @@
             gap: 8px;
         }
 
+        .light-mode .panel-tab {
+            color: #333;
+        }
+
         .panel-tab:hover {
             color: #ff8c00;
             background: rgba(255,140,0,0.1);
@@ -1301,6 +1349,10 @@
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             transition: all 0.3s;
+        }
+
+        .light-mode .dev-section {
+            background: rgba(0,0,0,0.05);
         }
 
         .dev-section:hover {
@@ -1508,64 +1560,6 @@
             font-size: 0.9rem;
         }
 
-        /* Açık Tema */
-        body.light-mode {
-            background: #f6f1e8 !important;
-            color: #2b2b2b !important;
-            animation: none !important;
-        }
-
-        .light-mode .card {
-            background: #fffaf3 !important;
-            border: 1px solid #e6d8c3 !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
-        }
-
-        .light-mode .hero {
-            background: linear-gradient(rgba(246,241,232,0.85), rgba(246,241,232,0.85)),
-                        url('https://i.postimg.cc/k5TwQCVb/hero.jpg') center/cover no-repeat !important;
-        }
-
-        .light-mode .item-name {
-            color: #8b6b4f !important;
-        }
-
-        .light-mode .item-price {
-            color: #d97706 !important;
-        }
-
-        .light-mode .contact-section {
-            background: #e6d8c3 !important;
-        }
-
-        .light-mode .dev-panel {
-            background: rgba(255,255,255,0.98) !important;
-        }
-
-        .light-mode .dev-panel input,
-        .light-mode .dev-panel select {
-            background: white;
-            color: #2b2b2b;
-            border-color: rgba(255,140,0,0.3);
-        }
-
-        .light-mode .language-menu {
-            background: #f5f5f5;
-            border-color: #d97706;
-        }
-
-        .light-mode .language-btn {
-            background: #e0e0e0;
-            color: #333;
-            border-color: #d97706;
-        }
-
-        .light-mode .language-btn:hover {
-            background: #d97706;
-            color: white;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .control-btn, #modeToggle { width: 40px; height: 40px; font-size: 18px; }
@@ -1586,30 +1580,11 @@
         @media (min-width:1201px) {
             .grid { grid-template-columns: repeat(3,1fr); }
         }
-
-        /* Yardımcı Sınıflar */
-        .w-100 { width: 100%; }
-        .h-100 { height: 100%; }
-        .position-relative { position: relative; }
-        .position-absolute { position: absolute; }
-        .position-fixed { position: fixed; }
-        .overflow-auto { overflow: auto; }
-        .overflow-hidden { overflow: hidden; }
-        .cursor-pointer { cursor: pointer; }
-        .cursor-move { cursor: move; }
-        .user-select-none { user-select: none; }
-        .pointer-events-none { pointer-events: none; }
-        .opacity-0 { opacity: 0; }
-        .opacity-50 { opacity: 0.5; }
-        .opacity-100 { opacity: 1; }
-        .z-1 { z-index: 1; }
-        .z-10 { z-index: 10; }
-        .z-100 { z-index: 100; }
     </style>
 </head>
-<body dir="ltr" data-theme="dark" data-language="tr" class="">
+<body dir="ltr" data-theme="dark" data-language="tr">
 
-<!-- ========== 13. MODALLAR ========== -->
+<!-- MODALLAR -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
@@ -1687,7 +1662,7 @@
     </div>
 </div>
 
-<!-- ========== 14. GELİŞTİRİCİ PANELİ V1 ========== -->
+<!-- GELİŞTİRİCİ PANELİ V1 -->
 <div class="dev-panel" id="devPanelV1">
     <div class="panel-header" id="dragHandle">
         <h3><i class="fas fa-cog"></i> Geliştirici Paneli (Tam Yetki)</h3>
@@ -1813,7 +1788,7 @@
     </div>
 </div>
 
-<!-- ========== 15. GELİŞTİRİCİ PANELİ V2 ========== -->
+<!-- GELİŞTİRİCİ PANELİ V2 -->
 <div class="dev-panel v2" id="devPanelV2">
     <div class="panel-header">
         <h3><i class="fas fa-paint-brush"></i> Gelişmiş Panel V2</h3>
@@ -1867,19 +1842,19 @@
     </div>
 </div>
 
-<!-- ========== 16. BİLDİRİM KONTEYNERİ ========== -->
+<!-- BİLDİRİM KONTEYNERİ -->
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ========== 17. ÜST KONTROL BUTONLARI ========== -->
+<!-- ÜST KONTROL BUTONLARI -->
 <div class="top-controls">
     <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Dil Değiştir"><i class="fas fa-globe"></i></button>
     <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
 </div>
 
-<!-- ========== 18. GELİŞTİRİCİ BUTONU ========== -->
+<!-- GELİŞTİRİCİ BUTONU -->
 <div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()"><i class="fas fa-code"></i></div>
 
-<!-- ========== 19. HERO BÖLÜMÜ ========== -->
+<!-- HERO BÖLÜMÜ -->
 <section class="hero">
     <div class="hero-content">
         <h1 id="secretTrigger">Tosttoo</h1>
@@ -1888,7 +1863,7 @@
     </div>
 </section>
 
-<!-- ========== 20. MENÜ BÖLÜMÜ ========== -->
+<!-- MENÜ BÖLÜMÜ -->
 <section id="menu" class="section">
     <div class="container">
         <h2 class="section-title" id="menuTitle">Menü <span class="version-tag">v1.0</span></h2>
@@ -1896,7 +1871,7 @@
     </div>
 </section>
 
-<!-- ========== 21. İLETİŞİM BÖLÜMÜ ========== -->
+<!-- İLETİŞİM BÖLÜMÜ -->
 <section id="contact" class="contact-section">
     <div class="container">
         <h2 class="section-title" id="contactTitle">İletişim</h2>
@@ -1924,15 +1899,14 @@
     </div>
 </section>
 
-<!-- ========== 22. JAVASCRIPT KODLARI (ÇOK DİLLİ) ========== -->
 <script>
 // ==================================================================
-// TÜM JAVASCRIPT KODLARI - ÇOK DİLLİ VERSİYON
+// TÜM JAVASCRIPT KODLARI - ÇOK DİLLİ TAM SÜRÜM
 // ==================================================================
 (function() {
     'use strict';
 
-    // ---------- 22.1 DEĞİŞKENLER ----------
+    // ---------- DEĞİŞKENLER ----------
     let isDeveloper = false;
     let deleteMode = false;
     let editMode = false;
@@ -1947,7 +1921,7 @@
     let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}');
     let productImages = JSON.parse(localStorage.getItem('productImages') || '{}');
 
-    // ---------- 22.2 ÇOK DİLLİ MENÜ ŞABLONU ----------
+    // ---------- ORİJİNAL MENÜ ŞABLONU (TÜM DİLLER) ----------
     const ORIGINAL_MENU_TEMPLATE = {
         tr: [
             { category: "TOST ÇEŞİTLERİ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
@@ -2032,267 +2006,258 @@
                 { name: "Sufle", price: "120₺" }
             ] }
         ],
-        en: [],
-        ru: [],
-        ar: []
+        en: [
+            { category: "TOAST TYPES", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Cheese Toast", price: "120₺" },
+                { name: "Sucuk Toast", price: "120₺" },
+                { name: "Cheese & Sucuk Mix", price: "150₺" },
+                { name: "Atom Toast", price: "200₺" },
+                { name: "3 Cheese Toast", price: "150₺" },
+                { name: "Kavurma Toast", price: "200₺" },
+                { name: "Ayvalık Toast", price: "200₺" },
+                { name: "Simit Toast", price: "350₺" },
+                { name: "Diet Toast", price: "150₺" },
+                { name: "Bazlama Toast", price: "200₺" },
+                { name: "Bazlama with Kavurma", price: "250₺" },
+                { name: "Kumru", price: "200₺" }
+            ] },
+            { category: "SANDWICHES", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Mixed Sandwich", price: "150₺" },
+                { name: "Tuna Sandwich", price: "200₺" },
+                { name: "Chicken Sandwich", price: "170₺" }
+            ] },
+            { category: "SNACKS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Potato Chips", price: "120₺" },
+                { name: "Chicken Nuggets", price: "150₺" },
+                { name: "Onion Rings (6 pcs)", price: "60₺" }
+            ] },
+            { category: "SALADS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Tuna Salad", price: "250₺" },
+                { name: "Chicken Salad", price: "250₺" },
+                { name: "Cheese Salad", price: "200₺" }
+            ] },
+            { category: "PASTA", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Bolognese Pasta", price: "250₺" },
+                { name: "Chicken Pasta", price: "250₺" },
+                { name: "Cheese Pasta", price: "200₺" },
+                { name: "Tuna Pasta", price: "250₺" }
+            ] },
+            { category: "BURGERS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Classic Hamburger", price: "300₺" },
+                { name: "Cheeseburger", price: "320₺" },
+                { name: "Chicken Burger", price: "280₺" }
+            ] },
+            { category: "PIZZAS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Margherita", price: "200₺" },
+                { name: "Sucuk Pizza", price: "250₺" },
+                { name: "Mixed Pizza", price: "300₺" },
+                { name: "Kavurma Pizza", price: "350₺" },
+                { name: "Tuna Pizza", price: "300₺" },
+                { name: "Veggie Pizza", price: "230₺" }
+            ] },
+            { category: "BREAKFAST", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Breakfast Plate", price: "250₺" },
+                { name: "Mixed Breakfast", price: "300₺" },
+                { name: "Menemen", price: "200₺" },
+                { name: "Egg with Sucuk", price: "200₺" },
+                { name: "Fried Eggs", price: "150₺" },
+                { name: "Egg with Cheese", price: "170₺" },
+                { name: "Egg with Kavurma", price: "250₺" }
+            ] },
+            { category: "HOT DRINKS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Tea", price: "20₺" },
+                { name: "Sage Tea", price: "20₺" },
+                { name: "Herbal Tea", price: "30₺" },
+                { name: "Turkish Coffee", price: "60₺" },
+                { name: "Ottoman Coffee", price: "80₺" },
+                { name: "Menengic Coffee", price: "80₺" }
+            ] },
+            { category: "COLD DRINKS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Water", price: "20₺" },
+                { name: "Soda", price: "30₺" },
+                { name: "Fruit Soda", price: "30₺" },
+                { name: "Beypazarı Cola", price: "30₺" },
+                { name: "Çamlıca Orange", price: "30₺" },
+                { name: "Niğde Soda", price: "30₺" },
+                { name: "Iced Tea", price: "40₺" },
+                { name: "Ayran Small", price: "20₺" },
+                { name: "Ayran Large", price: "30₺" },
+                { name: "Churchill", price: "50₺" }
+            ] },
+            { category: "DESSERTS", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Baked Rice Pudding", price: "120₺" },
+                { name: "Chocolate Soufflé", price: "120₺" }
+            ] }
+        ],
+        ru: [
+            { category: "ВИДЫ ТОСТОВ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Тост с сыром", price: "120₺" },
+                { name: "Тост с суджуком", price: "120₺" },
+                { name: "Тост с сыром и суджуком", price: "150₺" },
+                { name: "Атом тост", price: "200₺" },
+                { name: "Тост с 3 сырами", price: "150₺" },
+                { name: "Тост с кавурмой", price: "200₺" },
+                { name: "Айвалык тост", price: "200₺" },
+                { name: "Симит тост", price: "350₺" },
+                { name: "Диетический тост", price: "150₺" },
+                { name: "Базлама тост", price: "200₺" },
+                { name: "Базлама с кавурмой", price: "250₺" },
+                { name: "Кумру", price: "200₺" }
+            ] },
+            { category: "СЭНДВИЧИ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Смешанный сэндвич", price: "150₺" },
+                { name: "Сэндвич с тунцом", price: "200₺" },
+                { name: "Сэндвич с курицей", price: "170₺" }
+            ] },
+            { category: "ЗАКУСКИ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Картофельные чипсы", price: "120₺" },
+                { name: "Кусочки курицы", price: "150₺" },
+                { name: "Луковые кольца (6 шт)", price: "60₺" }
+            ] },
+            { category: "САЛАТЫ", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Салат с тунцом", price: "250₺" },
+                { name: "Салат с курицей", price: "250₺" },
+                { name: "Салат с сыром", price: "200₺" }
+            ] },
+            { category: "МАКАРОНЫ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Паста Болоньезе", price: "250₺" },
+                { name: "Паста с курицей", price: "250₺" },
+                { name: "Паста с сыром", price: "200₺" },
+                { name: "Паста с тунцом", price: "250₺" }
+            ] },
+            { category: "БУРГЕРЫ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Классический гамбургер", price: "300₺" },
+                { name: "Чизбургер", price: "320₺" },
+                { name: "Куриный бургер", price: "280₺" }
+            ] },
+            { category: "ПИЦЦА", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Маргарита", price: "200₺" },
+                { name: "Пицца с суджуком", price: "250₺" },
+                { name: "Смешанная пицца", price: "300₺" },
+                { name: "Пицца с кавурмой", price: "350₺" },
+                { name: "Пицца с тунцом", price: "300₺" },
+                { name: "Овощная пицца", price: "230₺" }
+            ] },
+            { category: "ЗАВТРАКИ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Завтрак тарелка", price: "250₺" },
+                { name: "Смешанный завтрак", price: "300₺" },
+                { name: "Менемен", price: "200₺" },
+                { name: "Яйцо с суджуком", price: "200₺" },
+                { name: "Яичница", price: "150₺" },
+                { name: "Яйцо с сыром", price: "170₺" },
+                { name: "Яйцо с кавурмой", price: "250₺" }
+            ] },
+            { category: "ГОРЯЧИЕ НАПИТКИ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "Чай", price: "20₺" },
+                { name: "Шалфейный чай", price: "20₺" },
+                { name: "Травяной чай", price: "30₺" },
+                { name: "Турецкий кофе", price: "60₺" },
+                { name: "Османский кофе", price: "80₺" },
+                { name: "Кофе мененгич", price: "80₺" }
+            ] },
+            { category: "ХОЛОДНЫЕ НАПИТКИ", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "Вода", price: "20₺" },
+                { name: "Содовая", price: "30₺" },
+                { name: "Фруктовая содовая", price: "30₺" },
+                { name: "Beypazarı Cola", price: "30₺" },
+                { name: "Çamlıca Orange", price: "30₺" },
+                { name: "Niğde Soda", price: "30₺" },
+                { name: "Холодный чай", price: "40₺" },
+                { name: "Айран маленький", price: "20₺" },
+                { name: "Айран большой", price: "30₺" },
+                { name: "Черчилль", price: "50₺" }
+            ] },
+            { category: "ДЕСЕРТЫ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "Запеченный рисовый пудинг", price: "120₺" },
+                { name: "Шоколадное суфле", price: "120₺" }
+            ] }
+        ],
+        ar: [
+            { category: "أنواع التوست", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "توست بالجبن", price: "120₺" },
+                { name: "توست بالسجق", price: "120₺" },
+                { name: "توست بالجبن والسجق", price: "150₺" },
+                { name: "توست أتوم", price: "200₺" },
+                { name: "توست بثلاثة أجبان", price: "150₺" },
+                { name: "توست بالكاورمة", price: "200₺" },
+                { name: "توست آيفالك", price: "200₺" },
+                { name: "توست سميط", price: "350₺" },
+                { name: "توست دايت", price: "150₺" },
+                { name: "توست بازلما", price: "200₺" },
+                { name: "بازلما بالكاورمة", price: "250₺" },
+                { name: "كمرة", price: "200₺" }
+            ] },
+            { category: "الساندويشات", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "ساندويش مشكل", price: "150₺" },
+                { name: "ساندويش تونة", price: "200₺" },
+                { name: "ساندويش دجاج", price: "170₺" }
+            ] },
+            { category: "الوجبات الخفيفة", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "رقائق بطاطس", price: "120₺" },
+                { name: "قطع دجاج", price: "150₺" },
+                { name: "حلقات بصل (٦ قطع)", price: "60₺" }
+            ] },
+            { category: "السلطات", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "سلطة تونة", price: "250₺" },
+                { name: "سلطة دجاج", price: "250₺" },
+                { name: "سلطة جبن", price: "200₺" }
+            ] },
+            { category: "المعكرونة", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "معكرونة بولونيز", price: "250₺" },
+                { name: "معكرونة بالدجاج", price: "250₺" },
+                { name: "معكرونة بالجبن", price: "200₺" },
+                { name: "معكرونة بالتونة", price: "250₺" }
+            ] },
+            { category: "البرغر", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "هامبرغر كلاسيكي", price: "300₺" },
+                { name: "تشيز برغر", price: "320₺" },
+                { name: "برغر دجاج", price: "280₺" }
+            ] },
+            { category: "البيتزا", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "مارغريتا", price: "200₺" },
+                { name: "بيتزا سجق", price: "250₺" },
+                { name: "بيتزا مشكلة", price: "300₺" },
+                { name: "بيتزا كاورمة", price: "350₺" },
+                { name: "بيتزا تونة", price: "300₺" },
+                { name: "بيتزا خضار", price: "230₺" }
+            ] },
+            { category: "الفطور", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "طبق فطور", price: "250₺" },
+                { name: "فطور مختلط", price: "300₺" },
+                { name: "منمن", price: "200₺" },
+                { name: "بيض بالسجق", price: "200₺" },
+                { name: "بيض مقلي", price: "150₺" },
+                { name: "بيض بالجبن", price: "170₺" },
+                { name: "بيض بالكاورمة", price: "250₺" }
+            ] },
+            { category: "المشروبات الساخنة", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
+                { name: "شاي", price: "20₺" },
+                { name: "شاي المريمية", price: "20₺" },
+                { name: "شاي أعشاب", price: "30₺" },
+                { name: "قهوة تركية", price: "60₺" },
+                { name: "قهوة عثمانية", price: "80₺" },
+                { name: "قهوة منينجيتش", price: "80₺" }
+            ] },
+            { category: "المشروبات الباردة", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
+                { name: "ماء", price: "20₺" },
+                { name: "صودا", price: "30₺" },
+                { name: "صودا بالفواكه", price: "30₺" },
+                { name: "كولا باي بازار", price: "30₺" },
+                { name: "تشامليكا برتقال", price: "30₺" },
+                { name: "صودا نيغدة", price: "30₺" },
+                { name: "شاي مثلج", price: "40₺" },
+                { name: "عيران صغير", price: "20₺" },
+                { name: "عيران كبير", price: "30₺" },
+                { name: "تشرشل", price: "50₺" }
+            ] },
+            { category: "الحلويات", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
+                { name: "أرز بالحليب مخبوز", price: "120₺" },
+                { name: "سوفليه شوكولاتة", price: "120₺" }
+            ] }
+        ]
     };
 
-    // ----- TAM ÇEVİRİLER - İNGİLİZCE -----
-    ORIGINAL_MENU_TEMPLATE.en = [
-        { category: "TOAST TYPES", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Cheese Toast", price: "120₺" },
-            { name: "Sucuk Toast", price: "120₺" },
-            { name: "Cheese & Sucuk Mix", price: "150₺" },
-            { name: "Atom Toast", price: "200₺" },
-            { name: "3 Cheese Toast", price: "150₺" },
-            { name: "Kavurma Toast", price: "200₺" },
-            { name: "Ayvalık Toast", price: "200₺" },
-            { name: "Simit Toast", price: "350₺" },
-            { name: "Diet Toast", price: "150₺" },
-            { name: "Bazlama Toast", price: "200₺" },
-            { name: "Bazlama with Kavurma", price: "250₺" },
-            { name: "Kumru", price: "200₺" }
-        ] },
-        { category: "SANDWICHES", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Mixed Sandwich", price: "150₺" },
-            { name: "Tuna Sandwich", price: "200₺" },
-            { name: "Chicken Sandwich", price: "170₺" }
-        ] },
-        { category: "SNACKS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Potato Chips", price: "120₺" },
-            { name: "Chicken Nuggets", price: "150₺" },
-            { name: "Onion Rings (6 pcs)", price: "60₺" }
-        ] },
-        { category: "SALADS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Tuna Salad", price: "250₺" },
-            { name: "Chicken Salad", price: "250₺" },
-            { name: "Cheese Salad", price: "200₺" }
-        ] },
-        { category: "PASTA", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Bolognese Pasta", price: "250₺" },
-            { name: "Chicken Pasta", price: "250₺" },
-            { name: "Cheese Pasta", price: "200₺" },
-            { name: "Tuna Pasta", price: "250₺" }
-        ] },
-        { category: "BURGERS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Classic Hamburger", price: "300₺" },
-            { name: "Cheeseburger", price: "320₺" },
-            { name: "Chicken Burger", price: "280₺" }
-        ] },
-        { category: "PIZZAS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Margherita", price: "200₺" },
-            { name: "Sucuk Pizza", price: "250₺" },
-            { name: "Mixed Pizza", price: "300₺" },
-            { name: "Kavurma Pizza", price: "350₺" },
-            { name: "Tuna Pizza", price: "300₺" },
-            { name: "Veggie Pizza", price: "230₺" }
-        ] },
-        { category: "BREAKFAST", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Breakfast Plate", price: "250₺" },
-            { name: "Mixed Breakfast", price: "300₺" },
-            { name: "Menemen", price: "200₺" },
-            { name: "Egg with Sucuk", price: "200₺" },
-            { name: "Fried Eggs", price: "150₺" },
-            { name: "Egg with Cheese", price: "170₺" },
-            { name: "Egg with Kavurma", price: "250₺" }
-        ] },
-        { category: "HOT DRINKS", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Tea", price: "20₺" },
-            { name: "Sage Tea", price: "20₺" },
-            { name: "Herbal Tea", price: "30₺" },
-            { name: "Turkish Coffee", price: "60₺" },
-            { name: "Ottoman Coffee", price: "80₺" },
-            { name: "Menengic Coffee", price: "80₺" }
-        ] },
-        { category: "COLD DRINKS", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Water", price: "20₺" },
-            { name: "Soda", price: "30₺" },
-            { name: "Fruit Soda", price: "30₺" },
-            { name: "Beypazarı Cola", price: "30₺" },
-            { name: "Çamlıca Orange", price: "30₺" },
-            { name: "Niğde Soda", price: "30₺" },
-            { name: "Iced Tea", price: "40₺" },
-            { name: "Ayran Small", price: "20₺" },
-            { name: "Ayran Large", price: "30₺" },
-            { name: "Churchill", price: "50₺" }
-        ] },
-        { category: "DESSERTS", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Baked Rice Pudding", price: "120₺" },
-            { name: "Chocolate Soufflé", price: "120₺" }
-        ] }
-    ];
-
-    // ----- TAM ÇEVİRİLER - RUSÇA -----
-    ORIGINAL_MENU_TEMPLATE.ru = [
-        { category: "ВИДЫ ТОСТОВ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Тост с сыром", price: "120₺" },
-            { name: "Тост с суджуком", price: "120₺" },
-            { name: "Тост с сыром и суджуком", price: "150₺" },
-            { name: "Атом тост", price: "200₺" },
-            { name: "Тост с 3 сырами", price: "150₺" },
-            { name: "Тост с кавурмой", price: "200₺" },
-            { name: "Айвалык тост", price: "200₺" },
-            { name: "Симит тост", price: "350₺" },
-            { name: "Диетический тост", price: "150₺" },
-            { name: "Базлама тост", price: "200₺" },
-            { name: "Базлама с кавурмой", price: "250₺" },
-            { name: "Кумру", price: "200₺" }
-        ] },
-        { category: "СЭНДВИЧИ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Смешанный сэндвич", price: "150₺" },
-            { name: "Сэндвич с тунцом", price: "200₺" },
-            { name: "Сэндвич с курицей", price: "170₺" }
-        ] },
-        { category: "ЗАКУСКИ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Картофельные чипсы", price: "120₺" },
-            { name: "Кусочки курицы", price: "150₺" },
-            { name: "Луковые кольца (6 шт)", price: "60₺" }
-        ] },
-        { category: "САЛАТЫ", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Салат с тунцом", price: "250₺" },
-            { name: "Салат с курицей", price: "250₺" },
-            { name: "Салат с сыром", price: "200₺" }
-        ] },
-        { category: "МАКАРОНЫ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Паста Болоньезе", price: "250₺" },
-            { name: "Паста с курицей", price: "250₺" },
-            { name: "Паста с сыром", price: "200₺" },
-            { name: "Паста с тунцом", price: "250₺" }
-        ] },
-        { category: "БУРГЕРЫ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Классический гамбургер", price: "300₺" },
-            { name: "Чизбургер", price: "320₺" },
-            { name: "Куриный бургер", price: "280₺" }
-        ] },
-        { category: "ПИЦЦА", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Маргарита", price: "200₺" },
-            { name: "Пицца с суджуком", price: "250₺" },
-            { name: "Смешанная пицца", price: "300₺" },
-            { name: "Пицца с кавурмой", price: "350₺" },
-            { name: "Пицца с тунцом", price: "300₺" },
-            { name: "Овощная пицца", price: "230₺" }
-        ] },
-        { category: "ЗАВТРАКИ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Завтрак тарелка", price: "250₺" },
-            { name: "Смешанный завтрак", price: "300₺" },
-            { name: "Менемен", price: "200₺" },
-            { name: "Яйцо с суджуком", price: "200₺" },
-            { name: "Яичница", price: "150₺" },
-            { name: "Яйцо с сыром", price: "170₺" },
-            { name: "Яйцо с кавурмой", price: "250₺" }
-        ] },
-        { category: "ГОРЯЧИЕ НАПИТКИ", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "Чай", price: "20₺" },
-            { name: "Шалфейный чай", price: "20₺" },
-            { name: "Травяной чай", price: "30₺" },
-            { name: "Турецкий кофе", price: "60₺" },
-            { name: "Османский кофе", price: "80₺" },
-            { name: "Кофе мененгич", price: "80₺" }
-        ] },
-        { category: "ХОЛОДНЫЕ НАПИТКИ", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "Вода", price: "20₺" },
-            { name: "Содовая", price: "30₺" },
-            { name: "Фруктовая содовая", price: "30₺" },
-            { name: "Beypazarı Cola", price: "30₺" },
-            { name: "Çamlıca Orange", price: "30₺" },
-            { name: "Niğde Soda", price: "30₺" },
-            { name: "Холодный чай", price: "40₺" },
-            { name: "Айран маленький", price: "20₺" },
-            { name: "Айран большой", price: "30₺" },
-            { name: "Черчилль", price: "50₺" }
-        ] },
-        { category: "ДЕСЕРТЫ", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "Запеченный рисовый пудинг", price: "120₺" },
-            { name: "Шоколадное суфле", price: "120₺" }
-        ] }
-    ];
-
-    // ----- TAM ÇEVİRİLER - ARAPÇA -----
-    ORIGINAL_MENU_TEMPLATE.ar = [
-        { category: "أنواع التوست", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "توست بالجبن", price: "120₺" },
-            { name: "توست بالسجق", price: "120₺" },
-            { name: "توست بالجبن والسجق", price: "150₺" },
-            { name: "توست أتوم", price: "200₺" },
-            { name: "توست بثلاثة أجبان", price: "150₺" },
-            { name: "توست بالكاورمة", price: "200₺" },
-            { name: "توست آيفالك", price: "200₺" },
-            { name: "توست سميط", price: "350₺" },
-            { name: "توست دايت", price: "150₺" },
-            { name: "توست بازلما", price: "200₺" },
-            { name: "بازلما بالكاورمة", price: "250₺" },
-            { name: "كمرة", price: "200₺" }
-        ] },
-        { category: "الساندويشات", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "ساندويش مشكل", price: "150₺" },
-            { name: "ساندويش تونة", price: "200₺" },
-            { name: "ساندويش دجاج", price: "170₺" }
-        ] },
-        { category: "الوجبات الخفيفة", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "رقائق بطاطس", price: "120₺" },
-            { name: "قطع دجاج", price: "150₺" },
-            { name: "حلقات بصل (٦ قطع)", price: "60₺" }
-        ] },
-        { category: "السلطات", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "سلطة تونة", price: "250₺" },
-            { name: "سلطة دجاج", price: "250₺" },
-            { name: "سلطة جبن", price: "200₺" }
-        ] },
-        { category: "المعكرونة", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "معكرونة بولونيز", price: "250₺" },
-            { name: "معكرونة بالدجاج", price: "250₺" },
-            { name: "معكرونة بالجبن", price: "200₺" },
-            { name: "معكرونة بالتونة", price: "250₺" }
-        ] },
-        { category: "البرغر", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "هامبرغر كلاسيكي", price: "300₺" },
-            { name: "تشيز برغر", price: "320₺" },
-            { name: "برغر دجاج", price: "280₺" }
-        ] },
-        { category: "البيتزا", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "مارغريتا", price: "200₺" },
-            { name: "بيتزا سجق", price: "250₺" },
-            { name: "بيتزا مشكلة", price: "300₺" },
-            { name: "بيتزا كاورمة", price: "350₺" },
-            { name: "بيتزا تونة", price: "300₺" },
-            { name: "بيتزا خضار", price: "230₺" }
-        ] },
-        { category: "الفطور", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "طبق فطور", price: "250₺" },
-            { name: "فطور مختلط", price: "300₺" },
-            { name: "منمن", price: "200₺" },
-            { name: "بيض بالسجق", price: "200₺" },
-            { name: "بيض مقلي", price: "150₺" },
-            { name: "بيض بالجبن", price: "170₺" },
-            { name: "بيض بالكاورمة", price: "250₺" }
-        ] },
-        { category: "المشروبات الساخنة", image: "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400", items: [
-            { name: "شاي", price: "20₺" },
-            { name: "شاي المريمية", price: "20₺" },
-            { name: "شاي أعشاب", price: "30₺" },
-            { name: "قهوة تركية", price: "60₺" },
-            { name: "قهوة عثمانية", price: "80₺" },
-            { name: "قهوة منينجيتش", price: "80₺" }
-        ] },
-        { category: "المشروبات الباردة", image: "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400", items: [
-            { name: "ماء", price: "20₺" },
-            { name: "صودا", price: "30₺" },
-            { name: "صودا بالفواكه", price: "30₺" },
-            { name: "كولا باي بازار", price: "30₺" },
-            { name: "تشامليكا برتقال", price: "30₺" },
-            { name: "صودا نيغدة", price: "30₺" },
-            { name: "شاي مثلج", price: "40₺" },
-            { name: "عيران صغير", price: "20₺" },
-            { name: "عيران كبير", price: "30₺" },
-            { name: "تشرشل", price: "50₺" }
-        ] },
-        { category: "الحلويات", image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [
-            { name: "أرز بالحليب مخبوز", price: "120₺" },
-            { name: "سوفليه شوكولاتة", price: "120₺" }
-        ] }
-    ];
-
-    // ---------- 22.3 AKTİF MENÜ ----------
+    // ---------- AKTİF MENÜ ----------
     let currentMenu = {
         tr: [],
         en: [],
@@ -2300,32 +2265,47 @@
         ar: []
     };
 
-    // Menüyü localStorage'dan yükle, yoksa orijinal şablondan kopyala
+    // ========== DÜZELTİLMİŞ YÜKLEME FONKSİYONU ==========
     function loadMenuFromStorage() {
         const saved = localStorage.getItem('tosttoo_menu');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                if (parsed && typeof parsed === 'object' && parsed.tr && parsed.en && parsed.ru && parsed.ar) {
+                // Tüm dillerin varlığını kontrol et
+                if (parsed && typeof parsed === 'object' && 
+                    parsed.tr && Array.isArray(parsed.tr) && parsed.tr.length > 0 &&
+                    parsed.en && Array.isArray(parsed.en) && parsed.en.length > 0 &&
+                    parsed.ru && Array.isArray(parsed.ru) && parsed.ru.length > 0 &&
+                    parsed.ar && Array.isArray(parsed.ar) && parsed.ar.length > 0) {
+                    
                     currentMenu = parsed;
+                    console.log('Menü başarıyla yüklendi');
                     return;
                 }
-            } catch (e) {}
+            } catch (e) {
+                console.error('Menü yüklenirken hata:', e);
+            }
         }
-        // Derin kopya oluştur
+        
+        // Eğer kayıt yoksa veya hatalıysa, orijinal şablondan kopyala
+        console.log('Orijinal şablondan menü oluşturuluyor');
         currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
+        saveMenuToStorage();
     }
 
-    // Menüyü localStorage'a kaydet
     function saveMenuToStorage() {
-        localStorage.setItem('tosttoo_menu', JSON.stringify(currentMenu));
+        try {
+            localStorage.setItem('tosttoo_menu', JSON.stringify(currentMenu));
+        } catch (e) {
+            console.error('Menü kaydedilirken hata:', e);
+        }
     }
 
     // İlk yükleme
     loadMenuFromStorage();
 
-    // ---------- 22.4 YARDIMCI FONKSİYONLAR ----------
-    function showToast(message, type) {
+    // ========== YARDIMCI FONKSİYONLAR ==========
+    function showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
         if (!container) return;
         const toast = document.createElement('div');
@@ -2357,15 +2337,24 @@
         document.body.style.overflow = 'auto';
     }
 
-    // Güncel menüyü döndürür (resimler eklenmiş)
+    // ========== TAM MENÜYÜ AL (RESİMLERLE) ==========
     function getFullMenu() {
-        const base = currentMenu[currentLang] || currentMenu.tr || [];
+        // Geçerli dilde menü var mı kontrol et
+        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
+            console.warn(`${currentLang} menüsü boş, yedek kullanılıyor`);
+            // Yedek olarak Türkçe'yi kullan
+            currentLang = 'tr';
+        }
+        
+        const base = currentMenu[currentLang] || currentMenu.tr;
         return base.map((cat, catIdx) => ({
             ...cat,
             image: categoryImages[cat.category] || cat.image || "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
             items: cat.items.map((item, itemIdx) => ({
                 ...item,
-                image: (productImages[catIdx] && productImages[catIdx][item.name]) || item.image || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
+                image: (productImages[catIdx] && productImages[catIdx][item.name]) || 
+                       item.image || 
+                       "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
             }))
         }));
     }
@@ -2386,11 +2375,26 @@
         const pcs = document.getElementById('productCategorySelect');
         const pcsv2 = document.getElementById('productCategorySelectV2');
 
-        if (cs) { cs.innerHTML = ''; menu.forEach((c,i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`); }
-        if (cis) { cis.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
-        if (cisv2) { cisv2.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cisv2.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
-        if (pcs) { pcs.innerHTML = ''; menu.forEach((c,i) => pcs.innerHTML += `<option value="${i}">${c.category}</option>`); }
-        if (pcsv2) { pcsv2.innerHTML = ''; menu.forEach((c,i) => pcsv2.innerHTML += `<option value="${i}">${c.category}</option>`); }
+        if (cs) { 
+            cs.innerHTML = ''; 
+            menu.forEach((c,i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`); 
+        }
+        if (cis) { 
+            cis.innerHTML = '<option value="">Kategori seçin</option>'; 
+            menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`); 
+        }
+        if (cisv2) { 
+            cisv2.innerHTML = '<option value="">Kategori seçin</option>'; 
+            menu.forEach(c => cisv2.innerHTML += `<option value="${c.category}">${c.category}</option>`); 
+        }
+        if (pcs) { 
+            pcs.innerHTML = ''; 
+            menu.forEach((c,i) => pcs.innerHTML += `<option value="${i}">${c.category}</option>`); 
+        }
+        if (pcsv2) { 
+            pcsv2.innerHTML = ''; 
+            menu.forEach((c,i) => pcsv2.innerHTML += `<option value="${i}">${c.category}</option>`); 
+        }
     }
 
     function updateGallery() {
@@ -2403,14 +2407,24 @@
         if (galleryV2) galleryV2.innerHTML = html || '<p class="text-center">Resim yok</p>';
     }
 
+    // ========== MENÜYÜ GÖSTER ==========
     function displayMenu() {
         const grid = document.getElementById('menuGrid');
         if (!grid) return;
+        
         grid.innerHTML = '';
+        
+        // Menü kontrolü
+        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
+            currentLang = 'tr';
+        }
+        
         const menu = getFullMenu();
+        
         menu.forEach((cat, catIdx) => {
             const card = document.createElement('div');
             card.className = 'card has-image';
+            
             if (cat.image) {
                 const imgContainer = document.createElement('div');
                 imgContainer.className = 'card-image-container';
@@ -2432,17 +2446,21 @@
                 imgContainer.appendChild(img);
                 card.appendChild(imgContainer);
             }
+            
             const header = document.createElement('div');
             header.className = 'card-header';
             header.innerHTML = `<h3>${cat.category}</h3>`;
             card.appendChild(header);
+            
             const body = document.createElement('div');
             body.className = 'card-body';
             body.innerHTML = '<div class="items-container"></div>';
             const itemsContainer = body.querySelector('.items-container');
+            
             cat.items.forEach((item, itemIdx) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `item has-image`;
+                
                 const img = document.createElement('img');
                 img.src = item.image;
                 img.className = 'item-image';
@@ -2459,18 +2477,28 @@
                     }
                 };
                 itemDiv.appendChild(img);
+                
                 const nameSpan = document.createElement('span');
                 nameSpan.className = 'item-name';
                 nameSpan.textContent = item.name;
+                
+                // Çay ürünleri için özel tıklama
                 if (item.name.includes('Çay') || item.name.includes('Tea') || item.name.includes('Чай') || item.name.includes('شاي')) {
                     nameSpan.onclick = function(e) {
                         e.stopPropagation();
                         if (isDeveloper) {
-                            if (editMode) { const newName = prompt('Yeni ürün adı:', item.name); if (newName) updateItemName(catIdx, cat.category, item.name, newName); }
+                            if (editMode) { 
+                                const newName = prompt('Yeni ürün adı:', item.name); 
+                                if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
+                            }
                             else if (deleteMode) showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
                         } else {
                             teaClickCount++;
-                            if (teaClickCount >= 7 && !videoShown) { videoShown = true; openVideoModal(); teaClickCount = 0; }
+                            if (teaClickCount >= 7 && !videoShown) { 
+                                videoShown = true; 
+                                openVideoModal(); 
+                                teaClickCount = 0; 
+                            }
                             clearTimeout(window.teaTimer);
                             window.teaTimer = setTimeout(() => teaClickCount = 0, 5000);
                         }
@@ -2479,44 +2507,59 @@
                     nameSpan.onclick = function(e) {
                         e.stopPropagation();
                         if (isDeveloper) {
-                            if (editMode) { const newName = prompt('Yeni ürün adı:', item.name); if (newName) updateItemName(catIdx, cat.category, item.name, newName); }
+                            if (editMode) { 
+                                const newName = prompt('Yeni ürün adı:', item.name); 
+                                if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
+                            }
                             else if (deleteMode) showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
                         }
                     };
                 }
+                
                 const priceSpan = document.createElement('span');
                 priceSpan.className = 'item-price';
                 priceSpan.textContent = item.price;
                 priceSpan.onclick = function(e) {
                     e.stopPropagation();
-                    if (isDeveloper && editMode) { const newPrice = prompt('Yeni fiyat:', item.price); if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice); }
+                    if (isDeveloper && editMode) { 
+                        const newPrice = prompt('Yeni fiyat:', item.price); 
+                        if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice); 
+                    }
                 };
+                
                 if (isDeveloper) {
                     const actionsDiv = document.createElement('div');
                     actionsDiv.className = 'item-actions';
                     actionsDiv.style.cssText = 'display:flex; gap:5px; margin-left:10px;';
+                    
                     const editBtn = document.createElement('button');
                     editBtn.className = 'item-edit-btn';
                     editBtn.innerHTML = '<i class="fas fa-edit"></i>';
                     editBtn.onclick = (e) => { e.stopPropagation(); editItem(catIdx, itemIdx); };
+                    
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'item-delete-btn';
                     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
                     deleteBtn.onclick = (e) => { e.stopPropagation(); showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name)); };
+                    
                     const imageBtn = document.createElement('button');
                     imageBtn.className = 'item-image-edit-btn';
                     imageBtn.innerHTML = '<i class="fas fa-image"></i>';
                     imageBtn.onclick = (e) => { e.stopPropagation(); openImageEdit('product', catIdx, itemIdx, item.name, img.src); };
+                    
                     actionsDiv.appendChild(editBtn);
                     actionsDiv.appendChild(imageBtn);
                     actionsDiv.appendChild(deleteBtn);
                     itemDiv.appendChild(actionsDiv);
                 }
+                
                 itemDiv.appendChild(nameSpan);
                 itemDiv.appendChild(priceSpan);
                 itemsContainer.appendChild(itemDiv);
             });
+            
             card.appendChild(body);
+            
             if (isDeveloper) {
                 const deleteCatBtn = document.createElement('button');
                 deleteCatBtn.className = 'delete-card-btn';
@@ -2524,16 +2567,19 @@
                 deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" kategorisi silinsin mi?`, () => deleteCategory(cat.category));
                 card.appendChild(deleteCatBtn);
             }
+            
             grid.appendChild(card);
         });
+        
         updateSelects();
         updateGallery();
         updateStats();
+        
         const codeDisplay = document.getElementById('v1CodeDisplay');
         if (codeDisplay) codeDisplay.textContent = JSON.stringify(currentMenu, null, 2);
     }
 
-    // ---------- 22.5 DÜZENLEME/SİLME FONKSİYONLARI ----------
+    // ========== DÜZENLEME/SİLME FONKSİYONLARI ==========
     function updateItemName(catIdx, catName, oldName, newName) {
         const menu = currentMenu[currentLang] || [];
         if (!menu[catIdx]) return;
@@ -2594,7 +2640,7 @@
         }
     }
 
-    // ---------- 22.6 GELİŞTİRİCİ FONKSİYONLARI ----------
+    // ========== GELİŞTİRİCİ FONKSİYONLARI ==========
     window.editItem = function(catIdx, itemIdx) {
         const menu = currentMenu[currentLang] || [];
         const item = menu[catIdx]?.items[itemIdx];
@@ -2608,9 +2654,30 @@
             }
         }
     };
-    window.enableEdit = function() { editMode = true; deleteMode = false; document.getElementById('menuGrid').classList.add('edit-mode'); document.getElementById('menuGrid').classList.remove('delete-mode'); showToast('✏️ Düzenleme modu aktif', 'success'); };
-    window.enableDelete = function() { deleteMode = true; editMode = false; document.getElementById('menuGrid').classList.add('delete-mode'); document.getElementById('menuGrid').classList.remove('edit-mode'); showToast('🗑️ Silme modu aktif', 'success'); };
-    window.disableAllModes = function() { editMode = false; deleteMode = false; document.getElementById('menuGrid').classList.remove('edit-mode','delete-mode'); showToast('🔘 Modlar kapatıldı', 'success'); };
+
+    window.enableEdit = function() { 
+        editMode = true; 
+        deleteMode = false; 
+        document.getElementById('menuGrid').classList.add('edit-mode'); 
+        document.getElementById('menuGrid').classList.remove('delete-mode'); 
+        showToast('✏️ Düzenleme modu aktif', 'success'); 
+    };
+
+    window.enableDelete = function() { 
+        deleteMode = true; 
+        editMode = false; 
+        document.getElementById('menuGrid').classList.add('delete-mode'); 
+        document.getElementById('menuGrid').classList.remove('edit-mode'); 
+        showToast('🗑️ Silme modu aktif', 'success'); 
+    };
+
+    window.disableAllModes = function() { 
+        editMode = false; 
+        deleteMode = false; 
+        document.getElementById('menuGrid').classList.remove('edit-mode','delete-mode'); 
+        showToast('🔘 Modlar kapatıldı', 'success'); 
+    };
+
     window.addCategory = function() {
         const name = document.getElementById('newCategory').value.trim();
         if (!name) return showToast('Kategori adı girin!', 'error');
@@ -2621,6 +2688,7 @@
         document.getElementById('newCategory').value = '';
         showToast('Kategori eklendi', 'success');
     };
+
     window.addProduct = function() {
         const name = document.getElementById('newName').value.trim();
         const price = document.getElementById('productPrice').value.trim();
@@ -2637,125 +2705,45 @@
             showToast('Ürün eklendi', 'success');
         }
     };
-    window.previewCategoryImage = function() {
-        const url = document.getElementById('categoryImageUrl').value;
-        document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
+
+    // ========== DİL VE TEMA FONKSİYONLARI ==========
+    window.toggleLanguageMenu = function() {
+        const menu = document.getElementById('languageMenu');
+        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     };
-    window.previewProductImage = function() {
-        const url = document.getElementById('productImageUrl').value;
-        document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
-    };
-    window.addCategoryImage = function() {
-        const cat = document.getElementById('categoryImageSelect').value;
-        const url = document.getElementById('categoryImageUrl').value;
-        if (!cat || !url) return showToast('Kategori ve URL girin!', 'error');
-        categoryImages[cat] = url;
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        displayMenu();
-        updateGallery();
-        showToast('Kategori resmi eklendi', 'success');
-    };
-    window.deleteCategoryImage = function() {
-        const cat = document.getElementById('categoryImageSelect').value;
-        if (!cat || !categoryImages[cat]) return showToast('Kategori seçin!', 'error');
-        delete categoryImages[cat];
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-        displayMenu();
-        updateGallery();
-        showToast('Kategori resmi silindi', 'success');
-    };
-    window.addProductImage = function() {
-        const catIdx = document.getElementById('productCategorySelect').value;
-        const prodIdx = document.getElementById('productSelect').value;
-        const url = document.getElementById('productImageUrl').value;
-        if (!catIdx || !prodIdx || !url) return showToast('Kategori, ürün ve URL girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (!productImages[catIdx]) productImages[catIdx] = {};
-        productImages[catIdx][prod] = url;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-        displayMenu();
-        updateGallery();
-        showToast('Ürün resmi eklendi', 'success');
-    };
-    window.deleteProductImage = function() {
-        const catIdx = document.getElementById('productCategorySelect').value;
-        const prodIdx = document.getElementById('productSelect').value;
-        if (!catIdx || !prodIdx) return showToast('Kategori ve ürün seçin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (productImages[catIdx] && productImages[catIdx][prod]) {
-            delete productImages[catIdx][prod];
-            localStorage.setItem('productImages', JSON.stringify(productImages));
-            displayMenu();
-            updateGallery();
-            showToast('Ürün resmi silindi', 'success');
+
+    window.setLanguage = function(lang) {
+        currentLang = lang;
+        localStorage.setItem('lang', lang);
+        
+        const flags = { tr:'🇹🇷', en:'🇬🇧', ru:'🇷🇺', ar:'🇮🇶' };
+        document.getElementById('langBtn').innerHTML = flags[lang];
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+        document.getElementById('languageMenu').style.display = 'none';
+        
+        // Menü kontrolü
+        if (!currentMenu[lang] || currentMenu[lang].length === 0) {
+            if (ORIGINAL_MENU_TEMPLATE[lang]) {
+                currentMenu[lang] = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE[lang]));
+                saveMenuToStorage();
+            }
         }
-    };
-    window.previewCategoryImageV2 = function() {
-        const url = document.getElementById('categoryImageUrlV2').value;
-        document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
-    };
-    window.previewProductImageV2 = function() {
-        const url = document.getElementById('productImageUrlV2').value;
-        document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
-    };
-    window.addCategoryImageV2 = function() {
-        const cat = document.getElementById('categoryImageSelectV2').value;
-        const url = document.getElementById('categoryImageUrlV2').value;
-        if (!cat || !url) return showToast('Kategori ve URL girin!', 'error');
-        categoryImages[cat] = url;
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        
         displayMenu();
-        updateGallery();
-        showToast('Kategori resmi eklendi', 'success');
-    };
-    window.addProductImageV2 = function() {
-        const catIdx = document.getElementById('productCategorySelectV2').value;
-        const prodIdx = document.getElementById('productSelectV2').value;
-        const url = document.getElementById('productImageUrlV2').value;
-        if (!catIdx || !prodIdx || !url) return showToast('Kategori, ürün ve URL girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (!productImages[catIdx]) productImages[catIdx] = {};
-        productImages[catIdx][prod] = url;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-        displayMenu();
-        updateGallery();
-        showToast('Ürün resmi eklendi', 'success');
-    };
-    window.editGalleryImage = function(type, cat, product) {
-        if (type === 'category') openImageEdit('category', null, null, cat, categoryImages[cat]);
-        else openImageEdit('product', parseInt(cat), null, product, productImages[cat][product]);
-    };
-    window.deleteGalleryImage = function(type, cat, product) {
-        showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
-            if (type === 'category') { delete categoryImages[cat]; localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); }
-            else { delete productImages[cat][product]; localStorage.setItem('productImages', JSON.stringify(productImages)); }
-            displayMenu(); updateGallery(); showToast('Resim silindi', 'success');
-        });
+        showToast(`Dil değiştirildi: ${lang.toUpperCase()}`, 'success');
     };
 
-    document.getElementById('productCategorySelect')?.addEventListener('change', function() {
-        const ci = this.value;
-        const ps = document.getElementById('productSelect');
-        const menu = currentMenu[currentLang] || [];
-        if (!ci || !menu[ci]) { ps.disabled = true; ps.innerHTML = '<option>Önce kategori seçin</option>'; return; }
-        ps.disabled = false;
-        ps.innerHTML = '<option value="">Ürün seçin</option>';
-        menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
-    });
-    document.getElementById('productCategorySelectV2')?.addEventListener('change', function() {
-        const ci = this.value;
-        const ps = document.getElementById('productSelectV2');
-        const menu = currentMenu[currentLang] || [];
-        if (!ci || !menu[ci]) { ps.disabled = true; ps.innerHTML = '<option>Önce kategori seçin</option>'; return; }
-        ps.disabled = false;
-        ps.innerHTML = '<option value="">Ürün seçin</option>';
-        menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
-    });
+    window.toggleMode = function() {
+        document.body.classList.toggle('light-mode');
+        document.getElementById('themeToggle').innerHTML = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    };
 
-    // ---------- 22.7 MODAL FONKSİYONLARI ----------
+    window.scrollToMenu = function() { 
+        document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); 
+    };
+
+    // ========== MODAL FONKSİYONLARI ==========
     window.openImageModal = function(src, title, imageList, index) {
         currentImageList = imageList || [];
         currentImageIndex = index || 0;
@@ -2764,17 +2752,29 @@
         const modalInfo = document.getElementById('modalImageInfo');
         const prev = document.querySelector('.image-modal-nav.prev');
         const next = document.querySelector('.image-modal-nav.next');
+        
         modalImg.src = src;
         modalInfo.textContent = title;
+        
         if (currentImageList.length > 1) {
-            prev.classList.remove('disabled'); next.classList.remove('disabled');
+            prev.classList.remove('disabled'); 
+            next.classList.remove('disabled');
             prev.classList.toggle('disabled', index === 0);
             next.classList.toggle('disabled', index === currentImageList.length-1);
-        } else { prev.classList.add('disabled'); next.classList.add('disabled'); }
+        } else { 
+            prev.classList.add('disabled'); 
+            next.classList.add('disabled'); 
+        }
+        
         modal.classList.add('show');
         document.body.style.overflow = 'hidden';
     };
-    window.closeImageModal = function() { document.getElementById('imageModal').classList.remove('show'); document.body.style.overflow = 'auto'; };
+
+    window.closeImageModal = function() { 
+        document.getElementById('imageModal').classList.remove('show'); 
+        document.body.style.overflow = 'auto'; 
+    };
+
     window.navigateImage = function(direction) {
         const newIdx = currentImageIndex + direction;
         if (newIdx >= 0 && newIdx < currentImageList.length) {
@@ -2782,33 +2782,43 @@
             const data = currentImageList[newIdx];
             document.getElementById('modalImage').src = data.src;
             document.getElementById('modalImageInfo').textContent = data.title;
+            
             const prev = document.querySelector('.image-modal-nav.prev');
             const next = document.querySelector('.image-modal-nav.next');
             prev.classList.toggle('disabled', newIdx === 0);
             next.classList.toggle('disabled', newIdx === currentImageList.length-1);
         }
     };
+
     window.openVideoModal = function() {
         document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/d6BLnYv_oZE?autoplay=1&mute=0';
         document.getElementById('videoModal').style.display = 'flex';
         document.body.style.overflow = 'hidden';
     };
+
     window.closeVideoModal = function() {
         document.getElementById('videoFrame').src = '';
         document.getElementById('videoModal').style.display = 'none';
         document.body.style.overflow = 'auto';
     };
+
     window.openImageEdit = function(type, catIdx, itemIdx, name, currentSrc) {
         currentEditData = { type, catIdx, itemIdx, name, currentSrc };
         document.getElementById('imageEditImg').src = currentSrc || '';
         document.getElementById('imageEditUrl').value = currentSrc || '';
         document.getElementById('imageEditModal').style.display = 'flex';
     };
-    window.closeImageEdit = function() { document.getElementById('imageEditModal').style.display = 'none'; currentEditData = null; };
+
+    window.closeImageEdit = function() { 
+        document.getElementById('imageEditModal').style.display = 'none'; 
+        currentEditData = null; 
+    };
+
     window.saveImageEdit = function() {
         if (!currentEditData) return;
         const newUrl = document.getElementById('imageEditUrl').value.trim();
         if (!newUrl) return showToast('Resim URL girin!', 'error');
+        
         if (currentEditData.type === 'category') {
             categoryImages[currentEditData.name] = newUrl;
             localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
@@ -2819,8 +2829,13 @@
             productImages[catIdx][itemName] = newUrl;
             localStorage.setItem('productImages', JSON.stringify(productImages));
         }
-        displayMenu(); updateGallery(); showToast('Resim güncellendi', 'success'); closeImageEdit();
+        
+        displayMenu(); 
+        updateGallery(); 
+        showToast('Resim güncellendi', 'success'); 
+        closeImageEdit();
     };
+
     window.deleteImageEdit = function() {
         if (!currentEditData) return;
         showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
@@ -2835,54 +2850,68 @@
                     localStorage.setItem('productImages', JSON.stringify(productImages));
                 }
             }
-            displayMenu(); updateGallery(); showToast('Resim silindi', 'success'); closeImageEdit();
+            displayMenu(); 
+            updateGallery(); 
+            showToast('Resim silindi', 'success'); 
+            closeImageEdit();
         });
     };
 
-    // ---------- 22.8 DİL VE TEMA ----------
-    window.toggleLanguageMenu = function() {
-        const menu = document.getElementById('languageMenu');
-        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-    };
-    window.setLanguage = function(lang) {
-        currentLang = lang;
-        localStorage.setItem('lang', lang);
-        const flags = { tr:'🇹🇷', en:'🇬🇧', ru:'🇷🇺', ar:'🇮🇶' };
-        document.getElementById('langBtn').textContent = flags[lang];
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.getElementById('languageMenu').style.display = 'none';
-        displayMenu();
-    };
-    window.toggleMode = function() {
-        document.body.classList.toggle('light-mode');
-        document.getElementById('themeToggle').innerHTML = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-    };
-    window.scrollToMenu = function() { document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); };
-
-    // ---------- 22.9 PANEL YÖNETİMİ ----------
+    // ========== PANEL YÖNETİMİ ==========
     window.switchDevTab = function(tab) {
         document.querySelectorAll('#devPanelV1 .panel-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('#devPanelV1 .panel-content').forEach(c => c.classList.remove('active'));
         document.querySelector(`#devPanelV1 .panel-tab[onclick="switchDevTab('${tab}')"]`).classList.add('active');
         document.getElementById(`tab-${tab}`).classList.add('active');
     };
+
     window.switchDevTabV2 = function(tab) {
         document.querySelectorAll('#devPanelV2 .panel-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('#devPanelV2 .panel-content').forEach(c => c.classList.remove('active'));
-        if (tab === 'gallery') { document.querySelector('#devPanelV2 .panel-tab:first-child').classList.add('active'); document.getElementById('tab-gallery').classList.add('active'); }
-        else if (tab === 'category') { document.querySelector('#devPanelV2 .panel-tab:nth-child(2)').classList.add('active'); document.getElementById('tab-category-v2').classList.add('active'); }
-        else if (tab === 'product') { document.querySelector('#devPanelV2 .panel-tab:nth-child(3)').classList.add('active'); document.getElementById('tab-product-v2').classList.add('active'); }
-        else if (tab === 'sync') { document.querySelector('#devPanelV2 .panel-tab:nth-child(4)').classList.add('active'); document.getElementById('tab-sync').classList.add('active'); }
-    };
-    window.closeDevPanel = function() { document.getElementById('devPanelV1').classList.remove('show'); document.getElementById('devPanelV2').classList.remove('show'); editMode = false; deleteMode = false; };
-    window.toggleDevPanel = function() {
-        const panel = document.getElementById('devPanelV1');
-        if (panel.classList.contains('show')) { panel.classList.remove('show'); document.getElementById('devPanelV2').classList.remove('show'); editMode = false; deleteMode = false; }
-        else { panel.classList.add('show'); document.getElementById('devPanelV2').classList.remove('show'); updateSelects(); updateGallery(); updateStats(); }
+        
+        if (tab === 'gallery') { 
+            document.querySelector('#devPanelV2 .panel-tab:first-child').classList.add('active'); 
+            document.getElementById('tab-gallery').classList.add('active'); 
+        }
+        else if (tab === 'category') { 
+            document.querySelector('#devPanelV2 .panel-tab:nth-child(2)').classList.add('active'); 
+            document.getElementById('tab-category-v2').classList.add('active'); 
+        }
+        else if (tab === 'product') { 
+            document.querySelector('#devPanelV2 .panel-tab:nth-child(3)').classList.add('active'); 
+            document.getElementById('tab-product-v2').classList.add('active'); 
+        }
+        else if (tab === 'sync') { 
+            document.querySelector('#devPanelV2 .panel-tab:nth-child(4)').classList.add('active'); 
+            document.getElementById('tab-sync').classList.add('active'); 
+        }
     };
 
-    // ---------- 22.10 CLOUD VE YEDEKLEME ----------
+    window.closeDevPanel = function() { 
+        document.getElementById('devPanelV1').classList.remove('show'); 
+        document.getElementById('devPanelV2').classList.remove('show'); 
+        editMode = false; 
+        deleteMode = false; 
+    };
+
+    window.toggleDevPanel = function() {
+        const panel = document.getElementById('devPanelV1');
+        if (panel.classList.contains('show')) { 
+            panel.classList.remove('show'); 
+            document.getElementById('devPanelV2').classList.remove('show'); 
+            editMode = false; 
+            deleteMode = false; 
+        }
+        else { 
+            panel.classList.add('show'); 
+            document.getElementById('devPanelV2').classList.remove('show'); 
+            updateSelects(); 
+            updateGallery(); 
+            updateStats(); 
+        }
+    };
+
+    // ========== CLOUD VE YEDEKLEME ==========
     window.saveToCloud = async function() {
         showToast('☁️ Kaydediliyor...', 'info');
         document.getElementById('cloudSaveBtn').disabled = true;
@@ -2893,9 +2922,12 @@
                 body:JSON.stringify({ menu: currentMenu, images:{ categories:categoryImages, products:productImages } })
             });
             showToast('✅ Kaydedildi!', 'success');
-        } catch { showToast('❌ Hata!', 'error'); }
+        } catch { 
+            showToast('❌ Hata!', 'error'); 
+        }
         document.getElementById('cloudSaveBtn').disabled = false;
     };
+
     window.loadFromCloud = async function() {
         showToast('📥 Yükleniyor...', 'info');
         document.getElementById('cloudLoadBtn').disabled = true;
@@ -2911,25 +2943,55 @@
                     localStorage.setItem('productImages', JSON.stringify(productImages));
                 }
                 saveMenuToStorage();
-                displayMenu(); updateGallery(); showToast('✅ Yüklendi!', 'success');
+                displayMenu(); 
+                updateGallery(); 
+                showToast('✅ Yüklendi!', 'success');
             }
-        } catch { showToast('❌ Hata!', 'error'); }
+        } catch { 
+            showToast('❌ Hata!', 'error'); 
+        }
         document.getElementById('cloudLoadBtn').disabled = false;
     };
+
     window.testCloudConnection = async function() {
-        try { await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a'); showToast('✅ Bağlantı başarılı!', 'success'); }
-        catch { showToast('❌ Bağlantı hatası!', 'error'); }
+        try { 
+            await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a'); 
+            showToast('✅ Bağlantı başarılı!', 'success'); 
+        }
+        catch { 
+            showToast('❌ Bağlantı hatası!', 'error'); 
+        }
     };
+
     window.saveImagesToCloud = function() {
         localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
         showToast('✅ Resimler kaydedildi!', 'success');
     };
+
     window.loadImagesFromCloud = function() {
         const b = localStorage.getItem('cloudImagesBackup');
-        if (b) { const d = JSON.parse(b); categoryImages = d.categories || {}; productImages = d.products || {}; localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); localStorage.setItem('productImages', JSON.stringify(productImages)); displayMenu(); updateGallery(); showToast('✅ Resimler yüklendi!', 'success'); }
+        if (b) { 
+            const d = JSON.parse(b); 
+            categoryImages = d.categories || {}; 
+            productImages = d.products || {}; 
+            localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); 
+            localStorage.setItem('productImages', JSON.stringify(productImages)); 
+            displayMenu(); 
+            updateGallery(); 
+            showToast('✅ Resimler yüklendi!', 'success'); 
+        }
     };
-    window.copyV1Code = function() { navigator.clipboard.writeText(JSON.stringify(currentMenu, null, 2)); showToast('📋 Kod kopyalandı!', 'success'); };
-    window.copyBackupCode = function() { navigator.clipboard.writeText(JSON.stringify({ menu: currentMenu, images: { categories: categoryImages, products: productImages } }, null, 2)); showToast('📋 Kod kopyalandı!', 'success'); };
+
+    window.copyV1Code = function() { 
+        navigator.clipboard.writeText(JSON.stringify(currentMenu, null, 2)); 
+        showToast('📋 Kod kopyalandı!', 'success'); 
+    };
+
+    window.copyBackupCode = function() { 
+        navigator.clipboard.writeText(JSON.stringify({ menu: currentMenu, images: { categories: categoryImages, products: productImages } }, null, 2)); 
+        showToast('📋 Kod kopyalandı!', 'success'); 
+    };
+
     window.pasteBackupCode = function() {
         const code = prompt('Kodu yapıştır:');
         if (!code) return;
@@ -2944,34 +3006,65 @@
                     localStorage.setItem('productImages', JSON.stringify(productImages));
                 }
                 saveMenuToStorage();
-                displayMenu(); updateGallery(); showToast('✅ Kod yüklendi!', 'success');
+                displayMenu(); 
+                updateGallery(); 
+                showToast('✅ Kod yüklendi!', 'success');
             }
-        } catch { showToast('❌ Geçersiz kod!', 'error'); }
+        } catch { 
+            showToast('❌ Geçersiz kod!', 'error'); 
+        }
     };
+
     window.changeInstagram = function() {
         const v = document.getElementById('newInstagram').value;
-        if (v) { document.getElementById('instaLink').href = v; localStorage.setItem('insta', v); showToast('Instagram güncellendi', 'success'); }
+        if (v) { 
+            document.getElementById('instaLink').href = v; 
+            localStorage.setItem('insta', v); 
+            showToast('Instagram güncellendi', 'success'); 
+        }
     };
+
     window.changeLocation = function() {
         const v = document.getElementById('newLocation').value;
-        if (v) { document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; localStorage.setItem('map', v); showToast('Konum güncellendi', 'success'); }
+        if (v) { 
+            document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; 
+            localStorage.setItem('map', v); 
+            showToast('Konum güncellendi', 'success'); 
+        }
     };
-    window.openColorPicker = function() { document.getElementById('colorPickerModal').style.display = 'flex'; };
-    window.closeColorPicker = function() { document.getElementById('colorPickerModal').style.display = 'none'; };
+
+    window.openColorPicker = function() { 
+        document.getElementById('colorPickerModal').style.display = 'flex'; 
+    };
+
+    window.closeColorPicker = function() { 
+        document.getElementById('colorPickerModal').style.display = 'none'; 
+    };
+
     window.applyColors = function() {
         const catColor = document.getElementById('colorCategory').value;
         const nameColor = document.getElementById('colorName').value;
         const priceColor = document.getElementById('colorPrice').value;
+        
         document.documentElement.style.setProperty('--primary', catColor);
         const style = document.createElement('style');
         style.id = 'customColors';
-        style.textContent = `.item-name { color: ${nameColor} !important; } .item-price { color: ${priceColor} !important; background: ${catColor}20 !important; border-color: ${catColor} !important; } .card-header h3 { color: ${catColor} !important; } .section-title { color: ${catColor} !important; } .btn { background: ${catColor} !important; }`;
+        style.textContent = `
+            .item-name { color: ${nameColor} !important; } 
+            .item-price { color: ${priceColor} !important; background: ${catColor}20 !important; border-color: ${catColor} !important; } 
+            .card-header h3 { color: ${catColor} !important; } 
+            .section-title { color: ${catColor} !important; } 
+            .btn { background: ${catColor} !important; }
+        `;
+        
         const old = document.getElementById('customColors');
         if (old) old.remove();
         document.head.appendChild(style);
+        
         closeColorPicker();
         showToast('🎨 Renkler uygulandı!', 'success');
     };
+
     window.resetToOriginal = function() {
         showConfirm('Menü sıfırlansın mı? (Tüm değişiklikler kaybolacak)', () => {
             currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
@@ -2985,14 +3078,26 @@
         });
     };
 
-    document.getElementById('confirmYesBtn').onclick = function() { if (confirmCallback) { confirmCallback(); confirmCallback = null; } document.getElementById('confirmModal').style.display = 'none'; };
-    document.getElementById('confirmNoBtn').onclick = function() { confirmCallback = null; document.getElementById('confirmModal').style.display = 'none'; };
+    document.getElementById('confirmYesBtn').onclick = function() { 
+        if (confirmCallback) { 
+            confirmCallback(); 
+            confirmCallback = null; 
+        } 
+        document.getElementById('confirmModal').style.display = 'none'; 
+    };
+
+    document.getElementById('confirmNoBtn').onclick = function() { 
+        confirmCallback = null; 
+        document.getElementById('confirmModal').style.display = 'none'; 
+    };
 
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { closeAllModals(); }
+        if (e.key === 'Escape') { 
+            closeAllModals(); 
+        }
     });
 
-    // ---------- 22.11 GELİŞTİRİCİ GİRİŞİ ----------
+    // ========== GELİŞTİRİCİ GİRİŞİ ==========
     let clickCount = 0;
     document.getElementById('secretTrigger').addEventListener('click', function() {
         clickCount++;
@@ -3008,6 +3113,7 @@
             clickCount = 0;
         }
     });
+
     document.addEventListener('keydown', function(e) {
         if (e.key === 'F5') {
             e.preventDefault();
@@ -3021,29 +3127,61 @@
         }
     });
 
-    // ---------- 22.12 SAYFA YÜKLENİRKEN ----------
+    // ========== SAYFA YÜKLENİRKEN ==========
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang') || 'tr';
-        setLanguage(savedLang);
-        if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').innerHTML = '☀️'; }
-        ['colorCategory','colorName','colorPrice'].forEach(id => { const v = localStorage.getItem(id); if (v) document.getElementById(id).value = v; });
+        // Kaydedilmiş dili yükle
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && ['tr', 'en', 'ru', 'ar'].includes(savedLang)) {
+            currentLang = savedLang;
+        }
+        
+        // Menü kontrolü
+        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
+            loadMenuFromStorage();
+        }
+        
+        // Dili uygula
+        setLanguage(currentLang);
+        
+        // Tema
+        if (localStorage.getItem('theme') === 'light') { 
+            document.body.classList.add('light-mode'); 
+            document.getElementById('themeToggle').innerHTML = '☀️'; 
+        }
+        
+        // Renkler
+        ['colorCategory','colorName','colorPrice'].forEach(id => { 
+            const v = localStorage.getItem(id); 
+            if (v) document.getElementById(id).value = v; 
+        });
+        
+        // Instagram
         const insta = localStorage.getItem('insta') || 'https://www.instagram.com/tosttooyevski';
         document.getElementById('instaLink').href = insta;
         document.getElementById('newInstagram').value = insta;
+        
+        // Harita
         const map = localStorage.getItem('map');
         if (map) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${map}&output=embed`;
+        
+        // Menüyü göster
         displayMenu();
+        
+        // Dil menüsünü kapatmak için tıklama
         document.addEventListener('click', function(e) {
             const btn = document.getElementById('langBtn');
             const menu = document.getElementById('languageMenu');
-            if (!btn.contains(e.target) && !menu.contains(e.target)) menu.style.display = 'none';
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.style.display = 'none';
+            }
         });
     });
 
-    // ---------- 22.13 SÜRÜKLEME ----------
+    // ========== SÜRÜKLEME ==========
     const devPanel = document.getElementById('devPanelV1');
     const dragHandle = document.getElementById('dragHandle');
     let isDragging = false, offsetX, offsetY;
+    
     if (dragHandle) {
         dragHandle.addEventListener('mousedown', function(e) {
             if (e.target.closest('button')) return;
@@ -3053,20 +3191,28 @@
             offsetY = e.clientY - rect.top;
             devPanel.style.transition = 'none';
         });
+        
         document.addEventListener('mousemove', function(e) {
             if (!isDragging) return;
             devPanel.style.left = (e.clientX - offsetX) + 'px';
             devPanel.style.top = (e.clientY - offsetY) + 'px';
             devPanel.style.transform = 'none';
         });
-        document.addEventListener('mouseup', function() { isDragging = false; devPanel.style.transition = ''; });
+        
+        document.addEventListener('mouseup', function() { 
+            isDragging = false; 
+            devPanel.style.transition = ''; 
+        });
     }
 
-    // ---------- 22.14 SAĞ TIK ENGELLEME ----------
-    document.addEventListener('contextmenu', function(e) { if (!isDeveloper) e.preventDefault(); });
+    // ========== SAĞ TIK ENGELLEME ==========
+    document.addEventListener('contextmenu', function(e) { 
+        if (!isDeveloper) e.preventDefault(); 
+    });
 })();
 </script>
-<!-- ========== 23. EK YORUM SATIRLARI ========== -->
+
+<!-- ========== EK YORUM SATIRLARI ========== -->
 <!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
 <!-- 11 --><!-- 12 --><!-- 13 --><!-- 14 --><!-- 15 --><!-- 16 --><!-- 17 --><!-- 18 --><!-- 19 --><!-- 20 -->
 <!-- 21 --><!-- 22 --><!-- 23 --><!-- 24 --><!-- 25 --><!-- 26 --><!-- 27 --><!-- 28 --><!-- 29 --><!-- 30 -->
