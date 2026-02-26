@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tosttoo | Menü (Tam Düzenlenebilir - Çok Dilli)</title>
+    <title>Tosttoo | Menü (Çok Dilli - العلم العراقي)</title>
     <!-- Yazı tipleri ve ikonlar -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -49,7 +49,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Hero Bölümü */
         .hero {
             height: 100vh;
             display: flex;
@@ -119,10 +118,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,140,0,0.3);
             z-index: 10;
-        }
-
-        .light-mode .work-time {
-            background: rgba(255,140,0,0.2);
         }
 
         @keyframes pulse {
@@ -1630,7 +1625,7 @@
 </head>
 <body dir="ltr" data-theme="dark" data-language="tr">
 
-<!-- MODALLAR - TÜM MODALLAR AYNEN KALIYOR -->
+<!-- MODALLAR -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
@@ -1657,7 +1652,7 @@
     <button class="language-btn" onclick="setLanguage('tr')"><span>🇹🇷 Türkçe</span></button>
     <button class="language-btn" onclick="setLanguage('en')"><span>🇬🇧 English</span></button>
     <button class="language-btn" onclick="setLanguage('ru')"><span>🇷🇺 Русский</span></button>
-    <button class="language-btn" onclick="setLanguage('ar')"><span>🇸🇦 العربية</span></button>
+    <button class="language-btn" onclick="setLanguage('ar')"><span>🇮🇶 العربية</span></button>
 </div>
 
 <div class="modal-overlay" id="confirmModal">
@@ -1945,7 +1940,6 @@
     </div>
 </section>
 
-<!-- ========== JAVASCRIPT - DÜZELTİLMİŞ ÇOK DİLLİ SÜRÜM ========== -->
 <script>
 (function() {
     'use strict';
@@ -2309,26 +2303,19 @@
         ar: []
     };
 
-    // ========== DÜZELTİLMİŞ YÜKLEME FONKSİYONU ==========
+    // ========== MENÜ YÜKLEME ==========
     function loadMenuFromStorage() {
         const saved = localStorage.getItem('tosttoo_menu');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                // Tüm dillerin varlığını kontrol et
                 if (parsed && typeof parsed === 'object' && 
-                    parsed.tr && Array.isArray(parsed.tr) && parsed.tr.length > 0 &&
-                    parsed.en && Array.isArray(parsed.en) && parsed.en.length > 0 &&
-                    parsed.ru && Array.isArray(parsed.ru) && parsed.ru.length > 0 &&
-                    parsed.ar && Array.isArray(parsed.ar) && parsed.ar.length > 0) {
-                    
+                    parsed.tr && parsed.en && parsed.ru && parsed.ar) {
                     currentMenu = parsed;
                     return;
                 }
             } catch (e) {}
         }
-        
-        // Eğer kayıt yoksa veya hatalıysa, orijinal şablondan kopyala
         currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
         saveMenuToStorage();
     }
@@ -2337,7 +2324,6 @@
         localStorage.setItem('tosttoo_menu', JSON.stringify(currentMenu));
     }
 
-    // İlk yükleme
     loadMenuFromStorage();
 
     // ========== YARDIMCI FONKSİYONLAR ==========
@@ -2373,29 +2359,14 @@
         document.body.style.overflow = 'auto';
     }
 
-    // ========== TAM MENÜYÜ AL (RESİMLERLE) ==========
     function getFullMenu() {
-        // Geçerli dilde menü var mı kontrol et
-        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
-            // Yedek olarak Türkçe'yi kullan
-            if (currentMenu.tr && currentMenu.tr.length > 0) {
-                currentLang = 'tr';
-            } else {
-                // Hiçbir şey yoksa şablondan yükle
-                currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
-                saveMenuToStorage();
-            }
-        }
-        
         const base = currentMenu[currentLang] || currentMenu.tr;
         return base.map((cat, catIdx) => ({
             ...cat,
             image: categoryImages[cat.category] || cat.image || "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
             items: cat.items.map((item, itemIdx) => ({
                 ...item,
-                image: (productImages[catIdx] && productImages[catIdx][item.name]) || 
-                       item.image || 
-                       "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
+                image: (productImages[catIdx] && productImages[catIdx][item.name]) || item.image || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
             }))
         }));
     }
@@ -2433,17 +2404,20 @@
         if (galleryV2) galleryV2.innerHTML = html || '<p class="text-center">Resim yok</p>';
     }
 
-    // ========== DÜZELTİLMİŞ DİL DEĞİŞTİRME FONKSİYONU ==========
+    // ========== DÜZELTİLMİŞ DİL DEĞİŞTİRME ==========
     window.setLanguage = function(lang) {
         currentLang = lang;
         localStorage.setItem('lang', lang);
         
-        const flags = { tr:'🇹🇷', en:'🇬🇧', ru:'🇷🇺', ar:'🇸🇦' };
+        // Bayraklar - العلم العراقي للعربية
+        const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
         document.getElementById('langBtn').innerHTML = flags[lang];
+        
+        // Yön değiştirme - تغيير الاتجاه
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
         document.getElementById('languageMenu').style.display = 'none';
         
-        // Menü kontrolü - Eğer seçilen dilde menü yoksa, şablondan yükle
+        // Menü kontrolü
         if (!currentMenu[lang] || currentMenu[lang].length === 0) {
             if (ORIGINAL_MENU_TEMPLATE[lang]) {
                 currentMenu[lang] = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE[lang]));
@@ -2535,7 +2509,7 @@
                 nameSpan.className = 'item-name';
                 nameSpan.textContent = item.name;
                 
-                // Çay ürünleri için özel tıklama
+                // Çay kontrolü - الشاي
                 if (item.name.includes('Çay') || item.name.includes('Tea') || 
                     item.name.includes('Чай') || item.name.includes('شاي')) {
                     nameSpan.onclick = function(e) {
@@ -2760,7 +2734,6 @@
         }
     };
 
-    // Resim fonksiyonları
     window.previewCategoryImage = function() {
         const url = document.getElementById('categoryImageUrl').value;
         document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
@@ -2822,7 +2795,6 @@
         }
     };
 
-    // V2 fonksiyonları
     window.previewCategoryImageV2 = function() {
         const url = document.getElementById('categoryImageUrlV2').value;
         document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
@@ -2880,7 +2852,6 @@
         });
     };
 
-    // Kategori ve ürün seçim olayları
     document.getElementById('productCategorySelect')?.addEventListener('change', function() {
         const ci = this.value;
         const ps = document.getElementById('productSelect');
@@ -3259,7 +3230,6 @@
         });
     };
 
-    // Confirm butonları
     document.getElementById('confirmYesBtn').onclick = function() { 
         if (confirmCallback) { 
             confirmCallback(); 
@@ -3311,45 +3281,36 @@
 
     // ---------- SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
-        // Kaydedilmiş dili yükle
         const savedLang = localStorage.getItem('lang');
         if (savedLang && ['tr', 'en', 'ru', 'ar'].includes(savedLang)) {
             currentLang = savedLang;
         }
         
-        // Menü kontrolü
         if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
             loadMenuFromStorage();
         }
         
-        // Dili uygula
         setLanguage(currentLang);
         
-        // Tema
         if (localStorage.getItem('theme') === 'light') { 
             document.body.classList.add('light-mode'); 
             document.getElementById('themeToggle').innerHTML = '☀️'; 
         }
         
-        // Renkler
         ['colorCategory','colorName','colorPrice'].forEach(id => { 
             const v = localStorage.getItem(id); 
             if (v) document.getElementById(id).value = v; 
         });
         
-        // Instagram
         const insta = localStorage.getItem('insta') || 'https://www.instagram.com/tosttooyevski';
         document.getElementById('instaLink').href = insta;
         document.getElementById('newInstagram').value = insta;
         
-        // Harita
         const map = localStorage.getItem('map');
         if (map) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${map}&output=embed`;
         
-        // Menüyü göster
         displayMenu();
         
-        // Dil menüsünü kapatmak için tıklama
         document.addEventListener('click', function(e) {
             const btn = document.getElementById('langBtn');
             const menu = document.getElementById('languageMenu');
@@ -3387,7 +3348,6 @@
         });
     }
 
-    // ---------- SAĞ TIK ENGELLEME ----------
     document.addEventListener('contextmenu', function(e) { 
         if (!isDeveloper) e.preventDefault(); 
     });
