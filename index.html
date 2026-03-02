@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Tosttoo | Menü (Çok Dilli - العلم العراقي)</title>
+    <title data-key="siteTitle">Tosttoo | Menü (Çok Dilli - العلم العراقي)</title>
     <!-- Yazı tipleri ve ikonlar -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -723,7 +723,7 @@
             left: 15px;
         }
 
-        .control-btn {
+        .control-btn, #modeToggle {
             width: 45px;
             height: 45px;
             border-radius: 50%;
@@ -740,102 +740,53 @@
             backdrop-filter: blur(5px);
         }
 
-        .light-mode .control-btn {
+        .light-mode .control-btn, .light-mode #modeToggle {
             border: 2px solid #d97706;
         }
 
-        .control-btn:hover {
+        .control-btn:hover, #modeToggle:hover {
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 8px 25px rgba(255,140,0,0.5);
             background: #ffa233;
         }
 
-        #modeToggle {
-            width: 45px;
+        /* Dil Seçici (Select) */
+        .language-select {
+            width: 140px;
             height: 45px;
-            border-radius: 50%;
-            border: 2px solid rgba(255,255,255,0.2);
-            background: #ff8c00;
+            border-radius: 30px;
+            border: 2px solid rgba(255,140,0,0.3);
+            background: rgba(0,0,0,0.8);
             color: white;
-            font-size: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(255,140,0,0.3);
-            transition: all 0.3s ease;
-        }
-
-        #modeToggle:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 8px 25px rgba(255,140,0,0.5);
-            background: #ffa233;
-        }
-
-        .language-menu {
-            position: fixed;
-            top: 70px;
-            right: 15px;
-            background: #1a1a1a;
-            border: 2px solid #ff8c00;
-            border-radius: 10px;
-            padding: 10px;
-            display: none;
-            z-index: 1001;
-            flex-direction: column;
-            gap: 5px;
-            min-width: 180px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-        }
-
-        .light-mode .language-menu {
-            background: #f5f5f5;
-            border-color: #d97706;
-        }
-
-        body[dir="rtl"] .language-menu {
-            right: auto;
-            left: 15px;
-        }
-
-        .language-btn {
-            background: #333;
-            color: white;
-            border: 1px solid #ff8c00;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
             font-size: 16px;
-            text-align: left;
-            transition: all 0.3s;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 600;
+            padding: 0 15px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-family: inherit;
         }
 
-        .light-mode .language-btn {
-            background: #e0e0e0;
+        .light-mode .language-select {
+            background: rgba(255,255,255,0.9);
             color: #333;
             border-color: #d97706;
         }
 
-        .light-mode .language-btn:hover {
-            background: #d97706;
+        .language-select:hover {
+            border-color: #ff8c00;
+            box-shadow: 0 5px 15px rgba(255,140,0,0.3);
+        }
+
+        .language-select option {
+            background: #1a1a1a;
             color: white;
         }
 
-        body[dir="rtl"] .language-btn {
-            text-align: right;
-        }
-
-        .language-btn:hover {
-            background: #ff8c00;
-            transform: translateX(5px);
-        }
-
-        body[dir="rtl"] .language-btn:hover {
-            transform: translateX(-5px);
+        .light-mode .language-select option {
+            background: white;
+            color: #333;
         }
 
         .floating-dev-btn {
@@ -1586,6 +1537,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .control-btn, #modeToggle { width: 40px; height: 40px; font-size: 18px; }
+            .language-select { width: 120px; font-size: 14px; }
             .floating-dev-btn { width: 55px; height: 55px; font-size: 24px; }
             .dev-panel { width: 95%; padding: 1.5rem; }
             .contact-item { flex-direction: column; text-align: center; padding: 15px; }
@@ -1648,57 +1600,50 @@
     </div>
 </div>
 
-<div class="language-menu" id="languageMenu">
-    <button class="language-btn" onclick="setLanguage('tr')"><span>🇹🇷 Türkçe</span></button>
-    <button class="language-btn" onclick="setLanguage('en')"><span>🇬🇧 English</span></button>
-    <button class="language-btn" onclick="setLanguage('ru')"><span>🇷🇺 Русский</span></button>
-    <button class="language-btn" onclick="setLanguage('ar')"><span>🇮🇶 العربية</span></button>
-</div>
-
 <div class="modal-overlay" id="confirmModal">
     <div class="modal">
-        <h3 class="confirm-title">⚠️ Onay</h3>
-        <p class="confirm-message" id="confirmMessage">Emin misiniz?</p>
+        <h3 class="confirm-title" data-key="confirmTitle">⚠️ Onay</h3>
+        <p class="confirm-message" id="confirmMessage" data-key="confirmMessage">Emin misiniz?</p>
         <div class="modal-buttons">
-            <button class="modal-btn yes" id="confirmYesBtn">Evet</button>
-            <button class="modal-btn no" id="confirmNoBtn">Hayır</button>
+            <button class="modal-btn yes" id="confirmYesBtn" data-key="confirmYes">Evet</button>
+            <button class="modal-btn no" id="confirmNoBtn" data-key="confirmNo">Hayır</button>
         </div>
     </div>
 </div>
 
 <div class="modal-overlay" id="imageEditModal">
     <div class="modal" style="max-width:500px;">
-        <h3>🖼️ Resim Düzenle</h3>
+        <h3 data-key="imageEditTitle">🖼️ Resim Düzenle</h3>
         <div class="image-preview" id="imageEditPreview">
             <img id="imageEditImg" src="" alt="Önizleme">
         </div>
-        <input type="text" class="form-control" id="imageEditUrl" placeholder="Yeni resim URL'sini girin" style="margin:1rem 0;">
+        <input type="text" class="form-control" id="imageEditUrl" data-key-placeholder="imageEditPlaceholder" placeholder="Yeni resim URL'sini girin" style="margin:1rem 0;">
         <div class="modal-buttons">
-            <button class="modal-btn" style="background:#28a745;" onclick="saveImageEdit()">💾 Kaydet</button>
-            <button class="modal-btn" style="background:#dc3545;" onclick="deleteImageEdit()">🗑️ Sil</button>
-            <button class="modal-btn no" onclick="closeImageEdit()">İptal</button>
+            <button class="modal-btn" style="background:#28a745;" onclick="saveImageEdit()" data-key="imageSave">💾 Kaydet</button>
+            <button class="modal-btn" style="background:#dc3545;" onclick="deleteImageEdit()" data-key="imageDelete">🗑️ Sil</button>
+            <button class="modal-btn no" onclick="closeImageEdit()" data-key="cancel">İptal</button>
         </div>
     </div>
 </div>
 
 <div class="modal-overlay" id="colorPickerModal">
     <div class="modal" style="max-width:350px;">
-        <h3>🎨 Renkleri Değiştir</h3>
+        <h3 data-key="colorPickerTitle">🎨 Renkleri Değiştir</h3>
         <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Kategori Başlığı</label>
+            <label style="color:#ff8c00; display:block; margin:10px 0 5px;" data-key="colorCategoryLabel">Kategori Başlığı</label>
             <input type="color" id="colorCategory" value="#ff8c00" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
         </div>
         <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Ürün Adı</label>
+            <label style="color:#ff8c00; display:block; margin:10px 0 5px;" data-key="colorNameLabel">Ürün Adı</label>
             <input type="color" id="colorName" value="#ff8c00" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
         </div>
         <div style="margin:1rem 0;">
-            <label style="color:#ff8c00; display:block; margin:10px 0 5px;">Fiyat</label>
+            <label style="color:#ff8c00; display:block; margin:10px 0 5px;" data-key="colorPriceLabel">Fiyat</label>
             <input type="color" id="colorPrice" value="#ffffff" style="width:100%; height:50px; border:2px solid #ff8c00; border-radius:8px; background:transparent;">
         </div>
         <div class="modal-buttons">
-            <button class="modal-btn" style="background:#28a745;" onclick="applyColors()">Uygula</button>
-            <button class="modal-btn no" onclick="closeColorPicker()">Kapat</button>
+            <button class="modal-btn" style="background:#28a745;" onclick="applyColors()" data-key="apply">Uygula</button>
+            <button class="modal-btn no" onclick="closeColorPicker()" data-key="close">Kapat</button>
         </div>
     </div>
 </div>
@@ -1706,125 +1651,125 @@
 <!-- GELİŞTİRİCİ PANELİ V1 -->
 <div class="dev-panel" id="devPanelV1">
     <div class="panel-header" id="dragHandle">
-        <h3><i class="fas fa-cog"></i> Geliştirici Paneli (Tam Yetki)</h3>
+        <h3><i class="fas fa-cog"></i> <span data-key="devPanelTitle">Geliştirici Paneli (Tam Yetki)</span></h3>
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
     <div class="panel-tabs">
-        <button class="panel-tab active" onclick="switchDevTab('products')"><i class="fas fa-box"></i> Ürünler</button>
-        <button class="panel-tab" onclick="switchDevTab('categories')"><i class="fas fa-folder"></i> Kategoriler</button>
-        <button class="panel-tab" onclick="switchDevTab('images')"><i class="fas fa-image"></i> Resimler</button>
-        <button class="panel-tab" onclick="switchDevTab('tools')"><i class="fas fa-tools"></i> Araçlar</button>
-        <button class="panel-tab" onclick="switchDevTab('cloud')"><i class="fas fa-cloud"></i> Cloud</button>
+        <button class="panel-tab active" onclick="switchDevTab('products')"><i class="fas fa-box"></i> <span data-key="devTabProducts">Ürünler</span></button>
+        <button class="panel-tab" onclick="switchDevTab('categories')"><i class="fas fa-folder"></i> <span data-key="devTabCategories">Kategoriler</span></button>
+        <button class="panel-tab" onclick="switchDevTab('images')"><i class="fas fa-image"></i> <span data-key="devTabImages">Resimler</span></button>
+        <button class="panel-tab" onclick="switchDevTab('tools')"><i class="fas fa-tools"></i> <span data-key="devTabTools">Araçlar</span></button>
+        <button class="panel-tab" onclick="switchDevTab('cloud')"><i class="fas fa-cloud"></i> <span data-key="devTabCloud">Cloud</span></button>
     </div>
     <div class="panel-content active" id="tab-products">
         <div class="dev-section">
-            <h4><i class="fas fa-plus-circle"></i> Yeni Ürün Ekle</h4>
-            <div class="form-group"><label class="form-label">Kategori</label><select id="categorySelect" class="form-control"></select></div>
-            <div class="form-group"><label class="form-label">Ürün Adı</label><input type="text" id="newName" class="form-control" placeholder="Örn: Kaşarlı tost"></div>
-            <div class="form-group"><label class="form-label">Fiyat</label><input type="text" id="productPrice" class="form-control" placeholder="Örn: 120₺"></div>
-            <button class="dev-btn dev-btn-success" onclick="addProduct()"><i class="fas fa-check"></i> Ekle</button>
+            <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProduct">Yeni Ürün Ekle</span></h4>
+            <div class="form-group"><label class="form-label" data-key="devCategory">Kategori</label><select id="categorySelect" class="form-control"></select></div>
+            <div class="form-group"><label class="form-label" data-key="devProductName">Ürün Adı</label><input type="text" id="newName" class="form-control" data-key-placeholder="devProductNamePlaceholder" placeholder="Örn: Kaşarlı tost"></div>
+            <div class="form-group"><label class="form-label" data-key="devPrice">Fiyat</label><input type="text" id="productPrice" class="form-control" data-key-placeholder="devPricePlaceholder" placeholder="Örn: 120₺"></div>
+            <button class="dev-btn dev-btn-success" onclick="addProduct()"><i class="fas fa-check"></i> <span data-key="add">Ekle</span></button>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-chart-bar"></i> İstatistikler</h4>
+            <h4><i class="fas fa-chart-bar"></i> <span data-key="devStats">İstatistikler</span></h4>
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-value" id="statCategories">0</div><div class="stat-label">Kategori</div></div>
-                <div class="stat-card"><div class="stat-value" id="statProducts">0</div><div class="stat-label">Ürün</div></div>
+                <div class="stat-card"><div class="stat-value" id="statCategories">0</div><div class="stat-label" data-key="devCategories">Kategori</div></div>
+                <div class="stat-card"><div class="stat-value" id="statProducts">0</div><div class="stat-label" data-key="devProducts">Ürün</div></div>
             </div>
         </div>
     </div>
     <div class="panel-content" id="tab-categories">
         <div class="dev-section">
-            <h4><i class="fas fa-folder-plus"></i> Yeni Kategori Ekle</h4>
-            <div class="form-group"><label class="form-label">Kategori Adı</label><input type="text" id="newCategory" class="form-control" placeholder="Örn: İçecekler"></div>
-            <button class="dev-btn dev-btn-success" onclick="addCategory()"><i class="fas fa-check"></i> Ekle</button>
+            <h4><i class="fas fa-folder-plus"></i> <span data-key="devAddCategory">Yeni Kategori Ekle</span></h4>
+            <div class="form-group"><label class="form-label" data-key="devCategoryName">Kategori Adı</label><input type="text" id="newCategory" class="form-control" data-key-placeholder="devCategoryNamePlaceholder" placeholder="Örn: İçecekler"></div>
+            <button class="dev-btn dev-btn-success" onclick="addCategory()"><i class="fas fa-check"></i> <span data-key="add">Ekle</span></button>
         </div>
     </div>
     <div class="panel-content" id="tab-images">
         <div class="dev-section">
-            <h4><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle/Değiştir</h4>
+            <h4><i class="fas fa-folder-plus"></i> <span data-key="devAddCategoryImage">Kategori Resmi Ekle/Değiştir</span></h4>
             <select id="categoryImageSelect" class="form-control" style="margin-bottom:1rem;"></select>
-            <input type="url" id="categoryImageUrl" class="form-control" placeholder="Resim URL">
-            <div class="image-preview" id="categoryImagePreview"><span>Önizleme</span></div>
+            <input type="url" id="categoryImageUrl" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL">
+            <div class="image-preview" id="categoryImagePreview"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="previewCategoryImage()"><i class="fas fa-eye"></i> Önizle</button>
-                <button class="dev-btn dev-btn-success" onclick="addCategoryImage()"><i class="fas fa-save"></i> Kaydet</button>
-                <button class="dev-btn dev-btn-danger" onclick="deleteCategoryImage()"><i class="fas fa-trash"></i> Sil</button>
+                <button class="dev-btn dev-btn-info" onclick="previewCategoryImage()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
+                <button class="dev-btn dev-btn-success" onclick="addCategoryImage()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
+                <button class="dev-btn dev-btn-danger" onclick="deleteCategoryImage()"><i class="fas fa-trash"></i> <span data-key="delete">Sil</span></button>
             </div>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle/Değiştir</h4>
+            <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProductImage">Ürün Resmi Ekle/Değiştir</span></h4>
             <select id="productCategorySelect" class="form-control" style="margin-bottom:1rem;"></select>
-            <select id="productSelect" class="form-control" disabled style="margin-bottom:1rem;"><option>Önce kategori seçin</option></select>
-            <input type="url" id="productImageUrl" class="form-control" placeholder="Resim URL">
-            <div class="image-preview" id="productImagePreview"><span>Önizleme</span></div>
+            <select id="productSelect" class="form-control" disabled style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
+            <input type="url" id="productImageUrl" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL">
+            <div class="image-preview" id="productImagePreview"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="previewProductImage()"><i class="fas fa-eye"></i> Önizle</button>
-                <button class="dev-btn dev-btn-success" onclick="addProductImage()"><i class="fas fa-save"></i> Kaydet</button>
-                <button class="dev-btn dev-btn-danger" onclick="deleteProductImage()"><i class="fas fa-trash"></i> Sil</button>
+                <button class="dev-btn dev-btn-info" onclick="previewProductImage()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
+                <button class="dev-btn dev-btn-success" onclick="addProductImage()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
+                <button class="dev-btn dev-btn-danger" onclick="deleteProductImage()"><i class="fas fa-trash"></i> <span data-key="delete">Sil</span></button>
             </div>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-images"></i> Resim Galerisi</h4>
+            <h4><i class="fas fa-images"></i> <span data-key="devGallery">Resim Galerisi</span></h4>
             <div class="image-gallery" id="imageGallery"></div>
         </div>
     </div>
     <div class="panel-content" id="tab-tools">
         <div class="dev-section">
-            <h4><i class="fas fa-palette"></i> Renk Düzenle</h4>
-            <button class="dev-btn dev-btn-primary" onclick="openColorPicker()"><i class="fas fa-palette"></i> Renk Seçici</button>
+            <h4><i class="fas fa-palette"></i> <span data-key="devColors">Renk Düzenle</span></h4>
+            <button class="dev-btn dev-btn-primary" onclick="openColorPicker()"><i class="fas fa-palette"></i> <span data-key="devColorPicker">Renk Seçici</span></button>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-edit"></i> Düzenleme Modları</h4>
+            <h4><i class="fas fa-edit"></i> <span data-key="devEditModes">Düzenleme Modları</span></h4>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-success" onclick="enableEdit()"><i class="fas fa-edit"></i> Düzenleme</button>
-                <button class="dev-btn dev-btn-danger" onclick="enableDelete()"><i class="fas fa-trash"></i> Silme</button>
+                <button class="dev-btn dev-btn-success" onclick="enableEdit()"><i class="fas fa-edit"></i> <span data-key="devEditMode">Düzenleme</span></button>
+                <button class="dev-btn dev-btn-danger" onclick="enableDelete()"><i class="fas fa-trash"></i> <span data-key="devDeleteMode">Silme</span></button>
             </div>
-            <button class="dev-btn dev-btn-warning" onclick="disableAllModes()"><i class="fas fa-ban"></i> Modları Kapat</button>
+            <button class="dev-btn dev-btn-warning" onclick="disableAllModes()"><i class="fas fa-ban"></i> <span data-key="devDisableModes">Modları Kapat</span></button>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-globe"></i> Sosyal Medya</h4>
-            <div class="form-group"><label class="form-label">Instagram Linki</label><input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski"></div>
-            <button class="dev-btn dev-btn-info" onclick="changeInstagram()"><i class="fab fa-instagram"></i> Güncelle</button>
-            <div class="form-group"><label class="form-label">Konum (enlem,boylam)</label><input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147"></div>
-            <button class="dev-btn dev-btn-info" onclick="changeLocation()"><i class="fas fa-map-marker-alt"></i> Güncelle</button>
+            <h4><i class="fas fa-globe"></i> <span data-key="devSocial">Sosyal Medya</span></h4>
+            <div class="form-group"><label class="form-label">Instagram</label><input type="text" id="newInstagram" class="form-control" value="https://www.instagram.com/tosttooyevski"></div>
+            <button class="dev-btn dev-btn-info" onclick="changeInstagram()"><i class="fab fa-instagram"></i> <span data-key="update">Güncelle</span></button>
+            <div class="form-group"><label class="form-label" data-key="devLocation">Konum (enlem,boylam)</label><input type="text" id="newLocation" class="form-control" placeholder="36.484479,32.101147"></div>
+            <button class="dev-btn dev-btn-info" onclick="changeLocation()"><i class="fas fa-map-marker-alt"></i> <span data-key="update">Güncelle</span></button>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-code"></i> Kod</h4>
+            <h4><i class="fas fa-code"></i> <span data-key="devCode">Kod</span></h4>
             <div class="code-display" id="v1CodeDisplay"></div>
-            <button class="dev-btn dev-btn-info" onclick="copyV1Code()"><i class="fas fa-copy"></i> Kopyala</button>
+            <button class="dev-btn dev-btn-info" onclick="copyV1Code()"><i class="fas fa-copy"></i> <span data-key="copy">Kopyala</span></button>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-undo"></i> Sıfırla</h4>
-            <button class="dev-btn dev-btn-danger" onclick="resetToOriginal()"><i class="fas fa-undo"></i> Menüyü Sıfırla</button>
+            <h4><i class="fas fa-undo"></i> <span data-key="devReset">Sıfırla</span></h4>
+            <button class="dev-btn dev-btn-danger" onclick="resetToOriginal()"><i class="fas fa-undo"></i> <span data-key="devResetMenu">Menüyü Sıfırla</span></button>
         </div>
     </div>
     <div class="panel-content" id="tab-cloud">
         <div class="dev-section" style="border-color:#17a2b8;">
-            <h4><i class="fas fa-cloud"></i> Cloud Sync</h4>
+            <h4><i class="fas fa-cloud"></i> <span data-key="devCloudSync">Cloud Sync</span></h4>
             <div class="cloud-panel">
-                <div class="cloud-stats"><span>🌐 API: <span style="color:#28a745;" id="apiStatus">Hazır</span></span><span>📦 Versiyon: 1.0</span></div>
+                <div class="cloud-stats"><span>🌐 API: <span style="color:#28a745;" id="apiStatus" data-key="devApiReady">Hazır</span></span><span>📦 Versiyon: 1.0</span></div>
                 <div style="background:rgba(0,150,255,0.2); padding:0.8rem; border-radius:8px; margin:1rem 0; text-align:center;">🔗 api.npoint.io</div>
                 <div class="btn-group">
-                    <button class="dev-btn dev-btn-info" onclick="saveToCloud()" id="cloudSaveBtn"><i class="fas fa-cloud-upload-alt"></i> Buluta Kaydet</button>
-                    <button class="dev-btn dev-btn-secondary" onclick="loadFromCloud()" id="cloudLoadBtn"><i class="fas fa-cloud-download-alt"></i> Buluttan Yükle</button>
+                    <button class="dev-btn dev-btn-info" onclick="saveToCloud()" id="cloudSaveBtn"><i class="fas fa-cloud-upload-alt"></i> <span data-key="devCloudSave">Buluta Kaydet</span></button>
+                    <button class="dev-btn dev-btn-secondary" onclick="loadFromCloud()" id="cloudLoadBtn"><i class="fas fa-cloud-download-alt"></i> <span data-key="devCloudLoad">Buluttan Yükle</span></button>
                 </div>
-                <button class="dev-btn dev-btn-success" onclick="testCloudConnection()"><i class="fas fa-plug"></i> Bağlantı Testi</button>
+                <button class="dev-btn dev-btn-success" onclick="testCloudConnection()"><i class="fas fa-plug"></i> <span data-key="devCloudTest">Bağlantı Testi</span></button>
             </div>
         </div>
         <div class="dev-section" style="border-color:#17a2b8;">
-            <h4><i class="fas fa-images"></i> Resim Senkronizasyonu</h4>
+            <h4><i class="fas fa-images"></i> <span data-key="devImageSync">Resim Senkronizasyonu</span></h4>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="saveImagesToCloud()"><i class="fas fa-save"></i> Resimleri Kaydet</button>
-                <button class="dev-btn dev-btn-secondary" onclick="loadImagesFromCloud()"><i class="fas fa-download"></i> Resimleri Yükle</button>
+                <button class="dev-btn dev-btn-info" onclick="saveImagesToCloud()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
+                <button class="dev-btn dev-btn-secondary" onclick="loadImagesFromCloud()"><i class="fas fa-download"></i> <span data-key="load">Yükle</span></button>
             </div>
         </div>
         <div class="dev-section">
-            <h4><i class="fas fa-copy"></i> Yedekleme</h4>
+            <h4><i class="fas fa-copy"></i> <span data-key="devBackup">Yedekleme</span></h4>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="copyBackupCode()"><i class="fas fa-copy"></i> Kodu Kopyala</button>
-                <button class="dev-btn dev-btn-secondary" onclick="pasteBackupCode()"><i class="fas fa-paste"></i> Kodu Yapıştır</button>
+                <button class="dev-btn dev-btn-info" onclick="copyBackupCode()"><i class="fas fa-copy"></i> <span data-key="copy">Kopyala</span></button>
+                <button class="dev-btn dev-btn-secondary" onclick="pasteBackupCode()"><i class="fas fa-paste"></i> <span data-key="paste">Yapıştır</span></button>
             </div>
-            <small style="color:#aaa; display:block; margin-top:0.5rem;">Tüm menü ve resimleri yedekler</small>
+            <small style="color:#aaa; display:block; margin-top:0.5rem;" data-key="devBackupNote">Tüm menü ve resimleri yedekler</small>
         </div>
     </div>
 </div>
@@ -1832,52 +1777,52 @@
 <!-- GELİŞTİRİCİ PANELİ V2 -->
 <div class="dev-panel v2" id="devPanelV2">
     <div class="panel-header">
-        <h3><i class="fas fa-paint-brush"></i> Gelişmiş Panel V2</h3>
+        <h3><i class="fas fa-paint-brush"></i> <span data-key="devPanelV2Title">Gelişmiş Panel V2</span></h3>
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
     <div class="panel-tabs">
-        <button class="panel-tab active" onclick="switchDevTabV2('gallery')"><i class="fas fa-images"></i> Galeri</button>
-        <button class="panel-tab" onclick="switchDevTabV2('category')"><i class="fas fa-folder-plus"></i> Kategori</button>
-        <button class="panel-tab" onclick="switchDevTabV2('product')"><i class="fas fa-plus-circle"></i> Ürün</button>
-        <button class="panel-tab" onclick="switchDevTabV2('sync')"><i class="fas fa-sync"></i> Senkronizasyon</button>
+        <button class="panel-tab active" onclick="switchDevTabV2('gallery')"><i class="fas fa-images"></i> <span data-key="devGallery">Galeri</span></button>
+        <button class="panel-tab" onclick="switchDevTabV2('category')"><i class="fas fa-folder-plus"></i> <span data-key="devCategory">Kategori</span></button>
+        <button class="panel-tab" onclick="switchDevTabV2('product')"><i class="fas fa-plus-circle"></i> <span data-key="devProduct">Ürün</span></button>
+        <button class="panel-tab" onclick="switchDevTabV2('sync')"><i class="fas fa-sync"></i> <span data-key="devSync">Senkronizasyon</span></button>
     </div>
     <div class="panel-content active" id="tab-gallery">
         <div class="dev-section v2">
-            <h4><i class="fas fa-images"></i> Resim Galerisi</h4>
+            <h4><i class="fas fa-images"></i> <span data-key="devGallery">Resim Galerisi</span></h4>
             <div class="image-gallery" id="imageGalleryV2"></div>
         </div>
     </div>
     <div class="panel-content" id="tab-category-v2">
         <div class="dev-section v2">
-            <h4><i class="fas fa-folder-plus"></i> Kategori Resmi Ekle</h4>
+            <h4><i class="fas fa-folder-plus"></i> <span data-key="devAddCategoryImageV2">Kategori Resmi Ekle</span></h4>
             <select id="categoryImageSelectV2" class="form-control" style="margin-bottom:1rem;"></select>
-            <input type="url" id="categoryImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
-            <div class="image-preview" id="categoryImagePreviewV2"><span>Önizleme</span></div>
+            <input type="url" id="categoryImageUrlV2" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <div class="image-preview" id="categoryImagePreviewV2"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="previewCategoryImageV2()"><i class="fas fa-eye"></i> Önizle</button>
-                <button class="dev-btn dev-btn-success" onclick="addCategoryImageV2()"><i class="fas fa-plus"></i> Ekle</button>
+                <button class="dev-btn dev-btn-info" onclick="previewCategoryImageV2()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
+                <button class="dev-btn dev-btn-success" onclick="addCategoryImageV2()"><i class="fas fa-plus"></i> <span data-key="add">Ekle</span></button>
             </div>
         </div>
     </div>
     <div class="panel-content" id="tab-product-v2">
         <div class="dev-section v2">
-            <h4><i class="fas fa-plus-circle"></i> Ürün Resmi Ekle</h4>
+            <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProductImageV2">Ürün Resmi Ekle</span></h4>
             <select id="productCategorySelectV2" class="form-control" style="margin-bottom:1rem;"></select>
-            <select id="productSelectV2" class="form-control" disabled style="margin-bottom:1rem;"><option>Önce kategori seçin</option></select>
-            <input type="url" id="productImageUrlV2" class="form-control" placeholder="Resim URL" style="margin-bottom:1rem;">
-            <div class="image-preview" id="productImagePreviewV2"><span>Önizleme</span></div>
+            <select id="productSelectV2" class="form-control" disabled style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
+            <input type="url" id="productImageUrlV2" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL" style="margin-bottom:1rem;">
+            <div class="image-preview" id="productImagePreviewV2"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="previewProductImageV2()"><i class="fas fa-eye"></i> Önizle</button>
-                <button class="dev-btn dev-btn-success" onclick="addProductImageV2()"><i class="fas fa-plus"></i> Ekle</button>
+                <button class="dev-btn dev-btn-info" onclick="previewProductImageV2()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
+                <button class="dev-btn dev-btn-success" onclick="addProductImageV2()"><i class="fas fa-plus"></i> <span data-key="add">Ekle</span></button>
             </div>
         </div>
     </div>
     <div class="panel-content" id="tab-sync">
         <div class="dev-section v2">
-            <h4><i class="fas fa-cloud"></i> Resim Senkronizasyonu</h4>
+            <h4><i class="fas fa-cloud"></i> <span data-key="devImageSync">Resim Senkronizasyonu</span></h4>
             <div class="btn-group">
-                <button class="dev-btn dev-btn-info" onclick="saveImagesToCloud()"><i class="fas fa-save"></i> Resimleri Kaydet</button>
-                <button class="dev-btn dev-btn-secondary" onclick="loadImagesFromCloud()"><i class="fas fa-download"></i> Resimleri Yükle</button>
+                <button class="dev-btn dev-btn-info" onclick="saveImagesToCloud()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
+                <button class="dev-btn dev-btn-secondary" onclick="loadImagesFromCloud()"><i class="fas fa-download"></i> <span data-key="load">Yükle</span></button>
             </div>
         </div>
     </div>
@@ -1888,7 +1833,13 @@
 
 <!-- ÜST KONTROL BUTONLARI -->
 <div class="top-controls">
-    <button class="control-btn" id="langBtn" onclick="toggleLanguageMenu()" title="Dil Değiştir"><i class="fas fa-globe"></i></button>
+    <!-- Dil Seçici (Select) -->
+    <select id="languageSwitcher" class="language-select">
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="ar">🇮🇶 العربية</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="ru">🇷🇺 Русский</option>
+    </select>
     <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
 </div>
 
@@ -1899,15 +1850,15 @@
 <section class="hero">
     <div class="hero-content">
         <h1 id="secretTrigger">Tosttoo</h1>
-        <div class="work-time" id="workTime">🕒 08:00 - 02:30</div>
-        <button class="btn" onclick="scrollToMenu()" id="scrollBtn">Menüyü Gör</button>
+        <div class="work-time" id="workTime" data-key="workTime">🕒 08:00 - 02:30</div>
+        <button class="btn" onclick="scrollToMenu()" id="scrollBtn" data-key="viewMenu">Menüyü Gör</button>
     </div>
 </section>
 
 <!-- MENÜ BÖLÜMÜ -->
 <section id="menu" class="section">
     <div class="container">
-        <h2 class="section-title" id="menuTitle">Menü <span class="version-tag">v1.0</span></h2>
+        <h2 class="section-title" id="menuTitle"><span data-key="menu">Menü</span> <span class="version-tag">v1.0</span></h2>
         <div class="grid" id="menuGrid"></div>
     </div>
 </section>
@@ -1915,23 +1866,23 @@
 <!-- İLETİŞİM BÖLÜMÜ -->
 <section id="contact" class="contact-section">
     <div class="container">
-        <h2 class="section-title" id="contactTitle">İletişim</h2>
+        <h2 class="section-title" id="contactTitle" data-key="contact">İletişim</h2>
         <div class="contact-content">
             <div class="contact-item" onclick="window.open('tel:905321580207')">
                 <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-                <div class="contact-text" id="phoneLink">📞 0532 158 02 07</div>
+                <div class="contact-text" id="phoneLink" data-key="phone">📞 0532 158 02 07</div>
             </div>
             <div class="contact-item" onclick="window.open('https://wa.me/905321580207')">
                 <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="contact-text" id="whatsappText">WhatsApp</div>
+                <div class="contact-text" id="whatsappText" data-key="whatsapp">WhatsApp</div>
             </div>
             <div class="contact-item">
                 <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-                <div class="contact-text"><a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank">Instagram</a></div>
+                <div class="contact-text"><a id="instaLink" href="https://www.instagram.com/tosttooyevski" target="_blank" data-key="instagram">Instagram</a></div>
             </div>
             <div class="contact-item" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                <div class="contact-text" id="locationText">📍 Konum</div>
+                <div class="contact-text" id="locationText" data-key="location">📍 Konum</div>
             </div>
             <div class="map-container" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
                 <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" loading="lazy"></iframe>
@@ -1944,11 +1895,355 @@
 (function() {
     'use strict';
 
+    // ---------- ÇEVİRİLER ----------
+    const translations = {
+        tr: {
+            // Genel
+            siteTitle: "Tosttoo | Menü (Çok Dilli)",
+            workTime: "🕒 08:00 - 02:30",
+            viewMenu: "Menüyü Gör",
+            menu: "Menü",
+            contact: "İletişim",
+            phone: "📞 0532 158 02 07",
+            whatsapp: "WhatsApp",
+            instagram: "Instagram",
+            location: "📍 Konum",
+            
+            // Modal
+            confirmTitle: "⚠️ Onay",
+            confirmMessage: "Emin misiniz?",
+            confirmYes: "Evet",
+            confirmNo: "Hayır",
+            imageEditTitle: "🖼️ Resim Düzenle",
+            imageEditPlaceholder: "Yeni resim URL'sini girin",
+            imageSave: "💾 Kaydet",
+            imageDelete: "🗑️ Sil",
+            cancel: "İptal",
+            colorPickerTitle: "🎨 Renkleri Değiştir",
+            colorCategoryLabel: "Kategori Başlığı",
+            colorNameLabel: "Ürün Adı",
+            colorPriceLabel: "Fiyat",
+            apply: "Uygula",
+            close: "Kapat",
+            
+            // Geliştirici Paneli
+            devPanelTitle: "Geliştirici Paneli (Tam Yetki)",
+            devTabProducts: "Ürünler",
+            devTabCategories: "Kategoriler",
+            devTabImages: "Resimler",
+            devTabTools: "Araçlar",
+            devTabCloud: "Cloud",
+            devAddProduct: "Yeni Ürün Ekle",
+            devCategory: "Kategori",
+            devProductName: "Ürün Adı",
+            devProductNamePlaceholder: "Örn: Kaşarlı tost",
+            devPrice: "Fiyat",
+            devPricePlaceholder: "Örn: 120₺",
+            add: "Ekle",
+            devStats: "İstatistikler",
+            devCategories: "Kategori",
+            devProducts: "Ürün",
+            devAddCategory: "Yeni Kategori Ekle",
+            devCategoryName: "Kategori Adı",
+            devCategoryNamePlaceholder: "Örn: İçecekler",
+            devAddCategoryImage: "Kategori Resmi Ekle/Değiştir",
+            devImageUrlPlaceholder: "Resim URL",
+            preview: "Önizle",
+            save: "Kaydet",
+            delete: "Sil",
+            devAddProductImage: "Ürün Resmi Ekle/Değiştir",
+            devSelectCategoryFirst: "Önce kategori seçin",
+            devGallery: "Resim Galerisi",
+            devColors: "Renk Düzenle",
+            devColorPicker: "Renk Seçici",
+            devEditModes: "Düzenleme Modları",
+            devEditMode: "Düzenleme",
+            devDeleteMode: "Silme",
+            devDisableModes: "Modları Kapat",
+            devSocial: "Sosyal Medya",
+            update: "Güncelle",
+            devLocation: "Konum (enlem,boylam)",
+            devCode: "Kod",
+            copy: "Kopyala",
+            devReset: "Sıfırla",
+            devResetMenu: "Menüyü Sıfırla",
+            devCloudSync: "Cloud Sync",
+            devApiReady: "Hazır",
+            devCloudSave: "Buluta Kaydet",
+            devCloudLoad: "Buluttan Yükle",
+            devCloudTest: "Bağlantı Testi",
+            devImageSync: "Resim Senkronizasyonu",
+            load: "Yükle",
+            devBackup: "Yedekleme",
+            paste: "Yapıştır",
+            devBackupNote: "Tüm menü ve resimleri yedekler",
+            devPanelV2Title: "Gelişmiş Panel V2",
+            devAddCategoryImageV2: "Kategori Resmi Ekle",
+            devAddProductImageV2: "Ürün Resmi Ekle",
+            devSync: "Senkronizasyon"
+        },
+        ar: {
+            // General
+            siteTitle: "توستتو | القائمة (متعددة اللغات)",
+            workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠",
+            viewMenu: "عرض القائمة",
+            menu: "القائمة",
+            contact: "اتصل بنا",
+            phone: "📞 ٠٥٣٢ ١٥٨ ٠٢ ٠٧",
+            whatsapp: "واتساب",
+            instagram: "انستغرام",
+            location: "📍 الموقع",
+            
+            // Modal
+            confirmTitle: "⚠️ تأكيد",
+            confirmMessage: "هل أنت متأكد؟",
+            confirmYes: "نعم",
+            confirmNo: "لا",
+            imageEditTitle: "🖼️ تعديل الصورة",
+            imageEditPlaceholder: "أدخل رابط الصورة الجديد",
+            imageSave: "💾 حفظ",
+            imageDelete: "🗑️ حذف",
+            cancel: "إلغاء",
+            colorPickerTitle: "🎨 تغيير الألوان",
+            colorCategoryLabel: "عنوان القسم",
+            colorNameLabel: "اسم المنتج",
+            colorPriceLabel: "السعر",
+            apply: "تطبيق",
+            close: "إغلاق",
+            
+            // Developer Panel
+            devPanelTitle: "لوحة المطور (صلاحية كاملة)",
+            devTabProducts: "المنتجات",
+            devTabCategories: "الأقسام",
+            devTabImages: "الصور",
+            devTabTools: "الأدوات",
+            devTabCloud: "السحابة",
+            devAddProduct: "إضافة منتج جديد",
+            devCategory: "القسم",
+            devProductName: "اسم المنتج",
+            devProductNamePlaceholder: "مثال: توست بالجبن",
+            devPrice: "السعر",
+            devPricePlaceholder: "مثال: ١٢٠₺",
+            add: "إضافة",
+            devStats: "الإحصائيات",
+            devCategories: "قسم",
+            devProducts: "منتج",
+            devAddCategory: "إضافة قسم جديد",
+            devCategoryName: "اسم القسم",
+            devCategoryNamePlaceholder: "مثال: المشروبات",
+            devAddCategoryImage: "إضافة/تغيير صورة القسم",
+            devImageUrlPlaceholder: "رابط الصورة",
+            preview: "معاينة",
+            save: "حفظ",
+            delete: "حذف",
+            devAddProductImage: "إضافة/تغيير صورة المنتج",
+            devSelectCategoryFirst: "اختر القسم أولاً",
+            devGallery: "معرض الصور",
+            devColors: "تعديل الألوان",
+            devColorPicker: "اختيار الألوان",
+            devEditModes: "أنماط التعديل",
+            devEditMode: "تعديل",
+            devDeleteMode: "حذف",
+            devDisableModes: "إيقاف الأنماط",
+            devSocial: "وسائل التواصل",
+            update: "تحديث",
+            devLocation: "الموقع (خط العرض، خط الطول)",
+            devCode: "الكود",
+            copy: "نسخ",
+            devReset: "إعادة تعيين",
+            devResetMenu: "إعادة تعيين القائمة",
+            devCloudSync: "مزامنة سحابية",
+            devApiReady: "جاهز",
+            devCloudSave: "حفظ في السحابة",
+            devCloudLoad: "تحميل من السحابة",
+            devCloudTest: "اختبار الاتصال",
+            devImageSync: "مزامنة الصور",
+            load: "تحميل",
+            devBackup: "نسخ احتياطي",
+            paste: "لصق",
+            devBackupNote: "يقوم بنسخ القائمة والصور بالكامل",
+            devPanelV2Title: "لوحة متقدمة V2",
+            devAddCategoryImageV2: "إضافة صورة قسم",
+            devAddProductImageV2: "إضافة صورة منتج",
+            devSync: "مزامنة"
+        },
+        en: {
+            // General
+            siteTitle: "Tosttoo | Menu (Multilingual)",
+            workTime: "🕒 08:00 - 02:30",
+            viewMenu: "View Menu",
+            menu: "Menu",
+            contact: "Contact",
+            phone: "📞 0532 158 02 07",
+            whatsapp: "WhatsApp",
+            instagram: "Instagram",
+            location: "📍 Location",
+            
+            // Modal
+            confirmTitle: "⚠️ Confirmation",
+            confirmMessage: "Are you sure?",
+            confirmYes: "Yes",
+            confirmNo: "No",
+            imageEditTitle: "🖼️ Edit Image",
+            imageEditPlaceholder: "Enter new image URL",
+            imageSave: "💾 Save",
+            imageDelete: "🗑️ Delete",
+            cancel: "Cancel",
+            colorPickerTitle: "🎨 Change Colors",
+            colorCategoryLabel: "Category Title",
+            colorNameLabel: "Product Name",
+            colorPriceLabel: "Price",
+            apply: "Apply",
+            close: "Close",
+            
+            // Developer Panel
+            devPanelTitle: "Developer Panel (Full Access)",
+            devTabProducts: "Products",
+            devTabCategories: "Categories",
+            devTabImages: "Images",
+            devTabTools: "Tools",
+            devTabCloud: "Cloud",
+            devAddProduct: "Add New Product",
+            devCategory: "Category",
+            devProductName: "Product Name",
+            devProductNamePlaceholder: "E.g.: Cheese Toast",
+            devPrice: "Price",
+            devPricePlaceholder: "E.g.: 120₺",
+            add: "Add",
+            devStats: "Statistics",
+            devCategories: "Category",
+            devProducts: "Product",
+            devAddCategory: "Add New Category",
+            devCategoryName: "Category Name",
+            devCategoryNamePlaceholder: "E.g.: Drinks",
+            devAddCategoryImage: "Add/Change Category Image",
+            devImageUrlPlaceholder: "Image URL",
+            preview: "Preview",
+            save: "Save",
+            delete: "Delete",
+            devAddProductImage: "Add/Change Product Image",
+            devSelectCategoryFirst: "Select category first",
+            devGallery: "Image Gallery",
+            devColors: "Color Settings",
+            devColorPicker: "Color Picker",
+            devEditModes: "Edit Modes",
+            devEditMode: "Edit",
+            devDeleteMode: "Delete",
+            devDisableModes: "Disable Modes",
+            devSocial: "Social Media",
+            update: "Update",
+            devLocation: "Location (lat,lng)",
+            devCode: "Code",
+            copy: "Copy",
+            devReset: "Reset",
+            devResetMenu: "Reset Menu",
+            devCloudSync: "Cloud Sync",
+            devApiReady: "Ready",
+            devCloudSave: "Save to Cloud",
+            devCloudLoad: "Load from Cloud",
+            devCloudTest: "Test Connection",
+            devImageSync: "Image Sync",
+            load: "Load",
+            devBackup: "Backup",
+            paste: "Paste",
+            devBackupNote: "Backs up all menu and images",
+            devPanelV2Title: "Advanced Panel V2",
+            devAddCategoryImageV2: "Add Category Image",
+            devAddProductImageV2: "Add Product Image",
+            devSync: "Sync"
+        },
+        ru: {
+            // General
+            siteTitle: "Tosttoo | Меню (Многоязычный)",
+            workTime: "🕒 08:00 - 02:30",
+            viewMenu: "Посмотреть меню",
+            menu: "Меню",
+            contact: "Контакты",
+            phone: "📞 0532 158 02 07",
+            whatsapp: "WhatsApp",
+            instagram: "Instagram",
+            location: "📍 Местоположение",
+            
+            // Modal
+            confirmTitle: "⚠️ Подтверждение",
+            confirmMessage: "Вы уверены?",
+            confirmYes: "Да",
+            confirmNo: "Нет",
+            imageEditTitle: "🖼️ Редактировать изображение",
+            imageEditPlaceholder: "Введите новый URL изображения",
+            imageSave: "💾 Сохранить",
+            imageDelete: "🗑️ Удалить",
+            cancel: "Отмена",
+            colorPickerTitle: "🎨 Изменить цвета",
+            colorCategoryLabel: "Заголовок категории",
+            colorNameLabel: "Название товара",
+            colorPriceLabel: "Цена",
+            apply: "Применить",
+            close: "Закрыть",
+            
+            // Developer Panel
+            devPanelTitle: "Панель разработчика (Полный доступ)",
+            devTabProducts: "Товары",
+            devTabCategories: "Категории",
+            devTabImages: "Изображения",
+            devTabTools: "Инструменты",
+            devTabCloud: "Облако",
+            devAddProduct: "Добавить товар",
+            devCategory: "Категория",
+            devProductName: "Название товара",
+            devProductNamePlaceholder: "Напр.: Тосты с сыром",
+            devPrice: "Цена",
+            devPricePlaceholder: "Напр.: 120₺",
+            add: "Добавить",
+            devStats: "Статистика",
+            devCategories: "Категория",
+            devProducts: "Товар",
+            devAddCategory: "Добавить категорию",
+            devCategoryName: "Название категории",
+            devCategoryNamePlaceholder: "Напр.: Напитки",
+            devAddCategoryImage: "Добавить/Изменить изображение категории",
+            devImageUrlPlaceholder: "URL изображения",
+            preview: "Предпросмотр",
+            save: "Сохранить",
+            delete: "Удалить",
+            devAddProductImage: "Добавить/Изменить изображение товара",
+            devSelectCategoryFirst: "Сначала выберите категорию",
+            devGallery: "Галерея изображений",
+            devColors: "Настройка цветов",
+            devColorPicker: "Выбор цвета",
+            devEditModes: "Режимы редактирования",
+            devEditMode: "Редактировать",
+            devDeleteMode: "Удалить",
+            devDisableModes: "Отключить режимы",
+            devSocial: "Социальные сети",
+            update: "Обновить",
+            devLocation: "Местоположение (широта,долгота)",
+            devCode: "Код",
+            copy: "Копировать",
+            devReset: "Сброс",
+            devResetMenu: "Сбросить меню",
+            devCloudSync: "Облачная синхронизация",
+            devApiReady: "Готово",
+            devCloudSave: "Сохранить в облако",
+            devCloudLoad: "Загрузить из облака",
+            devCloudTest: "Тест соединения",
+            devImageSync: "Синхронизация изображений",
+            load: "Загрузить",
+            devBackup: "Резервное копирование",
+            paste: "Вставить",
+            devBackupNote: "Резервирует всё меню и изображения",
+            devPanelV2Title: "Расширенная панель V2",
+            devAddCategoryImageV2: "Добавить изображение категории",
+            devAddProductImageV2: "Добавить изображение товара",
+            devSync: "Синхр."
+        }
+    };
+
     // ---------- DEĞİŞKENLER ----------
     let isDeveloper = false;
     let deleteMode = false;
     let editMode = false;
-    let currentLang = localStorage.getItem('lang') || 'tr';
+    let currentLang = localStorage.getItem('selectedLanguage') || 'tr';
     let teaClickCount = 0;
     let videoShown = false;
     let currentImageList = [];
@@ -2326,6 +2621,41 @@
 
     loadMenuFromStorage();
 
+    // ========== ÇEVİRİ FONKSİYONU ==========
+    function translatePage(lang) {
+        document.querySelectorAll('[data-key]').forEach(element => {
+            const key = element.getAttribute('data-key');
+            if (translations[lang] && translations[lang][key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    if (element.hasAttribute('placeholder')) {
+                        element.placeholder = translations[lang][key];
+                    }
+                } else if (element.tagName === 'OPTION') {
+                    element.textContent = translations[lang][key];
+                } else {
+                    element.textContent = translations[lang][key];
+                }
+            }
+        });
+        
+        // Placeholder'ları güncelle (data-key-placeholder)
+        document.querySelectorAll('[data-key-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-key-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+                element.placeholder = translations[lang][key];
+            }
+        });
+        
+        // RTL yönlendirme
+        if (lang === 'ar') {
+            document.documentElement.dir = 'rtl';
+            document.body.style.fontFamily = "'Cairo', 'Poppins', sans-serif";
+        } else {
+            document.documentElement.dir = 'ltr';
+            document.body.style.fontFamily = "'Poppins', 'Cairo', sans-serif";
+        }
+    }
+
     // ========== YARDIMCI FONKSİYONLAR ==========
     function showToast(message, type = 'info') {
         const container = document.getElementById('toastContainer');
@@ -2404,30 +2734,22 @@
         if (galleryV2) galleryV2.innerHTML = html || '<p class="text-center">Resim yok</p>';
     }
 
-    // ========== DÜZELTİLMİŞ DİL DEĞİŞTİRME ==========
-    window.setLanguage = function(lang) {
+    // ========== DİL DEĞİŞTİRME ==========
+    function changeLanguage(lang) {
         currentLang = lang;
-        localStorage.setItem('lang', lang);
+        localStorage.setItem('selectedLanguage', lang);
         
-        // Bayraklar - العلم العراقي للعربية
-        const flags = { tr: '🇹🇷', en: '🇬🇧', ru: '🇷🇺', ar: '🇮🇶' };
-        document.getElementById('langBtn').innerHTML = flags[lang];
+        // Sayfadaki çevirileri güncelle
+        translatePage(lang);
         
-        // Yön değiştirme - تغيير الاتجاه
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        document.getElementById('languageMenu').style.display = 'none';
-        
-        // Menü kontrolü
-        if (!currentMenu[lang] || currentMenu[lang].length === 0) {
-            if (ORIGINAL_MENU_TEMPLATE[lang]) {
-                currentMenu[lang] = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE[lang]));
-                saveMenuToStorage();
-            }
-        }
-        
+        // Menüyü yeniden göster
         displayMenu();
-        showToast(`Dil değiştirildi: ${lang.toUpperCase()}`, 'success');
-    };
+        
+        // Dil seçiciyi güncelle
+        document.getElementById('languageSwitcher').value = lang;
+        
+        showToast(translations[lang]?.siteTitle || `Dil değiştirildi: ${lang.toUpperCase()}`, 'success');
+    }
 
     // ========== MENÜYÜ GÖSTER ==========
     function displayMenu() {
@@ -2516,10 +2838,10 @@
                         e.stopPropagation();
                         if (isDeveloper) {
                             if (editMode) { 
-                                const newName = prompt('Yeni ürün adı:', item.name); 
+                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
                                 if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
                             }
-                            else if (deleteMode) showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
+                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
                         } else {
                             teaClickCount++;
                             if (teaClickCount >= 7 && !videoShown) { 
@@ -2536,10 +2858,10 @@
                         e.stopPropagation();
                         if (isDeveloper) {
                             if (editMode) { 
-                                const newName = prompt('Yeni ürün adı:', item.name); 
+                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
                                 if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
                             }
-                            else if (deleteMode) showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name));
+                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
                         }
                     };
                 }
@@ -2550,7 +2872,7 @@
                 priceSpan.onclick = function(e) {
                     e.stopPropagation();
                     if (isDeveloper && editMode) { 
-                        const newPrice = prompt('Yeni fiyat:', item.price); 
+                        const newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price); 
                         if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice); 
                     }
                 };
@@ -2568,7 +2890,7 @@
                     const deleteBtn = document.createElement('button');
                     deleteBtn.className = 'item-delete-btn';
                     deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                    deleteBtn.onclick = (e) => { e.stopPropagation(); showConfirm(`"${item.name}" silinsin mi?`, () => deleteProduct(catIdx, cat.category, item.name)); };
+                    deleteBtn.onclick = (e) => { e.stopPropagation(); showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name)); };
                     
                     const imageBtn = document.createElement('button');
                     imageBtn.className = 'item-image-edit-btn';
@@ -2592,7 +2914,7 @@
                 const deleteCatBtn = document.createElement('button');
                 deleteCatBtn.className = 'delete-card-btn';
                 deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
-                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" kategorisi silinsin mi?`, () => deleteCategory(cat.category));
+                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" ${translations[currentLang]?.confirmMessage || 'kategorisi silinsin mi?'}`, () => deleteCategory(cat.category));
                 card.appendChild(deleteCatBtn);
             }
             
@@ -2621,7 +2943,7 @@
             }
             saveMenuToStorage();
             displayMenu();
-            showToast('İsim güncellendi', 'success');
+            showToast(translations[currentLang]?.save || 'İsim güncellendi', 'success');
         }
     }
 
@@ -2633,7 +2955,7 @@
             item.price = newPrice;
             saveMenuToStorage();
             displayMenu();
-            showToast('Fiyat güncellendi', 'success');
+            showToast(translations[currentLang]?.save || 'Fiyat güncellendi', 'success');
         }
     }
 
@@ -2649,7 +2971,7 @@
             }
             saveMenuToStorage();
             displayMenu();
-            showToast('Ürün silindi', 'success');
+            showToast(translations[currentLang]?.delete || 'Ürün silindi', 'success');
         }
     }
 
@@ -2664,7 +2986,7 @@
             }
             saveMenuToStorage();
             displayMenu();
-            showToast('Kategori silindi', 'success');
+            showToast(translations[currentLang]?.delete || 'Kategori silindi', 'success');
         }
     }
 
@@ -2673,9 +2995,9 @@
         const menu = currentMenu[currentLang] || [];
         const item = menu[catIdx]?.items[itemIdx];
         if (!item) return;
-        const newName = prompt('Yeni ürün adı:', item.name);
+        const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name);
         if (newName) {
-            const newPrice = prompt('Yeni fiyat:', item.price);
+            const newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price);
             if (newPrice) {
                 updateItemName(catIdx, menu[catIdx].category, item.name, newName);
                 updateItemPrice(catIdx, menu[catIdx].category, newName, newPrice);
@@ -2688,7 +3010,7 @@
         deleteMode = false; 
         document.getElementById('menuGrid').classList.add('edit-mode'); 
         document.getElementById('menuGrid').classList.remove('delete-mode'); 
-        showToast('✏️ Düzenleme modu aktif', 'success'); 
+        showToast(translations[currentLang]?.devEditMode || '✏️ Düzenleme modu aktif', 'success'); 
     };
 
     window.enableDelete = function() { 
@@ -2696,32 +3018,32 @@
         editMode = false; 
         document.getElementById('menuGrid').classList.add('delete-mode'); 
         document.getElementById('menuGrid').classList.remove('edit-mode'); 
-        showToast('🗑️ Silme modu aktif', 'success'); 
+        showToast(translations[currentLang]?.devDeleteMode || '🗑️ Silme modu aktif', 'success'); 
     };
 
     window.disableAllModes = function() { 
         editMode = false; 
         deleteMode = false; 
         document.getElementById('menuGrid').classList.remove('edit-mode','delete-mode'); 
-        showToast('🔘 Modlar kapatıldı', 'success'); 
+        showToast(translations[currentLang]?.devDisableModes || '🔘 Modlar kapatıldı', 'success'); 
     };
 
     window.addCategory = function() {
         const name = document.getElementById('newCategory').value.trim();
-        if (!name) return showToast('Kategori adı girin!', 'error');
+        if (!name) return showToast(translations[currentLang]?.devCategoryNamePlaceholder || 'Kategori adı girin!', 'error');
         const menu = currentMenu[currentLang] || [];
         menu.push({ category: name, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [] });
         saveMenuToStorage();
         displayMenu();
         document.getElementById('newCategory').value = '';
-        showToast('Kategori eklendi', 'success');
+        showToast(translations[currentLang]?.add || 'Kategori eklendi', 'success');
     };
 
     window.addProduct = function() {
         const name = document.getElementById('newName').value.trim();
         const price = document.getElementById('productPrice').value.trim();
         const idx = document.getElementById('categorySelect').value;
-        if (!name || !price) return showToast('Ad ve fiyat girin!', 'error');
+        if (!name || !price) return showToast(translations[currentLang]?.devProductNamePlaceholder || 'Ad ve fiyat girin!', 'error');
         const menu = currentMenu[currentLang] || [];
         const category = menu[idx];
         if (category) {
@@ -2730,46 +3052,46 @@
             displayMenu();
             document.getElementById('newName').value = '';
             document.getElementById('productPrice').value = '';
-            showToast('Ürün eklendi', 'success');
+            showToast(translations[currentLang]?.add || 'Ürün eklendi', 'success');
         }
     };
 
     window.previewCategoryImage = function() {
         const url = document.getElementById('categoryImageUrl').value;
-        document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
+        document.getElementById('categoryImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>' + (translations[currentLang]?.preview || 'Önizleme') + '</span>';
     };
 
     window.previewProductImage = function() {
         const url = document.getElementById('productImageUrl').value;
-        document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
+        document.getElementById('productImagePreview').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>' + (translations[currentLang]?.preview || 'Önizleme') + '</span>';
     };
 
     window.addCategoryImage = function() {
         const cat = document.getElementById('categoryImageSelect').value;
         const url = document.getElementById('categoryImageUrl').value;
-        if (!cat || !url) return showToast('Kategori ve URL girin!', 'error');
+        if (!cat || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
         categoryImages[cat] = url;
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
-        showToast('Kategori resmi eklendi', 'success');
+        showToast(translations[currentLang]?.add || 'Kategori resmi eklendi', 'success');
     };
 
     window.deleteCategoryImage = function() {
         const cat = document.getElementById('categoryImageSelect').value;
-        if (!cat || !categoryImages[cat]) return showToast('Kategori seçin!', 'error');
+        if (!cat || !categoryImages[cat]) return showToast(translations[currentLang]?.devCategory + ' seçin!', 'error');
         delete categoryImages[cat];
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
-        showToast('Kategori resmi silindi', 'success');
+        showToast(translations[currentLang]?.delete || 'Kategori resmi silindi', 'success');
     };
 
     window.addProductImage = function() {
         const catIdx = document.getElementById('productCategorySelect').value;
         const prodIdx = document.getElementById('productSelect').value;
         const url = document.getElementById('productImageUrl').value;
-        if (!catIdx || !prodIdx || !url) return showToast('Kategori, ürün ve URL girin!', 'error');
+        if (!catIdx || !prodIdx || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
         const menu = currentMenu[currentLang] || [];
         const prod = menu[catIdx].items[prodIdx].name;
         if (!productImages[catIdx]) productImages[catIdx] = {};
@@ -2777,13 +3099,13 @@
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
         updateGallery();
-        showToast('Ürün resmi eklendi', 'success');
+        showToast(translations[currentLang]?.add || 'Ürün resmi eklendi', 'success');
     };
 
     window.deleteProductImage = function() {
         const catIdx = document.getElementById('productCategorySelect').value;
         const prodIdx = document.getElementById('productSelect').value;
-        if (!catIdx || !prodIdx) return showToast('Kategori ve ürün seçin!', 'error');
+        if (!catIdx || !prodIdx) return showToast(translations[currentLang]?.devCategory + ' ve ürün seçin!', 'error');
         const menu = currentMenu[currentLang] || [];
         const prod = menu[catIdx].items[prodIdx].name;
         if (productImages[catIdx] && productImages[catIdx][prod]) {
@@ -2791,36 +3113,36 @@
             localStorage.setItem('productImages', JSON.stringify(productImages));
             displayMenu();
             updateGallery();
-            showToast('Ürün resmi silindi', 'success');
+            showToast(translations[currentLang]?.delete || 'Ürün resmi silindi', 'success');
         }
     };
 
     window.previewCategoryImageV2 = function() {
         const url = document.getElementById('categoryImageUrlV2').value;
-        document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
+        document.getElementById('categoryImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>' + (translations[currentLang]?.preview || 'Önizleme') + '</span>';
     };
 
     window.previewProductImageV2 = function() {
         const url = document.getElementById('productImageUrlV2').value;
-        document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>Önizleme</span>';
+        document.getElementById('productImagePreviewV2').innerHTML = url ? `<img src="${url}" onerror="this.src='https://via.placeholder.com/150?text=Hata'">` : '<span>' + (translations[currentLang]?.preview || 'Önizleme') + '</span>';
     };
 
     window.addCategoryImageV2 = function() {
         const cat = document.getElementById('categoryImageSelectV2').value;
         const url = document.getElementById('categoryImageUrlV2').value;
-        if (!cat || !url) return showToast('Kategori ve URL girin!', 'error');
+        if (!cat || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
         categoryImages[cat] = url;
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
-        showToast('Kategori resmi eklendi', 'success');
+        showToast(translations[currentLang]?.add || 'Kategori resmi eklendi', 'success');
     };
 
     window.addProductImageV2 = function() {
         const catIdx = document.getElementById('productCategorySelectV2').value;
         const prodIdx = document.getElementById('productSelectV2').value;
         const url = document.getElementById('productImageUrlV2').value;
-        if (!catIdx || !prodIdx || !url) return showToast('Kategori, ürün ve URL girin!', 'error');
+        if (!catIdx || !prodIdx || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
         const menu = currentMenu[currentLang] || [];
         const prod = menu[catIdx].items[prodIdx].name;
         if (!productImages[catIdx]) productImages[catIdx] = {};
@@ -2828,7 +3150,7 @@
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
         updateGallery();
-        showToast('Ürün resmi eklendi', 'success');
+        showToast(translations[currentLang]?.add || 'Ürün resmi eklendi', 'success');
     };
 
     window.editGalleryImage = function(type, cat, product) {
@@ -2837,7 +3159,7 @@
     };
 
     window.deleteGalleryImage = function(type, cat, product) {
-        showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
+        showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (type === 'category') { 
                 delete categoryImages[cat]; 
                 localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); 
@@ -2848,7 +3170,7 @@
             }
             displayMenu(); 
             updateGallery(); 
-            showToast('Resim silindi', 'success');
+            showToast(translations[currentLang]?.delete || 'Resim silindi', 'success');
         });
     };
 
@@ -2858,11 +3180,11 @@
         const menu = currentMenu[currentLang] || [];
         if (!ci || !menu[ci]) { 
             ps.disabled = true; 
-            ps.innerHTML = '<option>Önce kategori seçin</option>'; 
+            ps.innerHTML = '<option>' + (translations[currentLang]?.devSelectCategoryFirst || 'Önce kategori seçin') + '</option>'; 
             return; 
         }
         ps.disabled = false;
-        ps.innerHTML = '<option value="">Ürün seçin</option>';
+        ps.innerHTML = '<option value="">' + (translations[currentLang]?.devProduct || 'Ürün seçin') + '</option>';
         menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
     });
 
@@ -2872,11 +3194,11 @@
         const menu = currentMenu[currentLang] || [];
         if (!ci || !menu[ci]) { 
             ps.disabled = true; 
-            ps.innerHTML = '<option>Önce kategori seçin</option>'; 
+            ps.innerHTML = '<option>' + (translations[currentLang]?.devSelectCategoryFirst || 'Önce kategori seçin') + '</option>'; 
             return; 
         }
         ps.disabled = false;
-        ps.innerHTML = '<option value="">Ürün seçin</option>';
+        ps.innerHTML = '<option value="">' + (translations[currentLang]?.devProduct || 'Ürün seçin') + '</option>';
         menu[ci].items.forEach((it,i) => ps.innerHTML += `<option value="${i}">${it.name}</option>`);
     });
 
@@ -2954,7 +3276,7 @@
     window.saveImageEdit = function() {
         if (!currentEditData) return;
         const newUrl = document.getElementById('imageEditUrl').value.trim();
-        if (!newUrl) return showToast('Resim URL girin!', 'error');
+        if (!newUrl) return showToast(translations[currentLang]?.devImageUrlPlaceholder || 'Resim URL girin!', 'error');
         
         if (currentEditData.type === 'category') {
             categoryImages[currentEditData.name] = newUrl;
@@ -2969,13 +3291,13 @@
         
         displayMenu(); 
         updateGallery(); 
-        showToast('Resim güncellendi', 'success'); 
+        showToast(translations[currentLang]?.save || 'Resim güncellendi', 'success'); 
         closeImageEdit();
     };
 
     window.deleteImageEdit = function() {
         if (!currentEditData) return;
-        showConfirm('Resmi silmek istediğinize emin misiniz?', () => {
+        showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (currentEditData.type === 'category') {
                 delete categoryImages[currentEditData.name];
                 localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
@@ -2989,7 +3311,7 @@
             }
             displayMenu(); 
             updateGallery(); 
-            showToast('Resim silindi', 'success'); 
+            showToast(translations[currentLang]?.delete || 'Resim silindi', 'success'); 
             closeImageEdit();
         });
     };
@@ -3003,11 +3325,6 @@
 
     window.scrollToMenu = function() { 
         document.getElementById('menu').scrollIntoView({ behavior: 'smooth' }); 
-    };
-
-    window.toggleLanguageMenu = function() {
-        const menu = document.getElementById('languageMenu');
-        menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
     };
 
     // ---------- PANEL YÖNETİMİ ----------
@@ -3066,7 +3383,7 @@
 
     // ---------- CLOUD VE YEDEKLEME ----------
     window.saveToCloud = async function() {
-        showToast('☁️ Kaydediliyor...', 'info');
+        showToast('☁️ ' + (translations[currentLang]?.devCloudSave || 'Kaydediliyor...'), 'info');
         document.getElementById('cloudSaveBtn').disabled = true;
         try {
             await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a', {
@@ -3074,15 +3391,15 @@
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({ menu: currentMenu, images:{ categories:categoryImages, products:productImages } })
             });
-            showToast('✅ Kaydedildi!', 'success');
+            showToast('✅ ' + (translations[currentLang]?.save || 'Kaydedildi!'), 'success');
         } catch { 
-            showToast('❌ Hata!', 'error'); 
+            showToast('❌ ' + (translations[currentLang]?.devCloudTest || 'Hata!'), 'error'); 
         }
         document.getElementById('cloudSaveBtn').disabled = false;
     };
 
     window.loadFromCloud = async function() {
-        showToast('📥 Yükleniyor...', 'info');
+        showToast('📥 ' + (translations[currentLang]?.devCloudLoad || 'Yükleniyor...'), 'info');
         document.getElementById('cloudLoadBtn').disabled = true;
         try {
             const res = await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a');
@@ -3098,10 +3415,10 @@
                 saveMenuToStorage();
                 displayMenu(); 
                 updateGallery(); 
-                showToast('✅ Yüklendi!', 'success');
+                showToast('✅ ' + (translations[currentLang]?.load || 'Yüklendi!'), 'success');
             }
         } catch { 
-            showToast('❌ Hata!', 'error'); 
+            showToast('❌ ' + (translations[currentLang]?.devCloudTest || 'Hata!'), 'error'); 
         }
         document.getElementById('cloudLoadBtn').disabled = false;
     };
@@ -3109,16 +3426,16 @@
     window.testCloudConnection = async function() {
         try { 
             await fetch('https://api.npoint.io/2b9acf08c13ba5b3b27a'); 
-            showToast('✅ Bağlantı başarılı!', 'success'); 
+            showToast('✅ ' + (translations[currentLang]?.devCloudTest || 'Bağlantı başarılı!'), 'success'); 
         }
         catch { 
-            showToast('❌ Bağlantı hatası!', 'error'); 
+            showToast('❌ ' + (translations[currentLang]?.devCloudTest || 'Bağlantı hatası!'), 'error'); 
         }
     };
 
     window.saveImagesToCloud = function() {
         localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-        showToast('✅ Resimler kaydedildi!', 'success');
+        showToast('✅ ' + (translations[currentLang]?.save || 'Resimler kaydedildi!'), 'success');
     };
 
     window.loadImagesFromCloud = function() {
@@ -3131,22 +3448,22 @@
             localStorage.setItem('productImages', JSON.stringify(productImages)); 
             displayMenu(); 
             updateGallery(); 
-            showToast('✅ Resimler yüklendi!', 'success'); 
+            showToast('✅ ' + (translations[currentLang]?.load || 'Resimler yüklendi!'), 'success'); 
         }
     };
 
     window.copyV1Code = function() { 
         navigator.clipboard.writeText(JSON.stringify(currentMenu, null, 2)); 
-        showToast('📋 Kod kopyalandı!', 'success'); 
+        showToast('📋 ' + (translations[currentLang]?.copy || 'Kod kopyalandı!'), 'success'); 
     };
 
     window.copyBackupCode = function() { 
         navigator.clipboard.writeText(JSON.stringify({ menu: currentMenu, images: { categories: categoryImages, products: productImages } }, null, 2)); 
-        showToast('📋 Kod kopyalandı!', 'success'); 
+        showToast('📋 ' + (translations[currentLang]?.copy || 'Kod kopyalandı!'), 'success'); 
     };
 
     window.pasteBackupCode = function() {
-        const code = prompt('Kodu yapıştır:');
+        const code = prompt(translations[currentLang]?.paste || 'Kodu yapıştır:');
         if (!code) return;
         try {
             const data = JSON.parse(code);
@@ -3161,10 +3478,10 @@
                 saveMenuToStorage();
                 displayMenu(); 
                 updateGallery(); 
-                showToast('✅ Kod yüklendi!', 'success');
+                showToast('✅ ' + (translations[currentLang]?.load || 'Kod yüklendi!'), 'success');
             }
         } catch { 
-            showToast('❌ Geçersiz kod!', 'error'); 
+            showToast('❌ ' + (translations[currentLang]?.devCloudTest || 'Geçersiz kod!'), 'error'); 
         }
     };
 
@@ -3173,7 +3490,7 @@
         if (v) { 
             document.getElementById('instaLink').href = v; 
             localStorage.setItem('insta', v); 
-            showToast('Instagram güncellendi', 'success'); 
+            showToast(translations[currentLang]?.update || 'Instagram güncellendi', 'success'); 
         }
     };
 
@@ -3182,7 +3499,7 @@
         if (v) { 
             document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${v}&output=embed`; 
             localStorage.setItem('map', v); 
-            showToast('Konum güncellendi', 'success'); 
+            showToast(translations[currentLang]?.update || 'Konum güncellendi', 'success'); 
         }
     };
 
@@ -3214,11 +3531,11 @@
         document.head.appendChild(style);
         
         closeColorPicker();
-        showToast('🎨 Renkler uygulandı!', 'success');
+        showToast(translations[currentLang]?.apply || '🎨 Renkler uygulandı!', 'success');
     };
 
     window.resetToOriginal = function() {
-        showConfirm('Menü sıfırlansın mı? (Tüm değişiklikler kaybolacak)', () => {
+        showConfirm(translations[currentLang]?.confirmMessage || 'Menü sıfırlansın mı? (Tüm değişiklikler kaybolacak)', () => {
             currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
             categoryImages = {};
             productImages = {};
@@ -3226,7 +3543,7 @@
             localStorage.removeItem('categoryImages');
             localStorage.removeItem('productImages');
             displayMenu();
-            showToast('Menü sıfırlandı', 'success');
+            showToast(translations[currentLang]?.devReset || 'Menü sıfırlandı', 'success');
         });
     };
 
@@ -3260,7 +3577,7 @@
                 isDeveloper = true;
                 document.getElementById('floatingDevBtn').classList.add('visible');
                 document.getElementById('floatingDevBtn').style.display = 'flex';
-                showToast('Hoş geldiniz geliştirici', 'success');
+                showToast(translations[currentLang]?.devPanelTitle || 'Hoş geldiniz geliştirici', 'success');
             } else alert('❌ Yanlış şifre!');
             clickCount = 0;
         }
@@ -3274,14 +3591,19 @@
                 isDeveloper = true;
                 document.getElementById('floatingDevBtn').classList.add('visible');
                 document.getElementById('floatingDevBtn').style.display = 'flex';
-                showToast('Hoş geldiniz geliştirici', 'success');
+                showToast(translations[currentLang]?.devPanelTitle || 'Hoş geldiniz geliştirici', 'success');
             } else alert('❌ Yanlış şifre!');
         }
     });
 
     // ---------- SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLang = localStorage.getItem('lang');
+        // Dil seçici event listener
+        document.getElementById('languageSwitcher').addEventListener('change', function() {
+            changeLanguage(this.value);
+        });
+        
+        const savedLang = localStorage.getItem('selectedLanguage');
         if (savedLang && ['tr', 'en', 'ru', 'ar'].includes(savedLang)) {
             currentLang = savedLang;
         }
@@ -3290,7 +3612,14 @@
             loadMenuFromStorage();
         }
         
-        setLanguage(currentLang);
+        // İlk çeviriyi yap
+        translatePage(currentLang);
+        
+        // Dil seçiciyi güncelle
+        document.getElementById('languageSwitcher').value = currentLang;
+        
+        // Menüyü göster
+        displayMenu();
         
         if (localStorage.getItem('theme') === 'light') { 
             document.body.classList.add('light-mode'); 
@@ -3308,16 +3637,6 @@
         
         const map = localStorage.getItem('map');
         if (map) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${map}&output=embed`;
-        
-        displayMenu();
-        
-        document.addEventListener('click', function(e) {
-            const btn = document.getElementById('langBtn');
-            const menu = document.getElementById('languageMenu');
-            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
-                menu.style.display = 'none';
-            }
-        });
     });
 
     // ---------- SÜRÜKLEME ----------
