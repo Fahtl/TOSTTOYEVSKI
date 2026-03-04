@@ -4447,6 +4447,173 @@
 })();
 </script>
 
+<!-- ===== إضافة: QR Code المخفي للمطورين (يظهر فقط بطرق سرية) ===== -->
+<div id="developerQR" style="display:none; text-align:center; margin:40px 0; padding:30px; background:linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius:30px; border:3px solid #ff3c3c; position:relative; box-shadow:0 20px 40px rgba(255,60,60,0.3);">
+    <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#ff3c3c; color:white; padding:8px 30px; border-radius:50px; font-size:14px; font-weight:bold; letter-spacing:2px; box-shadow:0 5px 15px rgba(255,60,60,0.5);">
+        🔐 DEVELOPER ONLY
+    </div>
+    
+    <h3 style="color:#ff3c3c; margin:25px 0 15px; font-size:28px; font-weight:800; text-shadow:0 0 15px rgba(255,60,60,0.5);">
+        ⚡ Developer Access
+    </h3>
+    
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; align-items:center;">
+        <!-- QR Code -->
+        <div style="position:relative;">
+            <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://fahtl.github.io/TOSTTOYEVSKI/?dev=toyev&format=png&qzone=2&margin=2" 
+                alt="Developer QR Code"
+                style="border:4px solid #ff3c3c; border-radius:20px; padding:10px; background:white; box-shadow:0 0 30px rgba(255,60,60,0.5);">
+            <div style="position:absolute; top:-10px; right:-10px; background:#ff3c3c; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; border:3px solid white; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+                🔐
+            </div>
+        </div>
+        
+        <!-- المعلومات -->
+        <div style="text-align:left; color:#ccc;">
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🔗</span>
+                <span style="font-family:monospace;">?dev=toyev</span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">⌨️</span>
+                <span>اضغط <span style="background:#333; padding:5px 10px; border-radius:5px; font-family:monospace;">Ctrl+Shift+D</span></span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🥚</span>
+                <span>10 نقرات على الشعار</span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🔑</span>
+                <span>كلمة السر: <span style="background:#333; padding:5px 10px; border-radius:5px; font-family:monospace;">toyev2025</span></span>
+            </p>
+        </div>
+    </div>
+    
+    <p style="color:#aaa; margin-top:25px; font-size:13px; border-top:1px solid #ff3c3c20; padding-top:15px;">
+        ⚡ هذا الـ QR يظهر فقط للمطورين • يستخدم للدخول السريع للوحة التحكم
+    </p>
+</div>
+
+<script>
+(function() {
+    'use strict';
+    
+    // ===== نظام التخفي المتكامل للمطورين (إضافة جديدة) =====
+    // هذا النظام لا يؤثر على النظام القديم إطلاقاً
+    
+    const devQR = document.getElementById('developerQR');
+    let isDevModeActive = false;
+    
+    // دالة إظهار QR (لا تؤثر على isDeveloper القديم)
+    function showDeveloperQR(source) {
+        if (devQR && !isDevModeActive) {
+            devQR.style.display = 'block';
+            isDevModeActive = true;
+            console.log(`%c🔐 Developer QR Activated via ${source}`, 'color: #ff3c3c; font-size: 14px; font-weight: bold; background: #1a1a1a; padding: 5px 10px; border-radius: 5px;');
+            
+            // رسالة ترحيب (تستخدم showToast الموجودة)
+            if (typeof showToast === 'function') {
+                showToast('🛠️ Developer QR Mode Activated!', 'info');
+            }
+        }
+    }
+    
+    // 1️⃣ الرابط السري
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('dev') === 'toyev') {
+        showDeveloperQR('Secret URL');
+    }
+    
+    // 2️⃣ اختصار لوحة المفاتيح (Ctrl+Shift+D)
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            e.preventDefault();
+            showDeveloperQR('Keyboard Shortcut');
+        }
+    });
+    
+    // 3️⃣ كلمة سر (F7) - مختلفة عن كلمة السر القديمة
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F7') {
+            e.preventDefault();
+            const password = prompt('🔐 Enter developer QR password:');
+            if (password === 'toyev2025') { // كلمة سر جديدة للـ QR
+                showDeveloperQR('Password');
+            } else if (password !== null) {
+                alert('❌ Wrong password!');
+            }
+        }
+    });
+    
+    // 4️⃣ نقرات سرية على الشعار (10 نقرات - تختلف عن 7 نقرات القديمة)
+    let qrClickCount = 0;
+    const secretTrigger = document.getElementById('secretTrigger');
+    if (secretTrigger) {
+        // نضيف مستمع جديد بدون إزالة القديم
+        secretTrigger.addEventListener('click', function() {
+            qrClickCount++;
+            if (qrClickCount === 10) { // 10 نقرات للـ QR
+                showDeveloperQR('Secret Clicks');
+                qrClickCount = 0;
+            }
+        });
+    }
+    
+    // 5️⃣ كود سري في الكنسول
+    console.log('%c🔧 Developer QR: Type "showQR()" to activate', 'color: #ff8c00; font-size: 12px; font-weight: bold;');
+    window.showQR = function() {
+        showDeveloperQR('Console Command');
+    };
+    
+    // 6️⃣ الضغط على F12 5 مرات
+    let f12Count = 0;
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12') {
+            f12Count++;
+            if (f12Count === 5) {
+                showDeveloperQR('F12 x5');
+                f12Count = 0;
+            }
+            setTimeout(() => f12Count = 0, 3000);
+        }
+    });
+    
+    // 7️⃣ نقرة مطولة على الشعار (3 ثوان)
+    let pressTimer;
+    if (secretTrigger) {
+        secretTrigger.addEventListener('mousedown', function() {
+            pressTimer = setTimeout(() => {
+                showDeveloperQR('Long Press');
+            }, 3000);
+        });
+        
+        secretTrigger.addEventListener('mouseup', function() {
+            clearTimeout(pressTimer);
+        });
+        
+        secretTrigger.addEventListener('mouseleave', function() {
+            clearTimeout(pressTimer);
+        });
+    }
+    
+    // 8️⃣ كتابة "dev" في الكنسول 3 مرات
+    console.log('%c🔑 Type "dev" 3 times to activate QR', 'color: #ff8c00;');
+    let devCounter = 0;
+    const originalLog = console.log;
+    console.log = function() {
+        if (arguments[0] === 'dev') {
+            devCounter++;
+            if (devCounter === 3) {
+                showDeveloperQR('Console Dev');
+                devCounter = 0;
+            }
+        }
+        originalLog.apply(console, arguments);
+    };
+})();
+</script>
+
 <!-- ========== EK YORUM SATIRLARI ========== -->
 <!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
 <!-- 11 --><!-- 12 --><!-- 13 --><!-- 14 --><!-- 15 --><!-- 16 --><!-- 17 --><!-- 18 --><!-- 19 --><!-- 20 -->
