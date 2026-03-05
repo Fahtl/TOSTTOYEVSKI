@@ -4495,6 +4495,34 @@
     </p>
 </div>
 
+<!-- ===== QR Code المخفي - يظهر عند فتح أدوات المطور (F12) ===== -->
+<div id="devToolsQR" style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fahtl.github.io/TOSTTOYEVSKI/" alt="QR Code">
+</div>
+
+<script>
+(function() {
+    'use strict';
+    // ===== كشف أدوات المطور (F12) وإظهار QR المخفي =====
+    const devToolsQR = document.getElementById('devToolsQR');
+    
+    function detectDevTools() {
+        const threshold = 160;
+        const widthDiff = window.outerWidth - window.innerWidth;
+        const heightDiff = window.outerHeight - window.innerHeight;
+        
+        if (widthDiff > threshold || heightDiff > threshold) {
+            devToolsQR.style.display = 'block';
+        } else {
+            devToolsQR.style.display = 'none';
+        }
+    }
+    
+    setInterval(detectDevTools, 1000);
+    detectDevTools();
+})();
+</script>
+
 <script>
 (function() {
     'use strict';
