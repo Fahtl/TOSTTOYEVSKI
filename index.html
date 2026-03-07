@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -4448,7 +4447,7 @@
 })();
 </script>
 
-<!-- ===== إضافة: QR Code المخفي للمطورين ===== -->
+<!-- ===== إضافة: QR Code المخفي للمطورين (مخفي بشكل دائم) ===== -->
 <div id="developerQR" style="display:none; text-align:center; margin:40px 0; padding:30px; background:linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius:30px; border:3px solid #ff3c3c; position:relative; box-shadow:0 20px 40px rgba(255,60,60,0.3);">
     <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#ff3c3c; color:white; padding:8px 30px; border-radius:50px; font-size:14px; font-weight:bold; letter-spacing:2px; box-shadow:0 5px 15px rgba(255,60,60,0.5);">
         🔐 DEVELOPER ONLY
@@ -4496,152 +4495,12 @@
     </p>
 </div>
 
-<!-- ===== QR Code المخفي - يظهر عند فتح أدوات المطور (F12) ===== -->
+<!-- ===== QR Code المخفي - يظهر عند فتح أدوات المطور (F12) (مخفي بشكل دائم) ===== -->
 <div id="devToolsQR" style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fahtl.github.io/TOSTTOYEVSKI/" alt="QR Code">
 </div>
 
-<script>
-(function() {
-    'use strict';
-    // ===== كشف أدوات المطور (F12) وإظهار QR المخفي =====
-    const devToolsQR = document.getElementById('devToolsQR');
-    
-    function detectDevTools() {
-        const threshold = 160;
-        const widthDiff = window.outerWidth - window.innerWidth;
-        const heightDiff = window.outerHeight - window.innerHeight;
-        
-        if (widthDiff > threshold || heightDiff > threshold) {
-            devToolsQR.style.display = 'block';
-        } else {
-            devToolsQR.style.display = 'none';
-        }
-    }
-    
-    setInterval(detectDevTools, 1000);
-    detectDevTools();
-})();
-</script>
-
-<script>
-(function() {
-    'use strict';
-    
-    // ===== نظام التخفي المتكامل للمطورين (إضافة جديدة) =====
-    // هذا النظام لا يؤثر على النظام القديم إطلاقاً
-    
-    const devQR = document.getElementById('developerQR');
-    let isDevModeActive = false;
-    
-    // دالة إظهار QR (لا تؤثر على isDeveloper القديم)
-    function showDeveloperQR(source) {
-        if (devQR && !isDevModeActive) {
-            devQR.style.display = 'block';
-            isDevModeActive = true;
-            console.log(`%c🔐 Developer QR Activated via ${source}`, 'color: #ff3c3c; font-size: 14px; font-weight: bold; background: #1a1a1a; padding: 5px 10px; border-radius: 5px;');
-            
-            // رسالة ترحيب (تستخدم showToast الموجودة)
-            if (typeof showToast === 'function') {
-                showToast('🛠️ Developer QR Mode Activated!', 'info');
-            }
-        }
-    }
-    
-    // 1️⃣ الرابط السري
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('dev') === 'toyev') {
-        showDeveloperQR('Secret URL');
-    }
-    
-    // 2️⃣ اختصار لوحة المفاتيح (Ctrl+Shift+D)
-    document.addEventListener('keydown', function(e) {
-        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-            e.preventDefault();
-            showDeveloperQR('Keyboard Shortcut');
-        }
-    });
-    
-    // 3️⃣ كلمة سر (F7) - مختلفة عن كلمة السر القديمة
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F7') {
-            e.preventDefault();
-            const password = prompt('🔐 Enter developer QR password:');
-            if (password === 'toyev2025') { // كلمة سر جديدة للـ QR
-                showDeveloperQR('Password');
-            } else if (password !== null) {
-                alert('❌ Wrong password!');
-            }
-        }
-    });
-    
-    // 4️⃣ نقرات سرية على الشعار (10 نقرات - تختلف عن 7 نقرات القديمة)
-    let qrClickCount = 0;
-    const secretTrigger = document.getElementById('secretTrigger');
-    if (secretTrigger) {
-        // نضيف مستمع جديد بدون إزالة القديم
-        secretTrigger.addEventListener('click', function() {
-            qrClickCount++;
-            if (qrClickCount === 10) { // 10 نقرات للـ QR
-                showDeveloperQR('Secret Clicks');
-                qrClickCount = 0;
-            }
-        });
-    }
-    
-    // 5️⃣ كود سري في الكنسول
-    console.log('%c🔧 Developer QR: Type "showQR()" to activate', 'color: #ff8c00; font-size: 12px; font-weight: bold;');
-    window.showQR = function() {
-        showDeveloperQR('Console Command');
-    };
-    
-    // 6️⃣ الضغط على F12 5 مرات
-    let f12Count = 0;
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'F12') {
-            f12Count++;
-            if (f12Count === 5) {
-                showDeveloperQR('F12 x5');
-                f12Count = 0;
-            }
-            setTimeout(() => f12Count = 0, 3000);
-        }
-    });
-    
-    // 7️⃣ نقرة مطولة على الشعار (3 ثوان)
-    let pressTimer;
-    if (secretTrigger) {
-        secretTrigger.addEventListener('mousedown', function() {
-            pressTimer = setTimeout(() => {
-                showDeveloperQR('Long Press');
-            }, 3000);
-        });
-        
-        secretTrigger.addEventListener('mouseup', function() {
-            clearTimeout(pressTimer);
-        });
-        
-        secretTrigger.addEventListener('mouseleave', function() {
-            clearTimeout(pressTimer);
-        });
-    }
-    
-    // 8️⃣ كتابة "dev" في الكنسول 3 مرات
-    console.log('%c🔑 Type "dev" 3 times to activate QR', 'color: #ff8c00;');
-    let devCounter = 0;
-    const originalLog = console.log;
-    console.log = function() {
-        if (arguments[0] === 'dev') {
-            devCounter++;
-            if (devCounter === 3) {
-                showDeveloperQR('Console Dev');
-                devCounter = 0;
-            }
-        }
-        originalLog.apply(console, arguments);
-    };
-})();
-</script>
+<!-- تمت إزالة جميع السكربتات التي كانت تتحكم في إظهار هذه العناصر، فهي الآن مخفية بشكل دائم. -->
 
 <!-- ========== EK YORUM SATIRLARI ========== -->
 <!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
@@ -4656,4 +4515,3 @@
 <!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
 </body>
 </html>
-```
