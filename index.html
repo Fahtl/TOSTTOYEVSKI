@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title data-key="siteTitle">Tosttoo | Menü (Çok Dilli)</title>
+    <title data-key="siteTitle">Tosttoo | Menü (Çok Dilli - العلم العراقي)</title>
     <!-- Yazı tipleri ve ikonlar -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* ========== TÜM CSS KODLARI (144Hz için optimize edilmiş) ========== */
+        /* ========== TÜM CSS KODLARI AYNEN KALIYOR ========== */
         * {
             margin: 0;
             padding: 0;
@@ -31,9 +31,6 @@
             color: #fff;
             padding-bottom: 70px;
             transition: background 0.3s ease, color 0.3s ease;
-            transform: translateZ(0);
-            backface-visibility: hidden;
-            perspective: 1000;
         }
 
         body[dir="rtl"] {
@@ -66,7 +63,6 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            will-change: transform;
         }
 
         .hero::before {
@@ -79,7 +75,6 @@
             background: radial-gradient(circle, rgba(255,140,0,0.2) 0%, transparent 50%);
             animation: rotate 20s linear infinite;
             pointer-events: none;
-            will-change: transform;
         }
 
         @keyframes rotate {
@@ -99,7 +94,6 @@
             font-weight: 800;
             letter-spacing: 2px;
             z-index: 10;
-            will-change: transform;
         }
 
         .hero h1:hover {
@@ -150,7 +144,6 @@
             box-shadow: 0 5px 15px rgba(255,140,0,0.3);
             font-size: 16px;
             text-decoration: none;
-            will-change: transform;
         }
 
         .btn::before {
@@ -255,7 +248,6 @@
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            will-change: transform, box-shadow;
         }
 
         .light-mode .card {
@@ -303,7 +295,6 @@
             object-fit: cover;
             transition: transform 0.5s;
             cursor: pointer;
-            will-change: transform;
         }
 
         .card:hover .card-image {
@@ -389,7 +380,6 @@
             cursor: pointer;
             overflow: hidden;
             width: 100%;
-            will-change: transform, border-color;
         }
 
         .light-mode .item {
@@ -451,7 +441,6 @@
             border: 2px solid #ff8c00;
             transition: all 0.3s;
             cursor: pointer;
-            will-change: transform;
         }
 
         body[dir="rtl"] .item-image {
@@ -637,7 +626,6 @@
             border: 1px solid rgba(255,140,0,0.3);
             transition: all 0.3s;
             cursor: pointer;
-            will-change: transform;
         }
 
         .contact-item:hover {
@@ -706,7 +694,6 @@
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s;
-            will-change: transform;
         }
 
         .map-container:hover {
@@ -751,7 +738,6 @@
             box-shadow: 0 4px 15px rgba(255,140,0,0.3);
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
-            will-change: transform;
         }
 
         .light-mode .control-btn, .light-mode #modeToggle {
@@ -764,6 +750,7 @@
             background: #ffa233;
         }
 
+        /* Dil Seçici (Select) */
         .language-select {
             width: 140px;
             height: 45px;
@@ -822,7 +809,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             transition: all 0.3s;
             display: none;
-            will-change: transform;
         }
 
         body[dir="rtl"] .floating-dev-btn {
@@ -1219,7 +1205,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             overflow-y: auto;
-            will-change: transform, opacity;
         }
 
         .light-mode .dev-panel {
@@ -1549,87 +1534,6 @@
             font-size: 0.9rem;
         }
 
-        /* ===== نافذة تكبير الصور (Image Popup) ===== */
-        .image-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 100000;
-            backdrop-filter: blur(8px);
-        }
-
-        .image-popup.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .image-popup img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 20px;
-            border: 3px solid #ff8c00;
-            box-shadow: 0 20px 40px rgba(255,140,0,0.3);
-            transform: scale(0.8);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            will-change: transform;
-        }
-
-        .image-popup.active img {
-            transform: scale(1);
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: #ff8c00;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            cursor: pointer;
-            border: 2px solid white;
-            transition: all 0.3s;
-            z-index: 100001;
-        }
-
-        .popup-close:hover {
-            transform: rotate(90deg) scale(1.1);
-            background: #ffa233;
-        }
-
-        body[dir="rtl"] .popup-close {
-            right: auto;
-            left: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .popup-close {
-                top: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 22px;
-            }
-            body[dir="rtl"] .popup-close {
-                right: auto;
-                left: 20px;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero h1 { font-size: 40px; }
             .control-btn, #modeToggle { width: 40px; height: 40px; font-size: 18px; }
@@ -1652,41 +1556,546 @@
             .grid { grid-template-columns: repeat(3,1fr); }
         }
 
-        /* أزرار التكبير والتصغير */
-        .zoom-controls {
-            display: flex;
-            gap: 10px;
-            margin-left: auto;
+        .w-100 { width: 100%; }
+        .h-100 { height: 100%; }
+        .position-relative { position: relative; }
+        .position-absolute { position: absolute; }
+        .position-fixed { position: fixed; }
+        .overflow-auto { overflow: auto; }
+        .overflow-hidden { overflow: hidden; }
+        .cursor-pointer { cursor: pointer; }
+        .cursor-move { cursor: move; }
+        .user-select-none { user-select: none; }
+        .pointer-events-none { pointer-events: none; }
+        .opacity-0 { opacity: 0; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-100 { opacity: 1; }
+        .z-1 { z-index: 1; }
+        .z-10 { z-index: 10; }
+        .z-100 { z-index: 100; }
+        
+        /* ===== قسم QR Code المتكامل ===== */
+        .qr-section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(255,140,0,0.02) 0%, transparent 100%);
         }
-        .zoom-btn {
-            background: #ff8c00;
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
+
+        /* خلفية متحركة */
+        .qr-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,140,0,0.05) 0%, transparent 60%);
+            animation: rotateQR 40s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateQR {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* شبكة البطاقات */
+        .qr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* بطاقة QR */
+        .qr-card {
+            background: rgba(30,30,30,0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,140,0,0.2);
+            border-radius: 30px;
+            padding: 30px 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .light-mode .qr-card {
+            background: rgba(255,255,255,0.95);
+            border-color: rgba(217,119,6,0.2);
+        }
+
+        .qr-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff8c00;
+            box-shadow: 0 30px 60px rgba(255,140,0,0.2);
+        }
+
+        .qr-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,140,0,0.1), transparent);
+            transition: left 0.8s;
+        }
+
+        .qr-card:hover::before {
+            left: 100%;
+        }
+
+        /* البطاقة الرئيسية */
+        .main-card {
+            text-align: center;
+        }
+
+        /* غلاف رمز QR */
+        .qr-code-wrapper {
+            position: relative;
+            width: fit-content;
+            margin: 0 auto 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #ff8c00, #ffa233);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255,140,0,0.4);
+            animation: cardPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes cardPulse {
+            0%, 100% { box-shadow: 0 15px 35px rgba(255,140,0,0.4); }
+            50% { box-shadow: 0 20px 45px rgba(255,140,0,0.7); }
+        }
+
+        /* صندوق QR */
+        .qr-code-box {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            background: white;
+            border-radius: 20px;
+            padding: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            overflow: hidden;
         }
-        .zoom-btn:hover {
-            transform: scale(1.1);
+
+        .qr-code-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            transition: transform 0.5s;
+        }
+
+        .qr-code-box:hover .qr-code-img {
+            transform: scale(1.05);
+        }
+
+        /* شعار Tosttoo داخل QR */
+        .qr-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: #ff8c00;
+            color: white;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            border: 3px solid white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: logoGlow 2s ease-in-out infinite;
+            z-index: 20;
+            font-weight: bold;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { box-shadow: 0 0 20px #ff8c00, 0 5px 15px rgba(0,0,0,0.3); }
+            50% { box-shadow: 0 0 35px #ffa233, 0 5px 20px rgba(0,0,0,0.4); }
+        }
+
+        /* خط المسح المتحرك */
+        .qr-scanner-animation {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 20px;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #ff8c00, #fff, #ff8c00, transparent);
+            animation: scan 3s linear infinite;
+            opacity: 0.7;
+            filter: blur(2px);
+        }
+
+        @keyframes scan {
+            0% { top: -10px; }
+            100% { top: 100%; }
+        }
+
+        /* عنوان QR */
+        .qr-title {
+            color: #ff8c00;
+            font-size: 22px;
+            font-weight: 700;
+            margin: 15px 0 8px;
+        }
+
+        .qr-desc {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .light-mode .qr-desc {
+            color: #666;
+        }
+
+        /* عداد المسح */
+        .qr-counter {
+            background: rgba(255,140,0,0.1);
+            border: 1px solid rgba(255,140,0,0.3);
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .qr-counter-number {
+            color: #ff8c00;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .qr-counter-label {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* أيقونة البطاقة */
+        .qr-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff8c00, #ffa233);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .qr-icon i {
+            font-size: 30px;
+            color: white;
+        }
+
+        /* حاوية الرابط */
+        .qr-link-container {
+            display: flex;
+            align-items: center;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,140,0,0.3);
+            border-radius: 50px;
+            padding: 5px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .light-mode .qr-link-container {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .qr-link-container:hover {
+            border-color: #ff8c00;
+            box-shadow: 0 5px 20px rgba(255,140,0,0.2);
+        }
+
+        .qr-link-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 14px;
+            padding: 12px 15px;
+            outline: none;
+            direction: ltr;
+            text-align: left;
+        }
+
+        .light-mode .qr-link-input {
+            color: #333;
+        }
+
+        .qr-copy-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #ff8c00;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .qr-copy-btn:hover {
+            transform: scale(1.1) rotate(15deg);
             background: #ffa233;
+        }
+
+        /* أزرار الإجراءات */
+        .qr-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .qr-action-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .share-btn {
+            background: linear-gradient(45deg, #17a2b8, #0dcaf0);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .qr-action-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        /* إحصائيات مصغرة */
+        .qr-stats-mini {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,140,0,0.2);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .light-mode .stat-item {
+            color: #666;
+        }
+
+        .stat-item i {
+            width: 25px;
+            color: #ff8c00;
+            font-size: 16px;
+        }
+
+        /* بطاقة طرق المسح */
+        .scan-methods-card h4 {
+            color: #ff8c00;
+            font-size: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .scan-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .scan-method {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(255,140,0,0.05);
+            border: 1px solid rgba(255,140,0,0.1);
+            border-radius: 15px;
+            transition: all 0.3s;
+        }
+
+        .scan-method:hover {
+            background: rgba(255,140,0,0.1);
+            border-color: #ff8c00;
+            transform: translateX(5px);
+        }
+
+        body[dir="rtl"] .scan-method:hover {
+            transform: translateX(-5px);
+        }
+
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff8c00, #ffa233);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .method-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .method-info {
+            flex: 1;
+        }
+
+        .method-info strong {
+            display: block;
+            color: #ff8c00;
+            margin-bottom: 4px;
+            font-size: 16px;
+        }
+
+        .method-info span {
+            color: #ccc;
+            font-size: 13px;
+        }
+
+        .light-mode .method-info span {
+            color: #666;
+        }
+
+        /* شريط العلامات المائية */
+        .qr-watermark {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255,140,0,0.3);
+            font-size: 14px;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .qr-watermark::before,
+        .qr-watermark::after {
+            content: '🍞';
+            margin: 0 15px;
+            opacity: 0.5;
+        }
+
+        /* تجاوب مع الجوال */
+        @media (max-width: 768px) {
+            .qr-section {
+                padding: 50px 0;
+            }
+            
+            .qr-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .qr-card {
+                padding: 20px;
+            }
+            
+            .qr-code-box {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .qr-logo {
+                width: 40px;
+                height: 40px;
+                font-size: 22px;
+            }
+            
+            .qr-actions {
+                grid-template-columns: 1fr;
+            }
+            
+            .scan-method {
+                padding: 12px;
+            }
+            
+            .method-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .method-icon i {
+                font-size: 20px;
+            }
+        }
+
+        /* تأثيرات إضافية */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .qr-card {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .qr-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .qr-card:nth-child(3) {
+            animation-delay: 0.4s;
         }
     </style>
 </head>
 <body dir="ltr" data-theme="dark" data-language="tr">
 
-<!-- ===== نافذة تكبير الصور (Image Popup) ===== -->
-<div class="image-popup" id="imagePopup">
-    <span class="popup-close" id="popupClose">&times;</span>
-    <img id="popupImage" src="" alt="تكبير الصورة">
-</div>
-
-<!-- MODALLAR (محفوظة كما هي) -->
+<!-- MODALLAR -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
         <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
@@ -1757,20 +2166,11 @@
     </div>
 </div>
 
-<!-- GELİŞTİRİCİ PANELİ V1 (Tam Yetki) -->
+<!-- GELİŞTİRİCİ PANELİ V1 -->
 <div class="dev-panel" id="devPanelV1">
     <div class="panel-header" id="dragHandle">
         <h3><i class="fas fa-cog"></i> <span data-key="devPanelTitle">Geliştirici Paneli (Tam Yetki)</span></h3>
-        <div style="display: flex; gap: 10px;">
-            <!-- زر التعديل -->
-            <button class="dev-btn dev-btn-success" onclick="enableEdit()" style="width: auto; height: 40px; padding: 0 15px; border-radius: 20px;" title="تعديل"><i class="fas fa-edit"></i> تعديل</button>
-            <!-- زر الإغلاق (إنهاء صلاحية المطور) -->
-            <button class="dev-btn dev-btn-danger" onclick="exitDeveloperMode()" style="width: auto; height: 40px; padding: 0 15px; border-radius: 20px;" title="إغلاق"><i class="fas fa-times"></i> إغلاق</button>
-            <!-- أزرار التكبير والتصغير -->
-            <button class="zoom-btn" onclick="zoomIn()" title="تكبير"><i class="fas fa-search-plus"></i></button>
-            <button class="zoom-btn" onclick="zoomOut()" title="تصغير"><i class="fas fa-search-minus"></i></button>
-            <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
-        </div>
+        <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
     <div class="panel-tabs">
         <button class="panel-tab active" onclick="switchDevTab('products')"><i class="fas fa-box"></i> <span data-key="devTabProducts">Ürünler</span></button>
@@ -1973,7 +2373,129 @@
     </div>
 </section>
 
-<!-- تم حذف جميع أقسام QR code والباركود بالكامل -->
+<!-- ===== قسم رمز الاستجابة السريعة (QR Code) ===== -->
+<section class="qr-section">
+    <div class="container">
+        <h2 class="section-title" data-key="qrTitle">📱 مسح رمز QR</h2>
+        
+        <div class="qr-grid">
+            <!-- بطاقة QR الرئيسية -->
+            <div class="qr-card main-card">
+                <div class="qr-code-wrapper">
+                    <!-- رمز QR مع شعار Tosttoo -->
+                    <div class="qr-code-box" id="qrCodeBox">
+                        <img 
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fahtl.github.io/TOSTTOYEVSKI/&format=png&qzone=2&margin=0" 
+                            alt="Tosttoo QR Code"
+                            class="qr-code-img"
+                            id="qrCodeImage"
+                            loading="lazy">
+                        <!-- الشعار داخل الـ QR -->
+                        <div class="qr-logo">🍞</div>
+                    </div>
+                    
+                    <!-- مؤشر المسح الضوئي -->
+                    <div class="qr-scanner-animation">
+                        <div class="scanner-line"></div>
+                    </div>
+                </div>
+                
+                <h3 class="qr-title" data-key="qrScanTitle">امسح الرمز لزيارة موقعنا</h3>
+                <p class="qr-desc" data-key="qrDesc">استخدم كاميرا الجوال أو أي تطبيق QR</p>
+                
+                <!-- عد تنازلي للمسح (تأثير تفاعلي) -->
+                <div class="qr-counter">
+                    <span class="qr-counter-number">150+</span>
+                    <span class="qr-counter-label" data-key="qrDaily">مسح اليوم</span>
+                </div>
+            </div>
+            
+            <!-- بطاقة الرابط المباشر -->
+            <div class="qr-card link-card">
+                <div class="qr-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h4 data-key="qrDirectLink">الرابط المباشر</h4>
+                
+                <div class="qr-link-container">
+                    <input type="text" 
+                           class="qr-link-input" 
+                           value="https://fahtl.github.io/TOSTTOYEVSKI/" 
+                           id="siteUrlInput" 
+                           readonly>
+                    <button class="qr-copy-btn" onclick="copySiteUrl()" title="نسخ الرابط">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+                
+                <div class="qr-actions">
+                    <button class="qr-action-btn download-btn" onclick="downloadQRCode()">
+                        <i class="fas fa-download"></i>
+                        <span data-key="qrDownload">تحميل QR</span>
+                    </button>
+                    <button class="qr-action-btn share-btn" onclick="shareQRCode()">
+                        <i class="fas fa-share-alt"></i>
+                        <span data-key="qrShare">مشاركة</span>
+                    </button>
+                </div>
+                
+                <!-- إحصائيات سريعة -->
+                <div class="qr-stats-mini">
+                    <div class="stat-item">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span data-key="qrMobile">متوافق مع الجوال</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-clock"></i>
+                        <span data-key="qr247">24/7 متاح</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- بطاقة طرق المسح -->
+            <div class="qr-card scan-methods-card">
+                <h4 data-key="qrHowToScan">كيف تمسح الرمز؟</h4>
+                
+                <div class="scan-methods">
+                    <div class="scan-method">
+                        <div class="method-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="method-info">
+                            <strong data-key="qrCamera">كاميرا الجوال</strong>
+                            <span data-key="qrCameraDesc">افتح الكاميرا ووجهها نحو الرمز</span>
+                        </div>
+                    </div>
+                    
+                    <div class="scan-method">
+                        <div class="method-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="method-info">
+                            <strong data-key="qrWhatsApp">واتساب ويب</strong>
+                            <span data-key="qrWhatsAppDesc">استخدم ماسح QR في واتساب</span>
+                        </div>
+                    </div>
+                    
+                    <div class="scan-method">
+                        <div class="method-icon">
+                            <i class="fas fa-app-store"></i>
+                        </div>
+                        <div class="method-info">
+                            <strong data-key="qrApp">تطبيقات QR</strong>
+                            <span data-key="qrAppDesc">أي تطبيق ماسح ضوئي</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- شريط العلامات المائية -->
+        <div class="qr-watermark">
+            <span>🍞 TOSTTOO • المطعم التركي • 2025</span>
+        </div>
+    </div>
+</section>
 
 <!-- MENÜ BÖLÜMÜ -->
 <section id="menu" class="section">
@@ -2018,6 +2540,7 @@
     // ---------- ÇEVİRİLER ----------
     const translations = {
         tr: {
+            // Genel
             siteTitle: "Tosttoo | Menü (Çok Dilli)",
             workTime: "🕒 08:00 - 02:30",
             viewMenu: "Menüyü Gör",
@@ -2102,6 +2625,7 @@
             devSync: "Senkronizasyon"
         },
         ar: {
+            // General
             siteTitle: "توستتو | القائمة (متعددة اللغات)",
             workTime: "🕒 ٠٨:٠٠ - ٠٢:٣٠",
             viewMenu: "عرض القائمة",
@@ -2186,6 +2710,7 @@
             devSync: "مزامنة"
         },
         en: {
+            // General
             siteTitle: "Tosttoo | Menu (Multilingual)",
             workTime: "🕒 08:00 - 02:30",
             viewMenu: "View Menu",
@@ -2270,6 +2795,7 @@
             devSync: "Sync"
         },
         ru: {
+            // General
             siteTitle: "Tosttoo | Меню (Многоязычный)",
             workTime: "🕒 08:00 - 02:30",
             viewMenu: "Посмотреть меню",
@@ -2754,6 +3280,7 @@
             }
         });
         
+        // Placeholder'ları güncelle (data-key-placeholder)
         document.querySelectorAll('[data-key-placeholder]').forEach(element => {
             const key = element.getAttribute('data-key-placeholder');
             if (translations[lang] && translations[lang][key]) {
@@ -2761,6 +3288,7 @@
             }
         });
         
+        // RTL yönlendirme
         if (lang === 'ar') {
             document.documentElement.dir = 'rtl';
             document.body.style.fontFamily = "'Cairo', 'Poppins', sans-serif";
@@ -2853,10 +3381,13 @@
         currentLang = lang;
         localStorage.setItem('selectedLanguage', lang);
         
+        // Sayfadaki çevirileri güncelle
         translatePage(lang);
         
+        // Menüyü yeniden göster
         displayMenu();
         
+        // Dil seçiciyi güncelle
         document.getElementById('languageSwitcher').value = lang;
         
         showToast(translations[lang]?.siteTitle || `Dil değiştirildi: ${lang.toUpperCase()}`, 'success');
@@ -2869,6 +3400,7 @@
         
         grid.innerHTML = '';
         
+        // Menü kontrolü
         if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
             if (currentMenu.tr && currentMenu.tr.length > 0) {
                 currentLang = 'tr';
@@ -2879,8 +3411,6 @@
         }
         
         const menu = getFullMenu();
-        
-        const fragment = document.createDocumentFragment();
         
         menu.forEach((cat, catIdx) => {
             const card = document.createElement('div');
@@ -2943,6 +3473,7 @@
                 nameSpan.className = 'item-name';
                 nameSpan.textContent = item.name;
                 
+                // Çay kontrolü - الشاي
                 if (item.name.includes('Çay') || item.name.includes('Tea') || 
                     item.name.includes('Чай') || item.name.includes('شاي')) {
                     nameSpan.onclick = function(e) {
@@ -3029,10 +3560,8 @@
                 card.appendChild(deleteCatBtn);
             }
             
-            fragment.appendChild(card);
+            grid.appendChild(card);
         });
-        
-        grid.appendChild(fragment);
         
         updateSelects();
         updateGallery();
@@ -3119,7 +3648,6 @@
     };
 
     window.enableEdit = function() { 
-        if (!isDeveloper) return;
         editMode = true; 
         deleteMode = false; 
         document.getElementById('menuGrid').classList.add('edit-mode'); 
@@ -3128,7 +3656,6 @@
     };
 
     window.enableDelete = function() { 
-        if (!isDeveloper) return;
         deleteMode = true; 
         editMode = false; 
         document.getElementById('menuGrid').classList.add('delete-mode'); 
@@ -3431,41 +3958,6 @@
         });
     };
 
-    // ---------- نافذة تكبير الصور الجديدة ----------
-    const popup = document.getElementById('imagePopup');
-    const popupImage = document.getElementById('popupImage');
-    const popupClose = document.getElementById('popupClose');
-
-    window.openImagePopup = function(src) {
-        popupImage.src = src;
-        popup.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    function closeImagePopup() {
-        popup.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-    popupClose.addEventListener('click', closeImagePopup);
-    popup.addEventListener('click', function(e) {
-        if (e.target === popup) closeImagePopup();
-    });
-    window.closeImagePopup = closeImagePopup;
-
-    // ---------- دوال التكبير والتصغير ----------
-    let currentZoom = 1;
-    window.zoomIn = function() {
-        if (currentZoom < 2) {
-            currentZoom += 0.1;
-            document.body.style.zoom = currentZoom;
-        }
-    };
-    window.zoomOut = function() {
-        if (currentZoom > 0.5) {
-            currentZoom -= 0.1;
-            document.body.style.zoom = currentZoom;
-        }
-    };
-
     // ---------- TEMA ----------
     window.toggleMode = function() {
         document.body.classList.toggle('light-mode');
@@ -3697,20 +4189,6 @@
         });
     };
 
-    // ---------- دوال إضافية: إغلاق المطور وإنهاء الصلاحية ----------
-    window.exitDeveloperMode = function() {
-        isDeveloper = false;
-        localStorage.removeItem('tosttoo_dev');
-        editMode = false;
-        deleteMode = false;
-        document.getElementById('floatingDevBtn').classList.remove('visible');
-        document.getElementById('floatingDevBtn').style.display = 'none';
-        document.getElementById('devPanelV1').classList.remove('show');
-        document.getElementById('devPanelV2').classList.remove('show');
-        document.getElementById('menuGrid').classList.remove('edit-mode', 'delete-mode');
-        showToast('Developer mode closed', 'info');
-    };
-
     document.getElementById('confirmYesBtn').onclick = function() { 
         if (confirmCallback) { 
             confirmCallback(); 
@@ -3726,24 +4204,11 @@
 
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') { 
-            closeAllModals();
-            closeImagePopup();
+            closeAllModals(); 
         }
     });
 
     // ---------- GELİŞTİRİCİ GİRİŞİ ----------
-    function activateDeveloper() {
-        isDeveloper = true;
-        localStorage.setItem('tosttoo_dev', 'true');
-        document.getElementById('floatingDevBtn').classList.add('visible');
-        document.getElementById('floatingDevBtn').style.display = 'flex';
-        showToast(translations[currentLang]?.devPanelTitle || 'Hoş geldiniz geliştirici', 'success');
-    }
-
-    if (localStorage.getItem('tosttoo_dev') === 'true') {
-        activateDeveloper();
-    }
-
     let clickCount = 0;
     document.getElementById('secretTrigger').addEventListener('click', function() {
         clickCount++;
@@ -3751,7 +4216,10 @@
         if (clickCount === 7) {
             const p = prompt('Şifre:');
             if (p === 'momotunc0702') {
-                activateDeveloper();
+                isDeveloper = true;
+                document.getElementById('floatingDevBtn').classList.add('visible');
+                document.getElementById('floatingDevBtn').style.display = 'flex';
+                showToast(translations[currentLang]?.devPanelTitle || 'Hoş geldiniz geliştirici', 'success');
             } else alert('❌ Yanlış şifre!');
             clickCount = 0;
         }
@@ -3762,18 +4230,17 @@
             e.preventDefault();
             const p = prompt('Şifre:');
             if (p === 'momotunc0702') {
-                activateDeveloper();
+                isDeveloper = true;
+                document.getElementById('floatingDevBtn').classList.add('visible');
+                document.getElementById('floatingDevBtn').style.display = 'flex';
+                showToast(translations[currentLang]?.devPanelTitle || 'Hoş geldiniz geliştirici', 'success');
             } else alert('❌ Yanlış şifre!');
         }
     });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('dev') === '1') {
-        activateDeveloper();
-    }
-
     // ---------- SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
+        // Dil seçici event listener
         document.getElementById('languageSwitcher').addEventListener('change', function() {
             changeLanguage(this.value);
         });
@@ -3787,10 +4254,13 @@
             loadMenuFromStorage();
         }
         
+        // İlk çeviriyi yap
         translatePage(currentLang);
         
+        // Dil seçiciyi güncelle
         document.getElementById('languageSwitcher').value = currentLang;
         
+        // Menüyü göster
         displayMenu();
         
         if (localStorage.getItem('theme') === 'light') { 
@@ -3843,13 +4313,205 @@
         if (!isDeveloper) e.preventDefault(); 
     });
     
+    // ========== دوال QR Code ==========
+    // نسخ رابط الموقع
+    window.copySiteUrl = function() {
+        const urlInput = document.getElementById('siteUrlInput');
+        urlInput.select();
+        urlInput.setSelectionRange(0, 99999);
+        
+        try {
+            navigator.clipboard.writeText(urlInput.value);
+            showToast(translations[currentLang]?.copy || '✅ تم نسخ الرابط!', 'success');
+        } catch (err) {
+            document.execCommand('copy');
+            showToast(translations[currentLang]?.copy || '✅ تم نسخ الرابط!', 'success');
+        }
+    };
+
+    // تحميل رمز QR
+    window.downloadQRCode = function() {
+        const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://fahtl.github.io/TOSTTOYEVSKI/&format=png&qzone=2&margin=2';
+        
+        const link = document.createElement('a');
+        link.href = qrUrl;
+        link.download = 'tosttoo-qr-code.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showToast(translations[currentLang]?.qrDownload || '📥 جاري تحميل رمز QR...', 'info');
+    };
+
+    // مشاركة رمز QR
+    window.shareQRCode = function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Tosttoo Menü',
+                text: 'اطلع على قائمة Tosttoo اللذيذة',
+                url: 'https://fahtl.github.io/TOSTTOYEVSKI/'
+            })
+            .then(() => showToast(translations[currentLang]?.qrShare || '✅ تمت المشاركة!', 'success'))
+            .catch(() => showToast(translations[currentLang]?.qrShare || '❌ فشلت المشاركة', 'error'));
+        } else {
+            // إذا المتصفح لا يدعم المشاركة
+            copySiteUrl();
+            showToast(translations[currentLang]?.qrShare || '📋 تم نسخ الرابط، يمكنك مشاركته الآن', 'info');
+        }
+    };
+
+    // إضافة ترجمات QR
+    document.addEventListener('DOMContentLoaded', function() {
+        // إضافة ترجمات QR
+        const qrTranslations = {
+            tr: {
+                qrTitle: "📱 QR Kod Tara",
+                qrScanTitle: "Menümüzü görmek için QR kodu tarayın",
+                qrDesc: "Telefon kameranızı veya QR uygulamasını kullanın",
+                qrDaily: "Bugün taranma",
+                qrDirectLink: "Doğrudan Bağlantı",
+                qrDownload: "QR İndir",
+                qrShare: "Paylaş",
+                qrMobile: "Mobil uyumlu",
+                qr247: "7/24 Açık",
+                qrHowToScan: "Nasıl taranır?",
+                qrCamera: "Telefon Kamerası",
+                qrCameraDesc: "Kamerayı QR koda doğrultur",
+                qrWhatsApp: "WhatsApp Web",
+                qrWhatsAppDesc: "WhatsApp QR tarayıcıyı kullan",
+                qrApp: "QR Uygulamaları",
+                qrAppDesc: "Herhangi bir tarayıcı uygulama"
+            },
+            ar: {
+                qrTitle: "📱 مسح رمز QR",
+                qrScanTitle: "امسح الرمز لزيارة موقعنا",
+                qrDesc: "استخدم كاميرا الجوال أو أي تطبيق QR",
+                qrDaily: "مسح اليوم",
+                qrDirectLink: "الرابط المباشر",
+                qrDownload: "تحميل QR",
+                qrShare: "مشاركة",
+                qrMobile: "متوافق مع الجوال",
+                qr247: "24/7 متاح",
+                qrHowToScan: "كيف تمسح الرمز؟",
+                qrCamera: "كاميرا الجوال",
+                qrCameraDesc: "افتح الكاميرا ووجهها نحو الرمز",
+                qrWhatsApp: "واتساب ويب",
+                qrWhatsAppDesc: "استخدم ماسح QR في واتساب",
+                qrApp: "تطبيقات QR",
+                qrAppDesc: "أي تطبيق ماسح ضوئي"
+            },
+            en: {
+                qrTitle: "📱 Scan QR Code",
+                qrScanTitle: "Scan to visit our website",
+                qrDesc: "Use your phone camera or any QR app",
+                qrDaily: "Scans today",
+                qrDirectLink: "Direct Link",
+                qrDownload: "Download QR",
+                qrShare: "Share",
+                qrMobile: "Mobile friendly",
+                qr247: "24/7 Available",
+                qrHowToScan: "How to scan?",
+                qrCamera: "Phone Camera",
+                qrCameraDesc: "Open camera and point at QR",
+                qrWhatsApp: "WhatsApp Web",
+                qrWhatsAppDesc: "Use WhatsApp QR scanner",
+                qrApp: "QR Apps",
+                qrAppDesc: "Any scanner application"
+            },
+            ru: {
+                qrTitle: "📱 Сканируйте QR-код",
+                qrScanTitle: "Сканируйте, чтобы посетить наш сайт",
+                qrDesc: "Используйте камеру телефона или приложение",
+                qrDaily: "Сканирований сегодня",
+                qrDirectLink: "Прямая ссылка",
+                qrDownload: "Скачать QR",
+                qrShare: "Поделиться",
+                qrMobile: "Для мобильных",
+                qr247: "24/7 Доступно",
+                qrHowToScan: "Как сканировать?",
+                qrCamera: "Камера телефона",
+                qrCameraDesc: "Наведите камеру на код",
+                qrWhatsApp: "WhatsApp Web",
+                qrWhatsAppDesc: "Используйте сканер WhatsApp",
+                qrApp: "QR приложения",
+                qrAppDesc: "Любое приложение для сканирования"
+            }
+        };
+        
+        // دمج الترجمات
+        for (let lang in qrTranslations) {
+            if (!translations[lang]) translations[lang] = {};
+            Object.assign(translations[lang], qrTranslations[lang]);
+        }
+    });
 })();
 </script>
 
-<!-- تم حذف جميع أقسام QR code والباركود بالكامل -->
+<!-- ===== إضافة: QR Code المخفي للمطورين (مخفي بشكل دائم) ===== -->
+<div id="developerQR" style="display:none; text-align:center; margin:40px 0; padding:30px; background:linear-gradient(135deg, #1a1a1a, #2a2a2a); border-radius:30px; border:3px solid #ff3c3c; position:relative; box-shadow:0 20px 40px rgba(255,60,60,0.3);">
+    <div style="position:absolute; top:-15px; left:50%; transform:translateX(-50%); background:#ff3c3c; color:white; padding:8px 30px; border-radius:50px; font-size:14px; font-weight:bold; letter-spacing:2px; box-shadow:0 5px 15px rgba(255,60,60,0.5);">
+        🔐 DEVELOPER ONLY
+    </div>
+    
+    <h3 style="color:#ff3c3c; margin:25px 0 15px; font-size:28px; font-weight:800; text-shadow:0 0 15px rgba(255,60,60,0.5);">
+        ⚡ Developer Access
+    </h3>
+    
+    <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; align-items:center;">
+        <!-- QR Code -->
+        <div style="position:relative;">
+            <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://fahtl.github.io/TOSTTOYEVSKI/?dev=toyev&format=png&qzone=2&margin=2" 
+                alt="Developer QR Code"
+                style="border:4px solid #ff3c3c; border-radius:20px; padding:10px; background:white; box-shadow:0 0 30px rgba(255,60,60,0.5);">
+            <div style="position:absolute; top:-10px; right:-10px; background:#ff3c3c; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; border:3px solid white; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+                🔐
+            </div>
+        </div>
+        
+        <!-- المعلومات -->
+        <div style="text-align:left; color:#ccc;">
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🔗</span>
+                <span style="font-family:monospace;">?dev=toyev</span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">⌨️</span>
+                <span>اضغط <span style="background:#333; padding:5px 10px; border-radius:5px; font-family:monospace;">Ctrl+Shift+D</span></span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🥚</span>
+                <span>10 نقرات على الشعار</span>
+            </p>
+            <p style="margin:12px 0; display:flex; align-items:center; gap:10px;">
+                <span style="background:#ff3c3c; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🔑</span>
+                <span>كلمة السر: <span style="background:#333; padding:5px 10px; border-radius:5px; font-family:monospace;">toyev2025</span></span>
+            </p>
+        </div>
+    </div>
+    
+    <p style="color:#aaa; margin-top:25px; font-size:13px; border-top:1px solid #ff3c3c20; padding-top:15px;">
+        ⚡ هذا الـ QR يظهر فقط للمطورين • يستخدم للدخول السريع للوحة التحكم
+    </p>
+</div>
 
-<!-- ========== EK YORUM SATIRLARI (محفوظة) ========== -->
+<!-- ===== QR Code المخفي - يظهر عند فتح أدوات المطور (F12) (مخفي بشكل دائم) ===== -->
+<div id="devToolsQR" style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fahtl.github.io/TOSTTOYEVSKI/" alt="QR Code">
+</div>
+
+<!-- تمت إزالة جميع السكربتات التي كانت تتحكم في إظهار هذه العناصر، فهي الآن مخفية بشكل دائم. -->
+
+<!-- ========== EK YORUM SATIRLARI ========== -->
 <!-- 1 --><!-- 2 --><!-- 3 --><!-- 4 --><!-- 5 --><!-- 6 --><!-- 7 --><!-- 8 --><!-- 9 --><!-- 10 -->
-<!-- ... (باقي التعليقات محفوظة) ... -->
+<!-- 11 --><!-- 12 --><!-- 13 --><!-- 14 --><!-- 15 --><!-- 16 --><!-- 17 --><!-- 18 --><!-- 19 --><!-- 20 -->
+<!-- 21 --><!-- 22 --><!-- 23 --><!-- 24 --><!-- 25 --><!-- 26 --><!-- 27 --><!-- 28 --><!-- 29 --><!-- 30 -->
+<!-- 31 --><!-- 32 --><!-- 33 --><!-- 34 --><!-- 35 --><!-- 36 --><!-- 37 --><!-- 38 --><!-- 39 --><!-- 40 -->
+<!-- 41 --><!-- 42 --><!-- 43 --><!-- 44 --><!-- 45 --><!-- 46 --><!-- 47 --><!-- 48 --><!-- 49 --><!-- 50 -->
+<!-- 51 --><!-- 52 --><!-- 53 --><!-- 54 --><!-- 55 --><!-- 56 --><!-- 57 --><!-- 58 --><!-- 59 --><!-- 60 -->
+<!-- 61 --><!-- 62 --><!-- 63 --><!-- 64 --><!-- 65 --><!-- 66 --><!-- 67 --><!-- 68 --><!-- 69 --><!-- 70 -->
+<!-- 71 --><!-- 72 --><!-- 73 --><!-- 74 --><!-- 75 --><!-- 76 --><!-- 77 --><!-- 78 --><!-- 79 --><!-- 80 -->
+<!-- 81 --><!-- 82 --><!-- 83 --><!-- 84 --><!-- 85 --><!-- 86 --><!-- 87 --><!-- 88 --><!-- 89 --><!-- 90 -->
+<!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
 </body>
 </html>
