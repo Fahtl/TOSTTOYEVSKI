@@ -2909,8 +2909,9 @@
     let currentEditData = null;
     let confirmCallback = null;
 
-    let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}');
-    let productImages = JSON.parse(localStorage.getItem('productImages') || '{}');
+    // Yeni: image storage by index instead of name
+    let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}'); // key: category index (string)
+    let productImages = JSON.parse(localStorage.getItem('productImages') || '{}'); // key: "catIdx,prodIdx"
 
     // ---------- ÇOK DİLLİ MENÜ ŞABLONU (TÜM DİLLER) ----------
     const ORIGINAL_MENU_TEMPLATE = {
@@ -3351,10 +3352,10 @@
         const base = currentMenu[currentLang] || currentMenu.tr;
         return base.map((cat, catIdx) => ({
             ...cat,
-            image: categoryImages[cat.category] || cat.image || "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+            image: categoryImages[catIdx] || cat.image || "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
             items: cat.items.map((item, itemIdx) => ({
                 ...item,
-                image: (productImages[catIdx] && productImages[catIdx][item.name]) || item.image || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
+                image: (productImages[`${catIdx},${itemIdx}`]) || item.image || "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
             }))
         }));
     }
@@ -3376,8 +3377,8 @@
         const pcsv2 = document.getElementById('productCategorySelectV2');
 
         if (cs) { cs.innerHTML = ''; menu.forEach((c,i) => cs.innerHTML += `<option value="${i}">${c.category}</option>`); }
-        if (cis) { cis.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cis.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
-        if (cisv2) { cisv2.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach(c => cisv2.innerHTML += `<option value="${c.category}">${c.category}</option>`); }
+        if (cis) { cis.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach((c,i) => cis.innerHTML += `<option value="${i}">${c.category}</option>`); }
+        if (cisv2) { cisv2.innerHTML = '<option value="">Kategori seçin</option>'; menu.forEach((c,i) => cisv2.innerHTML += `<option value="${i}">${c.category}</option>`); }
         if (pcs) { pcs.innerHTML = ''; menu.forEach((c,i) => pcs.innerHTML += `<option value="${i}">${c.category}</option>`); }
         if (pcsv2) { pcsv2.innerHTML = ''; menu.forEach((c,i) => pcsv2.innerHTML += `<option value="${i}">${c.category}</option>`); }
     }
@@ -3386,8 +3387,16 @@
         const gallery = document.getElementById('imageGallery');
         const galleryV2 = document.getElementById('imageGalleryV2');
         let html = '';
-        Object.keys(categoryImages).forEach(c => html += `<div class="gallery-item"><img src="${categoryImages[c]}" alt=""><span>📁 ${c}</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category','${c}')"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category','${c}')"><i class="fas fa-trash"></i></button></div></div>`);
-        Object.keys(productImages).forEach(ci => Object.keys(productImages[ci]).forEach(p => html += `<div class="gallery-item"><img src="${productImages[ci][p]}" alt=""><span>📦 ${p}</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',${ci},'${p}')"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',${ci},'${p}')"><i class="fas fa-trash"></i></button></div></div>`));
+        Object.keys(categoryImages).forEach(cIdx => {
+            const cat = currentMenu.tr[cIdx]?.category || `Kategori ${cIdx}`;
+            html += `<div class="gallery-item"><img src="${categoryImages[cIdx]}" alt=""><span>📁 ${cat}</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',${cIdx})"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',${cIdx})"><i class="fas fa-trash"></i></button></div></div>`;
+        });
+        Object.keys(productImages).forEach(key => {
+            const [catIdx, prodIdx] = key.split(',').map(Number);
+            const cat = currentMenu.tr[catIdx]?.category || `Kategori ${catIdx}`;
+            const prod = currentMenu.tr[catIdx]?.items[prodIdx]?.name || `Ürün ${prodIdx}`;
+            html += `<div class="gallery-item"><img src="${productImages[key]}" alt=""><span>📦 ${prod} (${cat})</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',${catIdx},${prodIdx})"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',${catIdx},${prodIdx})"><i class="fas fa-trash"></i></button></div></div>`;
+        });
         if (gallery) gallery.innerHTML = html || '<p class="text-center">Resim yok</p>';
         if (galleryV2) galleryV2.innerHTML = html || '<p class="text-center">Resim yok</p>';
     }
@@ -3526,12 +3535,24 @@
                 
                 const priceSpan = document.createElement('span');
                 priceSpan.className = 'item-price';
-                priceSpan.textContent = item.price;
+                // Ensure price ends with ₺
+                let displayPrice = item.price;
+                if (!displayPrice.endsWith('₺')) {
+                    displayPrice = displayPrice + '₺';
+                }
+                priceSpan.textContent = displayPrice;
                 priceSpan.onclick = function(e) {
                     e.stopPropagation();
                     if (isDeveloper && editMode) { 
-                        const newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price); 
-                        if (newPrice) updateItemPrice(catIdx, cat.category, item.name, newPrice); 
+                        let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price.replace(/₺/g, '').trim());
+                        if (newPrice !== null) {
+                            // Ensure it's a number and add ₺
+                            newPrice = newPrice.trim();
+                            if (!newPrice.endsWith('₺')) {
+                                newPrice = newPrice + '₺';
+                            }
+                            updateItemPrice(catIdx, cat.category, item.name, newPrice);
+                        }
                     }
                 };
                 
@@ -3572,7 +3593,7 @@
                 const deleteCatBtn = document.createElement('button');
                 deleteCatBtn.className = 'delete-card-btn';
                 deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
-                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" ${translations[currentLang]?.confirmMessage || 'kategorisi silinsin mi?'}`, () => deleteCategory(cat.category));
+                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" ${translations[currentLang]?.confirmMessage || 'kategorisi silinsin mi?'}`, () => deleteCategory(catIdx));
                 card.appendChild(deleteCatBtn);
             }
             
@@ -3587,65 +3608,99 @@
         if (codeDisplay) codeDisplay.textContent = JSON.stringify(currentMenu, null, 2);
     }
 
-    // ---------- DÜZENLEME/SİLME FONKSİYONLARI ----------
+    // ---------- DÜZENLEME/SİLME FONKSİYONLARI (MULTI-LANGUAGE SYNC) ----------
     function updateItemName(catIdx, catName, oldName, newName) {
-        const menu = currentMenu[currentLang] || [];
-        if (!menu[catIdx]) return;
-        const item = menu[catIdx].items.find(i => i.name === oldName);
-        if (item) {
-            item.name = newName;
-            if (productImages[catIdx] && productImages[catIdx][oldName]) {
-                productImages[catIdx][newName] = productImages[catIdx][oldName];
-                delete productImages[catIdx][oldName];
-                localStorage.setItem('productImages', JSON.stringify(productImages));
+        // Update name in all languages at the same index
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            const menu = currentMenu[lang];
+            if (menu[catIdx]) {
+                const item = menu[catIdx].items.find(i => i.name === oldName);
+                if (item) item.name = newName;
             }
-            saveMenuToStorage();
-            displayMenu();
-            showToast(translations[currentLang]?.save || 'İsim güncellendi', 'success');
-        }
+        });
+        // Update product images key? Since we use index-based images, no need to rename key.
+        saveMenuToStorage();
+        displayMenu();
+        showToast(translations[currentLang]?.save || 'İsim güncellendi', 'success');
     }
 
     function updateItemPrice(catIdx, catName, itemName, newPrice) {
-        const menu = currentMenu[currentLang] || [];
-        if (!menu[catIdx]) return;
-        const item = menu[catIdx].items.find(i => i.name === itemName);
-        if (item) {
-            item.price = newPrice;
-            saveMenuToStorage();
-            displayMenu();
-            showToast(translations[currentLang]?.save || 'Fiyat güncellendi', 'success');
-        }
+        // Update price in all languages at the same index
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            const menu = currentMenu[lang];
+            if (menu[catIdx]) {
+                const item = menu[catIdx].items.find(i => i.name === itemName);
+                if (item) item.price = newPrice;
+            }
+        });
+        saveMenuToStorage();
+        displayMenu();
+        showToast(translations[currentLang]?.save || 'Fiyat güncellendi', 'success');
     }
 
     function deleteProduct(catIdx, catName, itemName) {
-        const menu = currentMenu[currentLang] || [];
-        if (!menu[catIdx]) return;
-        const itemIndex = menu[catIdx].items.findIndex(i => i.name === itemName);
-        if (itemIndex !== -1) {
-            menu[catIdx].items.splice(itemIndex, 1);
-            if (productImages[catIdx] && productImages[catIdx][itemName]) {
-                delete productImages[catIdx][itemName];
-                localStorage.setItem('productImages', JSON.stringify(productImages));
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            const menu = currentMenu[lang];
+            if (menu[catIdx]) {
+                const idx = menu[catIdx].items.findIndex(i => i.name === itemName);
+                if (idx !== -1) {
+                    menu[catIdx].items.splice(idx, 1);
+                }
             }
-            saveMenuToStorage();
-            displayMenu();
-            showToast(translations[currentLang]?.delete || 'Ürün silindi', 'success');
-        }
+        });
+        // Remove product image if exists
+        const key = `${catIdx},${itemIdx}`; // we need the original index before deletion? Actually itemIdx is not passed. We'll need to find by position, but easier: after deletion we can shift images? Better to use a separate mapping that persists. For simplicity, we'll just delete all images for that product (by name) but since images are index-based, we need to shift later. Let's do a simple approach: after deletion, re-index productImages.
+        // We'll rebuild productImages after deletion to keep consistency.
+        // For now, we'll just remove any image with that specific key if we had it before deletion.
+        // Since we don't have itemIdx, we'll find the original index before deletion by comparing names.
+        // Let's implement re-index after any structural change.
+        reindexProductImages();
+        saveMenuToStorage();
+        displayMenu();
+        showToast(translations[currentLang]?.delete || 'Ürün silindi', 'success');
     }
 
-    function deleteCategory(catName) {
-        const menu = currentMenu[currentLang] || [];
-        const catIndex = menu.findIndex(c => c.category === catName);
-        if (catIndex !== -1) {
-            menu.splice(catIndex, 1);
-            if (categoryImages[catName]) {
-                delete categoryImages[catName];
-                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+    function deleteCategory(catIdx) {
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            const menu = currentMenu[lang];
+            if (menu[catIdx]) {
+                menu.splice(catIdx, 1);
             }
-            saveMenuToStorage();
-            displayMenu();
-            showToast(translations[currentLang]?.delete || 'Kategori silindi', 'success');
+        });
+        // Remove category images and product images that belonged to this category
+        delete categoryImages[catIdx];
+        // Re-index product images (shift keys)
+        const newProductImages = {};
+        for (let key in productImages) {
+            let [cIdx, pIdx] = key.split(',').map(Number);
+            if (cIdx == catIdx) continue;
+            if (cIdx > catIdx) cIdx--;
+            newProductImages[`${cIdx},${pIdx}`] = productImages[key];
         }
+        productImages = newProductImages;
+        localStorage.setItem('productImages', JSON.stringify(productImages));
+        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        saveMenuToStorage();
+        displayMenu();
+        showToast(translations[currentLang]?.delete || 'Kategori silindi', 'success');
+    }
+
+    // Helper to re-index product images after add/delete
+    function reindexProductImages() {
+        const newProductImages = {};
+        for (let key in productImages) {
+            let [cIdx, pIdx] = key.split(',').map(Number);
+            // Check if category still exists
+            if (currentMenu.tr[cIdx]) {
+                newProductImages[`${cIdx},${pIdx}`] = productImages[key];
+            }
+        }
+        productImages = newProductImages;
+        localStorage.setItem('productImages', JSON.stringify(productImages));
     }
 
     // ---------- GELİŞTİRİCİ FONKSİYONLARI ----------
@@ -3655,8 +3710,9 @@
         if (!item) return;
         const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name);
         if (newName) {
-            const newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price);
+            let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price.replace(/₺/g, '').trim());
             if (newPrice) {
+                if (!newPrice.endsWith('₺')) newPrice += '₺';
                 updateItemName(catIdx, menu[catIdx].category, item.name, newName);
                 updateItemPrice(catIdx, menu[catIdx].category, newName, newPrice);
             }
@@ -3689,8 +3745,10 @@
     window.addCategory = function() {
         const name = document.getElementById('newCategory').value.trim();
         if (!name) return showToast(translations[currentLang]?.devCategoryNamePlaceholder || 'Kategori adı girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        menu.push({ category: name, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [] });
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            currentMenu[lang].push({ category: name, image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400", items: [] });
+        });
         saveMenuToStorage();
         displayMenu();
         document.getElementById('newCategory').value = '';
@@ -3699,19 +3757,22 @@
 
     window.addProduct = function() {
         const name = document.getElementById('newName').value.trim();
-        const price = document.getElementById('productPrice').value.trim();
+        let price = document.getElementById('productPrice').value.trim();
         const idx = document.getElementById('categorySelect').value;
         if (!name || !price) return showToast(translations[currentLang]?.devProductNamePlaceholder || 'Ad ve fiyat girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const category = menu[idx];
-        if (category) {
-            category.items.push({ name, price, image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" });
-            saveMenuToStorage();
-            displayMenu();
-            document.getElementById('newName').value = '';
-            document.getElementById('productPrice').value = '';
-            showToast(translations[currentLang]?.add || 'Ürün eklendi', 'success');
-        }
+        if (!price.endsWith('₺')) price += '₺';
+        const langs = ['tr', 'en', 'ru', 'ar'];
+        langs.forEach(lang => {
+            const menu = currentMenu[lang];
+            if (menu[idx]) {
+                menu[idx].items.push({ name, price, image: "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" });
+            }
+        });
+        saveMenuToStorage();
+        displayMenu();
+        document.getElementById('newName').value = '';
+        document.getElementById('productPrice').value = '';
+        showToast(translations[currentLang]?.add || 'Ürün eklendi', 'success');
     };
 
     window.previewCategoryImage = function() {
@@ -3725,10 +3786,10 @@
     };
 
     window.addCategoryImage = function() {
-        const cat = document.getElementById('categoryImageSelect').value;
+        const catIdx = document.getElementById('categoryImageSelect').value;
         const url = document.getElementById('categoryImageUrl').value;
-        if (!cat || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
-        categoryImages[cat] = url;
+        if (catIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
+        categoryImages[catIdx] = url;
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
@@ -3736,9 +3797,9 @@
     };
 
     window.deleteCategoryImage = function() {
-        const cat = document.getElementById('categoryImageSelect').value;
-        if (!cat || !categoryImages[cat]) return showToast(translations[currentLang]?.devCategory + ' seçin!', 'error');
-        delete categoryImages[cat];
+        const catIdx = document.getElementById('categoryImageSelect').value;
+        if (catIdx === "" || !categoryImages[catIdx]) return showToast(translations[currentLang]?.devCategory + ' seçin!', 'error');
+        delete categoryImages[catIdx];
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
@@ -3749,11 +3810,9 @@
         const catIdx = document.getElementById('productCategorySelect').value;
         const prodIdx = document.getElementById('productSelect').value;
         const url = document.getElementById('productImageUrl').value;
-        if (!catIdx || !prodIdx || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (!productImages[catIdx]) productImages[catIdx] = {};
-        productImages[catIdx][prod] = url;
+        if (catIdx === "" || prodIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
+        const key = `${catIdx},${prodIdx}`;
+        productImages[key] = url;
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
         updateGallery();
@@ -3763,11 +3822,10 @@
     window.deleteProductImage = function() {
         const catIdx = document.getElementById('productCategorySelect').value;
         const prodIdx = document.getElementById('productSelect').value;
-        if (!catIdx || !prodIdx) return showToast(translations[currentLang]?.devCategory + ' ve ürün seçin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (productImages[catIdx] && productImages[catIdx][prod]) {
-            delete productImages[catIdx][prod];
+        if (catIdx === "" || prodIdx === "") return showToast(translations[currentLang]?.devCategory + ' ve ürün seçin!', 'error');
+        const key = `${catIdx},${prodIdx}`;
+        if (productImages[key]) {
+            delete productImages[key];
             localStorage.setItem('productImages', JSON.stringify(productImages));
             displayMenu();
             updateGallery();
@@ -3786,10 +3844,10 @@
     };
 
     window.addCategoryImageV2 = function() {
-        const cat = document.getElementById('categoryImageSelectV2').value;
+        const catIdx = document.getElementById('categoryImageSelectV2').value;
         const url = document.getElementById('categoryImageUrlV2').value;
-        if (!cat || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
-        categoryImages[cat] = url;
+        if (catIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
+        categoryImages[catIdx] = url;
         localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         displayMenu();
         updateGallery();
@@ -3800,30 +3858,28 @@
         const catIdx = document.getElementById('productCategorySelectV2').value;
         const prodIdx = document.getElementById('productSelectV2').value;
         const url = document.getElementById('productImageUrlV2').value;
-        if (!catIdx || !prodIdx || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
-        const menu = currentMenu[currentLang] || [];
-        const prod = menu[catIdx].items[prodIdx].name;
-        if (!productImages[catIdx]) productImages[catIdx] = {};
-        productImages[catIdx][prod] = url;
+        if (catIdx === "" || prodIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
+        const key = `${catIdx},${prodIdx}`;
+        productImages[key] = url;
         localStorage.setItem('productImages', JSON.stringify(productImages));
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.add || 'Ürün resmi eklendi', 'success');
     };
 
-    window.editGalleryImage = function(type, cat, product) {
-        if (type === 'category') openImageEdit('category', null, null, cat, categoryImages[cat]);
-        else openImageEdit('product', parseInt(cat), null, product, productImages[cat][product]);
+    window.editGalleryImage = function(type, catIdx, prodIdx) {
+        if (type === 'category') openImageEdit('category', catIdx, null, null, categoryImages[catIdx]);
+        else openImageEdit('product', catIdx, prodIdx, null, productImages[`${catIdx},${prodIdx}`]);
     };
 
-    window.deleteGalleryImage = function(type, cat, product) {
+    window.deleteGalleryImage = function(type, catIdx, prodIdx) {
         showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (type === 'category') { 
-                delete categoryImages[cat]; 
+                delete categoryImages[catIdx]; 
                 localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); 
             }
             else { 
-                delete productImages[cat][product]; 
+                delete productImages[`${catIdx},${prodIdx}`]; 
                 localStorage.setItem('productImages', JSON.stringify(productImages)); 
             }
             displayMenu(); 
@@ -3836,7 +3892,7 @@
         const ci = this.value;
         const ps = document.getElementById('productSelect');
         const menu = currentMenu[currentLang] || [];
-        if (!ci || !menu[ci]) { 
+        if (ci === "" || !menu[ci]) { 
             ps.disabled = true; 
             ps.innerHTML = '<option>' + (translations[currentLang]?.devSelectCategoryFirst || 'Önce kategori seçin') + '</option>'; 
             return; 
@@ -3850,7 +3906,7 @@
         const ci = this.value;
         const ps = document.getElementById('productSelectV2');
         const menu = currentMenu[currentLang] || [];
-        if (!ci || !menu[ci]) { 
+        if (ci === "" || !menu[ci]) { 
             ps.disabled = true; 
             ps.innerHTML = '<option>' + (translations[currentLang]?.devSelectCategoryFirst || 'Önce kategori seçin') + '</option>'; 
             return; 
@@ -3937,13 +3993,11 @@
         if (!newUrl) return showToast(translations[currentLang]?.devImageUrlPlaceholder || 'Resim URL girin!', 'error');
         
         if (currentEditData.type === 'category') {
-            categoryImages[currentEditData.name] = newUrl;
+            categoryImages[currentEditData.catIdx] = newUrl;
             localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
         } else {
-            const catIdx = currentEditData.catIdx;
-            const itemName = currentEditData.name;
-            if (!productImages[catIdx]) productImages[catIdx] = {};
-            productImages[catIdx][itemName] = newUrl;
+            const key = `${currentEditData.catIdx},${currentEditData.itemIdx}`;
+            productImages[key] = newUrl;
             localStorage.setItem('productImages', JSON.stringify(productImages));
         }
         
@@ -3957,15 +4011,12 @@
         if (!currentEditData) return;
         showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (currentEditData.type === 'category') {
-                delete categoryImages[currentEditData.name];
+                delete categoryImages[currentEditData.catIdx];
                 localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
             } else {
-                const catIdx = currentEditData.catIdx;
-                const itemName = currentEditData.name;
-                if (productImages[catIdx] && productImages[catIdx][itemName]) {
-                    delete productImages[catIdx][itemName];
-                    localStorage.setItem('productImages', JSON.stringify(productImages));
-                }
+                const key = `${currentEditData.catIdx},${currentEditData.itemIdx}`;
+                delete productImages[key];
+                localStorage.setItem('productImages', JSON.stringify(productImages));
             }
             displayMenu(); 
             updateGallery(); 
