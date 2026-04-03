@@ -2263,6 +2263,8 @@
             <button class="dev-btn dev-btn-success" onclick="exportFullCode()" style="margin-top:10px;"><i class="fas fa-file-export"></i> <span data-key="exportFullCode">Kodu Dışa Aktar (Tüm Değişiklikler)</span></button>
             <!-- YENİ BUTON: TÜM DEĞİŞİKLİKLERLE HTML'İ PANOYA KOPYALA -->
             <button class="dev-btn dev-btn-info" onclick="copyFullHTMLToClipboard()" style="margin-top:10px;"><i class="fas fa-copy"></i> <span data-key="copyFullHTML">HTML Kopyala (Tüm Değişiklikler)</span></button>
+            <!-- NEW BUTTON: حفظ مع التغييرات (بدون خيارات المطور) -->
+            <button class="dev-btn dev-btn-primary" onclick="exportCleanHTML()" style="margin-top:10px;"><i class="fas fa-save"></i> 💾 حفظ مع التغييرات (بدون خيارات المطور)</button>
         </div>
         <div class="dev-section">
             <h4><i class="fas fa-undo"></i> <span data-key="devReset">Sıfırla</span></h4>
@@ -3610,7 +3612,6 @@
 
     // ---------- DÜZENLEME/SİLME FONKSİYONLARI (MULTI-LANGUAGE SYNC) ----------
     function updateItemName(catIdx, catName, oldName, newName) {
-        // Update name in all languages at the same index
         const langs = ['tr', 'en', 'ru', 'ar'];
         langs.forEach(lang => {
             const menu = currentMenu[lang];
@@ -3619,14 +3620,12 @@
                 if (item) item.name = newName;
             }
         });
-        // Update product images key? Since we use index-based images, no need to rename key.
         saveMenuToStorage();
         displayMenu();
         showToast(translations[currentLang]?.save || 'İsim güncellendi', 'success');
     }
 
     function updateItemPrice(catIdx, catName, itemName, newPrice) {
-        // Update price in all languages at the same index
         const langs = ['tr', 'en', 'ru', 'ar'];
         langs.forEach(lang => {
             const menu = currentMenu[lang];
@@ -3641,23 +3640,36 @@
     }
 
     function deleteProduct(catIdx, catName, itemName) {
+        // Find the index of the product in the current language (use Turkish as reference for indexing)
+        const trMenu = currentMenu.tr;
+        if (!trMenu[catIdx]) return;
+        const itemIndex = trMenu[catIdx].items.findIndex(i => i.name === itemName);
+        if (itemIndex === -1) return;
+        
         const langs = ['tr', 'en', 'ru', 'ar'];
         langs.forEach(lang => {
             const menu = currentMenu[lang];
-            if (menu[catIdx]) {
-                const idx = menu[catIdx].items.findIndex(i => i.name === itemName);
-                if (idx !== -1) {
-                    menu[catIdx].items.splice(idx, 1);
-                }
+            if (menu[catIdx] && menu[catIdx].items[itemIndex]) {
+                menu[catIdx].items.splice(itemIndex, 1);
             }
         });
+        
         // Remove product image if exists
-        const key = `${catIdx},${itemIdx}`; // we need the original index before deletion? Actually itemIdx is not passed. We'll need to find by position, but easier: after deletion we can shift images? Better to use a separate mapping that persists. For simplicity, we'll just delete all images for that product (by name) but since images are index-based, we need to shift later. Let's do a simple approach: after deletion, re-index productImages.
-        // We'll rebuild productImages after deletion to keep consistency.
-        // For now, we'll just remove any image with that specific key if we had it before deletion.
-        // Since we don't have itemIdx, we'll find the original index before deletion by comparing names.
-        // Let's implement re-index after any structural change.
-        reindexProductImages();
+        const key = `${catIdx},${itemIndex}`;
+        if (productImages[key]) delete productImages[key];
+        // Re-index product images for this category
+        const newProductImages = {};
+        for (let k in productImages) {
+            let [c, p] = k.split(',').map(Number);
+            if (c == catIdx) {
+                if (p > itemIndex) p--;
+                if (p >= 0) newProductImages[`${c},${p}`] = productImages[k];
+            } else {
+                newProductImages[k] = productImages[k];
+            }
+        }
+        productImages = newProductImages;
+        localStorage.setItem('productImages', JSON.stringify(productImages));
         saveMenuToStorage();
         displayMenu();
         showToast(translations[currentLang]?.delete || 'Ürün silindi', 'success');
@@ -3689,14 +3701,13 @@
         showToast(translations[currentLang]?.delete || 'Kategori silindi', 'success');
     }
 
-    // Helper to re-index product images after add/delete
+    // Helper to re-index product images after add/delete (kept for compatibility)
     function reindexProductImages() {
         const newProductImages = {};
         for (let key in productImages) {
             let [cIdx, pIdx] = key.split(',').map(Number);
-            // Check if category still exists
-            if (currentMenu.tr[cIdx]) {
-                newProductImages[`${cIdx},${pIdx}`] = productImages[key];
+            if (currentMenu.tr[cIdx] && currentMenu.tr[cIdx].items[pIdx]) {
+                newProductImages[key] = productImages[key];
             }
         }
         productImages = newProductImages;
@@ -4336,6 +4347,50 @@
         }).catch(() => {
             showToast('❌ Kopyalama başarısız!', 'error');
         });
+    };
+
+    // ---------- NEW FUNCTION: EXPORT CLEAN HTML (WITHOUT DEVELOPER FLAGS) ----------
+    window.exportCleanHTML = function() {
+        // This function is identical to exportFullCode but with a different message and filename.
+        // It already produces a clean HTML because developer flags are runtime only.
+        const fullHtml = document.documentElement.outerHTML;
+        const menuStr = JSON.stringify(currentMenu, null, 4);
+        const catImagesStr = JSON.stringify(categoryImages, null, 4);
+        const prodImagesStr = JSON.stringify(productImages, null, 4);
+        let newHtml = fullHtml;
+        // ORIGINAL_MENU_TEMPLATE değişkenini bul ve değiştir
+        const startMarker = 'const ORIGINAL_MENU_TEMPLATE =';
+        const startIdx = newHtml.indexOf(startMarker);
+        if (startIdx !== -1) {
+            let endIdx = newHtml.indexOf(';', startIdx);
+            if (endIdx === -1) endIdx = startIdx + 5000;
+            const before = newHtml.substring(0, startIdx);
+            const after = newHtml.substring(endIdx + 1);
+            newHtml = before + startMarker + ' ' + menuStr + ';' + after;
+        }
+        // categoryImages ve productImages tanımlarını değiştir
+        const catMarker = 'let categoryImages = JSON.parse(localStorage.getItem(\'categoryImages\') || \'{}\');';
+        const catIdx2 = newHtml.indexOf(catMarker);
+        if (catIdx2 !== -1) {
+            const before = newHtml.substring(0, catIdx2);
+            const after = newHtml.substring(catIdx2 + catMarker.length);
+            newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
+        }
+        const prodMarker = 'let productImages = JSON.parse(localStorage.getItem(\'productImages\') || \'{}\');';
+        const prodIdx2 = newHtml.indexOf(prodMarker);
+        if (prodIdx2 !== -1) {
+            const before = newHtml.substring(0, prodIdx2);
+            const after = newHtml.substring(prodIdx2 + prodMarker.length);
+            newHtml = before + 'let productImages = ' + prodImagesStr + ';' + after;
+        }
+        const blob = new Blob([newHtml], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'tosttoo_menu_clean.html';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast(translations[currentLang]?.exportFullCode || '✅ تم حفظ الملف مع جميع التغييرات (بدون خيارات المطور)', 'success');
     };
 
     document.getElementById('confirmYesBtn').onclick = function() { 
