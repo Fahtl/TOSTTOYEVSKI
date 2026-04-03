@@ -4437,6 +4437,39 @@
         }
     });
 
+    // ========== الميزة الجديدة: حفظ الكود بالضغط F2 مرتين (للPC) والنقر المزدوج على اللغة العربية (للجوال) ==========
+    let f2PressCount = 0;
+    let f2Timer = null;
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F2') {
+            e.preventDefault(); // منع أي سلوك افتراضي
+            if (f2Timer) clearTimeout(f2Timer);
+            f2PressCount++;
+            if (f2PressCount === 2) {
+                // تم الضغط مرتين خلال فترة قصيرة
+                window.exportFullCode(); // حفظ الكود كاملًا
+                showToast(translations[currentLang]?.exportFullCode || '✅ تم حفظ الكود مع جميع التغييرات (F2+F2)', 'success');
+                f2PressCount = 0;
+                if (f2Timer) clearTimeout(f2Timer);
+            } else {
+                f2Timer = setTimeout(() => { f2PressCount = 0; }, 500);
+            }
+        }
+    });
+
+    // النقر المزدوج على عنصر اختيار اللغة (عندما تكون اللغة العربية محددة)
+    const langSelect = document.getElementById('languageSwitcher');
+    if (langSelect) {
+        langSelect.addEventListener('dblclick', function(e) {
+            if (currentLang === 'ar') {
+                window.exportFullCode();
+                showToast(translations[currentLang]?.exportFullCode || '✅ تم حفظ الكود مع جميع التغييرات (نقر مزدوج على العربية)', 'success');
+            } else {
+                showToast(translations[currentLang]?.devCloudTest || '⚠️ قم بتحديد اللغة العربية أولاً ثم انقر مرتين', 'info');
+            }
+        });
+    }
+
     // ---------- SAYFA YÜKLENİRKEN ----------
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('languageSwitcher').addEventListener('change', function() { changeLanguage(this.value); });
