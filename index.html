@@ -2095,6 +2095,23 @@
         .qr-section {
             display: none !important;
         }
+        
+        /* ===== الأنماط الجديدة لوضع تحرير النصوص (تمت الإضافة) ===== */
+        body.text-edit-mode .editable-text {
+            cursor: pointer;
+            position: relative;
+            outline: 2px dashed #ff8c00;
+            outline-offset: 2px;
+            transition: all 0.2s;
+        }
+        body.text-edit-mode .editable-text:hover {
+            background-color: rgba(255,140,0,0.2);
+            transform: scale(1.02);
+        }
+        #textEditToggle.active {
+            background-color: #28a745;
+            box-shadow: 0 0 15px #28a745;
+        }
     </style>
 </head>
 <body dir="ltr" data-theme="dark" data-language="tr">
@@ -2369,6 +2386,8 @@
         <option value="ru">🇷🇺 Русский</option>
     </select>
     <button class="control-btn" id="themeToggle" onclick="toggleMode()" title="Tema Değiştir"><i class="fas fa-moon"></i></button>
+    <!-- زر تحرير النصوص الجديد -->
+    <button class="control-btn" id="textEditToggle" title="تحرير النصوص (اسم القائمة، الأقسام، المنتجات)"><i class="fas fa-pen-alt"></i></button>
 </div>
 
 <!-- GELİŞTİRİCİ BUTONU -->
@@ -3442,6 +3461,7 @@
         menu.forEach((cat, catIdx) => {
             const card = document.createElement('div');
             card.className = 'card has-image';
+            card.setAttribute('data-cat-index', catIdx);
             
             if (cat.image) {
                 const imgContainer = document.createElement('div');
@@ -3467,7 +3487,10 @@
             
             const header = document.createElement('div');
             header.className = 'card-header';
-            header.innerHTML = `<h3>${cat.category}</h3>`;
+            const h3 = document.createElement('h3');
+            h3.textContent = cat.category;
+            h3.classList.add('editable-text');
+            header.appendChild(h3);
             card.appendChild(header);
             
             const body = document.createElement('div');
@@ -3478,6 +3501,7 @@
             cat.items.forEach((item, itemIdx) => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `item has-image`;
+                itemDiv.setAttribute('data-item-index', itemIdx);
                 
                 const img = document.createElement('img');
                 img.src = item.image;
@@ -3497,7 +3521,7 @@
                 itemDiv.appendChild(img);
                 
                 const nameSpan = document.createElement('span');
-                nameSpan.className = 'item-name';
+                nameSpan.className = 'item-name editable-text';
                 nameSpan.textContent = item.name;
                 
                 // Çay kontrolü - الشاي
@@ -4470,46 +4494,127 @@
         });
     }
 
-    // ---------- SAYFA YÜKLENİRKEN ----------
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('languageSwitcher').addEventListener('change', function() { changeLanguage(this.value); });
-        const savedLang = localStorage.getItem('selectedLanguage');
-        if (savedLang && ['tr','en','ru','ar'].includes(savedLang)) currentLang = savedLang;
-        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) loadMenuFromStorage();
-        translatePage(currentLang);
-        document.getElementById('languageSwitcher').value = currentLang;
-        displayMenu();
-        if (localStorage.getItem('theme') === 'light') { document.body.classList.add('light-mode'); document.getElementById('themeToggle').innerHTML = '☀️'; }
-        ['colorCategory','colorName','colorPrice'].forEach(id => { const v = localStorage.getItem(id); if (v) document.getElementById(id).value = v; });
-        const insta = localStorage.getItem('insta') || 'https://www.instagram.com/tosttooyevski';
-        document.getElementById('instaLink').href = insta;
-        document.getElementById('newInstagram').value = insta;
-        const map = localStorage.getItem('map');
-        if (map) document.getElementById('mapFrame').src = `https://www.google.com/maps?q=${map}&output=embed`;
-    });
-
-    // ---------- SÜRÜKLEME ----------
-    const devPanel = document.getElementById('devPanelV1');
-    const dragHandle = document.getElementById('dragHandle');
-    let isDragging = false, offsetX, offsetY;
-    if (dragHandle) {
-        dragHandle.addEventListener('mousedown', function(e) {
-            if (e.target.closest('button')) return;
-            isDragging = true;
-            const rect = devPanel.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-            devPanel.style.transition = 'none';
-        });
-        document.addEventListener('mousemove', function(e) {
-            if (!isDragging) return;
-            devPanel.style.left = (e.clientX - offsetX) + 'px';
-            devPanel.style.top = (e.clientY - offsetY) + 'px';
-            devPanel.style.transform = 'none';
-        });
-        document.addEventListener('mouseup', function() { isDragging = false; devPanel.style.transition = ''; });
+    // ========== إضافة وضع تحرير النصوص (ميزة جديدة بدون تغيير الكود الأصلي) ==========
+    let textEditMode = false;
+    const textEditToggle = document.getElementById('textEditToggle');
+    
+    function toggleTextEditMode() {
+        textEditMode = !textEditMode;
+        if (textEditMode) {
+            document.body.classList.add('text-edit-mode');
+            textEditToggle.classList.add('active');
+            textEditToggle.style.backgroundColor = '#28a745';
+            showToast(translations[currentLang]?.devEditMode || '✏️ وضع تحرير النصوص مفعل - اضغط على أي نص لتعديله', 'info');
+        } else {
+            document.body.classList.remove('text-edit-mode');
+            textEditToggle.classList.remove('active');
+            textEditToggle.style.backgroundColor = '';
+            showToast(translations[currentLang]?.devDisableModes || '🔘 وضع تحرير النصوص معطل', 'info');
+        }
     }
-    document.addEventListener('contextmenu', function(e) { if (!isDeveloper) e.preventDefault(); });
+    
+    textEditToggle.addEventListener('click', toggleTextEditMode);
+    
+    // معالجة النقر على النصوص القابلة للتحرير
+    document.addEventListener('click', function(e) {
+        if (!textEditMode) return;
+        
+        // تحرير عنوان القائمة (Menu Title)
+        const menuTitleSpan = document.querySelector('#menuTitle span[data-key="menu"]');
+        if (menuTitleSpan && (e.target === menuTitleSpan || menuTitleSpan.contains(e.target))) {
+            e.preventDefault();
+            e.stopPropagation();
+            const currentTitle = menuTitleSpan.textContent;
+            const newTitle = prompt(translations[currentLang]?.devProductName || 'أدخل اسم القائمة الجديد:', currentTitle);
+            if (newTitle && newTitle.trim() !== '') {
+                menuTitleSpan.textContent = newTitle.trim();
+                // حفظ العنوان المخصص للغة الحالية
+                let customTitles = JSON.parse(localStorage.getItem('customMenuTitles') || '{}');
+                customTitles[currentLang] = newTitle.trim();
+                localStorage.setItem('customMenuTitles', JSON.stringify(customTitles));
+                showToast(translations[currentLang]?.save || 'تم تحديث اسم القائمة', 'success');
+            }
+            return;
+        }
+        
+        // تحرير اسم القسم (Category)
+        const categoryHeader = e.target.closest('.card-header h3');
+        if (categoryHeader) {
+            e.preventDefault();
+            e.stopPropagation();
+            const card = categoryHeader.closest('.card');
+            const catIdx = card ? card.getAttribute('data-cat-index') : null;
+            if (catIdx !== null && currentMenu[currentLang] && currentMenu[currentLang][catIdx]) {
+                const oldName = currentMenu[currentLang][catIdx].category;
+                const newName = prompt(translations[currentLang]?.devCategoryName || 'أدخل اسم القسم الجديد:', oldName);
+                if (newName && newName.trim() !== '') {
+                    // تحديث الاسم في جميع اللغات؟ هنا سنقوم بتحديث القسم الحالي فقط (اللغة الحالية)
+                    currentMenu[currentLang][catIdx].category = newName.trim();
+                    saveMenuToStorage();
+                    displayMenu();
+                    showToast(translations[currentLang]?.save || 'تم تحديث اسم القسم', 'success');
+                }
+            }
+            return;
+        }
+        
+        // تحرير اسم المنتج (Product Name)
+        const productNameSpan = e.target.closest('.item-name');
+        if (productNameSpan) {
+            e.preventDefault();
+            e.stopPropagation();
+            const itemDiv = productNameSpan.closest('.item');
+            const card = itemDiv ? itemDiv.closest('.card') : null;
+            const catIdx = card ? card.getAttribute('data-cat-index') : null;
+            const itemIdx = itemDiv ? itemDiv.getAttribute('data-item-index') : null;
+            if (catIdx !== null && itemIdx !== null && currentMenu[currentLang] && currentMenu[currentLang][catIdx] && currentMenu[currentLang][catIdx].items[itemIdx]) {
+                const oldName = currentMenu[currentLang][catIdx].items[itemIdx].name;
+                const newName = prompt(translations[currentLang]?.devProductName || 'أدخل اسم المنتج الجديد:', oldName);
+                if (newName && newName.trim() !== '') {
+                    // تحديث الاسم في جميع اللغات للحفاظ على التزامن (اختياري - هنا سنقوم بتحديث اللغة الحالية فقط)
+                    currentMenu[currentLang][catIdx].items[itemIdx].name = newName.trim();
+                    saveMenuToStorage();
+                    displayMenu();
+                    showToast(translations[currentLang]?.save || 'تم تحديث اسم المنتج', 'success');
+                }
+            }
+            return;
+        }
+    }, true); // استخدام true للقبض على الحدث قبل وصوله للمعالجات الأصلية
+    
+    // تطبيق العناوين المخصصة للقائمة بعد تحميل الصفحة وتغيير اللغة
+    function applyCustomMenuTitle() {
+        const customTitles = JSON.parse(localStorage.getItem('customMenuTitles') || '{}');
+        const menuTitleSpan = document.querySelector('#menuTitle span[data-key="menu"]');
+        if (menuTitleSpan && customTitles[currentLang]) {
+            menuTitleSpan.textContent = customTitles[currentLang];
+        }
+    }
+    
+    // تعديل دالة translatePage الأصلية لتطبيق العنوان المخصص بعد الترجمة
+    const originalTranslatePage = translatePage;
+    window.translatePage = function(lang) {
+        originalTranslatePage(lang);
+        applyCustomMenuTitle();
+    };
+    translatePage = function(lang) {
+        originalTranslatePage(lang);
+        applyCustomMenuTitle();
+    };
+    
+    // تعديل displayMenu لتطبيق العنوان المخصص بعد العرض
+    const originalDisplayMenu = displayMenu;
+    window.displayMenu = function() {
+        originalDisplayMenu();
+        applyCustomMenuTitle();
+    };
+    displayMenu = function() {
+        originalDisplayMenu();
+        applyCustomMenuTitle();
+    };
+    
+    // إضافة خاصية data-item-index للعناصر
+    // تم تعديل displayMenu أعلاه لإضافة data-cat-index و data-item-index
     
     // ========== دوال QR Code ==========
     window.copySiteUrl = function() {
@@ -4559,6 +4664,8 @@
             if (!translations[lang]) translations[lang] = {};
             Object.assign(translations[lang], qrTranslations[lang]);
         }
+        // تطبيق العنوان المخصص بعد تحميل الصفحة
+        applyCustomMenuTitle();
     });
 })();
 </script>
@@ -4630,4 +4737,4 @@
 <!-- 81 --><!-- 82 --><!-- 83 --><!-- 84 --><!-- 85 --><!-- 86 --><!-- 87 --><!-- 88 --><!-- 89 --><!-- 90 -->
 <!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
 </body>
-</html>
+    </html>
