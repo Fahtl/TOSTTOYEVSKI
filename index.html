@@ -2912,8 +2912,9 @@
     let confirmCallback = null;
 
     // Yeni: image storage by index instead of name
-    let categoryImages = JSON.parse(localStorage.getItem('categoryImages') || '{}'); // key: category index (string)
-    let productImages = JSON.parse(localStorage.getItem('productImages') || '{}'); // key: "catIdx,prodIdx"
+    // --- DEĞİŞİKLİK 2: localStorage kullanımı kaldırıldı, her zaman boş nesne ---
+    let categoryImages = {};   // artık localStorage'dan okunmaz
+    let productImages = {};    // artık localStorage'dan okunmaz
 
     // ---------- ÇOK DİLLİ MENÜ ŞABLONU (TÜM DİLLER) ----------
     const ORIGINAL_MENU_TEMPLATE = {
@@ -3259,25 +3260,15 @@
         ar: []
     };
 
-    // ========== MENÜ YÜKLEME ==========
+    // ========== MENÜ YÜKLEME (DEĞİŞTİRİLDİ: HEP ORJİNAL YÜKLENİR) ==========
     function loadMenuFromStorage() {
-        const saved = localStorage.getItem('tosttoo_menu');
-        if (saved) {
-            try {
-                const parsed = JSON.parse(saved);
-                if (parsed && typeof parsed === 'object' && 
-                    parsed.tr && parsed.en && parsed.ru && parsed.ar) {
-                    currentMenu = parsed;
-                    return;
-                }
-            } catch (e) {}
-        }
+        // YENİ: localStorage tamamen ignore edilir, her zaman orijinal şablon yüklenir
         currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
-        saveMenuToStorage();
     }
 
     function saveMenuToStorage() {
-        localStorage.setItem('tosttoo_menu', JSON.stringify(currentMenu));
+        // YENİ: localStorage'a kayıt yapılmaz (değişiklikler geçici olur)
+        // Bu fonksiyon boş bırakıldı.
     }
 
     loadMenuFromStorage();
@@ -3508,7 +3499,7 @@
                         if (isDeveloper) {
                             if (editMode) { 
                                 const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
-                                if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
+                                if (newName) updateItemName(catIdx, itemIdx, newName); 
                             }
                             else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
                         } else {
@@ -3528,7 +3519,7 @@
                         if (isDeveloper) {
                             if (editMode) { 
                                 const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
-                                if (newName) updateItemName(catIdx, cat.category, item.name, newName); 
+                                if (newName) updateItemName(catIdx, itemIdx, newName); 
                             }
                             else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
                         }
@@ -3553,7 +3544,7 @@
                             if (!newPrice.endsWith('₺')) {
                                 newPrice = newPrice + '₺';
                             }
-                            updateItemPrice(catIdx, cat.category, item.name, newPrice);
+                            updateItemPrice(catIdx, itemIdx, newPrice);
                         }
                     }
                 };
@@ -3611,29 +3602,24 @@
     }
 
     // ---------- DÜZENLEME/SİLME FONKSİYONLARI (MULTI-LANGUAGE SYNC) ----------
-    function updateItemName(catIdx, catName, oldName, newName) {
-        const langs = ['tr', 'en', 'ru', 'ar'];
-        langs.forEach(lang => {
-            const menu = currentMenu[lang];
-            if (menu[catIdx]) {
-                const item = menu[catIdx].items.find(i => i.name === oldName);
-                if (item) item.name = newName;
-            }
-        });
-        saveMenuToStorage();
+    // YENİ: updateItemName ve updateItemPrice sadece currentLang üzerinde çalışır
+    function updateItemName(catIdx, itemIdx, newName) {
+        const menu = currentMenu[currentLang];
+        if (menu && menu[catIdx] && menu[catIdx].items[itemIdx]) {
+            menu[catIdx].items[itemIdx].name = newName;
+        }
+        // Diğer dillerde aynı indeksteki öğelerin ismi değişmez (sadece mevcut dil)
+        // Bu sayede her dil kendi isimlerini bağımsız tutar, fakat yapı (kategori ve ürün sayısı) aynı kalır.
+        saveMenuToStorage(); // aslında boş, ama çağrı kalabilir
         displayMenu();
         showToast(translations[currentLang]?.save || 'İsim güncellendi', 'success');
     }
 
-    function updateItemPrice(catIdx, catName, itemName, newPrice) {
-        const langs = ['tr', 'en', 'ru', 'ar'];
-        langs.forEach(lang => {
-            const menu = currentMenu[lang];
-            if (menu[catIdx]) {
-                const item = menu[catIdx].items.find(i => i.name === itemName);
-                if (item) item.price = newPrice;
-            }
-        });
+    function updateItemPrice(catIdx, itemIdx, newPrice) {
+        const menu = currentMenu[currentLang];
+        if (menu && menu[catIdx] && menu[catIdx].items[itemIdx]) {
+            menu[catIdx].items[itemIdx].price = newPrice;
+        }
         saveMenuToStorage();
         displayMenu();
         showToast(translations[currentLang]?.save || 'Fiyat güncellendi', 'success');
@@ -3669,7 +3655,7 @@
             }
         }
         productImages = newProductImages;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
+        // localStorage kullanılmıyor
         saveMenuToStorage();
         displayMenu();
         showToast(translations[currentLang]?.delete || 'Ürün silindi', 'success');
@@ -3694,8 +3680,7 @@
             newProductImages[`${cIdx},${pIdx}`] = productImages[key];
         }
         productImages = newProductImages;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        // localStorage kullanılmıyor
         saveMenuToStorage();
         displayMenu();
         showToast(translations[currentLang]?.delete || 'Kategori silindi', 'success');
@@ -3711,7 +3696,7 @@
             }
         }
         productImages = newProductImages;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
+        // localStorage kullanılmıyor
     }
 
     // ---------- GELİŞTİRİCİ FONKSİYONLARI ----------
@@ -3724,8 +3709,8 @@
             let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price.replace(/₺/g, '').trim());
             if (newPrice) {
                 if (!newPrice.endsWith('₺')) newPrice += '₺';
-                updateItemName(catIdx, menu[catIdx].category, item.name, newName);
-                updateItemPrice(catIdx, menu[catIdx].category, newName, newPrice);
+                updateItemName(catIdx, itemIdx, newName);
+                updateItemPrice(catIdx, itemIdx, newPrice);
             }
         }
     };
@@ -3801,7 +3786,7 @@
         const url = document.getElementById('categoryImageUrl').value;
         if (catIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
         categoryImages[catIdx] = url;
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        // localStorage kullanılmıyor
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.add || 'Kategori resmi eklendi', 'success');
@@ -3811,7 +3796,7 @@
         const catIdx = document.getElementById('categoryImageSelect').value;
         if (catIdx === "" || !categoryImages[catIdx]) return showToast(translations[currentLang]?.devCategory + ' seçin!', 'error');
         delete categoryImages[catIdx];
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        // localStorage kullanılmıyor
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.delete || 'Kategori resmi silindi', 'success');
@@ -3824,7 +3809,7 @@
         if (catIdx === "" || prodIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
         const key = `${catIdx},${prodIdx}`;
         productImages[key] = url;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
+        // localStorage kullanılmıyor
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.add || 'Ürün resmi eklendi', 'success');
@@ -3837,7 +3822,7 @@
         const key = `${catIdx},${prodIdx}`;
         if (productImages[key]) {
             delete productImages[key];
-            localStorage.setItem('productImages', JSON.stringify(productImages));
+            // localStorage kullanılmıyor
             displayMenu();
             updateGallery();
             showToast(translations[currentLang]?.delete || 'Ürün resmi silindi', 'success');
@@ -3859,7 +3844,7 @@
         const url = document.getElementById('categoryImageUrlV2').value;
         if (catIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ' ve URL girin!', 'error');
         categoryImages[catIdx] = url;
-        localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+        // localStorage kullanılmıyor
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.add || 'Kategori resmi eklendi', 'success');
@@ -3872,7 +3857,7 @@
         if (catIdx === "" || prodIdx === "" || !url) return showToast(translations[currentLang]?.devCategory + ', ürün ve URL girin!', 'error');
         const key = `${catIdx},${prodIdx}`;
         productImages[key] = url;
-        localStorage.setItem('productImages', JSON.stringify(productImages));
+        // localStorage kullanılmıyor
         displayMenu();
         updateGallery();
         showToast(translations[currentLang]?.add || 'Ürün resmi eklendi', 'success');
@@ -3887,11 +3872,11 @@
         showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (type === 'category') { 
                 delete categoryImages[catIdx]; 
-                localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); 
+                // localStorage kullanılmıyor
             }
             else { 
                 delete productImages[`${catIdx},${prodIdx}`]; 
-                localStorage.setItem('productImages', JSON.stringify(productImages)); 
+                // localStorage kullanılmıyor
             }
             displayMenu(); 
             updateGallery(); 
@@ -4005,11 +3990,11 @@
         
         if (currentEditData.type === 'category') {
             categoryImages[currentEditData.catIdx] = newUrl;
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+            // localStorage kullanılmıyor
         } else {
             const key = `${currentEditData.catIdx},${currentEditData.itemIdx}`;
             productImages[key] = newUrl;
-            localStorage.setItem('productImages', JSON.stringify(productImages));
+            // localStorage kullanılmıyor
         }
         
         displayMenu(); 
@@ -4023,11 +4008,11 @@
         showConfirm(translations[currentLang]?.confirmMessage || 'Resmi silmek istediğinize emin misiniz?', () => {
             if (currentEditData.type === 'category') {
                 delete categoryImages[currentEditData.catIdx];
-                localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
+                // localStorage kullanılmıyor
             } else {
                 const key = `${currentEditData.catIdx},${currentEditData.itemIdx}`;
                 delete productImages[key];
-                localStorage.setItem('productImages', JSON.stringify(productImages));
+                // localStorage kullanılmıyor
             }
             displayMenu(); 
             updateGallery(); 
@@ -4129,10 +4114,9 @@
                 if (data.images) {
                     if (data.images.categories) categoryImages = data.images.categories;
                     if (data.images.products) productImages = data.images.products;
-                    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-                    localStorage.setItem('productImages', JSON.stringify(productImages));
+                    // localStorage kullanılmıyor
                 }
-                saveMenuToStorage();
+                saveMenuToStorage(); // boş
                 displayMenu(); 
                 updateGallery(); 
                 showToast('✅ ' + (translations[currentLang]?.load || 'Yüklendi!'), 'success');
@@ -4154,22 +4138,13 @@
     };
 
     window.saveImagesToCloud = function() {
-        localStorage.setItem('cloudImagesBackup', JSON.stringify({ categories: categoryImages, products: productImages }));
-        showToast('✅ ' + (translations[currentLang]?.save || 'Resimler kaydedildi!'), 'success');
+        // localStorage kullanılmıyor, sadece geçici yedekleme amacıyla
+        // Bu fonksiyon artık hiçbir şey kaydetmez (isteğe bağlı olarak sessionStorage kullanılabilir)
+        showToast('⚠️ ' + (translations[currentLang]?.devCloudTest || 'Bulut kaydı devre dışı (geçici mod)'), 'info');
     };
 
     window.loadImagesFromCloud = function() {
-        const b = localStorage.getItem('cloudImagesBackup');
-        if (b) { 
-            const d = JSON.parse(b); 
-            categoryImages = d.categories || {}; 
-            productImages = d.products || {}; 
-            localStorage.setItem('categoryImages', JSON.stringify(categoryImages)); 
-            localStorage.setItem('productImages', JSON.stringify(productImages)); 
-            displayMenu(); 
-            updateGallery(); 
-            showToast('✅ ' + (translations[currentLang]?.load || 'Resimler yüklendi!'), 'success'); 
-        }
+        showToast('⚠️ ' + (translations[currentLang]?.devCloudTest || 'Bulut yükleme devre dışı (geçici mod)'), 'info');
     };
 
     window.copyV1Code = function() { 
@@ -4192,10 +4167,9 @@
                 if (data.images) {
                     if (data.images.categories) categoryImages = data.images.categories;
                     if (data.images.products) productImages = data.images.products;
-                    localStorage.setItem('categoryImages', JSON.stringify(categoryImages));
-                    localStorage.setItem('productImages', JSON.stringify(productImages));
+                    // localStorage kullanılmıyor
                 }
-                saveMenuToStorage();
+                saveMenuToStorage(); // boş
                 displayMenu(); 
                 updateGallery(); 
                 showToast('✅ ' + (translations[currentLang]?.load || 'Kod yüklendi!'), 'success');
@@ -4259,9 +4233,7 @@
             currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
             categoryImages = {};
             productImages = {};
-            localStorage.removeItem('tosttoo_menu');
-            localStorage.removeItem('categoryImages');
-            localStorage.removeItem('productImages');
+            // localStorage kullanılmıyor
             displayMenu();
             showToast(translations[currentLang]?.devReset || 'Menü sıfırlandı', 'success');
         });
@@ -4285,14 +4257,14 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = JSON.parse(localStorage.getItem(\'categoryImages\') || \'{}\');';
+        const catMarker = 'let categoryImages = {};   // artık localStorage';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
             const before = newHtml.substring(0, catIdx2);
             const after = newHtml.substring(catIdx2 + catMarker.length);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = JSON.parse(localStorage.getItem(\'productImages\') || \'{}\');';
+        const prodMarker = 'let productImages = {};    // artık localStorage';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
             const before = newHtml.substring(0, prodIdx2);
@@ -4327,14 +4299,14 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = JSON.parse(localStorage.getItem(\'categoryImages\') || \'{}\');';
+        const catMarker = 'let categoryImages = {};   // artık localStorage';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
             const before = newHtml.substring(0, catIdx2);
             const after = newHtml.substring(catIdx2 + catMarker.length);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = JSON.parse(localStorage.getItem(\'productImages\') || \'{}\');';
+        const prodMarker = 'let productImages = {};    // artık localStorage';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
             const before = newHtml.substring(0, prodIdx2);
@@ -4369,14 +4341,14 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = JSON.parse(localStorage.getItem(\'categoryImages\') || \'{}\');';
+        const catMarker = 'let categoryImages = {};   // artık localStorage';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
             const before = newHtml.substring(0, catIdx2);
             const after = newHtml.substring(catIdx2 + catMarker.length);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = JSON.parse(localStorage.getItem(\'productImages\') || \'{}\');';
+        const prodMarker = 'let productImages = {};    // artık localStorage';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
             const before = newHtml.substring(0, prodIdx2);
