@@ -2302,6 +2302,8 @@
             <button class="dev-btn dev-btn-info" onclick="copyFullHTMLToClipboard()" style="margin-top:10px;"><i class="fas fa-copy"></i> <span data-key="copyFullHTML">HTML Kopyala (Tüm Değişiklikler)</span></button>
             <!-- NEW BUTTON: حفظ مع التغييرات (بدون خيارات المطور) -->
             <button class="dev-btn dev-btn-primary" onclick="exportCleanHTML()" style="margin-top:10px;"><i class="fas fa-save"></i> 💾 حفظ مع التغييرات (بدون خيارات المطور)</button>
+            <!-- ========== ميزة جديدة: زر إخفاء خيارات المطور ========== -->
+            <button class="dev-btn dev-btn-danger" onclick="disableDeveloperMode()" style="margin-top:10px;"><i class="fas fa-eye-slash"></i> 🔒 تعطيل وضع المطور (إخفاء كل الخيارات)</button>
         </div>
         <div class="dev-section">
             <h4><i class="fas fa-undo"></i> <span data-key="devReset">Sıfırla</span></h4>
@@ -3606,6 +3608,35 @@
         deleteMode = false; 
         document.getElementById('menuGrid').classList.remove('edit-mode','delete-mode'); 
         showToast(translations[currentLang]?.devDisableModes || '🔘 Modlar kapatıldı', 'success'); 
+    };
+
+    // ========== الميزة الجديدة: تعطيل وضع المطور بالكامل ==========
+    window.disableDeveloperMode = function() {
+        if (!isDeveloper) {
+            showToast(translations[currentLang]?.devDisableModes || '⚠️ وضع المطور غير مفعل حالياً', 'info');
+            return;
+        }
+        // تعطيل كل متغيرات المطور
+        isDeveloper = false;
+        editMode = false;
+        deleteMode = false;
+        // إغلاق اللوحات
+        document.getElementById('devPanelV1').classList.remove('show');
+        document.getElementById('devPanelV2').classList.remove('show');
+        // إخفاء الزر العائم
+        const floatingBtn = document.getElementById('floatingDevBtn');
+        if (floatingBtn) {
+            floatingBtn.classList.remove('visible');
+            floatingBtn.style.display = 'none';
+        }
+        // إزالة كلاسات التعديل من القائمة
+        const menuGrid = document.getElementById('menuGrid');
+        if (menuGrid) {
+            menuGrid.classList.remove('edit-mode', 'delete-mode');
+        }
+        // إعادة عرض القائمة بدون أزرار المطور
+        displayMenu();
+        showToast(translations[currentLang]?.exportFullCode || '🔒 تم تعطيل وضع المطور وإخفاء جميع الخيارات', 'success');
     };
 
     window.addCategory = function() {
