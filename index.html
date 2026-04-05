@@ -307,6 +307,7 @@
             align-items: center;
             margin-bottom: 15px;
             width: 100%;
+            position: relative;
         }
 
         .card-header h3 {
@@ -322,6 +323,42 @@
 
         .light-mode .card-header h3 {
             color: #d97706;
+        }
+
+        /* زر تعديل القسم */
+        .edit-category-btn {
+            position: absolute;
+            top: 5px;
+            right: 50px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #28a745;
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+        }
+
+        body[dir="rtl"] .edit-category-btn {
+            right: auto;
+            left: 50px;
+        }
+
+        .card:hover .edit-category-btn {
+            opacity: 1;
+        }
+
+        .edit-category-btn:hover {
+            transform: scale(1.15) rotate(15deg);
+            background: #218838;
         }
 
         .delete-card-btn {
@@ -3411,197 +3448,20 @@
         showToast(translations[lang]?.siteTitle || `Dil değiştirildi: ${lang.toUpperCase()}`, 'success');
     }
 
-    // ========== MENÜYÜ GÖSTER ==========
-    function displayMenu() {
-        const grid = document.getElementById('menuGrid');
-        if (!grid) return;
-        
-        grid.innerHTML = '';
-        
-        // Menü kontrolü
-        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
-            if (currentMenu.tr && currentMenu.tr.length > 0) {
-                currentLang = 'tr';
-            } else {
-                currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
-                saveMenuToStorage();
-            }
+    // ========== YENİ FONKSİYON: Kategori adını sadece mevcut dilde güncelle ==========
+    function updateCategoryName(catIdx, newName) {
+        if (!currentMenu[currentLang] || !currentMenu[currentLang][catIdx]) {
+            showToast('Kategori bulunamadı!', 'error');
+            return;
         }
-        
-        const menu = getFullMenu();
-        
-        menu.forEach((cat, catIdx) => {
-            const card = document.createElement('div');
-            card.className = 'card has-image';
-            
-            if (cat.image) {
-                const imgContainer = document.createElement('div');
-                imgContainer.className = 'card-image-container';
-                const img = document.createElement('img');
-                img.src = cat.image;
-                img.className = 'card-image';
-                img.loading = 'lazy';
-                img.alt = cat.category;
-                img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=Resim'; };
-                img.onclick = function(e) {
-                    e.stopPropagation();
-                    if (isDeveloper && editMode) openImageEdit('category', catIdx, null, cat.category, this.src);
-                    else {
-                        const list = [{ src: this.src, title: `📁 ${cat.category}` }];
-                        cat.items.forEach(it => list.push({ src: it.image, title: `📦 ${it.name}` }));
-                        openImageModal(this.src, `📁 ${cat.category}`, list, 0);
-                    }
-                };
-                imgContainer.appendChild(img);
-                card.appendChild(imgContainer);
-            }
-            
-            const header = document.createElement('div');
-            header.className = 'card-header';
-            header.innerHTML = `<h3>${cat.category}</h3>`;
-            card.appendChild(header);
-            
-            const body = document.createElement('div');
-            body.className = 'card-body';
-            body.innerHTML = '<div class="items-container"></div>';
-            const itemsContainer = body.querySelector('.items-container');
-            
-            cat.items.forEach((item, itemIdx) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = `item has-image`;
-                
-                const img = document.createElement('img');
-                img.src = item.image;
-                img.className = 'item-image';
-                img.loading = 'lazy';
-                img.alt = item.name;
-                img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=Resim'; };
-                img.onclick = function(e) {
-                    e.stopPropagation();
-                    if (isDeveloper && editMode) openImageEdit('product', catIdx, itemIdx, item.name, this.src);
-                    else {
-                        const list = cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }));
-                        const idx = list.findIndex(i => i.src === item.image);
-                        openImageModal(item.image, `📦 ${item.name}`, list, idx);
-                    }
-                };
-                itemDiv.appendChild(img);
-                
-                const nameSpan = document.createElement('span');
-                nameSpan.className = 'item-name';
-                nameSpan.textContent = item.name;
-                
-                // Çay kontrolü - الشاي
-                if (item.name.includes('Çay') || item.name.includes('Tea') || 
-                    item.name.includes('Чай') || item.name.includes('شاي')) {
-                    nameSpan.onclick = function(e) {
-                        e.stopPropagation();
-                        if (isDeveloper) {
-                            if (editMode) { 
-                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
-                                if (newName) updateItemName(catIdx, itemIdx, newName); 
-                            }
-                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
-                        } else {
-                            teaClickCount++;
-                            if (teaClickCount >= 7 && !videoShown) { 
-                                videoShown = true; 
-                                openVideoModal(); 
-                                teaClickCount = 0; 
-                            }
-                            clearTimeout(window.teaTimer);
-                            window.teaTimer = setTimeout(() => teaClickCount = 0, 5000);
-                        }
-                    };
-                } else {
-                    nameSpan.onclick = function(e) {
-                        e.stopPropagation();
-                        if (isDeveloper) {
-                            if (editMode) { 
-                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name); 
-                                if (newName) updateItemName(catIdx, itemIdx, newName); 
-                            }
-                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
-                        }
-                    };
-                }
-                
-                const priceSpan = document.createElement('span');
-                priceSpan.className = 'item-price';
-                // Ensure price ends with ₺
-                let displayPrice = item.price;
-                if (!displayPrice.endsWith('₺')) {
-                    displayPrice = displayPrice + '₺';
-                }
-                priceSpan.textContent = displayPrice;
-                priceSpan.onclick = function(e) {
-                    e.stopPropagation();
-                    if (isDeveloper && editMode) { 
-                        let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price.replace(/₺/g, '').trim());
-                        if (newPrice !== null) {
-                            // Ensure it's a number and add ₺
-                            newPrice = newPrice.trim();
-                            if (!newPrice.endsWith('₺')) {
-                                newPrice = newPrice + '₺';
-                            }
-                            updateItemPrice(catIdx, itemIdx, newPrice);
-                        }
-                    }
-                };
-                
-                if (isDeveloper) {
-                    const actionsDiv = document.createElement('div');
-                    actionsDiv.className = 'item-actions';
-                    actionsDiv.style.cssText = 'display:flex; gap:5px; margin-left:10px;';
-                    
-                    const editBtn = document.createElement('button');
-                    editBtn.className = 'item-edit-btn';
-                    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
-                    editBtn.onclick = (e) => { e.stopPropagation(); editItem(catIdx, itemIdx); };
-                    
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.className = 'item-delete-btn';
-                    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
-                    deleteBtn.onclick = (e) => { e.stopPropagation(); showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name)); };
-                    
-                    const imageBtn = document.createElement('button');
-                    imageBtn.className = 'item-image-edit-btn';
-                    imageBtn.innerHTML = '<i class="fas fa-image"></i>';
-                    imageBtn.onclick = (e) => { e.stopPropagation(); openImageEdit('product', catIdx, itemIdx, item.name, img.src); };
-                    
-                    actionsDiv.appendChild(editBtn);
-                    actionsDiv.appendChild(imageBtn);
-                    actionsDiv.appendChild(deleteBtn);
-                    itemDiv.appendChild(actionsDiv);
-                }
-                
-                itemDiv.appendChild(nameSpan);
-                itemDiv.appendChild(priceSpan);
-                itemsContainer.appendChild(itemDiv);
-            });
-            
-            card.appendChild(body);
-            
-            if (isDeveloper) {
-                const deleteCatBtn = document.createElement('button');
-                deleteCatBtn.className = 'delete-card-btn';
-                deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
-                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" ${translations[currentLang]?.confirmMessage || 'kategorisi silinsin mi?'}`, () => deleteCategory(catIdx));
-                card.appendChild(deleteCatBtn);
-            }
-            
-            grid.appendChild(card);
-        });
-        
-        updateSelects();
-        updateGallery();
-        updateStats();
-        
-        const codeDisplay = document.getElementById('v1CodeDisplay');
-        if (codeDisplay) codeDisplay.textContent = JSON.stringify(currentMenu, null, 2);
+        currentMenu[currentLang][catIdx].category = newName;
+        // Diğer dillerde aynı indeksteki kategori adı değişmez (her dil bağımsız)
+        saveMenuToStorage(); // boş fonksiyon, sadece çağrı kalır
+        displayMenu();
+        showToast(translations[currentLang]?.save || 'Kategori adı güncellendi (sadece bu dil için)', 'success');
     }
 
-    // ---------- DÜZENLEME/SİLME FONKSİYONLARI (MULTI-LANGUAGE SYNC) ----------
+    // ========== DÜZENLEME/SİLME FONKSİYONLARI (MULTI-LANGUAGE SYNC) ==========
     // YENİ: updateItemName ve updateItemPrice sadece currentLang üzerinde çalışır
     function updateItemName(catIdx, itemIdx, newName) {
         const menu = currentMenu[currentLang];
@@ -3704,14 +3564,24 @@
         const menu = currentMenu[currentLang] || [];
         const item = menu[catIdx]?.items[itemIdx];
         if (!item) return;
-        const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı:', item.name);
+        const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı (sadece bu dil için):', item.name);
         if (newName) {
-            let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat:', item.price.replace(/₺/g, '').trim());
+            let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat (sadece bu dil için):', item.price.replace(/₺/g, '').trim());
             if (newPrice) {
                 if (!newPrice.endsWith('₺')) newPrice += '₺';
                 updateItemName(catIdx, itemIdx, newName);
                 updateItemPrice(catIdx, itemIdx, newPrice);
             }
+        }
+    };
+
+    window.editCategory = function(catIdx) {
+        const menu = currentMenu[currentLang] || [];
+        const cat = menu[catIdx];
+        if (!cat) return;
+        const newName = prompt(translations[currentLang]?.devCategoryName || 'Kategori adını düzenle (sadece bu dil için):', cat.category);
+        if (newName && newName.trim() !== '') {
+            updateCategoryName(catIdx, newName.trim());
         }
     };
 
@@ -4440,6 +4310,209 @@
                 showToast(translations[currentLang]?.devCloudTest || '⚠️ قم بتحديد اللغة العربية أولاً ثم انقر مرتين', 'info');
             }
         });
+    }
+
+    // ========== MENÜYÜ GÖSTER (DÜZENLENMİŞ: KATEGORİ DÜZENLEME BUTONU EKLENDİ) ==========
+    function displayMenu() {
+        const grid = document.getElementById('menuGrid');
+        if (!grid) return;
+        
+        grid.innerHTML = '';
+        
+        // Menü kontrolü
+        if (!currentMenu[currentLang] || currentMenu[currentLang].length === 0) {
+            if (currentMenu.tr && currentMenu.tr.length > 0) {
+                currentLang = 'tr';
+            } else {
+                currentMenu = JSON.parse(JSON.stringify(ORIGINAL_MENU_TEMPLATE));
+                saveMenuToStorage();
+            }
+        }
+        
+        const menu = getFullMenu();
+        
+        menu.forEach((cat, catIdx) => {
+            const card = document.createElement('div');
+            card.className = 'card has-image';
+            
+            if (cat.image) {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'card-image-container';
+                const img = document.createElement('img');
+                img.src = cat.image;
+                img.className = 'card-image';
+                img.loading = 'lazy';
+                img.alt = cat.category;
+                img.onerror = function() { this.src = 'https://via.placeholder.com/400x200?text=Resim'; };
+                img.onclick = function(e) {
+                    e.stopPropagation();
+                    if (isDeveloper && editMode) openImageEdit('category', catIdx, null, cat.category, this.src);
+                    else {
+                        const list = [{ src: this.src, title: `📁 ${cat.category}` }];
+                        cat.items.forEach(it => list.push({ src: it.image, title: `📦 ${it.name}` }));
+                        openImageModal(this.src, `📁 ${cat.category}`, list, 0);
+                    }
+                };
+                imgContainer.appendChild(img);
+                card.appendChild(imgContainer);
+            }
+            
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            header.innerHTML = `<h3>${cat.category}</h3>`;
+            
+            // زر تعديل القسم (يظهر فقط للمطور)
+            if (isDeveloper) {
+                const editCatBtn = document.createElement('button');
+                editCatBtn.className = 'edit-category-btn';
+                editCatBtn.innerHTML = '<i class="fas fa-pen"></i>';
+                editCatBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    editCategory(catIdx);
+                };
+                header.appendChild(editCatBtn);
+            }
+            
+            card.appendChild(header);
+            
+            const body = document.createElement('div');
+            body.className = 'card-body';
+            body.innerHTML = '<div class="items-container"></div>';
+            const itemsContainer = body.querySelector('.items-container');
+            
+            cat.items.forEach((item, itemIdx) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `item has-image`;
+                
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.className = 'item-image';
+                img.loading = 'lazy';
+                img.alt = item.name;
+                img.onerror = function() { this.src = 'https://via.placeholder.com/100x100?text=Resim'; };
+                img.onclick = function(e) {
+                    e.stopPropagation();
+                    if (isDeveloper && editMode) openImageEdit('product', catIdx, itemIdx, item.name, this.src);
+                    else {
+                        const list = cat.items.map(it => ({ src: it.image, title: `📦 ${it.name}` }));
+                        const idx = list.findIndex(i => i.src === item.image);
+                        openImageModal(item.image, `📦 ${item.name}`, list, idx);
+                    }
+                };
+                itemDiv.appendChild(img);
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'item-name';
+                nameSpan.textContent = item.name;
+                
+                // Çay kontrolü - الشاي
+                if (item.name.includes('Çay') || item.name.includes('Tea') || 
+                    item.name.includes('Чай') || item.name.includes('شاي')) {
+                    nameSpan.onclick = function(e) {
+                        e.stopPropagation();
+                        if (isDeveloper) {
+                            if (editMode) { 
+                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı (sadece bu dil için):', item.name); 
+                                if (newName) updateItemName(catIdx, itemIdx, newName); 
+                            }
+                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
+                        } else {
+                            teaClickCount++;
+                            if (teaClickCount >= 7 && !videoShown) { 
+                                videoShown = true; 
+                                openVideoModal(); 
+                                teaClickCount = 0; 
+                            }
+                            clearTimeout(window.teaTimer);
+                            window.teaTimer = setTimeout(() => teaClickCount = 0, 5000);
+                        }
+                    };
+                } else {
+                    nameSpan.onclick = function(e) {
+                        e.stopPropagation();
+                        if (isDeveloper) {
+                            if (editMode) { 
+                                const newName = prompt(translations[currentLang]?.devProductName || 'Yeni ürün adı (sadece bu dil için):', item.name); 
+                                if (newName) updateItemName(catIdx, itemIdx, newName); 
+                            }
+                            else if (deleteMode) showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name));
+                        }
+                    };
+                }
+                
+                const priceSpan = document.createElement('span');
+                priceSpan.className = 'item-price';
+                // Ensure price ends with ₺
+                let displayPrice = item.price;
+                if (!displayPrice.endsWith('₺')) {
+                    displayPrice = displayPrice + '₺';
+                }
+                priceSpan.textContent = displayPrice;
+                priceSpan.onclick = function(e) {
+                    e.stopPropagation();
+                    if (isDeveloper && editMode) { 
+                        let newPrice = prompt(translations[currentLang]?.devPrice || 'Yeni fiyat (sadece bu dil için):', item.price.replace(/₺/g, '').trim());
+                        if (newPrice !== null) {
+                            // Ensure it's a number and add ₺
+                            newPrice = newPrice.trim();
+                            if (!newPrice.endsWith('₺')) {
+                                newPrice = newPrice + '₺';
+                            }
+                            updateItemPrice(catIdx, itemIdx, newPrice);
+                        }
+                    }
+                };
+                
+                if (isDeveloper) {
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'item-actions';
+                    actionsDiv.style.cssText = 'display:flex; gap:5px; margin-left:10px;';
+                    
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'item-edit-btn';
+                    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+                    editBtn.onclick = (e) => { e.stopPropagation(); editItem(catIdx, itemIdx); };
+                    
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'item-delete-btn';
+                    deleteBtn.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteBtn.onclick = (e) => { e.stopPropagation(); showConfirm(`"${item.name}" ${translations[currentLang]?.confirmMessage || 'silinsin mi?'}`, () => deleteProduct(catIdx, cat.category, item.name)); };
+                    
+                    const imageBtn = document.createElement('button');
+                    imageBtn.className = 'item-image-edit-btn';
+                    imageBtn.innerHTML = '<i class="fas fa-image"></i>';
+                    imageBtn.onclick = (e) => { e.stopPropagation(); openImageEdit('product', catIdx, itemIdx, item.name, img.src); };
+                    
+                    actionsDiv.appendChild(editBtn);
+                    actionsDiv.appendChild(imageBtn);
+                    actionsDiv.appendChild(deleteBtn);
+                    itemDiv.appendChild(actionsDiv);
+                }
+                
+                itemDiv.appendChild(nameSpan);
+                itemDiv.appendChild(priceSpan);
+                itemsContainer.appendChild(itemDiv);
+            });
+            
+            card.appendChild(body);
+            
+            if (isDeveloper) {
+                const deleteCatBtn = document.createElement('button');
+                deleteCatBtn.className = 'delete-card-btn';
+                deleteCatBtn.innerHTML = '<i class="fas fa-times"></i>';
+                deleteCatBtn.onclick = () => showConfirm(`"${cat.category}" ${translations[currentLang]?.confirmMessage || 'kategorisi silinsin mi?'}`, () => deleteCategory(catIdx));
+                card.appendChild(deleteCatBtn);
+            }
+            
+            grid.appendChild(card);
+        });
+        
+        updateSelects();
+        updateGallery();
+        updateStats();
+        
+        const codeDisplay = document.getElementById('v1CodeDisplay');
+        if (codeDisplay) codeDisplay.textContent = JSON.stringify(currentMenu, null, 2);
     }
 
     // ---------- SAYFA YÜKLENİRKEN ----------
