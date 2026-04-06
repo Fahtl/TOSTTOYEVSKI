@@ -1,11 +1,13 @@
-<html lang="tr" dir="ltr"><head>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title data-key="siteTitle">Tosttoo | Menü (Çok Dilli)</title>
+    <title data-key="siteTitle">Tosttoo | Menü (Çok Dilli - العلم العراقي)</title>
     <!-- Yazı tipleri ve ikonlar -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* ========== TÜM CSS KODLARI AYNEN KALIYOR ========== */
@@ -2132,32 +2134,32 @@
         }
     </style>
 </head>
-<body dir="ltr" data-theme="dark" data-language="tr" style="font-family: Poppins, Cairo, sans-serif; overflow: auto;">
+<body dir="ltr" data-theme="dark" data-language="tr">
 
 <!-- MODALLAR -->
 <div class="image-modal" id="imageModal">
     <div class="image-modal-content">
-        <span class="image-modal-close" onclick="closeImageModal()">×</span>
-        <div class="image-modal-nav prev" onclick="navigateImage(-1)">❮</div>
-        <div class="image-modal-nav next" onclick="navigateImage(1)">❯</div>
+        <span class="image-modal-close" onclick="closeImageModal()">&times;</span>
+        <div class="image-modal-nav prev" onclick="navigateImage(-1)">&#10094;</div>
+        <div class="image-modal-nav next" onclick="navigateImage(1)">&#10095;</div>
         <div class="image-modal-img-container">
-            <img class="image-modal-img" id="modalImage" src="https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg" alt="Resim">
+            <img class="image-modal-img" id="modalImage" src="" alt="Resim">
         </div>
-        <div class="image-modal-info" id="modalImageInfo">📦 Tavuklu salata</div>
+        <div class="image-modal-info" id="modalImageInfo"></div>
     </div>
 </div>
 
 <div class="video-modal" id="videoModal">
     <div class="video-modal-content">
-        <span class="video-modal-close" onclick="closeVideoModal()">×</span>
+        <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
         <div class="video-container">
-            <iframe id="videoFrame" src="" allowfullscreen=""></iframe>
+            <iframe id="videoFrame" src="" allowfullscreen></iframe>
         </div>
         <div class="video-counter" id="videoCounter">🎬 Özel Video!</div>
     </div>
 </div>
 
-<div class="modal-overlay" id="confirmModal" style="display: none;">
+<div class="modal-overlay" id="confirmModal">
     <div class="modal">
         <h3 class="confirm-title" data-key="confirmTitle">⚠️ Onay</h3>
         <p class="confirm-message" id="confirmMessage" data-key="confirmMessage">Emin misiniz?</p>
@@ -2168,11 +2170,11 @@
     </div>
 </div>
 
-<div class="modal-overlay" id="imageEditModal" style="display: none;">
+<div class="modal-overlay" id="imageEditModal">
     <div class="modal" style="max-width:500px;">
         <h3 data-key="imageEditTitle">🖼️ Resim Düzenle</h3>
         <div class="image-preview" id="imageEditPreview">
-            <img id="imageEditImg" src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" alt="Önizleme">
+            <img id="imageEditImg" src="" alt="Önizleme">
         </div>
         <input type="text" class="form-control" id="imageEditUrl" data-key-placeholder="imageEditPlaceholder" placeholder="Yeni resim URL'sini girin" style="margin:1rem 0;">
         <div class="modal-buttons">
@@ -2212,16 +2214,16 @@
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
     <div class="panel-tabs">
-        <button class="panel-tab" onclick="switchDevTab('products')"><i class="fas fa-box"></i> <span data-key="devTabProducts">Ürünler</span></button>
+        <button class="panel-tab active" onclick="switchDevTab('products')"><i class="fas fa-box"></i> <span data-key="devTabProducts">Ürünler</span></button>
         <button class="panel-tab" onclick="switchDevTab('categories')"><i class="fas fa-folder"></i> <span data-key="devTabCategories">Kategoriler</span></button>
         <button class="panel-tab" onclick="switchDevTab('images')"><i class="fas fa-image"></i> <span data-key="devTabImages">Resimler</span></button>
-        <button class="panel-tab active" onclick="switchDevTab('tools')"><i class="fas fa-tools"></i> <span data-key="devTabTools">Araçlar</span></button>
+        <button class="panel-tab" onclick="switchDevTab('tools')"><i class="fas fa-tools"></i> <span data-key="devTabTools">Araçlar</span></button>
         <button class="panel-tab" onclick="switchDevTab('cloud')"><i class="fas fa-cloud"></i> <span data-key="devTabCloud">Cloud</span></button>
     </div>
-    <div class="panel-content" id="tab-products">
+    <div class="panel-content active" id="tab-products">
         <div class="dev-section">
             <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProduct">Yeni Ürün Ekle</span></h4>
-            <div class="form-group"><label class="form-label" data-key="devCategory">Kategori</label><select id="categorySelect" class="form-control"><option value="0">TOST ÇEŞİTLERİ</option><option value="1">ATIŞTIRMALIKLAR</option><option value="2">SALATALAR</option><option value="3">MAKARNALAR</option><option value="4">BURGERLER</option><option value="5">PİZZALAR</option><option value="6">KAHVALTILAR</option><option value="7">SICAK İÇECEKLER</option><option value="8">SOĞUK İÇECEKLER</option><option value="9">TATLILAR</option></select></div>
+            <div class="form-group"><label class="form-label" data-key="devCategory">Kategori</label><select id="categorySelect" class="form-control"></select></div>
             <div class="form-group"><label class="form-label" data-key="devProductName">Ürün Adı</label><input type="text" id="newName" class="form-control" data-key-placeholder="devProductNamePlaceholder" placeholder="Örn: Kaşarlı tost"></div>
             <div class="form-group"><label class="form-label" data-key="devPrice">Fiyat</label><input type="text" id="productPrice" class="form-control" data-key-placeholder="devPricePlaceholder" placeholder="Örn: 120₺"></div>
             <button class="dev-btn dev-btn-success" onclick="addProduct()"><i class="fas fa-check"></i> <span data-key="add">Ekle</span></button>
@@ -2229,8 +2231,8 @@
         <div class="dev-section">
             <h4><i class="fas fa-chart-bar"></i> <span data-key="devStats">İstatistikler</span></h4>
             <div class="stats-grid">
-                <div class="stat-card"><div class="stat-value" id="statCategories">10</div><div class="stat-label" data-key="devCategories">Kategori</div></div>
-                <div class="stat-card"><div class="stat-value" id="statProducts">65</div><div class="stat-label" data-key="devProducts">Ürün</div></div>
+                <div class="stat-card"><div class="stat-value" id="statCategories">0</div><div class="stat-label" data-key="devCategories">Kategori</div></div>
+                <div class="stat-card"><div class="stat-value" id="statProducts">0</div><div class="stat-label" data-key="devProducts">Ürün</div></div>
             </div>
         </div>
     </div>
@@ -2244,9 +2246,9 @@
     <div class="panel-content" id="tab-images">
         <div class="dev-section">
             <h4><i class="fas fa-folder-plus"></i> <span data-key="devAddCategoryImage">Kategori Resmi Ekle/Değiştir</span></h4>
-            <select id="categoryImageSelect" class="form-control" style="margin-bottom:1rem;"><option value="">Kategori seçin</option><option value="0">TOST ÇEŞİTLERİ</option><option value="1">ATIŞTIRMALIKLAR</option><option value="2">SALATALAR</option><option value="3">MAKARNALAR</option><option value="4">BURGERLER</option><option value="5">PİZZALAR</option><option value="6">KAHVALTILAR</option><option value="7">SICAK İÇECEKLER</option><option value="8">SOĞUK İÇECEKLER</option><option value="9">TATLILAR</option></select>
+            <select id="categoryImageSelect" class="form-control" style="margin-bottom:1rem;"></select>
             <input type="url" id="categoryImageUrl" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL">
-            <div class="image-preview" id="categoryImagePreview"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" onerror="this.src='https://via.placeholder.com/150?text=Hata'"></div>
+            <div class="image-preview" id="categoryImagePreview"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewCategoryImage()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
                 <button class="dev-btn dev-btn-success" onclick="addCategoryImage()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
@@ -2255,10 +2257,10 @@
         </div>
         <div class="dev-section">
             <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProductImage">Ürün Resmi Ekle/Değiştir</span></h4>
-            <select id="productCategorySelect" class="form-control" style="margin-bottom:1rem;"><option value="0">TOST ÇEŞİTLERİ</option><option value="1">ATIŞTIRMALIKLAR</option><option value="2">SALATALAR</option><option value="3">MAKARNALAR</option><option value="4">BURGERLER</option><option value="5">PİZZALAR</option><option value="6">KAHVALTILAR</option><option value="7">SICAK İÇECEKLER</option><option value="8">SOĞUK İÇECEKLER</option><option value="9">TATLILAR</option></select>
-            <select id="productSelect" class="form-control" disabled="" style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
+            <select id="productCategorySelect" class="form-control" style="margin-bottom:1rem;"></select>
+            <select id="productSelect" class="form-control" disabled style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
             <input type="url" id="productImageUrl" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL">
-            <div class="image-preview" id="productImagePreview"><span data-key="preview">Önizle</span></div>
+            <div class="image-preview" id="productImagePreview"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewProductImage()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
                 <button class="dev-btn dev-btn-success" onclick="addProductImage()"><i class="fas fa-save"></i> <span data-key="save">Kaydet</span></button>
@@ -2267,10 +2269,10 @@
         </div>
         <div class="dev-section">
             <h4><i class="fas fa-images"></i> <span data-key="devGallery">Resim Galerisi</span></h4>
-            <div class="image-gallery" id="imageGallery"><div class="gallery-item"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" alt=""><span>📁 ATIŞTIRMALIKLAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://cf.kizlarsoruyor.com/q23410538/primary-share.png?90" alt=""><span>📁 SALATALAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" alt=""><span>📁 MAKARNALAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',3)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.feA9XvdX7Nq5q9M7NBAVsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Karışık Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse3.mm.bing.net/th/id/OIP.a6jlW3me8d1P36XWfxyjsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Atom tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.giantbomb.com/a/uploads/scale_medium/8/82962/3363381-grilled-cheese-sandwich-sq.jpg" alt=""><span>📦 3 peynirli tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse2.mm.bing.net/th/id/OIP.Bn1jt-YfhrzHAxuEHHbnkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Kavurmalı tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,3)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://img.freepik.com/premium-photo/serving-turkish-traditional-toast-sandwich-turkish-name-ayvalik-tostu_693630-15753.jpg?w=1060" alt=""><span>📦 Ayvalık tostu (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,4)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,4)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://recipesclare.com/assets/images/1740482804242-a1vjqw23.webp" alt=""><span>📦 Pizza Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,5)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,5)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://i.lezzet.com.tr/images-xxlarge/air-fryerda-simit-tost-tarifi-1e357e63-43d3-4f64-8d17-8f8711c448f3" alt=""><span>📦 Simit Tost 2.Kişilik (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,6)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,6)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://as1.ftcdn.net/v2/jpg/05/21/85/38/1000_F_521853860_s56hqQQ8lUjOnxqw9lcq46ZasShYZEQL.jpg" alt=""><span>📦 Bazlama tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,7)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,7)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.elizinn.com.tr/wp-content/uploads/2024/01/kavurmali-bazlama-tost.jpg" alt=""><span>📦 Bazlama kavurmalı Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,8)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,8)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tarimmarkettenal.com/wp-content/uploads/2023/07/kumru-nasil-yapilir-kumru-tarifi.jpg" alt=""><span>📦 Kumru Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,9)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,9)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://lirp.cdn-website.com/0d0a6c3f/dms3rep/multi/opt/EG12_EP86_Roti-Chicken-Toasted-Sandwiches_1L0A6280-LR-1920w.jpg" alt=""><span>📦 Tavuklu Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,10)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,10)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" alt=""><span>📦 Patates cips (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://z.cdrst.com/foto/hotel-sf/1908e/granderesp/foto-hotel-1264e18e.jpg" alt=""><span>📦 6 lı soğan halkası (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse2.mm.bing.net/th/id/OIP.jD_uZkmBqIIuMQfanySb2AHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Çıtır Tavuk parçacıkları (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://images.pexels.com/photos/19572490/pexels-photo-19572490/free-photo-of-ton-balikli-salata.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1" alt=""><span>📦 Tonbalıklı salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg" alt=""><span>📦 Tavuklu salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.imrZyVWA9ZWkZVp0u_aZkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Peynirli salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" alt=""><span>📦 Bolonez makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://migrostvstr.blob.core.windows.net/migrostv/2016/08/domates-soslu-makarna.jpg" alt=""><span>📦 Tavuklu makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://cdn.ye-mek.net/App_UI/Img/out/650/2017/07/peynirli-makarna-resimli-yemek-tarifi(11).jpg" alt=""><span>📦 Peynirli makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://img.aydinlik.com.tr/rcman/Cw1280h720q95gc/storage/files/images/2025/10/16/masterchefteki-ton-balikli-makarna-tarifi-ton-balikli-makarna-nasil-yapilir-h57r.jpg" alt=""><span>📦 Tonbalıklı makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,3)"><i class="fas fa-trash"></i></button></div></div></div>
+            <div class="image-gallery" id="imageGallery"></div>
         </div>
     </div>
-    <div class="panel-content active" id="tab-tools">
+    <div class="panel-content" id="tab-tools">
         <div class="dev-section">
             <h4><i class="fas fa-palette"></i> <span data-key="devColors">Renk Düzenle</span></h4>
             <button class="dev-btn dev-btn-primary" onclick="openColorPicker()"><i class="fas fa-palette"></i> <span data-key="devColorPicker">Renk Seçici</span></button>
@@ -2292,1340 +2294,7 @@
         </div>
         <div class="dev-section">
             <h4><i class="fas fa-code"></i> <span data-key="devCode">Kod</span></h4>
-            <div class="code-display" id="v1CodeDisplay">{
-  "tr": [
-    {
-      "category": "TOST ÇEŞİTLERİ",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Karışık Tost",
-          "price": "170₺"
-        },
-        {
-          "name": "Atom tost",
-          "price": "250₺"
-        },
-        {
-          "name": "3 peynirli tost",
-          "price": "170₺"
-        },
-        {
-          "name": "Kavurmalı tost",
-          "price": "250₺"
-        },
-        {
-          "name": "Ayvalık tostu",
-          "price": "200₺"
-        },
-        {
-          "name": "Pizza Tost",
-          "price": "250₺"
-        },
-        {
-          "name": "Simit Tost 2.Kişilik",
-          "price": "450₺"
-        },
-        {
-          "name": "Bazlama tost",
-          "price": "250₺"
-        },
-        {
-          "name": "Bazlama kavurmalı Tost",
-          "price": "300₺"
-        },
-        {
-          "name": "Kumru Tost",
-          "price": "250₺"
-        },
-        {
-          "name": "Tavuklu Tost",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ATIŞTIRMALIKLAR",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Patates cips",
-          "price": "180₺"
-        },
-        {
-          "name": "Çıtır Tavuk parçacıkları",
-          "price": "200₺"
-        },
-        {
-          "name": "6 lı soğan halkası",
-          "price": "250₺"
-        }
-      ]
-    },
-    {
-      "category": "SALATALAR",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Tonbalıklı salata",
-          "price": "350₺"
-        },
-        {
-          "name": "Tavuklu salata",
-          "price": "350₺"
-        },
-        {
-          "name": "Peynirli salata",
-          "price": "300₺"
-        }
-      ]
-    },
-    {
-      "category": "MAKARNALAR",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Bolonez makarna",
-          "price": "350₺"
-        },
-        {
-          "name": "Tavuklu makarna",
-          "price": "350₺"
-        },
-        {
-          "name": "Peynirli makarna",
-          "price": "250₺"
-        },
-        {
-          "name": "Tonbalıklı makarna",
-          "price": "350₺"
-        }
-      ]
-    },
-    {
-      "category": "BURGERLER",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Klassik hamburger",
-          "price": "350₺"
-        },
-        {
-          "name": "Cheese burger",
-          "price": "380₺"
-        },
-        {
-          "name": "Tavuk burger",
-          "price": "320₺"
-        },
-        {
-          "name": "Kapalı Burger",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "PİZZALAR",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Margarita",
-          "price": "300₺"
-        },
-        {
-          "name": "Sucuklu pizza",
-          "price": "350₺"
-        },
-        {
-          "name": "Karışık pizza",
-          "price": "400₺"
-        },
-        {
-          "name": "Kavurmalı pizza",
-          "price": "450₺"
-        },
-        {
-          "name": "Tonbalıklı pizza",
-          "price": "400₺"
-        },
-        {
-          "name": "Vegi pizza",
-          "price": "350₺"
-        },
-        {
-          "name": "Tavuklu Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "4 Peynirli Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "KAHVALTILAR",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Kahvaltı tabağı",
-          "price": "350₺"
-        },
-        {
-          "name": "Serpme kahvaltı",
-          "price": "400₺"
-        },
-        {
-          "name": "Menemen",
-          "price": "300₺"
-        },
-        {
-          "name": "Sucuklu yumurta",
-          "price": "300₺"
-        },
-        {
-          "name": "Sahanda yumurta",
-          "price": "250₺"
-        },
-        {
-          "name": "Peynirli Omlet",
-          "price": "250₺"
-        },
-        {
-          "name": "Kavurmalı yumurta",
-          "price": "250₺"
-        },
-        {
-          "name": "Sade Omlet",
-          "price": "200₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Karışık Omlet",
-          "price": "300₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "SICAK İÇECEKLER",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Çay",
-          "price": "25₺"
-        },
-        {
-          "name": "Ada çayı",
-          "price": "25₺"
-        },
-        {
-          "name": "Bitki çayı",
-          "price": "150₺"
-        },
-        {
-          "name": "Türk kahvesi",
-          "price": "100₺"
-        },
-        {
-          "name": "Osmanlı kahvesi",
-          "price": "100₺"
-        },
-        {
-          "name": "Menengiç kahvesi",
-          "price": "100₺"
-        },
-        {
-          "name": "Amerikano",
-          "price": "100₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Latte",
-          "price": "120₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "SOĞUK İÇECEKLER",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Su",
-          "price": "25₺"
-        },
-        {
-          "name": "Soda",
-          "price": "40₺"
-        },
-        {
-          "name": "Meyveli soda",
-          "price": "50₺"
-        },
-        {
-          "name": "Şişe İçecekler",
-          "price": "50₺"
-        },
-        {
-          "name": "Kutu İçecekler",
-          "price": "70₺"
-        },
-        {
-          "name": "Limonata",
-          "price": "150₺"
-        },
-        {
-          "name": "Taze Portakal Suyu ",
-          "price": "150₺"
-        },
-        {
-          "name": "Ayran",
-          "price": "30₺"
-        },
-        {
-          "name": "Taze Nar Suyu",
-          "price": "200₺"
-        },
-        {
-          "name": "Churchill",
-          "price": "100₺"
-        },
-        {
-          "name": "Büyük Ayran",
-          "price": "40₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "TATLILAR",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Fırında sütlaç",
-          "price": "180₺"
-        },
-        {
-          "name": "Sufle",
-          "price": "200₺"
-        },
-        {
-          "name": "Katmer",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Künefe",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    }
-  ],
-  "en": [
-    {
-      "category": "TOAST TYPES",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Cheese Toast",
-          "price": "120₺"
-        },
-        {
-          "name": "Atom Toast",
-          "price": "200₺"
-        },
-        {
-          "name": "3 Cheese Toast",
-          "price": "150₺"
-        },
-        {
-          "name": "Kavurma Toast",
-          "price": "200₺"
-        },
-        {
-          "name": "Ayvalık Toast",
-          "price": "200₺"
-        },
-        {
-          "name": "Simit Toast",
-          "price": "350₺"
-        },
-        {
-          "name": "Diet Toast",
-          "price": "150₺"
-        },
-        {
-          "name": "Bazlama Toast",
-          "price": "200₺"
-        },
-        {
-          "name": "Bazlama with Kavurma",
-          "price": "250₺"
-        },
-        {
-          "name": "Kumru",
-          "price": "200₺"
-        },
-        {
-          "name": "Tavuklu Tost",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "SNACKS",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Potato Chips",
-          "price": "120₺"
-        },
-        {
-          "name": "Chicken Nuggets",
-          "price": "150₺"
-        },
-        {
-          "name": "Onion Rings (6 pcs)",
-          "price": "60₺"
-        }
-      ]
-    },
-    {
-      "category": "SALADS",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Tuna Salad",
-          "price": "250₺"
-        },
-        {
-          "name": "Chicken Salad",
-          "price": "250₺"
-        },
-        {
-          "name": "Cheese Salad",
-          "price": "200₺"
-        }
-      ]
-    },
-    {
-      "category": "PASTA",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Bolognese Pasta",
-          "price": "250₺"
-        },
-        {
-          "name": "Chicken Pasta",
-          "price": "250₺"
-        },
-        {
-          "name": "Cheese Pasta",
-          "price": "200₺"
-        },
-        {
-          "name": "Tuna Pasta",
-          "price": "250₺"
-        }
-      ]
-    },
-    {
-      "category": "BURGERS",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Classic Hamburger",
-          "price": "300₺"
-        },
-        {
-          "name": "Cheeseburger",
-          "price": "320₺"
-        },
-        {
-          "name": "Chicken Burger",
-          "price": "280₺"
-        },
-        {
-          "name": "Kapalı Burger",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "PIZZAS",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Margherita",
-          "price": "200₺"
-        },
-        {
-          "name": "Sucuk Pizza",
-          "price": "250₺"
-        },
-        {
-          "name": "Mixed Pizza",
-          "price": "300₺"
-        },
-        {
-          "name": "Kavurma Pizza",
-          "price": "350₺"
-        },
-        {
-          "name": "Tuna Pizza",
-          "price": "300₺"
-        },
-        {
-          "name": "Veggie Pizza",
-          "price": "230₺"
-        },
-        {
-          "name": "Tavuklu Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "4 Peynirli Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "BREAKFAST",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Breakfast Plate",
-          "price": "250₺"
-        },
-        {
-          "name": "Mixed Breakfast",
-          "price": "300₺"
-        },
-        {
-          "name": "Menemen",
-          "price": "200₺"
-        },
-        {
-          "name": "Egg with Sucuk",
-          "price": "200₺"
-        },
-        {
-          "name": "Fried Eggs",
-          "price": "150₺"
-        },
-        {
-          "name": "Egg with Cheese",
-          "price": "170₺"
-        },
-        {
-          "name": "Egg with Kavurma",
-          "price": "250₺"
-        },
-        {
-          "name": "Sade Omlet",
-          "price": "200₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Karışık Omlet",
-          "price": "300₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "HOT DRINKS",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Tea",
-          "price": "20₺"
-        },
-        {
-          "name": "Sage Tea",
-          "price": "20₺"
-        },
-        {
-          "name": "Herbal Tea",
-          "price": "30₺"
-        },
-        {
-          "name": "Turkish Coffee",
-          "price": "60₺"
-        },
-        {
-          "name": "Ottoman Coffee",
-          "price": "80₺"
-        },
-        {
-          "name": "Menengic Coffee",
-          "price": "80₺"
-        },
-        {
-          "name": "Amerikano",
-          "price": "100₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Latte",
-          "price": "120₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "COLD DRINKS",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Water",
-          "price": "20₺"
-        },
-        {
-          "name": "Soda",
-          "price": "30₺"
-        },
-        {
-          "name": "Fruit Soda",
-          "price": "30₺"
-        },
-        {
-          "name": "Beypazarı Cola",
-          "price": "30₺"
-        },
-        {
-          "name": "Çamlıca Orange",
-          "price": "30₺"
-        },
-        {
-          "name": "Niğde Soda",
-          "price": "30₺"
-        },
-        {
-          "name": "Iced Tea",
-          "price": "40₺"
-        },
-        {
-          "name": "Ayran Small",
-          "price": "20₺"
-        },
-        {
-          "name": "Ayran Large",
-          "price": "30₺"
-        },
-        {
-          "name": "Churchill",
-          "price": "50₺"
-        },
-        {
-          "name": "Büyük Ayran",
-          "price": "40₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "DESSERTS",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Baked Rice Pudding",
-          "price": "120₺"
-        },
-        {
-          "name": "Chocolate Soufflé",
-          "price": "120₺"
-        },
-        {
-          "name": "Katmer",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Künefe",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    }
-  ],
-  "ru": [
-    {
-      "category": "ВИДЫ ТОСТОВ",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Тост с сыром",
-          "price": "120₺"
-        },
-        {
-          "name": "Атом тост",
-          "price": "200₺"
-        },
-        {
-          "name": "Тост с 3 сырами",
-          "price": "150₺"
-        },
-        {
-          "name": "Тост с кавурмой",
-          "price": "200₺"
-        },
-        {
-          "name": "Айвалык тост",
-          "price": "200₺"
-        },
-        {
-          "name": "Симит тост",
-          "price": "350₺"
-        },
-        {
-          "name": "Диетический тост",
-          "price": "150₺"
-        },
-        {
-          "name": "Базлама тост",
-          "price": "200₺"
-        },
-        {
-          "name": "Базлама с кавурмой",
-          "price": "250₺"
-        },
-        {
-          "name": "Кумру",
-          "price": "200₺"
-        },
-        {
-          "name": "Tavuklu Tost",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ЗАКУСКИ",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Картофельные чипсы",
-          "price": "120₺"
-        },
-        {
-          "name": "Кусочки курицы",
-          "price": "150₺"
-        },
-        {
-          "name": "Луковые кольца (6 шт)",
-          "price": "60₺"
-        }
-      ]
-    },
-    {
-      "category": "САЛАТЫ",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Салат с тунцом",
-          "price": "250₺"
-        },
-        {
-          "name": "Салат с курицей",
-          "price": "250₺"
-        },
-        {
-          "name": "Салат с сыром",
-          "price": "200₺"
-        }
-      ]
-    },
-    {
-      "category": "МАКАРОНЫ",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Паста Болоньезе",
-          "price": "250₺"
-        },
-        {
-          "name": "Паста с курицей",
-          "price": "250₺"
-        },
-        {
-          "name": "Паста с сыром",
-          "price": "200₺"
-        },
-        {
-          "name": "Паста с тунцом",
-          "price": "250₺"
-        }
-      ]
-    },
-    {
-      "category": "БУРГЕРЫ",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Классический гамбургер",
-          "price": "300₺"
-        },
-        {
-          "name": "Чизбургер",
-          "price": "320₺"
-        },
-        {
-          "name": "Куриный бургер",
-          "price": "280₺"
-        },
-        {
-          "name": "Kapalı Burger",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ПИЦЦА",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Маргарита",
-          "price": "200₺"
-        },
-        {
-          "name": "Пицца с суджуком",
-          "price": "250₺"
-        },
-        {
-          "name": "Смешанная пицца",
-          "price": "300₺"
-        },
-        {
-          "name": "Пицца с кавурмой",
-          "price": "350₺"
-        },
-        {
-          "name": "Пицца с тунцом",
-          "price": "300₺"
-        },
-        {
-          "name": "Овощная пицца",
-          "price": "230₺"
-        },
-        {
-          "name": "Tavuklu Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "4 Peynirli Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ЗАВТРАКИ",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Завтрак тарелка",
-          "price": "250₺"
-        },
-        {
-          "name": "Смешанный завтрак",
-          "price": "300₺"
-        },
-        {
-          "name": "Менемен",
-          "price": "200₺"
-        },
-        {
-          "name": "Яйцо с суджуком",
-          "price": "200₺"
-        },
-        {
-          "name": "Яичница",
-          "price": "150₺"
-        },
-        {
-          "name": "Яйцо с сыром",
-          "price": "170₺"
-        },
-        {
-          "name": "Яйцо с кавурмой",
-          "price": "250₺"
-        },
-        {
-          "name": "Sade Omlet",
-          "price": "200₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Karışık Omlet",
-          "price": "300₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ГОРЯЧИЕ НАПИТКИ",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "Чай",
-          "price": "20₺"
-        },
-        {
-          "name": "Шалфейный чай",
-          "price": "20₺"
-        },
-        {
-          "name": "Травяной чай",
-          "price": "30₺"
-        },
-        {
-          "name": "Турецкий кофе",
-          "price": "60₺"
-        },
-        {
-          "name": "Османский кофе",
-          "price": "80₺"
-        },
-        {
-          "name": "Кофе мененгич",
-          "price": "80₺"
-        },
-        {
-          "name": "Amerikano",
-          "price": "100₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Latte",
-          "price": "120₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ХОЛОДНЫЕ НАПИТКИ",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "Вода",
-          "price": "20₺"
-        },
-        {
-          "name": "Содовая",
-          "price": "30₺"
-        },
-        {
-          "name": "Фруктовая содовая",
-          "price": "30₺"
-        },
-        {
-          "name": "Beypazarı Cola",
-          "price": "30₺"
-        },
-        {
-          "name": "Çamlıca Orange",
-          "price": "30₺"
-        },
-        {
-          "name": "Niğde Soda",
-          "price": "30₺"
-        },
-        {
-          "name": "Холодный чай",
-          "price": "40₺"
-        },
-        {
-          "name": "Айран маленький",
-          "price": "20₺"
-        },
-        {
-          "name": "Айран большой",
-          "price": "30₺"
-        },
-        {
-          "name": "Черчилль",
-          "price": "50₺"
-        },
-        {
-          "name": "Büyük Ayran",
-          "price": "40₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "ДЕСЕРТЫ",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "Запеченный рисовый пудинг",
-          "price": "120₺"
-        },
-        {
-          "name": "Шоколадное суфле",
-          "price": "120₺"
-        },
-        {
-          "name": "Katmer",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Künefe",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    }
-  ],
-  "ar": [
-    {
-      "category": "أنواع التوست",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "توست بالجبن",
-          "price": "120₺"
-        },
-        {
-          "name": "توست أتوم",
-          "price": "200₺"
-        },
-        {
-          "name": "توست بثلاثة أجبان",
-          "price": "150₺"
-        },
-        {
-          "name": "توست بالكاورمة",
-          "price": "200₺"
-        },
-        {
-          "name": "توست آيفالك",
-          "price": "200₺"
-        },
-        {
-          "name": "توست سميط",
-          "price": "350₺"
-        },
-        {
-          "name": "توست دايت",
-          "price": "150₺"
-        },
-        {
-          "name": "توست بازلما",
-          "price": "200₺"
-        },
-        {
-          "name": "بازلما بالكاورمة",
-          "price": "250₺"
-        },
-        {
-          "name": "كمرة",
-          "price": "200₺"
-        },
-        {
-          "name": "Tavuklu Tost",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "الوجبات الخفيفة",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "رقائق بطاطس",
-          "price": "120₺"
-        },
-        {
-          "name": "قطع دجاج",
-          "price": "150₺"
-        },
-        {
-          "name": "حلقات بصل (٦ قطع)",
-          "price": "60₺"
-        }
-      ]
-    },
-    {
-      "category": "السلطات",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "سلطة تونة",
-          "price": "250₺"
-        },
-        {
-          "name": "سلطة دجاج",
-          "price": "250₺"
-        },
-        {
-          "name": "سلطة جبن",
-          "price": "200₺"
-        }
-      ]
-    },
-    {
-      "category": "المعكرونة",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "معكرونة بولونيز",
-          "price": "250₺"
-        },
-        {
-          "name": "معكرونة بالدجاج",
-          "price": "250₺"
-        },
-        {
-          "name": "معكرونة بالجبن",
-          "price": "200₺"
-        },
-        {
-          "name": "معكرونة بالتونة",
-          "price": "250₺"
-        }
-      ]
-    },
-    {
-      "category": "البرغر",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "هامبرغر كلاسيكي",
-          "price": "300₺"
-        },
-        {
-          "name": "تشيز برغر",
-          "price": "320₺"
-        },
-        {
-          "name": "برغر دجاج",
-          "price": "280₺"
-        },
-        {
-          "name": "Kapalı Burger",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "البيتزا",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "مارغريتا",
-          "price": "200₺"
-        },
-        {
-          "name": "بيتزا سجق",
-          "price": "250₺"
-        },
-        {
-          "name": "بيتزا مشكلة",
-          "price": "300₺"
-        },
-        {
-          "name": "بيتزا كاورمة",
-          "price": "350₺"
-        },
-        {
-          "name": "بيتزا تونة",
-          "price": "300₺"
-        },
-        {
-          "name": "بيتزا خضار",
-          "price": "230₺"
-        },
-        {
-          "name": "Tavuklu Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "4 Peynirli Pizza",
-          "price": "400₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "الفطور",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "طبق فطور",
-          "price": "250₺"
-        },
-        {
-          "name": "فطور مختلط",
-          "price": "300₺"
-        },
-        {
-          "name": "منمن",
-          "price": "200₺"
-        },
-        {
-          "name": "بيض بالسجق",
-          "price": "200₺"
-        },
-        {
-          "name": "بيض مقلي",
-          "price": "150₺"
-        },
-        {
-          "name": "بيض بالجبن",
-          "price": "170₺"
-        },
-        {
-          "name": "بيض بالكاورمة",
-          "price": "250₺"
-        },
-        {
-          "name": "Sade Omlet",
-          "price": "200₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Karışık Omlet",
-          "price": "300₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "المشروبات الساخنة",
-      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-      "items": [
-        {
-          "name": "شاي",
-          "price": "20₺"
-        },
-        {
-          "name": "شاي المريمية",
-          "price": "20₺"
-        },
-        {
-          "name": "شاي أعشاب",
-          "price": "30₺"
-        },
-        {
-          "name": "قهوة تركية",
-          "price": "60₺"
-        },
-        {
-          "name": "قهوة عثمانية",
-          "price": "80₺"
-        },
-        {
-          "name": "قهوة منينجيتش",
-          "price": "80₺"
-        },
-        {
-          "name": "Amerikano",
-          "price": "100₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Latte",
-          "price": "120₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "المشروبات الباردة",
-      "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-      "items": [
-        {
-          "name": "ماء",
-          "price": "20₺"
-        },
-        {
-          "name": "صودا",
-          "price": "30₺"
-        },
-        {
-          "name": "صودا بالفواكه",
-          "price": "30₺"
-        },
-        {
-          "name": "كولا باي بازار",
-          "price": "30₺"
-        },
-        {
-          "name": "تشامليكا برتقال",
-          "price": "30₺"
-        },
-        {
-          "name": "صودا نيغدة",
-          "price": "30₺"
-        },
-        {
-          "name": "شاي مثلج",
-          "price": "40₺"
-        },
-        {
-          "name": "عيران صغير",
-          "price": "20₺"
-        },
-        {
-          "name": "عيران كبير",
-          "price": "30₺"
-        },
-        {
-          "name": "تشرشل",
-          "price": "50₺"
-        },
-        {
-          "name": "Büyük Ayran",
-          "price": "40₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    },
-    {
-      "category": "الحلويات",
-      "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-      "items": [
-        {
-          "name": "أرز بالحليب مخبوز",
-          "price": "120₺"
-        },
-        {
-          "name": "سوفليه شوكولاتة",
-          "price": "120₺"
-        },
-        {
-          "name": "Katmer",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        },
-        {
-          "name": "Künefe",
-          "price": "250₺",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-        }
-      ]
-    }
-  ]
-}</div>
+            <div class="code-display" id="v1CodeDisplay"></div>
             <button class="dev-btn dev-btn-info" onclick="copyV1Code()"><i class="fas fa-copy"></i> <span data-key="copy">Kopyala</span></button>
             <!-- YENİ BUTON: TÜM DEĞİŞİKLİKLERLE KODU DIŞA AKTAR (İNDİR) -->
             <button class="dev-btn dev-btn-success" onclick="exportFullCode()" style="margin-top:10px;"><i class="fas fa-file-export"></i> <span data-key="exportFullCode">Kodu Dışa Aktar (Tüm Değişiklikler)</span></button>
@@ -3679,7 +2348,7 @@
         <button class="panel-close" onclick="closeDevPanel()"><i class="fas fa-times"></i></button>
     </div>
     <div class="panel-tabs">
-        <button class="panel-tab active" onclick="switchDevTabV2('gallery')"><i class="fas fa-images"></i> <span data-key="devGallery">Resim Galerisi</span></button>
+        <button class="panel-tab active" onclick="switchDevTabV2('gallery')"><i class="fas fa-images"></i> <span data-key="devGallery">Galeri</span></button>
         <button class="panel-tab" onclick="switchDevTabV2('category')"><i class="fas fa-folder-plus"></i> <span data-key="devCategory">Kategori</span></button>
         <button class="panel-tab" onclick="switchDevTabV2('product')"><i class="fas fa-plus-circle"></i> <span data-key="devProduct">Ürün</span></button>
         <button class="panel-tab" onclick="switchDevTabV2('sync')"><i class="fas fa-sync"></i> <span data-key="devSync">Senkronizasyon</span></button>
@@ -3687,15 +2356,15 @@
     <div class="panel-content active" id="tab-gallery">
         <div class="dev-section v2">
             <h4><i class="fas fa-images"></i> <span data-key="devGallery">Resim Galerisi</span></h4>
-            <div class="image-gallery" id="imageGalleryV2"><div class="gallery-item"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" alt=""><span>📁 ATIŞTIRMALIKLAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://cf.kizlarsoruyor.com/q23410538/primary-share.png?90" alt=""><span>📁 SALATALAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" alt=""><span>📁 MAKARNALAR</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('category',3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('category',3)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.feA9XvdX7Nq5q9M7NBAVsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Karışık Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse3.mm.bing.net/th/id/OIP.a6jlW3me8d1P36XWfxyjsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Atom tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.giantbomb.com/a/uploads/scale_medium/8/82962/3363381-grilled-cheese-sandwich-sq.jpg" alt=""><span>📦 3 peynirli tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse2.mm.bing.net/th/id/OIP.Bn1jt-YfhrzHAxuEHHbnkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Kavurmalı tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,3)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://img.freepik.com/premium-photo/serving-turkish-traditional-toast-sandwich-turkish-name-ayvalik-tostu_693630-15753.jpg?w=1060" alt=""><span>📦 Ayvalık tostu (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,4)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,4)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://recipesclare.com/assets/images/1740482804242-a1vjqw23.webp" alt=""><span>📦 Pizza Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,5)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,5)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://i.lezzet.com.tr/images-xxlarge/air-fryerda-simit-tost-tarifi-1e357e63-43d3-4f64-8d17-8f8711c448f3" alt=""><span>📦 Simit Tost 2.Kişilik (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,6)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,6)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://as1.ftcdn.net/v2/jpg/05/21/85/38/1000_F_521853860_s56hqQQ8lUjOnxqw9lcq46ZasShYZEQL.jpg" alt=""><span>📦 Bazlama tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,7)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,7)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.elizinn.com.tr/wp-content/uploads/2024/01/kavurmali-bazlama-tost.jpg" alt=""><span>📦 Bazlama kavurmalı Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,8)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,8)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tarimmarkettenal.com/wp-content/uploads/2023/07/kumru-nasil-yapilir-kumru-tarifi.jpg" alt=""><span>📦 Kumru Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,9)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,9)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://lirp.cdn-website.com/0d0a6c3f/dms3rep/multi/opt/EG12_EP86_Roti-Chicken-Toasted-Sandwiches_1L0A6280-LR-1920w.jpg" alt=""><span>📦 Tavuklu Tost (TOST ÇEŞİTLERİ)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',0,10)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',0,10)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" alt=""><span>📦 Patates cips (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://z.cdrst.com/foto/hotel-sf/1908e/granderesp/foto-hotel-1264e18e.jpg" alt=""><span>📦 6 lı soğan halkası (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse2.mm.bing.net/th/id/OIP.jD_uZkmBqIIuMQfanySb2AHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Çıtır Tavuk parçacıkları (ATIŞTIRMALIKLAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',1,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',1,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://images.pexels.com/photos/19572490/pexels-photo-19572490/free-photo-of-ton-balikli-salata.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1" alt=""><span>📦 Tonbalıklı salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg" alt=""><span>📦 Tavuklu salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://tse1.mm.bing.net/th/id/OIP.imrZyVWA9ZWkZVp0u_aZkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" alt=""><span>📦 Peynirli salata (SALATALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',2,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',2,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" alt=""><span>📦 Bolonez makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,0)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,0)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://migrostvstr.blob.core.windows.net/migrostv/2016/08/domates-soslu-makarna.jpg" alt=""><span>📦 Tavuklu makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,1)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,1)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://cdn.ye-mek.net/App_UI/Img/out/650/2017/07/peynirli-makarna-resimli-yemek-tarifi(11).jpg" alt=""><span>📦 Peynirli makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,2)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,2)"><i class="fas fa-trash"></i></button></div></div><div class="gallery-item"><img src="https://img.aydinlik.com.tr/rcman/Cw1280h720q95gc/storage/files/images/2025/10/16/masterchefteki-ton-balikli-makarna-tarifi-ton-balikli-makarna-nasil-yapilir-h57r.jpg" alt=""><span>📦 Tonbalıklı makarna (MAKARNALAR)</span><div class="gallery-actions"><button class="gallery-edit" onclick="editGalleryImage('product',3,3)"><i class="fas fa-edit"></i></button><button class="gallery-delete" onclick="deleteGalleryImage('product',3,3)"><i class="fas fa-trash"></i></button></div></div></div>
+            <div class="image-gallery" id="imageGalleryV2"></div>
         </div>
     </div>
     <div class="panel-content" id="tab-category-v2">
         <div class="dev-section v2">
             <h4><i class="fas fa-folder-plus"></i> <span data-key="devAddCategoryImageV2">Kategori Resmi Ekle</span></h4>
-            <select id="categoryImageSelectV2" class="form-control" style="margin-bottom:1rem;"><option value="">Kategori seçin</option><option value="0">TOST ÇEŞİTLERİ</option><option value="1">ATIŞTIRMALIKLAR</option><option value="2">SALATALAR</option><option value="3">MAKARNALAR</option><option value="4">BURGERLER</option><option value="5">PİZZALAR</option><option value="6">KAHVALTILAR</option><option value="7">SICAK İÇECEKLER</option><option value="8">SOĞUK İÇECEKLER</option><option value="9">TATLILAR</option></select>
+            <select id="categoryImageSelectV2" class="form-control" style="margin-bottom:1rem;"></select>
             <input type="url" id="categoryImageUrlV2" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL" style="margin-bottom:1rem;">
-            <div class="image-preview" id="categoryImagePreviewV2"><span data-key="preview">Önizle</span></div>
+            <div class="image-preview" id="categoryImagePreviewV2"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewCategoryImageV2()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
                 <button class="dev-btn dev-btn-success" onclick="addCategoryImageV2()"><i class="fas fa-plus"></i> <span data-key="add">Ekle</span></button>
@@ -3705,10 +2374,10 @@
     <div class="panel-content" id="tab-product-v2">
         <div class="dev-section v2">
             <h4><i class="fas fa-plus-circle"></i> <span data-key="devAddProductImageV2">Ürün Resmi Ekle</span></h4>
-            <select id="productCategorySelectV2" class="form-control" style="margin-bottom:1rem;"><option value="0">TOST ÇEŞİTLERİ</option><option value="1">ATIŞTIRMALIKLAR</option><option value="2">SALATALAR</option><option value="3">MAKARNALAR</option><option value="4">BURGERLER</option><option value="5">PİZZALAR</option><option value="6">KAHVALTILAR</option><option value="7">SICAK İÇECEKLER</option><option value="8">SOĞUK İÇECEKLER</option><option value="9">TATLILAR</option></select>
-            <select id="productSelectV2" class="form-control" disabled="" style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
+            <select id="productCategorySelectV2" class="form-control" style="margin-bottom:1rem;"></select>
+            <select id="productSelectV2" class="form-control" disabled style="margin-bottom:1rem;"><option data-key="devSelectCategoryFirst">Önce kategori seçin</option></select>
             <input type="url" id="productImageUrlV2" class="form-control" data-key-placeholder="devImageUrlPlaceholder" placeholder="Resim URL" style="margin-bottom:1rem;">
-            <div class="image-preview" id="productImagePreviewV2"><span data-key="preview">Önizle</span></div>
+            <div class="image-preview" id="productImagePreviewV2"><span data-key="preview">Önizleme</span></div>
             <div class="btn-group">
                 <button class="dev-btn dev-btn-info" onclick="previewProductImageV2()"><i class="fas fa-eye"></i> <span data-key="preview">Önizle</span></button>
                 <button class="dev-btn dev-btn-success" onclick="addProductImageV2()"><i class="fas fa-plus"></i> <span data-key="add">Ekle</span></button>
@@ -3742,7 +2411,7 @@
 </div>
 
 <!-- GELİŞTİRİCİ BUTONU -->
-<div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()" style="display: none;"><i class="fas fa-code"></i></div>
+<div class="floating-dev-btn" id="floatingDevBtn" onclick="toggleDevPanel()"><i class="fas fa-code"></i></div>
 
 <!-- HERO BÖLÜMÜ -->
 <section class="hero">
@@ -3764,7 +2433,12 @@
                 <div class="qr-code-wrapper">
                     <!-- رمز QR مع شعار Tosttoo -->
                     <div class="qr-code-box" id="qrCodeBox">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=https://fahtl.github.io/TOSTTOYEVSKI/&amp;format=png&amp;qzone=2&amp;margin=0" alt="Tosttoo QR Code" class="qr-code-img" id="qrCodeImage" loading="lazy">
+                        <img 
+                            src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fahtl.github.io/TOSTTOYEVSKI/&format=png&qzone=2&margin=0" 
+                            alt="Tosttoo QR Code"
+                            class="qr-code-img"
+                            id="qrCodeImage"
+                            loading="lazy">
                         <!-- الشعار داخل الـ QR -->
                         <div class="qr-logo">🍞</div>
                     </div>
@@ -3793,7 +2467,11 @@
                 <h4 data-key="qrDirectLink">الرابط المباشر</h4>
                 
                 <div class="qr-link-container">
-                    <input type="text" class="qr-link-input" value="https://fahtl.github.io/TOSTTOYEVSKI/" id="siteUrlInput" readonly="">
+                    <input type="text" 
+                           class="qr-link-input" 
+                           value="https://fahtl.github.io/TOSTTOYEVSKI/" 
+                           id="siteUrlInput" 
+                           readonly>
                     <button class="qr-copy-btn" onclick="copySiteUrl()" title="نسخ الرابط">
                         <i class="fas fa-copy"></i>
                     </button>
@@ -3872,7 +2550,7 @@
 <section id="menu" class="section">
     <div class="container">
         <h2 class="section-title" id="menuTitle"><span data-key="menu">Menü</span> <span class="version-tag">v1.0</span></h2>
-        <div class="grid" id="menuGrid"><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400" class="card-image" loading="lazy" alt="TOST ÇEŞİTLERİ"></div><div class="card-header"><h3>TOST ÇEŞİTLERİ</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://tse1.mm.bing.net/th/id/OIP.feA9XvdX7Nq5q9M7NBAVsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" class="item-image" loading="lazy" alt="Karışık Tost"><span class="item-name">Karışık Tost</span><span class="item-price">170₺</span></div><div class="item has-image"><img src="https://tse3.mm.bing.net/th/id/OIP.a6jlW3me8d1P36XWfxyjsAHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" class="item-image" loading="lazy" alt="Atom tost"><span class="item-name">Atom tost</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://www.giantbomb.com/a/uploads/scale_medium/8/82962/3363381-grilled-cheese-sandwich-sq.jpg" class="item-image" loading="lazy" alt="3 peynirli tost"><span class="item-name">3 peynirli tost</span><span class="item-price">170₺</span></div><div class="item has-image"><img src="https://tse2.mm.bing.net/th/id/OIP.Bn1jt-YfhrzHAxuEHHbnkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" class="item-image" loading="lazy" alt="Kavurmalı tost"><span class="item-name">Kavurmalı tost</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://img.freepik.com/premium-photo/serving-turkish-traditional-toast-sandwich-turkish-name-ayvalik-tostu_693630-15753.jpg?w=1060" class="item-image" loading="lazy" alt="Ayvalık tostu"><span class="item-name">Ayvalık tostu</span><span class="item-price">200₺</span></div><div class="item has-image"><img src="https://recipesclare.com/assets/images/1740482804242-a1vjqw23.webp" class="item-image" loading="lazy" alt="Pizza Tost"><span class="item-name">Pizza Tost</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://i.lezzet.com.tr/images-xxlarge/air-fryerda-simit-tost-tarifi-1e357e63-43d3-4f64-8d17-8f8711c448f3" class="item-image" loading="lazy" alt="Simit Tost 2.Kişilik"><span class="item-name">Simit Tost 2.Kişilik</span><span class="item-price">450₺</span></div><div class="item has-image"><img src="https://as1.ftcdn.net/v2/jpg/05/21/85/38/1000_F_521853860_s56hqQQ8lUjOnxqw9lcq46ZasShYZEQL.jpg" class="item-image" loading="lazy" alt="Bazlama tost"><span class="item-name">Bazlama tost</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://www.elizinn.com.tr/wp-content/uploads/2024/01/kavurmali-bazlama-tost.jpg" class="item-image" loading="lazy" alt="Bazlama kavurmalı Tost"><span class="item-name">Bazlama kavurmalı Tost</span><span class="item-price">300₺</span></div><div class="item has-image"><img src="https://tarimmarkettenal.com/wp-content/uploads/2023/07/kumru-nasil-yapilir-kumru-tarifi.jpg" class="item-image" loading="lazy" alt="Kumru Tost"><span class="item-name">Kumru Tost</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://lirp.cdn-website.com/0d0a6c3f/dms3rep/multi/opt/EG12_EP86_Roti-Chicken-Toasted-Sandwiches_1L0A6280-LR-1920w.jpg" class="item-image" loading="lazy" alt="Tavuklu Tost"><span class="item-name">Tavuklu Tost</span><span class="item-price">250₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" class="card-image" loading="lazy" alt="ATIŞTIRMALIKLAR"></div><div class="card-header"><h3>ATIŞTIRMALIKLAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&amp;w=0&amp;k=20&amp;c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=" class="item-image" loading="lazy" alt="Patates cips"><span class="item-name">Patates cips</span><span class="item-price">180₺</span></div><div class="item has-image"><img src="https://tse2.mm.bing.net/th/id/OIP.jD_uZkmBqIIuMQfanySb2AHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" class="item-image" loading="lazy" alt="Çıtır Tavuk parçacıkları"><span class="item-name">Çıtır Tavuk parçacıkları</span><span class="item-price">200₺</span></div><div class="item has-image"><img src="https://z.cdrst.com/foto/hotel-sf/1908e/granderesp/foto-hotel-1264e18e.jpg" class="item-image" loading="lazy" alt="6 lı soğan halkası"><span class="item-name">6 lı soğan halkası</span><span class="item-price">250₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://cf.kizlarsoruyor.com/q23410538/primary-share.png?90" class="card-image" loading="lazy" alt="SALATALAR"></div><div class="card-header"><h3>SALATALAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.pexels.com/photos/19572490/pexels-photo-19572490/free-photo-of-ton-balikli-salata.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1" class="item-image" loading="lazy" alt="Tonbalıklı salata"><span class="item-name">Tonbalıklı salata</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg" class="item-image" loading="lazy" alt="Tavuklu salata"><span class="item-name">Tavuklu salata</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://tse1.mm.bing.net/th/id/OIP.imrZyVWA9ZWkZVp0u_aZkQHaE7?rs=1&amp;pid=ImgDetMain&amp;o=7&amp;rm=3" class="item-image" loading="lazy" alt="Peynirli salata"><span class="item-name">Peynirli salata</span><span class="item-price">300₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" class="card-image" loading="lazy" alt="MAKARNALAR"></div><div class="card-header"><h3>MAKARNALAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg" class="item-image" loading="lazy" alt="Bolonez makarna"><span class="item-name">Bolonez makarna</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://migrostvstr.blob.core.windows.net/migrostv/2016/08/domates-soslu-makarna.jpg" class="item-image" loading="lazy" alt="Tavuklu makarna"><span class="item-name">Tavuklu makarna</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://cdn.ye-mek.net/App_UI/Img/out/650/2017/07/peynirli-makarna-resimli-yemek-tarifi(11).jpg" class="item-image" loading="lazy" alt="Peynirli makarna"><span class="item-name">Peynirli makarna</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://img.aydinlik.com.tr/rcman/Cw1280h720q95gc/storage/files/images/2025/10/16/masterchefteki-ton-balikli-makarna-tarifi-ton-balikli-makarna-nasil-yapilir-h57r.jpg" class="item-image" loading="lazy" alt="Tonbalıklı makarna"><span class="item-name">Tonbalıklı makarna</span><span class="item-price">350₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" class="card-image" loading="lazy" alt="BURGERLER"></div><div class="card-header"><h3>BURGERLER</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Klassik hamburger"><span class="item-name">Klassik hamburger</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Cheese burger"><span class="item-name">Cheese burger</span><span class="item-price">380₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Tavuk burger"><span class="item-name">Tavuk burger</span><span class="item-price">320₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Kapalı Burger"><span class="item-name">Kapalı Burger</span><span class="item-price">400₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" class="card-image" loading="lazy" alt="PİZZALAR"></div><div class="card-header"><h3>PİZZALAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Margarita"><span class="item-name">Margarita</span><span class="item-price">300₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Sucuklu pizza"><span class="item-name">Sucuklu pizza</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Karışık pizza"><span class="item-name">Karışık pizza</span><span class="item-price">400₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Kavurmalı pizza"><span class="item-name">Kavurmalı pizza</span><span class="item-price">450₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Tonbalıklı pizza"><span class="item-name">Tonbalıklı pizza</span><span class="item-price">400₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Vegi pizza"><span class="item-name">Vegi pizza</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Tavuklu Pizza"><span class="item-name">Tavuklu Pizza</span><span class="item-price">400₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="4 Peynirli Pizza"><span class="item-name">4 Peynirli Pizza</span><span class="item-price">400₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400" class="card-image" loading="lazy" alt="KAHVALTILAR"></div><div class="card-header"><h3>KAHVALTILAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Kahvaltı tabağı"><span class="item-name">Kahvaltı tabağı</span><span class="item-price">350₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Serpme kahvaltı"><span class="item-name">Serpme kahvaltı</span><span class="item-price">400₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Menemen"><span class="item-name">Menemen</span><span class="item-price">300₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Sucuklu yumurta"><span class="item-name">Sucuklu yumurta</span><span class="item-price">300₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Sahanda yumurta"><span class="item-name">Sahanda yumurta</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Peynirli Omlet"><span class="item-name">Peynirli Omlet</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Kavurmalı yumurta"><span class="item-name">Kavurmalı yumurta</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Sade Omlet"><span class="item-name">Sade Omlet</span><span class="item-price">200₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Karışık Omlet"><span class="item-name">Karışık Omlet</span><span class="item-price">300₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400" class="card-image" loading="lazy" alt="SICAK İÇECEKLER"></div><div class="card-header"><h3>SICAK İÇECEKLER</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Çay"><span class="item-name">Çay</span><span class="item-price">25₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Ada çayı"><span class="item-name">Ada çayı</span><span class="item-price">25₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Bitki çayı"><span class="item-name">Bitki çayı</span><span class="item-price">150₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Türk kahvesi"><span class="item-name">Türk kahvesi</span><span class="item-price">100₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Osmanlı kahvesi"><span class="item-name">Osmanlı kahvesi</span><span class="item-price">100₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Menengiç kahvesi"><span class="item-name">Menengiç kahvesi</span><span class="item-price">100₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Amerikano"><span class="item-name">Amerikano</span><span class="item-price">100₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Latte"><span class="item-name">Latte</span><span class="item-price">120₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400" class="card-image" loading="lazy" alt="SOĞUK İÇECEKLER"></div><div class="card-header"><h3>SOĞUK İÇECEKLER</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Su"><span class="item-name">Su</span><span class="item-price">25₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Soda"><span class="item-name">Soda</span><span class="item-price">40₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Meyveli soda"><span class="item-name">Meyveli soda</span><span class="item-price">50₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Şişe İçecekler"><span class="item-name">Şişe İçecekler</span><span class="item-price">50₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Kutu İçecekler"><span class="item-name">Kutu İçecekler</span><span class="item-price">70₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Limonata"><span class="item-name">Limonata</span><span class="item-price">150₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Taze Portakal Suyu "><span class="item-name">Taze Portakal Suyu </span><span class="item-price">150₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Ayran"><span class="item-name">Ayran</span><span class="item-price">30₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Taze Nar Suyu"><span class="item-name">Taze Nar Suyu</span><span class="item-price">200₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Churchill"><span class="item-name">Churchill</span><span class="item-price">100₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Büyük Ayran"><span class="item-name">Büyük Ayran</span><span class="item-price">40₺</span></div></div></div></div><div class="card has-image"><div class="card-image-container"><img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400" class="card-image" loading="lazy" alt="TATLILAR"></div><div class="card-header"><h3>TATLILAR</h3></div><div class="card-body"><div class="items-container"><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Fırında sütlaç"><span class="item-name">Fırında sütlaç</span><span class="item-price">180₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Sufle"><span class="item-name">Sufle</span><span class="item-price">200₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Katmer"><span class="item-name">Katmer</span><span class="item-price">250₺</span></div><div class="item has-image"><img src="https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" class="item-image" loading="lazy" alt="Künefe"><span class="item-name">Künefe</span><span class="item-price">250₺</span></div></div></div></div></div>
+        <div class="grid" id="menuGrid"></div>
     </div>
 </section>
 
@@ -3898,7 +2576,7 @@
                 <div class="contact-text" id="locationText" data-key="location">📍 Konum</div>
             </div>
             <div class="map-container" onclick="window.open('https://www.google.com/maps?q=36.484479,32.101147', '_blank')">
-                <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&amp;output=embed" loading="lazy"></iframe>
+                <iframe id="mapFrame" src="https://www.google.com/maps?q=36.484479,32.101147&output=embed" loading="lazy"></iframe>
             </div>
         </div>
     </div>
@@ -4272,1372 +2950,548 @@
     let currentEditData = null;
     let confirmCallback = null;
 
-    // Yeni: image storage by index instead of name
-    // --- DEĞİŞİKLİK 2: localStorage kullanımı kaldırıldı, her zaman boş nesne ---
+    // Güncellenmiş categoryImages ve productImages (ikinci dosyadan alınmıştır)
     let categoryImages = {
-    "1": "https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&w=0&k=20&c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=",
-    "2": "https://cf.kizlarsoruyor.com/q23410538/primary-share.png?90",
-    "3": "https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg"
-};'dan okunmaz
-    let productImages = {
-    "0,0": "https://tse1.mm.bing.net/th/id/OIP.feA9XvdX7Nq5q9M7NBAVsAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-    "0,1": "https://tse3.mm.bing.net/th/id/OIP.a6jlW3me8d1P36XWfxyjsAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-    "0,2": "https://www.giantbomb.com/a/uploads/scale_medium/8/82962/3363381-grilled-cheese-sandwich-sq.jpg",
-    "0,3": "https://tse2.mm.bing.net/th/id/OIP.Bn1jt-YfhrzHAxuEHHbnkQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-    "0,4": "https://img.freepik.com/premium-photo/serving-turkish-traditional-toast-sandwich-turkish-name-ayvalik-tostu_693630-15753.jpg?w=1060",
-    "0,5": "https://recipesclare.com/assets/images/1740482804242-a1vjqw23.webp",
-    "0,6": "https://i.lezzet.com.tr/images-xxlarge/air-fryerda-simit-tost-tarifi-1e357e63-43d3-4f64-8d17-8f8711c448f3",
-    "0,7": "https://as1.ftcdn.net/v2/jpg/05/21/85/38/1000_F_521853860_s56hqQQ8lUjOnxqw9lcq46ZasShYZEQL.jpg",
-    "0,8": "https://www.elizinn.com.tr/wp-content/uploads/2024/01/kavurmali-bazlama-tost.jpg",
-    "0,9": "https://tarimmarkettenal.com/wp-content/uploads/2023/07/kumru-nasil-yapilir-kumru-tarifi.jpg",
-    "0,10": "https://lirp.cdn-website.com/0d0a6c3f/dms3rep/multi/opt/EG12_EP86_Roti-Chicken-Toasted-Sandwiches_1L0A6280-LR-1920w.jpg",
-    "1,0": "https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&w=0&k=20&c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=",
-    "1,2": "https://z.cdrst.com/foto/hotel-sf/1908e/granderesp/foto-hotel-1264e18e.jpg",
-    "1,1": "https://tse2.mm.bing.net/th/id/OIP.jD_uZkmBqIIuMQfanySb2AHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-    "2,0": "https://images.pexels.com/photos/19572490/pexels-photo-19572490/free-photo-of-ton-balikli-salata.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    "2,1": "https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg",
-    "2,2": "https://tse1.mm.bing.net/th/id/OIP.imrZyVWA9ZWkZVp0u_aZkQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
-    "3,0": "https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg",
-    "3,1": "https://migrostvstr.blob.core.windows.net/migrostv/2016/08/domates-soslu-makarna.jpg",
-    "3,2": "https://cdn.ye-mek.net/App_UI/Img/out/650/2017/07/peynirli-makarna-resimli-yemek-tarifi(11).jpg",
-    "3,3": "https://img.aydinlik.com.tr/rcman/Cw1280h720q95gc/storage/files/images/2025/10/16/masterchefteki-ton-balikli-makarna-tarifi-ton-balikli-makarna-nasil-yapilir-h57r.jpg"
-};'dan okunmaz
+        "1": "https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&w=0&k=20&c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=",
+        "2": "https://cf.kizlarsoruyor.com/q23410538/primary-share.png?90",
+        "3": "https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg"
+    };
 
-    // ---------- ÇOK DİLLİ MENÜ ŞABLONU (TÜM DİLLER) ----------
+    let productImages = {
+        "0,0": "https://tse1.mm.bing.net/th/id/OIP.feA9XvdX7Nq5q9M7NBAVsAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "0,1": "https://tse3.mm.bing.net/th/id/OIP.a6jlW3me8d1P36XWfxyjsAHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "0,2": "https://www.giantbomb.com/a/uploads/scale_medium/8/82962/3363381-grilled-cheese-sandwich-sq.jpg",
+        "0,3": "https://tse2.mm.bing.net/th/id/OIP.Bn1jt-YfhrzHAxuEHHbnkQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "0,4": "https://img.freepik.com/premium-photo/serving-turkish-traditional-toast-sandwich-turkish-name-ayvalik-tostu_693630-15753.jpg?w=1060",
+        "0,5": "https://recipesclare.com/assets/images/1740482804242-a1vjqw23.webp",
+        "0,6": "https://i.lezzet.com.tr/images-xxlarge/air-fryerda-simit-tost-tarifi-1e357e63-43d3-4f64-8d17-8f8711c448f3",
+        "0,7": "https://as1.ftcdn.net/v2/jpg/05/21/85/38/1000_F_521853860_s56hqQQ8lUjOnxqw9lcq46ZasShYZEQL.jpg",
+        "0,8": "https://www.elizinn.com.tr/wp-content/uploads/2024/01/kavurmali-bazlama-tost.jpg",
+        "0,9": "https://tarimmarkettenal.com/wp-content/uploads/2023/07/kumru-nasil-yapilir-kumru-tarifi.jpg",
+        "0,10": "https://lirp.cdn-website.com/0d0a6c3f/dms3rep/multi/opt/EG12_EP86_Roti-Chicken-Toasted-Sandwiches_1L0A6280-LR-1920w.jpg",
+        "1,0": "https://media.istockphoto.com/id/948704568/photo/basket-of-french-fries.jpg?s=612x612&w=0&k=20&c=7OqieML8mbOExILMgFi8xITNjy696-W2n2oU45Myvx8=",
+        "1,2": "https://z.cdrst.com/foto/hotel-sf/1908e/granderesp/foto-hotel-1264e18e.jpg",
+        "1,1": "https://tse2.mm.bing.net/th/id/OIP.jD_uZkmBqIIuMQfanySb2AHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "2,0": "https://images.pexels.com/photos/19572490/pexels-photo-19572490/free-photo-of-ton-balikli-salata.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "2,1": "https://publiccorlu.com/wp-content/uploads/2021/10/public_corlu_tavuklu_sezar_salata.jpg",
+        "2,2": "https://tse1.mm.bing.net/th/id/OIP.imrZyVWA9ZWkZVp0u_aZkQHaE7?rs=1&pid=ImgDetMain&o=7&rm=3",
+        "3,0": "https://www.samuelsgrandemanor.com/wp-content/uploads/2017/10/lunch-header.jpg",
+        "3,1": "https://migrostvstr.blob.core.windows.net/migrostv/2016/08/domates-soslu-makarna.jpg",
+        "3,2": "https://cdn.ye-mek.net/App_UI/Img/out/650/2017/07/peynirli-makarna-resimli-yemek-tarifi(11).jpg",
+        "3,3": "https://img.aydinlik.com.tr/rcman/Cw1280h720q95gc/storage/files/images/2025/10/16/masterchefteki-ton-balikli-makarna-tarifi-ton-balikli-makarna-nasil-yapilir-h57r.jpg"
+    };
+
+    // ---------- ÇOK DİLLİ MENÜ ŞABLONU (GÜNCELLENMİŞ - ikinci dosyadaki veriler) ----------
     const ORIGINAL_MENU_TEMPLATE = {
-    "tr": [
-        {
-            "category": "TOST ÇEŞİTLERİ",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Karışık Tost",
-                    "price": "170₺"
-                },
-                {
-                    "name": "Atom tost",
-                    "price": "250₺"
-                },
-                {
-                    "name": "3 peynirli tost",
-                    "price": "170₺"
-                },
-                {
-                    "name": "Kavurmalı tost",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Ayvalık tostu",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Pizza Tost",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Simit Tost 2.Kişilik",
-                    "price": "450₺"
-                },
-                {
-                    "name": "Bazlama tost",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Bazlama kavurmalı Tost",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Kumru Tost",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Tavuklu Tost",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ATIŞTIRMALIKLAR",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Patates cips",
-                    "price": "180₺"
-                },
-                {
-                    "name": "Çıtır Tavuk parçacıkları",
-                    "price": "200₺"
-                },
-                {
-                    "name": "6 lı soğan halkası",
-                    "price": "250₺"
-                }
-            ]
-        },
-        {
-            "category": "SALATALAR",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Tonbalıklı salata",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Tavuklu salata",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Peynirli salata",
-                    "price": "300₺"
-                }
-            ]
-        },
-        {
-            "category": "MAKARNALAR",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Bolonez makarna",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Tavuklu makarna",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Peynirli makarna",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Tonbalıklı makarna",
-                    "price": "350₺"
-                }
-            ]
-        },
-        {
-            "category": "BURGERLER",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Klassik hamburger",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Cheese burger",
-                    "price": "380₺"
-                },
-                {
-                    "name": "Tavuk burger",
-                    "price": "320₺"
-                },
-                {
-                    "name": "Kapalı Burger",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "PİZZALAR",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Margarita",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Sucuklu pizza",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Karışık pizza",
-                    "price": "400₺"
-                },
-                {
-                    "name": "Kavurmalı pizza",
-                    "price": "450₺"
-                },
-                {
-                    "name": "Tonbalıklı pizza",
-                    "price": "400₺"
-                },
-                {
-                    "name": "Vegi pizza",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Tavuklu Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "4 Peynirli Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "KAHVALTILAR",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Kahvaltı tabağı",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Serpme kahvaltı",
-                    "price": "400₺"
-                },
-                {
-                    "name": "Menemen",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Sucuklu yumurta",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Sahanda yumurta",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Peynirli Omlet",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Kavurmalı yumurta",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Sade Omlet",
-                    "price": "200₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Karışık Omlet",
-                    "price": "300₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "SICAK İÇECEKLER",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Çay",
-                    "price": "25₺"
-                },
-                {
-                    "name": "Ada çayı",
-                    "price": "25₺"
-                },
-                {
-                    "name": "Bitki çayı",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Türk kahvesi",
-                    "price": "100₺"
-                },
-                {
-                    "name": "Osmanlı kahvesi",
-                    "price": "100₺"
-                },
-                {
-                    "name": "Menengiç kahvesi",
-                    "price": "100₺"
-                },
-                {
-                    "name": "Amerikano",
-                    "price": "100₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Latte",
-                    "price": "120₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "SOĞUK İÇECEKLER",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Su",
-                    "price": "25₺"
-                },
-                {
-                    "name": "Soda",
-                    "price": "40₺"
-                },
-                {
-                    "name": "Meyveli soda",
-                    "price": "50₺"
-                },
-                {
-                    "name": "Şişe İçecekler",
-                    "price": "50₺"
-                },
-                {
-                    "name": "Kutu İçecekler",
-                    "price": "70₺"
-                },
-                {
-                    "name": "Limonata",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Taze Portakal Suyu ",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Ayran",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Taze Nar Suyu",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Churchill",
-                    "price": "100₺"
-                },
-                {
-                    "name": "Büyük Ayran",
-                    "price": "40₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "TATLILAR",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Fırında sütlaç",
-                    "price": "180₺"
-                },
-                {
-                    "name": "Sufle",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Katmer",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Künefe",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        }
-    ],
-    "en": [
-        {
-            "category": "TOAST TYPES",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Cheese Toast",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Atom Toast",
-                    "price": "200₺"
-                },
-                {
-                    "name": "3 Cheese Toast",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Kavurma Toast",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Ayvalık Toast",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Simit Toast",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Diet Toast",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Bazlama Toast",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Bazlama with Kavurma",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Kumru",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Tavuklu Tost",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "SNACKS",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Potato Chips",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Chicken Nuggets",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Onion Rings (6 pcs)",
-                    "price": "60₺"
-                }
-            ]
-        },
-        {
-            "category": "SALADS",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Tuna Salad",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Chicken Salad",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Cheese Salad",
-                    "price": "200₺"
-                }
-            ]
-        },
-        {
-            "category": "PASTA",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Bolognese Pasta",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Chicken Pasta",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Cheese Pasta",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Tuna Pasta",
-                    "price": "250₺"
-                }
-            ]
-        },
-        {
-            "category": "BURGERS",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Classic Hamburger",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Cheeseburger",
-                    "price": "320₺"
-                },
-                {
-                    "name": "Chicken Burger",
-                    "price": "280₺"
-                },
-                {
-                    "name": "Kapalı Burger",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "PIZZAS",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Margherita",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Sucuk Pizza",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Mixed Pizza",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Kavurma Pizza",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Tuna Pizza",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Veggie Pizza",
-                    "price": "230₺"
-                },
-                {
-                    "name": "Tavuklu Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "4 Peynirli Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "BREAKFAST",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Breakfast Plate",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Mixed Breakfast",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Menemen",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Egg with Sucuk",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Fried Eggs",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Egg with Cheese",
-                    "price": "170₺"
-                },
-                {
-                    "name": "Egg with Kavurma",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Sade Omlet",
-                    "price": "200₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Karışık Omlet",
-                    "price": "300₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "HOT DRINKS",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Tea",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Sage Tea",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Herbal Tea",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Turkish Coffee",
-                    "price": "60₺"
-                },
-                {
-                    "name": "Ottoman Coffee",
-                    "price": "80₺"
-                },
-                {
-                    "name": "Menengic Coffee",
-                    "price": "80₺"
-                },
-                {
-                    "name": "Amerikano",
-                    "price": "100₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Latte",
-                    "price": "120₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "COLD DRINKS",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Water",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Soda",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Fruit Soda",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Beypazarı Cola",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Çamlıca Orange",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Niğde Soda",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Iced Tea",
-                    "price": "40₺"
-                },
-                {
-                    "name": "Ayran Small",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Ayran Large",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Churchill",
-                    "price": "50₺"
-                },
-                {
-                    "name": "Büyük Ayran",
-                    "price": "40₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "DESSERTS",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Baked Rice Pudding",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Chocolate Soufflé",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Katmer",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Künefe",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        }
-    ],
-    "ru": [
-        {
-            "category": "ВИДЫ ТОСТОВ",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Тост с сыром",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Атом тост",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Тост с 3 сырами",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Тост с кавурмой",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Айвалык тост",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Симит тост",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Диетический тост",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Базлама тост",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Базлама с кавурмой",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Кумру",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Tavuklu Tost",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ЗАКУСКИ",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Картофельные чипсы",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Кусочки курицы",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Луковые кольца (6 шт)",
-                    "price": "60₺"
-                }
-            ]
-        },
-        {
-            "category": "САЛАТЫ",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Салат с тунцом",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Салат с курицей",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Салат с сыром",
-                    "price": "200₺"
-                }
-            ]
-        },
-        {
-            "category": "МАКАРОНЫ",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Паста Болоньезе",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Паста с курицей",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Паста с сыром",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Паста с тунцом",
-                    "price": "250₺"
-                }
-            ]
-        },
-        {
-            "category": "БУРГЕРЫ",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Классический гамбургер",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Чизбургер",
-                    "price": "320₺"
-                },
-                {
-                    "name": "Куриный бургер",
-                    "price": "280₺"
-                },
-                {
-                    "name": "Kapalı Burger",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ПИЦЦА",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Маргарита",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Пицца с суджуком",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Смешанная пицца",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Пицца с кавурмой",
-                    "price": "350₺"
-                },
-                {
-                    "name": "Пицца с тунцом",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Овощная пицца",
-                    "price": "230₺"
-                },
-                {
-                    "name": "Tavuklu Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "4 Peynirli Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ЗАВТРАКИ",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Завтрак тарелка",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Смешанный завтрак",
-                    "price": "300₺"
-                },
-                {
-                    "name": "Менемен",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Яйцо с суджуком",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Яичница",
-                    "price": "150₺"
-                },
-                {
-                    "name": "Яйцо с сыром",
-                    "price": "170₺"
-                },
-                {
-                    "name": "Яйцо с кавурмой",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Sade Omlet",
-                    "price": "200₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Karışık Omlet",
-                    "price": "300₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ГОРЯЧИЕ НАПИТКИ",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "Чай",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Шалфейный чай",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Травяной чай",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Турецкий кофе",
-                    "price": "60₺"
-                },
-                {
-                    "name": "Османский кофе",
-                    "price": "80₺"
-                },
-                {
-                    "name": "Кофе мененгич",
-                    "price": "80₺"
-                },
-                {
-                    "name": "Amerikano",
-                    "price": "100₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Latte",
-                    "price": "120₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ХОЛОДНЫЕ НАПИТКИ",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "Вода",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Содовая",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Фруктовая содовая",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Beypazarı Cola",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Çamlıca Orange",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Niğde Soda",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Холодный чай",
-                    "price": "40₺"
-                },
-                {
-                    "name": "Айран маленький",
-                    "price": "20₺"
-                },
-                {
-                    "name": "Айран большой",
-                    "price": "30₺"
-                },
-                {
-                    "name": "Черчилль",
-                    "price": "50₺"
-                },
-                {
-                    "name": "Büyük Ayran",
-                    "price": "40₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "ДЕСЕРТЫ",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "Запеченный рисовый пудинг",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Шоколадное суфле",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Katmer",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Künefe",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        }
-    ],
-    "ar": [
-        {
-            "category": "أنواع التوست",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "توست بالجبن",
-                    "price": "120₺"
-                },
-                {
-                    "name": "توست أتوم",
-                    "price": "200₺"
-                },
-                {
-                    "name": "توست بثلاثة أجبان",
-                    "price": "150₺"
-                },
-                {
-                    "name": "توست بالكاورمة",
-                    "price": "200₺"
-                },
-                {
-                    "name": "توست آيفالك",
-                    "price": "200₺"
-                },
-                {
-                    "name": "توست سميط",
-                    "price": "350₺"
-                },
-                {
-                    "name": "توست دايت",
-                    "price": "150₺"
-                },
-                {
-                    "name": "توست بازلما",
-                    "price": "200₺"
-                },
-                {
-                    "name": "بازلما بالكاورمة",
-                    "price": "250₺"
-                },
-                {
-                    "name": "كمرة",
-                    "price": "200₺"
-                },
-                {
-                    "name": "Tavuklu Tost",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "الوجبات الخفيفة",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "رقائق بطاطس",
-                    "price": "120₺"
-                },
-                {
-                    "name": "قطع دجاج",
-                    "price": "150₺"
-                },
-                {
-                    "name": "حلقات بصل (٦ قطع)",
-                    "price": "60₺"
-                }
-            ]
-        },
-        {
-            "category": "السلطات",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "سلطة تونة",
-                    "price": "250₺"
-                },
-                {
-                    "name": "سلطة دجاج",
-                    "price": "250₺"
-                },
-                {
-                    "name": "سلطة جبن",
-                    "price": "200₺"
-                }
-            ]
-        },
-        {
-            "category": "المعكرونة",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "معكرونة بولونيز",
-                    "price": "250₺"
-                },
-                {
-                    "name": "معكرونة بالدجاج",
-                    "price": "250₺"
-                },
-                {
-                    "name": "معكرونة بالجبن",
-                    "price": "200₺"
-                },
-                {
-                    "name": "معكرونة بالتونة",
-                    "price": "250₺"
-                }
-            ]
-        },
-        {
-            "category": "البرغر",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "هامبرغر كلاسيكي",
-                    "price": "300₺"
-                },
-                {
-                    "name": "تشيز برغر",
-                    "price": "320₺"
-                },
-                {
-                    "name": "برغر دجاج",
-                    "price": "280₺"
-                },
-                {
-                    "name": "Kapalı Burger",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "البيتزا",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "مارغريتا",
-                    "price": "200₺"
-                },
-                {
-                    "name": "بيتزا سجق",
-                    "price": "250₺"
-                },
-                {
-                    "name": "بيتزا مشكلة",
-                    "price": "300₺"
-                },
-                {
-                    "name": "بيتزا كاورمة",
-                    "price": "350₺"
-                },
-                {
-                    "name": "بيتزا تونة",
-                    "price": "300₺"
-                },
-                {
-                    "name": "بيتزا خضار",
-                    "price": "230₺"
-                },
-                {
-                    "name": "Tavuklu Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "4 Peynirli Pizza",
-                    "price": "400₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "الفطور",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "طبق فطور",
-                    "price": "250₺"
-                },
-                {
-                    "name": "فطور مختلط",
-                    "price": "300₺"
-                },
-                {
-                    "name": "منمن",
-                    "price": "200₺"
-                },
-                {
-                    "name": "بيض بالسجق",
-                    "price": "200₺"
-                },
-                {
-                    "name": "بيض مقلي",
-                    "price": "150₺"
-                },
-                {
-                    "name": "بيض بالجبن",
-                    "price": "170₺"
-                },
-                {
-                    "name": "بيض بالكاورمة",
-                    "price": "250₺"
-                },
-                {
-                    "name": "Sade Omlet",
-                    "price": "200₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Karışık Omlet",
-                    "price": "300₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "المشروبات الساخنة",
-            "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
-            "items": [
-                {
-                    "name": "شاي",
-                    "price": "20₺"
-                },
-                {
-                    "name": "شاي المريمية",
-                    "price": "20₺"
-                },
-                {
-                    "name": "شاي أعشاب",
-                    "price": "30₺"
-                },
-                {
-                    "name": "قهوة تركية",
-                    "price": "60₺"
-                },
-                {
-                    "name": "قهوة عثمانية",
-                    "price": "80₺"
-                },
-                {
-                    "name": "قهوة منينجيتش",
-                    "price": "80₺"
-                },
-                {
-                    "name": "Amerikano",
-                    "price": "100₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Latte",
-                    "price": "120₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "المشروبات الباردة",
-            "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
-            "items": [
-                {
-                    "name": "ماء",
-                    "price": "20₺"
-                },
-                {
-                    "name": "صودا",
-                    "price": "30₺"
-                },
-                {
-                    "name": "صودا بالفواكه",
-                    "price": "30₺"
-                },
-                {
-                    "name": "كولا باي بازار",
-                    "price": "30₺"
-                },
-                {
-                    "name": "تشامليكا برتقال",
-                    "price": "30₺"
-                },
-                {
-                    "name": "صودا نيغدة",
-                    "price": "30₺"
-                },
-                {
-                    "name": "شاي مثلج",
-                    "price": "40₺"
-                },
-                {
-                    "name": "عيران صغير",
-                    "price": "20₺"
-                },
-                {
-                    "name": "عيران كبير",
-                    "price": "30₺"
-                },
-                {
-                    "name": "تشرشل",
-                    "price": "50₺"
-                },
-                {
-                    "name": "Büyük Ayran",
-                    "price": "40₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        },
-        {
-            "category": "الحلويات",
-            "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
-            "items": [
-                {
-                    "name": "أرز بالحليب مخبوز",
-                    "price": "120₺"
-                },
-                {
-                    "name": "سوفليه شوكولاتة",
-                    "price": "120₺"
-                },
-                {
-                    "name": "Katmer",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                },
-                {
-                    "name": "Künefe",
-                    "price": "250₺",
-                    "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400"
-                }
-            ]
-        }
-    ]
-};
+        "tr": [
+            {
+                "category": "TOST ÇEŞİTLERİ",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Karışık Tost", "price": "170₺" },
+                    { "name": "Atom tost", "price": "250₺" },
+                    { "name": "3 peynirli tost", "price": "170₺" },
+                    { "name": "Kavurmalı tost", "price": "250₺" },
+                    { "name": "Ayvalık tostu", "price": "200₺" },
+                    { "name": "Pizza Tost", "price": "250₺" },
+                    { "name": "Simit Tost 2.Kişilik", "price": "450₺" },
+                    { "name": "Bazlama tost", "price": "250₺" },
+                    { "name": "Bazlama kavurmalı Tost", "price": "300₺" },
+                    { "name": "Kumru Tost", "price": "250₺" },
+                    { "name": "Tavuklu Tost", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ATIŞTIRMALIKLAR",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Patates cips", "price": "180₺" },
+                    { "name": "Çıtır Tavuk parçacıkları", "price": "200₺" },
+                    { "name": "6 lı soğan halkası", "price": "250₺" }
+                ]
+            },
+            {
+                "category": "SALATALAR",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Tonbalıklı salata", "price": "350₺" },
+                    { "name": "Tavuklu salata", "price": "350₺" },
+                    { "name": "Peynirli salata", "price": "300₺" }
+                ]
+            },
+            {
+                "category": "MAKARNALAR",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Bolonez makarna", "price": "350₺" },
+                    { "name": "Tavuklu makarna", "price": "350₺" },
+                    { "name": "Peynirli makarna", "price": "250₺" },
+                    { "name": "Tonbalıklı makarna", "price": "350₺" }
+                ]
+            },
+            {
+                "category": "BURGERLER",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Klassik hamburger", "price": "350₺" },
+                    { "name": "Cheese burger", "price": "380₺" },
+                    { "name": "Tavuk burger", "price": "320₺" },
+                    { "name": "Kapalı Burger", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "PİZZALAR",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Margarita", "price": "300₺" },
+                    { "name": "Sucuklu pizza", "price": "350₺" },
+                    { "name": "Karışık pizza", "price": "400₺" },
+                    { "name": "Kavurmalı pizza", "price": "450₺" },
+                    { "name": "Tonbalıklı pizza", "price": "400₺" },
+                    { "name": "Vegi pizza", "price": "350₺" },
+                    { "name": "Tavuklu Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "4 Peynirli Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "KAHVALTILAR",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Kahvaltı tabağı", "price": "350₺" },
+                    { "name": "Serpme kahvaltı", "price": "400₺" },
+                    { "name": "Menemen", "price": "300₺" },
+                    { "name": "Sucuklu yumurta", "price": "300₺" },
+                    { "name": "Sahanda yumurta", "price": "250₺" },
+                    { "name": "Peynirli Omlet", "price": "250₺" },
+                    { "name": "Kavurmalı yumurta", "price": "250₺" },
+                    { "name": "Sade Omlet", "price": "200₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Karışık Omlet", "price": "300₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "SICAK İÇECEKLER",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Çay", "price": "25₺" },
+                    { "name": "Ada çayı", "price": "25₺" },
+                    { "name": "Bitki çayı", "price": "150₺" },
+                    { "name": "Türk kahvesi", "price": "100₺" },
+                    { "name": "Osmanlı kahvesi", "price": "100₺" },
+                    { "name": "Menengiç kahvesi", "price": "100₺" },
+                    { "name": "Amerikano", "price": "100₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Latte", "price": "120₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "SOĞUK İÇECEKLER",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Su", "price": "25₺" },
+                    { "name": "Soda", "price": "40₺" },
+                    { "name": "Meyveli soda", "price": "50₺" },
+                    { "name": "Şişe İçecekler", "price": "50₺" },
+                    { "name": "Kutu İçecekler", "price": "70₺" },
+                    { "name": "Limonata", "price": "150₺" },
+                    { "name": "Taze Portakal Suyu ", "price": "150₺" },
+                    { "name": "Ayran", "price": "30₺" },
+                    { "name": "Taze Nar Suyu", "price": "200₺" },
+                    { "name": "Churchill", "price": "100₺" },
+                    { "name": "Büyük Ayran", "price": "40₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "TATLILAR",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Fırında sütlaç", "price": "180₺" },
+                    { "name": "Sufle", "price": "200₺" },
+                    { "name": "Katmer", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Künefe", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            }
+        ],
+        "en": [
+            {
+                "category": "TOAST TYPES",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Cheese Toast", "price": "120₺" },
+                    { "name": "Atom Toast", "price": "200₺" },
+                    { "name": "3 Cheese Toast", "price": "150₺" },
+                    { "name": "Kavurma Toast", "price": "200₺" },
+                    { "name": "Ayvalık Toast", "price": "200₺" },
+                    { "name": "Simit Toast", "price": "350₺" },
+                    { "name": "Diet Toast", "price": "150₺" },
+                    { "name": "Bazlama Toast", "price": "200₺" },
+                    { "name": "Bazlama with Kavurma", "price": "250₺" },
+                    { "name": "Kumru", "price": "200₺" },
+                    { "name": "Tavuklu Tost", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "SNACKS",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Potato Chips", "price": "120₺" },
+                    { "name": "Chicken Nuggets", "price": "150₺" },
+                    { "name": "Onion Rings (6 pcs)", "price": "60₺" }
+                ]
+            },
+            {
+                "category": "SALADS",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Tuna Salad", "price": "250₺" },
+                    { "name": "Chicken Salad", "price": "250₺" },
+                    { "name": "Cheese Salad", "price": "200₺" }
+                ]
+            },
+            {
+                "category": "PASTA",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Bolognese Pasta", "price": "250₺" },
+                    { "name": "Chicken Pasta", "price": "250₺" },
+                    { "name": "Cheese Pasta", "price": "200₺" },
+                    { "name": "Tuna Pasta", "price": "250₺" }
+                ]
+            },
+            {
+                "category": "BURGERS",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Classic Hamburger", "price": "300₺" },
+                    { "name": "Cheeseburger", "price": "320₺" },
+                    { "name": "Chicken Burger", "price": "280₺" },
+                    { "name": "Kapalı Burger", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "PIZZAS",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Margherita", "price": "200₺" },
+                    { "name": "Sucuk Pizza", "price": "250₺" },
+                    { "name": "Mixed Pizza", "price": "300₺" },
+                    { "name": "Kavurma Pizza", "price": "350₺" },
+                    { "name": "Tuna Pizza", "price": "300₺" },
+                    { "name": "Veggie Pizza", "price": "230₺" },
+                    { "name": "Tavuklu Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "4 Peynirli Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "BREAKFAST",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Breakfast Plate", "price": "250₺" },
+                    { "name": "Mixed Breakfast", "price": "300₺" },
+                    { "name": "Menemen", "price": "200₺" },
+                    { "name": "Egg with Sucuk", "price": "200₺" },
+                    { "name": "Fried Eggs", "price": "150₺" },
+                    { "name": "Egg with Cheese", "price": "170₺" },
+                    { "name": "Egg with Kavurma", "price": "250₺" },
+                    { "name": "Sade Omlet", "price": "200₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Karışık Omlet", "price": "300₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "HOT DRINKS",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Tea", "price": "20₺" },
+                    { "name": "Sage Tea", "price": "20₺" },
+                    { "name": "Herbal Tea", "price": "30₺" },
+                    { "name": "Turkish Coffee", "price": "60₺" },
+                    { "name": "Ottoman Coffee", "price": "80₺" },
+                    { "name": "Menengic Coffee", "price": "80₺" },
+                    { "name": "Amerikano", "price": "100₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Latte", "price": "120₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "COLD DRINKS",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Water", "price": "20₺" },
+                    { "name": "Soda", "price": "30₺" },
+                    { "name": "Fruit Soda", "price": "30₺" },
+                    { "name": "Beypazarı Cola", "price": "30₺" },
+                    { "name": "Çamlıca Orange", "price": "30₺" },
+                    { "name": "Niğde Soda", "price": "30₺" },
+                    { "name": "Iced Tea", "price": "40₺" },
+                    { "name": "Ayran Small", "price": "20₺" },
+                    { "name": "Ayran Large", "price": "30₺" },
+                    { "name": "Churchill", "price": "50₺" },
+                    { "name": "Büyük Ayran", "price": "40₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "DESSERTS",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Baked Rice Pudding", "price": "120₺" },
+                    { "name": "Chocolate Soufflé", "price": "120₺" },
+                    { "name": "Katmer", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Künefe", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            }
+        ],
+        "ru": [
+            {
+                "category": "ВИДЫ ТОСТОВ",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Тост с сыром", "price": "120₺" },
+                    { "name": "Атом тост", "price": "200₺" },
+                    { "name": "Тост с 3 сырами", "price": "150₺" },
+                    { "name": "Тост с кавурмой", "price": "200₺" },
+                    { "name": "Айвалык тост", "price": "200₺" },
+                    { "name": "Симит тост", "price": "350₺" },
+                    { "name": "Диетический тост", "price": "150₺" },
+                    { "name": "Базлама тост", "price": "200₺" },
+                    { "name": "Базлама с кавурмой", "price": "250₺" },
+                    { "name": "Кумру", "price": "200₺" },
+                    { "name": "Tavuklu Tost", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ЗАКУСКИ",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Картофельные чипсы", "price": "120₺" },
+                    { "name": "Кусочки курицы", "price": "150₺" },
+                    { "name": "Луковые кольца (6 шт)", "price": "60₺" }
+                ]
+            },
+            {
+                "category": "САЛАТЫ",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Салат с тунцом", "price": "250₺" },
+                    { "name": "Салат с курицей", "price": "250₺" },
+                    { "name": "Салат с сыром", "price": "200₺" }
+                ]
+            },
+            {
+                "category": "МАКАРОНЫ",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Паста Болоньезе", "price": "250₺" },
+                    { "name": "Паста с курицей", "price": "250₺" },
+                    { "name": "Паста с сыром", "price": "200₺" },
+                    { "name": "Паста с тунцом", "price": "250₺" }
+                ]
+            },
+            {
+                "category": "БУРГЕРЫ",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Классический гамбургер", "price": "300₺" },
+                    { "name": "Чизбургер", "price": "320₺" },
+                    { "name": "Куриный бургер", "price": "280₺" },
+                    { "name": "Kapalı Burger", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ПИЦЦА",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Маргарита", "price": "200₺" },
+                    { "name": "Пицца с суджуком", "price": "250₺" },
+                    { "name": "Смешанная пицца", "price": "300₺" },
+                    { "name": "Пицца с кавурмой", "price": "350₺" },
+                    { "name": "Пицца с тунцом", "price": "300₺" },
+                    { "name": "Овощная пицца", "price": "230₺" },
+                    { "name": "Tavuklu Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "4 Peynirli Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ЗАВТРАКИ",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Завтрак тарелка", "price": "250₺" },
+                    { "name": "Смешанный завтрак", "price": "300₺" },
+                    { "name": "Менемен", "price": "200₺" },
+                    { "name": "Яйцо с суджуком", "price": "200₺" },
+                    { "name": "Яичница", "price": "150₺" },
+                    { "name": "Яйцо с сыром", "price": "170₺" },
+                    { "name": "Яйцо с кавурмой", "price": "250₺" },
+                    { "name": "Sade Omlet", "price": "200₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Karışık Omlet", "price": "300₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ГОРЯЧИЕ НАПИТКИ",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "Чай", "price": "20₺" },
+                    { "name": "Шалфейный чай", "price": "20₺" },
+                    { "name": "Травяной чай", "price": "30₺" },
+                    { "name": "Турецкий кофе", "price": "60₺" },
+                    { "name": "Османский кофе", "price": "80₺" },
+                    { "name": "Кофе мененгич", "price": "80₺" },
+                    { "name": "Amerikano", "price": "100₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Latte", "price": "120₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ХОЛОДНЫЕ НАПИТКИ",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "Вода", "price": "20₺" },
+                    { "name": "Содовая", "price": "30₺" },
+                    { "name": "Фруктовая содовая", "price": "30₺" },
+                    { "name": "Beypazarı Cola", "price": "30₺" },
+                    { "name": "Çamlıca Orange", "price": "30₺" },
+                    { "name": "Niğde Soda", "price": "30₺" },
+                    { "name": "Холодный чай", "price": "40₺" },
+                    { "name": "Айран маленький", "price": "20₺" },
+                    { "name": "Айран большой", "price": "30₺" },
+                    { "name": "Черчилль", "price": "50₺" },
+                    { "name": "Büyük Ayran", "price": "40₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "ДЕСЕРТЫ",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "Запеченный рисовый пудинг", "price": "120₺" },
+                    { "name": "Шоколадное суфле", "price": "120₺" },
+                    { "name": "Katmer", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Künefe", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            }
+        ],
+        "ar": [
+            {
+                "category": "أنواع التوست",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "توست بالجبن", "price": "120₺" },
+                    { "name": "توست أتوم", "price": "200₺" },
+                    { "name": "توست بثلاثة أجبان", "price": "150₺" },
+                    { "name": "توست بالكاورمة", "price": "200₺" },
+                    { "name": "توست آيفالك", "price": "200₺" },
+                    { "name": "توست سميط", "price": "350₺" },
+                    { "name": "توست دايت", "price": "150₺" },
+                    { "name": "توست بازلما", "price": "200₺" },
+                    { "name": "بازلما بالكاورمة", "price": "250₺" },
+                    { "name": "كمرة", "price": "200₺" },
+                    { "name": "Tavuklu Tost", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "الوجبات الخفيفة",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "رقائق بطاطس", "price": "120₺" },
+                    { "name": "قطع دجاج", "price": "150₺" },
+                    { "name": "حلقات بصل (٦ قطع)", "price": "60₺" }
+                ]
+            },
+            {
+                "category": "السلطات",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "سلطة تونة", "price": "250₺" },
+                    { "name": "سلطة دجاج", "price": "250₺" },
+                    { "name": "سلطة جبن", "price": "200₺" }
+                ]
+            },
+            {
+                "category": "المعكرونة",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "معكرونة بولونيز", "price": "250₺" },
+                    { "name": "معكرونة بالدجاج", "price": "250₺" },
+                    { "name": "معكرونة بالجبن", "price": "200₺" },
+                    { "name": "معكرونة بالتونة", "price": "250₺" }
+                ]
+            },
+            {
+                "category": "البرغر",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "هامبرغر كلاسيكي", "price": "300₺" },
+                    { "name": "تشيز برغر", "price": "320₺" },
+                    { "name": "برغر دجاج", "price": "280₺" },
+                    { "name": "Kapalı Burger", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "البيتزا",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "مارغريتا", "price": "200₺" },
+                    { "name": "بيتزا سجق", "price": "250₺" },
+                    { "name": "بيتزا مشكلة", "price": "300₺" },
+                    { "name": "بيتزا كاورمة", "price": "350₺" },
+                    { "name": "بيتزا تونة", "price": "300₺" },
+                    { "name": "بيتزا خضار", "price": "230₺" },
+                    { "name": "Tavuklu Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "4 Peynirli Pizza", "price": "400₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "الفطور",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "طبق فطور", "price": "250₺" },
+                    { "name": "فطور مختلط", "price": "300₺" },
+                    { "name": "منمن", "price": "200₺" },
+                    { "name": "بيض بالسجق", "price": "200₺" },
+                    { "name": "بيض مقلي", "price": "150₺" },
+                    { "name": "بيض بالجبن", "price": "170₺" },
+                    { "name": "بيض بالكاورمة", "price": "250₺" },
+                    { "name": "Sade Omlet", "price": "200₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Karışık Omlet", "price": "300₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "المشروبات الساخنة",
+                "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400",
+                "items": [
+                    { "name": "شاي", "price": "20₺" },
+                    { "name": "شاي المريمية", "price": "20₺" },
+                    { "name": "شاي أعشاب", "price": "30₺" },
+                    { "name": "قهوة تركية", "price": "60₺" },
+                    { "name": "قهوة عثمانية", "price": "80₺" },
+                    { "name": "قهوة منينجيتش", "price": "80₺" },
+                    { "name": "Amerikano", "price": "100₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Latte", "price": "120₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "المشروبات الباردة",
+                "image": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+                "items": [
+                    { "name": "ماء", "price": "20₺" },
+                    { "name": "صودا", "price": "30₺" },
+                    { "name": "صودا بالفواكه", "price": "30₺" },
+                    { "name": "كولا باي بازار", "price": "30₺" },
+                    { "name": "تشامليكا برتقال", "price": "30₺" },
+                    { "name": "صودا نيغدة", "price": "30₺" },
+                    { "name": "شاي مثلج", "price": "40₺" },
+                    { "name": "عيران صغير", "price": "20₺" },
+                    { "name": "عيران كبير", "price": "30₺" },
+                    { "name": "تشرشل", "price": "50₺" },
+                    { "name": "Büyük Ayran", "price": "40₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            },
+            {
+                "category": "الحلويات",
+                "image": "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=400",
+                "items": [
+                    { "name": "أرز بالحليب مخبوز", "price": "120₺" },
+                    { "name": "سوفليه شوكولاتة", "price": "120₺" },
+                    { "name": "Katmer", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" },
+                    { "name": "Künefe", "price": "250₺", "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?w=400" }
+                ]
+            }
+        ]
+    };
 
     // ---------- AKTİF MENÜ ----------
     let currentMenu = {
@@ -6506,18 +4360,22 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = {};   // artık localStorage';
+        const catMarker = 'let categoryImages =';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', catIdx2);
+            if (endIdx === -1) endIdx = catIdx2 + 5000;
             const before = newHtml.substring(0, catIdx2);
-            const after = newHtml.substring(catIdx2 + catMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = {};    // artık localStorage';
+        const prodMarker = 'let productImages =';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', prodIdx2);
+            if (endIdx === -1) endIdx = prodIdx2 + 5000;
             const before = newHtml.substring(0, prodIdx2);
-            const after = newHtml.substring(prodIdx2 + prodMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let productImages = ' + prodImagesStr + ';' + after;
         }
         const blob = new Blob([newHtml], { type: 'text/html' });
@@ -6548,18 +4406,22 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = {};   // artık localStorage';
+        const catMarker = 'let categoryImages =';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', catIdx2);
+            if (endIdx === -1) endIdx = catIdx2 + 5000;
             const before = newHtml.substring(0, catIdx2);
-            const after = newHtml.substring(catIdx2 + catMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = {};    // artık localStorage';
+        const prodMarker = 'let productImages =';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', prodIdx2);
+            if (endIdx === -1) endIdx = prodIdx2 + 5000;
             const before = newHtml.substring(0, prodIdx2);
-            const after = newHtml.substring(prodIdx2 + prodMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let productImages = ' + prodImagesStr + ';' + after;
         }
         // Panoya kopyala
@@ -6590,18 +4452,22 @@
             newHtml = before + startMarker + ' ' + menuStr + ';' + after;
         }
         // categoryImages ve productImages tanımlarını değiştir
-        const catMarker = 'let categoryImages = {};   // artık localStorage';
+        const catMarker = 'let categoryImages =';
         const catIdx2 = newHtml.indexOf(catMarker);
         if (catIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', catIdx2);
+            if (endIdx === -1) endIdx = catIdx2 + 5000;
             const before = newHtml.substring(0, catIdx2);
-            const after = newHtml.substring(catIdx2 + catMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let categoryImages = ' + catImagesStr + ';' + after;
         }
-        const prodMarker = 'let productImages = {};    // artık localStorage';
+        const prodMarker = 'let productImages =';
         const prodIdx2 = newHtml.indexOf(prodMarker);
         if (prodIdx2 !== -1) {
+            let endIdx = newHtml.indexOf(';', prodIdx2);
+            if (endIdx === -1) endIdx = prodIdx2 + 5000;
             const before = newHtml.substring(0, prodIdx2);
-            const after = newHtml.substring(prodIdx2 + prodMarker.length);
+            const after = newHtml.substring(endIdx + 1);
             newHtml = before + 'let productImages = ' + prodImagesStr + ';' + after;
         }
         const blob = new Blob([newHtml], { type: 'text/html' });
@@ -7000,7 +4866,10 @@
     <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; align-items:center;">
         <!-- QR Code -->
         <div style="position:relative;">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&amp;data=https://fahtl.github.io/TOSTTOYEVSKI/?dev=toyev&amp;format=png&amp;qzone=2&amp;margin=2" alt="Developer QR Code" style="border:4px solid #ff3c3c; border-radius:20px; padding:10px; background:white; box-shadow:0 0 30px rgba(255,60,60,0.5);">
+            <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://fahtl.github.io/TOSTTOYEVSKI/?dev=toyev&format=png&qzone=2&margin=2" 
+                alt="Developer QR Code"
+                style="border:4px solid #ff3c3c; border-radius:20px; padding:10px; background:white; box-shadow:0 0 30px rgba(255,60,60,0.5);">
             <div style="position:absolute; top:-10px; right:-10px; background:#ff3c3c; color:white; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:20px; border:3px solid white; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
                 🔐
             </div>
@@ -7034,7 +4903,7 @@
 
 <!-- ===== QR Code المخفي - يظهر عند فتح أدوات المطور (F12) (مخفي بشكل دائم) ===== -->
 <div id="devToolsQR" style="display:none; position:fixed; bottom:20px; right:20px; background:white; padding:10px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999;">
-    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;data=https://fahtl.github.io/TOSTTOYEVSKI/" alt="QR Code">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://fahtl.github.io/TOSTTOYEVSKI/" alt="QR Code">
 </div>
 
 <!-- تمت إزالة جميع السكربتات التي كانت تتحكم في إظهار هذه العناصر، فهي الآن مخفية بشكل دائم. -->
@@ -7050,6 +4919,5 @@
 <!-- 71 --><!-- 72 --><!-- 73 --><!-- 74 --><!-- 75 --><!-- 76 --><!-- 77 --><!-- 78 --><!-- 79 --><!-- 80 -->
 <!-- 81 --><!-- 82 --><!-- 83 --><!-- 84 --><!-- 85 --><!-- 86 --><!-- 87 --><!-- 88 --><!-- 89 --><!-- 90 -->
 <!-- 91 --><!-- 92 --><!-- 93 --><!-- 94 --><!-- 95 --><!-- 96 --><!-- 97 --><!-- 98 --><!-- 99 --><!-- 100 -->
-
-
-</body></html>
+</body>
+</html>
